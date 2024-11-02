@@ -65,13 +65,12 @@ private:
 
 	/**
 	 * Convenient struct to get info on a [class] [const] function pointer.
-	 * TODO VS19: I ran into a really weird bug with an auto specialisation on this taking function pointers.
-	 * It'd be good to add it back once we upgrade.
 	 */
-	template <class T> struct args_info;
+	template <class T> struct args_info_t;
+	template <auto T> using args_info = args_info_t<decltype(T)>;
 
 	template<typename R, typename ...Types>
-	struct args_info<R(*)(Types ...)>
+	struct args_info_t<R(*)(Types ...)>
 	{
 		static constexpr const size_t nb_args = sizeof...(Types);
 		using return_type = R;
@@ -80,9 +79,9 @@ private:
 	};
 
 	template<typename C, typename R, typename ...Types>
-	struct args_info<R(C::*)(Types ...)> : public args_info<R(*)(Types ...)> { using object_type = C; };
+	struct args_info_t<R(C::*)(Types ...)> : public args_info_t<R(*)(Types ...)> { using object_type = C; };
 	template<typename C, typename R, typename ...Types>
-	struct args_info<R(C::*)(Types ...) const> : public args_info<R(C::*)(Types ...)> {};
+	struct args_info_t<R(C::*)(Types ...) const> : public args_info_t<R(C::*)(Types ...)> {};
 
 	struct IteratorResultError : std::runtime_error
 	{
@@ -186,7 +185,7 @@ private:
 	 * Wrap std::apply for the case where we have an object method or a regular function.
 	 */
 	template <auto callable, typename T, typename tuple>
-	static typename args_info<decltype(callable)>::return_type call(T* object, tuple& args)
+	static typename args_info<callable>::return_type call(T* object, tuple& args)
 	{
 		if constexpr(std::is_same_v<T, void>)
 		{
@@ -272,10 +271,8 @@ public:
 	template <typename T>
 	using ObjectGetter = T*(*)(const ScriptRequest&, JS::CallArgs&);
 
-	// TODO: the fact that this takes class and not auto is to work around an odd VS17 bug.
-	// It can be removed with VS19.
-	template <class callableType>
-	using GetterFor = ObjectGetter<typename args_info<callableType>::object_type>;
+	template <auto callable>
+	using GetterFor = ObjectGetter<typename args_info<callable>::object_type>;
 
 	/**
 	 * The meat of this file. This wraps a C++ function into a JSNative,
@@ -290,16 +287,16 @@ public:
 	 *
 	 * @param thisGetter to get the object, if necessary.
 	 */
-	template <auto callable, GetterFor<decltype(callable)> thisGetter = nullptr>
+	template <auto callable, GetterFor<callable> thisGetter = nullptr>
 	static bool ToJSNative(JSContext* cx, unsigned argc, JS::Value* vp)
 	{
-		using ObjType = typename args_info<decltype(callable)>::object_type;
+		using ObjType = typename args_info<callable>::object_type;
 
 		JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 		ScriptRequest rq(cx);
 
 		// If the callable is an object method, we must specify how to fetch the object.
-		static_assert(std::is_same_v<typename args_info<decltype(callable)>::object_type, void> || thisGetter != nullptr,
+		static_assert(std::is_same_v<typename args_info<callable>::object_type, void> || thisGetter != nullptr,
 					  "ScriptFunction::Register - No getter specified for object method");
 
 // GCC 7 triggers spurious warnings
@@ -319,16 +316,16 @@ public:
 #endif
 
 		bool wentOk = true;
-		typename args_info<decltype(callable)>::arg_types outs = ConvertFromJS(rq, args, wentOk,
-			static_cast<typename args_info<decltype(callable)>::arg_types*>(nullptr));
+		typename args_info<callable>::arg_types outs = ConvertFromJS(rq, args, wentOk,
+			static_cast<typename args_info<callable>::arg_types*>(nullptr));
 		if (!wentOk)
 			return false;
 
 		try
 		{
-			if constexpr (std::is_same_v<void, typename args_info<decltype(callable)>::return_type>)
+			if constexpr (std::is_same_v<void, typename args_info<callable>::return_type>)
 				call<callable>(obj, outs);
-			else if constexpr (std::is_same_v<JS::Value, typename args_info<decltype(callable)>::return_type>)
+			else if constexpr (std::is_same_v<JS::Value, typename args_info<callable>::return_type>)
 				args.rval().set(call<callable>(obj, outs));
 			else
 				Script::ToJSVal(rq, args.rval(), call<callable>(obj, outs));
@@ -430,31 +427,31 @@ public:
 	/**
 	 * Return a function spec from a C++ function.
 	 */
-	template <auto callable, GetterFor<decltype(callable)> thisGetter = nullptr>
+	template <auto callable, GetterFor<callable> thisGetter = nullptr>
 	static JSFunctionSpec Wrap(const char* name,
 		const u16 flags = JSPROP_ENUMERATE | JSPROP_READONLY | JSPROP_PERMANENT)
 	{
-		return JS_FN(name, (&ToJSNative<callable, thisGetter>), args_info<decltype(callable)>::nb_args, flags);
+		return JS_FN(name, (&ToJSNative<callable, thisGetter>), args_info<callable>::nb_args, flags);
 	}
 
 	/**
 	 * Return a JSFunction from a C++ function.
 	 */
-	template <auto callable, GetterFor<decltype(callable)> thisGetter = nullptr>
+	template <auto callable, GetterFor<callable> thisGetter = nullptr>
 	static JSFunction* Create(const ScriptRequest& rq, const char* name,
 		const u16 flags = JSPROP_ENUMERATE | JSPROP_READONLY | JSPROP_PERMANENT)
 	{
-		return JS_NewFunction(rq.cx, &ToJSNative<callable, thisGetter>, args_info<decltype(callable)>::nb_args, flags, name);
+		return JS_NewFunction(rq.cx, &ToJSNative<callable, thisGetter>, args_info<callable>::nb_args, flags, name);
 	}
 
 	/**
 	 * Register a function on the native scope (usually 'Engine').
 	 */
-	template <auto callable, GetterFor<decltype(callable)> thisGetter = nullptr>
+	template <auto callable, GetterFor<callable> thisGetter = nullptr>
 	static void Register(const ScriptRequest& rq, const char* name,
 		const u16 flags = JSPROP_ENUMERATE | JSPROP_READONLY | JSPROP_PERMANENT)
 	{
-		JS_DefineFunction(rq.cx, rq.nativeScope, name, &ToJSNative<callable, thisGetter>, args_info<decltype(callable)>::nb_args, flags);
+		JS_DefineFunction(rq.cx, rq.nativeScope, name, &ToJSNative<callable, thisGetter>, args_info<callable>::nb_args, flags);
 	}
 
 	/**
@@ -462,11 +459,11 @@ public:
 	 * Prefer the version taking ScriptRequest unless you have a good reason not to.
 	 * @see Register
 	 */
-	template <auto callable, GetterFor<decltype(callable)> thisGetter = nullptr>
+	template <auto callable, GetterFor<callable> thisGetter = nullptr>
 	static void Register(JSContext* cx, JS::HandleObject scope, const char* name,
 		const u16 flags = JSPROP_ENUMERATE | JSPROP_READONLY | JSPROP_PERMANENT)
 	{
-		JS_DefineFunction(cx, scope, name, &ToJSNative<callable, thisGetter>, args_info<decltype(callable)>::nb_args, flags);
+		JS_DefineFunction(cx, scope, name, &ToJSNative<callable, thisGetter>, args_info<callable>::nb_args, flags);
 	}
 
 	template<typename Callable>

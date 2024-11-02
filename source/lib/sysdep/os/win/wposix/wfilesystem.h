@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -53,12 +53,6 @@ typedef unsigned int mode_t;	// defined by MinGW but not VC
 #define S_ISREG(m) (m & S_IFREG)
 
 
-//
-// <unistd.h>
-//
-
-extern int read (int fd, void* buf, size_t nbytes);	// thunk
-extern int write(int fd, void* buf, size_t nbytes);	// thunk
-extern off_t lseek(int fd, off_t ofs, int whence);  // thunk
+#include <corecrt_io.h> // read, write, lseek
 
 #endif	// #ifndef INCLUDED_WFILESYSTEM

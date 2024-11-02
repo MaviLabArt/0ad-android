@@ -43,14 +43,6 @@
 // external libraries from pulling it in (which would cause conflicts).
 #undef _WINDOWS_
 
-// set version; needed for EnumDisplayDevices
-#ifndef NTDDI_VERSION
-# define NTDDI_VERSION NTDDI_LONGHORN
-#endif
-#ifndef _WIN32_WINNT
-# define _WIN32_WINNT 0x600
-#endif
-
 #define NOGDICAPMASKS       // CC_*, LC_*, PC_*, CP_*, TC_*, RC_
 //#define NOVIRTUALKEYCODES // VK_*
 //#define NOWINMESSAGES     // WM_*, EM_*, LB_*, CB_*

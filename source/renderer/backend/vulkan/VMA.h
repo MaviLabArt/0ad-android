@@ -40,11 +40,6 @@
 #define VMA_STATS_STRING_ENABLED 0
 #endif
 
-#if OS_WIN
-// MSVC doesn't enable std::shared_mutex for XP toolkit.
-#define VMA_USE_STL_SHARED_MUTEX 0
-#endif
-
 #if GCC_VERSION
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat"
