@@ -8,7 +8,7 @@ function Cheat(input)
 	if (playerEnt == INVALID_ENTITY)
 		return;
 	const cmpPlayer = Engine.QueryInterface(playerEnt, IID_Player);
-	if (!cmpPlayer?.GetCheatsEnabled())
+	if (!InitAttributes.settings.CheatsEnabled)
 		return;
 
 	const cmpGuiInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);

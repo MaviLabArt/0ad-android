@@ -25,7 +25,7 @@ class Cheats
 	{
 		const player = Engine.GetPlayerID();
 		if (!controlsPlayer(player) ||
-		    !g_Players[player].cheatsEnabled)
+		    !g_InitAttributes.settings.CheatsEnabled)
 			return false;
 
 		// Find the cheat code that is a prefix of the user input

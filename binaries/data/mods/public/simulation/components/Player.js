@@ -66,7 +66,6 @@ Player.prototype.Init = function()
 	this.controlAllUnits = false;
 	this.isAI = false;
 	this.isRemoved = false;
-	this.cheatsEnabled = false;
 	this.panelEntities = [];
 	this.resourceNames = {};
 	this.disabledTemplates = {};
@@ -656,16 +655,6 @@ Player.prototype.OnValueModification = function(msg)
 			this.barterMultiplier.buy[res] = ApplyValueModificationsToEntity("Player/BarterMultiplier/Buy/"+res, +this.template.BarterMultiplier.Buy[res], this.entity);
 			this.barterMultiplier.sell[res] = ApplyValueModificationsToEntity("Player/BarterMultiplier/Sell/"+res, +this.template.BarterMultiplier.Sell[res], this.entity);
 		}
-};
-
-Player.prototype.SetCheatsEnabled = function(flag)
-{
-	this.cheatsEnabled = flag;
-};
-
-Player.prototype.GetCheatsEnabled = function()
-{
-	return this.cheatsEnabled;
 };
 
 Player.prototype.TributeResource = function(player, amounts)

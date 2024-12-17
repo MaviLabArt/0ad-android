@@ -395,7 +395,6 @@ function updatePlayerData()
 			},
 			"team": playerState.team,
 			"teamLocked": playerState.teamLocked,
-			"cheatsEnabled": playerState.cheatsEnabled,
 			"state": playerState.state,
 			"isAlly": playerState.isAlly,
 			"isMutualAlly": playerState.isMutualAlly,

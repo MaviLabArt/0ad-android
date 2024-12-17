@@ -45,7 +45,6 @@ function InitGame(settings)
 	for (let i = 0; i < settings.PlayerData.length; ++i)
 	{
 		const cmpPlayer = QueryPlayerIDInterface(i);
-		cmpPlayer.SetCheatsEnabled(!!settings.CheatsEnabled);
 
 		if (settings.PlayerData[i])
 		{

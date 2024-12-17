@@ -71,7 +71,7 @@ var g_Commands = {
 
 	"control-all": function(player, cmd, data)
 	{
-		if (!data.cmpPlayer.GetCheatsEnabled())
+		if (!InitAttributes.settings.CheatsEnabled)
 			return;
 
 		var cmpGuiInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
@@ -86,7 +86,7 @@ var g_Commands = {
 
 	"reveal-map": function(player, cmd, data)
 	{
-		if (!data.cmpPlayer.GetCheatsEnabled())
+		if (!InitAttributes.settings.CheatsEnabled)
 			return;
 
 		var cmpGuiInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
@@ -614,7 +614,7 @@ var g_Commands = {
 
 	"promote": function(player, cmd, data)
 	{
-		if (!data.cmpPlayer.GetCheatsEnabled())
+		if (!InitAttributes.settings.CheatsEnabled)
 			return;
 
 		var cmpGuiInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
