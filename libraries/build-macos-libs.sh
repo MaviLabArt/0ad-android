@@ -48,7 +48,7 @@ ENET_VERSION="enet-1.3.18"
 MINIUPNPC_VERSION="miniupnpc-2.2.8"
 SODIUM_VERSION="libsodium-1.0.20"
 FMT_VERSION="7.1.3"
-MOLTENVK_VERSION="1.2.2"
+MOLTENVK_VERSION="1.3.0"
 OPENAL_SOFT_VERSION="1.24.2"
 # --------------------------------------------------------------
 # Bundled with the game:
@@ -1186,8 +1186,8 @@ echo "Building Molten VK..."
 
 (
 	LIB_DIRECTORY="MoltenVK-$MOLTENVK_VERSION"
-	LIB_ARCHIVE="MoltenVK-$MOLTENVK_VERSION.tar.gz"
-	LIB_URL="https://releases.wildfiregames.com/libs/"
+	LIB_ARCHIVE="v$MOLTENVK_VERSION.tar.gz"
+	LIB_URL="https://github.com/KhronosGroup/MoltenVK/archive/refs/tags/"
 
 	mkdir -p "molten-vk"
 	cd "molten-vk"
@@ -1201,10 +1201,25 @@ echo "Building Molten VK..."
 		rm -rf "$LIB_DIRECTORY"
 		tar -xf $LIB_ARCHIVE || die
 
-		# The CI cannot build MoltenVK so we provide prebuild binaries instead.
-		# Use mv instead of copy to preserve binary signature integrity. See:
-		# https://developer.apple.com/forums/thread/130313?answerId=410541022#410541022
-		mv $LIB_DIRECTORY/dylib/libMoltenVK.dylib $INSTALL_DIR || die
+		(
+			cd "$LIB_DIRECTORY"
+			# dont use --parallel-build, it breaks the build since it calls kill.
+			MACOSX_DEPLOYMENT_TARGET="$MIN_OSX_VERSION" CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" ./fetchDependencies --macos || die
+
+			xcodebuild \
+				-quiet \
+				-project MoltenVKPackaging.xcodeproj \
+				-scheme "MoltenVK Package (macOS only)" \
+				-destination "generic/platform=macOS" \
+				MACOSX_DEPLOYMENT_TARGET="$MIN_OSX_VERSION" \
+				CFLAGS="$CFLAGS" \
+				CXXFLAGS="$CXXFLAGS" \
+				LDFLAGS="$LDFLAGS" \
+				ARCHS="arm64 x86_64" || die
+		) || die
+
+		# We don't use the provided install command, because we haven't got enough permissions to use it.
+		mv $LIB_DIRECTORY/Package/Latest/MoltenVK/dylib/macOS/libMoltenVK.dylib $INSTALL_DIR || die
 
 		echo "$MOLTENVK_VERSION" >.already-built
 	else
