@@ -309,7 +309,7 @@
 			<Actor seed="12285"/>
 		</Entity>
 		<Entity uid="46">
-			<Template>units/rome/siege_onager</Template>
+			<Template>units/rome/siege_onager_unpacked</Template>
 			<Player>1</Player>
 			<Position x="736.21497" z="370.38395"/>
 			<Orientation y="2.35621"/>

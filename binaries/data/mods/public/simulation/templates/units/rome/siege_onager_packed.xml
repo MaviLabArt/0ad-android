@@ -14,7 +14,7 @@
     </Requirements>
   </Identity>
   <Pack>
-    <Entity>units/rome/siege_onager</Entity>
+    <Entity>units/rome/siege_onager_unpacked</Entity>
     <State>packed</State>
   </Pack>
   <VisualActor>
