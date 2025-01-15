@@ -71,6 +71,9 @@
       units/{civ}/war_dog
     </Entities>
   </Trainer>
+  <Vision>
+    <Range>20</Range>
+  </Vision>
   <VisualActor>
     <FoundationActor>structures/fndn_2x2.xml</FoundationActor>
   </VisualActor>
