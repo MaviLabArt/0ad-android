@@ -18,10 +18,8 @@
     <Entities datatype="tokens">
       units/{civ}/infantry_swordsman_b
       units/{civ}/infantry_javelineer_b
+      units/{civ}/infantry_spearman_conscript
       units/{civ}/cavalry_spearman_b
-	  units/rome/infantry_spearman_conscript
-      units/rome/infantry_legionary
-      units/rome/infantry_antesignanus
     </Entities>
   </Trainer>
   <VisualActor>

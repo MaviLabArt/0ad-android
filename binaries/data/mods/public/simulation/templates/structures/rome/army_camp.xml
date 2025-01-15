@@ -111,9 +111,8 @@
       units/{civ}/infantry_swordsman_a
       units/{civ}/infantry_spearman_a
       units/{civ}/infantry_pikeman_a
-      units/{civ}/infantry_legionary
       units/{civ}/infantry_antesignanus
-	  units/{civ}/siege_onager_packed
+      units/{civ}/siege_onager_packed
       units/{civ}/siege_ram
     </Entities>
   </Trainer>
