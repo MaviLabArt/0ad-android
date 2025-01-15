@@ -17,6 +17,7 @@
     <metal>2</metal>
   </Loot>
   <Identity>
+    <Civ>rome</Civ>
     <GenericName>Marian Legionary</GenericName>
     <Lang>latin</Lang>
     <SpecificName>Legiōnārius</SpecificName>

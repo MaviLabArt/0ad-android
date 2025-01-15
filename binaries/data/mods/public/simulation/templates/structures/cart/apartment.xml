@@ -20,6 +20,7 @@
     <Max op="mul">1.5</Max>
   </Health>
   <Identity>
+    <Civ>cart</Civ>
     <GenericName>Apartment Building</GenericName>
     <SpecificName>Bet</SpecificName>
     <Classes datatype="tokens">CivSpecific</Classes>
