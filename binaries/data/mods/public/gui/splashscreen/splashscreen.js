@@ -1,4 +1,4 @@
-async function init(data)
+export async function init(data)
 {
 	const paragraphObjects = Engine.GetGUIObjectByName("paragraphs").children;
 
