@@ -141,7 +141,7 @@ private:
 		/**
 		 * Create the CGUI with it's own ScriptInterface. Deletes the previous CGUI if it existed.
 		 */
-		void LoadPage(ScriptContext& scriptContext);
+		void LoadPage(ScriptContext& context);
 
 		/**
 		 * A new promise gets set. A reference to that promise is returned. The promise will settle when

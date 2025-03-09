@@ -152,8 +152,9 @@ private:
 
 class ModuleLoader::Result
 {
-	class iterator;
 public:
+	class iterator;
+
 	explicit Result(const ScriptRequest& rq, const VfsPath& modulePath);
 	Result(const Result&) = delete;
 	Result& operator=(const Result&) = delete;

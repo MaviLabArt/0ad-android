@@ -26,8 +26,8 @@
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CGUIDummyObject.h"
 #include "gui/ObjectTypes/CTooltip.h"
-#include "gui/Scripting/ScriptFunctions.h"
 #include "gui/Scripting/JSInterface_GUIProxy.h"
+#include "gui/Scripting/ScriptFunctions.h"
 #include "i18n/L10n.h"
 #include "lib/bits.h"
 #include "lib/input.h"
@@ -44,6 +44,9 @@
 #include "ps/Pyrogenesis.h"
 #include "ps/VideoMode.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/Promises.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
 
@@ -77,7 +80,10 @@ CGUI::CGUI(ScriptContext& context)
 	  m_InternalNameNumber(0),
 	  m_MouseButtons(0)
 {
-	m_ScriptInterface = std::make_shared<ScriptInterface>("Engine", "GUIPage", context);
+	m_ScriptInterface = std::make_shared<ScriptInterface>("Engine", "GUIPage", context,
+		[](const VfsPath& path){
+			return path.string8().find("gui/") == 0;
+		});
 	m_ScriptInterface->SetCallbackData(this);
 
 	GuiScriptingInit(*m_ScriptInterface);
@@ -277,12 +283,61 @@ InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 	return ret;
 }
 
-void CGUI::TickObjects()
+JS::Value CGUI::GetHotloadData(const ScriptRequest& rq)
 {
+	JS::RootedValue oldNamespace{rq.cx, m_LoadModuleResult.has_value() ?
+		JS::ObjectValue(*m_LoadModuleResult->moduleNamespace) : rq.globalValue()};
+	JS::RootedValue hotloadDataVal(rq.cx);
+	ScriptFunction::Call(rq, oldNamespace, "getHotloadData", &hotloadDataVal);
+	return hotloadDataVal;
+}
+
+JSObject* CGUI::CallPageInit(const ScriptRequest& rq, Script::StructuredClone initData,
+	JS::HandleValue hotloadDataVal, const std::string_view scriptName)
+{
+	JS::RootedValue initDataVal{rq.cx};
+	if (initData)
+		Script::ReadStructuredClone(rq, initData, &initDataVal);
+	JS::RootedValue newNamespace{rq.cx, m_LoadModuleResult.has_value() ?
+		JS::ObjectValue(*m_LoadModuleResult->moduleNamespace) : rq.globalValue()};
+
+	if (!Script::HasProperty(rq, newNamespace, "init"))
+		return nullptr;
+
+	JS::RootedValue returnValue{rq.cx};
+	if (!ScriptFunction::Call(rq, newNamespace, "init", &returnValue, initDataVal, hotloadDataVal))
+	{
+		LOGERROR("GUI page '%s': Failed to call init() function", scriptName);
+		return nullptr;
+	}
+
+	if (!returnValue.isObject())
+		return nullptr;
+
+	JS::RootedObject returnObject{rq.cx, &returnValue.toObject()};
+	if (!JS::IsPromiseObject(returnObject))
+		return nullptr;
+
+	return returnObject;
+}
+
+JSObject* CGUI::TickObjects(const ScriptRequest& rq, Script::StructuredClone initData,
+	const std::string_view scriptName)
+{
+	JS::RootedObject sendingPromise{rq.cx};
+	if (m_LoadModuleResult.has_value() && m_LoadModuleResult->iterator->IsDone())
+	{
+		JS::RootedValue hotloadData{rq.cx, GetHotloadData(rq)};
+		m_LoadModuleResult->moduleNamespace = m_LoadModuleResult->iterator->Get();
+		++m_LoadModuleResult->iterator;
+		sendingPromise = CallPageInit(rq, initData, hotloadData, scriptName);
+	}
+
 	m_BaseObject->RecurseObject(&IGUIObject::IsHidden, &IGUIObject::DispatchDelayedSettingChanges);
 	m_BaseObject->RecurseObject(&IGUIObject::IsHiddenOrGhostOrOutOfBoundaries, &IGUIObject::Tick);
 	SendEventToAll(EventNameTick);
 	m_Tooltip.Update(FindObjectUnderMouse(), m_MousePos, *this);
+	return sendingPromise;
 }
 
 void CGUI::SendEventToAll(const CStr& eventName)
@@ -925,10 +980,20 @@ void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObje
 
 void CGUI::Xeromyces_ReadScript(const XMBData& xmb, XMBElement element, std::unordered_set<VfsPath>& Paths)
 {
-	// Check for a 'file' parameter
-	CStrW fileAttr(element.GetAttributes().GetNamedItem(xmb.GetAttributeID("file")).FromUTF8());
+	// If there is a "module" attribute, save it so it can be loaded at the end. It isn't saved to `Path`
+	// because modules automatically get reloaded.
+	const std::string moduleAttribute{element.GetAttributes().GetNamedItem(xmb.GetAttributeID("module"))};
+	if (!moduleAttribute.empty())
+	{
+		if (m_LoadModuleResult.has_value())
+			throw std::logic_error{"There can only be one root module per page."};
 
-	// If there is a file specified, open and execute it
+		const ScriptRequest rq{m_ScriptInterface};
+		m_LoadModuleResult.emplace(rq, moduleAttribute);
+	}
+
+	// If there is a "file" attribute, open and execute it
+	CStrW fileAttr(element.GetAttributes().GetNamedItem(xmb.GetAttributeID("file")).FromUTF8());
 	if (!fileAttr.empty())
 	{
 		if (!VfsPath(fileAttr).IsDirectory())
@@ -940,7 +1005,7 @@ void CGUI::Xeromyces_ReadScript(const XMBData& xmb, XMBElement element, std::uno
 			LOGERROR("GUI: Script path %s is not a file path", fileAttr.ToUTF8().c_str());
 	}
 
-	// If it has a directory attribute, read all JS files in that directory
+	// If there is a "directory" attribute, read all JS files in that directory
 	CStrW directoryAttr(element.GetAttributes().GetNamedItem(xmb.GetAttributeID("directory")).FromUTF8());
 	if (!directoryAttr.empty())
 	{
@@ -1299,3 +1364,8 @@ void CGUI::Xeromyces_ReadColor(const XMBData& xmb, XMBElement element)
 	else
 		LOGERROR("GUI: Unable to create custom color '%s'. Invalid color syntax.", name.c_str());
 }
+
+CGUI::ModuleArtifact::ModuleArtifact(const ScriptRequest& rq, VfsPath filename):
+	result{rq, std::move(filename)},
+	moduleNamespace{rq.cx}
+{}

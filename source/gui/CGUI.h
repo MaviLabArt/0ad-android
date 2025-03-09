@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -33,10 +33,13 @@
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ModuleLoader.h"
+#include "scriptinterface/StructuredClone.h"
 #include "scriptinterface/ScriptForward.h"
 
 #include <map>
 #include <memory>
+#include <optional>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -74,11 +77,17 @@ public:
 	 */
 	void AddObjectTypes();
 
+	JS::Value GetHotloadData(const ScriptRequest& rq);
+
+	JSObject* CallPageInit(const ScriptRequest& rq, Script::StructuredClone initDataVal,
+		JS::HandleValue hotloadDataVal, const std::string_view scriptName);
+
 	/**
 	 * Performs processing that should happen every frame
 	 * (including sending the "Tick" event to scripts)
 	 */
-	void TickObjects();
+	JSObject* TickObjects(const ScriptRequest& rq, Script::StructuredClone initData,
+		const std::string_view scriptName);
 
 	/**
 	 * Sends a specified script event to every object
@@ -370,7 +379,8 @@ private:
 	 *
 	 * @see LoadXmlFile()
 	 */
-	void Xeromyces_ReadRootObjects(const XMBData& xmb, XMBElement element, std::unordered_set<VfsPath>& Paths);
+	void Xeromyces_ReadRootObjects(const XMBData& xmb, XMBElement element,
+		std::unordered_set<VfsPath>& Paths);
 
 	/**
 	 * Reads in the root element \<sprites\> (the DOMElement).
@@ -429,7 +439,9 @@ private:
 	 *
 	 * @see LoadXmlFile()
 	 */
-	IGUIObject* Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent, std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth);
+	IGUIObject* Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+		std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
+		u32 nesting_depth);
 
 	/**
 	 * Reads in the element \<repeat\>, which repeats its child \<object\>s
@@ -437,7 +449,9 @@ private:
 	 * 'var' enclosed in square brackets) in its descendants' names with "[0]",
 	 * "[1]", etc.
 	 */
-	void Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject* pParent, std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth);
+	void Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+		std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
+		u32 nesting_depth);
 
 	/**
 	 * Reads in the element \<script\> (the XMBElement) and executes
@@ -691,6 +705,16 @@ private:
 	std::map<CStr, const SGUIIcon> m_Icons;
 
 public:
+	struct ModuleArtifact
+	{
+		ModuleArtifact(const ScriptRequest& rq, VfsPath filename);
+
+		Script::ModuleLoader::Result result;
+		Script::ModuleLoader::Result::iterator iterator{result.begin()};
+		JS::PersistentRootedObject moduleNamespace;
+	};
+	std::optional<ModuleArtifact> m_LoadModuleResult;
+
 	/**
 	 * Map from event names to object which listen to a given event.
 	 */

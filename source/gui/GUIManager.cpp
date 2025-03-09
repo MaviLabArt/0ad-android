@@ -156,10 +156,7 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 	{
 		std::shared_ptr<ScriptInterface> scriptInterface = gui->GetScriptInterface();
 		ScriptRequest rq(scriptInterface);
-
-		JS::RootedValue global(rq.cx, rq.globalValue());
-		JS::RootedValue hotloadDataVal(rq.cx);
-		ScriptFunction::Call(rq, global, "getHotloadData", &hotloadDataVal);
+		JS::RootedValue hotloadDataVal(rq.cx, gui->GetHotloadData(rq));
 		hotloadData = Script::WriteStructuredClone(rq, hotloadDataVal);
 	}
 
@@ -167,8 +164,6 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 	inputs.clear();
 	gui.reset(new CGUI(scriptContext));
 	const ScriptRequest rq{gui->GetScriptInterface()};
-	sendingPromise = std::make_shared<JS::PersistentRootedObject>(rq.cx,
-		JS::NewPromiseObject(rq.cx, nullptr));
 
 	{
 		JS::RootedString jsName{rq.cx, JS_NewStringCopyZ(rq.cx, START_ATLAS)};
@@ -197,6 +192,7 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 		return;
 	}
 
+	VfsPath rootModule;
 	XERO_ITER_EL(root, node)
 	{
 		if (node.GetNodeName() != elmt_include)
@@ -229,34 +225,23 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 
 	gui->LoadedXmlFiles();
 
-	JS::RootedValue initDataVal(rq.cx);
-	JS::RootedValue hotloadDataVal(rq.cx);
-	JS::RootedValue global(rq.cx, rq.globalValue());
+	scriptContext.RunJobs();
+	if (gui->m_LoadModuleResult.has_value())
+	{
+		gui->m_LoadModuleResult->moduleNamespace = gui->m_LoadModuleResult->iterator->Get();
+		++gui->m_LoadModuleResult->iterator;
+	}
 
-	if (initData)
-		Script::ReadStructuredClone(rq, initData, &initDataVal);
+	JS::RootedValue hotloadDataVal(rq.cx);
 
 	if (hotloadData)
 		Script::ReadStructuredClone(rq, hotloadData, &hotloadDataVal);
 
-	if (!Script::HasProperty(rq, global, "init"))
-		return;
+	JS::RootedObject returnObject{rq.cx, gui->CallPageInit(rq, initData, hotloadDataVal,
+		utf8_from_wstring(m_Name))};
 
-	JS::RootedValue returnValue{rq.cx};
-	if (!ScriptFunction::Call(rq, global, "init", &returnValue, initDataVal, hotloadDataVal))
-	{
-		LOGERROR("GUI page '%s': Failed to call init() function", utf8_from_wstring(m_Name));
-		return;
-	}
-
-	if (!returnValue.isObject())
-		return;
-
-	JS::RootedObject returnObject{rq.cx, &returnValue.toObject()};
-	if (!JS::IsPromiseObject(returnObject))
-		return;
-
-	sendingPromise = std::make_shared<JS::PersistentRootedObject>(rq.cx, returnObject);
+	sendingPromise = std::make_shared<JS::PersistentRootedObject>(rq.cx,
+		returnObject ? returnObject : JS::NewPromiseObject(rq.cx, nullptr));
 }
 
 JS::Value CGUIManager::SGUIPage::ReplacePromise(ScriptInterface& scriptInterface)
@@ -407,7 +392,13 @@ std::optional<bool> CGUIManager::TickObjects()
 	const auto pageStack = GetCopyOfFrozenStack();
 
 	for (const SGUIPage& p : pageStack)
-		p.gui->TickObjects();
+	{
+		const ScriptRequest rq{p.gui->GetScriptInterface()};
+		JS::RootedObject newSendingPromise{rq.cx, p.gui->TickObjects(rq, p.initData,
+			utf8_from_wstring(p.m_Name))};
+		if (newSendingPromise)
+			(*p.sendingPromise) = newSendingPromise;
+	}
 
 	m_ScriptContext.RunJobs();
 

@@ -27,6 +27,9 @@
       <interleave>
         <text/>
         <optional>
+          <attribute name="module"/>
+        </optional>
+        <optional>
           <attribute name="file"/>
         </optional>
         <optional>

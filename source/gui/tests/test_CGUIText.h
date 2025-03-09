@@ -330,6 +330,8 @@ public:
 
 	void test_regression_rP26522()
 	{
+		TS_ASSERT_OK(g_VFS->Mount(L"", DataDir() / "mods" / "mod" / "", VFS_MOUNT_MUST_EXIST));
+
 		CGUI gui{*g_ScriptContext};
 
 		const CStrW font{L"sans-bold-13"};

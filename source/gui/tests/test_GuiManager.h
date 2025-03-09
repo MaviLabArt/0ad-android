@@ -296,4 +296,22 @@ public:
 			Script::WriteStructuredClone(rq, JS::TrueHandleValue));
 		TS_ASSERT(g_GUI->TickObjects().value());
 	}
+
+	void test_MultipleRootModules()
+	{
+		ScriptRequest rq{g_GUI->GetScriptInterface()};
+
+		TS_ASSERT_THROWS_EQUALS(g_GUI->OpenChildPage(
+			L"multiple_root-modules/page.xml",
+			Script::WriteStructuredClone(rq, JS::NullHandleValue)),
+			const std::logic_error& e, e.what(), "There can only be one root module per page.");
+	}
+
+	void test_Await()
+	{
+		ScriptRequest rq{g_GUI->GetScriptInterface()};
+
+		TS_ASSERT_THROWS(g_GUI->OpenChildPage(L"await/page.xml",
+			Script::WriteStructuredClone(rq, JS::NullHandleValue)), const std::bad_variant_access&);
+	}
 };
