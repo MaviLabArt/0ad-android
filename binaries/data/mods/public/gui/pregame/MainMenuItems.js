@@ -1,4 +1,4 @@
-var g_MainMenuItems = [
+export const mainMenuItems = [
 	{
 		"caption": translate("Learn to Play"),
 		"tooltip": translate("Learn how to play, start the tutorial, discover the technology trees, and the history behind the civilizations."),

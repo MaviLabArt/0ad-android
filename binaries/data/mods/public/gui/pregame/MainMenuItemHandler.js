@@ -2,7 +2,7 @@
  * This class sets up the main menu buttons, animates submenu that opens when
  * clicking on category buttons, assigns the defined actions and hotkeys to every button.
  */
-class MainMenuItemHandler
+export class MainMenuItemHandler
 {
 	constructor(closePageCallback, menuItems)
 	{

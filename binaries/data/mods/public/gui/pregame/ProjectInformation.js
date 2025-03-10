@@ -1,7 +1,7 @@
 /**
  * IMPORTANT: Remember to update session/top_panel/BuildLabel.xml in sync with this.
  */
-var g_ProjectInformation = {
+export const projectInformation = {
 	"organizationName": {
 		"caption": translate("WILDFIRE GAMES")
 	},
@@ -20,7 +20,7 @@ var g_ProjectInformation = {
 	}
 };
 
-var g_CommunityButtons = [
+export const communityButtons = [
 	{
 		"caption": translate("Website"),
 		"tooltip": translate("Click to open play0ad.com in your web browser."),

@@ -42,7 +42,7 @@ class BackgroundLayer
 	}
 }
 
-class BackgroundHandler
+export class BackgroundHandler
 {
 	constructor(layers)
 	{

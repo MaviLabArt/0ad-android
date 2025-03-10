@@ -39,7 +39,7 @@ var g_UserReportStatusFormat = {
 	})
 };
 
-function initUserReport()
+export function initUserReport()
 {
 	initTerms(g_TermsUserReport);
 	loadTermsAcceptance();
@@ -72,7 +72,7 @@ function updateUserReportButtons()
 	};
 }
 
-function updateUserReportStatus()
+export function updateUserReportStatus()
 {
 	const statusData = Engine.GetUserReportStatus().split(":");
 

@@ -3,9 +3,7 @@
 
 	<script directory="gui/common/"/>
 	<script directory="gui/common/campaigns/"/>
-	<script directory="gui/pregame/"/>
-	<script directory="gui/pregame/backgrounds/"/>
-	<script directory="gui/pregame/userreport/"/>
+	<script module="gui/pregame/mainmenu.js"/>
 
 	<object name="mainMenuPage">
 		<include file="gui/pregame/backgrounds.xml"/>

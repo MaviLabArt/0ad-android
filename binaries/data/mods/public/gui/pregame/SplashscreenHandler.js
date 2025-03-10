@@ -1,4 +1,4 @@
-class SplashScreenHandler
+export class SplashScreenHandler
 {
 	constructor(initData, hotloadData)
 	{

@@ -1,28 +1,26 @@
-/**
- * Available backgrounds, added by the files in backgrounds/.
- */
-var g_BackgroundLayerData = [];
+import { initUserReport, updateUserReportStatus } from "gui/pregame/userreport/userreport.js";
+import { MainMenuPage } from "gui/pregame/MainMenuPage.js";
+import { mainMenuItems } from "gui/pregame/MainMenuItems.js";
+import { projectInformation, communityButtons } from "gui/pregame/ProjectInformation.js";
+import { backgrounds } from "gui/pregame/backgrounds/background.js";
 
-/**
- * This is the handler that coordinates all other handlers.
- */
-var g_MainMenuPage;
+export let getHotloadData;
 
-function init(data, hotloadData)
+export function init(data, hotloadData)
 {
+	initUserReport();
+	Engine.GetGUIObjectByName("userReport").onTick = updateUserReportStatus;
+
 	return new Promise(closePageCallback => {
-		g_MainMenuPage = new MainMenuPage(
+		const mainMenuPage = new MainMenuPage(
 			closePageCallback,
 			data,
 			hotloadData,
-			g_MainMenuItems,
-			g_BackgroundLayerData,
-			g_ProjectInformation,
-			g_CommunityButtons);
-	});
-}
+			mainMenuItems,
+			Object.values(backgrounds),
+			projectInformation,
+			communityButtons);
 
-function getHotloadData()
-{
-	return g_MainMenuPage.getHotloadData();
+		getHotloadData = () => mainMenuPage.getHotloadData();
+	});
 }

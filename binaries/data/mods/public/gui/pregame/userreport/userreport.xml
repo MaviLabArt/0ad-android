@@ -2,9 +2,6 @@
 
 <object name="userReport" type="image" style="userReportPanel" size="100%-314 100%-158 100%-4 100%-4">
 
-	<action on="Load">initUserReport();</action>
-	<action on="Tick">updateUserReportStatus();</action>
-
 	<object type="text" name="userReportText" style="userReportText" size="2 2 100%-2 100%-44"/>
 
 	<object type="button" name="userReportEnableButton" style="StoneButton" tooltip_style="pgToolTip" size="8 100%-40 151 100%-8"/>
