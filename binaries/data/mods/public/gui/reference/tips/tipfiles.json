@@ -23,6 +23,21 @@
         ]
       },
       {
+        "textFile": "batch_training.txt",
+        "imageFiles": [
+          "batch_training.png"
+        ]
+      },
+      {
+        "textFile": "fruits.txt",
+        "imageFiles": [
+          "bananas.png",
+          "berries.png",
+          "dates.png",
+          "grapes.png"
+        ]
+      },
+      {
         "textFile": "cavalry_stable.txt",
         "imageFiles": [
           "cavalry_stable.png"
@@ -145,9 +160,23 @@
         ]
       },
       {
+        "textFile": "battering_rams.txt",
+        "imageFiles": [
+          "battering_rams_athen.png",
+          "battering_rams_kush.png"
+        ]
+      },
+      {
         "textFile": "briton_war_dog.txt",
         "imageFiles": [
           "briton_war_dog.png"
+        ]
+      },
+      {
+        "textFile": "bolt_shooters.txt",
+        "imageFiles": [
+          "polybolos.png",
+          "scorpio.png"
         ]
       },
       {
@@ -172,6 +201,13 @@
         "textFile": "embassies.txt",
         "imageFiles": [
           "embassies.png"
+        ]
+      },
+      {
+        "textFile": "experience.txt",
+        "imageFiles": [
+          "ranks_pers.png",
+          "ranks_han.png"
         ]
       },
       {
