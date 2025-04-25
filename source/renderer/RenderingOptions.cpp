@@ -262,6 +262,9 @@ void CRenderingOptions::ReadConfigAndSetupHooks()
 				m_GPUSkinning = true;
 			else
 				LOGMESSAGE("GPU skinning isn't supported on the current hardware.");
+
+			if (CRenderer::IsInitialised())
+				g_Renderer.MakeShadersDirty();
 		}
 	});
 
