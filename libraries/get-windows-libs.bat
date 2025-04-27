@@ -4,7 +4,8 @@ rem **SVN revision to checkout for windows-libs**
 rem **Update this line when you commit an update to windows-libs**
 set "svnrev=28256"
 
-svn co https://svn.wildfiregames.com/public/windows-libs/trunk@%svnrev% win32
+svn co https://svn.wildfiregames.com/public/windows-libs/trunk@%svnrev% win32 || ^
+svn export --force https://svn.wildfiregames.com/public/windows-libs/trunk@%svnrev% win32
 
 rem **Copy dependencies' binaries to binaries/system/**
 
