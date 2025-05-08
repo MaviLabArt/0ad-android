@@ -57,7 +57,7 @@ enum
 
 struct SPrototypeSerialization
 {
-	std::string name = "";
+	std::wstring name;
 	bool hasCustomSerialize = false;
 	bool hasCustomDeserialize = false;
 	bool hasNullSerialize = false;
@@ -71,7 +71,7 @@ inline SPrototypeSerialization GetPrototypeInfo(const ScriptRequest& rq, JS::Han
 		throw PSERROR_Serialize_ScriptError("Could not get constructor name.");
 
 	// Nothing to do for basic Object objects.
-	if (ret.name == "Object")
+	if (ret.name == L"Object")
 		return ret;
 
 	JS::RootedValue serialize(rq.cx);
@@ -88,7 +88,7 @@ inline SPrototypeSerialization GetPrototypeInfo(const ScriptRequest& rq, JS::Han
 		(!ret.hasNullSerialize && !ret.hasCustomDeserialize))
 	{
 		// Don't throw for this error: mods might need updating and this crashes as exceptions are not correctly handled.
-		LOGERROR("Error serializing object '%s': non-null Serialize() but no matching Deserialize().", ret.name);
+		LOGERROR("Error serializing object '%s': non-null Serialize() but no matching Deserialize().", utf8_from_wstring(ret.name));
 	}
 
 	return ret;
