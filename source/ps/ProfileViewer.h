@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -119,7 +119,7 @@ public:
 	 *
 	 * @return true if the row should be highlighted in a special color.
 	 */
-	virtual bool IsHighlightRow(size_t row) { UNUSED2(row); return false; }
+	virtual bool IsHighlightRow(size_t /*row*/) { return false; }
 };
 
 

@@ -608,9 +608,9 @@ void CDeviceCommandContext::BeginFramebufferPass(IFramebuffer* framebuffer)
 			m_Framebuffer->GetDepthStencilAttachmentLoadOp() == AttachmentLoadOp::CLEAR);
 	if (needsClearValues)
 	{
-		for (CTexture* colorAttachment : m_Framebuffer->GetColorAttachments())
+		const CFramebuffer::ColorAttachments& colorAttachments{m_Framebuffer->GetColorAttachments()};
+		std::for_each(colorAttachments.begin(), colorAttachments.end(), [&](CTexture*)
 		{
-			UNUSED2(colorAttachment);
 			const CColor& clearColor = m_Framebuffer->GetClearColor();
 			// The four array elements of the clear color map to R, G, B, and A
 			// components of image formats, in order.
@@ -619,7 +619,7 @@ void CDeviceCommandContext::BeginFramebufferPass(IFramebuffer* framebuffer)
 			clearValues.back().color.float32[1] = clearColor.g;
 			clearValues.back().color.float32[2] = clearColor.b;
 			clearValues.back().color.float32[3] = clearColor.a;
-		}
+		});
 		if (m_Framebuffer->GetDepthStencilAttachment())
 		{
 			clearValues.emplace_back();

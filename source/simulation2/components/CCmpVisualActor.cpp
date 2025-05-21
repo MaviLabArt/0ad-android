@@ -496,12 +496,12 @@ public:
 			m_Unit->GetAnimation()->SetAnimationSyncOffset(m_AnimSyncOffsetTime.ToFloat());
 	}
 
-	void SetShadingColor(fixed r, fixed g, fixed b, fixed a) override
+	// TODO: Why is `a` even an argument?
+	void SetShadingColor(fixed r, fixed g, fixed b, fixed /*a*/) override
 	{
 		m_R = r;
 		m_G = g;
 		m_B = b;
-		UNUSED2(a); // TODO: why is this even an argument?
 
 		if (m_Unit)
 		{

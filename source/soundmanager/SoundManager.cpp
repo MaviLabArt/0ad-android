@@ -664,23 +664,20 @@ void CSoundManager::PlayAsGroup(const VfsPath& groupPath, const CVector3D& sourc
 		group->PlayNext(sourcePos, source);
 }
 
-void CSoundManager::PlayAsMusic(const VfsPath& itemPath, bool looping)
+void CSoundManager::PlayAsMusic(const VfsPath& itemPath, bool /*looping*/)
 {
 	if (m_Enabled)
 	{
-		UNUSED2(looping);
-
 		ISoundItem* aSnd = LoadItem(itemPath);
 		if (aSnd != NULL)
 			SetMusicItem(aSnd);
 	}
 }
 
-void CSoundManager::PlayAsAmbient(const VfsPath& itemPath, bool looping)
+void CSoundManager::PlayAsAmbient(const VfsPath& itemPath, bool /*looping*/)
 {
 	if (m_Enabled)
 	{
-		UNUSED2(looping);
 		ISoundItem* aSnd = LoadItem(itemPath);
 		if (aSnd != NULL)
 			SetAmbientItem(aSnd);

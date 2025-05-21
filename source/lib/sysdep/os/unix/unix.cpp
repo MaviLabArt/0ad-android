@@ -274,12 +274,8 @@ ErrorReactionInternal sys_display_error(const wchar_t* text, size_t flags)
 }
 
 
-Status sys_StatusDescription(int err, wchar_t* buf, size_t max_chars)
+Status sys_StatusDescription(int /*err*/, wchar_t* /*buf*/, size_t /*max_chars*/)
 {
-	UNUSED2(err);
-	UNUSED2(buf);
-	UNUSED2(max_chars);
-
 	// don't need to do anything: lib/errors.cpp already queries
 	// libc's strerror(). if we ever end up needing translation of
 	// e.g. Qt or X errors, that'd go here.

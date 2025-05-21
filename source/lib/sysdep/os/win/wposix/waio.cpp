@@ -566,11 +566,10 @@ int aio_write(struct aiocb* cb)
 	return Issue(cb);
 }
 
-
-int lio_listio(int mode, struct aiocb* const cbs[], int n, struct sigevent* se)
+// Signaling is not implemented.
+int lio_listio(int mode, struct aiocb* const cbs[], int n, struct sigevent* /*se*/)
 {
 	ENSURE(mode == LIO_WAIT || mode == LIO_NOWAIT);
-	UNUSED2(se);	// signaling is not implemented.
 
 	for(int i = 0; i < n; i++)
 	{

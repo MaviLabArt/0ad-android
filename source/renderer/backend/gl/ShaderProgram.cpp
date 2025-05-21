@@ -675,11 +675,8 @@ public:
 
 		m_Program = 0;
 		m_FileDependencies = {programPath};
-		for (const auto& [path, type] : shaderStages)
-		{
-			UNUSED2(type);
-			m_FileDependencies.emplace_back(path);
-		}
+		for (const auto& shaderStage : shaderStages)
+			m_FileDependencies.emplace_back(std::get<0>(shaderStage));
 
 		// TODO: replace by scoped bind.
 		m_Device->GetActiveCommandContext()->SetGraphicsPipelineState(

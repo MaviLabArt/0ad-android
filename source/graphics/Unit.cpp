@@ -53,9 +53,7 @@ CUnit::~CUnit()
 
 std::unique_ptr<CUnit> CUnit::Create(const CStrW& actorName, const entity_id_t id, const uint32_t seed, CObjectManager& objectManager)
 {
-	auto [success, actor] = objectManager.FindActorDef(actorName);
-
-	UNUSED2(success);
+	const CActorDef& actor{std::get<1>(objectManager.FindActorDef(actorName))};
 
 	std::unique_ptr<CUnit> unit{new CUnit(objectManager, actor, id, seed)};
 	if (!unit->m_Model)
