@@ -104,7 +104,8 @@ private:
 	 * @param wentOk - true if the conversion succeeded and wentOk was true before, false otherwise.
 	 */
 	template<size_t idx, typename T>
-	static T DoConvertFromJS(const ScriptRequest& rq, JS::CallArgs& args, bool& wentOk)
+	static T DoConvertFromJS([[maybe_unused]] const ScriptRequest& rq,
+		[[maybe_unused]] JS::CallArgs& args, [[maybe_unused]] bool& wentOk)
 	{
 		// No need to convert JS values.
 		if constexpr (std::is_same_v<T, JS::HandleValue>)
@@ -114,11 +115,7 @@ private:
 			if (idx >= args.length())
 				return JS::UndefinedHandleValue;
 			else
-			{
-				// GCC (at least < 9) & VS17 prints warnings if arguments are not used in some constexpr branch.
-				UNUSED2(rq); UNUSED2(args); UNUSED2(wentOk);
 				return args[idx]; // This passes the null handle value if idx is beyond the length of args.
-			}
 		}
 		else
 		{
@@ -185,14 +182,10 @@ private:
 	 * Wrap std::apply for the case where we have an object method or a regular function.
 	 */
 	template <auto callable, typename T, typename tuple>
-	static typename args_info<callable>::return_type call(T* object, tuple& args)
+	static typename args_info<callable>::return_type call([[maybe_unused]] T* object, tuple& args)
 	{
 		if constexpr(std::is_same_v<T, void>)
-		{
-			// GCC (at least < 9) & VS17 prints warnings if arguments are not used in some constexpr branch.
-			UNUSED2(object);
 			return std::apply(callable, args);
-		}
 		else
 			return std::apply(callable, std::tuple_cat(std::forward_as_tuple(*object), args));
 	}
@@ -224,7 +217,8 @@ private:
 	 * This could be worked around with more templates, but it doesn't seem particularly worth doing.
 	 */
 	template<typename R, typename ...Args>
-	static bool Call_(const ScriptRequest& rq, JS::HandleValue val, const char* name, R& ret, const Args&... args)
+	static bool Call_(const ScriptRequest& rq, JS::HandleValue val, const char* name,
+		[[maybe_unused]] R& ret, const Args&... args)
 	{
 		JS::RootedObject obj(rq.cx);
 		if (!JS_ValueToObject(rq.cx, val, &obj) || !obj)
@@ -251,8 +245,6 @@ private:
 				if (success)
 					success = Script::FromJSVal(rq, jsRet, ret);
 			}
-			else
-				UNUSED2(ret); // VS2017 complains.
 		}
 		// Even if everything succeeded, there could be pending exceptions
 		return !ScriptException::CatchPending(rq) && success;

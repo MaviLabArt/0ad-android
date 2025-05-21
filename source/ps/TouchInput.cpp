@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -182,10 +182,8 @@ void CTouchInput::Frame()
 	}
 }
 
-InReaction CTouchInput::HandleEvent(const SDL_Event_* ev)
+InReaction CTouchInput::HandleEvent([[maybe_unused]] const SDL_Event_* ev)
 {
-	UNUSED2(ev); // may be unused depending on #ifs
-
 	if (!IsEnabled())
 		return IN_PASS;
 

@@ -43,19 +43,16 @@ MESSAGEHANDLER(DoCommand)
 
 MESSAGEHANDLER(UndoCommand)
 {
-	UNUSED2(msg);
 	GetCommandProc().Undo();
 }
 
 MESSAGEHANDLER(RedoCommand)
 {
-	UNUSED2(msg);
 	GetCommandProc().Redo();
 }
 
 MESSAGEHANDLER(MergeCommand)
 {
-	UNUSED2(msg);
 	GetCommandProc().Merge();
 }
 

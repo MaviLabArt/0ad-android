@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -55,13 +55,10 @@ MESSAGEHANDLER(Screenshot)
 
 QUERYHANDLER(Ping)
 {
-	UNUSED2(msg);
 }
 
 MESSAGEHANDLER(SimStopMusic)
 {
-	UNUSED2(msg);
-
 	CmpPtr<ICmpSoundManager> cmpSoundManager(*g_Game->GetSimulation2(), SYSTEM_ENTITY);
 	if (cmpSoundManager)
 		cmpSoundManager->StopMusic();

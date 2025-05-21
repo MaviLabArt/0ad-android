@@ -60,7 +60,7 @@ void CStdDeserializer::TraceMember(JSTracer *trc)
 		JS::TraceEdge(trc, &backref, "StdDeserializer::m_ScriptBackrefs");
 }
 
-void CStdDeserializer::Get(const char* name, u8* data, size_t len)
+void CStdDeserializer::Get([[maybe_unused]] const char* name, u8* data, size_t len)
 {
 #if DEBUG_SERIALIZER_ANNOTATE
 	std::string strName;
@@ -75,8 +75,6 @@ void CStdDeserializer::Get(const char* name, u8* data, size_t len)
 			strName += c;
 	}
 	ENSURE(strName == name);
-#else
-	UNUSED2(name);
 #endif
 	m_Stream.read((char*)data, (std::streamsize)len);
 	if (!m_Stream.good())

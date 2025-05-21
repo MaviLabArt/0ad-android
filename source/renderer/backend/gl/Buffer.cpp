@@ -59,7 +59,7 @@ GLenum GetTargetFromBufferType(const IBuffer::Type type)
 
 // static
 std::unique_ptr<CBuffer> CBuffer::Create(
-	CDevice* device, const char* name,
+	CDevice* device, [[maybe_unused]] const char* name,
 	const Type type, const uint32_t size, const uint32_t usage)
 {
 	ENSURE(type == Type::VERTEX || type == Type::INDEX || type == Type::UNIFORM);
@@ -77,8 +77,6 @@ std::unique_ptr<CBuffer> CBuffer::Create(
 	{
 		glObjectLabel(GL_BUFFER, buffer->m_Handle, -1, name);
 	}
-#else
-	UNUSED2(name);
 #endif
 	glBindBufferARB(target, 0);
 	return buffer;

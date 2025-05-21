@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ extern msgHandlers& GetMsgHandlers();
 		ENSURE(msg->GetType() == IMessage::expectedtype); \
 		f##t (static_cast<prefix##t*>(msg)); \
 	} \
-	void f##t(prefix##t* msg)
+	void f##t([[maybe_unused]] prefix##t* msg)
 
 #define MESSAGEHANDLER(t) THINGHANDLER(m, Message, t)
 #define QUERYHANDLER(t) THINGHANDLER(q, Query, t)

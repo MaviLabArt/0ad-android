@@ -39,7 +39,7 @@ namespace io {
 // note that the Windows aio implementation requires buffers, sizes and
 // offsets to be sector-aligned.
 
-Status Issue(aiocb& cb, size_t queueDepth)
+Status Issue(aiocb& cb, [[maybe_unused]] size_t queueDepth)
 {
 #if CONFIG2_FILE_ENABLE_AIO
 	if(queueDepth > 1)
@@ -49,8 +49,6 @@ Status Issue(aiocb& cb, size_t queueDepth)
 			WARN_RETURN(StatusFromErrno());
 	}
 	else
-#else
-	UNUSED2(queueDepth);
 #endif
 	{
 		ENSURE(lseek(cb.aio_fildes, cb.aio_offset, SEEK_SET) == cb.aio_offset);
@@ -67,7 +65,7 @@ Status Issue(aiocb& cb, size_t queueDepth)
 }
 
 
-Status WaitUntilComplete(aiocb& cb, size_t queueDepth)
+Status WaitUntilComplete([[maybe_unused]] aiocb& cb, [[maybe_unused]] size_t queueDepth)
 {
 #if CONFIG2_FILE_ENABLE_AIO
 	if(queueDepth > 1)
@@ -94,9 +92,6 @@ SUSPEND_AGAIN:
 		}
 		cb.aio_nbytes = (size_t)bytesTransferred;
 	}
-#else
-	UNUSED2(cb);
-	UNUSED2(queueDepth);
 #endif
 
 	return INFO::OK;

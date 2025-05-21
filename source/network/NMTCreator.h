@@ -146,15 +146,13 @@ public: \
 size_t _nm::GetSerializedLength() const \
 { \
 	size_t ret=_base::GetSerializedLength(); \
-	const _nm *thiz=this;\
-	UNUSED2(thiz);	// preempt any "unused" warning
+	[[maybe_unused]] const _nm *thiz=this;
 
 #define NMT_START_ARRAY(_nm) \
 	std::vector <ARRAY_STRUCT_PREFIX(_nm)>::const_iterator it=_nm.begin(); \
 	while (it != _nm.end()) \
 	{ \
-		const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;\
-		UNUSED2(thiz);	// preempt any "unused" warning
+		[[maybe_unused]] const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;
 
 #define NMT_END_ARRAY() \
 		++it; \
@@ -191,15 +189,13 @@ u8 *_nm::Serialize(u8 *buffer) const \
 { \
 	/*printf("In " #_nm "::Serialize()\n");*/ \
 	u8 *pos=_base::Serialize(buffer); \
-	const _nm *thiz=this;\
-	UNUSED2(thiz);	// preempt any "unused" warning
+	[[maybe_unused]] const _nm *thiz=this;
 
 #define NMT_START_ARRAY(_nm) \
 	std::vector <ARRAY_STRUCT_PREFIX(_nm)>::const_iterator it=_nm.begin(); \
 	while (it != _nm.end()) \
 	{ \
-		const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;\
-		UNUSED2(thiz);	// preempt any "unused" warning
+		[[maybe_unused]] const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;
 
 #define NMT_END_ARRAY() \
 		++it; \
@@ -239,16 +235,15 @@ const u8 *_nm::Deserialize(const u8 *pos, const u8 *end) \
 { \
 	pos=_base::Deserialize(pos, end); \
 	if (pos == NULL) BAIL_DESERIALIZER;\
-	_nm *thiz=this; \
-	/*printf("In Deserialize" #_nm "\n"); */\
-	UNUSED2(thiz);	// preempt any "unused" warning
+	[[maybe_unused]] _nm *thiz=this; \
+	/*printf("In Deserialize" #_nm "\n"); */
 
 
 #define NMT_START_ARRAY(_nm) \
 	while (pos < end) \
 	{ \
-		ARRAY_STRUCT_PREFIX(_nm) *thiz=&*_nm.insert(_nm.end(), ARRAY_STRUCT_PREFIX(_nm)());\
-		UNUSED2(thiz);	// preempt any "unused" warning
+		[[maybe_unused]] ARRAY_STRUCT_PREFIX(_nm) *thiz = \
+			&*_nm.insert(_nm.end(), ARRAY_STRUCT_PREFIX(_nm)());
 
 #define NMT_END_ARRAY() \
 	}
@@ -289,8 +284,7 @@ CStr _nm::ToString() const \
 CStr _nm::ToStringRaw() const \
 { \
 	CStr ret; \
-	const _nm *thiz=this;\
-	UNUSED2(thiz);	// preempt any "unused" warning
+	[[maybe_unused]] const _nm *thiz=this;
 
 #define START_NMT_CLASS_DERIVED(_base, _nm, _tp) \
 CStr _nm::ToString() const \
@@ -301,8 +295,7 @@ CStr _nm::ToString() const \
 CStr _nm::ToStringRaw() const \
 { \
 	CStr ret=_base::ToStringRaw() + ", "; \
-	const _nm *thiz=this;\
-	UNUSED2(thiz);	// preempt any "unused" warning
+	[[maybe_unused]] const _nm *thiz=this;
 
 #define NMT_START_ARRAY(_nm) \
 	ret+=#_nm ": { "; \
@@ -310,8 +303,7 @@ CStr _nm::ToStringRaw() const \
 	while (it != _nm.end()) \
 	{ \
 		ret+=" { "; \
-		const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;\
-		UNUSED2(thiz);	// preempt any "unused" warning
+		[[maybe_unused]] const ARRAY_STRUCT_PREFIX(_nm) *thiz=&*it;
 
 #define NMT_END_ARRAY() \
 		++it; \

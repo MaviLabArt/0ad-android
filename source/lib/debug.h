@@ -301,7 +301,7 @@ Status debug_WriteCrashlog(const char* text);
  * (we do not provide an MFC-style VERIFY macro because the distinction
  * between ENSURE and VERIFY is unclear. to always run code but only
  * check for success in debug builds without raising unused-variable warnings,
- * use ASSERT + UNUSED2.)
+ * use [[maybe_unused]].)
  **/
 #define ASSERT(expr) ENSURE(expr)
 #ifdef NDEBUG

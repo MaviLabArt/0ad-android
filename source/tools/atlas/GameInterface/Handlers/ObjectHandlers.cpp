@@ -412,8 +412,6 @@ QUERYHANDLER(GetCurrentSelection)
 
 MESSAGEHANDLER(ObjectPreviewToEntity)
 {
-	UNUSED2(msg);
-
 	if (g_PreviewEntitiesID.size() == 0)
 		return;
 
@@ -713,8 +711,6 @@ QUERYHANDLER(PickSimilarObjects)
 
 MESSAGEHANDLER(ResetSelectionColor)
 {
-	UNUSED2(msg);
-
 	for (entity_id_t ent : g_Selection)
 	{
 		CmpPtr<ICmpVisual> cmpVisual(*g_Game->GetSimulation2(), ent);

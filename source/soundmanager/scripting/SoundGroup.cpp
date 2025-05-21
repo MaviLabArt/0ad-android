@@ -128,12 +128,10 @@ CSoundGroup::~CSoundGroup()
 	ReleaseGroup();
 }
 
-float CSoundGroup::RadiansOffCenter(const CVector3D& position, bool& onScreen, float& itemRollOff)
+float CSoundGroup::RadiansOffCenter([[maybe_unused]] const CVector3D& position,
+	[[maybe_unused]] bool& onScreen, [[maybe_unused]] float& itemRollOff)
 {
 #if !CONFIG2_AUDIO
-        UNUSED2(position);
-        UNUSED2(onScreen);
-        UNUSED2(itemRollOff);
 	return 0.f;
 #else
 	const int screenWidth = g_Game->GetView()->GetCamera()->GetViewPort().m_Width;
@@ -181,13 +179,10 @@ float CSoundGroup::RadiansOffCenter(const CVector3D& position, bool& onScreen, f
 #endif // !CONFIG2_AUDIO
 }
 
-void CSoundGroup::UploadPropertiesAndPlay(size_t index, const CVector3D& position, entity_id_t source)
+void CSoundGroup::UploadPropertiesAndPlay([[maybe_unused]] size_t index,
+	[[maybe_unused]] const CVector3D& position, [[maybe_unused]] entity_id_t source)
 {
-#if !CONFIG2_AUDIO
-	UNUSED2(index);
-	UNUSED2(position);
-	UNUSED2(source);
-#else
+#if CONFIG2_AUDIO
 	if (!g_SoundManager)
 		return;
 

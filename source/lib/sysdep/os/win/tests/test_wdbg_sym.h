@@ -138,15 +138,15 @@ class TestWdbgSym : public CxxTest::TestSuite
 			char s3;
 		}
 		Small;
-		Small small__ = { 0x55, 0xaa, -1 }; UNUSED2(small__);
+		[[maybe_unused]] Small small__ = { 0x55, 0xaa, -1 };
 
 		struct Large
 		{
 			u8 large_member_u8;
 			std::string large_member_string;
 			double large_member_double;
-		}
-		large = { 0xff, "large struct string", 123456.0 }; UNUSED2(large);
+		};
+		[[maybe_unused]] Large large = { 0xff, "large struct string", 123456.0 };
 
 
 		class Base
@@ -235,14 +235,15 @@ class TestWdbgSym : public CxxTest::TestSuite
 
 	// also exercises all basic types because we need to display some values
 	// anyway (to see at a glance whether symbol engine addrs are correct)
-	static void m_test_addrs(int p_int, double p_double, char* p_pchar, uintptr_t p_uintptr)
+	static void m_test_addrs([[maybe_unused]] int p_int, [[maybe_unused]] double p_double,
+		[[maybe_unused]] char* p_pchar, [[maybe_unused]] uintptr_t p_uintptr)
 	{
-		size_t l_uint = 0x1234;
-		bool l_bool = true; UNUSED2(l_bool);
-		wchar_t l_wchars[] = L"wchar string";
-		enum TestEnum { VAL1=1, VAL2=2 } l_enum = VAL1;
-		u8 l_u8s[] = { 1,2,3,4 };
-		void (*l_funcptr)(void) = m_test_stl;
+		[[maybe_unused]] size_t l_uint = 0x1234;
+		[[maybe_unused]] bool l_bool = true;
+		[[maybe_unused]] wchar_t l_wchars[] = L"wchar string";
+		[[maybe_unused]] enum TestEnum { VAL1=1, VAL2=2 } l_enum = VAL1;
+		[[maybe_unused]] u8 l_u8s[] = { 1,2,3,4 };
+		[[maybe_unused]] void (*l_funcptr)(void) = m_test_stl;
 
 		static double s_double = -2.718;
 		static char s_chars[] = {'c','h','a','r','s',0};
@@ -262,25 +263,15 @@ class TestWdbgSym : public CxxTest::TestSuite
 		debug_printf("l_enum    addr=%p val=%d\n", &l_enum, l_enum);
 		debug_printf("l_u8s     addr=%p val=%d\n", &l_u8s, l_u8s);
 		debug_printf("l_funcptr addr=%p val=%p\n", &l_funcptr, l_funcptr);
-#else
-		UNUSED2(p_uintptr);
-		UNUSED2(p_pchar);
-		UNUSED2(p_double);
-		UNUSED2(p_int);
-		UNUSED2(l_funcptr);
-		UNUSED2(l_enum);
-		UNUSED2(l_uint);
-		UNUSED2(l_u8s);
-		UNUSED2(l_wchars);
 #endif
 
 		m_test_stl();
 
-		int uninit_int; UNUSED2(uninit_int);
-		float uninit_float; UNUSED2(uninit_float);
-		double uninit_double; UNUSED2(uninit_double);
-		bool uninit_bool; UNUSED2(uninit_bool);
-		HWND uninit_hwnd; UNUSED2(uninit_hwnd);
+		[[maybe_unused]] int uninit_int;
+		[[maybe_unused]] float uninit_float;
+		[[maybe_unused]] double uninit_double;
+		[[maybe_unused]] bool uninit_bool;
+		[[maybe_unused]] HWND uninit_hwnd;
 	}
 
 #pragma optimize("", on)

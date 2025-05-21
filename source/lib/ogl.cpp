@@ -24,7 +24,6 @@
 
 #include "lib/ogl.h"
 
-#include "lib/code_annotation.h"
 #include "lib/config2.h"
 #include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
@@ -518,7 +517,7 @@ bool ogl_Init(void* (load)(const char*))
 
 void ogl_SetVsyncEnabled(bool enabled)
 {
-	const int interval = enabled ? 1 : 0;
+	[[maybe_unused]] const int interval = enabled ? 1 : 0;
 #if !CONFIG2_GLES && OS_WIN
 	if (ogl_HaveExtension("WGL_EXT_swap_control"))
 		wglSwapIntervalEXT(interval);
@@ -526,10 +525,6 @@ void ogl_SetVsyncEnabled(bool enabled)
 #if defined(SDL_VIDEO_DRIVER_X11)
 	if (GLXVersion && ogl_HaveExtension("GLX_SGI_swap_control"))
 		glXSwapIntervalSGI(interval);
-#else
-	UNUSED2(interval);
 #endif
-#else
-	UNUSED2(interval);
 #endif
 }

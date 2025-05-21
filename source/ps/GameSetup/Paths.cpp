@@ -184,11 +184,10 @@ Paths::Paths(const CmdLineArgs& args)
 #endif
 }
 
-/*static*/ OsPath Paths::RootData(const OsPath& argv0)
+/*static*/ OsPath Paths::RootData([[maybe_unused]] const OsPath& argv0)
 {
 
 #ifdef INSTALLED_DATADIR
-	UNUSED2(argv0);
 	return OsPath(STRINGIZE(INSTALLED_DATADIR))/"";
 #else
 

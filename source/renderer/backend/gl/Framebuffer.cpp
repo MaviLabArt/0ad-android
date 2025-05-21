@@ -38,7 +38,7 @@ namespace GL
 
 // static
 std::unique_ptr<CFramebuffer> CFramebuffer::Create(
-	CDevice* device, const char* name, SColorAttachment* colorAttachment,
+	CDevice* device, [[maybe_unused]] const char* name, SColorAttachment* colorAttachment,
 	SDepthStencilAttachment* depthStencilAttachment)
 {
 	ENSURE(colorAttachment || depthStencilAttachment);
@@ -143,8 +143,6 @@ std::unique_ptr<CFramebuffer> CFramebuffer::Create(
 	{
 		glObjectLabel(GL_FRAMEBUFFER, framebuffer->m_Handle, -1, name);
 	}
-#else
-	UNUSED2(name);
 #endif
 
 	const GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);

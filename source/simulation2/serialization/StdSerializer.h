@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -35,14 +35,12 @@ public:
 		m_Stream.flush();
 	}
 
-	void Put(const char* name, const u8* data, size_t len)
+	void Put([[maybe_unused]] const char* name, const u8* data, size_t len)
 	{
 #if DEBUG_SERIALIZER_ANNOTATE
 		m_Stream.put('<');
 		m_Stream.write(name, strlen(name));
 		m_Stream.put('>');
-#else
-		UNUSED2(name);
 #endif
 		m_Stream.write((const char*)data, (std::streamsize)len);
 	}

@@ -1254,7 +1254,7 @@ public:
 	void VertexAttribPointer(
 		const VertexAttributeStream stream, const Format format,
 		const uint32_t offset, const uint32_t stride,
-		const VertexAttributeRate rate, const void* data) override
+		[[maybe_unused]] const VertexAttributeRate rate, const void* data) override
 	{
 		const int attributeLocation = GetAttributeLocationFromStream(m_Device, stream);
 		std::vector<int>::const_iterator it =
@@ -1268,7 +1268,6 @@ public:
 			attributeLocation, size, type, normalized, stride, static_cast<const u8*>(data) + offset);
 #if CONFIG2_GLES
 		ENSURE(!m_Device->GetCapabilities().instancing);
-		UNUSED2(rate);
 #else
 		if (rate == VertexAttributeRate::PER_INSTANCE)
 			ENSURE(m_Device->GetCapabilities().instancing);

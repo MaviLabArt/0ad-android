@@ -552,17 +552,11 @@ template<class T> bool get_container_info(const T& t, size_t size, size_t el_siz
 // return number of elements and an iterator (any data it needs is stored in
 // it_mem, which must hold DEBUG_STL_MAX_ITERATOR_SIZE bytes).
 // returns 0 on success or an StlContainerError.
-Status debug_stl_get_container_info(const wchar_t* type_name, const u8* p, size_t size,
-	size_t el_size, size_t* el_count, DebugStlIterator* el_iterator, void* it_mem)
+Status debug_stl_get_container_info([[maybe_unused]] const wchar_t* type_name, [[maybe_unused]] const u8* p,
+	[[maybe_unused]] size_t size, [[maybe_unused]] size_t el_size, [[maybe_unused]] size_t* el_count,
+	[[maybe_unused]] DebugStlIterator* el_iterator, [[maybe_unused]] void* it_mem)
 {
 #if MSC_VERSION
-	UNUSED2(type_name);
-	UNUSED2(p);
-	UNUSED2(size);
-	UNUSED2(el_size);
-	UNUSED2(el_count);
-	UNUSED2(el_iterator);
-	UNUSED2(it_mem);
 	return ERR::STL_CNT_UNSUPPORTED;	// NOWARN
 #else
 

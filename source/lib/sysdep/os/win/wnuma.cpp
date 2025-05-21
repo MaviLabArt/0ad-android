@@ -473,7 +473,8 @@ bool numa_IsMemoryInterleaved()
 
 #if 0
 
-static bool VerifyPages(void* mem, size_t size, size_t pageSize, size_t node)
+static bool VerifyPages([[maybe_unused]] void* mem, [[maybe_unused]] size_t size,
+	[[maybe_unused]] size_t pageSize, [[maybe_unused]] size_t node)
 {
 	WUTIL_FUNC(pQueryWorkingSetEx, BOOL, (HANDLE, PVOID, DWORD));
 	WUTIL_IMPORT_KERNEL32(QueryWorkingSetEx, pQueryWorkingSetEx);
@@ -510,11 +511,6 @@ static bool VerifyPages(void* mem, size_t size, size_t pageSize, size_t node)
 	}
 
 	delete[] wsi;
-#else
-	UNUSED2(mem);
-	UNUSED2(size);
-	UNUSED2(pageSize);
-	UNUSED2(node);
 #endif
 
 	return true;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -72,8 +72,6 @@ std::optional<ScriptInterface> g_ScriptInterface;
 
 MESSAGEHANDLER(Init)
 {
-	UNUSED2(msg);
-
 	g_Quickstart = true;
 
 	InitVfs(g_AtlasGameLoop->args);
@@ -98,15 +96,11 @@ MESSAGEHANDLER(InitAppWindow)
 {
 #if OS_WIN
 	wutil_SetAppWindow(msg->handle);
-#else
-	UNUSED2(msg);
 #endif
 }
 
 MESSAGEHANDLER(InitSDL)
 {
-	UNUSED2(msg);
-
 	// When using GLX (Linux), SDL has to load the GL library to find
 	// glXGetProcAddressARB before it can load any extensions.
 	// When running in Atlas, we skip the SDL video initialisation code
@@ -128,8 +122,6 @@ MESSAGEHANDLER(InitSDL)
 
 MESSAGEHANDLER(InitGraphics)
 {
-	UNUSED2(msg);
-
 	g_VideoMode.CreateBackendDevice(false);
 
 	g_VideoMode.GetBackendDevice()->OnWindowResize(g_xres, g_yres);
@@ -141,8 +133,6 @@ MESSAGEHANDLER(InitGraphics)
 
 MESSAGEHANDLER(Shutdown)
 {
-	UNUSED2(msg);
-
 	// Empty the CommandProc, to get rid of its references to entities before
 	// we kill the EntityManager
 	GetCommandProc().Destroy();
@@ -159,7 +149,6 @@ MESSAGEHANDLER(Shutdown)
 
 QUERYHANDLER(Exit)
 {
-	UNUSED2(msg);
 	g_AtlasGameLoop->running = false;
 }
 

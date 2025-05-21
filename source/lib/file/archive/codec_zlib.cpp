@@ -37,14 +37,12 @@
 class Codec_ZLib : public ICodec
 {
 public:
-	u32 UpdateChecksum(u32 checksum, const u8* in, size_t inSize) const
+	u32 UpdateChecksum([[maybe_unused]] u32 checksum, [[maybe_unused]] const u8* in,
+		[[maybe_unused]] size_t inSize) const
 	{
 #if CODEC_COMPUTE_CHECKSUM
 		return (u32)crc32(checksum, in, (uInt)inSize);
 #else
-		UNUSED2(checksum);
-		UNUSED2(in);
-		UNUSED2(inSize);
 		return 0;
 #endif
 	}

@@ -37,8 +37,8 @@ ApicId GetApicId()
 	regs.eax = 1;
 	// note: CPUID function 1 is always supported, but only processors with
 	// an xAPIC (e.g. P4/Athlon XP) will return a nonzero ID.
-	bool ok = x86_x64::cpuid(&regs);
-	ASSERT(ok); UNUSED2(ok);
+	[[maybe_unused]] bool ok = x86_x64::cpuid(&regs);
+	ASSERT(ok);
 	const u8 apicId = (u8)bits(regs.ebx, 24, 31);
 	return apicId;
 }
