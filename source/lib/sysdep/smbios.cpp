@@ -703,10 +703,9 @@ void FieldStringizer::operator()<const char*>(size_t flags, const char*& value, 
 const Structures* GetStructures()
 {
 	static ModuleInitState initState{ 0 };
-	Status ret = ModuleInit(&initState, InitStructures);
+	std::ignore = ModuleInit(&initState, InitStructures);
 	// (callers have to check if member pointers are nonzero anyway, so
 	// we always return a valid pointer to simplify most use cases.)
-	UNUSED2(ret);
 	return &g_Structures;
 }
 

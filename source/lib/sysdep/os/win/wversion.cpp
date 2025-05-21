@@ -26,6 +26,7 @@
 #include "lib/sysdep/os/win/win.h"
 
 #include <sstream>
+#include <utility>
 
 const char* wversion_Family()
 {
@@ -37,7 +38,8 @@ const char* wversion_Family()
 	{
 		wchar_t windowsVersionString[32];
 		DWORD size = sizeof(windowsVersionString);
-		UNUSED2(RegQueryValueExW(hKey, L"CurrentVersion", 0, 0, reinterpret_cast<LPBYTE>(windowsVersionString), &size));
+		std::ignore = RegQueryValueExW(hKey, L"CurrentVersion", 0, 0,
+			reinterpret_cast<LPBYTE>(windowsVersionString), &size);
 
 		unsigned major = 0, minor = 0;
 		swscanf_s(windowsVersionString, L"%u.%u", &major, &minor);

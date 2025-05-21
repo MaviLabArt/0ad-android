@@ -49,6 +49,8 @@
 #include <fcntl.h>
 #include <memory>
 
+#include <utility>
+
 namespace ERR
 {
 	const Status IO = -110301;
@@ -327,7 +329,7 @@ static inline Status Store(const OsPath& pathname, const void* data, size_t size
 	io::Operation op(file, (void*)data, size);
 
 #if OS_WIN
-	UNUSED2(waio_Preallocate(op.m_FileDescriptor, (off_t)size));
+	std::ignore = waio_Preallocate(op.m_FileDescriptor, (off_t)size);
 #endif
 
 	RETURN_STATUS_IF_ERR(io::Run(op, p, completedHook, issueHook));

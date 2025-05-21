@@ -34,21 +34,6 @@
 #include <cstddef>
 
 /**
- * mark a function local variable or parameter as unused and avoid
- * the corresponding compiler warning.
- * note that UNUSED is not applicable to variable definitions that
- * involve initialization, nor is it sufficient in cases where
- * an argument is unused only in certain situations.
- * example: void f(int x) { ASSERT(x == 0); UNUSED2(x); }
- * this asserts in debug builds and avoids warnings in release.
- **/
-#if HAVE_C99 && GCC_VERSION	// _Pragma from C99, unused from GCC
-# define UNUSED2(param) _Pragma("unused " #param)
-#else
-# define UNUSED2(param) ((void)(param))
-#endif
-
-/**
  * indicate a function will not throw any synchronous exceptions,
  * thus hopefully generating smaller and more efficient code.
  *

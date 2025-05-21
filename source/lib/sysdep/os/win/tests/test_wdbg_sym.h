@@ -27,12 +27,6 @@
 
 #include "lib/self_test.h"
 
-#include <queue>
-#include <deque>
-#include <list>
-#include <map>
-#include <stack>
-
 #include "lib/bits.h"
 #include "lib/code_annotation.h"
 #include "lib/sysdep/os/win/win.h"	// HWND
@@ -40,6 +34,12 @@
 #include "lib/sysdep/os/win/wdbg_sym.h"
 #include "lib/external_libraries/dbghelp.h"
 
+#include <deque>
+#include <list>
+#include <map>
+#include <queue>
+#include <stack>
+#include <utility>
 
 static void* callers[100];
 static size_t numCallers;
@@ -60,7 +60,7 @@ static Status OnFrame(const _tagSTACKFRAME64* frame, uintptr_t /*cbData*/)
 __declspec(noinline) static void Func1()
 {
 	CONTEXT context;
-	UNUSED2(debug_CaptureContext(&context));
+	std::ignore = debug_CaptureContext(&context);
 	wdbg_sym_WalkStack(OnFrame, 0, context);
 }
 
