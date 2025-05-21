@@ -902,8 +902,6 @@ void CDeviceCommandContext::ResolveFramebuffer(
 	ENSURE(destinationFramebuffer->GetWidth() == sourceFramebuffer->GetWidth());
 	ENSURE(destinationFramebuffer->GetHeight() == sourceFramebuffer->GetHeight());
 #if CONFIG2_GLES
-	UNUSED2(destinationFramebuffer);
-	UNUSED2(sourceFramebuffer);
 	debug_warn("CDeviceCommandContext::ResolveFramebuffer is not implemented for GLES");
 #else
 	// Source framebuffer should not be backbuffer.
@@ -1203,8 +1201,6 @@ void CDeviceCommandContext::DrawInstanced(
 #if CONFIG2_GLES
 	ENSURE(!m_Device->GetCapabilities().instancing);
 	UNUSED2(firstVertex);
-	UNUSED2(vertexCount);
-	UNUSED2(instanceCount);
 #else
 	glDrawArraysInstancedARB(GL_TRIANGLES, firstVertex, vertexCount, instanceCount);
 #endif
@@ -1233,8 +1229,6 @@ void CDeviceCommandContext::DrawIndexedInstanced(
 	// in Mesa 7.10 swrast with index VBOs).
 #if CONFIG2_GLES
 	ENSURE(!m_Device->GetCapabilities().instancing);
-	UNUSED2(indexCount);
-	UNUSED2(firstIndex);
 	UNUSED2(instanceCount);
 #else
 	glDrawElementsInstancedARB(GL_TRIANGLES, indexCount, GL_UNSIGNED_SHORT,
