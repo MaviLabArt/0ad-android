@@ -5,6 +5,7 @@ newoption { trigger = "icc", description = "Use Intel C++ Compiler (Linux only; 
 newoption { trigger = "jenkins-tests", description = "Configure CxxTest to use the XmlPrinter runner which produces Jenkins-compatible output" }
 newoption { trigger = "minimal-flags", description = "Only set compiler/linker flags that are really needed. Has no effect on Windows builds" }
 newoption { trigger = "outpath", description = "Location for generated project files", default="../workspaces/default" }
+newoption { trigger = "strip-binaries", description = "Strip created binaries" }
 newoption { trigger = "with-system-cxxtest", description = "Search standard paths for cxxtest, instead of using bundled copy" }
 newoption { trigger = "with-lto", description = "Enable Link Time Optimization (LTO)" }
 newoption { trigger = "with-system-mozjs", description = "Search standard paths for libmozjs115, instead of using bundled copy" }
@@ -186,7 +187,9 @@ function project_set_build_flags()
 
 	editandcontinue "Off"
 
-	if not _OPTIONS["minimal-flags"] then
+	if _OPTIONS['strip-binaries'] then
+		symbols "Off"
+	else
 		symbols "On"
 	end
 
