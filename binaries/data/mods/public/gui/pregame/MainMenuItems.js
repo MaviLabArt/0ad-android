@@ -194,15 +194,15 @@ export const mainMenuItems = [
 			},
 			{
 				// Translation: Join a game by specifying the host's IP address.
-				"caption": translate("Join Game"),
-				"tooltip": translate("Joining an existing multiplayer game."),
+				"caption": translate("Connect by IP"),
+				"tooltip": translate("Joining an existing multiplayer game at a given IP address."),
 				"onPress": Engine.OpenChildPage.bind(null, "page_gamesetup_mp.xml", {
 					"multiplayerGameType": "join"
 				})
 			},
 			{
 				"caption": translate("Host New Game"),
-				"tooltip": translate("Host a new multiplayer game."),
+				"tooltip": translate("Host a new multiplayer game. Other players can connect directly to you via your IP address."),
 				"onPress": Engine.OpenChildPage.bind(null, "page_gamesetup_mp.xml", {
 					"multiplayerGameType": "host",
 					"loadSavedGame": false
