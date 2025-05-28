@@ -25,6 +25,7 @@
 #include "lib/utf8.h"
 #include "maths/Size2D.h"
 #include "maths/MD5.h"
+#include "ps/CLogger.h"
 #include "ps/CStrIntern.h"
 #include "ps/GUID.h"
 #include "ps/GameSetup/Atlas.h"
@@ -87,6 +88,7 @@ int GetFps()
 
 CSize2D GetTextSize(const std::string& fontName, const std::wstring& text)
 {
+	LOGWARNING("Engine.GetTextSize is deprecated and will be removed in a future version.Use guiObject.GetPreferedTextSize for accurate text sizing or guiObject.getTextSize for sizing within GUI objects.");
 	float width = 0;
 	float height = 0;
 	CStrIntern _fontName(fontName);
