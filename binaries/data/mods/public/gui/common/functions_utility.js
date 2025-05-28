@@ -236,10 +236,11 @@ function horizontallySpaceObjects(parentName, margin = 0)
  */
 function resizeGUIObjectToCaption(object, align, margin = {})
 {
-	const textSize = Engine.GetTextSize(object.font, object.caption);
+	const textSize = object.getPreferredTextSize();
+
 	if (align.horizontal)
 	{
-		const width = textSize.width + 2 * object.buffer_zone + (margin.horizontal || 0);
+		const width = textSize.width + (margin.horizontal || 0);
 		switch (align.horizontal)
 		{
 		case "right":

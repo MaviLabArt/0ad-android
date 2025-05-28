@@ -298,10 +298,7 @@ function getNetworkWarnings()
 	// Show local messages first
 	const guids = Object.keys(g_NetworkWarnings).sort(guid => guid != "server");
 
-	const font = Engine.GetGUIObjectByName("gameStateNotifications").font;
-
 	const messages = [];
-	let maxTextWidth = 0;
 
 	for (const guid of guids)
 	{
@@ -309,15 +306,7 @@ function getNetworkWarnings()
 
 		// Add formatted text
 		messages.push(g_NetworkWarningTexts[msg.warntype](msg, colorizePlayernameByGUID(guid)));
-
-		// Add width of unformatted text
-		const username = guid != "server" && g_PlayerAssignments[guid].name;
-		const textWidth = Engine.GetTextWidth(font, g_NetworkWarningTexts[msg.warntype](msg, username));
-		maxTextWidth = Math.max(textWidth, maxTextWidth);
 	}
 
-	return {
-		"messages": messages,
-		"maxTextWidth": maxTextWidth
-	};
+	return messages;
 }

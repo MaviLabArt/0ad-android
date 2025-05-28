@@ -28,7 +28,7 @@ class GameSettingWarning
 
 		this.gameSettingWarning.caption = caption;
 
-		const labelWidth = Math.min(Engine.GetTextWidth(this.gameSettingWarning.font, this.gameSettingWarning.caption) + 10, maxWidth);
+		const labelWidth = Math.min(this.gameSettingWarning.getPreferredTextSize().width + 10, maxWidth);
 
 		const neighborElement = !this.savedGameLabel.hidden ? this.savedGameLabel.parent : this.bottomRightPanel;
 		this.gameSettingWarning.parent.size = {

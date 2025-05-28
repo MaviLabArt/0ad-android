@@ -25,7 +25,7 @@ class TrainerSection
 	draw(units, civCode)
 	{
 		const caption = this.TrainerSectionHeading;
-		this.width = Engine.GetTextWidth(caption.font, caption.caption) + (caption.size.left + caption.buffer_zone) * 2;
+		this.width = caption.getPreferredTextSize().width + caption.size.left;
 		let count = 0;
 
 		for (const unitCode of units.keys())

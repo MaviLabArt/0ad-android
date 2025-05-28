@@ -38,7 +38,7 @@ class EntityBox
 	{
 		// We make the assumption that the caption's padding is equal on both sides
 		const caption = this.gui.children[0];
-		return Engine.GetTextWidth(caption.font, caption.caption) + (caption.size.left + caption.buffer_zone) * 2;
+		return caption.getPreferredTextSize().width + caption.size.left;
 	}
 
 	static compileTooltip(template)

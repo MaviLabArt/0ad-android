@@ -4,16 +4,17 @@
 function displayGamestateNotifications()
 {
 	let messages = [];
-	let maxTextWidth = 0;
-
 	// Add network warnings
 	if (Engine.ConfigDB_GetValue("user", "overlay.netwarnings") == "true")
 	{
 		const netwarnings = getNetworkWarnings();
-		messages = messages.concat(netwarnings.messages);
-		maxTextWidth = Math.max(maxTextWidth, netwarnings.maxTextWidth);
+		messages = messages.concat(netwarnings);
 	}
 
+	const gameStateNotifications = Engine.GetGUIObjectByName("gameStateNotifications");
+	gameStateNotifications.caption = messages.join("\n");
+
+	const maxTextWidth = gameStateNotifications.getPreferredTextSize().width;
 	// Resize textbox
 	const width = maxTextWidth + 20;
 	const height = 14 * messages.length;
@@ -25,8 +26,6 @@ function displayGamestateNotifications()
 	const bottom = top + "+" + height;
 	const left = right + "-" + width;
 
-	const gameStateNotifications = Engine.GetGUIObjectByName("gameStateNotifications");
-	gameStateNotifications.caption = messages.join("\n");
 	gameStateNotifications.hidden = !messages.length;
 	gameStateNotifications.size = left + " " + top + " " + right + " " + bottom;
 
