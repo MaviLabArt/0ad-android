@@ -56,6 +56,7 @@ newoption { category = "Pyrogenesis", trigger = "with-system-nvtt", description 
 newoption { category = "Pyrogenesis", trigger = "with-valgrind", description = "Enable Valgrind support (non-Windows only)" }
 newoption { category = "Pyrogenesis", trigger = "without-audio", description = "Disable use of OpenAL/Ogg/Vorbis APIs" }
 newoption { category = "Pyrogenesis", trigger = "without-atlas", description = "Disable Atlas scenario/map editor and ActorEditor" }
+newoption { category = "Pyrogenesis", trigger = "without-dap-interface", description = "Disable Dap interface project" }
 newoption { category = "Pyrogenesis", trigger = "without-lobby", description = "Disable the use of gloox and the multiplayer lobby" }
 newoption { category = "Pyrogenesis", trigger = "without-miniupnpc", description = "Disable use of miniupnpc for port forwarding" }
 newoption { category = "Pyrogenesis", trigger = "without-nvtt", description = "Disable use of NVTT" }
@@ -279,6 +280,10 @@ function project_set_build_flags()
 
 	if _OPTIONS["without-miniupnpc"] then
 		defines { "CONFIG2_MINIUPNPC=0" }
+	end
+
+	if _OPTIONS["without-dap-interface"] then
+		defines { "CONFIG2_DAP_INTERFACE=0" }
 	end
 
 	-- various platform-specific build flags
@@ -708,6 +713,19 @@ function setup_all_libs ()
 		"spidermonkey",
 	}
 	setup_static_lib_project("rlinterface", source_dirs, extern_libs, { no_pch = 1 })
+
+	if not _OPTIONS["without-dap-interface"] then
+		source_dirs = {
+			"dapinterface",
+		}
+		extern_libs = {
+			"boost", -- dragged in via simulation.h and scriptinterface.h
+			"fmt",
+			"spidermonkey",
+			"sockets"
+		}
+		setup_static_lib_project("dapinterface", source_dirs, extern_libs, { no_pch = 1 })
+	end
 
 	source_dirs = {
 		"third_party/tinygettext/src",

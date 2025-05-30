@@ -84,6 +84,7 @@ that of Atlas depending on commandline parameters.
 #include "simulation2/Simulation2.h"
 #include "simulation2/system/TurnManager.h"
 #include "soundmanager/ISoundManager.h"
+#include "dapinterface/DapInterface.h"
 
 #if OS_UNIX
 #include <iostream>
@@ -362,7 +363,11 @@ static void RendererIncrementalLoad()
 	while (more && timer_Time() - startTime < maxTime);
 }
 
+#if CONFIG2_DAP_INTERFACE
+static void Frame(RL::Interface* rlInterface, const int fixedFrameFrequency, DAP::Interface* dapInterface)
+#else
 static void Frame(RL::Interface* rlInterface, const int fixedFrameFrequency)
+#endif // CONFIG2_DAP_INTERFACE
 {
 	g_Profiler2.RecordFrameStart();
 	PROFILE2("frame");
@@ -425,6 +430,11 @@ static void Frame(RL::Interface* rlInterface, const int fixedFrameFrequency)
 
 	if (g_NetClient)
 		g_NetClient->Poll();
+
+#if CONFIG2_DAP_INTERFACE
+	if (dapInterface)
+		dapInterface->TryHandleMessage();
+#endif // CONFIG2_DAP_INTERFACE
 
 	std::optional<bool> completionCommand{g_GUI->TickObjects()};
 	if (completionCommand.has_value())
@@ -504,6 +514,23 @@ static std::optional<RL::Interface> CreateRLInterface(const CmdLineArgs& args)
 	debug_printf("RL interface listening on %s\n", server_address.c_str());
 	return std::make_optional<RL::Interface>(server_address.c_str());
 }
+
+#if CONFIG2_DAP_INTERFACE
+static std::optional<DAP::Interface> CreateDAPInterface(const CmdLineArgs& args)
+{
+	if (!args.Has("dap-interface"))
+		return std::nullopt;
+
+	const std::string server_address{args.Get("dapinterface.address").empty() ?
+		g_ConfigDB.Get("dapinterface.address", std::string{}) : args.Get("dapinterface.address")};
+
+	const int port{args.Get("dapinterface.port").empty() ?
+		g_ConfigDB.Get("dapinterface.port", int{}) : args.Get("dapinterface.port").ToInt()};
+
+	debug_printf("DAP interface listening on %s:%d\n", server_address.c_str(), port);
+	return std::make_optional<DAP::Interface>(server_address, port, *g_ScriptContext);
+}
+#endif // CONFIG2_DAP_INTERFACE
 
 // moved into a helper function to ensure args is destroyed before
 // exit(), which may result in a memory leak.
@@ -677,6 +704,10 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 			g_Mods.UpdateAvailableMods(modInterface);
 		}
 
+#if CONFIG2_DAP_INTERFACE
+		std::optional<DAP::Interface> dapInterface{CreateDAPInterface(args)};
+#endif // CONFIG2_DAP_INTERFACE
+
 		std::optional<ScriptInterface> guiScriptInterface;
 
 		if (isVisual)
@@ -702,7 +733,11 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 			while (g_Shutdown == ShutdownType::None)
 			{
 				if (isVisual)
+#if CONFIG2_DAP_INTERFACE
+				Frame(rlInterface ? &*rlInterface : nullptr, fixedFrameFrequency, dapInterface ? &*dapInterface : nullptr);
+#else
 					Frame(rlInterface ? &*rlInterface : nullptr, fixedFrameFrequency);
+#endif
 				else if(rlInterface)
 					rlInterface->TryApplyMessage();
 				else
@@ -717,6 +752,11 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 
 		ShutdownNetworkAndUI();
 		guiScriptInterface.reset();
+
+#if CONFIG2_DAP_INTERFACE
+		dapInterface.reset();
+#endif // CONFIG2_DAP_INTERFACE
+
 		ShutdownConfigAndSubsequent();
 		MainControllerShutdown();
 

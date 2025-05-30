@@ -772,6 +772,14 @@ extern_lib_defs = {
 			end
 		end,
 	},
+	sockets = {
+		link_settings = function()
+			add_default_links({
+				win_names = { "ws2_32" },
+				no_delayload = 1,
+			})
+		end,
+	}
 }
 
 

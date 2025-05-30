@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,6 +31,10 @@
 // can be changed. it is assumed that only a few modules will need
 // configuration choices, so rebuilding them all is acceptable.
 // use config.h when settings must apply to the entire project.
+
+#ifndef CONFIG2_DAP_INTERFACE
+# define CONFIG2_DAP_INTERFACE 1
+#endif // !CONFIG2_DAP_INTERFACE
 
 // allow use of RDTSC for raw tick counts (otherwise, the slower but
 // more reliable on MP systems wall-clock will be used).
