@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,13 +23,13 @@
 template<>
 struct SerializeHelper<Waypoint>
 {
-	void operator()(ISerializer& serialize, const char* UNUSED(name), const Waypoint& value)
+	void operator()(ISerializer& serialize, const char* /*name*/, const Waypoint& value)
 	{
 		serialize.NumberFixed_Unbounded("waypoint x", value.x);
 		serialize.NumberFixed_Unbounded("waypoint z", value.z);
 	}
 
-	void operator()(IDeserializer& deserialize, const char* UNUSED(name), Waypoint& value)
+	void operator()(IDeserializer& deserialize, const char* /*name*/, Waypoint& value)
 	{
 		deserialize.NumberFixed_Unbounded("waypoint x", value.x);
 		deserialize.NumberFixed_Unbounded("waypoint z", value.z);
@@ -40,7 +40,7 @@ template<>
 struct SerializeHelper<PathGoal>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, PathGoal> value)
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, PathGoal> value)
 	{
 		Serializer(serialize, "type", value.type, PathGoal::INVERTED_SQUARE);
 		serialize.NumberFixed_Unbounded("goal x", value.x);

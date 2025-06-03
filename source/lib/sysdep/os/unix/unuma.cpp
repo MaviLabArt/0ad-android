@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -31,7 +31,7 @@ size_t numa_NumNodes()
 	return 1;
 }
 
-size_t numa_NodeFromProcessor(size_t UNUSED(processor))
+size_t numa_NodeFromProcessor(size_t /*processor*/)
 {
 	return 0;
 }

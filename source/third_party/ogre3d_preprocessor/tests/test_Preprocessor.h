@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -202,7 +202,7 @@ public:
 	{
 		int includeRetrievedCounter = 0;
 		CPreprocessorWrapper::IncludeRetrieverCallback includeCallback = [&includeRetrievedCounter](
-				const CStr& UNUSED(includePath), CStr& out) {
+				const CStr& /*includePath*/, CStr& out) {
 			out = "42";
 			++includeRetrievedCounter;
 			return true;
@@ -219,7 +219,7 @@ public:
 	void test_include_invalid_file()
 	{
 		CPreprocessorWrapper::IncludeRetrieverCallback includeCallback = [](
-				const CStr& UNUSED(includePath), CStr& UNUSED(out)) {
+				const CStr& /*includePath*/, CStr& /*out*/) {
 			return false;
 		};
 
@@ -233,7 +233,7 @@ public:
 	void test_include_with_defines()
 	{
 		CPreprocessorWrapper::IncludeRetrieverCallback includeCallback = [](
-				const CStr& UNUSED(includePath), CStr& out) {
+				const CStr& /*includePath*/, CStr& out) {
 			out = R"(
 				#if defined(A)
 					#define X 41

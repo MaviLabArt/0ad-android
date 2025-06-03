@@ -64,7 +64,7 @@ public:
 		deserialize.NumberI32_Unbounded("owner", m_Owner);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

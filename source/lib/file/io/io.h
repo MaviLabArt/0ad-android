@@ -174,7 +174,7 @@ struct DefaultCompletedHook
 	 * allows progress notification and processing data while waiting for
 	 * previous I/Os to complete.
 	 **/
-	Status operator()(const u8* UNUSED(block), size_t UNUSED(blockSize)) const
+	Status operator()(const u8* /*block*/, size_t /*blockSize*/) const
 	{
 		return INFO::OK;
 	}

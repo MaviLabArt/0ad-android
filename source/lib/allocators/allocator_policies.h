@@ -136,7 +136,7 @@ public:
 		return maxCapacity;
 	}
 
-	bool Expand(size_t UNUSED(requiredCapacity))
+	bool Expand(size_t /*requiredCapacity*/)
 	{
 		return false;
 	}
@@ -297,7 +297,7 @@ public:
 		return maxCapacity;
 	}
 
-	bool Expand(size_t UNUSED(requiredCapacity))
+	bool Expand(size_t /*requiredCapacity*/)
 	{
 		return false;
 	}

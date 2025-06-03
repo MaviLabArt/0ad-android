@@ -876,7 +876,7 @@ void CDeviceCommandContext::DrawIndexedInstanced(
 
 void CDeviceCommandContext::DrawIndexedInRange(
 	const uint32_t firstIndex, const uint32_t indexCount,
-	const uint32_t UNUSED(start), const uint32_t UNUSED(end))
+	const uint32_t /*start*/, const uint32_t /*end*/)
 {
 	DrawIndexed(firstIndex, indexCount, 0);
 }

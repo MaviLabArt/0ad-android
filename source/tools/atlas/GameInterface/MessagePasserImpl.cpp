@@ -54,7 +54,7 @@ void MessagePasserImpl::Add(IMessage* msg)
 	AtlasMessage::ShareableDelete(msg);
 }
 
-void MessagePasserImpl::Query(QueryMessage* msg, void(* UNUSED(timeoutCallback) )())
+void MessagePasserImpl::Query(QueryMessage* msg, void(* /*timeoutCallback*/ )())
 {
 	ENSURE(msg);
 	ENSURE(msg->GetType() == IMessage::Query);

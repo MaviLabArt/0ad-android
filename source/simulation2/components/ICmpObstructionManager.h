@@ -377,7 +377,7 @@ public:
 class NullObstructionFilter : public IObstructionTestFilter
 {
 public:
-	virtual bool TestShape(tag_t, flags_t, entity_id_t UNUSED(group), entity_id_t UNUSED(group2)) const
+	virtual bool TestShape(tag_t, flags_t /*flags*/, entity_id_t /*group*/, entity_id_t /*group2*/) const
 	{
 		return true;
 	}
@@ -389,7 +389,7 @@ public:
 class StationaryOnlyObstructionFilter : public IObstructionTestFilter
 {
 public:
-	virtual bool TestShape(tag_t, flags_t flags, entity_id_t UNUSED(group), entity_id_t UNUSED(group2)) const
+	virtual bool TestShape(tag_t, flags_t flags, entity_id_t /*group*/, entity_id_t /*group2*/) const
 	{
 		return !(flags & ICmpObstructionManager::FLAG_MOVING);
 	}
@@ -531,7 +531,7 @@ public:
 	{
 	}
 
-	virtual bool TestShape(tag_t tag, flags_t, entity_id_t UNUSED(group), entity_id_t UNUSED(group2)) const
+	virtual bool TestShape(tag_t tag, flags_t, entity_id_t /*group*/, entity_id_t /*group2*/) const
 	{
 		return tag.n != m_Tag.n;
 	}
@@ -584,7 +584,7 @@ public:
 	{
 	}
 
-	virtual bool TestShape(tag_t tag, flags_t flags, entity_id_t UNUSED(group), entity_id_t UNUSED(group2)) const
+	virtual bool TestShape(tag_t tag, flags_t flags, entity_id_t /*group*/, entity_id_t /*group2*/) const
 	{
 		return (tag.n != m_Tag.n && (flags & m_Mask) != 0);
 	}

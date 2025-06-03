@@ -509,7 +509,7 @@ class Divider_Naive
 {
 public:
 	Divider_Naive() {}	// needed for default CacheEntry ctor
-	Divider_Naive(float UNUSED(x)) {}
+	Divider_Naive(float /*x*/) {}
 	float operator()(float val, float divisor) const
 	{
 		return val / divisor;
@@ -524,7 +524,7 @@ class Divider_Recip
 public:
 	Divider_Recip() {}	// needed for default CacheEntry ctor
 	Divider_Recip(float x) { recip = 1.0f / x; }
-	float operator()(float val, float UNUSED(divisor)) const
+	float operator()(float val, float /*divisor*/) const
 	{
 		return val * recip;
 	}

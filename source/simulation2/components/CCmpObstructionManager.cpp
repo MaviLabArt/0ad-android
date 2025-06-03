@@ -88,7 +88,7 @@ template<>
 struct SerializeHelper<UnitShape>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, UnitShape> value) const
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, UnitShape> value) const
 	{
 		serialize.NumberU32_Unbounded("entity", value.entity);
 		serialize.NumberFixed_Unbounded("x", value.x);
@@ -106,7 +106,7 @@ template<>
 struct SerializeHelper<StaticShape>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, StaticShape> value) const
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, StaticShape> value) const
 	{
 		serialize.NumberU32_Unbounded("entity", value.entity);
 		serialize.NumberFixed_Unbounded("x", value.x);
@@ -223,7 +223,7 @@ public:
 		m_UpdateInformations.dirtinessGrid = Grid<u8>(size, size);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -105,7 +105,7 @@ size_t os_cpu_MemoryAvailable()
 // the current Android NDK (r7-crystax-4) doesn't support sched_setaffinity,
 // so provide a stub implementation instead
 
-uintptr_t os_cpu_SetThreadAffinityMask(uintptr_t UNUSED(processorMask))
+uintptr_t os_cpu_SetThreadAffinityMask(uintptr_t /*processorMask*/)
 {
 	// not yet implemented
 	return os_cpu_ProcessorMask();

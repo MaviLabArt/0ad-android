@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -356,7 +356,7 @@ BEGIN_COMMAND(SetObjectSettings)
 	}
 
 private:
-	void Set(player_id_t player, const std::set<CStr>& UNUSED(selections))
+	void Set(player_id_t player, const std::set<CStr>& /*selections*/)
 	{
 		AtlasView* view = AtlasView::GetView(msg->view);
 		CSimulation2* simulation = view->GetSimulation2();

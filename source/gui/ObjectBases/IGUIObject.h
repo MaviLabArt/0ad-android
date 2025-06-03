@@ -373,7 +373,7 @@ protected:
 	 * Notice 'false' is default, because an object not using this function, should not
 	 * have any additional children (and this function should never be called).
 	 */
-	virtual bool HandleAdditionalChildren(const XMBData& UNUSED(file), const XMBElement& UNUSED(child))
+	virtual bool HandleAdditionalChildren(const XMBData& /*file*/, const XMBElement& /*child*/)
 	{
 		return false;
 	}

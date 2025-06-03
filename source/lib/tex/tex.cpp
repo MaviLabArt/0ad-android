@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -669,7 +669,8 @@ u32 Tex::get_average_color() const
 }
 
 
-static void add_level_size(size_t UNUSED(level), size_t UNUSED(level_w), size_t UNUSED(level_h), const u8* RESTRICT UNUSED(level_data), size_t level_dataSize, void* RESTRICT cbData)
+static void add_level_size(size_t /*level*/, size_t /*level_w*/, size_t /*level_h*/,
+	const u8* RESTRICT /*level_data*/, size_t level_dataSize, void* RESTRICT cbData)
 {
 	size_t* ptotal_size = (size_t*)cbData;
 	*ptotal_size += level_dataSize;

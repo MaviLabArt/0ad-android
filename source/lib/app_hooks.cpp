@@ -46,7 +46,7 @@ static void def_bundle_logs(FILE*)
 }
 
 
-static ErrorReactionInternal def_display_error(const wchar_t* UNUSED(text), size_t UNUSED(flags))
+static ErrorReactionInternal def_display_error(const wchar_t* /*text*/, size_t /*flags*/)
 {
 	return ERI_NOT_IMPLEMENTED;
 }

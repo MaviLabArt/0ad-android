@@ -60,7 +60,7 @@ struct BmpHeader
 #define BI_RGB 0		// biCompression
 
 
-Status TexCodecBmp::transform(Tex*, size_t UNUSED(transforms)) const
+Status TexCodecBmp::transform(Tex*, size_t /*transforms*/) const
 {
 	return INFO::TEX_CODEC_CANNOT_HANDLE;
 }
@@ -95,7 +95,7 @@ size_t TexCodecBmp::hdr_size(const u8* file) const
 
 
 // requirements: uncompressed, direct color, bottom up
-Status TexCodecBmp::decode(u8* RESTRICT data, size_t UNUSED(size), Tex* RESTRICT t) const
+Status TexCodecBmp::decode(u8* RESTRICT data, size_t /*size*/, Tex* RESTRICT t) const
 {
 	const BmpHeader* hdr = (const BmpHeader*)data;
 	const long w       = (long)read_le32(&hdr->biWidth);

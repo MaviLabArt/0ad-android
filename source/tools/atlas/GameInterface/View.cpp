@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -53,19 +53,19 @@ extern int g_xres, g_yres;
 
 //////////////////////////////////////////////////////////////////////////
 
-void AtlasView::SetParam(const std::wstring& UNUSED(name), bool UNUSED(value))
+void AtlasView::SetParam(const std::wstring& /*name*/, bool /*value*/)
 {
 }
 
-void AtlasView::SetParam(const std::wstring& UNUSED(name), const AtlasMessage::Color& UNUSED(value))
+void AtlasView::SetParam(const std::wstring& /*name*/, const AtlasMessage::Color& /*value*/)
 {
 }
 
-void AtlasView::SetParam(const std::wstring& UNUSED(name), const std::wstring& UNUSED(value))
+void AtlasView::SetParam(const std::wstring& /*name*/, const std::wstring& /*value*/)
 {
 }
 
-void AtlasView::SetParam(const std::wstring& UNUSED(name), int UNUSED(value))
+void AtlasView::SetParam(const std::wstring& /*name*/, int /*value*/)
 {
 }
 
@@ -165,7 +165,7 @@ void AtlasViewActor::SetParam(const std::wstring& name, int value)
 		m_ActorViewer->SetPropPointsMode(value);
 }
 
-void AtlasViewActor::SetParam(const std::wstring& UNUSED(name), const AtlasMessage::Color& UNUSED(value))
+void AtlasViewActor::SetParam(const std::wstring& /*name*/, const AtlasMessage::Color& /*value*/)
 {
 }
 

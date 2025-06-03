@@ -235,13 +235,13 @@ bool CGUI::ParseString<CGUISpriteInstance>(const CGUI*, const CStrW& Value, CGUI
 }
 
 template <>
-bool CGUI::ParseString<CGUISeries>(const CGUI*, const CStrW& UNUSED(Value), CGUISeries& UNUSED(Output))
+bool CGUI::ParseString<CGUISeries>(const CGUI*, const CStrW& /*Value*/, CGUISeries& /*Output*/)
 {
 	return false;
 }
 
 template <>
-bool CGUI::ParseString<CGUIList>(const CGUI*, const CStrW& UNUSED(Value), CGUIList& UNUSED(Output))
+bool CGUI::ParseString<CGUIList>(const CGUI*, const CStrW& /*Value*/, CGUIList& /*Output*/)
 {
 	return false;
 }

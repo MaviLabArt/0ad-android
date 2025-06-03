@@ -41,39 +41,39 @@ class MockPositionRgm : public ICmpPosition
 public:
 	DEFAULT_MOCK_COMPONENT()
 
-	void SetTurretParent(entity_id_t UNUSED(id), const CFixedVector3D& UNUSED(pos)) override {}
+	void SetTurretParent(entity_id_t /*id*/, const CFixedVector3D& /*pos*/) override {}
 	entity_id_t GetTurretParent() const override {return INVALID_ENTITY;}
 	void UpdateTurretPosition() override {}
 	std::set<entity_id_t>* GetTurrets() override { return nullptr; }
 	bool IsInWorld() const override { return true; }
 	void MoveOutOfWorld() override { }
-	void MoveTo(entity_pos_t UNUSED(x), entity_pos_t UNUSED(z)) override { }
-	void MoveAndTurnTo(entity_pos_t UNUSED(x), entity_pos_t UNUSED(z), entity_angle_t UNUSED(a)) override { }
-	void JumpTo(entity_pos_t UNUSED(x), entity_pos_t UNUSED(z)) override { }
-	void SetHeightOffset(entity_pos_t UNUSED(dy)) override { }
+	void MoveTo(entity_pos_t /*x*/, entity_pos_t /*z*/) override { }
+	void MoveAndTurnTo(entity_pos_t /*x*/, entity_pos_t /*z*/, entity_angle_t /*a*/) override { }
+	void JumpTo(entity_pos_t /*x*/, entity_pos_t /*z*/) override { }
+	void SetHeightOffset(entity_pos_t /*dy*/) override { }
 	entity_pos_t GetHeightOffset() const override { return entity_pos_t::Zero(); }
-	void SetHeightFixed(entity_pos_t UNUSED(y)) override { }
+	void SetHeightFixed(entity_pos_t /*y*/) override { }
 	entity_pos_t GetHeightFixed() const override { return entity_pos_t::Zero(); }
 	entity_pos_t GetHeightAtFixed(entity_pos_t, entity_pos_t) const override { return entity_pos_t::Zero(); }
 	bool IsHeightRelative() const override { return true; }
-	void SetHeightRelative(bool UNUSED(relative)) override { }
+	void SetHeightRelative(bool /*relative*/) override { }
 	bool CanFloat() const override { return false; }
-	void SetFloating(bool UNUSED(flag)) override { }
-	void SetActorFloating(bool UNUSED(flag)) override { }
-	void SetActorAnchor(const CStr& UNUSED(anchor)) override { }
-	void SetConstructionProgress(fixed UNUSED(progress)) override { }
+	void SetFloating(bool /*flag*/) override { }
+	void SetActorFloating(bool /*flag*/) override { }
+	void SetActorAnchor(const CStr& /*anchor*/) override { }
+	void SetConstructionProgress(fixed /*progress*/) override { }
 	CFixedVector3D GetPosition() const override { return m_Pos; }
 	CFixedVector2D GetPosition2D() const override { return CFixedVector2D(m_Pos.X, m_Pos.Z); }
 	CFixedVector3D GetPreviousPosition() const override { return CFixedVector3D(); }
 	CFixedVector2D GetPreviousPosition2D() const override { return CFixedVector2D(); }
 	fixed GetTurnRate() const override { return fixed::Zero(); }
-	void TurnTo(entity_angle_t UNUSED(y)) override { }
-	void SetYRotation(entity_angle_t UNUSED(y)) override { }
-	void SetXZRotation(entity_angle_t UNUSED(x), entity_angle_t UNUSED(z)) override { }
+	void TurnTo(entity_angle_t /*y*/) override { }
+	void SetYRotation(entity_angle_t /*y*/) override { }
+	void SetXZRotation(entity_angle_t /*x*/, entity_angle_t /*z*/) override { }
 	CFixedVector3D GetRotation() const override { return CFixedVector3D(); }
 	fixed GetDistanceTravelled() const override { return fixed::Zero(); }
-	void GetInterpolatedPosition2D(float UNUSED(frameOffset), float& x, float& z, float& rotY) const override { x = z = rotY = 0; }
-	CMatrix3D GetInterpolatedTransform(float UNUSED(frameOffset)) const override { return CMatrix3D(); }
+	void GetInterpolatedPosition2D(float /*frameOffset*/, float& x, float& z, float& rotY) const override { x = z = rotY = 0; }
+	CMatrix3D GetInterpolatedTransform(float /*frameOffset*/) const override { return CMatrix3D(); }
 
 	CFixedVector3D m_Pos;
 };

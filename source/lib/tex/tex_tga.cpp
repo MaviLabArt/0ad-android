@@ -67,7 +67,7 @@ TgaHeader;
 #pragma pack(pop)
 
 
-Status TexCodecTga::transform(Tex*, size_t UNUSED(transforms)) const
+Status TexCodecTga::transform(Tex*, size_t /*transforms*/) const
 {
 	return INFO::TEX_CODEC_CANNOT_HANDLE;
 }
@@ -112,7 +112,7 @@ size_t TexCodecTga::hdr_size(const u8* file) const
 
 
 // requirements: uncompressed, direct color, bottom up
-Status TexCodecTga::decode(u8* RESTRICT data, size_t UNUSED(size), Tex* RESTRICT t) const
+Status TexCodecTga::decode(u8* RESTRICT data, size_t /*size*/, Tex* RESTRICT t) const
 {
 	const TgaHeader* hdr = (const TgaHeader*)data;
 	const u8 type  = hdr->img_type;

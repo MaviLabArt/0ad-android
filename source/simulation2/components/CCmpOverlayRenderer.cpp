@@ -81,7 +81,7 @@ public:
 		Init(paramNode);
 	}
 
-	void HandleMessage(const CMessage &msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage &msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{
@@ -151,7 +151,7 @@ public:
 		UpdateMessageSubscriptions();
 	}
 
-	void Interpolate(float UNUSED(frameTime), float frameOffset)
+	void Interpolate(float /*frameTime*/, float frameOffset)
 	{
 		// Recompute our visibility if needed.
 		if (m_LastStoredPlayerVisibility != GetSimContext().GetCurrentDisplayedPlayer())

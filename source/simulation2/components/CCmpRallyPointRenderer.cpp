@@ -153,7 +153,7 @@ void CCmpRallyPointRenderer::Deserialize(const CParamNode& paramNode, IDeseriali
 	// The dependent components have not been deserialized, so the color is loaded on first SetDisplayed
 }
 
-void CCmpRallyPointRenderer::HandleMessage(const CMessage& msg, bool UNUSED(global))
+void CCmpRallyPointRenderer::HandleMessage(const CMessage& msg, bool /*global*/)
 {
 	switch (msg.GetType())
 	{

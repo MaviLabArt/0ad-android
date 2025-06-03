@@ -205,7 +205,7 @@ protected:
 		m_Impl.Put(name, (u8*)value.data(), value.length());
 	}
 
-	virtual void PutScriptVal(const char* UNUSED(name), JS::MutableHandleValue value)
+	virtual void PutScriptVal(const char* /*name*/, JS::MutableHandleValue value)
 	{
 		m_ScriptImpl->PutScriptVal(value);
 	}

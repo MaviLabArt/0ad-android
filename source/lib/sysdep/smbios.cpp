@@ -164,7 +164,7 @@ public:
 	}
 
 	template<typename Field>
-	void operator()(size_t flags, Field& field, const char* UNUSED(name), const char* UNUSED(units))
+	void operator()(size_t flags, Field& field, const char* /*name*/, const char* /*units*/)
 	{
 		if((flags & F_DERIVED) || data >= end)
 		{
@@ -210,7 +210,8 @@ private:
 
 // (this specialization avoids a "forcing value to bool true or false" warning)
 template<>
-void FieldInitializer::operator()<bool>(size_t flags, bool& UNUSED(t), const char* UNUSED(name), const char* UNUSED(units))
+void FieldInitializer::operator()<bool>(size_t flags, bool& /*t*/, const char* /*name*/,
+	const char* /*units*/)
 {
 	// SMBIOS doesn't specify any individual booleans, so we're only called for
 	// derived fields and don't need to do anything.
@@ -218,7 +219,8 @@ void FieldInitializer::operator()<bool>(size_t flags, bool& UNUSED(t), const cha
 }
 
 template<>
-void FieldInitializer::operator()<const char*>(size_t flags, const char*& t, const char* UNUSED(name), const char* UNUSED(units))
+void FieldInitializer::operator()<const char*>(size_t flags, const char*& t, const char* /*name*/,
+	const char* /*units*/)
 {
 	t = 0;	// (allow immediate `return' when the string is found to be invalid)
 
@@ -472,7 +474,7 @@ static Status InitStructures()
 // StringFromEnum
 
 template<class Enum>
-std::string StringFromEnum(Enum UNUSED(field))
+std::string StringFromEnum(Enum /*field*/)
 {
 	return "(unknown enumeration)";
 }
@@ -592,7 +594,7 @@ private:
 
 	// enumerations and bit flags
 	template<typename Field>
-	void Write(size_t UNUSED(flags), Field& field, const char* name, const char* units, typename Field::Enum*)
+	void Write(size_t /*flags*/, Field& field, const char* name, const char* units, typename Field::Enum*)
 	{
 		// 0 usually means "not included in structure", but some packed
 		// enumerations actually use that value. therefore, only skip this

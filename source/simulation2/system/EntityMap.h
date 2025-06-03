@@ -252,7 +252,7 @@ fill_gaps:
 template<typename T>
 struct SerializeHelper<EntityMap<T>>
 {
-	void operator()(ISerializer& serialize, const char* UNUSED(name), EntityMap<T>& value)
+	void operator()(ISerializer& serialize, const char* /*name*/, EntityMap<T>& value)
 	{
 		size_t len = value.size();
 		serialize.NumberU32_Unbounded("length", (u32)len);
@@ -268,7 +268,7 @@ struct SerializeHelper<EntityMap<T>>
 		ENSURE(count == len);
 	}
 
-	void operator()(IDeserializer& deserialize, const char* UNUSED(name), EntityMap<T>& value)
+	void operator()(IDeserializer& deserialize, const char* /*name*/, EntityMap<T>& value)
 	{
 		value.clear();
 		uint32_t len;

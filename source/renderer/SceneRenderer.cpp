@@ -271,7 +271,7 @@ void CSceneRenderer::Initialize()
 }
 
 // resize renderer view
-void CSceneRenderer::Resize(int UNUSED(width), int UNUSED(height))
+void CSceneRenderer::Resize(int /*width*/, int /*height*/)
 {
 	// need to recreate the shadow map object to resize the shadow texture
 	m->shadow.RecreateTexture();

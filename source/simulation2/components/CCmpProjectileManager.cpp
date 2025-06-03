@@ -88,7 +88,7 @@ public:
 		deserialize.NumberU32_Unbounded("next id", m_NextId);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

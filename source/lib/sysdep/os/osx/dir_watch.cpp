@@ -76,7 +76,7 @@ static bool CanRunNotifications()
   #define kFSEventStreamEventFlagItemModified 0x00001000
 #endif
 
-static void fsevent_callback(ConstFSEventStreamRef, void * UNUSED(clientCallBackInfo), size_t numEvents,
+static void fsevent_callback(ConstFSEventStreamRef, void* /*clientCallBackInfo*/, size_t numEvents,
 	void *eventPaths, const FSEventStreamEventFlags eventFlags[], const FSEventStreamEventId[])
 {
     unsigned long i;

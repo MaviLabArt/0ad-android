@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -118,19 +118,19 @@ namespace JSI_Sound
 #else
 
 	bool MusicPlaying( ){ return false; }
-	void PlayAmbientSound(const std::wstring& UNUSED(filename), bool UNUSED(looping) ){}
-	void PlayUISound(const std::wstring& UNUSED(filename), bool UNUSED(looping) ) {}
-	void PlayMusic(const std::wstring& UNUSED(filename), bool UNUSED(looping) ) {}
-	void StartPlaylist(bool UNUSED(looping) ){}
-	void AddPlaylistItem(const std::wstring& UNUSED(filename) ){}
+	void PlayAmbientSound(const std::wstring& /*filename*/, bool /*looping*/ ){}
+	void PlayUISound(const std::wstring& /*filename*/, bool /*looping*/ ) {}
+	void PlayMusic(const std::wstring& /*filename*/, bool /*looping*/ ) {}
+	void StartPlaylist(bool /*looping*/ ){}
+	void AddPlaylistItem(const std::wstring& /*filename*/ ){}
 	void ClearPlaylist( ){}
 	void StopMusic( ){}
 	void StartMusic( ){}
-	void SetMasterGain(float UNUSED(gain)){}
-	void SetMusicGain(float UNUSED(gain)){}
-	void SetAmbientGain(float UNUSED(gain)){}
-	void SetActionGain(float UNUSED(gain)){}
-	void SetUIGain(float UNUSED(gain)){}
+	void SetMasterGain(float /*gain*/){}
+	void SetMusicGain(float /*gain*/){}
+	void SetAmbientGain(float /*gain*/){}
+	void SetActionGain(float /*gain*/){}
+	void SetUIGain(float /*gain*/){}
 
 #endif
 

@@ -338,7 +338,7 @@ CMiniMapTexture::~CMiniMapTexture()
 	DestroyTextures();
 }
 
-void CMiniMapTexture::Update(const float UNUSED(deltaRealTime))
+void CMiniMapTexture::Update(const float /*deltaRealTime*/)
 {
 	if (m_WaterHeight != g_Renderer.GetSceneRenderer().GetWaterManager().m_WaterHeight)
 	{

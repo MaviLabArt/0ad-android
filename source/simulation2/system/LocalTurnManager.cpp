@@ -39,7 +39,7 @@ void CLocalTurnManager::NotifyFinishedOwnCommands(u32 turn)
 	FinishedAllCommands(turn, m_TurnLength);
 }
 
-void CLocalTurnManager::NotifyFinishedUpdate(u32 UNUSED(turn))
+void CLocalTurnManager::NotifyFinishedUpdate(u32 /*turn*/)
 {
 #if 0 // this hurts performance and is only useful for verifying log replays
 	std::string hash;

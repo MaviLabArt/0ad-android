@@ -118,7 +118,7 @@ template<>
 struct SerializeHelper<LongPathRequest>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, LongPathRequest> value)
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, LongPathRequest> value)
 	{
 		serialize.NumberU32_Unbounded("ticket", value.ticket);
 		serialize.NumberFixed_Unbounded("x0", value.x0);
@@ -133,7 +133,7 @@ template<>
 struct SerializeHelper<ShortPathRequest>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, ShortPathRequest> value)
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, ShortPathRequest> value)
 	{
 		serialize.NumberU32_Unbounded("ticket", value.ticket);
 		serialize.NumberFixed_Unbounded("x0", value.x0);
@@ -169,7 +169,7 @@ void CCmpPathfinder::Deserialize(const CParamNode& paramNode, IDeserializer& des
 	SerializeCommon(deserialize);
 }
 
-void CCmpPathfinder::HandleMessage(const CMessage& msg, bool UNUSED(global))
+void CCmpPathfinder::HandleMessage(const CMessage& msg, bool /*global*/)
 {
 	switch (msg.GetType())
 	{
@@ -957,7 +957,8 @@ bool CCmpPathfinder::CheckMovement(const IObstructionTestFilter& filter,
 }
 
 ICmpObstruction::EFoundationCheck CCmpPathfinder::CheckUnitPlacement(const IObstructionTestFilter& filter,
-	entity_pos_t x, entity_pos_t z, entity_pos_t r,	pass_class_t passClass, bool UNUSED(onlyCenterPoint)) const
+	entity_pos_t x, entity_pos_t z, entity_pos_t r,	pass_class_t passClass,
+	bool /*onlyCenterPoint*/) const
 {
 	// Check unit obstruction
 	CmpPtr<ICmpObstructionManager> cmpObstructionManager(GetSystemEntity());
@@ -991,7 +992,7 @@ ICmpObstruction::EFoundationCheck CCmpPathfinder::CheckBuildingPlacement(const I
 
 ICmpObstruction::EFoundationCheck CCmpPathfinder::CheckBuildingPlacement(const IObstructionTestFilter& filter,
 	entity_pos_t x, entity_pos_t z, entity_pos_t a, entity_pos_t w,
-	entity_pos_t h, entity_id_t id, pass_class_t passClass, bool UNUSED(onlyCenterPoint)) const
+	entity_pos_t h, entity_id_t id, pass_class_t passClass, bool /*onlyCenterPoint*/) const
 {
 	// Check unit obstruction
 	CmpPtr<ICmpObstructionManager> cmpObstructionManager(GetSystemEntity());

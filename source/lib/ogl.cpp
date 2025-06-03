@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -294,20 +294,20 @@ static void GLAD_API_PTR dummy_glDrawRangeElementsEXT(GLenum mode, GLuint, GLuin
 	glDrawElements(mode, count, type, indices);
 }
 
-static void GLAD_API_PTR dummy_glActiveTextureARB(GLenum UNUSED(texture))
+static void GLAD_API_PTR dummy_glActiveTextureARB(GLenum /*texture*/)
 {
 }
 
-static void GLAD_API_PTR dummy_glClientActiveTextureARB(GLenum UNUSED(texture))
+static void GLAD_API_PTR dummy_glClientActiveTextureARB(GLenum /*texture*/)
 {
 }
 
-static void GLAD_API_PTR dummy_glMultiTexCoord2fARB(GLenum UNUSED(target), GLfloat s, GLfloat t)
+static void GLAD_API_PTR dummy_glMultiTexCoord2fARB(GLenum /*target*/, GLfloat s, GLfloat t)
 {
 	glTexCoord2f(s, t);
 }
 
-static void GLAD_API_PTR dummy_glMultiTexCoord3fARB(GLenum UNUSED(target), GLfloat s, GLfloat t, GLfloat r)
+static void GLAD_API_PTR dummy_glMultiTexCoord3fARB(GLenum /*target*/, GLfloat s, GLfloat t, GLfloat r)
 {
 	glTexCoord3f(s, t, r);
 }

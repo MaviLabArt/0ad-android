@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -219,7 +219,8 @@ void TNSpline::AddNode(const CFixedVector3D& pos, const CFixedVector3D& rotation
 }
 
 //Inserts node before position
-void TNSpline::InsertNode(const int index, const CFixedVector3D& pos, const CFixedVector3D& UNUSED(rotation), fixed timePeriod)
+void TNSpline::InsertNode(const int index, const CFixedVector3D& pos, const CFixedVector3D& /*rotation*/,
+	fixed timePeriod)
 {
 	if (NodeCount >= MAX_SPLINE_NODES || index < 0 || index > NodeCount)
 		return;

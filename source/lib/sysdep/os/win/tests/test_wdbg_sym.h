@@ -44,7 +44,7 @@
 static void* callers[100];
 static size_t numCallers;
 
-static Status OnFrame(const _tagSTACKFRAME64* frame, uintptr_t UNUSED(cbData))
+static Status OnFrame(const _tagSTACKFRAME64* frame, uintptr_t /*cbData*/)
 {
 	callers[numCallers++] = (void*)frame->AddrPC.Offset;
 	return INFO::OK;

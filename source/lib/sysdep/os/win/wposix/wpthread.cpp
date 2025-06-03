@@ -357,7 +357,7 @@ int pthread_mutex_unlock(pthread_mutex_t* m)
 
 // not implemented - pthread_mutex is based on CRITICAL_SECTION,
 // which doesn't support timeouts. use sem_timedwait instead.
-int pthread_mutex_timedlock(pthread_mutex_t*, const struct timespec* UNUSED(abs_timeout))
+int pthread_mutex_timedlock(pthread_mutex_t*, const struct timespec* /*abs_timeout*/)
 {
 	return -ENOSYS;
 }
@@ -437,7 +437,7 @@ int sem_close(sem_t* sem)
 	return 0;	// success
 }
 
-int sem_unlink(const char* UNUSED(name))
+int sem_unlink(const char* /*name*/)
 {
 	// see sem_close
 	return 0;	// success
@@ -567,7 +567,7 @@ static unsigned __stdcall thread_start(void* param)
 }
 
 
-int pthread_create(pthread_t* thread_id, const void* UNUSED(attr), void* (*func)(void*), void* arg)
+int pthread_create(pthread_t* thread_id, const void* /*attr*/, void* (*func)(void*), void* arg)
 {
 	// notes:
 	// - use wutil_Allocate instead of the normal heap because we /might/

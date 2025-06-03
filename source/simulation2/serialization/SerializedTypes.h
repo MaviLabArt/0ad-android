@@ -104,7 +104,7 @@ template<typename K, typename V>
 struct SerializeHelper<std::map<K, V>>
 {
 	template<typename... Args>
-	void operator()(ISerializer& serialize, const char* UNUSED(name), std::map<K, V>& value, Args&&... args)
+	void operator()(ISerializer& serialize, const char* /*name*/, std::map<K, V>& value, Args&&... args)
 	{
 		size_t len = value.size();
 		serialize.NumberU32_Unbounded("length", (u32)len);
@@ -116,7 +116,8 @@ struct SerializeHelper<std::map<K, V>>
 	}
 
 	template<typename... Args>
-	void operator()(IDeserializer& deserialize, const char* UNUSED(name), std::map<K, V>& value, Args&&... args)
+	void operator()(IDeserializer& deserialize, const char* /*name*/, std::map<K, V>& value,
+		Args&&... args)
 	{
 		value.clear();
 		u32 len;

@@ -1092,7 +1092,7 @@ static Status dump_sym_enum(DWORD type_id, const u8* p, DumpState& state)
 
 //-----------------------------------------------------------------------------
 
-static Status dump_sym_function(DWORD UNUSED(type_id), const u8* UNUSED(p), DumpState&)
+static Status dump_sym_function(DWORD /*type_id*/, const u8* /*p*/, DumpState&)
 {
 	return INFO::SYM_SUPPRESS_OUTPUT;
 }
@@ -1100,7 +1100,7 @@ static Status dump_sym_function(DWORD UNUSED(type_id), const u8* UNUSED(p), Dump
 
 //-----------------------------------------------------------------------------
 
-static Status dump_sym_function_type(DWORD UNUSED(type_id), const u8* p, DumpState& state)
+static Status dump_sym_function_type(DWORD /*type_id*/, const u8* p, DumpState& state)
 {
 	// this symbol gives class parent, return type, and parameter count.
 	// unfortunately the one thing we care about, its name,
@@ -1376,7 +1376,8 @@ not_handle:
 }
 
 
-static Status udt_dump_suppressed(const wchar_t* type_name, const u8* UNUSED(p), size_t UNUSED(size), DumpState state, ULONG UNUSED(numChildren), const DWORD* UNUSED(children))
+static Status udt_dump_suppressed(const wchar_t* type_name, const u8* /*p*/, size_t /*size*/,
+	DumpState state, ULONG /*numChildren*/, const DWORD* /*children*/)
 {
 	if(!udt_should_suppress(type_name))
 		return INFO::CANNOT_HANDLE;
@@ -1552,7 +1553,7 @@ done:
 //-----------------------------------------------------------------------------
 
 
-static Status dump_sym_vtable(DWORD UNUSED(type_id), const u8* UNUSED(p), DumpState&)
+static Status dump_sym_vtable(DWORD /*type_id*/, const u8* /*p*/, DumpState&)
 {
 	// unsupported (vtable internals are undocumented; too much work).
 	return INFO::SYM_SUPPRESS_OUTPUT;
@@ -1562,7 +1563,7 @@ static Status dump_sym_vtable(DWORD UNUSED(type_id), const u8* UNUSED(p), DumpSt
 //-----------------------------------------------------------------------------
 
 
-static Status dump_sym_unknown(DWORD type_id, const u8* UNUSED(p), DumpState& state)
+static Status dump_sym_unknown(DWORD type_id, const u8* /*p*/, DumpState& state)
 {
 	// redundant (already done in dump_sym), but this is rare.
 	DWORD type_tag;
@@ -1640,7 +1641,7 @@ static bool ShouldSkipSymbol(const wchar_t* name)
 
 // output the symbol's name and value via dump_sym*.
 // called from dump_frame_cb for each local symbol; lock is held.
-static BOOL CALLBACK dump_sym_cb(SYMBOL_INFOW* sym, ULONG UNUSED(size), PVOID userContext)
+static BOOL CALLBACK dump_sym_cb(SYMBOL_INFOW* sym, ULONG /*size*/, PVOID userContext)
 {
 	if(ShouldSkipSymbol(sym->Name))
 		return TRUE;	// continue
@@ -1661,7 +1662,7 @@ static BOOL CALLBACK dump_sym_cb(SYMBOL_INFOW* sym, ULONG UNUSED(size), PVOID us
 }
 
 // called by wdbg_sym_WalkStack for each stack frame
-static Status dump_frame_cb(const STACKFRAME64* sf, uintptr_t UNUSED(userContext))
+static Status dump_frame_cb(const STACKFRAME64* sf, uintptr_t /*userContext*/)
 {
 	void* func = (void*)(uintptr_t)sf->AddrPC.Offset;
 

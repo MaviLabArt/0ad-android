@@ -105,7 +105,7 @@ public:
 
 private:
 	static void ArchiveEntryCallback(const VfsPath& path, const CFileInfo&, PIArchiveFile,
-		uintptr_t UNUSED(cbData))
+		uintptr_t /*cbData*/)
 	{
 		g_ResultBuffer = path.string8();
 	}

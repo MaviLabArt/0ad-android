@@ -107,7 +107,7 @@ static void io_flush(png_structp)
 
 //-----------------------------------------------------------------------------
 
-Status TexCodecPng::transform(Tex*, size_t UNUSED(transforms)) const
+Status TexCodecPng::transform(Tex*, size_t /*transforms*/) const
 {
 	return INFO::TEX_CODEC_CANNOT_HANDLE;
 }
@@ -252,7 +252,7 @@ bool TexCodecPng::is_ext(const OsPath& extension) const
 }
 
 
-size_t TexCodecPng::hdr_size(const u8* UNUSED(file)) const
+size_t TexCodecPng::hdr_size(const u8* /*file*/) const
 {
 	return 0;	// libpng returns decoded image data; no header
 }

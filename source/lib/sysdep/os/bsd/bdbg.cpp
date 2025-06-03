@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -35,7 +35,7 @@
 
 #include <execinfo.h>
 
-void* debug_GetCaller(void* UNUSED(context), const wchar_t* UNUSED(lastFuncToSkip))
+void* debug_GetCaller(void* /*context*/, const wchar_t* /*lastFuncToSkip*/)
 {
 	// bt[0] == this function
 	// bt[1] == our caller
@@ -49,7 +49,7 @@ void* debug_GetCaller(void* UNUSED(context), const wchar_t* UNUSED(lastFuncToSki
 	return bt[2];
 }
 
-Status debug_DumpStack(wchar_t* buf, size_t max_chars, void* UNUSED(context), const wchar_t* UNUSED(lastFuncToSkip))
+Status debug_DumpStack(wchar_t* buf, size_t max_chars, void* /*context*/, const wchar_t* /*lastFuncToSkip*/)
 {
 	static const size_t N_FRAMES = 16;
 	void *bt[N_FRAMES];
@@ -123,7 +123,7 @@ Status debug_ResolveSymbol(void* ptr_of_interest, wchar_t* sym_name, wchar_t* fi
 	}
 }
 
-void debug_SetThreadName(char const* UNUSED(name))
+void debug_SetThreadName(char const* /*name*/)
 {
     // Currently unimplemented
 }

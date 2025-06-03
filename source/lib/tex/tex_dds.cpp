@@ -226,7 +226,7 @@ struct S3tcDecompressInfo
 	u8* out;
 };
 
-static void s3tc_decompress_level(size_t UNUSED(level), size_t level_w, size_t level_h,
+static void s3tc_decompress_level(size_t /*level*/, size_t level_w, size_t level_h,
 	const u8* RESTRICT level_data, size_t level_data_size, void* RESTRICT cbData)
 {
 	S3tcDecompressInfo* di = (S3tcDecompressInfo*)cbData;
@@ -603,13 +603,13 @@ bool TexCodecDds::is_ext(const OsPath& extension) const
 }
 
 
-size_t TexCodecDds::hdr_size(const u8* UNUSED(file)) const
+size_t TexCodecDds::hdr_size(const u8* /*file*/) const
 {
 	return 4+sizeof(DDS_HEADER);
 }
 
 
-Status TexCodecDds::decode(u8* RESTRICT data, size_t UNUSED(size), Tex* RESTRICT t) const
+Status TexCodecDds::decode(u8* RESTRICT data, size_t /*size*/, Tex* RESTRICT t) const
 {
 	const DDS_HEADER* sd = (const DDS_HEADER*)(data+4);
 	RETURN_STATUS_IF_ERR(decode_sd(sd, t->m_Width, t->m_Height, t->m_Bpp, t->m_Flags));

@@ -207,7 +207,7 @@ to hear about all MT_Destroy messages.)
 Then you need to respond to the messages in @c HandleMessage:
 
 @code
-virtual void HandleMessage(const CMessage& msg, bool UNUSED(global))
+virtual void HandleMessage(const CMessage& msg, bool global)
 {
     switch (msg.GetType())
     {

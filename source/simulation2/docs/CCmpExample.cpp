@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * ...the usual copyright header...
  */
 
@@ -46,7 +46,7 @@ public:
 		// ...
 	}
 
-	virtual void HandleMessage(const CMessage& msg, bool UNUSED(global))
+	virtual void HandleMessage(const CMessage& msg, bool /*global*/)
 	{
 		// ...
 	}

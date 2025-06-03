@@ -673,7 +673,7 @@ JS::Value XmppClient::GUIGetProfile(const ScriptRequest& rq)
  * Message interfaces                                *
  *****************************************************/
 
-void SetGUIMessageProperty(const ScriptRequest&, JS::HandleObject UNUSED(messageObj))
+void SetGUIMessageProperty(const ScriptRequest&, JS::HandleObject /*messageObj*/)
 {
 }
 

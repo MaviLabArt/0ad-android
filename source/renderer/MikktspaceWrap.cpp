@@ -49,7 +49,7 @@ int MikkTSpace::GetNumFaces(const SMikkTSpaceContext* pContext)
 	return GetUserDataFromContext(pContext)->m_Model->GetNumFaces();
 }
 
-int MikkTSpace::GetNumVerticesOfFace(const SMikkTSpaceContext*, const int UNUSED(iFace))
+int MikkTSpace::GetNumVerticesOfFace(const SMikkTSpaceContext*, const int /*iFace*/)
 {
 	return 3;
 }
@@ -91,7 +91,7 @@ void MikkTSpace::GetTexCoord(const SMikkTSpaceContext* pContext,
 
 
 void MikkTSpace::SetTSpace(const SMikkTSpaceContext* pContext, const float* fvTangent,
-	const float* UNUSED(fvBiTangent), const float UNUSED(fMagS), const float UNUSED(fMagT),
+	const float* /*fvBiTangent*/, const float /*fMagS*/, const float /*fMagT*/,
 	const tbool bIsOrientationPreserving, const int iFace, const int iVert)
 {
 	const MikkTSpace* userData = GetUserDataFromContext(pContext);

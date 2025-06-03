@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -40,19 +40,19 @@ class AtlasView
 {
 public:
 	virtual ~AtlasView();
-	virtual void Update(float UNUSED(realFrameLength)) { };
+	virtual void Update(float /*realFrameLength*/) { };
 	virtual void Render() { };
 	virtual void DrawCinemaPathTool() { };
-	virtual void DrawOverlays(CCanvas2D& UNUSED(canvas)) { };
+	virtual void DrawOverlays(CCanvas2D& /*canvas*/) { };
 	virtual CCamera& GetCamera() = 0;
 	virtual CSimulation2* GetSimulation2() { return NULL; }
 	virtual entity_id_t GetEntityId(AtlasMessage::ObjectID obj) { return (entity_id_t)obj; }
 	virtual bool WantsHighFramerate() { return false; }
-	virtual void SetEnabled(bool UNUSED(enabled)) {}
+	virtual void SetEnabled(bool /*enabled*/) {}
 
 	virtual void SetParam(const std::wstring& name, bool value);
 	virtual void SetParam(const std::wstring& name, int value);
-	virtual void SetParam(const std::wstring& UNUSED(name), float UNUSED(value)) {}
+	virtual void SetParam(const std::wstring& /*name*/, float /*value*/) {}
 	virtual void SetParam(const std::wstring& name, const AtlasMessage::Color& value);
 	virtual void SetParam(const std::wstring& name, const std::wstring& value);
 

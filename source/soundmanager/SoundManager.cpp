@@ -179,7 +179,7 @@ private:
 
 	bool m_Shutdown;
 
-	CSoundManagerWorker(ISoundManager* UNUSED(other)){};
+	CSoundManagerWorker(ISoundManager* /*other*/){};
 };
 
 void ISoundManager::CreateSoundManager()
@@ -601,7 +601,7 @@ void CSoundManager::IdleTask()
 	}
 }
 
-ISoundItem*	CSoundManager::ItemForEntity(entity_id_t UNUSED(source), CSoundData* sndData)
+ISoundItem*	CSoundManager::ItemForEntity(entity_id_t /*source*/, CSoundData* sndData)
 {
 	ISoundItem* currentItem = NULL;
 
@@ -873,7 +873,7 @@ CStr8 CSoundManager::GetSoundCardNames() const
 #else // CONFIG2_AUDIO
 
 void ISoundManager::CreateSoundManager(){}
-void ISoundManager::SetEnabled(bool UNUSED(doEnable)){}
+void ISoundManager::SetEnabled(bool /*doEnable*/){}
 void ISoundManager::CloseGame(){}
 void ISoundManager::RunHardwareDetection() {}
 CStr8 ISoundManager::GetSoundCardNames() const { return CStr8(); };

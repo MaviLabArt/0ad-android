@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -186,7 +186,8 @@ size_t ModIo::DownloadCallback(void* buffer, size_t size, size_t nmemb, void* us
 	return written;
 }
 
-int ModIo::DownloadProgressCallback(void* clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t UNUSED(ultotal), curl_off_t UNUSED(ulnow))
+int ModIo::DownloadProgressCallback(void* clientp, curl_off_t dltotal, curl_off_t dlnow,
+	curl_off_t /*ultotal*/, curl_off_t /*ulnow*/)
 {
 	DownloadProgressData* data = static_cast<DownloadProgressData*>(clientp);
 

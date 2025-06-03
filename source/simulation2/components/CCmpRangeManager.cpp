@@ -286,7 +286,7 @@ template<>
 struct SerializeHelper<Query>
 {
 	template<typename S>
-	void Common(S& serialize, const char* UNUSED(name), Serialize::qualify<S, Query> value)
+	void Common(S& serialize, const char* /*name*/, Serialize::qualify<S, Query> value)
 	{
 		serialize.NumberFixed_Unbounded("min range", value.minRange);
 		serialize.NumberFixed_Unbounded("max range", value.maxRange);
@@ -327,7 +327,7 @@ template<>
 struct SerializeHelper<EntityData>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, EntityData> value)
+	void operator()(S& serialize, const char* /*name*/, Serialize::qualify<S, EntityData> value)
 	{
 		serialize.NumberFixed_Unbounded("x", value.x);
 		serialize.NumberFixed_Unbounded("z", value.z);
@@ -508,7 +508,7 @@ public:
 		SerializeCommon(deserialize);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

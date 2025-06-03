@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -157,7 +157,7 @@ public:
 	{
 	public:
 		Mock_dladdr(const std::string& fname) : fname_(fname) { }
-		int dladdr(void *UNUSED(addr), Dl_info *info) {
+		int dladdr(void* /*addr*/, Dl_info *info) {
 			info->dli_fname = fname_.c_str();
 			return 1;
 		}

@@ -39,7 +39,7 @@ symbol lookups and backtraces)
 #include "lib/utf8.h"
 
 
-Status debug_CaptureContext(void* UNUSED(context))
+Status debug_CaptureContext(void* /*context*/)
 {
 	// (not needed unless/until we support stack traces)
 	return INFO::SKIPPED;

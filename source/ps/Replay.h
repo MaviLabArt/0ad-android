@@ -70,9 +70,9 @@ public:
 class CDummyReplayLogger : public IReplayLogger
 {
 public:
-	virtual void StartGame(JS::MutableHandleValue UNUSED(attribs)) { }
-	virtual void Turn(u32 UNUSED(n), u32 UNUSED(turnLength), std::vector<SimulationCommand>&) { }
-	virtual void Hash(const std::string& UNUSED(hash), bool UNUSED(quick)) { }
+	virtual void StartGame(JS::MutableHandleValue /*attribs*/) { }
+	virtual void Turn(u32 /*n*/, u32 /*turnLength*/, std::vector<SimulationCommand>&) { }
+	virtual void Hash(const std::string& /*hash*/, bool /*quick*/) { }
 	virtual void SaveMetadata(const CSimulation2&) { };
 	virtual OsPath GetDirectory() const { return OsPath(); }
 };

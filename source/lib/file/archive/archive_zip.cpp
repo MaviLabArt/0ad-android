@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -319,7 +319,7 @@ public:
 		return m_file->Pathname();
 	}
 
-	virtual Status Load(const OsPath& UNUSED(name), const std::shared_ptr<u8>& buf, size_t size) const
+	virtual Status Load(const OsPath& /*name*/, const std::shared_ptr<u8>& buf, size_t size) const
 	{
 		AdjustOffset();
 

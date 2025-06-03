@@ -117,7 +117,7 @@ std::vector<std::string> GetExtensionsImpl()
 
 void GLAD_API_PTR OnDebugMessage(
 	GLenum source, GLenum type, GLuint id, GLenum severity,
-	GLsizei UNUSED(length), const GLchar* message, const void* UNUSED(user_param))
+	GLsizei /*length*/, const GLchar* message, const void* /*user_param*/)
 {
 	std::string debugSource = "unknown";
 	std::string debugType = "unknown";
@@ -1081,7 +1081,7 @@ bool CDevice::IsFramebufferFormatSupported(const Format format) const
 }
 
 Format CDevice::GetPreferredDepthStencilFormat(
-	const uint32_t UNUSED(usage), const bool depth, const bool stencil) const
+	const uint32_t /*usage*/, const bool depth, const bool stencil) const
 {
 	ENSURE(depth || stencil);
 	if (stencil)

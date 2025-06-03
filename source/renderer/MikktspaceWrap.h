@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -113,8 +113,8 @@ private:
 	 * @param[in] iVert - Array containing the position vector of the face.
 	 */
 	static void SetTSpace(const SMikkTSpaceContext* pContext, const float* fvTangent,
-			const float* UNUSED(fvBiTangent), const float UNUSED(fMagS), const float UNUSED(fMagT),
-			const tbool bIsOrientationPreserving, const int iFace, const int iVert);
+		const float* /*fvBiTangent*/, const float /*fMagS*/, const float /*fMagT*/,
+		const tbool bIsOrientationPreserving, const int iFace, const int iVert);
 
 };
 

@@ -77,7 +77,7 @@ public:
 		RecomputeWaterData();
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{
@@ -126,12 +126,12 @@ public:
 		GetSimContext().GetComponentManager().BroadcastMessage(msg);
 	}
 
-	entity_pos_t GetWaterLevel(entity_pos_t UNUSED(x), entity_pos_t UNUSED(z)) const override
+	entity_pos_t GetWaterLevel(entity_pos_t /*x*/, entity_pos_t /*z*/) const override
 	{
 		return m_WaterHeight;
 	}
 
-	float GetExactWaterLevel(float UNUSED(x), float UNUSED(z)) const override
+	float GetExactWaterLevel(float /*x*/, float /*z*/) const override
 	{
 		return m_WaterHeight.ToFloat();
 	}

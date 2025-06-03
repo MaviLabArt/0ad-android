@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -191,7 +191,7 @@ public:
 	 * @param mouse current mouse position
 	 * @return True if mouse positions are hovering the button
 	 */
-	virtual bool HoveringButtonMinus(const CVector2D& UNUSED(mouse)) { return false; }
+	virtual bool HoveringButtonMinus(const CVector2D& /*mouse*/) { return false; }
 
 	/**
 	 * Hovering the scroll plus button
@@ -199,7 +199,7 @@ public:
 	 * @param mouse current mouse position
 	 * @return True if mouse positions are hovering the button
 	 */
-	virtual bool HoveringButtonPlus(const CVector2D& UNUSED(mouse)) { return false; }
+	virtual bool HoveringButtonPlus(const CVector2D& /*mouse*/) { return false; }
 
 	/**
 	 * Get scroll-position

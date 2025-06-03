@@ -991,7 +991,7 @@ void CXMLReader::ReadPaths(XMBElement parent)
 	}
 }
 
-void CXMLReader::ReadTriggers(XMBElement UNUSED(parent))
+void CXMLReader::ReadTriggers(XMBElement /*parent*/)
 {
 }
 

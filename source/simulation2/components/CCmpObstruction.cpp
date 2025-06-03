@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -33,7 +33,8 @@ template<>
 struct SerializeHelper<ICmpObstructionManager::tag_t>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, ICmpObstructionManager::tag_t> value)
+	void operator()(S& serialize, const char* /*name*/,
+		Serialize::qualify<S, ICmpObstructionManager::tag_t> value)
 	{
 		serialize.NumberU32_Unbounded("tag", value.n);
 	}
@@ -304,7 +305,7 @@ public:
 		SerializeCommon(deserialize);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

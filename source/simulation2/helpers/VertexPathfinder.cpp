@@ -1003,8 +1003,8 @@ void VertexPathfinderDebugOverlay::DebugRenderGraph(const CSimContext& simContex
 	}
 }
 
-void VertexPathfinderDebugOverlay::DebugRenderEdges(const CSimContext&, bool UNUSED(visible),
-	CFixedVector2D UNUSED(curr), CFixedVector2D UNUSED(npos))
+void VertexPathfinderDebugOverlay::DebugRenderEdges(const CSimContext&, bool /*visible*/,
+	CFixedVector2D /*curr*/, CFixedVector2D /*npos*/)
 {
 	if (!m_DebugOverlay)
 		return;

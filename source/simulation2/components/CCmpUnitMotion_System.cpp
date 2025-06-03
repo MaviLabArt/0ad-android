@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -130,7 +130,7 @@ void CCmpUnitMotionManager::ClassInit(CComponentManager& componentManager)
 #endif
 }
 
-void CCmpUnitMotionManager::HandleMessage(const CMessage& msg, bool UNUSED(global))
+void CCmpUnitMotionManager::HandleMessage(const CMessage& msg, bool /*global*/)
 {
 	switch (msg.GetType())
 	{
@@ -276,7 +276,8 @@ template<>
 struct SerializeHelper<CCmpUnitMotionManager::MotionState>
 {
 	template<typename S>
-	void operator()(S& serialize, const char* UNUSED(name), Serialize::qualify<S, CCmpUnitMotionManager::MotionState> value)
+	void operator()(S& serialize, const char* /*name*/,
+		Serialize::qualify<S, CCmpUnitMotionManager::MotionState> value)
 	{
 		Serializer(serialize, "pushing pressure", value.pushingPressure);
 	}
@@ -285,7 +286,8 @@ struct SerializeHelper<CCmpUnitMotionManager::MotionState>
 template<>
 struct SerializeHelper<EntityMap<CCmpUnitMotionManager::MotionState>>
 {
-	void operator()(ISerializer& serialize, const char* UNUSED(name), EntityMap<CCmpUnitMotionManager::MotionState>& value)
+	void operator()(ISerializer& serialize, const char* /*name*/,
+		EntityMap<CCmpUnitMotionManager::MotionState>& value)
 	{
 		// Serialize manually, we don't have a default-constructor for deserialization.
 		Serializer(serialize, "size", static_cast<u32>(value.size()));
@@ -296,7 +298,8 @@ struct SerializeHelper<EntityMap<CCmpUnitMotionManager::MotionState>>
 		}
 	}
 
-	void operator()(IDeserializer& deserialize, const char* UNUSED(name), EntityMap<CCmpUnitMotionManager::MotionState>& value)
+	void operator()(IDeserializer& deserialize, const char* /*name*/,
+		EntityMap<CCmpUnitMotionManager::MotionState>& value)
 	{
 		u32 units = 0;
 		Serializer(deserialize, "size", units);
@@ -778,7 +781,7 @@ void CCmpUnitMotionManager::Push(EntityMap<MotionState>::value_type& a, EntityMa
 }
 
 #if DEBUG_RENDER
-void RenderDebugOverlay(SceneCollector& collector, const CFrustum& frustum, bool UNUSED(culling))
+void RenderDebugOverlay(SceneCollector& collector, const CFrustum& frustum, bool /*culling*/)
 {
 	for (SOverlaySphere& sph: debugDataMotionMgr.m_Spheres)
 		if (frustum.IsSphereVisible(sph.m_Center, sph.m_Radius))

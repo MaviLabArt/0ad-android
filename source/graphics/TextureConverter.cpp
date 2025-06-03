@@ -63,7 +63,8 @@ struct BufferOutputHandler : public nvtt::OutputHandler
 {
 	std::vector<u8> buffer;
 
-	virtual void beginImage(int UNUSED(size), int UNUSED(width), int UNUSED(height), int UNUSED(depth), int UNUSED(face), int UNUSED(miplevel))
+	virtual void beginImage(int /*size*/, int /*width*/, int /*height*/, int /*depth*/, int /*face*/,
+		int /*miplevel*/)
 	{
 	}
 

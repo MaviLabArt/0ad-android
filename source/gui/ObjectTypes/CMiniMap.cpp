@@ -244,7 +244,7 @@ CVector2D CMiniMap::WorldSpaceToMiniMapSpace(const CVector3D& worldPosition) con
 		m_CachedActualSize.bottom - (0.5f + rotatedY) * m_CachedActualSize.GetHeight());
 }
 
-bool CMiniMap::FireWorldClickEvent(int button, int UNUSED(clicks))
+bool CMiniMap::FireWorldClickEvent(int button, int /*clicks*/)
 {
 	ScriptRequest rq(g_GUI->GetActiveGUI()->GetScriptInterface());
 

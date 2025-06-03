@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ IDevice* CShaderProgram::GetDevice()
 	return m_Device;
 }
 
-int32_t CShaderProgram::GetBindingSlot(const CStrIntern UNUSED(name)) const
+int32_t CShaderProgram::GetBindingSlot(const CStrIntern /*name*/) const
 {
 	return -1;
 }

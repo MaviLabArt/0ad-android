@@ -171,7 +171,7 @@ public:
 		deserialize.Bool("trigger event", m_TriggerEvent);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{
@@ -705,7 +705,7 @@ void CCmpTerritoryManager::UpdateBoundaryLines()
 	}
 }
 
-void CCmpTerritoryManager::Interpolate(float frameTime, float UNUSED(frameOffset))
+void CCmpTerritoryManager::Interpolate(float frameTime, float /*frameOffset*/)
 {
 	m_AnimTime += frameTime;
 

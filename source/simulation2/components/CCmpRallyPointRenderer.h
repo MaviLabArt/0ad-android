@@ -78,7 +78,7 @@ public:
 	void Serialize(ISerializer&) override;
 	void Deserialize(const CParamNode& paramNode, IDeserializer&) override;
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override;
+	void HandleMessage(const CMessage& msg, bool /*global*/) override;
 
 	/*
 	 * Must be called whenever m_Displayed or the size of m_RallyPoints change,

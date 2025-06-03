@@ -112,7 +112,7 @@ thread_local std::shared_ptr<ScriptContext> g_ScriptContext;
 bool g_InDevelopmentCopy;
 bool g_CheckedIfInDevelopmentCopy = false;
 
-ErrorReactionInternal psDisplayError(const wchar_t* UNUSED(text), size_t UNUSED(flags))
+ErrorReactionInternal psDisplayError(const wchar_t* /*text*/, size_t /*flags*/)
 {
 	// If we're fullscreen, then sometimes (at least on some particular drivers on Linux)
 	// displaying the error dialog hangs the desktop since the dialog box is behind the

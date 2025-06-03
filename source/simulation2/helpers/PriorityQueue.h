@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -77,7 +77,7 @@ public:
 		push_heap(m_Heap.begin(), m_Heap.end(), QueueItemPriority<Item, CMP>());
 	}
 
-	void promote(ID id, R UNUSED(oldrank), R newrank, H newh)
+	void promote(ID id, R /*oldrank*/, R newrank, H newh)
 	{
 		// Loop backwards since it seems a little faster in practice
 		for (ssize_t n = m_Heap.size() - 1; n >= 0; --n)
@@ -157,7 +157,7 @@ public:
 		return NULL;
 	}
 
-	void promote(ID id, R UNUSED(oldrank), R newrank, H newh)
+	void promote(ID id, R /*oldrank*/, R newrank, H newh)
 	{
 		find(id)->rank = newrank;
 		find(id)->h = newh;

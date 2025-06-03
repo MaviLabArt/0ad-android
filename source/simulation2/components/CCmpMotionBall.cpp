@@ -66,7 +66,7 @@ public:
 		deserialize.NumberFloat_Unbounded("speed z", m_SpeedZ);
 	}
 
-	void HandleMessage(const CMessage& msg, bool UNUSED(global)) override
+	void HandleMessage(const CMessage& msg, bool /*global*/) override
 	{
 		switch (msg.GetType())
 		{

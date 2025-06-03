@@ -33,13 +33,6 @@
 #include <cstddef>
 
 /**
- * mark a function parameter as unused and avoid
- * the corresponding compiler warning.
- * wrap around the parameter name, e.g. void f(int UNUSED(x))
- **/
-#define UNUSED(param)
-
-/**
  * mark a function local variable or parameter as unused and avoid
  * the corresponding compiler warning.
  * note that UNUSED is not applicable to variable definitions that

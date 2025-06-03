@@ -37,7 +37,7 @@ static const int mmap_flags = MAP_PRIVATE|MAP_ANONYMOUS;
 
 namespace vm {
 
-void* ReserveAddressSpace(size_t size, size_t UNUSED(commitSize), PageType UNUSED(pageType), int UNUSED(prot))
+void* ReserveAddressSpace(size_t size, size_t /*commitSize*/, PageType /*pageType*/, int /*prot*/)
 {
 	errno = 0;
 	void* p = mmap(0, size, PROT_NONE, mmap_flags|MAP_NORESERVE, -1, 0);

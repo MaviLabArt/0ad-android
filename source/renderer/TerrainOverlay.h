@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -49,8 +49,7 @@ public:
 
 	virtual void RenderBeforeWater(Renderer::Backend::IDeviceCommandContext*) { }
 
-	virtual void RenderAfterWater(Renderer::Backend::IDeviceCommandContext*, int UNUSED(cullGroup)) { }
-
+	virtual void RenderAfterWater(Renderer::Backend::IDeviceCommandContext*, int /*cullGroup*/) { }
 	/**
 	 * Draw all ITerrainOverlay objects that exist
 	 * and that should be drawn before water.

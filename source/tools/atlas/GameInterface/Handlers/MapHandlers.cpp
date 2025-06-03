@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -653,7 +653,7 @@ QUERYHANDLER(VFSFileRealPath)
 		msg->realPath = realPathname.string();
 }
 
-static Status AddToFilenames(const VfsPath& pathname, const CFileInfo& UNUSED(fileInfo), const uintptr_t cbData)
+static Status AddToFilenames(const VfsPath& pathname, const CFileInfo& /*fileInfo*/, const uintptr_t cbData)
 {
 	std::vector<std::wstring>& filenames = *(std::vector<std::wstring>*)cbData;
 	filenames.push_back(pathname.string().c_str());

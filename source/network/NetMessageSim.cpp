@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -79,7 +79,7 @@ public:
 	{
 	}
 
-	void Put(const char* name, const u8* UNUSED(data), size_t len)
+	void Put(const char* name, const u8* /*data*/, size_t len)
 	{
 		#if DEBUG_SERIALIZER_ANNOTATE
 		m_Length += 2;	// '<' and '>'

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -32,7 +32,7 @@ public:
 	size_t GetHashLength();
 	const u8* ComputeHash();
 
-	void Put(const char* UNUSED(name), const u8* data, size_t len)
+	void Put(const char* /*name*/, const u8* data, size_t len)
 	{
 		m_Hash.Update(data, len);
 	}

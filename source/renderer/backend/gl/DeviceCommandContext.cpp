@@ -488,7 +488,7 @@ void CDeviceCommandContext::UploadBufferRegion(
 	UploadDynamicBufferRegionImpl(target, buffer->GetSize(), dataOffset, dataSize, uploadFunction);
 }
 
-void CDeviceCommandContext::InsertTimestampQuery(const uint32_t handle, const bool UNUSED(isScopeBegin))
+void CDeviceCommandContext::InsertTimestampQuery(const uint32_t handle, const bool /*isScopeBegin*/)
 {
 	// GL can have the only one command context so we can call commands on
 	// the deivce side.
@@ -1293,7 +1293,7 @@ void CDeviceCommandContext::Dispatch(
 }
 
 void CDeviceCommandContext::InsertMemoryBarrier(
-	const uint32_t UNUSED(srcStageMask), const uint32_t dstStageMask,
+	const uint32_t /*srcStageMask*/, const uint32_t dstStageMask,
 	const uint32_t srcAccessMask, const uint32_t dstAccessMask)
 {
 #if !CONFIG2_GLES

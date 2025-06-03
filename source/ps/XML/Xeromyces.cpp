@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -38,7 +38,7 @@
 static std::mutex g_ValidatorCacheLock;
 static std::map<const std::string, RelaxNGValidator> g_ValidatorCache;
 
-static void errorHandler(void* UNUSED(userData),
+static void errorHandler(void* /*userData*/,
 	std::conditional_t<LIBXML_VERSION >= 21200, const xmlError, xmlError>* error)
 {
 	// Strip a trailing newline

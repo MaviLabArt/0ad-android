@@ -73,7 +73,7 @@ FColladaErrorHandler::~FColladaErrorHandler()
 	FUError::RemoveErrorCallback(FUError::ERROR_LEVEL, this, &FColladaErrorHandler::OnError);
 }
 
-void FColladaErrorHandler::OnError(FUError::Level errorLevel, uint32 errorCode, uint32 UNUSED(lineNumber))
+void FColladaErrorHandler::OnError(FUError::Level errorLevel, uint32 errorCode, uint32 /*lineNumber*/)
 {
 	// Ignore warnings about missing materials, since we ignore materials entirely anyway
 	if (errorCode == FUError::WARNING_INVALID_POLYGON_MAT_SYMBOL)
@@ -111,7 +111,7 @@ void FColladaDocument::LoadFromText(const char *text)
 	REQUIRE_SUCCESS(status);
 }
 
-void FColladaDocument::ReadExtras(xmlNode* UNUSED(colladaNode))
+void FColladaDocument::ReadExtras(xmlNode* /*colladaNode*/)
 {
 	// TODO: This was needed to recognise and load XSI models.
 	// XSI support should be reintroduced some time, but this function

@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -213,17 +213,17 @@ wchar_t* debug_stl_simplify_name(wchar_t* name)
 template<class Container>
 struct ContainerBase : public Container
 {
-	bool IsValid(size_t UNUSED(el_size)) const
+	bool IsValid(size_t /*el_size*/) const
 	{
 		return true;
 	}
 
-	size_t NumElements(size_t UNUSED(el_size)) const
+	size_t NumElements(size_t /*el_size*/) const
 	{
 		return this->size();
 	}
 
-	static const u8* DereferenceAndAdvance(typename Container::iterator& it, size_t UNUSED(el_size))
+	static const u8* DereferenceAndAdvance(typename Container::iterator& it, size_t /*el_size*/)
 	{
 		const u8* p = (const u8*)&*it;
 		++it;
@@ -309,12 +309,12 @@ struct Any_tree : public std::_Tree<_Traits>
 	{
 	}
 
-	bool IsValid(size_t UNUSED(el_size)) const
+	bool IsValid(size_t /*el_size*/) const
 	{
 		return true;
 	}
 
-	size_t NumElements(size_t UNUSED(el_size)) const
+	size_t NumElements(size_t /*el_size*/) const
 	{
 		return size();
 	}
@@ -397,7 +397,7 @@ struct Any_multiset: public Any_set
 
 struct Any_vector: public ContainerBase<std::vector<int> >
 {
-	bool IsValid(size_t UNUSED(el_size)) const
+	bool IsValid(size_t /*el_size*/) const
 	{
 		// more elements reported than reserved
 		if(size() > capacity())

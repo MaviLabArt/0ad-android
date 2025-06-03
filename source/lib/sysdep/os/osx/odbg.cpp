@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,17 +30,19 @@
 
 #include <pthread.h>
 
-void* debug_GetCaller(void* UNUSED(context), const wchar_t* UNUSED(lastFuncToSkip))
+void* debug_GetCaller(void* /*context*/, const wchar_t* /*lastFuncToSkip*/)
 {
 	return NULL;
 }
 
-Status debug_DumpStack(wchar_t* UNUSED(buf), size_t UNUSED(max_chars), void* UNUSED(context), const wchar_t* UNUSED(lastFuncToSkip))
+Status debug_DumpStack(wchar_t* /*buf*/, size_t /*max_chars*/, void* /*context*/,
+	const wchar_t* /*lastFuncToSkip*/)
 {
 	return ERR::NOT_SUPPORTED;
 }
 
-Status debug_ResolveSymbol(void* UNUSED(ptr_of_interest), wchar_t* UNUSED(sym_name), wchar_t* UNUSED(file), int* UNUSED(line))
+Status debug_ResolveSymbol(void* /*ptr_of_interest*/, wchar_t* /*sym_name*/, wchar_t* /*file*/,
+	int* /*line*/)
 {
 	return ERR::NOT_SUPPORTED;
 }

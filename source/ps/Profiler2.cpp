@@ -776,7 +776,7 @@ public:
 	{
 	}
 
-	void OnSync(double UNUSED(time))
+	void OnSync(double /*time*/)
 	{
 		// Split the array of items into an array of array (arbitrarily splitting
 		// around the sync points) to avoid array-too-large errors in JSON decoders

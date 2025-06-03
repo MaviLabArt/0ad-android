@@ -169,48 +169,48 @@ protected:
 	// We provide defaults that do nothing (some raise JS exceptions).
 
 	// The JS code will see undefined when querying a property descriptor.
-	virtual bool getOwnPropertyDescriptor(JSContext*, JS::HandleObject UNUSED(proxy), JS::HandleId,
+	virtual bool getOwnPropertyDescriptor(JSContext*, JS::HandleObject /*proxy*/, JS::HandleId,
 		JS::MutableHandle<mozilla::Maybe<JS::PropertyDescriptor>>) const override
 	{
 		return true;
 	}
 	// Throw an exception is JS code attempts defining a property.
-	virtual bool defineProperty(JSContext*, JS::HandleObject UNUSED(proxy), JS::HandleId,
-		JS::Handle<JS::PropertyDescriptor>, JS::ObjectOpResult& UNUSED(result)) const override
+	virtual bool defineProperty(JSContext*, JS::HandleObject /*proxy*/, JS::HandleId,
+		JS::Handle<JS::PropertyDescriptor>, JS::ObjectOpResult& /*result*/) const override
 	{
 		return false;
 	}
 	// No accessible properties.
-	virtual bool ownPropertyKeys(JSContext*, JS::HandleObject UNUSED(proxy),
-		JS::MutableHandleIdVector UNUSED(props)) const override
+	virtual bool ownPropertyKeys(JSContext*, JS::HandleObject /*proxy*/,
+		JS::MutableHandleIdVector) const override
 	{
 		return true;
 	}
 	// Nothing to enumerate.
-	virtual bool enumerate(JSContext*, JS::HandleObject UNUSED(proxy),
-		JS::MutableHandleIdVector UNUSED(props)) const override
+	virtual bool enumerate(JSContext*, JS::HandleObject /*proxy*/,
+		JS::MutableHandleIdVector /*props*/) const override
 	{
 		return true;
 	}
 	// Throw an exception is JS attempts to query the prototype.
-	virtual bool getPrototypeIfOrdinary(JSContext*, JS::HandleObject UNUSED(proxy),
-		bool* UNUSED(isOrdinary), JS::MutableHandleObject UNUSED(protop)) const override
+	virtual bool getPrototypeIfOrdinary(JSContext*, JS::HandleObject /*proxy*/, bool* /*isOrdinary*/,
+		JS::MutableHandleObject /*protop*/) const override
 	{
 		return false;
 	}
 	// Throw an exception - no prototype to set.
-	virtual bool setImmutablePrototype(JSContext*, JS::HandleObject UNUSED(proxy),
-		bool* UNUSED(succeeded)) const override
+	virtual bool setImmutablePrototype(JSContext*, JS::HandleObject /*proxy*/,
+		bool* /*succeeded*/) const override
 	{
 		return false;
 	}
 	// We are not extensible.
-	virtual bool preventExtensions(JSContext*, JS::HandleObject UNUSED(proxy),
-		JS::ObjectOpResult&) const override
+	virtual bool preventExtensions(JSContext*, JS::HandleObject /*proxy*/,
+		JS::ObjectOpResult& /*result*/) const override
 	{
 		return true;
 	}
-	virtual bool isExtensible(JSContext*, JS::HandleObject UNUSED(proxy), bool* extensible) const override
+	virtual bool isExtensible(JSContext*, JS::HandleObject /*proxy*/, bool* extensible) const override
 	{
 		*extensible = false;
 		return true;

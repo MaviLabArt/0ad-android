@@ -292,7 +292,7 @@ void CSoundGroup::ReleaseGroup()
 #endif
 }
 
-void CSoundGroup::Update(float UNUSED(TimeSinceLastFrame))
+void CSoundGroup::Update(float /*TimeSinceLastFrame*/)
 {
 }
 

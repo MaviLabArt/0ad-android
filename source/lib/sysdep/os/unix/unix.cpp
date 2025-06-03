@@ -64,7 +64,8 @@ void sys_display_msg(const wchar_t* caption, const wchar_t* msg)
 }
 
 #if OS_MACOSX || OS_ANDROID
-static ErrorReactionInternal try_gui_display_error(const wchar_t* UNUSED(text), bool UNUSED(manual_break), bool UNUSED(allow_suppress), bool UNUSED(no_continue))
+static ErrorReactionInternal try_gui_display_error(const wchar_t* /*text*/, bool /*manual_break*/,
+	bool /*allow_suppress*/, bool /*no_continue*/)
 {
 	// TODO: implement this, in a way that doesn't rely on X11
 	// and doesn't occasionally cause crazy errors like
@@ -343,7 +344,7 @@ Status sys_generate_random_bytes(u8* buf, size_t count)
 	return INFO::OK;
 }
 
-Status sys_get_proxy_config(const std::wstring& UNUSED(url), std::wstring& UNUSED(proxy))
+Status sys_get_proxy_config(const std::wstring& /*url*/, std::wstring& /*proxy*/)
 {
 	return INFO::SKIPPED;
 }

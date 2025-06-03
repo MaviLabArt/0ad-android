@@ -30,29 +30,29 @@ public:
 
 	ICmpObstructionManager::tag_t GetObstruction() const override { return ICmpObstructionManager::tag_t(); }
 	bool GetObstructionSquare(ICmpObstructionManager::ObstructionSquare& out) const override { out = obstruction; return true; }
-	bool GetPreviousObstructionSquare(ICmpObstructionManager::ObstructionSquare& UNUSED(out)) const override { return true; }
+	bool GetPreviousObstructionSquare(ICmpObstructionManager::ObstructionSquare& /*out*/) const override { return true; }
 	entity_pos_t GetSize() const override { return entity_pos_t::Zero(); }
 	CFixedVector2D GetStaticSize() const override { return CFixedVector2D(); }
 	EObstructionType GetObstructionType() const override { return ICmpObstruction::STATIC; }
-	void SetUnitClearance(const entity_pos_t& UNUSED(clearance)) override { }
+	void SetUnitClearance(const entity_pos_t& /*clearance*/) override { }
 	bool IsControlPersistent() const override { return true; }
 	bool CheckShorePlacement() const override { return true; }
-	EFoundationCheck CheckFoundation(const std::string& UNUSED(className)) const override { return EFoundationCheck(); }
-	EFoundationCheck CheckFoundation(const std::string& UNUSED(className), bool UNUSED(onlyCenterPoint)) const override { return EFoundationCheck(); }
-	std::string CheckFoundation_wrapper(const std::string& UNUSED(className), bool UNUSED(onlyCenterPoint)) const override { return std::string(); }
+	EFoundationCheck CheckFoundation(const std::string& /*className*/) const override { return EFoundationCheck(); }
+	EFoundationCheck CheckFoundation(const std::string& /*className*/, bool /*onlyCenterPoint*/) const override { return EFoundationCheck(); }
+	std::string CheckFoundation_wrapper(const std::string& /*className*/, bool /*onlyCenterPoint*/) const override { return std::string(); }
 	bool CheckDuplicateFoundation() const override { return true; }
 	std::vector<entity_id_t> GetEntitiesByFlags(ICmpObstructionManager::flags_t) const override { return std::vector<entity_id_t>(); }
 	std::vector<entity_id_t> GetEntitiesBlockingMovement() const override { return std::vector<entity_id_t>(); }
 	std::vector<entity_id_t> GetEntitiesBlockingConstruction() const override { return std::vector<entity_id_t>(); }
 	std::vector<entity_id_t> GetEntitiesDeletedUponConstruction() const override { return std::vector<entity_id_t>(); }
 	void ResolveFoundationCollisions() const override { }
-	void SetActive(bool UNUSED(active)) override { }
-	void SetMovingFlag(bool UNUSED(enabled)) override { }
-	void SetDisableBlockMovementPathfinding(bool UNUSED(movementDisabled), bool UNUSED(pathfindingDisabled), int32_t UNUSED(shape)) override { }
+	void SetActive(bool /*active*/) override { }
+	void SetMovingFlag(bool /*enabled*/) override { }
+	void SetDisableBlockMovementPathfinding(bool /*movementDisabled*/, bool /*pathfindingDisabled*/, int32_t /*shape*/) override { }
 	bool GetBlockMovementFlag(bool) const override { return true; }
-	void SetControlGroup(entity_id_t UNUSED(group)) override { }
+	void SetControlGroup(entity_id_t /*group*/) override { }
 	entity_id_t GetControlGroup() const override { return INVALID_ENTITY; }
-	void SetControlGroup2(entity_id_t UNUSED(group2)) override { }
+	void SetControlGroup2(entity_id_t /*group2*/) override { }
 	entity_id_t GetControlGroup2() const override { return INVALID_ENTITY; }
 };
 

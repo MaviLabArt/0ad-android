@@ -104,16 +104,16 @@ std::wstring TraceEntry::EncodeAsText() const
 class Trace_Dummy : public ITrace
 {
 public:
-	Trace_Dummy(size_t UNUSED(maxSize))
+	Trace_Dummy(size_t /*maxSize*/)
 	{
 
 	}
 
-	virtual void NotifyLoad(const Path&, size_t UNUSED(size))
+	virtual void NotifyLoad(const Path&, size_t /*size*/)
 	{
 	}
 
-	virtual void NotifyStore(const Path&, size_t UNUSED(size))
+	virtual void NotifyStore(const Path&, size_t /*size*/)
 	{
 	}
 

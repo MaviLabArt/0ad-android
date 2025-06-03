@@ -121,7 +121,7 @@ void CStdDeserializer::GetScriptBackref(size_t tag, JS::MutableHandleObject ret)
 
 ////////////////////////////////////////////////////////////////
 
-JS::Value CStdDeserializer::ReadScriptVal(const char* UNUSED(name), JS::HandleObject preexistingObject)
+JS::Value CStdDeserializer::ReadScriptVal(const char* /*name*/, JS::HandleObject preexistingObject)
 {
 	ScriptRequest rq(m_ScriptInterface);
 

@@ -105,7 +105,7 @@ CStr CScriptStatsTable::GetCellText(size_t row, size_t col)
 	}
 }
 
-AbstractProfileTable* CScriptStatsTable::GetChild(size_t UNUSED(row))
+AbstractProfileTable* CScriptStatsTable::GetChild(size_t /*row*/)
 {
 	return 0;
 }

@@ -225,7 +225,7 @@ CStr CRendererStatsTable::GetCellText(size_t row, size_t col)
 	}
 }
 
-AbstractProfileTable* CRendererStatsTable::GetChild(size_t UNUSED(row))
+AbstractProfileTable* CRendererStatsTable::GetChild(size_t /*row*/)
 {
 	return 0;
 }

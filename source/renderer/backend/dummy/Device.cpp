@@ -92,9 +92,10 @@ std::unique_ptr<IVertexInputLayout> CDevice::CreateVertexInputLayout(
 }
 
 std::unique_ptr<ITexture> CDevice::CreateTexture(
-	const char* UNUSED(name), const CTexture::Type type, const uint32_t usage,
+	const char* /*name*/, const CTexture::Type type, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
-	const Sampler::Desc& UNUSED(defaultSamplerDesc), const uint32_t MIPLevelCount, const uint32_t UNUSED(sampleCount))
+	const Sampler::Desc& /*defaultSamplerDesc*/, const uint32_t MIPLevelCount,
+	const uint32_t /*sampleCount*/)
 {
 	return CTexture::Create(this, type, usage, format, width, height, MIPLevelCount);
 }
@@ -144,7 +145,7 @@ void CDevice::Present()
 	// We have nothing to present.
 }
 
-void CDevice::OnWindowResize(const uint32_t UNUSED(width), const uint32_t UNUSED(height))
+void CDevice::OnWindowResize(const uint32_t /*width*/, const uint32_t /*height*/)
 {
 }
 
@@ -169,16 +170,16 @@ uint32_t CDevice::AllocateQuery()
 	return 0;
 }
 
-void CDevice::FreeQuery(const uint32_t UNUSED(handle))
+void CDevice::FreeQuery(const uint32_t /*handle*/)
 {
 }
 
-bool CDevice::IsQueryResultAvailable(const uint32_t UNUSED(handle)) const
+bool CDevice::IsQueryResultAvailable(const uint32_t /*handle*/) const
 {
 	return false;
 }
 
-uint64_t CDevice::GetQueryResult(const uint32_t UNUSED(handle))
+uint64_t CDevice::GetQueryResult(const uint32_t /*handle*/)
 {
 	return 0;
 }

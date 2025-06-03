@@ -167,7 +167,8 @@ std::unique_ptr<IGUIProxyObject> JSI_GUIProxy<T>::CreateJSObject(const ScriptReq
 }
 
 template <typename T>
-bool JSI_GUIProxy<T>::get(JSContext* cx, JS::HandleObject proxy, JS::HandleValue UNUSED(receiver), JS::HandleId id, JS::MutableHandleValue vp) const
+bool JSI_GUIProxy<T>::get(JSContext* cx, JS::HandleObject proxy, JS::HandleValue /*receiver*/,
+	JS::HandleId id, JS::MutableHandleValue vp) const
 {
 	ScriptRequest rq(cx);
 
@@ -237,7 +238,7 @@ bool JSI_GUIProxy<T>::get(JSContext* cx, JS::HandleObject proxy, JS::HandleValue
 
 template <typename T>
 bool JSI_GUIProxy<T>::set(JSContext* cx, JS::HandleObject proxy, JS::HandleId id, JS::HandleValue vp,
-							JS::HandleValue UNUSED(receiver), JS::ObjectOpResult& result) const
+	JS::HandleValue /*receiver*/, JS::ObjectOpResult& result) const
 {
 	T* e = IGUIProxyObject::FromPrivateSlot<T>(proxy.get());
 	if (!e)

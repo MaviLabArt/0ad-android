@@ -199,7 +199,7 @@ public:
 
 	std::unique_ptr<CModelAbstract> Clone() const override;
 
-	void SetTerrainDirty(ssize_t UNUSED(i0), ssize_t UNUSED(j0), ssize_t UNUSED(i1), ssize_t UNUSED(j1)) override
+	void SetTerrainDirty(ssize_t /*i0*/, ssize_t /*j0*/, ssize_t /*i1*/, ssize_t /*j1*/) override
 	{
 	}
 
