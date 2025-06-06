@@ -393,6 +393,12 @@
         ]
       },
       {
+        "textFile": "resource_lost.txt",
+        "imageFiles": [
+          "resource_lost.png"
+        ]
+      },
+      {
         "textFile": "select_wounded_units.txt",
         "imageFiles": [
           "select_wounded_units.png"
