@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -111,6 +111,11 @@ CSize2D CText::GetTextSize()
 {
 	UpdateText();
 	return m_GeneratedTexts[0].GetSize();
+}
+
+CSize2D CText::GetPreferredTextSize()
+{
+	return CGUIText{m_pGUI, m_Caption, m_Font, 0, m_BufferZone, m_TextAlign, this}.GetSize();
 }
 
 const CStrW& CText::GetTooltipText() const

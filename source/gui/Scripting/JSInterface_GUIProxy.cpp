@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -44,6 +44,7 @@ DECLARE_GUIPROXY(IGUIObject);
 template<> void JSI_GUIProxy<CButton>::CreateFunctions(const ScriptRequest& rq, GUIProxyProps* cache)
 {
 	CreateFunction<&CButton::GetTextSize>(rq, cache, "getTextSize");
+	CreateFunction<&CButton::GetPreferredTextSize>(rq, cache, "getPreferredTextSize");
 }
 DECLARE_GUIPROXY(CButton);
 
@@ -51,6 +52,7 @@ DECLARE_GUIPROXY(CButton);
 template<> void JSI_GUIProxy<CText>::CreateFunctions(const ScriptRequest& rq, GUIProxyProps* cache)
 {
 	CreateFunction<&CText::GetTextSize>(rq, cache, "getTextSize");
+	CreateFunction<&CText::GetPreferredTextSize>(rq, cache, "getPreferredTextSize");
 }
 DECLARE_GUIPROXY(CText);
 

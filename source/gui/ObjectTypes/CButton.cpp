@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -71,6 +71,11 @@ CSize2D CButton::GetTextSize()
 {
 	UpdateText();
 	return m_GeneratedTexts[0].GetSize();
+}
+
+CSize2D CButton::GetPreferredTextSize()
+{
+	return CGUIText{m_pGUI, m_Caption, m_Font, 0, m_BufferZone, m_TextAlign, this}.GetSize();
 }
 
 void CButton::HandleMessage(SGUIMessage& Message)
