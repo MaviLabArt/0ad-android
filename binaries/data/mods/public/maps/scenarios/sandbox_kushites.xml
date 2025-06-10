@@ -587,70 +587,70 @@
 			<Actor seed="11575"/>
 		</Entity>
 		<Entity uid="90">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="516.57752" z="417.63617"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="45503"/>
 		</Entity>
 		<Entity uid="91">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="518.45691" z="420.09089"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="1051"/>
 		</Entity>
 		<Entity uid="92">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="519.724" z="421.69364"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="1051"/>
 		</Entity>
 		<Entity uid="93">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="521.14765" z="424.1681"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="22376"/>
 		</Entity>
 		<Entity uid="94">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="523.50916" z="426.57837"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="30059"/>
 		</Entity>
 		<Entity uid="95">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="525.54352" z="429.42237"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="39367"/>
 		</Entity>
 		<Entity uid="96">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="527.43012" z="432.91276"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="27667"/>
 		</Entity>
 		<Entity uid="97">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="530.06012" z="435.45948"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="27667"/>
 		</Entity>
 		<Entity uid="98">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="514.10553" z="416.41547"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="38127"/>
 		</Entity>
 		<Entity uid="99">
-			<Template>units/kush/support_female_citizen</Template>
+			<Template>units/kush/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="512.50812" z="414.84263"/>
 			<Orientation y="2.35621"/>

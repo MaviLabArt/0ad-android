@@ -43,10 +43,11 @@
   <ProductionQueue/>
   <Researcher>
     <Technologies datatype="tokens">
-      health_females_01
+      health_civilians_01
       pop_house_01
       pop_house_02
-      unlock_females_house
+      unlock_civilians_house_generic
+      unlock_civilians_house_kush
     </Technologies>
   </Researcher>
   <Sound>
@@ -65,7 +66,7 @@
   </TerritoryInfluence>
   <Trainer>
     <Entities datatype="tokens">
-      units/{civ}/support_female_citizen_house
+      units/{civ}/support_civilian_house
     </Entities>
   </Trainer>
   <Vision>

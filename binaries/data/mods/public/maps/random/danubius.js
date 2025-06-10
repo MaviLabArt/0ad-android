@@ -81,7 +81,7 @@ export function* generateMap(mapSettings)
 	const oPalisadeGate = "uncapturable|structures/palisades_gate";
 	const oPalisadePillar = "uncapturable|structures/palisades_tower";
 
-	const oFemale = "units/gaul/support_female_citizen";
+	const oCivilian = "units/gaul/support_civilian";
 	const oHealer = "units/gaul/support_healer_b";
 	const oSkirmisher = "units/gaul/infantry_javelineer_b";
 	const oNakedFanatic = "units/gaul/champion_fanatic";
@@ -183,7 +183,7 @@ export function* generateMap(mapSettings)
 	const ritualParticipants = [
 		{
 			"radius": 0.6,
-			"templates": [oFemale],
+			"templates": [oCivilian],
 			"count": 9,
 			"angle": Math.PI
 		},

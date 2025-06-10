@@ -21389,7 +21389,7 @@
 			<Orientation y="1.84865"/>
 		</Entity>
 		<Entity uid="4513">
-			<Template>units/gaul/support_female_citizen</Template>
+			<Template>units/gaul/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="108.67644" z="123.14678"/>
 			<Orientation y="2.35621"/>

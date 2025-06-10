@@ -2245,37 +2245,37 @@
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="480">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="528.59375" z="408.14283"/>
 			<Orientation y="-1.61399"/>
 		</Entity>
 		<Entity uid="481">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="529.53364" z="402.99952"/>
 			<Orientation y="-1.49158"/>
 		</Entity>
 		<Entity uid="482">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="529.78754" z="405.24643"/>
 			<Orientation y="1.92016"/>
 		</Entity>
 		<Entity uid="483">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="299.56156" z="269.61979"/>
 			<Orientation y="-0.59456"/>
 		</Entity>
 		<Entity uid="484">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="297.8129" z="267.87833"/>
 			<Orientation y="2.3373"/>
 		</Entity>
 		<Entity uid="485">
-			<Template>units/maur/support_female_citizen</Template>
+			<Template>units/maur/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="295.96036" z="268.5276"/>
 			<Orientation y="-1.53225"/>

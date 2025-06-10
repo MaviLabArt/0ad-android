@@ -74,7 +74,7 @@ function attackComponentTest(defenderClass, isEnemy, test_function)
 			"MinRange": 3,
 			"MaxRange": 5,
 			"PreferredClasses": {
-				"_string": "FemaleCitizen"
+				"_string": "Civilian"
 			},
 			"RestrictedClasses": {
 				"_string": "Elephant Archer"
@@ -198,7 +198,7 @@ attackComponentTest(undefined, true, (attacker, cmpAttack, defender) => {
 	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetAttackTypes(["Capture", "!Ranged"]), ["Capture"]);
 	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetAttackTypes(["Capture", "Melee", "!Ranged"]), ["Melee", "Capture"]);
 
-	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetPreferredClasses("Melee"), ["FemaleCitizen"]);
+	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetPreferredClasses("Melee"), ["Civilian"]);
 	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetRestrictedClasses("Melee"), ["Elephant", "Archer"]);
 	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetFullAttackRange(), { "min": 0, "max": 80 });
 	TS_ASSERT_UNEVAL_EQUALS(cmpAttack.GetAttackEffectsData("Capture"), { "Capture": 8 });
@@ -360,7 +360,7 @@ function testGetBestAttackAgainst(defenderClass, bestAttack, bestAllyAttack, isB
 	});
 }
 
-testGetBestAttackAgainst("FemaleCitizen", "Melee", undefined);
+testGetBestAttackAgainst("Civilian", "Melee", undefined);
 testGetBestAttackAgainst("Archer", "Ranged", undefined);
 testGetBestAttackAgainst("Domestic", "Slaughter", "Slaughter");
 testGetBestAttackAgainst("Structure", "Capture", "Capture", true);
@@ -379,7 +379,7 @@ function testAttackPreference()
 			"MinRange": 3,
 			"MaxRange": 5,
 			"PreferredClasses": {
-				"_string": "FemaleCitizen Unit+!Ship"
+				"_string": "Civilian Unit+!Ship"
 			},
 			"RestrictedClasses": {
 				"_string": "Elephant Archer"
@@ -388,7 +388,7 @@ function testAttackPreference()
 	});
 
 	AddMock(attacker+1, IID_Identity, {
-		"GetClassesList": () => ["FemaleCitizen", "Unit"]
+		"GetClassesList": () => ["Civilian", "Unit"]
 	});
 
 	AddMock(attacker+2, IID_Identity, {

@@ -43,7 +43,7 @@ var jebelBarkal_templateClasses = deepfreeze({
 	"citizenSoldier_cavalry": "CitizenSoldier+Cavalry",
 	"citizenSoldier_cavalry_melee": "CitizenSoldier+Cavalry+Melee",
 	"healers": "Healer",
-	"females": "FemaleCitizen"
+	"civilians": "Civilian"
 });
 
 var jebelBarkal_templates = deepfreeze(Object.keys(jebelBarkal_templateClasses).reduce((templates, name) => {
@@ -186,7 +186,7 @@ var jebelBarkal_buildingGarrison = difficulty => [
 	},
 	{
 		"buildingClasses": ["House"],
-		"unitTemplates": [...jebelBarkal_templates.females, ...jebelBarkal_templates.healers],
+		"unitTemplates": [...jebelBarkal_templates.civilians, ...jebelBarkal_templates.healers],
 		"capacityRatio": 0.5
 
 	},

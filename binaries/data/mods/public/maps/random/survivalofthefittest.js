@@ -41,7 +41,7 @@ export function* generateMap(mapSettings)
 		tForestFloor1
 	];
 
-	const oTreasureSeeker = "nonbuilder|undeletable|skirmish/units/default_support_female_citizen";
+	const oTreasureSeeker = "nonbuilder|undeletable|skirmish/units/default_support_civilian";
 	const oObstruction = "obstructors/placement_24x24";
 
 	const triggerPointAttacker = "trigger/trigger_point_A";
@@ -66,7 +66,7 @@ export function* generateMap(mapSettings)
 	const clDirt = g_Map.createTileClass();
 	const clBaseResource = g_Map.createTileClass();
 	const clLand = g_Map.createTileClass();
-	const clWomen = g_Map.createTileClass();
+	const clCivilians = g_Map.createTileClass();
 
 	g_Map.log("Creating central area");
 	createArea(
@@ -110,11 +110,11 @@ export function* generateMap(mapSettings)
 				new SmoothElevationPainter(ELEVATION_SET, heightLand, 4)
 			]);
 
-		// Treasure seeker woman
-		const femaleLocation = findLocationInDirectionBasedOnHeight(playerPosition[i], mapCenter, -3,
+		// Treasure seeker civilian
+		const civilianLocation = findLocationInDirectionBasedOnHeight(playerPosition[i], mapCenter, -3,
 			3.5, 3).round();
-		clWomen.add(femaleLocation);
-		g_Map.placeEntityPassable(oTreasureSeeker, playerIDs[i], femaleLocation,
+		clCivilians.add(civilianLocation);
+		g_Map.placeEntityPassable(oTreasureSeeker, playerIDs[i], civilianLocation,
 			playerAngle[i] + Math.PI);
 
 		// Attacker spawn point
@@ -138,7 +138,7 @@ export function* generateMap(mapSettings)
 
 	for (const triggerPointTreasure of triggerPointTreasures)
 		createObjectGroupsDeprecated(
-			new SimpleGroup([new SimpleObject(triggerPointTreasure, 1, 1, 0, 0)], true, clWomen),
+			new SimpleGroup([new SimpleObject(triggerPointTreasure, 1, 1, 0, 0)], true, clCivilians),
 			0,
 			[avoidClasses(clPlayer, 5, clHill, 5), landConstraint],
 			scaleByMapSize(40, 140),
@@ -151,7 +151,7 @@ export function* generateMap(mapSettings)
 	const hillConstraint = new AndConstraint(
 		[
 			avoidClasses(clHill, 5),
-			new StaticConstraint(avoidClasses(clPlayer, 20, clBaseResource, 3, clWomen, 5))
+			new StaticConstraint(avoidClasses(clPlayer, 20, clBaseResource, 3, clCivilians, 5))
 		]);
 	if (randBool())
 		createHills([tMainTerrain, tCliff, tHill],
@@ -182,7 +182,7 @@ export function* generateMap(mapSettings)
 		[tMainTerrain, tForestFloor1, tForestFloor2, pForest1, pForest2],
 		[avoidClasses(clForest, 5), new StaticConstraint(
 			[
-				avoidClasses(clPlayer, 20, clHill, 0, clBaseResource, 2, clWomen, 5),
+				avoidClasses(clPlayer, 20, clHill, 0, clBaseResource, 2, clCivilians, 5),
 				stayClasses(clLand, 4)
 			])],
 		clForest,
@@ -195,7 +195,7 @@ export function* generateMap(mapSettings)
 		[scaleByMapSize(3, 6), scaleByMapSize(5, 10), scaleByMapSize(8, 21)],
 		[[tMainTerrain, tTier1Terrain], [tTier1Terrain, tTier2Terrain], [tTier2Terrain, tTier3Terrain]],
 		[1, 1],
-		[avoidClasses(clForest, 0, clHill, 0, clDirt, 5, clPlayer, 12, clWomen, 5), landConstraint],
+		[avoidClasses(clForest, 0, clHill, 0, clDirt, 5, clPlayer, 12, clCivilians, 5), landConstraint],
 		scaleByMapSize(15, 45),
 		clDirt);
 	yield 70;
@@ -204,7 +204,7 @@ export function* generateMap(mapSettings)
 	createPatches(
 		[scaleByMapSize(2, 4), scaleByMapSize(3, 7), scaleByMapSize(5, 15)],
 		tTier4Terrain,
-		[avoidClasses(clForest, 0, clHill, 0, clDirt, 5, clPlayer, 12, clWomen, 5), landConstraint],
+		[avoidClasses(clForest, 0, clHill, 0, clDirt, 5, clPlayer, 12, clCivilians, 5), landConstraint],
 		scaleByMapSize(15, 45),
 		clDirt);
 	yield 80;

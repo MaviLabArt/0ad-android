@@ -15,7 +15,7 @@ const showDebugLog = false;
 const danubiusAttackerTemplates = deepfreeze({
 	"ships": TriggerHelper.GetTemplateNamesByClasses("Trireme", "gaul", undefined, undefined, true),
 	"siege": TriggerHelper.GetTemplateNamesByClasses("Siege", "gaul", undefined, undefined, true),
-	"females": TriggerHelper.GetTemplateNamesByClasses("FemaleCitizen", "gaul", undefined, undefined, true),
+	"civilians": TriggerHelper.GetTemplateNamesByClasses("Civilian", "gaul", undefined, undefined, true),
 	"healers": TriggerHelper.GetTemplateNamesByClasses("Healer", "gaul", undefined, undefined, true),
 	"champions": TriggerHelper.GetTemplateNamesByClasses("Champion", "gaul", undefined, undefined, true),
 	"champion_infantry": TriggerHelper.GetTemplateNamesByClasses("Champion+Infantry", "gaul", undefined, undefined, true),
@@ -33,14 +33,14 @@ var ccDefenders = [
 	{ "count": 8, "templates": danubiusAttackerTemplates.citizen_soldiers },
 	{ "count": 13, "templates": danubiusAttackerTemplates.champions },
 	{ "count": 4, "templates": danubiusAttackerTemplates.healers },
-	{ "count": 5, "templates": danubiusAttackerTemplates.females },
+	{ "count": 5, "templates": danubiusAttackerTemplates.civilians },
 	{ "count": 10, "templates": ["gaia/fauna_sheep"] }
 ];
 
 var gallicBuildingGarrison = [
 	{
 		"buildingClasses": ["House"],
-		"unitTemplates": danubiusAttackerTemplates.females.concat(danubiusAttackerTemplates.healers)
+		"unitTemplates": danubiusAttackerTemplates.civilians.concat(danubiusAttackerTemplates.healers)
 	},
 	{
 		"buildingClasses": ["CivCentre", "Temple"],
@@ -170,8 +170,8 @@ var ritualProbability = 0.75;
  * if idle and switch back when becoming idle again.
  */
 var ritualAnimations = {
-	"female": ["attack_slaughter"],
-	"male": ["attack_capture", "promotion", "attack_slaughter"],
+	"civilian": ["attack_slaughter"],
+	"soldier": ["attack_capture", "promotion", "attack_slaughter"],
 	"healer": ["attack_capture", "promotion", "heal"]
 };
 
@@ -308,7 +308,7 @@ Trigger.prototype.UpdateCelticRitual = function()
 
 		const animations = ritualAnimations[
 			cmpIdentity.HasClass("Healer") ? "healer" :
-				cmpIdentity.HasClass("Female") ? "female" : "male"];
+				cmpIdentity.HasClass("Civilian") ? "civilian" : "soldier"];
 
 		const cmpVisual = Engine.QueryInterface(ent, IID_Visual);
 		if (!cmpVisual)

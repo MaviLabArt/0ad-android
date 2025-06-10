@@ -97,7 +97,7 @@ function calculateTeamCounterDataHelper()
 		if (!g_TeamHelperData[playerState.team])
 		{
 			g_TeamHelperData[playerState.team] = {};
-			for (const value of ["food", "vegetarianFood", "femaleCitizen", "worker", "enemyUnitsKilled",
+			for (const value of ["food", "vegetarianFood", "civilian", "worker", "enemyUnitsKilled",
 				"unitsLost", "mapControl", "mapControlPeak",
 				"mapExploration", "totalBought", "totalSold"])
 				g_TeamHelperData[playerState.team][value] = new Array(playerState.sequences.time.length).fill(0);
@@ -106,7 +106,7 @@ function calculateTeamCounterDataHelper()
 		summaryAddObject(g_TeamHelperData[playerState.team].food, playerState.sequences.resourcesGathered.food);
 		summaryAddObject(g_TeamHelperData[playerState.team].vegetarianFood, playerState.sequences.resourcesGathered.vegetarianFood);
 
-		summaryAddObject(g_TeamHelperData[playerState.team].femaleCitizen, playerState.sequences.unitsTrained.FemaleCitizen);
+		summaryAddObject(g_TeamHelperData[playerState.team].civilian, playerState.sequences.unitsTrained.Civilian);
 		summaryAddObject(g_TeamHelperData[playerState.team].worker, playerState.sequences.unitsTrained.Worker);
 
 		summaryAddObject(g_TeamHelperData[playerState.team].enemyUnitsKilled, playerState.sequences.enemyUnitsKilled.Unit);
@@ -315,10 +315,10 @@ function calculateVegetarianRatio(playerState, index)
 		playerState.sequences.resourcesGathered.food[index]);
 }
 
-function calculateFeminization(playerState, index)
+function calculateCivilianization(playerState, index)
 {
 	return calculatePercent(
-		playerState.sequences.unitsTrained.FemaleCitizen[index],
+		playerState.sequences.unitsTrained.Civilian[index],
 		playerState.sequences.unitsTrained.Worker[index]);
 }
 
@@ -354,8 +354,8 @@ function calculateMiscellaneousTeam(team, index, type, counters, headings)
 	if (type == "vegetarianRatio")
 		return calculatePercent(g_TeamHelperData[team].vegetarianFood[index], g_TeamHelperData[team].food[index]);
 
-	if (type == "feminization")
-		return calculatePercent(g_TeamHelperData[team].femaleCitizen[index], g_TeamHelperData[team].worker[index]);
+	if (type == "civilianization")
+		return calculatePercent(g_TeamHelperData[team].civilian[index], g_TeamHelperData[team].worker[index]);
 
 	if (type == "killDeath")
 		return calculateRatio(g_TeamHelperData[team].enemyUnitsKilled[index], g_TeamHelperData[team].unitsLost[index]);

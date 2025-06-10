@@ -5,7 +5,7 @@ Trainer.prototype.Schema =
 	"<a:example>" +
 		"<BatchTimeModifier>0.7</BatchTimeModifier>" +
 		"<Entities datatype='tokens'>" +
-			"\n    units/{civ}/support_female_citizen\n    units/{native}/support_trader\n    units/athen/infantry_spearman_b\n  " +
+			"\n    units/{civ}/support_civilian\n    units/{native}/support_trader\n    units/athen/infantry_spearman_b\n  " +
 		"</Entities>" +
 	"</a:example>" +
 	"<optional>" +

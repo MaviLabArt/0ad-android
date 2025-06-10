@@ -518,19 +518,19 @@ template = {
 		"value": "ResourceGatherer/Rates/food.meat",
 		"multiply": 10
 	}],
-	"affects": ["FemaleCitizen", "CitizenSoldier Melee"]
+	"affects": ["Civilian", "CitizenSoldier Melee"]
 };
 let techMods = {
 	"ResourceGatherer/Rates/food.grain": [{
 		"affects": [
-			["FemaleCitizen", "Spearman", "Swordsman"],
+			["Civilian", "Spearman", "Swordsman"],
 			["CitizenSoldier", "Melee", "Spearman", "Swordsman"]
 		],
 		"multiply": 15
 	}],
 	"ResourceGatherer/Rates/food.meat": [{
 		"affects": [
-			["FemaleCitizen"],
+			["Civilian"],
 			["CitizenSoldier", "Melee"]
 		],
 		"multiply": 10
@@ -553,26 +553,26 @@ template = {
 		"value": "ResourceGatherer/Rates/food.meat",
 		"multiply": 10
 	}],
-	"affects": ["FemaleCitizen", "CitizenSoldier Melee"]
+	"affects": ["Civilian", "CitizenSoldier Melee"]
 };
 techMods = {
 	"ResourceGatherer/Rates/food.grain": [{
 		"affects": [
-			["FemaleCitizen", "Spearman"],
+			["Civilian", "Spearman"],
 			["CitizenSoldier", "Melee", "Spearman"]
 		],
 		"multiply": 15
 	},
 	{
 		"affects": [
-			["FemaleCitizen", "Swordsman"],
+			["Civilian", "Swordsman"],
 			["CitizenSoldier", "Melee", "Swordsman"]
 		],
 		"multiply": 15
 	}],
 	"ResourceGatherer/Rates/food.meat": [{
 		"affects": [
-			["FemaleCitizen"],
+			["Civilian"],
 			["CitizenSoldier", "Melee"]
 		],
 		"multiply": 10

@@ -141,15 +141,15 @@ Trigger.prototype.SetDisableTemplates = function()
 };
 
 /**
- *  Remember civic centers and make women invincible.
+ *  Remember civic centers and make civilians invincible.
  */
 Trigger.prototype.InitStartingUnits = function()
 {
 	for (let playerID = 1; playerID < TriggerHelper.GetNumberOfPlayers(); ++playerID)
 	{
 		this.playerCivicCenter[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "CivilCentre")[0];
-		this.treasureFemale[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "FemaleCitizen")[0];
-		Engine.QueryInterface(this.treasureFemale[playerID], IID_Resistance).SetInvulnerability(true);
+		this.treasureCivilian[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "Civilian")[0];
+		Engine.QueryInterface(this.treasureCivilian[playerID], IID_Resistance).SetInvulnerability(true);
 	}
 };
 
@@ -288,9 +288,9 @@ Trigger.prototype.OnOwnershipChanged = function(data)
 			data.from,
 			markForTranslation("%(player)s has been defeated (lost civic center)."));
 	}
-	else if (data.entity == this.treasureFemale[data.from])
+	else if (data.entity == this.treasureCivilian[data.from])
 	{
-		this.treasureFemale[data.from] = undefined;
+		this.treasureCivilian[data.from] = undefined;
 		Engine.DestroyEntity(data.entity);
 	}
 };
@@ -299,7 +299,7 @@ Trigger.prototype.OnOwnershipChanged = function(data)
 {
 	const cmpTrigger = Engine.QueryInterface(SYSTEM_ENTITY, IID_Trigger);
 
-	cmpTrigger.treasureFemale = [];
+	cmpTrigger.treasureCivilian = [];
 	cmpTrigger.playerCivicCenter = [];
 	cmpTrigger.gaiaHeroes = [];
 

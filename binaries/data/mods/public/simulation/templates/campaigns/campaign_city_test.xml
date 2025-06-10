@@ -33,7 +33,7 @@
   </TerritoryInfluence>
   <Trainer>
     <Entities datatype="tokens">
-      -units/{civ}/support_female_citizen
+      -units/{civ}/support_civilian
       campaigns/army_mace_hero_alexander
       campaigns/army_mace_standard
       units/{civ}/support_trader

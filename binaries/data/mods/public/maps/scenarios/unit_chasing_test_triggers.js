@@ -166,20 +166,20 @@ experiments.fast_on_muskox_2 = {
 
 // Women flee
 experiments.fast_on_women_flee = {
-	"spawn": straight_line(false, FAST_UNIT_TEMPLATE, "units/mace/support_female_citizen", false)
+	"spawn": straight_line(false, FAST_UNIT_TEMPLATE, "units/mace/support_civilian", false)
 };
 
 experiments.fast_on_women_flee_2 = {
-	"spawn": straight_line(true, FAST_UNIT_TEMPLATE, "units/mace/support_female_citizen", false)
+	"spawn": straight_line(true, FAST_UNIT_TEMPLATE, "units/mace/support_civilian", false)
 };
 
 // Women flee
 experiments.slow_on_women_flee = {
-	"spawn": straight_line(false, "units/athen/infantry_spearman_b", "units/mace/support_female_citizen", false)
+	"spawn": straight_line(false, "units/athen/infantry_spearman_b", "units/mace/support_civilian", false)
 };
 
 experiments.slow_on_women_flee_2 = {
-	"spawn": straight_line(true, "units/athen/infantry_spearman_b", "units/mace/support_female_citizen", false)
+	"spawn": straight_line(true, "units/athen/infantry_spearman_b", "units/mace/support_civilian", false)
 };
 
 experiments.straight_line_garrison = {
@@ -223,11 +223,11 @@ experiments.fast_on_semi_2 = {
 };
 
 experiments.fast_on_flee = {
-	"spawn": straight_line(false, FAST_UNIT_TEMPLATE_2, "units/mace/support_female_citizen", false)
+	"spawn": straight_line(false, FAST_UNIT_TEMPLATE_2, "units/mace/support_civilian", false)
 };
 
 experiments.fast_on_flee_2 = {
-	"spawn": straight_line(true, FAST_UNIT_TEMPLATE_2, "units/mace/support_female_citizen", false)
+	"spawn": straight_line(true, FAST_UNIT_TEMPLATE_2, "units/mace/support_civilian", false)
 };
 
 

@@ -15,7 +15,7 @@ Trigger.prototype.InitElephantine_DefenderStance = function()
 Trigger.prototype.InitElephantine_GarrisonBuildings = function()
 {
 	const kushInfantryUnits = TriggerHelper.GetTemplateNamesByClasses("CitizenSoldier+Infantry", "kush", undefined, "Elite", true);
-	const kushSupportUnits = TriggerHelper.GetTemplateNamesByClasses("FemaleCitizen Healer", "kush", undefined, "Elite", true);
+	const kushSupportUnits = TriggerHelper.GetTemplateNamesByClasses("Civilian Healer", "kush", undefined, "Elite", true);
 
 	TriggerHelper.SpawnAndGarrisonAtClasses(elephantinePlayerID, "Tower", kushInfantryUnits, 1);
 	TriggerHelper.SpawnAndGarrisonAtClasses(elephantinePlayerID, "Wonder Temple Pyramid", kushInfantryUnits.concat(kushSupportUnits), 1);

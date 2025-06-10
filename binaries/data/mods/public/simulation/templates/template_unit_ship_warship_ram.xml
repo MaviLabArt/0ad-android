@@ -35,7 +35,7 @@
   </Footprint>
   <GarrisonHolder>
     <Max>30</Max>
-    <EjectClassesOnDestroy datatype="tokens">FemaleCitizen Infantry Dog</EjectClassesOnDestroy>
+    <EjectClassesOnDestroy datatype="tokens">Civilian Infantry Dog</EjectClassesOnDestroy>
     <List datatype="tokens">Siege</List>
     <LoadingRange>10</LoadingRange>
   </GarrisonHolder>

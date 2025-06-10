@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Entity parent="template_structure_civic">
   <AlertRaiser>
-    <List datatype="tokens">FemaleCitizen</List>
+    <List datatype="tokens">Civilian</List>
     <RaiseAlertRange>120</RaiseAlertRange>
     <EndOfAlertRange>180</EndOfAlertRange>
     <SearchRange>100</SearchRange>
@@ -74,7 +74,7 @@
   <Identity>
     <GenericName>Civic Center</GenericName>
     <SelectionGroupName>template_structure_civic_civil_centre</SelectionGroupName>
-    <Tooltip>Build in own or neutral territory. Acquire large tracts of territory. Territory root. Train Citizens and research technologies. Garrison Soldiers for additional arrows.</Tooltip>
+    <Tooltip>Build in own or neutral territory. Acquire large tracts of territory. Territory root. Train Civilians and research technologies. Garrison Soldiers for additional arrows.</Tooltip>
     <Classes datatype="tokens">CivCentre</Classes>
     <VisibleClasses datatype="tokens">Defensive CivilCentre</VisibleClasses>
     <Icon>structures/civic_centre.png</Icon>
@@ -139,7 +139,7 @@
   <Trainer>
     <BatchTimeModifier>0.8</BatchTimeModifier>
     <Entities datatype="tokens">
-      units/{civ}/support_female_citizen
+      units/{native}/support_civilian
     </Entities>
   </Trainer>
   <Vision>

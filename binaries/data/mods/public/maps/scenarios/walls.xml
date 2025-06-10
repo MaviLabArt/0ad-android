@@ -6349,49 +6349,49 @@
 			<Orientation y="-0.78367"/>
 		</Entity>
 		<Entity uid="1127">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="297.18467" z="265.86597"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1128">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="301.95432" z="269.76993"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1129">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="305.26105" z="273.05146"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1130">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="293.33051" z="263.59742"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1131">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="682.6056" z="782.88917"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1132">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="686.54987" z="786.45185"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1133">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="675.2472" z="775.94343"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="1134">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="678.93433" z="779.6678"/>
 			<Orientation y="2.35621"/>

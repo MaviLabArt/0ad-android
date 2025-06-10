@@ -27267,56 +27267,56 @@
 			<Actor seed="27440"/>
 		</Entity>
 		<Entity uid="9327">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>1</Player>
 			<Position x="563.83844" z="806.25684"/>
 			<Orientation y="-2.40578"/>
 			<Actor seed="34692"/>
 		</Entity>
 		<Entity uid="9328">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>1</Player>
 			<Position x="566.28095" z="803.86915"/>
 			<Orientation y="-2.29015"/>
 			<Actor seed="26694"/>
 		</Entity>
 		<Entity uid="9329">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>1</Player>
 			<Position x="568.47938" z="801.98707"/>
 			<Orientation y="-2.4218"/>
 			<Actor seed="2429"/>
 		</Entity>
 		<Entity uid="9330">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>1</Player>
 			<Position x="570.6761" z="799.62848"/>
 			<Orientation y="-2.13569"/>
 			<Actor seed="20415"/>
 		</Entity>
 		<Entity uid="9331">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>2</Player>
 			<Position x="451.22397" z="167.24012"/>
 			<Orientation y="-2.40578"/>
 			<Actor seed="34692"/>
 		</Entity>
 		<Entity uid="9332">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>2</Player>
 			<Position x="453.66648" z="164.85242"/>
 			<Orientation y="-2.29015"/>
 			<Actor seed="26694"/>
 		</Entity>
 		<Entity uid="9333">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>2</Player>
 			<Position x="455.8649" z="162.97034"/>
 			<Orientation y="-2.4218"/>
 			<Actor seed="2429"/>
 		</Entity>
 		<Entity uid="9334">
-			<Template>skirmish/units/default_support_female_citizen</Template>
+			<Template>skirmish/units/default_support_civilian</Template>
 			<Player>2</Player>
 			<Position x="458.06162" z="160.61176"/>
 			<Orientation y="-2.1357"/>

@@ -5542,56 +5542,56 @@
 			<Actor seed="29002"/>
 		</Entity>
 		<Entity uid="879">
-			<Template>units/iber/support_female_citizen</Template>
+			<Template>units/iber/support_civilian</Template>
 			<Player>4</Player>
 			<Position x="965.89368" z="372.8943"/>
 			<Orientation y="0.80773"/>
 			<Actor seed="29484"/>
 		</Entity>
 		<Entity uid="880">
-			<Template>units/iber/support_female_citizen</Template>
+			<Template>units/iber/support_civilian</Template>
 			<Player>4</Player>
 			<Position x="961.03278" z="377.22223"/>
 			<Orientation y="0.72468"/>
 			<Actor seed="17630"/>
 		</Entity>
 		<Entity uid="881">
-			<Template>units/iber/support_female_citizen</Template>
+			<Template>units/iber/support_civilian</Template>
 			<Player>4</Player>
 			<Position x="955.33472" z="381.60029"/>
 			<Orientation y="0.8397"/>
 			<Actor seed="13018"/>
 		</Entity>
 		<Entity uid="882">
-			<Template>units/iber/support_female_citizen</Template>
+			<Template>units/iber/support_civilian</Template>
 			<Player>4</Player>
 			<Position x="948.88666" z="386.75178"/>
 			<Orientation y="0.445"/>
 			<Actor seed="39432"/>
 		</Entity>
 		<Entity uid="883">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="951.95752" z="902.41126"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="57178"/>
 		</Entity>
 		<Entity uid="884">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="955.75391" z="905.74244"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="16284"/>
 		</Entity>
 		<Entity uid="885">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="958.6875" z="909.01154"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="3480"/>
 		</Entity>
 		<Entity uid="886">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="962.44166" z="911.7818"/>
 			<Orientation y="2.35621"/>
@@ -5633,28 +5633,28 @@
 			<Actor seed="26044"/>
 		</Entity>
 		<Entity uid="892">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="339.63398" z="886.48865"/>
 			<Orientation y="-2.15603"/>
 			<Actor seed="49886"/>
 		</Entity>
 		<Entity uid="893">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="333.70777" z="891.25593"/>
 			<Orientation y="-2.63059"/>
 			<Actor seed="43544"/>
 		</Entity>
 		<Entity uid="894">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="329.62403" z="894.84449"/>
 			<Orientation y="-2.41187"/>
 			<Actor seed="31174"/>
 		</Entity>
 		<Entity uid="895">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="325.20997" z="899.15723"/>
 			<Orientation y="-2.60616"/>
@@ -5696,28 +5696,28 @@
 			<Actor seed="28068"/>
 		</Entity>
 		<Entity uid="904">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="325.5128" z="351.87403"/>
 			<Orientation y="-0.8292"/>
 			<Actor seed="22236"/>
 		</Entity>
 		<Entity uid="905">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="328.32966" z="354.80005"/>
 			<Orientation y="-0.944"/>
 			<Actor seed="15924"/>
 		</Entity>
 		<Entity uid="906">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="330.63593" z="358.67887"/>
 			<Orientation y="-0.63198"/>
 			<Actor seed="63958"/>
 		</Entity>
 		<Entity uid="907">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>2</Player>
 			<Position x="333.78824" z="361.62433"/>
 			<Orientation y="-0.79165"/>

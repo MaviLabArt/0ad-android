@@ -38,7 +38,7 @@ export function* generateMap(mapSettings)
 	const oPyramid = "structures/kush/pyramid_small";
 	const oPyramidLarge = "structures/kush/pyramid_large";
 	const oKushUnits = mapSettings.Nomad ?
-		"units/kush/support_female_citizen" :
+		"units/kush/support_civilian" :
 		"units/kush/infantry_javelineer_merc_e";
 
 	const aRain = g_Decoratives.rain;

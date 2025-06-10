@@ -689,19 +689,19 @@
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="141">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="428.85456" z="218.54062"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="142">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="429.90967" z="219.71848"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="143">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="431.34464" z="221.20066"/>
 			<Orientation y="2.35621"/>

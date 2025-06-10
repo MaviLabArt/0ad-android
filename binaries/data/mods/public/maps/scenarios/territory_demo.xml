@@ -412,7 +412,7 @@
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="69">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="469.22165" z="363.5293"/>
 			<Orientation y="2.35621"/>

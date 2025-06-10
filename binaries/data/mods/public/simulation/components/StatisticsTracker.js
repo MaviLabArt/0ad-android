@@ -3,7 +3,7 @@ function StatisticsTracker() {}
 StatisticsTracker.prototype.Schema =
 	"<a:help>This component records statistics over the course of the match, such as the number of trained, lost, captured and destroyed units and buildings The statistics are consumed by the summary screen and lobby rankings.</a:help>" +
 	"<a:example>" +
-		"<UnitClasses>Infantry FemaleCitizen</UnitClasses>" +
+		"<UnitClasses>Infantry Civilian</UnitClasses>" +
 		"<StructureClasses>House Wonder</StructureClasses>" +
 	"</a:example>" +
 	"<element name='UnitClasses' a:help='The tracker records trained, lost, killed and captured units of entities that match any of these Identity classes.'>" +

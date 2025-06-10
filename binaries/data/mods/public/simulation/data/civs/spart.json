@@ -25,9 +25,9 @@
 	],
 	"CivBonuses": [
 		{
-			"Name": "Spartan Women",
+			"Name": "Ritualistic Exercise",
 			"History": "",
-			"Description": "Female Citizens +40% health and +50% melee attack hack damage."
+			"Description": "Citizen-Soldiers +40% health and +50% melee attack hack damage."
 		},
 		{
 			"Name": "Laws of Lycurgus",
@@ -49,7 +49,7 @@
 			"Template": "structures/spart/civil_centre"
 		},
 		{
-			"Template": "units/spart/support_female_citizen",
+			"Template": "units/spart/support_civilian",
 			"Count": 4
 		},
 		{

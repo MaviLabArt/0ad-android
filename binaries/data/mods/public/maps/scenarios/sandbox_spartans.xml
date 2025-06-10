@@ -1058,98 +1058,98 @@
 			<Actor seed="4337"/>
 		</Entity>
 		<Entity uid="346">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="483.80131" z="276.70402"/>
 			<Orientation y="3.00681"/>
 			<Actor seed="6960"/>
 		</Entity>
 		<Entity uid="347">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="485.48234" z="275.24988"/>
 			<Orientation y="0.62801"/>
 			<Actor seed="21289"/>
 		</Entity>
 		<Entity uid="348">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="487.30817" z="272.5546"/>
 			<Orientation y="-2.55556"/>
 			<Actor seed="40552"/>
 		</Entity>
 		<Entity uid="349">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="484.48493" z="271.54587"/>
 			<Orientation y="-2.2154"/>
 			<Actor seed="40552"/>
 		</Entity>
 		<Entity uid="350">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="481.74735" z="272.62348"/>
 			<Orientation y="0.6563"/>
 			<Actor seed="18750"/>
 		</Entity>
 		<Entity uid="351">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="482.35749" z="269.00379"/>
 			<Orientation y="-2.94271"/>
 			<Actor seed="18750"/>
 		</Entity>
 		<Entity uid="352">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="485.1573" z="267.97724"/>
 			<Orientation y="-0.56916"/>
 			<Actor seed="29986"/>
 		</Entity>
 		<Entity uid="353">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="486.17103" z="268.77125"/>
 			<Orientation y="2.24527"/>
 			<Actor seed="38492"/>
 		</Entity>
 		<Entity uid="354">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="483.01865" z="273.32389"/>
 			<Orientation y="-2.11947"/>
 			<Actor seed="38492"/>
 		</Entity>
 		<Entity uid="355">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="481.84076" z="276.43573"/>
 			<Orientation y="-0.9647"/>
 			<Actor seed="5410"/>
 		</Entity>
 		<Entity uid="356">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="487.46268" z="276.19394"/>
 			<Orientation y="-2.71721"/>
 			<Actor seed="10676"/>
 		</Entity>
 		<Entity uid="357">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="478.96442" z="270.9618"/>
 			<Orientation y="2.91214"/>
 			<Actor seed="34042"/>
 		</Entity>
 		<Entity uid="358">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="479.77546" z="274.26725"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="16182"/>
 		</Entity>
 		<Entity uid="359">
-			<Template>units/spart/support_female_citizen</Template>
+			<Template>units/spart/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="476.95524" z="272.83136"/>
 			<Orientation y="2.35621"/>

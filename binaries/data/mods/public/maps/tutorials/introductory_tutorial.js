@@ -3,7 +3,7 @@ Trigger.prototype.tutorialGoals = [
 		"instructions": markForTranslation("Welcome to the 0\xa0A.D. tutorial."),
 	},
 	{
-		"instructions": markForTranslation("Left-click on a Female Citizen and then right-click on a berry bush to make that Female Citizen gather food. Female Citizens gather vegetables faster than other units."),
+		"instructions": markForTranslation("Left-click on a Civilian and then right-click on a berry bush to make that Civilian gather food. Civilians gather vegetables faster than other units."),
 		"OnPlayerCommand": function(msg)
 		{
 			if (msg.cmd.type == "gather" && msg.cmd.target &&
@@ -12,7 +12,7 @@ Trigger.prototype.tutorialGoals = [
 		}
 	},
 	{
-		"instructions": markForTranslation("Select the Citizen Soldier, right-click on a tree near the Civic Center to begin gathering wood. Citizen Soldiers gather wood faster than Female Citizens."),
+		"instructions": markForTranslation("Select the Citizen Soldier, right-click on a tree near the Civic Center to begin gathering wood. Citizen Soldiers gather wood faster than Civilians."),
 		"OnPlayerCommand": function(msg)
 		{
 			if (msg.cmd.type == "gather" && msg.cmd.target &&
@@ -43,7 +43,7 @@ Trigger.prototype.tutorialGoals = [
 		}
 	},
 	{
-		"instructions": markForTranslation("Select the two idle Female Citizens and build a House nearby by selecting the House icon. Place the House by left-clicking on a piece of land."),
+		"instructions": markForTranslation("Select the two idle Civilians and build a House nearby by selecting the House icon. Place the House by left-clicking on a piece of land."),
 		"OnPlayerCommand": function(msg)
 		{
 			if (msg.cmd.type == "repair" && TriggerHelper.EntityMatchesClassList(msg.cmd.target, "House"))
@@ -225,7 +225,7 @@ Trigger.prototype.tutorialGoals = [
 		}
 	},
 	{
-		"instructions": markForTranslation("Start training a batch of Female Citizens in the Civic Center and set its rally point to the Field (right click on it)."),
+		"instructions": markForTranslation("Start training a batch of Civilians in the Civic Center and set its rally point to the Field (right click on it)."),
 		"Init": function()
 		{
 			this.rallyPointSet = false;
@@ -237,13 +237,13 @@ Trigger.prototype.tutorialGoals = [
 		},
 		"OnTrainingQueued": function(msg)
 		{
-			if (msg.unitTemplate != "units/spart/support_female_citizen" || +msg.count == 1)
+			if (msg.unitTemplate != "units/spart/support_civilian" || +msg.count == 1)
 			{
 				const cmpProductionQueue = Engine.QueryInterface(msg.trainerEntity, IID_ProductionQueue);
 				cmpProductionQueue.ResetQueue();
 				const txt = +msg.count == 1 ?
 					markForTranslation("Do not forget to press the batch training hotkey while clicking to produce multiple units.") :
-					markForTranslation("Click on the Female Citizen icon.");
+					markForTranslation("Click on the Civilian icon.");
 				this.WarningMessage(txt);
 				return;
 			}
@@ -365,7 +365,7 @@ Trigger.prototype.tutorialGoals = [
 	{
 		"instructions": [
 			markForTranslation("Stop all your soldiers gathering resources and instead task small groups to find the enemy Civic Center on the map. Once the enemy's base has been spotted, send your Siege Engines and all remaining soldiers to destroy it.\n"),
-			markForTranslation("Female Citizens should continue to gather resources.")
+			markForTranslation("Civilians should continue to gather resources.")
 		],
 		"OnOwnershipChanged": function(msg)
 		{

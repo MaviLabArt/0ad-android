@@ -16635,19 +16635,19 @@
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="3605">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="685.50251" z="761.19758"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="3606">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="687.95411" z="763.56336"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="3607">
-			<Template>units/rome/support_female_citizen</Template>
+			<Template>units/rome/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="690.58936" z="766.625"/>
 			<Orientation y="2.35621"/>
@@ -16695,19 +16695,19 @@
 			<Orientation y="-3.03142"/>
 		</Entity>
 		<Entity uid="3625">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="380.81901" z="202.14588"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="3626">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="384.19724" z="205.76723"/>
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="3627">
-			<Template>units/cart/support_female_citizen</Template>
+			<Template>units/cart/support_civilian</Template>
 			<Player>3</Player>
 			<Position x="387.38273" z="209.70693"/>
 			<Orientation y="2.35621"/>

@@ -13,9 +13,9 @@
   </Footprint>
   <GarrisonHolder>
     <Max>10</Max>
-    <List datatype="tokens">FemaleCitizen Infantry Healer Dog</List>
+    <List datatype="tokens">Civilian Infantry Healer Dog</List>
     <EjectHealth>0</EjectHealth>
-    <EjectClassesOnDestroy datatype="tokens">FemaleCitizen Infantry Healer Dog</EjectClassesOnDestroy>
+    <EjectClassesOnDestroy datatype="tokens">Civilian Infantry Healer Dog</EjectClassesOnDestroy>
     <BuffHeal>0</BuffHeal>
     <LoadingRange>10</LoadingRange>
     <Pickup>true</Pickup>

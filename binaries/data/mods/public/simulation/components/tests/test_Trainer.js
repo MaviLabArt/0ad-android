@@ -30,7 +30,7 @@ AddMock(SYSTEM_ENTITY, IID_TemplateManager, {
 let cmpTrainer = ConstructComponent(entityID, "Trainer", {
 	"Entities": { "_string": "units/{civ}/cavalry_javelineer_b " +
 	                         "units/{civ}/infantry_swordsman_b " +
-	                         "units/{native}/support_female_citizen" }
+	                         "units/{native}/support_civilian" }
 });
 cmpTrainer.GetUpgradedTemplate = (template) => template;
 
@@ -60,7 +60,7 @@ Engine.RegisterGlobal("GetUpgradedTemplate", GetUpgradedTemplate);
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/iber/cavalry_javelineer_a", "units/iber/infantry_swordsman_b", "units/iber/support_female_citizen"]
+	["units/iber/cavalry_javelineer_a", "units/iber/infantry_swordsman_b", "units/iber/support_civilian"]
 );
 
 GetUpgradedTemplate = (_, template) => template;
@@ -68,16 +68,16 @@ Engine.RegisterGlobal("GetUpgradedTemplate", GetUpgradedTemplate);
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_female_citizen"]
+	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_civilian"]
 );
 
 AddMock(SYSTEM_ENTITY, IID_TemplateManager, {
-	"TemplateExists": name => name == "units/iber/support_female_citizen",
+	"TemplateExists": name => name == "units/iber/support_civilian",
 	"GetTemplate": name => ({})
 });
 
 cmpTrainer.CalculateEntitiesMap();
-TS_ASSERT_UNEVAL_EQUALS(cmpTrainer.GetEntitiesList(), ["units/iber/support_female_citizen"]);
+TS_ASSERT_UNEVAL_EQUALS(cmpTrainer.GetEntitiesList(), ["units/iber/support_civilian"]);
 
 AddMock(SYSTEM_ENTITY, IID_TemplateManager, {
 	"TemplateExists": () => true,
@@ -92,7 +92,7 @@ AddMock(playerEntityID, IID_Player, {
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_female_citizen"]
+	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_civilian"]
 );
 
 AddMock(playerEntityID, IID_Player, {
@@ -103,7 +103,7 @@ AddMock(playerEntityID, IID_Player, {
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/iber/cavalry_javelineer_b", "units/iber/support_female_citizen"]
+	["units/iber/cavalry_javelineer_b", "units/iber/support_civilian"]
 );
 
 AddMock(playerEntityID, IID_Player, {
@@ -118,7 +118,7 @@ AddMock(playerEntityID, IID_Identity, {
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/athen/cavalry_javelineer_b", "units/iber/support_female_citizen"]
+	["units/athen/cavalry_javelineer_b", "units/iber/support_civilian"]
 );
 
 AddMock(playerEntityID, IID_Player, {
@@ -133,7 +133,7 @@ AddMock(playerEntityID, IID_Identity, {
 cmpTrainer.CalculateEntitiesMap();
 TS_ASSERT_UNEVAL_EQUALS(
 	cmpTrainer.GetEntitiesList(),
-	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_female_citizen"]
+	["units/iber/cavalry_javelineer_b", "units/iber/infantry_swordsman_b", "units/iber/support_civilian"]
 );
 
 
@@ -315,7 +315,7 @@ cmpTrainer.OnValueModification({
 });
 
 TS_ASSERT_UNEVAL_EQUALS(
-	cmpTrainer.GetEntitiesList(), ["units/iber/c", "units/iber/support_female_citizen", "units/iber/d"]
+	cmpTrainer.GetEntitiesList(), ["units/iber/c", "units/iber/support_civilian", "units/iber/d"]
 );
 TS_ASSERT_EQUALS(cmpTrainer.queue.size, 1);
 TS_ASSERT_EQUALS(cmpTrainer.GetBatch(id1), undefined);

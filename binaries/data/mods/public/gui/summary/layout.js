@@ -195,7 +195,7 @@ var getScorePanelsData = () => [
 			{ "identifier": "mapControl", "caption": translate("Map control (finish)"), "yStart": 0, "width": 110, "format": "PERCENTAGE" },
 			{ "identifier": "mapExploration", "caption": translate("Map exploration"), "yStart": 0, "width": 110, "format": "PERCENTAGE" },
 			{ "identifier": "vegetarianRatio", "caption": translate("Vegetarian ratio"), "yStart": 0, "width": 110, "format": "PERCENTAGE" },
-			{ "identifier": "feminization", "caption": translate("Feminization"), "yStart": 0, "width": 110, "format": "PERCENTAGE" },
+			{ "identifier": "civilianization", "caption": translate("Civilianization"), "yStart": 0, "width": 110, "format": "PERCENTAGE" },
 			{
 				"identifier": "bribes",
 				"caption": translate("Bribes"),
@@ -216,7 +216,7 @@ var getScorePanelsData = () => [
 			{ "width": 110, "fn": calculateMapFinalControl },
 			{ "width": 110, "fn": calculateMapExploration },
 			{ "width": 110, "fn": calculateVegetarianRatio },
-			{ "width": 110, "fn": calculateFeminization },
+			{ "width": 110, "fn": calculateCivilianization },
 			{ "width": 110, "fn": calculateBribes }
 		],
 		"teamCounterFn": calculateMiscellaneousTeam

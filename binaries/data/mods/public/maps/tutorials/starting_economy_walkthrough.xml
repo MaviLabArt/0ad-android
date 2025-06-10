@@ -379,25 +379,25 @@
 			<Orientation y="2.35621"/>
 		</Entity>
 		<Entity uid="248">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="604.5882" z="841.91709"/>
 			<Orientation y="3.927"/>
 		</Entity>
 		<Entity uid="249">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="610.24506" z="836.26024"/>
 			<Orientation y="3.927"/>
 		</Entity>
 		<Entity uid="250">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="615.90191" z="830.60338"/>
 			<Orientation y="3.927"/>
 		</Entity>
 		<Entity uid="251">
-			<Template>units/athen/support_female_citizen</Template>
+			<Template>units/athen/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="621.55877" z="824.94652"/>
 			<Orientation y="3.927"/>

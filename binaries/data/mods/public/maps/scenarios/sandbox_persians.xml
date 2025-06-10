@@ -669,21 +669,21 @@
 			<Actor seed="1470"/>
 		</Entity>
 		<Entity uid="105">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="430.90986" z="312.31281"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="32727"/>
 		</Entity>
 		<Entity uid="106">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="433.55842" z="312.80054"/>
 			<Orientation y="-2.38338"/>
 			<Actor seed="9645"/>
 		</Entity>
 		<Entity uid="107">
-			<Template>units/pers/support_female_citizen</Template>
+			<Template>units/pers/support_civilian</Template>
 			<Player>1</Player>
 			<Position x="431.92716" z="308.9758"/>
 			<Orientation y="0.23427"/>

@@ -65,8 +65,8 @@ g_SelectionPanels.Alert = {
 		case "raise":
 			data.icon.sprite = "stretched:session/icons/bell_level1.png";
 			data.button.tooltip = translate("Raise an alert!");
-			if (data.unitEntStates.every(state => MatchesClassList(["FemaleCitizen"], state.alertRaiser?.classes)))
-				data.button.tooltip += "\n" + bodyFont(translate("Alert nearby Female Citizens to seek refuge."));
+			if (data.unitEntStates.every(state => MatchesClassList(["Civilian"], state.alertRaiser?.classes)))
+				data.button.tooltip += "\n" + bodyFont(translate("Alert nearby Civilians to seek refuge."));
 			else if (data.unitEntStates.every(state => MatchesClassList(["Trader"], state.alertRaiser?.classes)))
 				data.button.tooltip += "\n" + bodyFont(translate("Alert nearby Traders to seek refuge."));
 			else
@@ -75,8 +75,8 @@ g_SelectionPanels.Alert = {
 		case "end":
 			data.icon.sprite = "stretched:session/icons/bell_level0.png";
 			data.button.tooltip = translate("End the alert.");
-			if (data.unitEntStates.every(state => MatchesClassList(["FemaleCitizen"], state.alertRaiser?.classes)))
-				data.button.tooltip += "\n" + bodyFont(translate("Unload nearby Female Citizens."));
+			if (data.unitEntStates.every(state => MatchesClassList(["Civilian"], state.alertRaiser?.classes)))
+				data.button.tooltip += "\n" + bodyFont(translate("Unload nearby Civilians."));
 			else if (data.unitEntStates.every(state => MatchesClassList(["Trader"], state.alertRaiser?.classes)))
 				data.button.tooltip += "\n" + bodyFont(translate("Unload nearby Traders."));
 			else
