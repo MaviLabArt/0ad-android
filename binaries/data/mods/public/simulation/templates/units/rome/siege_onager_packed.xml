@@ -8,7 +8,6 @@
     <Civ>rome</Civ>
     <SpecificName>Onager</SpecificName>
     <Icon>units/rome/siege_onager.png</Icon>
-    <Tooltip>An area of effect siege unit unlocked by Marian Reforms.</Tooltip>
     <Requirements>
       <Techs datatype="tokens">roman_reforms -phase_city</Techs>
     </Requirements>
