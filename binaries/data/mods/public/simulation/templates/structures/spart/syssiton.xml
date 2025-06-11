@@ -22,7 +22,7 @@
     <Civ>spart</Civ>
     <GenericName>Military Mess Hall</GenericName>
     <SpecificName>Syssition</SpecificName>
-    <Tooltip>Train Champions and Heroes.</Tooltip>
+    <Tooltip>Train Champions.</Tooltip>
     <Classes datatype="tokens">ConquestCritical CivSpecific</Classes>
     <VisibleClasses datatype="tokens">-City Village Syssiton</VisibleClasses>
     <Icon>structures/syssition.png</Icon>
