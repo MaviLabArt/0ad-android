@@ -421,17 +421,17 @@ ModuleLoader::Result::iterator& ModuleLoader::Result::iterator::operator++(int)
 }
 
 ModuleLoader::Result::Result(const ScriptRequest& rq, const VfsPath& modulePath):
-	m_Cx{rq.cx},
-	m_Loader{rq.GetScriptInterface().GetModuleLoader()},
+	m_Script{rq.GetScriptInterface()},
 	m_ModulePath{modulePath},
-	m_Storage{rq, m_Loader, *this, m_ModulePath}
+	m_Storage{rq, m_Script.GetModuleLoader(), *this, m_ModulePath}
 {
 }
 
 ModuleLoader::Result::~Result()
 {
-	const auto modIter = m_Loader.m_Registry.find(m_ModulePath);
-	if (modIter == m_Loader.m_Registry.end())
+	ModuleLoader::RegistryType& registry{m_Script.GetModuleLoader().m_Registry};
+	const auto modIter = registry.find(m_ModulePath);
+	if (modIter == registry.end())
 		return;
 
 	std::get<1>(*modIter).RemoveRequester(this);
@@ -450,7 +450,7 @@ ModuleLoader::Result::~Result()
 void ModuleLoader::Result::Resume()
 {
 	if (m_Storage.IsWaiting())
-		m_Storage = ModuleLoader::Future{m_Cx, m_Loader, *this, m_ModulePath};
+		m_Storage = ModuleLoader::Future{m_Script, m_Script.GetModuleLoader(), *this, m_ModulePath};
 }
 
 ModuleLoader::ModuleLoader(ModuleLoader::AllowModuleFunc allowModule):

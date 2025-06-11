@@ -29,6 +29,7 @@
 #include <vector>
 
 class ScriptContext;
+class ScriptInterface;
 class ScriptRequest;
 
 namespace Script
@@ -166,8 +167,7 @@ public:
 	void Resume();
 
 private:
-	JSContext* m_Cx;
-	ModuleLoader& m_Loader;
+	const ScriptInterface& m_Script;
 	VfsPath m_ModulePath;
 	Future m_Storage;
 };

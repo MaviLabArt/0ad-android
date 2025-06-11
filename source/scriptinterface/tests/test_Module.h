@@ -686,10 +686,18 @@ public:
 		TS_ASSERT_STR_NOT_CONTAINS(logger.GetOutput(), "blah blah blah");
 	}
 
-	void test_ResultDestructionAfterScriptRequestDestruction()
+	void test_HotloadAfterScriptRequestDestruction()
 	{
 		ScriptInterface script{"Test", "Test", g_ScriptContext, AllowAllPredicate};
-		auto _ = script.GetModuleLoader().LoadModule(ScriptRequest{script}, "empty.js");
+		auto result = script.GetModuleLoader().LoadModule(ScriptRequest{script}, "empty.js");
+		g_ScriptContext->RunJobs();
+		auto iter = result.begin();
+		TS_ASSERT(iter->IsDone());
+
+		++iter;
+		ClearFromCache("empty.js");
+		g_ScriptContext->RunJobs();
+		TS_ASSERT(iter->IsDone());
 	}
 
 	void test_RestrictionNoPredicate()
