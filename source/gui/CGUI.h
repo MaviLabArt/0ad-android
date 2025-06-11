@@ -71,7 +71,7 @@ struct SGUIImageEffects;
 
 extern const double SELECT_DBLCLICK_RATE;
 
-using map_pObjects = std::map<CStr, IGUIObject*>;
+using map_pObjects = std::map<CStr, std::unique_ptr<IGUIObject>>;
 
 /**
  * The main object that represents a whole GUI page.
@@ -82,7 +82,7 @@ class CGUI
 
 private:
 	// Private typedefs
-	using ConstructObjectFunction = IGUIObject* (*)(CGUI&);
+	using ConstructObjectFunction = std::unique_ptr<IGUIObject> (*)(CGUI&);
 
 public:
 	CGUI(ScriptContext& context);
@@ -288,7 +288,7 @@ private:
 	 * The CGUI takes ownership of the child object and links the parent with the child.
 	 * Returns false on failure to take over ownership of the child object.
 	 */
-	bool AddObject(IGUIObject& parent, IGUIObject& child);
+	void AddObject(IGUIObject& parent, std::unique_ptr<IGUIObject> child);
 
 	/**
 	 * You input the name of the object type, and let's
@@ -298,7 +298,7 @@ private:
 	 * @param str Name of object type
 	 * @return Newly constructed IGUIObject (but constructed as a subclass)
 	 */
-	IGUIObject* ConstructObject(const CStr& str);
+	std::unique_ptr<IGUIObject> ConstructObject(const CStr& str);
 
 public:
 	/**

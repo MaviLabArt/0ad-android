@@ -53,8 +53,8 @@ struct SDL_Event_;
 
 #define GUI_OBJECT(obj) \
 public: \
-	static IGUIObject* ConstructObject(CGUI& pGUI) \
-		{ return new obj(pGUI); }
+	static std::unique_ptr<IGUIObject> ConstructObject(CGUI& pGUI) \
+		{ return std::make_unique<obj>(pGUI); }
 
 /**
  * GUI object such as a button or an input-box.

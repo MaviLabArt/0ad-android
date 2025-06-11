@@ -105,11 +105,7 @@ CGUI::CGUI(ScriptContext& context)
 	m_ScriptInterface->LoadGlobalScripts();
 }
 
-CGUI::~CGUI()
-{
-	for (const std::pair<const CStr, IGUIObject*>& p : m_pAllObjects)
-		delete p.second;
-}
+CGUI::~CGUI() = default;
 
 InReaction CGUI::HandleEvent(const SDL_Event_* ev)
 {
@@ -400,7 +396,7 @@ void CGUI::UpdateResolution()
 	m_BaseObject->RecurseObject(nullptr, &IGUIObject::UpdateCachedSize);
 }
 
-IGUIObject* CGUI::ConstructObject(const CStr& str)
+std::unique_ptr<IGUIObject> CGUI::ConstructObject(const CStr& str)
 {
 	std::map<CStr, ConstructObjectFunction>::iterator it = m_ObjectTypes.find(str);
 
@@ -410,23 +406,22 @@ IGUIObject* CGUI::ConstructObject(const CStr& str)
 	return (*it->second)(*this);
 }
 
-bool CGUI::AddObject(IGUIObject& parent, IGUIObject& child)
+void CGUI::AddObject(IGUIObject& parent, std::unique_ptr<IGUIObject> child)
 {
-	if (child.m_Name.empty())
+	if (child->m_Name.empty())
 	{
 		LOGERROR("Can't register an object without name!");
-		return false;
+		return;
 	}
 
-	if (m_pAllObjects.find(child.m_Name) != m_pAllObjects.end())
+	if (m_pAllObjects.find(child->m_Name) != m_pAllObjects.end())
 	{
-		LOGERROR("Can't register more than one object of the name %s", child.m_Name.c_str());
-		return false;
+		LOGERROR("Can't register more than one object of the name %s", child->m_Name.c_str());
+		return;
 	}
 
-	m_pAllObjects[child.m_Name] = &child;
-	parent.RegisterChild(&child);
-	return true;
+	parent.RegisterChild(child.get());
+	m_pAllObjects[child->m_Name] = std::move(child);
 }
 
 IGUIObject* CGUI::GetBaseObject()
@@ -446,7 +441,7 @@ IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
 	if (it == m_pAllObjects.end())
 		return nullptr;
 
-	return it->second;
+	return it->second.get();
 }
 
 IGUIObject* CGUI::FindObjectUnderMouse()
@@ -669,7 +664,7 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 	// Construct object from specified type
 	//  henceforth, we need to do a rollback before aborting.
 	//  i.e. releasing this object
-	IGUIObject* object = ConstructObject(type);
+	std::unique_ptr<IGUIObject> object = ConstructObject(type);
 
 	if (!object)
 	{
@@ -953,8 +948,7 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 			object->m_Z.Set(10.f, false);
 	}
 
-	if (!AddObject(parent, *object))
-		delete object;
+	AddObject(parent, std::move(object));
 }
 
 void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject& parent,
@@ -1333,7 +1327,7 @@ void CGUI::Xeromyces_ReadIcon(const XMBData& xmb, XMBElement element)
 
 void CGUI::Xeromyces_ReadTooltip(const XMBData& xmb, XMBElement element)
 {
-	IGUIObject* object = new CTooltip(*this);
+	std::unique_ptr<IGUIObject> object{std::make_unique<CTooltip>(*this)};
 
 	for (XMBAttribute attr : element.GetAttributes())
 	{
@@ -1346,8 +1340,7 @@ void CGUI::Xeromyces_ReadTooltip(const XMBData& xmb, XMBElement element)
 			object->SetSettingFromString(std::string(attr_name), attr_value.FromUTF8(), true);
 	}
 
-	if (!AddObject(*m_BaseObject, *object))
-		delete object;
+	AddObject(*m_BaseObject, std::move(object));
 }
 
 void CGUI::Xeromyces_ReadColor(const XMBData& xmb, XMBElement element)
