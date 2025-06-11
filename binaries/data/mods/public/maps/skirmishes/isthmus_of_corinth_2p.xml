@@ -37254,84 +37254,84 @@
 		</Entity>
 		<Entity uid="6332">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="606.06861" z="864.55854"/>
 			<Orientation y="-3.1089"/>
 			<Actor seed="48612"/>
 		</Entity>
 		<Entity uid="6333">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="614.48444" z="854.1388"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="58937"/>
 		</Entity>
 		<Entity uid="6334">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="625.74012" z="851.07392"/>
 			<Orientation y="0.38529"/>
 			<Actor seed="58937"/>
 		</Entity>
 		<Entity uid="6335">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="625.81733" z="864.59168"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="58937"/>
 		</Entity>
 		<Entity uid="6336">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="615.60016" z="862.92554"/>
 			<Orientation y="-2.01844"/>
 			<Actor seed="62701"/>
 		</Entity>
 		<Entity uid="6337">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="630.63892" z="856.47474"/>
 			<Orientation y="1.21845"/>
 			<Actor seed="62701"/>
 		</Entity>
 		<Entity uid="6338">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="737.11414" z="885.21302"/>
 			<Orientation y="-1.80336"/>
 			<Actor seed="50843"/>
 		</Entity>
 		<Entity uid="6339">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="722.29444" z="883.89576"/>
 			<Orientation y="3.14002"/>
 			<Actor seed="29699"/>
 		</Entity>
 		<Entity uid="6340">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="718.6435" z="875.3628"/>
 			<Orientation y="3.07102"/>
 			<Actor seed="29699"/>
 		</Entity>
 		<Entity uid="6341">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="722.31641" z="864.73017"/>
 			<Orientation y="2.7963"/>
 			<Actor seed="29699"/>
 		</Entity>
 		<Entity uid="6342">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="734.6385" z="862.97376"/>
 			<Orientation y="0.27884"/>
 			<Actor seed="58092"/>
 		</Entity>
 		<Entity uid="6343">
 			<Template>gaia/tree/carob</Template>
-			<Player>1</Player>
+			<Player>0</Player>
 			<Position x="738.83271" z="871.84418"/>
 			<Orientation y="-2.24103"/>
 			<Actor seed="58092"/>
