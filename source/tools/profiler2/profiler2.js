@@ -283,15 +283,15 @@ function compare_reports()
 	const section = document.getElementById("comparison");
 	section.innerHTML = "<h3>Report Comparison</h3>";
 
-	if (g_reports.length < 2)
+	if (g_active_elements.length < 1)
 	{
-		section.innerHTML += "<p>Too few reports loaded</p>";
+		section.innerHTML += "<p>Select an element to show statistics</p>";
 		return;
 	}
 
-	if (g_active_elements.length != 1)
+	if (g_active_elements.length > 1)
 	{
-		section.innerHTML += "<p>Too many of too few elements selected</p>";
+		section.innerHTML += "<p>Too many elements selected</p>";
 		return;
 	}
 
