@@ -159,3 +159,16 @@ function set_tooltip_handlers(canvas)
 		$('#tooltip').css('visibility', 'hidden');
 	});
 }
+
+/**
+ * Get the specified quantile of a sorted array.
+ */
+function quantile(arr, q)
+{
+	const position = (arr.length - 1) * q;
+	const base = Math.floor(position);
+	const remainder = position - base;
+	if (arr[base + 1] !== undefined)
+		return arr[base] + remainder * (arr[base + 1] - arr[base]);
+	return arr[base];
+}

@@ -307,19 +307,26 @@ function compare_reports()
 
 	for (const rep in g_reports)
 	{
-		const raw_data = get_history_data(rep, g_main_thread, g_active_elements[0]).time_by_frame;
+		const raw_data_t = get_history_data(rep, g_main_thread, g_active_elements[0]);
+		const raw_data = raw_data_t.time_by_frame;
 		reports_data.push({ "time_data": raw_data.slice(0, frames_nb), "sorted_data": raw_data.slice(0, frames_nb).sort((a, b) => a-b) });
 	}
 
-	let table_output = "<table><tr><th>Profiler Variable</th><th>Median</th><th>Maximum</th><th>% better frames</th><th>time difference per frame</th></tr>";
+	let table_output = "<table><tr><th>Profiler Variable</th><th>Minimum</th><th>Median</th><th>p99</th><th>p99.9</th><th>Maximum</th><th>Sum</th><th>better frames</th><th>time difference per frame</th></tr>";
 	for (const rep in reports_data)
 	{
 		const report = reports_data[rep];
 		table_output += "<tr><td>Report " + rep + (rep == 0 ? " (reference)":"") + "</td>";
-		// median
+		// min
+		table_output += "<td>" + time_label(report.sorted_data[0]) + "</td>";
+		// percentiles (median, p99, p99.9)
 		table_output += "<td>" + time_label(report.sorted_data[Math.floor(report.sorted_data.length/2)]) + "</td>";
+		table_output += "<td>" + time_label(quantile(report.sorted_data, 0.99)) + "</td>";
+		table_output += "<td>" + time_label(quantile(report.sorted_data, 0.999)) + "</td>";
 		// max
 		table_output += "<td>" + time_label(report.sorted_data[report.sorted_data.length-1]) + "</td>";
+		// sum
+		table_output += "<td>" + time_label(report.sorted_data.reduce((a, b) => a + b, 0)) + "</td>";
 		let frames_better = 0;
 		let frames_diff = 0;
 		for (const f in report.time_data)
