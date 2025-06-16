@@ -1,9 +1,9 @@
 {
-	"supersedes": "warship_siege_attack",
 	"genericName": "Flaming Projectiles",
 	"description": "Flaming munitions were very useful against wooden targets such as ships.",
 	"cost": {
-		"wood": 800
+		"wood": 1200,
+		"metal": 400
 	},
 	"requirements": {
 		"all": [
@@ -15,7 +15,7 @@
 			}
 		]
 	},
-	"requirementsTooltip": "Unlocked in City Phase. Requires “Naval Ballistae.”",
+	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "fire_arrows.png",
 	"researchTime": 40,
 	"tooltip": "Ranged Warships +10% attack damage.",
