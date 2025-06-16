@@ -154,6 +154,7 @@ public:
 			wxStaticText* label = new wxStaticText(this, wxID_ANY, FormatTextureName(*qry.preview->name), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER);
 			label->Wrap(m_Sizer->GetSize().GetX());
 
+			// cppcheck-suppress "memleak"
 			unsigned char* buf = (unsigned char*)(malloc(preview.imageData.GetSize()));
 			// imagedata.GetBuffer() gives a Shareable<unsigned char>*, which
 			// is stored the same as a unsigned char*, so we can just copy it.

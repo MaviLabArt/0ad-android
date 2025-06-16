@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ void CSoundData::ReleaseSoundData(CSoundData* theData)
 
 	if (theData->DecrementCount())
 	{
-		if ((itemFind = CSoundData::sSoundData.find( theData->GetFileName().string() )) != sSoundData.end())
+		if ((itemFind = CSoundData::sSoundData.find( theData->GetFileName().string() )) != CSoundData::sSoundData.end())
 		{
 			CSoundData::sSoundData.erase(itemFind);
 		}
@@ -61,7 +61,7 @@ CSoundData* CSoundData::SoundDataFromFile(const VfsPath& itemPath)
 	DataMap::iterator itemFind;
 	CSoundData* answer = NULL;
 
-	if ((itemFind = CSoundData::sSoundData.find(itemPath.string())) != sSoundData.end())
+	if ((itemFind = CSoundData::sSoundData.find(itemPath.string())) != CSoundData::sSoundData.end())
 	{
 		answer = itemFind->second;
 	}
