@@ -1,8 +1,12 @@
 function init()
 {
 	var languageList = Engine.GetGUIObjectByName("languageList");
-	languageList.list = Engine.GetSupportedLocaleDisplayNames();
-	languageList.list_data = Engine.GetSupportedLocaleBaseNames();
+	const displayLanguages = Engine.GetSupportedLocaleDisplayNames();
+	const displayLanguagesData = Engine.GetSupportedLocaleBaseNames();
+	languageList.list = displayLanguages.map((name, index) => {
+		return `[locale="${displayLanguagesData[index]}"]${name}[/locale]`;
+	});
+	languageList.list_data = displayLanguagesData;
 
 	var currentLocale = Engine.GetCurrentLocale();
 	var currentLocaleDictName = Engine.GetFallbackToAvailableDictLocale(currentLocale);
