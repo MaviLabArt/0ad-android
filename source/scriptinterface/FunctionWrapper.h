@@ -324,20 +324,26 @@ public:
 		if (!wentOk)
 			return false;
 
-		/**
-		 * TODO: error handling isn't standard, and since this can call any C++ function,
-		 * there's no simple obvious way to deal with it.
-		 * For now we check for pending JS exceptions, but it would probably be nicer
-		 * to standardise on something, or perhaps provide an "errorHandler" here.
-		 */
-		if constexpr (std::is_same_v<void, typename args_info<decltype(callable)>::return_type>)
-			call<callable>(obj, outs);
-		else if constexpr (std::is_same_v<JS::Value, typename args_info<decltype(callable)>::return_type>)
-			args.rval().set(call<callable>(obj, outs));
-		else
-			Script::ToJSVal(rq, args.rval(), call<callable>(obj, outs));
+		try
+		{
+			if constexpr (std::is_same_v<void, typename args_info<decltype(callable)>::return_type>)
+				call<callable>(obj, outs);
+			else if constexpr (std::is_same_v<JS::Value, typename args_info<decltype(callable)>::return_type>)
+				args.rval().set(call<callable>(obj, outs));
+			else
+				Script::ToJSVal(rq, args.rval(), call<callable>(obj, outs));
 
-		return !ScriptException::IsPending(rq);
+			return !ScriptException::IsPending(rq);
+		}
+		catch (const std::exception& e)
+		{
+			ScriptException::Raise(rq, "%s", e.what());
+		}
+		catch (...)
+		{
+			ScriptException::Raise(rq, "Unknown error occured in an Engine callback.");
+		}
+		return false;
 	}
 
 	/**

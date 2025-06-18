@@ -18,6 +18,7 @@
 #include "lib/self_test.h"
 
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
 
@@ -129,5 +130,27 @@ public:
 		}
 
 		TS_ASSERT(!ScriptFunction::CallVoid(rq, nativeScope, name));
+	}
+
+	void test_exception()
+	{
+		g_VFS = CreateVfs();
+		TS_ASSERT_OK(g_VFS->Mount(L"", DataDir() / "mods" / "_test.scriptinterface" / "exception" / "",
+			VFS_MOUNT_MUST_EXIST));
+
+		ScriptInterface script{"Engine", "Test", g_ScriptContext, [](const VfsPath&){
+			return true;
+		}};
+		const ScriptRequest rq{script};
+
+		auto _ = ScriptFunction::Register(rq, "callback", [&](){
+			throw std::runtime_error{"Testerror"};
+		});
+
+		TestLogger logger;
+		std::ignore = script.GetModuleLoader().LoadModule(rq, "catch.js");
+		TS_ASSERT_STR_CONTAINS(logger.GetOutput(), "Testerror");
+
+		g_VFS.reset();
 	}
 };
