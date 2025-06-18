@@ -42,6 +42,7 @@
 
 #include <boost/random/linear_congruential.hpp>
 #include <set>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -198,9 +199,8 @@ private:
 
 		if (!VfsFileExists(filename))
 		{
-			ScriptException::Raise(rq, "Terrain file \"%s\" does not exist!",
-				filename.string8().c_str());
-			return JS::UndefinedValue();
+			throw std::runtime_error{fmt::format("Terrain file \"{}\" does not exist!",
+				filename.string8().c_str())};
 		}
 
 		CFileUnpacker unpacker;
@@ -208,9 +208,8 @@ private:
 
 		if (unpacker.GetVersion() < CMapIO::FILE_READ_VERSION)
 		{
-			ScriptException::Raise(rq, "Could not load terrain file \"%s\" too old version!",
-				filename.string8().c_str());
-			return JS::UndefinedValue();
+			throw std::runtime_error{fmt::format(
+				"Could not load terrain file \"{}\" too old version!", filename.string8().c_str())};
 		}
 
 		// unpack size

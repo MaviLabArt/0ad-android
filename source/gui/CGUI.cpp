@@ -535,22 +535,16 @@ void CGUI::SetGlobalHotkey(const CStr& hotkeyTag, const CStr& eventName, JS::Han
 	ScriptRequest rq(*m_ScriptInterface);
 
 	if (hotkeyTag.empty())
-	{
-		ScriptException::Raise(rq, "Cannot assign a function to an empty hotkey identifier!");
-		return;
-	}
+		throw std::invalid_argument{"Cannot assign a function to an empty hotkey identifier!"};
 
 	// Only support "Press", "Keydown" and "Release" events.
 	if (eventName != EventNamePress && eventName != EventNameKeyDown && eventName != EventNameRelease)
-	{
-		ScriptException::Raise(rq, "Cannot assign a function to an unsupported event!");
-		return;
-	}
+		throw std::invalid_argument{"Cannot assign a function to an unsupported event!"};
 
 	if (!function.isObject() || !JS::IsCallable(&function.toObject()))
 	{
-		ScriptException::Raise(rq, "Cannot assign non-function value to global hotkey '%s'", hotkeyTag.c_str());
-		return;
+		throw std::invalid_argument{fmt::format(
+			"Cannot assign non-function value to global hotkey '{}'", hotkeyTag.c_str())};
 	}
 
 	UnsetGlobalHotkey(hotkeyTag, eventName);

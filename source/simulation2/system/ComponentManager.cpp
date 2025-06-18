@@ -34,6 +34,7 @@
 #include "simulation2/system/ParamNode.h"
 #include "simulation2/system/SimContext.h"
 
+#include <stdexcept>
 #include <string_view>
 
 /**
@@ -168,10 +169,8 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 	// Find the C++ component that wraps the interface
 	int cidWrapper = GetScriptWrapper(iid);
 	if (cidWrapper == CID__Invalid)
-	{
-		ScriptException::Raise(rq, "Invalid interface id");
-		return;
-	}
+		throw std::invalid_argument{"Invalid interface id"};
+
 	const ComponentType& ctWrapper = m_ComponentTypesById[cidWrapper];
 
 	bool mustReloadComponents = false; // for hotloading
@@ -181,8 +180,8 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 	{
 		if (reRegister)
 		{
-			ScriptException::Raise(rq, "ReRegistering component type that was not registered before '%s'", cname.c_str());
-			return;
+			throw std::logic_error{fmt::format(
+				"ReRegistering component type that was not registered before '{}'", cname.c_str())};
 		}
 		// Allocate a new cid number
 		cid = m_NextScriptComponentTypeId++;
@@ -196,8 +195,8 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 
 		if (!m_CurrentlyHotloading && !reRegister)
 		{
-			ScriptException::Raise(rq, "Registering component type with already-registered name '%s'", cname.c_str());
-			return;
+			throw std::logic_error{fmt::format(
+				"Registering component type with already-registered name '{}'", cname.c_str())};
 		}
 
 		const ComponentType& ctPrevious = m_ComponentTypesById[cid];
@@ -205,8 +204,9 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 		// We can only replace scripted component types, not native ones
 		if (ctPrevious.type != CT_Script)
 		{
-			ScriptException::Raise(rq, "Loading script component type with same name '%s' as native component", cname.c_str());
-			return;
+			throw std::logic_error{fmt::format(
+				"Loading script component type with same name '%s' as native component",
+				cname.c_str())};
 		}
 
 		// We don't support changing the IID of a component type (it would require fiddling
@@ -216,8 +216,8 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 			// ...though it only matters if any components exist with this type
 			if (!m_ComponentsByTypeId[cid].empty())
 			{
-				ScriptException::Raise(rq, "Hotloading script component type mustn't change interface ID");
-				return;
+				throw std::logic_error{
+					"Hotloading script component type mustn't change interface ID"};
 			}
 		}
 
@@ -243,15 +243,10 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 
 	JS::RootedValue protoVal(rq.cx);
 	if (!Script::GetProperty(rq, ctor, "prototype", &protoVal))
-	{
-		ScriptException::Raise(rq, "Failed to get property 'prototype'");
-		return;
-	}
+		throw std::runtime_error("Failed to get property 'prototype'");
 	if (!protoVal.isObject())
-	{
-		ScriptException::Raise(rq, "Component has no constructor");
-		return;
-	}
+		throw std::invalid_argument{"Component has no constructor"};
+
 	std::string schema = "<empty/>";
 
 	if (Script::HasProperty(rq, protoVal, "Schema"))
@@ -279,7 +274,7 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 
 	if (!Script::EnumeratePropertyNames(rq, protoVal, false, methods))
 	{
-		ScriptException::Raise(rq, "Failed to enumerate component properties.");
+		throw std::runtime_error{"Failed to enumerate component properties."};
 		return;
 	}
 
@@ -301,10 +296,9 @@ void CComponentManager::Script_RegisterComponentType_Common(int iid, const std::
 		auto mit = m_MessageTypeIdsByName.find(std::string{name});
 		if (mit == m_MessageTypeIdsByName.end())
 		{
-			ScriptException::Raise(rq,
-				"Registered component has unrecognized '%s' message handler method",
-				method.c_str());
-			return;
+			throw std::invalid_argument{fmt::format(
+				"Registered component has unrecognized '{}' message handler method",
+				method.c_str())};
 		}
 
 		// If we have already subscribed in classInit, do not subscribe again
@@ -363,8 +357,8 @@ void CComponentManager::Script_RegisterInterface(const std::string& name)
 		// they're probably unintentional and should be reported
 		if (!m_CurrentlyHotloading)
 		{
-			ScriptRequest rq(m_ScriptInterface);
-			ScriptException::Raise(rq, "Registering interface with already-registered name '%s'", name.c_str());
+			throw std::logic_error{fmt::format(
+				"Registering interface with already-registered name '{}'", name.c_str())};
 		}
 		return;
 	}
@@ -385,8 +379,8 @@ void CComponentManager::Script_RegisterMessageType(const std::string& name)
 		// they're probably unintentional and should be reported
 		if (!m_CurrentlyHotloading)
 		{
-			ScriptRequest rq(m_ScriptInterface);
-			ScriptException::Raise(rq, "Registering message type with already-registered name '%s'", name.c_str());
+			throw std::logic_error{fmt::format(
+				"Registering message type with already-registered name '{}'", name.c_str())};
 		}
 		return;
 	}

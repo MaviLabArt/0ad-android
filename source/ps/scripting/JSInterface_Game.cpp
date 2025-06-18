@@ -34,6 +34,8 @@
 #include "simulation2/Simulation2.h"
 #include "soundmanager/SoundManager.h"
 
+#include <stdexcept>
+
 namespace JSI_Game
 {
 void StartGame(const ScriptInterface& guiInterface, JS::HandleValue attribs, int playerID, bool storeReplay)
@@ -67,7 +69,7 @@ int GetPlayerID()
 	return g_Game->GetPlayerID();
 }
 
-void SetPlayerID(const ScriptRequest& rq, int id)
+void SetPlayerID(int id)
 {
 	if (!g_Game)
 		return;
@@ -79,10 +81,10 @@ void SetPlayerID(const ScriptRequest& rq, int id)
 	if (g_Game->CheatsEnabled() || g_Game->IsVisualReplay())
 		g_Game->SetPlayerID(id);
 	else
-		ScriptException::Raise(rq, "Changing player ID with cheats disabled is prohibited");
+		throw std::logic_error{"Changing player ID with cheats disabled is prohibited"};
 }
 
-void SetViewedPlayer(const ScriptRequest& rq, int id)
+void SetViewedPlayer(int id)
 {
 	if (!g_Game || g_Game->GetViewedPlayerID() == id)
 		return;
@@ -92,7 +94,7 @@ void SetViewedPlayer(const ScriptRequest& rq, int id)
 	if (playerID == -1 || g_Game->CheatsEnabled() || g_Game->PlayerFinished(playerID) || g_Game->IsVisualReplay())
 		g_Game->SetViewedPlayerID(id);
 	else
-		ScriptException::Raise(rq, "Changing the perspective with cheats disabled is prohibited");
+		std::logic_error{"Changing the perspective with cheats disabled is prohibited"};
 }
 
 float GetSimRate()
@@ -113,24 +115,18 @@ int GetPendingTurns()
 	return g_Game->GetTurnManager()->GetPendingTurns();
 }
 
-bool IsPaused(const ScriptRequest& rq)
+bool IsPaused()
 {
 	if (!g_Game)
-	{
-		ScriptException::Raise(rq, "Game is not started");
-		return false;
-	}
+		throw std::logic_error{"Game is not started"};
 
 	return g_Game->m_Paused;
 }
 
-void SetPaused(const ScriptRequest& rq, bool pause, bool sendMessage)
+void SetPaused(bool pause, bool sendMessage)
 {
 	if (!g_Game)
-	{
-		ScriptException::Raise(rq, "Game is not started");
-		return;
-	}
+		throw std::logic_error{"Game is not started"};
 
 	g_Game->m_Paused = pause;
 

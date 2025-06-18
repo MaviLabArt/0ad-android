@@ -41,6 +41,7 @@
 #include <js/Value.h>
 #include <sodium/core.h>
 #include <sodium/crypto_hash_sha256.h>
+#include <stdexcept>
 #include <string>
 
 class ScriptInterface;
@@ -60,13 +61,11 @@ void SetRankedGame(bool isRanked)
 
 #if CONFIG2_LOBBY
 
-void StartXmppClient(const ScriptRequest& rq, const std::wstring& username, const std::wstring& password, const std::wstring& room, const std::wstring& nick, int historyRequestSize)
+void StartXmppClient(const std::wstring& username, const std::wstring& password, const std::wstring& room,
+	const std::wstring& nick, int historyRequestSize)
 {
 	if (g_XmppClient)
-	{
-		ScriptException::Raise(rq, "Cannot call StartXmppClient with an already initialized XmppClient!");
-		return;
-	}
+		throw std::logic_error{"Cannot call StartXmppClient with an already initialized XmppClient!"};
 
 	g_XmppClient =
 		IXmppClient::create(
@@ -80,12 +79,12 @@ void StartXmppClient(const ScriptRequest& rq, const std::wstring& username, cons
 	g_rankedGame = true;
 }
 
-void StartRegisterXmppClient(const ScriptRequest& rq, const std::wstring& username, const std::wstring& password)
+void StartRegisterXmppClient(const std::wstring& username, const std::wstring& password)
 {
 	if (g_XmppClient)
 	{
-		ScriptException::Raise(rq, "Cannot call StartRegisterXmppClient with an already initialized XmppClient!");
-		return;
+		throw std::logic_error{
+			"Cannot call StartRegisterXmppClient with an already initialized XmppClient!"};
 	}
 
 	g_XmppClient =
@@ -99,13 +98,10 @@ void StartRegisterXmppClient(const ScriptRequest& rq, const std::wstring& userna
 			true);
 }
 
-void StopXmppClient(const ScriptRequest& rq)
+void StopXmppClient()
 {
 	if (!g_XmppClient)
-	{
-		ScriptException::Raise(rq, "Cannot call StopXmppClient without an initialized XmppClient!");
-		return;
-	}
+		throw std::logic_error{"Cannot call StopXmppClient without an initialized XmppClient!"};
 
 	SAFE_DELETE(g_XmppClient);
 	g_rankedGame = false;
@@ -127,11 +123,7 @@ IXmppClient* XmppGetter(const ScriptRequest&, JS::CallArgs&)
 void SendRegisterGame(const ScriptInterface& scriptInterface, JS::HandleValue data)
 {
 	if (!g_XmppClient)
-	{
-		ScriptRequest rq(scriptInterface);
-		ScriptException::Raise(rq, "Cannot call SendRegisterGame without an initialized XmppClient!");
-		return;
-	}
+		throw std::logic_error{"Cannot call SendRegisterGame without an initialized XmppClient!"};
 
 	// Prevent JS mods to register matches in the lobby that were started with lobby authentication disabled
 	if (!g_NetServer || !g_NetServer->UseLobbyAuth())

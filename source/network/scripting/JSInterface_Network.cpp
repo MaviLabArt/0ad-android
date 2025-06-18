@@ -42,6 +42,7 @@
 #include "third_party/encryption/pkcs5_pbkdf2.h"
 
 #include <optional>
+#include <stdexcept>
 
 namespace JSI_Network
 {
@@ -65,8 +66,8 @@ bool HasNetClient()
 	return !!g_NetClient;
 }
 
-void StartNetworkHost(const ScriptRequest& rq, const CStrW& playerName, const u16 serverPort,
-	const CStr& password, const bool continueSavedGame, bool storeReplay)
+void StartNetworkHost(const CStrW& playerName, const u16 serverPort, const CStr& password,
+	const bool continueSavedGame, bool storeReplay)
 {
 	ENSURE(!g_NetClient);
 	ENSURE(!g_NetServer);
@@ -78,18 +79,16 @@ void StartNetworkHost(const ScriptRequest& rq, const CStrW& playerName, const u1
 
 	if (!g_NetServer->SetupConnection(serverPort))
 	{
-		ScriptException::Raise(rq, "Failed to start server");
 		SAFE_DELETE(g_NetServer);
-		return;
+		throw std::runtime_error{"Failed to start server"};
 	}
 
 	// In lobby, we send our public ip and port on request to the players who want to connect.
 	// Thus we need to know our public IP and use STUN to get it.
 	if (hasLobby && !g_NetServer->SetConnectionData())
 	{
-		ScriptException::Raise(rq, "Failed to resolve public IP-address.");
 		SAFE_DELETE(g_NetServer);
-		return;
+		throw std::runtime_error{"Failed to resolve public IP-address."};
 	}
 
 	// Generate a secret to identify the host client.
@@ -131,13 +130,13 @@ void StartNetworkHost(const ScriptRequest& rq, const CStrW& playerName, const u1
 
 	if (!g_NetClient->SetupConnection(nullptr))
 	{
-		ScriptException::Raise(rq, "Failed to connect to server");
 		SAFE_DELETE(g_NetClient);
 		SAFE_DELETE(g_Game);
+		throw std::runtime_error{"Failed to connect to server"};
 	}
 }
 
-void StartNetworkJoin(const ScriptRequest& rq, const CStrW& playerName, const CStr& serverAddress, u16 serverPort, bool storeReplay)
+void StartNetworkJoin(const CStrW& playerName, const CStr& serverAddress, u16 serverPort, bool storeReplay)
 {
 	ENSURE(!g_NetClient);
 	ENSURE(!g_NetServer);
@@ -150,9 +149,9 @@ void StartNetworkJoin(const ScriptRequest& rq, const CStrW& playerName, const CS
 
 	if (!g_NetClient->SetupConnection(nullptr))
 	{
-		ScriptException::Raise(rq, "Failed to connect to server");
 		SAFE_DELETE(g_NetClient);
 		SAFE_DELETE(g_Game);
+		throw std::runtime_error{"Failed to connect to server"};
 	}
 }
 
@@ -224,13 +223,10 @@ void AssignNetworkPlayer(int playerID, const CStr& guid)
 	g_NetClient->SendAssignPlayerMessage(playerID, guid);
 }
 
-void KickPlayer(const ScriptRequest& rq, const CStrW& playerName, bool ban)
+void KickPlayer(const CStrW& playerName, bool ban)
 {
 	if (!g_NetClient)
-	{
-		ScriptException::Raise(rq, "g_NetClient is null.");
-		return;
-	}
+		throw std::logic_error{"g_NetClient is null."};
 	g_NetClient->SendKickPlayerMessage(playerName, ban);
 }
 
@@ -247,8 +243,8 @@ void SendNetworkChat(const ScriptRequest& rq, const CStrW& message, JS::HandleVa
 	auto receivers = std::make_optional<std::vector<std::string>>();
 	if (!Script::FromJSVal(rq, handle, *receivers))
 	{
-		ScriptException::Raise(rq, "The second argument to `SendNetworkChat` has to be either an Array "
-			"or a nullish value.");
+		throw std::invalid_argument{"The second argument to `SendNetworkChat` has to be either an "
+			"Array or a nullish value."};
 		return;
 	}
 
@@ -291,7 +287,10 @@ void StartNetworkGame(const ScriptInterface& scriptInterface, JS::HandleValue sa
 	if (loadResult)
 		g_NetClient->SendStartSavedGameMessage(attributesAsString, loadResult->savedState);
 	else
-		ScriptException::Raise(rq, "Failed to load the saved game: \"%ls\"", savegameID.c_str());
+	{
+		throw std::runtime_error{fmt::format("Failed to load the saved game: \"{}\"",
+			utf8_from_wstring(savegameID).c_str())};
+	}
 }
 
 void SetTurnLength(int length)

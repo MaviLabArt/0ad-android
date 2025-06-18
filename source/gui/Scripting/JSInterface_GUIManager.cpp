@@ -32,6 +32,8 @@
 #include <js/Value.h>
 #include <string>
 
+#include <stdexcept>
+
 namespace JSI_GUIManager
 {
 // Note that the initData argument may only contain clonable data.

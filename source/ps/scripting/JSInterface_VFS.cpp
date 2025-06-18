@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include <sstream>
+#include <stdexcept>
 
 namespace JSI_VFS
 {
@@ -61,7 +62,7 @@ constexpr std::array<std::wstring_view, 2> MAPS{L"simulation/"sv, L"maps/"sv};
 
 // Tests whether the current script context is allowed to read from the given directory
 template<auto& restriction>
-bool PathRestrictionMet(const ScriptRequest& rq, const std::wstring& filePath)
+bool PathRestrictionMet(const std::wstring& filePath)
 {
 	if (std::any_of(restriction.begin(), restriction.end(), [&](const std::wstring_view allowedPath)
 		{
@@ -80,7 +81,9 @@ bool PathRestrictionMet(const ScriptRequest& rq, const std::wstring& filePath)
 		allowedPaths += L"\"" + static_cast<std::wstring>(restriction[i]) + L"\"";
 	}
 
-	ScriptException::Raise(rq, "Restricted access to %s. This part of the engine may only read from %s!", utf8_from_wstring(filePath).c_str(), utf8_from_wstring(allowedPaths).c_str());
+	throw std::logic_error{fmt::format(
+		"Restricted access to {}. This part of the engine may only read from {}!",
+		utf8_from_wstring(filePath).c_str(), utf8_from_wstring(allowedPaths).c_str())};
 
 	return false;
 }
@@ -123,7 +126,7 @@ template<auto& restriction>
 JS::Value BuildDirEntList(const ScriptRequest& rq, const std::wstring& path, const std::wstring& filterStr,
 	bool recurse)
 {
-	if (!PathRestrictionMet<restriction>(rq, path))
+	if (!PathRestrictionMet<restriction>(path))
 		return JS::NullValue();
 
 	// convert to const wchar_t*; if there's no filter, pass 0 for speed
@@ -143,9 +146,9 @@ JS::Value BuildDirEntList(const ScriptRequest& rq, const std::wstring& path, con
 
 // Return true iff the file exits
 template<auto& restriction>
-bool FileExists(const ScriptRequest& rq, const std::wstring& filename)
+bool FileExists(const std::wstring& filename)
 {
-	return PathRestrictionMet<restriction>(rq, filename) && g_VFS->GetFileInfo(filename, 0) == INFO::OK;
+	return PathRestrictionMet<restriction>(filename) && g_VFS->GetFileInfo(filename, 0) == INFO::OK;
 }
 
 // Return current size of file.
@@ -162,7 +165,7 @@ unsigned int GetFileSize(const std::wstring& filename)
 template<auto& restriction>
 JS::Value ReadFile(const ScriptRequest& rq, const std::wstring& filename)
 {
-	if (!PathRestrictionMet<restriction>(rq, filename))
+	if (!PathRestrictionMet<restriction>(filename))
 		return JS::NullValue();
 
 	CVFSFile file;
@@ -184,7 +187,7 @@ JS::Value ReadFile(const ScriptRequest& rq, const std::wstring& filename)
 template<auto& restriction>
 JS::Value ReadFileLines(const ScriptRequest& rq, const std::wstring& filename)
 {
-	if (!PathRestrictionMet<restriction>(rq, filename))
+	if (!PathRestrictionMet<restriction>(filename))
 		return JS::NullValue();
 
 	CVFSFile file;
@@ -221,7 +224,7 @@ template<auto& restriction>
 JS::Value ReadJSONFile(const ScriptInterface& scriptInterface, const std::wstring& filePath)
 {
 	ScriptRequest rq(scriptInterface);
-	if (!PathRestrictionMet<restriction>(rq, filePath))
+	if (!PathRestrictionMet<restriction>(filePath))
 		return JS::NullValue();
 
 	JS::RootedValue out(rq.cx);
@@ -235,7 +238,7 @@ void WriteJSONFile(const ScriptInterface& scriptInterface, const std::wstring& f
 	JS::HandleValue val1)
 {
 	ScriptRequest rq(scriptInterface);
-	if (!PathRestrictionMet<restriction>(rq, filePath))
+	if (!PathRestrictionMet<restriction>(filePath))
 		return;
 
 	// TODO: This is a workaround because we need to pass a MutableHandle to StringifyJSON.

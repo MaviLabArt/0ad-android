@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,6 +25,8 @@
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
+
+#include <stdexcept>
 
 extern void RestartEngine();
 
@@ -137,8 +139,8 @@ JS::Value GetAvailableMods(const ScriptRequest& rq)
 		JS::RootedValue json(rq.cx);
 		if (!Script::ParseJSON(rq, data.m_Text, &json))
 		{
-			ScriptException::Raise(rq, "Error parsing mod.json of '%s'", data.m_Pathname.c_str());
-			continue;
+			throw std::runtime_error{fmt::format("Error parsing mod.json of '{}'",
+				data.m_Pathname.c_str())};
 		}
 		Script::SetProperty(rq, ret, data.m_Pathname.c_str(), json);
 	}
