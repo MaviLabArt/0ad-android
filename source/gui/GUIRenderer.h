@@ -19,18 +19,17 @@
 #define INCLUDED_GUIRENDERER
 
 #include "graphics/Color.h"
-#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/Texture.h"
 #include "maths/Rect.h"
-#include "ps/CStrForward.h"
-#include "ps/CStrIntern.h"
 
 #include <map>
+#include <memory>
 #include <vector>
 
 class CCanvas2D;
 class CGUI;
 class CGUISprite;
+class CStr8;
 struct CGUIColor;
 struct SGUIImage;
 

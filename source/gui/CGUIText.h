@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,10 +20,11 @@
 
 #include "gui/CGUISprite.h"
 #include "gui/SettingTypes/CGUIColor.h"
-#include "gui/SettingTypes/EAlign.h"
+#include "lib/code_annotation.h"
 #include "maths/Rect.h"
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
 #include "ps/CStrIntern.h"
 
 #include <array>
@@ -34,6 +35,7 @@ class CCanvas2D;
 class CGUI;
 class CGUIString;
 class IGUIObject;
+enum class EAlign;
 struct SGenerateTextImage;
 
 using SGenerateTextImages = std::array<std::vector<SGenerateTextImage>, 2>;

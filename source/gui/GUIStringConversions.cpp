@@ -18,8 +18,9 @@
 #include "precompiled.h"
 
 #include "gui/CGUI.h"
-#include "gui/SettingTypes/EScrollOrientation.h"
 #include "gui/SettingTypes/CGUIString.h"
+#include "gui/SettingTypes/EAlign.h"
+#include "gui/SettingTypes/EScrollOrientation.h"
 #include "ps/CLogger.h"
 
 class CGUIList;

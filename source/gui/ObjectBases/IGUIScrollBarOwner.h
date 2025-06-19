@@ -19,12 +19,12 @@
 #define INCLUDED_IGUISCROLLBAROWNER
 
 #include "lib/code_annotation.h"
-#include "ps/CStr.h"
 
 #include <memory>
 #include <vector>
 
 class CCanvas2D;
+class CStr8;
 class IGUIObject;
 class IGUIScrollBar;
 struct SGUIMessage;

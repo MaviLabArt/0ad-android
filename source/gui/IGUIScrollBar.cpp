@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,9 +20,10 @@
 #include "IGUIScrollBar.h"
 
 #include "gui/CGUI.h"
-#include "gui/SGUIMessage.h"
 #include "gui/ObjectBases/IGUIScrollBarOwner.h"
+#include "gui/SGUIMessage.h"
 #include "maths/MathUtil.h"
+#include "maths/Rect.h"
 
 IGUIScrollBar::IGUIScrollBar(CGUI& pGUI)
 	: m_pGUI(pGUI),

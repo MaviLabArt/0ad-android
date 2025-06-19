@@ -21,9 +21,14 @@
 #define GUIOBJECTEVENTBROADCASTER
 
 #include "gui/ObjectBases/IGUIObject.h"
-#include "gui/ObjectBases/IGUIPanel.h"
+#include "lib/alignment.h"
 #include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
+#include "lib/types.h"
+
+#include <algorithm>
+#include <utility>
+#include <vector>
 
 namespace
 {

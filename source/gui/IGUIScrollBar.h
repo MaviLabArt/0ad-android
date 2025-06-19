@@ -25,11 +25,15 @@
 #define INCLUDED_IGUISCROLLBAR
 
 #include "gui/CGUISprite.h"
+#include "lib/code_annotation.h"
 #include "maths/Vector2D.h"
 #include "ps/CStr.h"
 
+#include <algorithm>
+
 class CCanvas2D;
 class CGUI;
+class CRect;
 class IGUIScrollBarOwner;
 struct SGUIMessage;
 

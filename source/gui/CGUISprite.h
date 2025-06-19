@@ -24,9 +24,11 @@
 #define INCLUDED_CGUISPRITE
 
 #include "gui/GUIRenderer.h"
-#include "gui/SettingTypes/CGUISize.h"
 #include "gui/SettingTypes/CGUIColor.h"
+#include "gui/SettingTypes/CGUISize.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "maths/Rect.h"
 #include "ps/CStr.h"
 #include "renderer/backend/Sampler.h"
 
@@ -35,6 +37,7 @@
 #include <vector>
 
 class CCanvas2D;
+class CGUI;
 
 struct SGUIImageEffects
 {

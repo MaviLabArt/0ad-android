@@ -23,9 +23,11 @@
 #ifndef INCLUDED_ALIGNMENT
 #define INCLUDED_ALIGNMENT
 
+#include "lib/code_annotation.h"
 #include "lib/sysdep/compiler.h"	// MSC_VERSION
 #include "lib/sysdep/arch.h"	// ARCH_AMD64
 
+#include <cstddef>
 #include <cstdint>
 
 template<typename T>

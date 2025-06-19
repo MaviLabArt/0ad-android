@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,6 +20,11 @@
 #include "CGUIScrollBarHorizontal.h"
 
 #include "gui/CGUI.h"
+#include "gui/CGUISprite.h"
+#include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
+#include "maths/Rect.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 
 CGUIScrollBarHorizontal::CGUIScrollBarHorizontal(CGUI& pGUI)

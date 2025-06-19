@@ -24,36 +24,52 @@
 #define INCLUDED_CGUI
 
 #include "gui/GUITooltip.h"
-#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SGUIIcon.h"
 #include "gui/SGUIMessage.h"
 #include "gui/SGUIStyle.h"
+#include "gui/SettingTypes/CGUIColor.h"
+#include "lib/code_annotation.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/input.h"
+#include "lib/types.h"
 #include "maths/Rect.h"
-#include "maths/Size2D.h"
 #include "maths/Vector2D.h"
-#include "ps/XML/Xeromyces.h"
+#include "ps/CStr.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/StructuredClone.h"
-#include "scriptinterface/ScriptForward.h"
 
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
 #include <map>
 #include <memory>
 #include <optional>
+#include <string>
+#include <string_view>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
-extern const double SELECT_DBLCLICK_RATE;
-
 class CCanvas2D;
-class CGUISpriteInstance;
 class CGUISprite;
+class CGUISpriteInstance;
+class CSize2D;
+class GUIProxyProps;
 class IGUIObject;
+class JSObject;
+class ScriptContext;
+class ScriptInterface;
+class ScriptRequest;
+class XMBData;
+class XMBElement;
+namespace JS { class HandleValueArray; }
+namespace JS { class Value; }
+namespace js { class BaseProxyHandler; }
+struct SDL_Event_;
 struct SGUIImageEffects;
 struct SGUIScrollBarStyle;
 
-class GUIProxyProps;
+extern const double SELECT_DBLCLICK_RATE;
 
 using map_pObjects = std::map<CStr, IGUIObject*>;
 

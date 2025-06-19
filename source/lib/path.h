@@ -37,6 +37,8 @@
 #ifndef INCLUDED_PATH
 #define INCLUDED_PATH
 
+#include "lib/debug.h"
+#include "lib/status.h"
 #include "lib/sysdep/os.h"
 #include "lib/utf8.h"
 

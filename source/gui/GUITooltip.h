@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,7 @@
 class IGUIObject;
 class CGUI;
 
+#include "lib/code_annotation.h"
 #include "maths/Vector2D.h"
 #include "ps/CStr.h"
 

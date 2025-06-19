@@ -26,6 +26,7 @@
 #include "lib/debug.h"
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
 
 #include <string>
 

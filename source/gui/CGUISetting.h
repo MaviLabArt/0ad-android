@@ -18,12 +18,14 @@
 #ifndef INCLUDED_CGUISETTINGS
 #define INCLUDED_CGUISETTINGS
 
+#include "lib/code_annotation.h"
 #include "ps/CStr.h"
-#include "scriptinterface/ScriptForward.h"
 
+#include <js/TypeDecls.h>
 #include <utility>
 
 class IGUIObject;
+class ScriptRequest;
 
 /**
  * This setting interface allows GUI objects to call setting function functions without having to know the setting type.

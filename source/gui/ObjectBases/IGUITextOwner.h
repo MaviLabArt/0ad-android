@@ -33,7 +33,6 @@ GUI Object Base - Text Owner
 #include "gui/CGUISetting.h"
 #include "lib/code_annotation.h"
 #include "maths/Rect.h"
-#include "ps/CStr.h"
 
 #include <cstddef>
 #include <vector>
@@ -41,6 +40,7 @@ GUI Object Base - Text Owner
 class CCanvas2D;
 class CGUIString;
 class CGUIText;
+class CStrW;
 class CVector2D;
 class IGUIObject;
 enum class EAlign;

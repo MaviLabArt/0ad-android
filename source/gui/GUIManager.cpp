@@ -28,6 +28,7 @@
 #include "ps/Profile.h"
 #include "ps/VideoMode.h"
 #include "ps/XML/Xeromyces.h"
+#include "ps/containers/StaticVector.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/Promises.h"

@@ -33,11 +33,9 @@
 #include "lib/input.h"
 #include "maths/Rect.h"
 #include "ps/CStr.h"
-#include "ps/XMB/XMBData.h"
 
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
-#include <js/ValueArray.h>
 #include <map>
 #include <memory>
 #include <vector>
@@ -47,6 +45,9 @@ class CGUI;
 class IGUIProxyObject;
 class JSObject;
 class JSTracer;
+class XMBData;
+class XMBElement;
+namespace JS { class HandleValueArray; }
 struct SDL_Event_;
 
 #define GUI_OBJECT(obj) \

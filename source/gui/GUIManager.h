@@ -18,20 +18,32 @@
 #ifndef INCLUDED_GUIMANAGER
 #define INCLUDED_GUIMANAGER
 
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/input.h"
-#include "ps/containers/StaticVector.h"
+#include "lib/path.h"
+#include "lib/status.h"
 #include "ps/CStr.h"
 #include "ps/TemplateLoader.h"
 #include "scriptinterface/StructuredClone.h"
 
+#include <cstddef>
 #include <deque>
+#include <js/TypeDecls.h>
+#include <memory>
 #include <optional>
 #include <string>
 #include <unordered_set>
 
 class CCanvas2D;
 class CGUI;
+class CParamNode;
+class ScriptContext;
+class ScriptInterface;
+namespace JS { class HandleValueArray; }
+namespace JS { class Value; }
+namespace PS { template <typename T, size_t N> class StaticVector; }
+struct SDL_Event_;
 
 /**
  * External interface to the GUI system.

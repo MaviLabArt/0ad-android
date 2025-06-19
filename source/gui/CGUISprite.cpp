@@ -19,6 +19,8 @@
 
 #include "CGUISprite.h"
 
+#include <utility>
+
 CGUISprite::~CGUISprite() = default;
 
 void CGUISprite::AddImage(std::unique_ptr<SGUIImage> image)

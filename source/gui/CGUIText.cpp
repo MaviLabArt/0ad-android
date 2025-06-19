@@ -23,12 +23,15 @@
 #include "graphics/FontMetrics.h"
 #include "graphics/TextRenderer.h"
 #include "gui/CGUI.h"
-#include "gui/ObjectBases/IGUIObject.h"
+#include "gui/SGUIIcon.h"
 #include "gui/SettingTypes/CGUIString.h"
-#include "ps/CStrInternStatic.h"
+#include "gui/SettingTypes/EAlign.h"
+#include "lib/debug.h"
 
-#include <cmath>
+#include <algorithm>
+#include <iterator>
 #include <optional>
+#include <utility>
 
 extern int g_xres, g_yres;
 

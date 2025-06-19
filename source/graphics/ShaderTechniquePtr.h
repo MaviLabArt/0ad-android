@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,6 +19,8 @@
 
 #ifndef INCLUDED_SHADERTECHNIQUEPTR
 #define INCLUDED_SHADERTECHNIQUEPTR
+
+#include <memory>
 
 /*
  * Forward declaration, to reduce the number of header files that have to pull

@@ -22,6 +22,7 @@
 #include "gui/CGUI.h"
 #include "gui/IGUIScrollBar.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "ps/CStr.h"
 
 #include <utility>
 
