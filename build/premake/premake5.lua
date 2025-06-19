@@ -691,6 +691,8 @@ function setup_all_libs ()
 		"sdl",
 		"boost",	-- dragged in via server->simulation.h->random and NetSession.h->lockfree
 		"fmt",
+		"libxml2",
+		"iconv",
 	}
 	if not _OPTIONS["without-miniupnpc"] then
 		table.insert(extern_libs, "miniupnpc")
@@ -780,6 +782,8 @@ function setup_all_libs ()
 		"boost",
 		"spidermonkey",
 		"fmt",
+		"libxml2",
+		"iconv",
 	}
 	setup_static_lib_project("simulation2", source_dirs, extern_libs, {})
 
@@ -861,6 +865,8 @@ function setup_all_libs ()
 		"fmt",
 		"freetype",
 		"icu",
+		"libxml2",
+		"iconv",
 	}
 	if not _OPTIONS["without-nvtt"] then
 		table.insert(extern_libs, "nvtt")
@@ -877,6 +883,8 @@ function setup_all_libs ()
 		"sdl",	-- key definitions
 		"spidermonkey",
 		"fmt",
+		"libxml2",
+		"iconv",
 	}
 	setup_static_lib_project("atlas", source_dirs, extern_libs, {})
 
@@ -898,6 +906,7 @@ function setup_all_libs ()
 		"icu",
 		"iconv",
 		"fmt",
+		"libxml2",
 	}
 	if not _OPTIONS["without-audio"] then
 		table.insert(extern_libs, "openal")

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,9 +17,16 @@
 
 #include "precompiled.h"
 
-#include "lib/byte_order.h"	// FOURCC_LE
+#include "XMBData.h"
+
+#include "lib/debug.h"
+#include "lib/posix/posix.h"
+#include "lib/secure_crt.h"
+#include "lib/types.h"
 #include "ps/XMB/XMBStorage.h"
-#include "ps/XML/Xeromyces.h"
+
+#include <cstring>
+#include <memory>
 
 template<typename T>
 static inline T read(const void* ptr)

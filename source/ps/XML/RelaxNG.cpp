@@ -19,17 +19,24 @@
 
 #include "RelaxNG.h"
 
+#include "lib/code_annotation.h"
 #include "lib/timer.h"
-#include "lib/utf8.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 
+#include <cstddef>
 #include <libxml/parser.h>
 #include <libxml/relaxng.h>
+#include <libxml/xmlerror.h>
+#include <libxml/xmlversion.h>
 #include <map>
+#include <memory>
 #include <mutex>
 #include <type_traits>
+#include <utility>
 
 TIMER_ADD_CLIENT(xml_validation);
 

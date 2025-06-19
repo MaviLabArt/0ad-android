@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,14 +19,23 @@
 
 #include "XMLWriter.h"
 
-#include "ps/CLogger.h"
-#include "ps/Filesystem.h"
-#include "ps/XML/Xeromyces.h"
-#include "lib/utf8.h"
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
-#include "lib/sysdep/cpu.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
 #include "maths/Fixed.h"
+#include "ps/CLogger.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
+#include "ps/XML/Xeromyces.h"
 
+#include <cstring>
+#include <memory>
+#include <sstream>
+#include <string>
 
 // TODO (maybe): Write to the file frequently, instead of buffering
 // the entire file, so that large files get written faster.

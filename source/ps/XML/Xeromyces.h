@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,18 +25,18 @@
 #define INCLUDED_XEROMYCES
 
 #include "ps/Errors.h"
-ERROR_GROUP(Xeromyces);
-ERROR_TYPE(Xeromyces, XMLOpenFailed);
-ERROR_TYPE(Xeromyces, XMLParseError);
-ERROR_TYPE(Xeromyces, XMLValidationFailed);
-
 #include "ps/Singleton.h"
 #include "ps/XMB/XMBData.h"
 #include "ps/XMB/XMBStorage.h"
 
-#include "lib/file/vfs/vfs.h"
+#include <string>
 
 class RelaxNGValidator;
+
+ERROR_GROUP(Xeromyces);
+ERROR_TYPE(Xeromyces, XMLOpenFailed);
+ERROR_TYPE(Xeromyces, XMLParseError);
+ERROR_TYPE(Xeromyces, XMLValidationFailed);
 
 class CXeromyces : public XMBData
 {

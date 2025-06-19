@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,30 @@
 
 #include "XMBStorage.h"
 
+#include "lib/debug.h"
 #include "lib/file/io/write_buffer.h"
 #include "lib/file/vfs/vfs.h"
 #include "ps/CLogger.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <algorithm>
+#include <iterator>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <jspubtd.h>
 #include <libxml/parser.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/xmlstring.h>
 #include <string_view>
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
 const char* XMBStorage::HeaderMagicStr = "XMB0";
 const char* XMBStorage::UnfinishedHeaderMagicStr = "XMBu";

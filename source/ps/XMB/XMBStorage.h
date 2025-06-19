@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,15 @@
 #ifndef INCLUDED_XMBSTORAGE
 #define INCLUDED_XMBSTORAGE
 
-#include "scriptinterface/ScriptForward.h"
+#include "lib/types.h"
 
+#include <cstddef>
+#include <js/TypeDecls.h>
+#include <libxml/parser.h>
 #include <memory>
+#include <string>
+
+class ScriptInterface;
 
 typedef struct _xmlDoc xmlDoc;
 typedef xmlDoc* xmlDocPtr;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -82,15 +82,14 @@ XMB_Text {
 
 #include "ps/CStr.h"
 
-#include <string>
+#include <cstddef>
+#include <iterator>
 #include <string_view>
 
-class XMBStorage;
-
+class XMBAttributeList;
 class XMBElement;
 class XMBElementList;
-class XMBAttributeList;
-
+class XMBStorage;
 
 class XMBData
 {
