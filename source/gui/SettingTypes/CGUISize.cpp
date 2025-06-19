@@ -19,11 +19,8 @@
 
 #include "CGUISize.h"
 
-#include "gui/Scripting/JSInterface_GUISize.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
-#include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
 
 CGUISize::CGUISize()
 	: pixel(), percent()

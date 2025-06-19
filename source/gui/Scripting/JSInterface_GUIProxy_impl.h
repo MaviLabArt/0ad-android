@@ -20,16 +20,37 @@
 #include "JSInterface_GUIProxy.h"
 
 #include "gui/CGUI.h"
-#include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 
+#include <js/CallAndConstruct.h>
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/Object.h>
+#include <js/Proxy.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/friend/ErrorMessages.h>
+#include <jsapi.h>
+#include <jspubtd.h>
+#include <map>
+#include <memory>
+#include <cstddef>
 #include <string>
 #include <string_view>
+#include <type_traits>
+#include <unordered_map>
+#include <utility>
+
+class JSObject;
+class ScriptInterface;
 
 #ifndef INCLUDED_JSI_GUIPROXY_IMP
 #define INCLUDED_JSI_GUIPROXY_IMP

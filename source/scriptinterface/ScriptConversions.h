@@ -18,6 +18,7 @@
 #ifndef INCLUDED_SCRIPTCONVERSIONS
 #define INCLUDED_SCRIPTCONVERSIONS
 
+#include "lib/debug.h"
 #include "ScriptRequest.h"
 #include "ScriptExceptions.h"
 #include "ScriptExtraHeaders.h" // for typed arrays

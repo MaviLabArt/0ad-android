@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,8 +20,20 @@
 #include "JSInterface_GUISize.h"
 
 #include "ps/CStr.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
+
+struct JSContext;
 
 JSClass JSI_GUISize::JSI_class = {
 	"GUISize", 0, &JSI_GUISize::JSI_classops

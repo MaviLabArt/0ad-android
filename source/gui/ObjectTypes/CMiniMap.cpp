@@ -59,6 +59,7 @@
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
+#include <js/ValueArray.h>
 #include <memory>
 #include <stddef.h>
 #include <string>

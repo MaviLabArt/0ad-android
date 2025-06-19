@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,6 +22,8 @@
 #include "gui/CGUI.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "scriptinterface/ScriptConversions.h"
+
+#include <js/RootingAPI.h>
 
 bool CGUIHotkey::DoFromString(const CStrW& value)
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,13 +19,18 @@
 #define INCLUDED_CGUISTRING
 
 #include "gui/CGUIText.h"
-#include "ps/CStrIntern.h"
+#include "lib/code_annotation.h"
+#include "maths/Size2D.h"
+#include "ps/CStr.h"
 
 #include <array>
 #include <list>
+#include <string>
 #include <vector>
 
 class CGUI;
+class CStrIntern;
+class IGUIObject;
 
 /**
  * String class, substitute for CStr, but that parses

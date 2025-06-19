@@ -20,25 +20,50 @@
 #include "GUIManager.h"
 
 #include "gui/CGUI.h"
+#include "gui/SGUIMessage.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/timer.h"
-#include "lobby/IXmppClient.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "ps/VideoMode.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
 #include "ps/containers/StaticVector.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/Promises.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
+#include "simulation2/system/ParamNode.h"
 
-#include "js/Equality.h"
-
+#include <algorithm>
+#include <iterator>
+#include <js/Equality.h>
+#include <js/GCVector.h>
+#if MSC_VERSION
+# pragma warning(push, 1)
+#endif
+#include <js/Promise.h>
+#if MSC_VERSION
+# pragma warning(pop)
+#endif
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/String.h>
+#include <js/Symbol.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <stdexcept>
+#include <tuple>
 #include <utility>
+#include <vector>
 
 namespace
 {

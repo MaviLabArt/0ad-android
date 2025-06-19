@@ -17,14 +17,20 @@
 
 #include "lib/self_test.h"
 
-#include "graphics/FontManager.h"
 #include "graphics/FontMetrics.h"
 #include "gui/CGUI.h"
 #include "gui/CGUIText.h"
 #include "gui/SettingTypes/CGUIString.h"
 #include "gui/SettingTypes/EAlign.h"
 #include "i18n/L10n.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "maths/Size2D.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/ProfileViewer.h"
@@ -35,7 +41,10 @@
 
 #include <algorithm>
 #include <array>
+#include <memory>
 #include <optional>
+#include <string>
+#include <vector>
 
 class TestCGUIText : public CxxTest::TestSuite
 {

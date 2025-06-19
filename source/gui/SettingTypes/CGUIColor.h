@@ -20,9 +20,9 @@
 
 #include "graphics/Color.h"
 #include "lib/code_annotation.h"
-#include "ps/CStrForward.h"
 
 class CGUI;
+class CStr8;
 
 /**
  * Same as the CColor class, but this one can also parse colors predefined in the GUI page (such as "yellow").

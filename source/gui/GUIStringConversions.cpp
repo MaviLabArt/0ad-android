@@ -18,10 +18,21 @@
 #include "precompiled.h"
 
 #include "gui/CGUI.h"
+#include "gui/CGUISprite.h"
+#include "gui/SettingTypes/CGUIColor.h"
+#include "gui/SettingTypes/CGUISize.h"
 #include "gui/SettingTypes/CGUIString.h"
 #include "gui/SettingTypes/EAlign.h"
 #include "gui/SettingTypes/EScrollOrientation.h"
+#include "lib/types.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+
+#include <sstream>
+#include <string>
 
 class CGUIList;
 class CGUISeries;

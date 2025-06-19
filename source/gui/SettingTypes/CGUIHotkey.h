@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,12 @@
 #define INCLUDED_CGUIHOTKEY
 
 #include "gui/CGUISetting.h"
-#include "scriptinterface/ScriptForward.h"
+#include "lib/code_annotation.h"
 #include "ps/CStr.h"
 
+#include <js/TypeDecls.h>
+
 class IGUIObject;
-class ScriptRequest;
 
 /**
  * Manages a hotkey setting for a GUI object.

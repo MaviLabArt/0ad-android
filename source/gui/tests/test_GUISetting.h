@@ -17,33 +17,37 @@
 
 #include "lib/self_test.h"
 
-#include "graphics/FontManager.h"
-#include "graphics/FontMetrics.h"
 #include "gui/CGUI.h"
 #include "gui/CGUISetting.h"
-#include "gui/CGUIText.h"
 #include "gui/ObjectBases/IGUIObject.h"
-#include "gui/Scripting/JSInterface_CGUISize.h"
-#include "gui/Scripting/JSInterface_GUIProxy.h"
 #include "gui/SettingTypes/CGUISize.h"
-#include "gui/SettingTypes/CGUIString.h"
 #include "i18n/L10n.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "maths/Rect.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/ProfileViewer.h"
 #include "ps/VideoMode.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/Renderer.h"
-#include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ModuleLoader.h"
 
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <map>
 #include <memory>
 #include <optional>
+#include <string>
 #include <type_traits>
+#include <utility>
 
 class TestGUISetting : public CxxTest::TestSuite
 {

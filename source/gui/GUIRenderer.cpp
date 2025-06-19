@@ -24,13 +24,18 @@
 #include "gui/CGUI.h"
 #include "gui/CGUISprite.h"
 #include "gui/SettingTypes/CGUIColor.h"
+#include "gui/SettingTypes/CGUISize.h"
 #include "i18n/L10n.h"
-#include "lib/tex/tex.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
 #include "lib/utf8.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
-#include "ps/CStrInternStatic.h"
-#include "ps/Filesystem.h"
+#include "ps/CStr.h"
 #include "renderer/Renderer.h"
+
+#include <string>
+#include <utility>
 
 using namespace GUIRenderer;
 

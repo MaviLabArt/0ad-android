@@ -39,7 +39,7 @@
 #include "ps/scripting/JSInterface_VFS.h"
 #include "ps/scripting/JSInterface_VisualReplay.h"
 #include "renderer/scripting/JSInterface_Renderer.h"
-#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/scripting/JSInterface_Simulation.h"
 #include "soundmanager/scripting/JSInterface_Sound.h"
 

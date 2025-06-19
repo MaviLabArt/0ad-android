@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,12 +21,16 @@
 
 #include "gui/CGUI.h"
 #include "gui/GUIManager.h"
-#include "gui/ObjectBases/IGUIObject.h"
-#include "ps/GameSetup/Config.h"
 #include "ps/VideoMode.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/StructuredClone.h"
+#include "simulation2/system/ParamNode.h"
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
 
 namespace JSI_GUIManager
 {

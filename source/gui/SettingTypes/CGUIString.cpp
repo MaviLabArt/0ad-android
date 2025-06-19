@@ -21,13 +21,21 @@
 
 #include "graphics/FontMetrics.h"
 #include "gui/CGUI.h"
+#include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "gui/SGUIIcon.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "lib/utf8.h"
+#include "maths/Rect.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 
 #include <algorithm>
 #include <array>
-#include <cstdlib>
+#include <utility>
+
+struct CGUIColor;
 
 // List of word delimiter bounds
 // The list contains ranges of word delimiters. The odd indexed chars are the start

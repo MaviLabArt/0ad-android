@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,15 @@
 #define INCLUDED_GUI_MOUSE_EVENT_MASK
 
 #include "gui/CGUISetting.h"
-#include "ps/CStr.h"
+#include "lib/code_annotation.h"
 
-#include <string>
+#include <js/TypeDecls.h>
 #include <memory>
+#include <string>
 
 class CRect;
 class CVector2D;
 class IGUIObject;
-class ScriptRequest;
 
 /**
  * A custom shape that changes the object's "over-ability", and thus where one can click on it.

@@ -19,19 +19,36 @@
 
 #include "JSInterface_CGUISize.h"
 
-#include "ps/CStr.h"
 #include "gui/CGUI.h"
 #include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
-#include "gui/SettingTypes/CGUISize.h"
 #include "gui/Scripting/JSInterface_GUISize.h"
+#include "gui/SettingTypes/CGUISize.h"
 #include "lib/code_generation.h"
+#include "lib/types.h"
 #include "maths/Rect.h"
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/ScriptForward.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptTypes.h"
+
 #include <fmt/format.h>
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/Conversions.h>
+#include <js/Object.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/PropertySpec.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <string>
+struct JSContext;
 
 namespace
 {

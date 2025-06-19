@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,20 +21,38 @@
 
 #include "gui/CGUI.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/input.h"
+#include "lib/path.h"
+#include "lib/sysdep/compiler.h"
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/GameSetup.h"
 #include "ps/Hotkey.h"
 #include "ps/XML/Xeromyces.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/StructuredClone.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "scriptinterface/StructuredClone.h"
 
+#include <array>
+#include <js/CallArgs.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <memory>
 #include <optional>
+#include <SDL_events.h>
+#include <SDL_scancode.h>
+#include <stdexcept>
+#include <tuple>
+#include <variant>
 
 #if MSC_VERSION
 # pragma warning(push, 1)

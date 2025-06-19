@@ -17,22 +17,39 @@
 
 #include "precompiled.h"
 
+#include "scriptinterface/ScriptConversions.h"
+
+#include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/Scripting/JSInterface_GUIProxy.h"
 #include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
 #include "gui/SettingTypes/CGUISeries.h"
+#include "gui/SettingTypes/CGUIString.h"
 #include "gui/SettingTypes/EAlign.h"
 #include "gui/SettingTypes/EScrollOrientation.h"
+#include "lib/code_generation.h"
 #include "lib/external_libraries/libsdl.h"
+#include "maths/Rect.h"
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/Hotkey.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <js/CallArgs.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <SDL_events.h>
 #include <string>
+#include <vector>
+
+struct CColor;
 
 #define SET(obj, name, value) STMT(JS::RootedValue v_(rq.cx); Script::ToJSVal(rq, &v_, (value)); JS_SetProperty(rq.cx, obj, (name), v_))
 	// ignore JS_SetProperty return value, because errors should be impossible

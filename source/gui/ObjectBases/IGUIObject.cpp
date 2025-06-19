@@ -26,6 +26,7 @@
 #include "js/Conversions.h"
 #include "lib/debug.h"
 #include "lib/secure_crt.h"
+#include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/Profiler2.h"
@@ -46,6 +47,7 @@
 #include <js/SourceText.h>
 #include <js/TracingAPI.h>
 #include <js/Value.h>
+#include <js/ValueArray.h>
 #include <jsapi.h>
 #include <string>
 #include <string_view>

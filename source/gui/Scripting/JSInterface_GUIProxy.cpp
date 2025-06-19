@@ -17,6 +17,7 @@
 
 #include "precompiled.h"
 
+#include "JSInterface_GUIProxy.h"
 #include "JSInterface_GUIProxy_impl.h"
 
 #include "gui/ObjectBases/IGUIObject.h"
@@ -25,6 +26,11 @@
 #include "gui/ObjectTypes/CMiniMap.h"
 #include "gui/ObjectTypes/CScrollPanel.h"
 #include "gui/ObjectTypes/CText.h"
+
+#include <string>
+
+class CGUIString;
+class ScriptRequest;
 
 // Called for every specialization - adds the common interface.
 template<>

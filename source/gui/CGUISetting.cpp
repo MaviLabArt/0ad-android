@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,15 +22,22 @@
 #include "gui/CGUI.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
 #include "gui/SettingTypes/CGUISeries.h"
-#include "gui/SettingTypes/CGUISize.h"
 #include "gui/SettingTypes/CGUIString.h"
-#include "gui/SettingTypes/EAlign.h"
-#include "gui/SettingTypes/EScrollOrientation.h"
+#include "lib/types.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "scriptinterface/ScriptConversions.h"
+
+#include <js/RootingAPI.h>
+
+enum class EAlign;
+enum class EScrollOrientation;
+enum class EVAlign;
+struct CColor;
 
 IGUISetting::IGUISetting(const CStr& name, IGUIObject* owner) : m_Object(*owner), m_Name(name)
 {

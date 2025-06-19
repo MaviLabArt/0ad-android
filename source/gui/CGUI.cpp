@@ -19,41 +19,62 @@
 
 #include "CGUI.h"
 
-#include "GUIObjectEventBroadcaster.h"
-
 #include "graphics/Canvas2D.h"
+#include "graphics/Color.h"
+#include "gui/CGUISetting.h"
+#include "gui/CGUISprite.h"
+#include "gui/GUIObjectEventBroadcaster.h"
 #include "gui/IGUIScrollBar.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CGUIDummyObject.h"
 #include "gui/ObjectTypes/CTooltip.h"
 #include "gui/Scripting/JSInterface_GUIProxy.h"
 #include "gui/Scripting/ScriptFunctions.h"
+#include "gui/SettingTypes/CGUISize.h"
 #include "i18n/L10n.h"
 #include "lib/bits.h"
+#include "lib/debug.h"
+#include "lib/external_libraries/libsdl.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/input.h"
-#include "lib/sysdep/sysdep.h"
+#include "lib/path.h"
 #include "lib/timer.h"
 #include "lib/utf8.h"
 #include "maths/Size2D.h"
 #include "ps/CLogger.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/Config.h"
-#include "ps/Globals.h"
 #include "ps/Hotkey.h"
-#include "ps/Profile.h"
-#include "ps/Pyrogenesis.h"
 #include "ps/VideoMode.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
+#include "renderer/backend/Sampler.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/Promises.h"
-#include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
-#include <string>
+#include <algorithm>
+#include <js/CallAndConstruct.h>
+#if MSC_VERSION
+# pragma warning(push, 1)
+#endif
+#include <js/Promise.h>
+#if MSC_VERSION
+# pragma warning(pop)
+#endif
+#include <js/ValueArray.h>
 #include <optional>
+#include <SDL_events.h>
+#include <SDL_mouse.h>
+#include <stdexcept>
+#include <string>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 
 const double SELECT_DBLCLICK_RATE = 0.5;
 const u32 MAX_OBJECT_DEPTH = 100; // Max number of nesting for GUI includes. Used to detect recursive inclusion
