@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,10 +20,15 @@
 #include "JSInterface_L10n.h"
 
 #include "i18n/L10n.h"
-#include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptRequest.h"
+
+#include <js/PropertyAndElement.h>
+#include <unicode/utypes.h>
+#include <string>
+#include <vector>
+
+namespace JS { class CallArgs; }
 
 namespace JSI_L10n
 {

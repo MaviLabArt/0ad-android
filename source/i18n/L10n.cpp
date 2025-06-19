@@ -25,17 +25,36 @@
 #include "i18n/L10n.h"
 
 #include "gui/GUIManager.h"
-#include "lib/external_libraries/tinygettext.h"
-#include "lib/file/file_system.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/GameSetup.h"
 
+#include <algorithm>
 #include <boost/algorithm/string/predicate.hpp>
+#include <cstdint>
+#include <cstring>
+#include <exception>
 #include <sstream>
 #include <string>
+#include <tinygettext/dictionary.hpp>
+#include <tinygettext/log.hpp>
+#include <tinygettext/po_parser.hpp>
+#include <unicode/bytestream.h>
+#include <unicode/calendar.h>
+#include <unicode/numfmt.h>
+#include <unicode/smpdtfmt.h>
+#include <unicode/timezone.h>
+#include <unicode/unistr.h>
+#include <unicode/unum.h>
+#include <utility>
 
 namespace
 {

@@ -25,6 +25,7 @@
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptRequest.h"
 
+#include <unicode/smpdtfmt.h>
 #include <ctime>
 #include <string>
 

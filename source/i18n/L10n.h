@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,13 +23,15 @@
 #ifndef INCLUDED_L10N
 #define INCLUDED_L10N
 
-#include "lib/code_annotation.h"
-#include "lib/external_libraries/icu.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
 #include "ps/Singleton.h"
 
 #include <memory>
 #include <string>
+#include <unicode/datefmt.h>
+#include <unicode/locid.h>
+#include <unicode/utypes.h>
 #include <vector>
 
 namespace tinygettext
