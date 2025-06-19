@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,8 +23,9 @@
 
 /**** Decompose.c ****/
 /* Ken Shoemake, 1993 */
-#include <math.h>
 #include "Decompose.h"
+
+#include <cmath>
 
 /******* Matrix Preliminaries *******/
 

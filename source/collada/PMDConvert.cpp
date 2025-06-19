@@ -18,31 +18,36 @@
 #include "precompiled.h"
 
 #include "PMDConvert.h"
+
 #include "CommonConvert.h"
-
-#include "FCollada.h"
-#include "FCDocument/FCDAsset.h"
-#include "FCDocument/FCDocument.h"
-#include "FCDocument/FCDocumentTools.h"
-#include "FCDocument/FCDController.h"
-#include "FCDocument/FCDControllerInstance.h"
-#include "FCDocument/FCDGeometry.h"
-#include "FCDocument/FCDGeometryMesh.h"
-#include "FCDocument/FCDGeometryPolygons.h"
-#include "FCDocument/FCDGeometryPolygonsInput.h"
-#include "FCDocument/FCDGeometryPolygonsTools.h"
-#include "FCDocument/FCDGeometrySource.h"
-#include "FCDocument/FCDSceneNode.h"
-#include "FCDocument/FCDSkinController.h"
-
+#include "DLL.h"
 #include "StdSkeletons.h"
 #include "Decompose.h"
 #include "Maths.h"
 #include "GeomReindex.h"
 
-#include <cassert>
-#include <vector>
+#include <FCDocument/FCDController.h>
+#include <FCDocument/FCDControllerInstance.h>
+#include <FCDocument/FCDEntity.h>
+#include <FCDocument/FCDEntityInstance.h>
+#include <FCDocument/FCDGeometry.h>
+#include <FCDocument/FCDGeometryMesh.h>
+#include <FCDocument/FCDGeometryPolygons.h>
+#include <FCDocument/FCDGeometryPolygonsInput.h>
+#include <FCDocument/FCDGeometryPolygonsTools.h>
+#include <FCDocument/FCDGeometrySource.h>
+#include <FCDocument/FCDSceneNode.h>
+#include <FCDocument/FCDSkinController.h>
+#include <FMath/FMMatrix44.h>
+#include <FMath/FMVector3.h>
+#include <FUtils/FUDaeEnum.h>
+#include <FUtils/FUString.h>
+#include <FUtils/Platforms.h>
 #include <algorithm>
+#include <cassert>
+#include <cstring>
+#include <utility>
+#include <vector>
 
 const size_t maxInfluences = 4;
 struct VertexBlend

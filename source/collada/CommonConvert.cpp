@@ -19,18 +19,27 @@
 
 #include "CommonConvert.h"
 
+#include "DLL.h"
 #include "StdSkeletons.h"
 #include "XMLFix.h"
 
-#include "FCollada.h"
-#include "FCDocument/FCDSceneNode.h"
-#include "FCDocument/FCDSkinController.h"
-#include "FUtils/FUDaeSyntax.h"
-#include "FUtils/FUFileManager.h"
-
+#include <FCDocument/FCDAsset.h>
+#include <FCDocument/FCDControllerInstance.h>
+#include <FCDocument/FCDEntity.h>
+#include <FCDocument/FCDEntityInstance.h>
+#include <FCDocument/FCDSceneNode.h>
+#include <FCDocument/FCDSkinController.h>
+#include <FCollada.h>
+#include <FMath/FMVector3.h>
+#include <FUtils/FUString.h>
+#include <FUtils/FUtils.h>
 #include <algorithm>
 #include <cassert>
+#include <cstdarg>
+#include <cstdio>
 #include <libxml/xmlerror.h>
+#include <libxml/xmlmemory.h>
+#include <utility>
 
 void require_(int line, bool value, const char* type, const char* message)
 {

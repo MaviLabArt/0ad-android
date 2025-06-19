@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,15 +18,22 @@
 #ifndef INCLUDED_COMMONCONVERT
 #define INCLUDED_COMMONCONVERT
 
+#include <FCDocument/FCDExtra.h>
+#include <FCDocument/FCDocument.h>
+#include <FMath/FMMatrix44.h>
+#include <FUtils/FUError.h>
+#include <FUtils/Platforms.h>
+#include <cstddef>
 #include <exception>
-#include <string>
+#include <libxml/tree.h>
 #include <memory>
+#include <string>
 #include <vector>
 
+class FCDControllerInstance;
 class FCDEntityInstance;
 class FCDSceneNode;
 class FCDSkinController;
-class FMMatrix44;
 
 class Skeleton;
 

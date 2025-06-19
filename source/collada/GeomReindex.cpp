@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,18 +19,22 @@
 
 #include "GeomReindex.h"
 
-#include "FCollada.h"
-#include "FCDocument/FCDEntity.h"
-#include "FCDocument/FCDGeometryMesh.h"
-#include "FCDocument/FCDGeometryPolygons.h"
-#include "FCDocument/FCDGeometryPolygonsInput.h"
-#include "FCDocument/FCDGeometrySource.h"
-#include "FCDocument/FCDSkinController.h"
-
-#include <cassert>
-#include <vector>
-#include <map>
+#include <FCDocument/FCDGeometryMesh.h>
+#include <FCDocument/FCDGeometryPolygons.h>
+#include <FCDocument/FCDGeometryPolygonsInput.h>
+#include <FCDocument/FCDGeometrySource.h>
+#include <FCDocument/FCDSkinController.h>
+#include <FMath/FMath.h>
+#include <FUtils/FUDaeEnum.h>
+#include <FUtils/Platforms.h>
 #include <algorithm>
+#include <cassert>
+#include <cmath>
+#include <cstring>
+#include <iterator>
+#include <map>
+#include <utility>
+#include <vector>
 
 typedef std::pair<float, float> uv_pair_type;
 
