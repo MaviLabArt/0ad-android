@@ -18,21 +18,37 @@
 #include "precompiled.h"
 
 #include "XmppClient.h"
-#include "StanzaExtensions.h"
 
+#include "StanzaExtensions.h"
 #include "i18n/L10n.h"
+#include "lib/external_libraries/gloox.h"
 #include "lib/utf8.h"
-#include "network/NetServer.h"
+#include "lobby/IXmppClient.h"
 #include "network/NetClient.h"
+#include "network/NetServer.h"
 #include "network/StunClient.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/GUID.h"
 #include "ps/Pyrogenesis.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
 
 #include <iostream>
+#include <iterator>
+#include <js/GCAPI.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/TracingAPI.h>
+#include <memory>
+#include <tuple>
+#include <unicode/locid.h>
+#include <unicode/utypes.h>
+#include <utility>
 
 //debug
 #if 1

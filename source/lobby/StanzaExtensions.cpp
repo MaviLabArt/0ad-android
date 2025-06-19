@@ -14,8 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "precompiled.h"
+
 #include "StanzaExtensions.h"
+
+#include <list>
 
 /******************************************************
  * GameReport, fairly generic custom stanza extension used

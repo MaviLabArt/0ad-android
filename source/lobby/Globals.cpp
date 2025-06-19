@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,5 +19,5 @@
 
 #include "IXmppClient.h"
 
-IXmppClient *g_XmppClient = NULL;
+IXmppClient *g_XmppClient = nullptr;
 bool g_rankedGame = false;

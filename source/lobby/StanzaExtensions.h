@@ -19,6 +19,7 @@
 
 #include "lib/external_libraries/gloox.h"
 
+#include <string>
 #include <vector>
 
 /// Global Gamelist Extension

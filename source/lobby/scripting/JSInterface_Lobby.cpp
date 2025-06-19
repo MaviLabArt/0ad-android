@@ -20,6 +20,10 @@
 #include "JSInterface_Lobby.h"
 
 #include "gui/GUIManager.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/config2.h"
+#include "lib/debug.h"
 #include "lib/utf8.h"
 #include "lobby/IXmppClient.h"
 #include "network/NetServer.h"
@@ -27,10 +31,20 @@
 #include "ps/CStr.h"
 #include "ps/Util.h"
 #include "scriptinterface/FunctionWrapper.h"
-
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "third_party/encryption/pkcs5_pbkdf2.h"
 
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <sodium/core.h>
+#include <sodium/crypto_hash_sha256.h>
 #include <string>
+
+class ScriptInterface;
+namespace JS { class CallArgs; }
 
 namespace JSI_Lobby
 {

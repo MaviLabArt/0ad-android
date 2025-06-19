@@ -20,14 +20,21 @@
 
 #include "IXmppClient.h"
 
+#include "lib/code_annotation.h"
 #include "lib/external_libraries/gloox.h"
+#include "lib/types.h"
 
 #include <ctime>
 #include <deque>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <map>
 #include <string>
 #include <vector>
 
-class ScriptRequest;
+class JSTracer;
+class ScriptInterface;
 
 class XmppClient : public IXmppClient, public gloox::ConnectionListener, public gloox::MUCRoomHandler, public gloox::IqHandler, public gloox::RegistrationHandler, public gloox::MessageHandler, public gloox::Jingle::SessionHandler, public gloox::LogHandler
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,16 @@
 
 #include "lib/config2.h"
 #if CONFIG2_LOBBY
+#include "lib/external_libraries/gloox.h"
 #include "lib/utf8.h"
 #include "lobby/XmppClient.h"
 #include "scriptinterface/ScriptConversions.h"
+
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <string>
+
+class ScriptRequest;
 
 template<> void Script::ToJSVal<gloox::Presence::PresenceType>(const ScriptRequest& rq, JS::MutableHandleValue ret, const gloox::Presence::PresenceType& val)
 {
