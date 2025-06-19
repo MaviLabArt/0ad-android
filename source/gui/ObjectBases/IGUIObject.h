@@ -26,29 +26,28 @@
 #define INCLUDED_IGUIOBJECT
 
 #include "gui/CGUISetting.h"
+#include "gui/SGUIMessage.h"
 #include "gui/SettingTypes/CGUIHotkey.h"
 #include "gui/SettingTypes/CGUISize.h"
-#include "gui/SGUIMessage.h"
-#include "lib/allocators/DynamicArena.h"
-#include "lib/allocators/STLAllocators.h"
-#include "lib/input.h" // just for IN_PASS
+#include "lib/code_annotation.h"
+#include "lib/input.h"
+#include "maths/Rect.h"
 #include "ps/CStr.h"
-#include "ps/XML/Xeromyces.h"
-#include "scriptinterface/ScriptTypes.h"
+#include "ps/XMB/XMBData.h"
 
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/ValueArray.h>
 #include <map>
+#include <memory>
 #include <vector>
 
 class CCanvas2D;
 class CGUI;
-class CGUISize;
-class CGUIObjectEventBroadcaster;
-class IGUIObject;
 class IGUIProxyObject;
-class IGUISetting;
-
-template <typename T>
-class JSI_GUIProxy;
+class JSObject;
+class JSTracer;
+struct SDL_Event_;
 
 #define GUI_OBJECT(obj) \
 public: \

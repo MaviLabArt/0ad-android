@@ -19,13 +19,15 @@
 
 #include "IGUITextOwner.h"
 
-#include "gui/CGUI.h"
-#include "gui/SGUIMessage.h"
+#include "gui/CGUIText.h"
 #include "gui/ObjectBases/IGUIObject.h"
-#include "gui/SettingTypes/CGUIString.h"
+#include "gui/SGUIMessage.h"
+#include "gui/SettingTypes/EAlign.h"
+#include "lib/debug.h"
+#include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 
-#include <math.h>
+#include <string>
 
 IGUITextOwner::IGUITextOwner(IGUIObject& pObject)
 : m_pObject(pObject),

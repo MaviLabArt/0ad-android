@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -31,20 +31,22 @@ GUI Object Base - Text Owner
 #define INCLUDED_IGUITEXTOWNER
 
 #include "gui/CGUISetting.h"
-#include "gui/SettingTypes/EAlign.h"
+#include "lib/code_annotation.h"
 #include "maths/Rect.h"
-#include "ps/CStrForward.h"
+#include "ps/CStr.h"
 
+#include <cstddef>
 #include <vector>
 
 class CCanvas2D;
+class CGUIString;
+class CGUIText;
+class CVector2D;
+class IGUIObject;
+enum class EAlign;
+enum class EVAlign;
 struct CGUIColor;
 struct SGUIMessage;
-class CGUIText;
-class CGUIString;
-class IGUIObject;
-
-class CVector2D;
 
 /**
  * Framework for handling Output text.

@@ -20,6 +20,12 @@
 #include "IGUIPanel.h"
 
 #include "gui/CGUI.h"
+#include "gui/CGUISetting.h"
+#include "ps/CStr.h"
+
+#include <map>
+#include <string>
+#include <vector>
 
 IGUIPanel::IGUIPanel(CGUI& pGUI)
 	: IGUIObject(pGUI)

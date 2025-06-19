@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,6 +22,8 @@
 #include "gui/CGUI.h"
 #include "gui/IGUIScrollBar.h"
 #include "gui/ObjectBases/IGUIObject.h"
+
+#include <utility>
 
 IGUIScrollBarOwner::IGUIScrollBarOwner(IGUIObject& pObject)
 	: m_pObject(pObject)

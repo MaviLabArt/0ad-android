@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,16 +18,17 @@
 #ifndef INCLUDED_IGUISCROLLBAROWNER
 #define INCLUDED_IGUISCROLLBAROWNER
 
-#include "ps/CStrForward.h"
+#include "lib/code_annotation.h"
+#include "ps/CStr.h"
 
 #include <memory>
 #include <vector>
 
 class CCanvas2D;
+class IGUIObject;
+class IGUIScrollBar;
 struct SGUIMessage;
 struct SGUIScrollBarStyle;
-class IGUIScrollBar;
-class IGUIObject;
 
 /**
  * Base-class this if you want an object to contain

@@ -21,21 +21,39 @@
 
 #include "gui/CGUI.h"
 #include "gui/CGUISetting.h"
-#include "gui/ObjectBases/IGUIObject.h"
+#include "gui/SGUIStyle.h"
 #include "gui/Scripting/JSInterface_GUIProxy.h"
 #include "js/Conversions.h"
+#include "lib/debug.h"
+#include "lib/secure_crt.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
-#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "soundmanager/ISoundManager.h"
 
 #include <algorithm>
+#include <iterator>
+#include <js/CallAndConstruct.h>
+#include <js/ComparisonOperators.h>
+#include <js/CompilationAndEvaluation.h>
+#include <js/CompileOptions.h>
+#include <js/GCAPI.h>
+#include <js/GCVector.h>
+#include <js/SourceText.h>
+#include <js/TracingAPI.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <string>
 #include <string_view>
+#include <tuple>
 #include <unordered_map>
 #include <utility>
+
+class JSObject;
+namespace mozilla { union Utf8Unit; }
 
 const CStr IGUIObject::EventNameMouseEnter = "MouseEnter";
 const CStr IGUIObject::EventNameMouseMove = "MouseMove";
