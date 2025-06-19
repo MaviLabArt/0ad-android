@@ -720,7 +720,7 @@ bool ModIo::ParseModsResponse(const ScriptInterface& scriptInterface, const std:
 		bool ok = true;
 		std::string copyStringError;
 #define COPY_STRINGS_ELSE_CONTINUE(prefix, obj, ...) \
-	for (const std::string& prop : { __VA_ARGS__ }) \
+	for (const std::string prop : { __VA_ARGS__ }) \
 	{ \
 		std::string val; \
 		if (!Script::FromJSProperty(rq, obj, prop.c_str(), val, true)) \
