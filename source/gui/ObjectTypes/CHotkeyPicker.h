@@ -18,12 +18,15 @@
 #ifndef INCLUDED_CHOTKEYPICKER
 #define INCLUDED_CHOTKEYPICKER
 
-#include "gui/CGUI.h"
+#include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/input.h"
 #include "ps/CStr.h"
 
+#include <SDL_scancode.h>
 #include <vector>
+
+class CGUI;
 
 /**
  * When in focus, returns all currently pressed keys.

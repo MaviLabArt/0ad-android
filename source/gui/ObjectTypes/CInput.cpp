@@ -24,17 +24,35 @@
 #include "graphics/TextRenderer.h"
 #include "gui/CGUI.h"
 #include "gui/CGUIScrollBarVertical.h"
+#include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
+#include "gui/SettingTypes/EAlign.h"
+#include "lib/debug.h"
+#include "lib/external_libraries/libsdl.h"
 #include "lib/timer.h"
 #include "lib/utf8.h"
+#include "maths/Vector2D.h"
+#include "ps/CStrIntern.h"
 #include "ps/ConfigDB.h"
-#include "ps/CStrInternStatic.h"
-#include "ps/GameSetup/Config.h"
 #include "ps/Globals.h"
 #include "ps/Hotkey.h"
 
-#include <sstream>
-#include <maths/Size2D.h>
+#include <SDL_clipboard.h>
+#include <SDL_events.h>
+#include <SDL_keyboard.h>
+#include <SDL_mouse.h>
+#include <SDL_rect.h>
+#include <SDL_scancode.h>
+#include <SDL_stdinc.h>
+#include <algorithm>
+#include <bits/wctype-wchar.h>
 #include <cstdlib>
+#include <cstring>
+#include <maths/Size2D.h>
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <utility>
 
 extern int g_yres;
 

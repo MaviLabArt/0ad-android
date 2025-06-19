@@ -19,10 +19,19 @@
 
 #include "CScrollPanel.h"
 
-#include "gui/GUIObjectEventBroadcaster.h"
-
 #include "gui/CGUIScrollBarHorizontal.h"
 #include "gui/CGUIScrollBarVertical.h"
+#include "gui/GUIObjectEventBroadcaster.h"
+#include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
+#include "maths/Rect.h"
+
+#include <algorithm>
+#include <memory>
+#include <string>
+#include <utility>
+
+class CGUI;
 
 CScrollPanel::CScrollPanel(CGUI& pGUI)
 	: IGUIPanel(pGUI),

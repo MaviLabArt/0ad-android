@@ -20,11 +20,26 @@
 #include "COList.h"
 
 #include "gui/CGUI.h"
+#include "gui/CGUIText.h"
 #include "gui/IGUIScrollBar.h"
+#include "gui/ObjectBases/IGUIScrollBarOwner.h"
+#include "gui/SGUIMessage.h"
 #include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
+#include "gui/SettingTypes/CGUIString.h"
 #include "i18n/L10n.h"
+#include "lib/debug.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XML/Xeromyces.h"
+
+#include <algorithm>
+#include <cstddef>
+#include <string_view>
+#include <utility>
 
 const float SORT_SPRITE_DIM = 16.0f;
 const CVector2D COLUMN_SHIFT = CVector2D(0, 4);

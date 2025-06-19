@@ -18,9 +18,12 @@
 #ifndef INCLUDED_CCHECKBOX
 #define INCLUDED_CCHECKBOX
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
-#include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUIButtonBehavior.h"
+#include "gui/ObjectBases/IGUIObject.h"
+
+class CGUI;
 
 class CCheckBox : public IGUIObject, public IGUIButtonBehavior
 {

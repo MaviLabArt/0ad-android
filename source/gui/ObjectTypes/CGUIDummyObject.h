@@ -25,6 +25,8 @@
 
 #include "gui/ObjectBases/IGUIObject.h"
 
+class CGUI;
+
 /**
  * Dummy object are used for the base object and objects of type "empty".
  */

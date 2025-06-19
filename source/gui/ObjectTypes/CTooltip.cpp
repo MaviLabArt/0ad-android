@@ -20,10 +20,15 @@
 #include "CTooltip.h"
 
 #include "gui/CGUI.h"
-#include "gui/SettingTypes/CGUIString.h"
 #include "gui/CGUIText.h"
+#include "gui/SettingTypes/CGUISize.h"
+#include "gui/SettingTypes/CGUIString.h"
+#include "gui/SettingTypes/EAlign.h"
+#include "lib/debug.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
 
-#include <algorithm>
+#include <vector>
 
 CTooltip::CTooltip(CGUI& pGUI)
 	: IGUIObject(pGUI),

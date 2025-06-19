@@ -17,10 +17,20 @@
 #ifndef INCLUDED_COLIST
 #define INCLUDED_COLIST
 
+#include "gui/CGUISetting.h"
+#include "gui/CGUISprite.h"
+#include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CList.h"
 #include "gui/SettingTypes/CGUIColor.h"
+#include "gui/SettingTypes/CGUIList.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
 
+#include <string>
 #include <vector>
+
+class CGUI;
 
 /**
  * Represents a column.

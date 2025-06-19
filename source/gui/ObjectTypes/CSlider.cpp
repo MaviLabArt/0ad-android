@@ -20,7 +20,9 @@
 #include "CSlider.h"
 
 #include "gui/CGUI.h"
+#include "gui/SGUIMessage.h"
 #include "maths/MathUtil.h"
+#include "maths/Rect.h"
 
 const CStr CSlider::EventNameValueChange = "ValueChange";
 

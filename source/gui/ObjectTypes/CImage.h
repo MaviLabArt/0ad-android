@@ -18,8 +18,11 @@
 #ifndef INCLUDED_CIMAGE
 #define INCLUDED_CIMAGE
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
+
+class CGUI;
 
 /**
  * Object just for drawing a sprite. Like CText, without the

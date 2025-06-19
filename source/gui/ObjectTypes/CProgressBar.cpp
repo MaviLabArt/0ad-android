@@ -20,6 +20,11 @@
 #include "CProgressBar.h"
 
 #include "gui/CGUI.h"
+#include "gui/SGUIMessage.h"
+#include "maths/Rect.h"
+#include "ps/CStr.h"
+
+#include <string>
 
 CProgressBar::CProgressBar(CGUI& pGUI)
 	: IGUIObject(pGUI),

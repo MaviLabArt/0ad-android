@@ -20,14 +20,20 @@
 
 #include "graphics/Color.h"
 #include "graphics/Texture.h"
+#include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "lib/types.h"
 #include "maths/Vector2D.h"
-#include "renderer/VertexArray.h"
+#include "ps/CStr.h"
 
 #include <deque>
+#include <sys/types.h>
 #include <vector>
 
-class CMatrix3D;
+class CCanvas2D;
+class CGUI;
+class CRect;
+class CVector3D;
 
 class CMiniMap : public IGUIObject
 {

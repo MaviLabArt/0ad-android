@@ -17,6 +17,7 @@
 
 #include "precompiled.h"
 
+#include "gui/CGUI.h"
 #include "gui/ObjectTypes/CButton.h"
 #include "gui/ObjectTypes/CChart.h"
 #include "gui/ObjectTypes/CCheckBox.h"

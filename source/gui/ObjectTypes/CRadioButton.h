@@ -18,7 +18,10 @@
 #ifndef INCLUDED_CRADIOBUTTON
 #define INCLUDED_CRADIOBUTTON
 
+#include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CCheckBox.h"
+
+class CGUI;
 
 /**
  * Just like a check box, but it'll nullify its siblings,

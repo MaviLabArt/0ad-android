@@ -18,10 +18,15 @@
 #ifndef INCLUDED_CSLIDER
 #define INCLUDED_CSLIDER
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIButtonBehavior.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
+
+class CGUI;
+class CRect;
 
 class CSlider : public IGUIObject, public IGUIButtonBehavior
 {

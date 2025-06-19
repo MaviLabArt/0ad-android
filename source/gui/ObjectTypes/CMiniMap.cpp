@@ -19,41 +19,54 @@
 
 #include "CMiniMap.h"
 
+#include "graphics/Camera.h"
 #include "graphics/Canvas2D.h"
 #include "graphics/GameView.h"
 #include "graphics/MiniMapTexture.h"
-#include "graphics/MiniPatch.h"
 #include "graphics/Terrain.h"
-#include "graphics/TerrainTextureEntry.h"
-#include "graphics/TerrainTextureManager.h"
 #include "graphics/TextureManager.h"
 #include "gui/CGUI.h"
 #include "gui/GUIManager.h"
-#include "lib/bits.h"
-#include "lib/external_libraries/libsdl.h"
+#include "gui/SGUIMessage.h"
+#include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/timer.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
-#include "ps/Filesystem.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
 #include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/WaterManager.h"
 #include "scriptinterface/Object.h"
-#include "simulation2/Simulation2.h"
-#include "simulation2/components/ICmpMinimap.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/helpers/Los.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
 
+#include <SDL_mouse.h>
+#include <algorithm>
 #include <array>
 #include <cmath>
-#include <utility>
+#include <fmt/base.h>
+#include <fmt/printf.h>
+#include <js/GCVector.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+#include <stddef.h>
+#include <string>
+#include <tuple>
 #include <vector>
+
+class CSimulation2;
 
 namespace
 {

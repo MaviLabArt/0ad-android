@@ -18,8 +18,11 @@
 #ifndef INCLUDED_CPROGRESSBAR
 #define INCLUDED_CPROGRESSBAR
 
-#include "gui/ObjectBases/IGUIObject.h"
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
+#include "gui/ObjectBases/IGUIObject.h"
+
+class CGUI;
 
 /**
  * Object used to draw a value (e.g. progress) from 0 to 100 visually.

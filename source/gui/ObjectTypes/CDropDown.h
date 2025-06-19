@@ -28,12 +28,20 @@ GUI Object - Drop Down (list)
 #ifndef INCLUDED_CDROPDOWN
 #define INCLUDED_CDROPDOWN
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CList.h"
+#include "gui/SettingTypes/CGUIColor.h"
+#include "lib/input.h"
+#include "lib/types.h"
+#include "maths/Rect.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
 
 #include <string>
+
+class CGUI;
 
 /**
  * Drop Down

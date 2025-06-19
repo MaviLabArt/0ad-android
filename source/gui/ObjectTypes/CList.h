@@ -18,13 +18,23 @@
 #ifndef INCLUDED_CLIST
 #define INCLUDED_CLIST
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUIScrollBarOwner.h"
 #include "gui/ObjectBases/IGUITextOwner.h"
+#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
+#include "lib/input.h"
+#include "lib/types.h"
+#include "maths/Rect.h"
+#include "ps/CStr.h"
 
 #include <vector>
+
+class CCanvas2D;
+class CGUI;
+class CGUIString;
 
 /**
  * Create a list of elements, where one can be selected

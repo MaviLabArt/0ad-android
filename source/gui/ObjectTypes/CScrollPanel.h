@@ -18,10 +18,16 @@
 #ifndef INCLUDED_CSCROLLPANEL
 #define INCLUDED_CSCROLLPANEL
 
+#include "gui/CGUISetting.h"
+#include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUIPanel.h"
 #include "gui/ObjectBases/IGUIScrollBarOwner.h"
 #include "gui/SettingTypes/EScrollOrientation.h"
 #include "ps/CStr.h"
+
+#include <vector>
+
+class CGUI;
 
 class CScrollPanel : public IGUIPanel, public IGUIScrollBarOwner
 {

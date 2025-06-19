@@ -21,10 +21,26 @@
 
 #include "gui/CGUI.h"
 #include "gui/CGUIScrollBarVertical.h"
+#include "gui/CGUIText.h"
+#include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
 #include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
+#include "gui/SettingTypes/CGUIString.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/timer.h"
+#include "maths/Size2D.h"
+#include "maths/Vector2D.h"
+#include "ps/XMB/XMBData.h"
+
+#include <SDL_events.h>
+#include <SDL_keycode.h>
+#include <cstddef>
+#include <memory>
+#include <string>
+#include <utility>
+
+class CCanvas2D;
 
 const CStr CList::EventNameSelectionChange = "SelectionChange";
 const CStr CList::EventNameHoverChange = "HoverChange";

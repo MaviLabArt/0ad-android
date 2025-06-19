@@ -18,15 +18,22 @@
 #ifndef INCLUDED_CCHART
 #define INCLUDED_CCHART
 
+#include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUITextOwner.h"
 #include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
 #include "gui/SettingTypes/CGUISeries.h"
-#include "maths/Size2D.h"
+#include "lib/code_annotation.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
 
 #include <vector>
+
+class CCanvas2D;
+class CGUI;
+class CRect;
+class CSize2D;
 
 struct CChartData
 {

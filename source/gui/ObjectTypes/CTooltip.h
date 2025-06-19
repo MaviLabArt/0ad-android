@@ -18,11 +18,18 @@
 #ifndef INCLUDED_CTOOLTIP
 #define INCLUDED_CTOOLTIP
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUITextOwner.h"
+#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIString.h"
+#include "lib/types.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
+
+class CGUI;
+enum class EVAlign;
 
 /**
  * Dynamic tooltips. Similar to CText.

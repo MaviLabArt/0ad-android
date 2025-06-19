@@ -19,12 +19,24 @@
 
 #include "CHotkeyPicker.h"
 
+#include "gui/CGUI.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "gui/SGUIMessage.h"
+#include "lib/external_libraries/libsdl.h"
 #include "lib/timer.h"
 #include "ps/CLogger.h"
-#include "ps/Hotkey.h"
 #include "ps/KeyName.h"
 #include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <SDL_events.h>
+#include <SDL_mouse.h>
+#include <algorithm>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <memory>
 
 
 const CStr CHotkeyPicker::EventNameCombination = "Combination";

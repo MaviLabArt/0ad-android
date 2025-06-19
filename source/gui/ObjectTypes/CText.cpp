@@ -22,6 +22,15 @@
 #include "gui/CGUI.h"
 #include "gui/CGUIScrollBarVertical.h"
 #include "gui/CGUIText.h"
+#include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
+
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
 
 CText::CText(CGUI& pGUI)
 	: IGUIObject(pGUI),

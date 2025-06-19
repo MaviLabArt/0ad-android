@@ -18,11 +18,18 @@
 #ifndef INCLUDED_CTEXT
 #define INCLUDED_CTEXT
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUIScrollBarOwner.h"
 #include "gui/ObjectBases/IGUITextOwner.h"
+#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIString.h"
+#include "maths/Vector2D.h"
+#include "ps/CStr.h"
+
+class CGUI;
+class CSize2D;
 
 /**
  * Text field that just displays static text.

@@ -20,15 +20,24 @@
 #include "CChart.h"
 
 #include "graphics/Canvas2D.h"
+#include "gui/CGUIText.h"
+#include "gui/SGUIMessage.h"
 #include "gui/SettingTypes/CGUIList.h"
 #include "gui/SettingTypes/CGUISeries.h"
 #include "gui/SettingTypes/CGUIString.h"
+#include "lib/utf8.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
 #include "ps/CLogger.h"
-#include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
 
 #include <cmath>
+#include <limits>
 #include <optional>
+#include <string>
+#include <wchar.h>
+
+class CGUI;
 
 CChart::CChart(CGUI& pGUI)
 	: IGUIObject(pGUI),

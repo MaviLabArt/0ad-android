@@ -19,6 +19,15 @@
 
 #include "CRadioButton.h"
 
+#include "gui/CGUISetting.h"
+#include "gui/ObjectBases/IGUIButtonBehavior.h"
+#include "gui/SGUIMessage.h"
+#include "ps/CStr.h"
+
+#include <vector>
+
+class CGUI;
+
 CRadioButton::CRadioButton(CGUI& pGUI)
 	: CCheckBox(pGUI)
 {

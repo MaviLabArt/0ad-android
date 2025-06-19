@@ -21,11 +21,19 @@
 
 #include "gui/CGUI.h"
 #include "gui/IGUIScrollBar.h"
+#include "gui/SGUIMessage.h"
 #include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIList.h"
+#include "gui/SettingTypes/CGUIString.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/timer.h"
-#include "ps/Profile.h"
+#include "maths/Size2D.h"
+
+#include <SDL_events.h>
+#include <SDL_keycode.h>
+#include <algorithm>
+#include <cstdlib>
+#include <vector>
 
 CDropDown::CDropDown(CGUI& pGUI)
 	: CList(pGUI),

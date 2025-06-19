@@ -20,6 +20,8 @@
 #include "CCheckBox.h"
 
 #include "gui/CGUI.h"
+#include "gui/SGUIMessage.h"
+#include "ps/CStr.h"
 
 CCheckBox::CCheckBox(CGUI& pGUI)
 	: IGUIObject(pGUI),

@@ -20,6 +20,7 @@
 #include "CImage.h"
 
 #include "gui/CGUI.h"
+#include "ps/CStr.h"
 
 CImage::CImage(CGUI& pGUI)
 	: IGUIObject(pGUI),

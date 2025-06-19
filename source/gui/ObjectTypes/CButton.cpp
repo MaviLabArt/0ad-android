@@ -22,6 +22,11 @@
 #include "gui/CGUI.h"
 #include "gui/CGUIText.h"
 #include "gui/SettingTypes/CGUIColor.h"
+#include "lib/debug.h"
+#include "maths/Rect.h"
+#include "maths/Size2D.h"
+
+#include <vector>
 
 CButton::CButton(CGUI& pGUI)
 	: IGUIObject(pGUI),

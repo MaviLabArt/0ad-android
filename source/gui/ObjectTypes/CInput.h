@@ -18,14 +18,25 @@
 #ifndef INCLUDED_CINPUT
 #define INCLUDED_CINPUT
 
+#include "gui/CGUISetting.h"
 #include "gui/CGUISprite.h"
+#include "gui/CGUIText.h"
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectBases/IGUIScrollBarOwner.h"
+#include "gui/SettingTypes/CGUIColor.h"
 #include "gui/SettingTypes/CGUIString.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/input.h"
+#include "lib/types.h"
+#include "maths/Rect.h"
+#include "ps/CStr.h"
 
+#include <SDL_keycode.h>
 #include <list>
 #include <vector>
+
+class CCanvas2D;
+class CGUI;
+struct SDL_Event_;
 
 /**
  * Text field where you can input and edit the text.
