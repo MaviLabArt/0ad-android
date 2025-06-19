@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,8 +25,8 @@ portal rendering, where a portal may have 3 or more edges.
 
 #include "Frustum.h"
 
+#include "lib/debug.h"
 #include "maths/BoundingBoxAligned.h"
-#include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
 
 CFrustum::CFrustum()

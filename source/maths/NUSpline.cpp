@@ -17,10 +17,15 @@
 
 #include "precompiled.h"
 
-#include <algorithm>
-
 #include "NUSpline.h"
-#include "Matrix3D.h"
+
+#include "lib/debug.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+
+#include <utility>
+
 
 //Note: column major order!  Each set of 4 constitutes a column.
 CMatrix3D HermiteSpline(2.f, -3.f, 0.f, 1.f,

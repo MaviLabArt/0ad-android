@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,6 +18,7 @@
 #ifndef INCLUDED_FIXED_VECTOR2D
 #define INCLUDED_FIXED_VECTOR2D
 
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/Sqrt.h"
 

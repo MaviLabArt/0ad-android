@@ -18,6 +18,9 @@
 #ifndef INCLUDED_MD5
 #define INCLUDED_MD5
 
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+
 #include <cstring>
 
 /**

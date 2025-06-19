@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,7 +25,9 @@
 #include "precompiled.h"
 
 #include "Plane.h"
-#include "MathUtil.h"
+
+#include "maths/MathUtil.h"
+#include "maths/Vector3D.h"
 
 const float CPlane::m_EPS = 0.001f;
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -28,7 +28,10 @@ portal rendering, where a portal may have 3 or more edges.
 #ifndef INCLUDED_FRUSTUM
 #define INCLUDED_FRUSTUM
 
+#include "maths/Vector3D.h"
 #include "maths/Plane.h"
+
+#include <cstddef>
 
 class CBoundingBoxAligned;
 class CMatrix3D;

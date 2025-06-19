@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,11 +17,14 @@
 
 #include "lib/self_test.h"
 
+#include "lib/types.h"
 #include "maths/Sqrt.h"
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <boost/random/variate_generator.hpp>
+#include <cmath>
+#include <cstddef>
 
 class TestSqrt : public CxxTest::TestSuite
 {

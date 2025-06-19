@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,17 @@
 #ifndef INCLUDED_FIXED
 #define INCLUDED_FIXED
 
+#include "lib/debug.h"
+#include "lib/sysdep/compiler.h"
 #include "lib/types.h"
 #include "maths/Sqrt.h"
-#include "ps/CStrForward.h"
+
+#include <algorithm>
+#include <cmath>
+#include <limits>
+
+class CStr8;
+class CStrW;
 
 #ifndef NDEBUG
 #define USE_FIXED_OVERFLOW_CHECKS
@@ -312,7 +320,7 @@ public:
 		return CFixed(t);
 	}
 
-	constexpr CFixed Absolute() const { return CFixed(abs(value)); }
+	constexpr CFixed Absolute() const { return CFixed(std::abs(value)); }
 
 	/**
 	 * Multiply by a CFixed. Likely to overflow if both numbers are large,

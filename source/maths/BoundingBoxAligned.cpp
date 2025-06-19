@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,12 +23,15 @@
 
 #include "BoundingBoxAligned.h"
 
+#include "lib/debug.h"
 #include "maths/BoundingBoxOriented.h"
 #include "maths/Brush.h"
 #include "maths/Frustum.h"
 #include "maths/Matrix3D.h"
+#include "maths/Plane.h"
 
 #include <limits>
+#include <utility>
 
 const CBoundingBoxAligned CBoundingBoxAligned::EMPTY = CBoundingBoxAligned(); // initializes to an empty bound
 

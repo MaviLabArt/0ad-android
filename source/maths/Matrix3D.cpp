@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,8 +23,10 @@
 #include "precompiled.h"
 
 #include "Matrix3D.h"
-#include "Quaternion.h"
-#include "Vector4D.h"
+
+#include "maths/Quaternion.h"
+
+#include <cmath>
 
 //Sets the identity matrix
 void CMatrix3D::SetIdentity ()

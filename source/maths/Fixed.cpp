@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 #include "ps/CStr.h"
 
 #include <sstream>
+#include <string>
 
 template<>
 CFixed_15_16 CFixed_15_16::FromString(const CStr8& s)

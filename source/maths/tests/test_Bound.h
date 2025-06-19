@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,10 +17,12 @@
 
 #include "lib/self_test.h"
 
-#include "lib/posix/posix.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/BoundingBoxOriented.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+
+#include <cmath>
 
 #define TS_ASSERT_VEC_DELTA(v, x, y, z, delta) \
 	TS_ASSERT_DELTA(v.X, x, delta); \

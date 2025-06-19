@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,8 +22,14 @@
 # pragma warning(push, 1)
 # pragma warning(disable: 4724)
 #endif
+
+#include "lib/types.h"
 #include "maths/Fixed.h"
-#include "maths/MathUtil.h"
+#include "ps/CStr.h"
+
+#include <algorithm>
+#include <cmath>
+#include <limits>
 
 class TestFixed : public CxxTest::TestSuite
 {

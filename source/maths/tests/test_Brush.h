@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,9 +17,18 @@
 
 #include "lib/self_test.h"
 
-#include "maths/Brush.h"
 #include "maths/BoundingBoxAligned.h"
-#include "maths/Frustum.h"
+#include "maths/Brush.h"
+#include "maths/Plane.h"
+#include "maths/Vector3D.h"
+#include "maths/Vector4D.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstdarg>
+#include <cstddef>
+#include <iterator>
+#include <vector>
 
 class TestBrush : public CxxTest::TestSuite
 {

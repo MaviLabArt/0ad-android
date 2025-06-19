@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,8 @@
 
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
+
+#include <algorithm>
 
 CRect::CRect() :
 	left(0.f), top(0.f), right(0.f), bottom(0.f)

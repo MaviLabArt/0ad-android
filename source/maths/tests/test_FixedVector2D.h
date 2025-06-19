@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,7 +17,11 @@
 
 #include "lib/self_test.h"
 
+#include "lib/types.h"
+#include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
+
+#include <cmath>
 
 #define TS_ASSERT_VEC_EQUALS(v, x, y) \
 	TS_ASSERT_EQUALS(v.X.ToDouble(), x); \
