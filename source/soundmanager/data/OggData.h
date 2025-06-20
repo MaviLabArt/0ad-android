@@ -54,7 +54,6 @@ protected:
 	ALuint m_Buffer[100];
 	int m_BuffersUsed;
 
-	bool AddDataBuffer(char* data, long length);
 	void SetFormatAndFreq(int form, ALsizei freq);
 	int  GetBufferCount();
 	unsigned int GetBuffer();
