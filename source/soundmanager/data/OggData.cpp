@@ -26,6 +26,19 @@
 #include "ps/Filesystem.h"
 #include "soundmanager/SoundManager.h"
 
+/*
+* Each buffer holds ~0.56 seconds of audio.
+* Bytes per second = sampleRate × channels × bytesPerSample.
+* For 44100 Hz, 2 channels, 2 bytes per sample, this is 176400 bytes per second.
+* Nice multiple of 4096 (system page size)
+*/
+constexpr int OGG_DEFAULT_BUFFER_SIZE = 98304;
+
+/*
+* 50 buffers of 98304 bytes each gives us 4.9 seconds of audio, which is a good amount to have buffered at once.
+*/
+constexpr int OGG_DEFAULT_BUFFER_COUNT = 50;
+
 COggData::COggData()
 	: m_Format(0), m_Frequency(0), m_OneShot(false), m_BuffersUsed(0)
 {
@@ -54,11 +67,6 @@ bool COggData::IsStereo()
 
 bool COggData::InitOggFile(const VfsPath& itemPath)
 {
-	CSoundManager* sndManager{static_cast<CSoundManager*>(g_SoundManager)};
-	if (!sndManager)
-		return false;
-
-	int buffersToStart{sndManager->GetBufferCount()};
 	if (OpenOggNonstream(g_VFS, itemPath, m_Stream) != INFO::OK)
 		return false;
 
@@ -68,8 +76,7 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 	SetFileName(itemPath);
 
 	AL_CHECK;
-
-	alGenBuffers(buffersToStart, m_Buffer);
+	alGenBuffers(OGG_DEFAULT_BUFFER_COUNT, m_Buffer);
 
 	ALenum err{alGetError()};
 	if (err != AL_NO_ERROR)
@@ -78,13 +85,13 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 		return false;
 	}
 
-	m_BuffersUsed = FetchDataIntoBuffer(buffersToStart, m_Buffer);
+	m_BuffersUsed = FetchDataIntoBuffer(OGG_DEFAULT_BUFFER_COUNT, m_Buffer);
 	if (m_FileFinished)
 	{
 		m_OneShot = true;
-		if (m_BuffersUsed < buffersToStart)
+		if (m_BuffersUsed < OGG_DEFAULT_BUFFER_COUNT)
 		{
-			alDeleteBuffers(buffersToStart - m_BuffersUsed, &m_Buffer[m_BuffersUsed]);
+			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersUsed, &m_Buffer[m_BuffersUsed]);
 		}
 	}
 	AL_CHECK;
@@ -115,19 +122,13 @@ bool COggData::IsOneShot()
 
 int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 {
-	CSoundManager* sndManager{static_cast<CSoundManager*>(g_SoundManager)};
-	if (!sndManager)
-		return 0;
-
-	long bufferSize{sndManager->GetBufferSize()};
-
-	u8* PCMOut{new u8[bufferSize + 5000]};
+	u8* PCMOut{new u8[OGG_DEFAULT_BUFFER_SIZE + 5000]};
 	int buffersWritten{0};
 
 	for (int i{0}; i < count && !m_FileFinished; ++i)
 	{
-		memset(PCMOut, 0, bufferSize + 5000);
-		Status totalRet{m_Stream->GetNextChunk(PCMOut, bufferSize)};
+		memset(PCMOut, 0, OGG_DEFAULT_BUFFER_SIZE + 5000);
+		Status totalRet{m_Stream->GetNextChunk(PCMOut, OGG_DEFAULT_BUFFER_SIZE)};
 		m_FileFinished = m_Stream->atFileEOF();
 		if (totalRet > 0)
 		{

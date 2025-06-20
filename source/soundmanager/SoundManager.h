@@ -77,8 +77,6 @@ protected:
 	float m_ActionGain;
 	float m_UIGain;
 	bool m_Enabled;
-	long m_BufferSize;
-	int m_BufferCount;
 	bool m_SoundEnabled;
 	bool m_MusicEnabled;
 
@@ -135,8 +133,6 @@ public:
 	void IdleTask();
 
 	void SetMemoryUsage(long bufferSize, int bufferCount);
-	long GetBufferCount();
-	long GetBufferSize();
 	CStr8 GetSoundCardNames() const;
 	CStr8 GetOpenALVersion() const;
 

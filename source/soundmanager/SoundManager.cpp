@@ -243,9 +243,8 @@ CSoundManager::CSoundManager(ALCdevice* device)
 	m_AmbientGain{g_ConfigDB.Get("sound.ambientgain", 0.5f)},
 	m_ActionGain{g_ConfigDB.Get("sound.actiongain", 0.5f)},
 	m_UIGain{g_ConfigDB.Get("sound.uigain", 0.5f)},
-	m_Enabled(false), m_BufferSize(98304), m_BufferCount(50),
-	m_SoundEnabled(true), m_MusicEnabled(true), m_MusicPaused(false),
-	m_AmbientPaused(false), m_ActionPaused(false),
+	m_Enabled(false), m_SoundEnabled(true), m_MusicEnabled(true),
+	m_MusicPaused(false), m_AmbientPaused(false), m_ActionPaused(false),
 	m_RunningPlaylist(false), m_PlayingPlaylist(false), m_LoopingPlaylist(false),
 	m_PlaylistGap(0), m_DistressErrCount(0), m_DistressTime(0)
 {
@@ -429,15 +428,6 @@ void CSoundManager::ReleaseALSource(ALuint theSource)
 			return;
 		}
 	}
-}
-
-long CSoundManager::GetBufferCount()
-{
-	return m_BufferCount;
-}
-long CSoundManager::GetBufferSize()
-{
-	return m_BufferSize;
 }
 
 void CSoundManager::AddPlayListItem(const VfsPath& itemPath)
