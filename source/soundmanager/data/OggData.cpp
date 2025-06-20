@@ -22,9 +22,12 @@
 #if CONFIG2_AUDIO
 
 #include "ps/CLogger.h"
-#include "ps/CLogger.h"
+#include "ps/containers/Span.h"
 #include "ps/Filesystem.h"
 #include "soundmanager/SoundManager.h"
+
+#include <algorithm>
+#include <vector>
 
 /*
 * Each buffer holds ~0.56 seconds of audio.
@@ -117,21 +120,20 @@ bool COggData::IsOneShot()
 
 int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 {
-	u8* PCMOut{new u8[OGG_DEFAULT_BUFFER_SIZE + 5000]};
+	std::vector<u8> PCMOut(OGG_DEFAULT_BUFFER_SIZE);
 	int buffersWritten{0};
 
 	for (int i{0}; i < count && !m_FileFinished; ++i)
 	{
-		memset(PCMOut, 0, OGG_DEFAULT_BUFFER_SIZE + 5000);
-		Status totalRet{m_Stream->GetNextChunk(PCMOut, OGG_DEFAULT_BUFFER_SIZE)};
+		std::fill(PCMOut.begin(), PCMOut.end(), 0);
+		const size_t totalRet{m_Stream->GetNextChunk(PS::span<u8>(PCMOut))};
 		m_FileFinished = m_Stream->atFileEOF();
-		if (totalRet > 0)
-		{
-			buffersWritten++;
-			alBufferData( buffers[i], m_Format, PCMOut, static_cast<ALsizei>(totalRet), static_cast<ALsizei>(m_Frequency));
-		}
+		if (totalRet == 0)
+			continue;
+
+		++buffersWritten;
+		alBufferData(buffers[i], m_Format, PCMOut.data(), static_cast<ALsizei>(totalRet), m_Frequency);
 	}
-	delete[] PCMOut;
 	return buffersWritten;
 }
 

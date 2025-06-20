@@ -27,6 +27,7 @@
 #include "lib/file/vfs/vfs_util.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
+#include "ps/containers/Span.h"
 #include "ps/Filesystem.h"
 
 #include <AL/al.h>
@@ -182,12 +183,12 @@ public:
 		return INFO::OK;
 	}
 
-	virtual Status GetNextChunk(u8* buffer, size_t size)
+	virtual size_t GetNextChunk(PS::span<u8> buffer)
 	{
 		// We may have to call ov_read multiple times because it
 		// treats the buffer size "as a limit and not a request".
 		size_t bytesRead{0};
-		while (bytesRead < size)
+		while (bytesRead < buffer.size())
 		{
 			constexpr int isBigEndian{(BYTE_ORDER == BIG_ENDIAN)};
 			constexpr int wordSize{sizeof(i16)};
@@ -196,8 +197,8 @@ public:
 			int bitstream;
 			const int ret{static_cast<int>(ov_read(
 				&m_VorbisFile,
-				reinterpret_cast<char*>(buffer + bytesRead),
-				static_cast<int>(size - bytesRead),
+				reinterpret_cast<char*>(buffer.data() + bytesRead),
+				static_cast<int>(buffer.size() - bytesRead),
 				isBigEndian,
 				wordSize,
 				isSigned,
@@ -205,15 +206,15 @@ public:
 			))};
 			if(ret == 0) {
 				m_FileEOF = true;
-				return static_cast<Status>(bytesRead);
+				return bytesRead;
 			}
 
 			if(ret < 0)
 				WARN_RETURN(LibErrorFromVorbis(ret));
 
-			bytesRead += static_cast<size_t>(ret);
+			bytesRead += ret;
 		}
-		return static_cast<Status>(bytesRead);
+		return bytesRead;
 	}
 
 private:

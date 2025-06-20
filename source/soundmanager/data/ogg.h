@@ -22,6 +22,8 @@
 #if CONFIG2_AUDIO
 
 #include "lib/file/vfs/vfs.h"
+#include "lib/types.h"
+#include "ps/containers/Span.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
@@ -35,10 +37,7 @@ public:
 	virtual bool atFileEOF() = 0;
 	virtual Status ResetFile() = 0;
 
-	/**
-	 * @return bytes read (<= size) or a (negative) Status
-	 **/
-	virtual Status GetNextChunk(u8* buffer, size_t size) = 0;
+	virtual size_t GetNextChunk(PS::span<u8> buffer) = 0;
 };
 
 typedef std::shared_ptr<OggStream> OggStreamPtr;

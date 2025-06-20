@@ -52,7 +52,7 @@ public:
 
 private:
 	ALuint m_Format;
-	long m_Frequency;
+	ALsizei m_Frequency;
 protected:
 	OggStreamPtr m_Stream;
 	bool m_FileFinished;
