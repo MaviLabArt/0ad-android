@@ -156,11 +156,9 @@ public:
 		Open();
 	}
 
-	Status Close()
+	~OggStreamImpl()
 	{
 		ov_clear(&m_VorbisFile);
-
-		return 0;
 	}
 
 	virtual ALenum Format()

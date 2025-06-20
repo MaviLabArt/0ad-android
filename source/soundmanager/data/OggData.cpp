@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -33,10 +33,6 @@ COggData::COggData()
 
 COggData::~COggData()
 {
-	AL_CHECK;
-	if (ogg)
-		ogg->Close();
-
 	AL_CHECK;
 	if ( m_BuffersUsed > 0 )
 		alDeleteBuffers(m_BuffersUsed, &m_Buffer[0]);
