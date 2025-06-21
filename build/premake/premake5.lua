@@ -201,8 +201,7 @@ function project_set_build_flags()
 	end
 	sanitize(sanitizers)
 
-	if os.istarget("windows") or not _OPTIONS["minimal-flags"] then
-		-- adds the -Wall compiler flag
+	if os.istarget("windows") then
 		warnings "Extra"
 	end
 
@@ -272,6 +271,7 @@ function project_set_build_flags()
 		if not _OPTIONS["minimal-flags"] then
 			buildoptions {
 				-- enable most of the standard warnings
+				"-Wall",
 				"-Wextra",
 				-- "-Wconversion", FIXME: should seriously consider fixing so this warning can be enabled.
 
