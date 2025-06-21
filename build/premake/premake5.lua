@@ -272,13 +272,8 @@ function project_set_build_flags()
 		if not _OPTIONS["minimal-flags"] then
 			buildoptions {
 				-- enable most of the standard warnings
-				"-Wno-switch",		-- enumeration value not handled in switch (this is sometimes useful, but results in lots of noise)
-				"-Wno-reorder",		-- order of initialization list in constructors (lots of noise)
-				"-Wno-invalid-offsetof",	-- offsetof on non-POD types (see comment in renderer/PatchRData.cpp)
-
 				"-Wextra",
 				-- "-Wconversion", FIXME: should seriously consider fixing so this warning can be enabled.
-				"-Wno-missing-field-initializers",	-- (this is common in external headers we can't fix)
 
 				-- add some other useful warnings that need to be enabled explicitly
 				"-Wunused-parameter",
@@ -287,6 +282,10 @@ function project_set_build_flags()
 				-- "-Wcast-qual",		-- (useful for checking const-correctness, but a bit noisy, so skip it by default)
 				"-Wnon-virtual-dtor",	-- (sometimes noisy but finds real bugs)
 				"-Wundef",				-- (useful for finding macro name typos)
+
+				-- disable some warnings that currently trigger
+				"-Wno-missing-field-initializers",	-- (this is common in external headers we can't fix)
+				"-Wno-reorder",		-- order of initialization list in constructors (lots of noise)
 
 				-- enable security features (stack checking etc) that shouldn't have
 				-- a significant effect on performance and can catch bugs
