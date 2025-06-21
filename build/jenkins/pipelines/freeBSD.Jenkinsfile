@@ -32,17 +32,17 @@ pipeline {
             customWorkspace 'workspace/clang17'
         }
     }
+
     environment {
         USE = 'iconv'
         WX_CONFIG = '/usr/local/bin/wxgtk3u-3.0-config'
         CXXFLAGS = '-stdlib=libc++ '
         LLVM_OBJDUMP = '/usr/bin/llvm-objdump'
     }
+
     stages {
         stage('Pre-build') {
             steps {
-                discoverGitReferenceBuild()
-
                 sh 'git lfs pull -I binaries/data/tests'
                 sh 'git lfs pull -I "binaries/data/mods/_test.*"'
 
@@ -64,7 +64,15 @@ pipeline {
 
         stage('Release Build') {
             steps {
-                sh "cd build/workspaces/gcc/ && gmake ${JOBS} config=release"
+                sh '''
+                    rm -f thepipe
+                    mkfifo thepipe
+                    tee build.log < thepipe &
+                    gmake -C build/workspaces/gcc/ ${JOBS} config=release > thepipe 2>&1
+                    status=$?
+                    rm thepipe
+                    exit ${status}
+                '''
             }
             post {
                 failure {
@@ -74,26 +82,35 @@ pipeline {
                         }
                     }
                 }
+                always {
+                    script {
+                        recordIssues(
+                            tool: analysisParser(
+                                analysisModelId: 'clang',
+                                name: 'Release Build',
+                                id : 'release',
+                                pattern: 'build.log'
+                            ),
+                            skipPublishingChecks: true,
+                            enabledForFailure: true,
+                            qualityGates: [[threshold: 1, type: 'TOTAL', criticality: 'FAILURE']]
+                        )
+                    }
+                }
             }
         }
 
         stage('Release Tests') {
             steps {
                 timeout(time: 15) {
-                    sh 'cd binaries/system/ && ./test > cxxtest-release.xml'
+                    sh './binaries/system/test > cxxtest.xml'
                 }
             }
             post {
                 always {
-                    junit 'binaries/system/cxxtest-release.xml'
+                    junit(skipPublishingChecks: true, testResults: 'cxxtest.xml')
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            recordIssues enabledForFailure: true, qualityGates: [[threshold: 1, type: 'NEW']], tool: clang()
         }
     }
 }
