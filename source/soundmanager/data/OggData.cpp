@@ -54,11 +54,11 @@ bool COggData::IsStereo()
 
 bool COggData::InitOggFile(const VfsPath& itemPath)
 {
-	CSoundManager* sndManager = (CSoundManager*)g_SoundManager;
+	CSoundManager* sndManager{static_cast<CSoundManager*>(g_SoundManager)};
 	if (!sndManager)
 		return false;
 
-	int buffersToStart = sndManager->GetBufferCount();
+	int buffersToStart{sndManager->GetBufferCount()};
 	if (OpenOggNonstream(g_VFS, itemPath, ogg) != INFO::OK)
 		return false;
 
@@ -71,7 +71,7 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 
 	alGenBuffers(buffersToStart, m_Buffer);
 
-	ALenum err = alGetError();
+	ALenum err{alGetError()};
 	if (err != AL_NO_ERROR)
 	{
 		LOGERROR("Failed to create initial buffer. OpenAL error: %s\n", alGetString(err));
@@ -115,19 +115,19 @@ bool COggData::IsOneShot()
 
 int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 {
-	CSoundManager* sndManager = (CSoundManager*)g_SoundManager;
+	CSoundManager* sndManager{static_cast<CSoundManager*>(g_SoundManager)};
 	if (!sndManager)
 		return 0;
 
-	long bufferSize = sndManager->GetBufferSize();
+	long bufferSize{sndManager->GetBufferSize()};
 
-	u8* pcmout = new u8[bufferSize + 5000];
-	int buffersWritten = 0;
+	u8* pcmout{new u8[bufferSize + 5000]};
+	int buffersWritten{0};
 
-	for (int i = 0; i < count && !m_FileFinished; ++i)
+	for (int i{0}; i < count && !m_FileFinished; ++i)
 	{
 		memset(pcmout, 0, bufferSize + 5000);
-		Status totalRet = ogg->GetNextChunk(pcmout, bufferSize);
+		Status totalRet{ogg->GetNextChunk(pcmout, bufferSize)};
 		m_FileFinished = ogg->atFileEOF();
 		if (totalRet > 0)
 		{
