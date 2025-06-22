@@ -59,12 +59,12 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 		return false;
 
 	int buffersToStart{sndManager->GetBufferCount()};
-	if (OpenOggNonstream(g_VFS, itemPath, ogg) != INFO::OK)
+	if (OpenOggNonstream(g_VFS, itemPath, m_Stream) != INFO::OK)
 		return false;
 
 	m_FileFinished = false;
 
-	SetFormatAndFreq(ogg->Format(), ogg->SamplingRate());
+	SetFormatAndFreq(m_Stream->Format(), m_Stream->SamplingRate());
 	SetFileName(itemPath);
 
 	AL_CHECK;
@@ -104,7 +104,7 @@ bool COggData::IsFileFinished()
 
 void COggData::ResetFile()
 {
-	ogg->ResetFile();
+	m_Stream->ResetFile();
 	m_FileFinished = false;
 }
 
@@ -121,21 +121,21 @@ int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 
 	long bufferSize{sndManager->GetBufferSize()};
 
-	u8* pcmout{new u8[bufferSize + 5000]};
+	u8* PCMOut{new u8[bufferSize + 5000]};
 	int buffersWritten{0};
 
 	for (int i{0}; i < count && !m_FileFinished; ++i)
 	{
-		memset(pcmout, 0, bufferSize + 5000);
-		Status totalRet{ogg->GetNextChunk(pcmout, bufferSize)};
-		m_FileFinished = ogg->atFileEOF();
+		memset(PCMOut, 0, bufferSize + 5000);
+		Status totalRet{m_Stream->GetNextChunk(PCMOut, bufferSize)};
+		m_FileFinished = m_Stream->atFileEOF();
 		if (totalRet > 0)
 		{
 			buffersWritten++;
-			alBufferData(buffers[i], m_Format, pcmout, (ALsizei)totalRet, (int)m_Frequency);
+			alBufferData(buffers[i], m_Format, PCMOut, (ALsizei)totalRet, (int)m_Frequency);
 		}
 	}
-	delete[] pcmout;
+	delete[] PCMOut;
 	return buffersWritten;
 }
 

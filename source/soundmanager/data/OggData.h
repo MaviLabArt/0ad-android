@@ -32,9 +32,6 @@
 
 class COggData : public CSoundData
 {
-	ALuint m_Format;
-	long m_Frequency;
-
 public:
 	COggData();
 	virtual ~COggData();
@@ -47,8 +44,11 @@ public:
 	virtual int FetchDataIntoBuffer(int count, ALuint* buffers);
 	virtual void ResetFile();
 
+private:
+	ALuint m_Format;
+	long m_Frequency;
 protected:
-	OggStreamPtr  ogg;
+	OggStreamPtr m_Stream;
 	bool m_FileFinished;
 	bool m_OneShot;
 	ALuint m_Buffer[100];
