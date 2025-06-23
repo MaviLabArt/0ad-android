@@ -34,11 +34,6 @@
 */
 constexpr int OGG_DEFAULT_BUFFER_SIZE = 98304;
 
-/*
-* 50 buffers of 98304 bytes each gives us 4.9 seconds of audio, which is a good amount to have buffered at once.
-*/
-constexpr int OGG_DEFAULT_BUFFER_COUNT = 50;
-
 COggData::COggData()
 	: m_Format(0), m_Frequency(0), m_OneShot(false), m_BuffersUsed(0)
 {
@@ -48,7 +43,7 @@ COggData::~COggData()
 {
 	AL_CHECK;
 	if ( m_BuffersUsed > 0 )
-		alDeleteBuffers(m_BuffersUsed, &m_Buffer[0]);
+		alDeleteBuffers(m_BuffersUsed, &m_Buffer.at(0));
 
 	AL_CHECK;
 	m_BuffersUsed = 0;
@@ -76,7 +71,7 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 	SetFileName(itemPath);
 
 	AL_CHECK;
-	alGenBuffers(OGG_DEFAULT_BUFFER_COUNT, m_Buffer);
+	alGenBuffers(m_Buffer.size(), m_Buffer.data());
 
 	ALenum err{alGetError()};
 	if (err != AL_NO_ERROR)
@@ -85,13 +80,13 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 		return false;
 	}
 
-	m_BuffersUsed = FetchDataIntoBuffer(OGG_DEFAULT_BUFFER_COUNT, m_Buffer);
+	m_BuffersUsed = FetchDataIntoBuffer(m_Buffer.size(), m_Buffer.data());
 	if (m_FileFinished)
 	{
 		m_OneShot = true;
 		if (m_BuffersUsed < OGG_DEFAULT_BUFFER_COUNT)
 		{
-			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersUsed, &m_Buffer[m_BuffersUsed]);
+			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersUsed, &m_Buffer.at(m_BuffersUsed));
 		}
 	}
 	AL_CHECK;
@@ -133,7 +128,7 @@ int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 		if (totalRet > 0)
 		{
 			buffersWritten++;
-			alBufferData(buffers[i], m_Format, PCMOut, (ALsizei)totalRet, (int)m_Frequency);
+			alBufferData( buffers[i], m_Format, PCMOut, static_cast<ALsizei>(totalRet), static_cast<ALsizei>(m_Frequency));
 		}
 	}
 	delete[] PCMOut;
@@ -143,12 +138,12 @@ int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 
 ALuint COggData::GetBuffer()
 {
-	return m_Buffer[0];
+	return m_Buffer.at(0);
 }
 
 ALuint* COggData::GetBufferPtr()
 {
-	return m_Buffer;
+	return m_Buffer.data();
 }
 
 #endif // CONFIG2_AUDIO

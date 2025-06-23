@@ -29,6 +29,12 @@
 
 #include <AL/al.h>
 #include <AL/alc.h>
+#include <array>
+
+/*
+* 50 buffers of 98304 bytes each gives us 4.9 seconds of audio, which is a good amount to have buffered at once.
+*/
+constexpr int OGG_DEFAULT_BUFFER_COUNT = 50;
 
 class COggData : public CSoundData
 {
@@ -51,7 +57,7 @@ protected:
 	OggStreamPtr m_Stream;
 	bool m_FileFinished;
 	bool m_OneShot;
-	ALuint m_Buffer[100];
+	std::array<ALuint, OGG_DEFAULT_BUFFER_COUNT> m_Buffer{};
 	int m_BuffersUsed;
 
 	void SetFormatAndFreq(int form, ALsizei freq);
