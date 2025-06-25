@@ -25,6 +25,7 @@ libraries/source/spirv-reflect/*
 !libraries/source/**/patches/
 
 # Tools
+appimage-build/
 archives/
 build/bin/
 source/tools/spirv/rules.*.json
@@ -68,6 +69,7 @@ binaries/data/mods/public/gui/credits/texts/translators.json
 *.pot
 
 # Packaged mods and tarballs
+*.AppImage
 *.pyromod
 *.zip
 *.tar

@@ -15,6 +15,7 @@ in particular, let us know and we can try to clarify it.
     MIT
 
   dist
+    GPL-2.0-or-later
     MIT
     zlib/libpng (FileAssociation.nsh)
 

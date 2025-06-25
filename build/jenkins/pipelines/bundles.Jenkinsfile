@@ -140,24 +140,67 @@ pipeline {
         stage('Create Windows Installer & Tarballs') {
             steps {
                 sh "BUNDLE_VERSION=${params.BUNDLE_VERSION} DO_GZIP=${params.DO_GZIP} source/tools/dist/build-unix-win32.sh"
+                stash(name: 'unix-sources', includes: '*.tar.gz')
+            }
+        }
+
+        stage('Create AppImage') {
+            stages {
+                stage('Docker Setup') {
+                    agent {
+                        node {
+                            label 'LinuxAgent'
+                            customWorkspace 'workspace/appimage'
+                        }
+                    }
+                    steps {
+                        checkout scm
+                        sh 'git clean -dxf'
+                        sh 'docker build -t debian-12 -f build/jenkins/dockerfiles/debian-12.Dockerfile .'
+                    }
+                }
+
+                stage('Build AppImage') {
+                    agent {
+                        dockerfile {
+                            label 'LinuxAgent'
+                            customWorkspace 'workspace/appimage'
+                            dir 'build/jenkins/dockerfiles'
+                            filename 'debian-12-appimage.Dockerfile'
+                            // Prevent Jenkins from running commands with the UID of the host's jenkins user
+                            // https://stackoverflow.com/a/42822143
+                            args '-u root'
+                        }
+                    }
+
+                    steps {
+                        unstash('unix-sources')
+                        untar(dir: 'appimage-build', file: "0ad-${params.BUNDLE_VERSION}-unix-build.tar.gz", keepPermissions: true)
+                        untar(dir: 'appimage-build', file: "0ad-${params.BUNDLE_VERSION}-unix-data.tar.gz", keepPermissions: true)
+
+                        sh "source/tools/dist/build-appimage.sh --version ${params.BUNDLE_VERSION} --root appimage-build/0ad-${params.BUNDLE_VERSION}"
+                        stash(name: 'appimage', includes: '*AppImage')
+                    }
+                }
             }
         }
 
         stage('Generate Signatures and Checksums') {
             steps {
+                unstash('appimage')
                 withCredentials([sshUserPrivateKey(credentialsId: 'minisign-releases-key', keyFileVariable: 'MINISIGN_KEY', passphraseVariable: 'MINISIGN_PASS')]) {
-                    sh 'echo ${MINISIGN_PASS} | minisign -s ${MINISIGN_KEY} -Sm *.{dmg,exe,tar.gz,tar.xz}'
+                    sh 'echo ${MINISIGN_PASS} | minisign -s ${MINISIGN_KEY} -Sm *.{AppImage,dmg,exe,tar.gz,tar.xz}'
                 }
-                sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do md5sum "${file}" > "${file}".md5sum; done'
-                sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do sha1sum "${file}" > "${file}".sha1sum; done'
-                sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do sha256sum "${file}" > "${file}".sha256sum; done'
+                sh 'for file in *.{AppImage,dmg,exe,tar.gz,tar.xz}; do md5sum "${file}" > "${file}".md5sum; done'
+                sh 'for file in *.{AppImage,dmg,exe,tar.gz,tar.xz}; do sha1sum "${file}" > "${file}".sha1sum; done'
+                sh 'for file in *.{AppImage,dmg,exe,tar.gz,tar.xz}; do sha256sum "${file}" > "${file}".sha256sum; done'
             }
         }
     }
 
     post {
         success {
-            archiveArtifacts '*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum,*.sha256sum'
+            archiveArtifacts '*AppImage,*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum,*.sha256sum'
         }
         cleanup {
             sh 'svn revert -R .'
