@@ -22,7 +22,7 @@ function init()
 function applySelectedLocale()
 {
 	var localeText = Engine.GetGUIObjectByName("localeText");
-	if(!Engine.SaveLocale(localeText.caption))
+	if (!Engine.SaveLocale(localeText.caption))
 	{
 		warn("Selected locale could not be saved in the configuration!");
 		return;
@@ -37,7 +37,7 @@ function languageSelectionChanged()
 	var locale = languageList.list_data[languageList.selected];
 	if (locale == "long")
 		warn("'long' is not an actual language, just a collection of all longest strings extracted from some languages");
-	else if(!Engine.ValidateLocale(locale))
+	else if (!Engine.ValidateLocale(locale))
 		warn("Selected locale is not valid! This is not expected, please report the issue.");
 	var localeText = Engine.GetGUIObjectByName("localeText");
 	localeText.caption = locale;

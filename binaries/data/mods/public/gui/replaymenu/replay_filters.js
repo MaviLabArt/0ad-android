@@ -240,10 +240,10 @@ function filterReplays()
 		else if (cmpA > cmpB)
 			return +sortOrder;
 
-		else if(cmpA_secondary && cmpB_secondary)
+		else if (cmpA_secondary && cmpB_secondary)
 			if (cmpA_secondary < cmpB_secondary)
 				return -sortOrder;
-			else if(cmpA_secondary > cmpB_secondary)
+			else if (cmpA_secondary > cmpB_secondary)
 				return +sortOrder;
 
 		return 0;

@@ -14,7 +14,7 @@ function Cheat(input)
 	const cmpGuiInterface = Engine.QueryInterface(SYSTEM_ENTITY, IID_GuiInterface);
 	const cmpPopulationManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_PopulationCapManager);
 
-	switch(input.action)
+	switch (input.action)
 	{
 	case "addresource":
 		if (isNaN(input.parameter))

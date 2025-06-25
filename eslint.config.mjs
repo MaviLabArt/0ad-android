@@ -124,6 +124,7 @@ const configStylistic = {
 		"@stylistic/comma-spacing": "warn",
 		"@stylistic/indent": ["warn", "tab", { "outerIIFEBody": "off" }],
 		"@stylistic/key-spacing": "warn",
+		"@stylistic/keyword-spacing": ["warn", { "before": true, "after": true }],
 		"@stylistic/new-parens": "warn",
 		"@stylistic/no-extra-parens": "off",
 		"@stylistic/no-extra-semi": "warn",

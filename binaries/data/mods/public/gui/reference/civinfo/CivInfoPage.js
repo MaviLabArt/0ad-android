@@ -58,7 +58,7 @@ class CivInfoPage extends ReferencePage
 
 		const civInfo = this.civData[civCode];
 
-		if(!civInfo)
+		if (!civInfo)
 			error(sprintf("Error loading civ data for \"%(code)s\"", { "code": civCode }));
 
 		this.gameplaySection.update(this.activeCiv, civInfo);

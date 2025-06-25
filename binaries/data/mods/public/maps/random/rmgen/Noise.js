@@ -86,14 +86,14 @@ function Noise3D(freq, vfreq)
 		for (let j=0; j < freq; ++j)
 		{
 			this.grads[i][j] = [];
-			for(let k=0; k < vfreq; ++k)
+			for (let k=0; k < vfreq; ++k)
 			{
 				const v = new Vector3D();
 				do
 				{
 					v.set(randFloat(-1, 1), randFloat(-1, 1), randFloat(-1, 1));
 				}
-				while(v.lengthSquared() > 1 || v.lengthSquared() < 0.1);
+				while (v.lengthSquared() > 1 || v.lengthSquared() < 0.1);
 
 				v.normalize();
 

@@ -62,7 +62,7 @@ PopulationCapManager.prototype.GetPopulationCap = function()
  */
 PopulationCapManager.prototype.InitializePopCaps = function()
 {
-	switch(this.popCapType)
+	switch (this.popCapType)
 	{
 	case CAPTYPE_PLAYER_POPULATION:
 		this.InitializePlayerPopCaps();
@@ -149,7 +149,7 @@ PopulationCapManager.prototype.RedistributeWorldPopCap = function()
  */
 PopulationCapManager.prototype.OnGlobalPlayerDefeated = function(msg)
 {
-	switch(this.popCapType)
+	switch (this.popCapType)
 	{
 	case CAPTYPE_TEAM_POPULATION:
 	{

@@ -218,7 +218,7 @@ class Profiler2Report
 			if (data[i][0] == this.ITEM_LEAVE)
 				stack.pop();
 		}
-		if(!range)
+		if (!range)
 		{
 			range = { "tmin": data[0][1], "tmax": data[data.length-1][1] };
 		}

@@ -79,7 +79,7 @@ var g_MainMenuItems = [
 			{
 				Engine.SwitchGuiPage(CampaignRun.getCurrentRun().getMenuPath());
 			}
-			catch(err)
+			catch (err)
 			{
 				error("Error opening campaign run:");
 				error(err.toString());
@@ -136,7 +136,7 @@ var g_MainMenuItems = [
 					{
 						Engine.SwitchGuiPage(CampaignRun.getCurrentRun().getMenuPath());
 					}
-					catch(err)
+					catch (err)
 					{
 						error("Error opening campaign run:");
 						error(err.toString());

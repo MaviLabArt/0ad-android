@@ -49,7 +49,7 @@ function InitGame(settings)
 
 		if (settings.PlayerData[i])
 		{
-			if(settings.PlayerData[i].Removed)
+			if (settings.PlayerData[i].Removed)
 			{
 				cmpPlayer.Defeat(undefined);
 				continue;

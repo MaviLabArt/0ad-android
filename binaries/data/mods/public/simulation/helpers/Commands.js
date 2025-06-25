@@ -41,7 +41,7 @@ var g_Commands = {
 		if (!cmpDiplomacy || cmpDiplomacy.IsTeamLocked())
 			return;
 
-		switch(cmd.to)
+		switch (cmd.to)
 		{
 		case "ally":
 			cmpDiplomacy.Ally(cmd.player);
@@ -240,7 +240,7 @@ var g_Commands = {
 		for (const ent of data.entities)
 		{
 			var cmpUnitAI = Engine.QueryInterface(ent, IID_UnitAI);
-			if(!cmpUnitAI || !cmpUnitAI.BackToWork())
+			if (!cmpUnitAI || !cmpUnitAI.BackToWork())
 				notifyBackToWorkFailure(player);
 		}
 	},

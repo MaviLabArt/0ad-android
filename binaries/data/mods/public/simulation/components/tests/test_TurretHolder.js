@@ -139,18 +139,18 @@ cmpTurretHolder = ConstructComponent(turretHolderID, "TurretHolder", {
 let spawned = 100;
 Engine.AddEntity = function() {
 	++spawned;
-	if(spawned > 101)
+	if (spawned > 101)
 	{
 		ConstructComponent(spawned, "Turretable", {});
 	}
-	if(spawned > 102)
+	if (spawned > 102)
 	{
 		AddMock(spawned, IID_Ownership, {
 			"GetOwner": () => player,
 			"SetOwner": () => {}
 		});
 	}
-	if(spawned > 103)
+	if (spawned > 103)
 	{
 		AddMock(spawned, IID_Position, {
 			"GetPosition": () => new Vector3D(4, 3, 25),
