@@ -455,7 +455,7 @@ private:
 	 *
 	 * @see LoadXmlFile()
 	 */
-	IGUIObject* Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+	void Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
 		std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
 		u32 nesting_depth);
 

@@ -656,7 +656,8 @@ void CGUI::Xeromyces_ReadRootSetup(const XMBData& xmb, XMBElement element)
 	}
 }
 
-IGUIObject* CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent, std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
+void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+	std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
 {
 	ENSURE(pParent);
 
@@ -674,7 +675,7 @@ IGUIObject* CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, I
 	if (!object)
 	{
 		LOGERROR("GUI: Unrecognized object type \"%s\"", type.c_str());
-		return nullptr;
+		return;
 	}
 
 	// Cache some IDs for element attribute names, to avoid string comparisons
@@ -952,11 +953,7 @@ IGUIObject* CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, I
 	}
 
 	if (!AddObject(*pParent, *object))
-	{
 		delete object;
-		return nullptr;
-	}
-	return object;
 }
 
 void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject* pParent, std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
