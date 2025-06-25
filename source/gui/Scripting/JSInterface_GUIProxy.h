@@ -101,6 +101,7 @@ public:
 	// @return the JSFunction matching @param name. Must call has() first as it can assume existence.
 	virtual JSObject* get(const std::string& name) const = 0;
 	virtual bool setFunction(const ScriptRequest& rq, const std::string& name, JSFunction* function) = 0;
+	virtual std::vector<std::string_view> getPropsNames() const = 0;
 };
 
 /**
@@ -177,24 +178,17 @@ protected:
 	// The following methods are not provided by BaseProxyHandler.
 	// We provide defaults that do nothing (some raise JS exceptions).
 
-	// The JS code will see undefined when querying a property descriptor.
-	virtual bool getOwnPropertyDescriptor(JSContext*, JS::HandleObject /*proxy*/, JS::HandleId,
-		JS::MutableHandle<mozilla::Maybe<JS::PropertyDescriptor>>) const override
-	{
-		return true;
-	}
+	virtual bool getOwnPropertyDescriptor(JSContext* cx, JS::HandleObject proxy, JS::HandleId id, JS::MutableHandle<mozilla::Maybe<JS::PropertyDescriptor>> desc) const override final;
+
 	// Throw an exception is JS code attempts defining a property.
 	virtual bool defineProperty(JSContext*, JS::HandleObject /*proxy*/, JS::HandleId,
 		JS::Handle<JS::PropertyDescriptor>, JS::ObjectOpResult& /*result*/) const override
 	{
 		return false;
 	}
-	// No accessible properties.
-	virtual bool ownPropertyKeys(JSContext*, JS::HandleObject /*proxy*/,
-		JS::MutableHandleIdVector) const override
-	{
-		return true;
-	}
+
+	virtual bool ownPropertyKeys(JSContext* cx, JS::HandleObject proxy, JS::MutableHandleIdVector props) const override final;
+
 	// Nothing to enumerate.
 	virtual bool enumerate(JSContext*, JS::HandleObject /*proxy*/,
 		JS::MutableHandleIdVector /*props*/) const override

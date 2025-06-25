@@ -104,6 +104,17 @@ public:
 		return true;
 	}
 
+	virtual std::vector<std::string_view> getPropsNames() const override
+	{
+		std::vector<std::string_view> result;
+		result.reserve(m_Functions.size());
+
+		for (const auto& [key, value] : m_Functions)
+			result.emplace_back(key);
+
+		return result;
+	}
+
 protected:
 	std::unordered_map<std::string, JS::PersistentRootedObject> m_Functions;
 };
@@ -343,5 +354,84 @@ bool JSI_GUIProxy<T>::delete_(JSContext* cx, JS::HandleObject proxy, JS::HandleI
 
 	LOGERROR("Only event handlers can be deleted from GUI objects!");
 	return result.fail(JSMSG_BAD_PROP_ID);
+}
+
+template<typename T>
+bool JSI_GUIProxy<T>::ownPropertyKeys(JSContext* cx, JS::HandleObject proxy, JS::MutableHandleIdVector props) const
+{
+	ScriptRequest rq(cx);
+
+	T* e = IGUIProxyObject::FromPrivateSlot<T>(proxy.get());
+	if (!e)
+		return false;
+
+	// Add common properties.
+	static constexpr std::array<const char*, 3> keys = {
+		"name",
+		"parent",
+		"children"
+	};
+
+	for (const char* key : keys)
+	{
+		JS::RootedString str(cx, JS_NewStringCopyZ(cx, key));
+		if (!str)
+			return false;
+
+		JS::RootedId id(cx);
+		if (!JS_StringToId(cx, str, &id))
+			return false;
+
+		if (!props.append(id))
+			return false;
+	}
+
+	// Add settings.
+	for (const auto& [name, setting] : e->m_Settings)
+	{
+		JS::RootedString str(cx, JS_NewStringCopyZ(cx, name.c_str()));
+		JS::RootedId id(cx);
+		if (!str || !JS_StringToId(cx, str, &id) || !props.append(id))
+			return false;
+	}
+
+	// Add script handlers.
+	for (const auto& [name, scriptHandler] : e->m_ScriptHandlers)
+	{
+		JS::RootedString str(cx, JS_NewStringCopyZ(cx, fmt::format("on{}", name).c_str()));
+		JS::RootedId id(cx);
+		if (!str || !JS_StringToId(cx, str, &id) || !props.append(id))
+			return false;
+	}
+
+	// Add properties from the cache.
+	using PropertyCache = typename PropCache::type;
+	const PropertyCache* data = static_cast<const PropertyCache*>(static_cast<const GUIProxyProps*>(js::GetProxyReservedSlot(proxy, 0).toPrivate()));
+	for (const auto& key : data->getPropsNames()) {
+		JS::RootedString str(cx, JS_NewStringCopyZ(cx, key.data()));
+		JS::RootedId id(cx);
+		if (!str || !JS_StringToId(cx, str, &id) || !props.append(id))
+			return false;
+	}
+
+	return true;
+}
+
+template<typename T>
+bool JSI_GUIProxy<T>::getOwnPropertyDescriptor(JSContext* cx, JS::HandleObject proxy, JS::HandleId id, JS::MutableHandle<mozilla::Maybe<JS::PropertyDescriptor>> desc) const
+{
+	JS::RootedValue value(cx);
+
+	if (!this->get(cx, proxy, JS::UndefinedHandleValue, id, &value))
+		return false;
+
+	if (value.isUndefined())
+	{
+		desc.set(mozilla::Nothing());
+		return true;
+	}
+
+	desc.set(mozilla::Some(JS::PropertyDescriptor::Data(value, JSPROP_ENUMERATE | JSPROP_READONLY)));
+	return true;
 }
 #endif // INCLUDED_JSI_GUIPROXY_IMP
