@@ -4,10 +4,6 @@ Engine.LoadComponentScript("interfaces/Diplomacy.js");
 Engine.LoadComponentScript("interfaces/PopulationCapManager.js");
 Engine.LoadComponentScript("PopulationCapManager.js");
 
-const CAPTYPE_PLAYER_POPULATION = "player";
-const CAPTYPE_TEAM_POPULATION = "team";
-const CAPTYPE_WORLD_POPULATION = "world";
-
 const DEFAULT_POPCAP = 999;
 
 const cmpPopulationCapManager = ConstructComponent(SYSTEM_ENTITY, "PopulationCapManager");
@@ -54,7 +50,7 @@ const currentPopCaps = Object.keys(playerData).fill(DEFAULT_POPCAP);
 
 AddMock(SYSTEM_ENTITY, IID_PlayerManager, {
 	"GetNonGaiaPlayers": () => { return Object.keys(playerData).slice(1); },
-	"GetActivePlayers": () => { return Object.keys(playerData.filter(player => player.state == "active")).slice(1); },
+	"GetActivePlayers": () => { return Object.keys(playerData.filter(player => player.state === "active")).slice(1); },
 	"GetPlayerByID": (id) => id
 });
 
@@ -69,10 +65,10 @@ for (const playerID in Object.keys(playerData))
 }
 
 cmpPopulationCapManager.SetPopulationCap(400);
-cmpPopulationCapManager.SetPopulationCapType(CAPTYPE_PLAYER_POPULATION);
+cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION);
 TS_ASSERT_UNEVAL_EQUALS(currentPopCaps, [DEFAULT_POPCAP, 400, 400, 400, 400, 400, 400, 400, 400]);
 
-cmpPopulationCapManager.SetPopulationCapType(CAPTYPE_TEAM_POPULATION);
+cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_TEAM_POPULATION);
 TS_ASSERT_UNEVAL_EQUALS(currentPopCaps, [DEFAULT_POPCAP, 400, 400, 400, 133, 133, 133, 200, 200]);
 
 playerData[6].team = 2;
@@ -84,7 +80,7 @@ currentPopCaps.pop();
 cmpPopulationCapManager.OnGlobalPlayerDefeated({ "playerId": 8 });
 TS_ASSERT_UNEVAL_EQUALS(currentPopCaps, [DEFAULT_POPCAP, 400, 400, 400, 200, 200, 200, 200]);
 
-cmpPopulationCapManager.SetPopulationCapType(CAPTYPE_WORLD_POPULATION);
+cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_WORLD_POPULATION);
 TS_ASSERT_UNEVAL_EQUALS(currentPopCaps, [DEFAULT_POPCAP, 57, 57, 57, 57, 57, 57, 57]);
 
 playerData[7].state = "defeated";

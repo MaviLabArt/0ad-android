@@ -1,8 +1,8 @@
-const CAPTYPE_PLAYER_POPULATION = "player";
-const CAPTYPE_TEAM_POPULATION = "team";
-const CAPTYPE_WORLD_POPULATION = "world";
-
 function PopulationCapManager() {}
+
+PopulationCapManager.prototype.CAPTYPE_PLAYER_POPULATION = "player";
+PopulationCapManager.prototype.CAPTYPE_TEAM_POPULATION = "team";
+PopulationCapManager.prototype.CAPTYPE_WORLD_POPULATION = "world";
 
 PopulationCapManager.prototype.Schema =
 	"<a:component type='system'/><empty/>";
@@ -17,7 +17,7 @@ PopulationCapManager.prototype.Init = function()
  */
 PopulationCapManager.prototype.SetPopulationCapType = function(type)
 {
-	if ([CAPTYPE_PLAYER_POPULATION, CAPTYPE_TEAM_POPULATION, CAPTYPE_WORLD_POPULATION].includes(type))
+	if ([this.CAPTYPE_PLAYER_POPULATION, this.CAPTYPE_TEAM_POPULATION, this.CAPTYPE_WORLD_POPULATION].includes(type))
 		this.popCapType = type;
 	else
 	{
@@ -64,15 +64,15 @@ PopulationCapManager.prototype.InitializePopCaps = function()
 {
 	switch (this.popCapType)
 	{
-	case CAPTYPE_PLAYER_POPULATION:
+	case this.CAPTYPE_PLAYER_POPULATION:
 		this.InitializePlayerPopCaps();
 		break;
 
-	case CAPTYPE_TEAM_POPULATION:
+	case this.CAPTYPE_TEAM_POPULATION:
 		this.InitializeTeamPopCaps();
 		break;
 
-	case CAPTYPE_WORLD_POPULATION:
+	case this.CAPTYPE_WORLD_POPULATION:
 		this.RedistributeWorldPopCap();
 		break;
 
@@ -151,18 +151,18 @@ PopulationCapManager.prototype.OnGlobalPlayerDefeated = function(msg)
 {
 	switch (this.popCapType)
 	{
-	case CAPTYPE_TEAM_POPULATION:
+	case this.CAPTYPE_TEAM_POPULATION:
 	{
 		const team = QueryPlayerIDInterface(msg.playerId, IID_Diplomacy).GetTeam();
-		if (team != -1)
+		if (team !== -1)
 			this.RedistributeTeamPopCap(team);
 		break;
 	}
-	case CAPTYPE_WORLD_POPULATION:
+	case this.CAPTYPE_WORLD_POPULATION:
 		this.RedistributeWorldPopCap();
 		break;
 
-	case CAPTYPE_PLAYER_POPULATION:
+	case this.CAPTYPE_PLAYER_POPULATION:
 	default: break;
 	}
 };
@@ -175,7 +175,7 @@ PopulationCapManager.prototype.OnGlobalPlayerDefeated = function(msg)
  */
 PopulationCapManager.prototype.OnTeamChanged = function(msg)
 {
-	if (this.popCapType != CAPTYPE_TEAM_POPULATION)
+	if (this.popCapType !== this.CAPTYPE_TEAM_POPULATION)
 		return;
 
 	this.RedistributeTeamPopCap(msg.oldTeam);
