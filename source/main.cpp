@@ -636,6 +636,7 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 	g_frequencyFilter = CreateFrequencyFilter(res, 30.0);
 
 	// run the game
+	bool rlInterfaceError{false};
 	bool firstIteration{true};
 	do
 	{
@@ -687,23 +688,31 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 		else if (!InitNonVisual(args))
 			g_Shutdown = ShutdownType::Quit;
 
-		// MSVC doesn't support copy elision in ternary expressions. So we use a lambda instead.
-		std::optional<RL::Interface> rlInterface{[&]() -> std::optional<RL::Interface>
-			{
-				if (g_Shutdown == ShutdownType::None)
-					return CreateRLInterface(args);
-				else
-					return std::nullopt;
-			}()};
-
-		while (g_Shutdown == ShutdownType::None)
+		try
 		{
-			if (isVisual)
-				Frame(rlInterface ? &*rlInterface : nullptr, fixedFrameFrequency);
-			else if(rlInterface)
-				rlInterface->TryApplyMessage();
-			else
-				NonVisualFrame();
+			// MSVC doesn't support copy elision in ternary expressions. So we use a lambda instead.
+			std::optional<RL::Interface> rlInterface{[&]() -> std::optional<RL::Interface>
+				{
+					if (g_Shutdown == ShutdownType::None)
+						return CreateRLInterface(args);
+					else
+						return std::nullopt;
+				}()};
+
+			while (g_Shutdown == ShutdownType::None)
+			{
+				if (isVisual)
+					Frame(rlInterface ? &*rlInterface : nullptr, fixedFrameFrequency);
+				else if(rlInterface)
+					rlInterface->TryApplyMessage();
+				else
+					NonVisualFrame();
+			}
+
+		}
+		catch (const RL::SetupError&)
+		{
+		      rlInterfaceError = true;
 		}
 
 		ShutdownNetworkAndUI();
@@ -712,6 +721,9 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 		MainControllerShutdown();
 
 	} while (g_Shutdown == ShutdownType::Restart);
+
+	if (rlInterfaceError)
+	      throw RL::SetupError{};
 
 #if OS_MACOSX
 	if (g_Shutdown == ShutdownType::RestartAsAtlas)
@@ -755,8 +767,16 @@ extern "C" int main(int argc, char* argv[])
 
 	EarlyInit();	// must come at beginning of main
 
-	// static_cast is ok, argc is never negative.
-	RunGameOrAtlas({argv, static_cast<std::size_t>(argc)});
+	int returnValue{EXIT_SUCCESS};
+	try
+	{
+		// static_cast is ok, argc is never negative.
+		RunGameOrAtlas({argv, static_cast<std::size_t>(argc)});
+	}
+	catch (const RL::SetupError&)
+	{
+		returnValue = EXIT_FAILURE;
+	}
 
 	// Shut down profiler initialised by EarlyInit
 	g_Profiler2.Shutdown();
@@ -769,5 +789,5 @@ extern "C" int main(int argc, char* argv[])
 	wutil_Shutdown();
 #endif
 
-	return EXIT_SUCCESS;
+	return returnValue;
 }

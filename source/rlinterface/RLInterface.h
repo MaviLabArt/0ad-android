@@ -22,6 +22,7 @@
 #include "third_party/mongoose/mongoose.h"
 
 #include <condition_variable>
+#include <exception>
 #include <mutex>
 #include <vector>
 
@@ -55,6 +56,11 @@ struct GameMessage
 {
 	GameMessageType type;
 	std::vector<GameCommand> commands;
+};
+
+struct SetupError : std::exception
+{
+	using std::exception::exception;
 };
 
 /**

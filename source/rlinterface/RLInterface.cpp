@@ -50,7 +50,8 @@ Interface::Interface(const char* server_address)
 		nullptr
 	};
 	m_Context = mg_start(MgCallback, this, options);
-	ENSURE(m_Context);
+	if (!m_Context)
+		throw SetupError{};
 }
 
 Interface::~Interface()
