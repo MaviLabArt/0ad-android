@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -29,12 +29,13 @@ constexpr unsigned int FSM_INVALID_STATE{std::numeric_limits<unsigned int>::max(
  * The CFsmEvent objects are under the control of CFsm so
  * they are created and deleted via CFsm.
  */
+template <typename MessageType>
 class CFsmEvent
 {
 public:
-	CFsmEvent(unsigned int type, void* pParam) :
+	CFsmEvent(unsigned int type, MessageType param) :
 		m_Type{type},
-		m_Param{pParam}
+		m_Param{param}
 	{}
 
 	unsigned int GetType() const
@@ -42,14 +43,14 @@ public:
 		return m_Type;
 	}
 
-	void* GetParamRef()
+	MessageType GetParamRef()
 	{
 		return m_Param;
 	}
 
 private:
 	unsigned int m_Type; // Event type
-	void* m_Param; // Event paramater
+	MessageType m_Param; // Event paramater
 };
 
 /**
@@ -63,17 +64,17 @@ private:
  * transitions; Mealy machines are event driven where an
  * event triggers a state transition.
  */
-template <typename Context>
+template <typename Context, typename MessageType>
 class CFsm
 {
-	using Action = bool(Context* pContext, CFsmEvent* pEvent);
+	using Action = bool(Context* pContext, CFsmEvent<MessageType>* pEvent);
 
 	struct CallbackFunction
 	{
 		Action* pFunction{nullptr};
 		Context* pContext{nullptr};
 
-		bool operator()(CFsmEvent& event) const
+		bool operator()(CFsmEvent<MessageType>& event) const
 		{
 			return !pFunction || pFunction(pContext, &event);
 		}
@@ -123,7 +124,7 @@ public:
 	 * Updates the FSM and retrieves next state.
 	 * @return whether the state was changed.
 	 */
-	bool Update(unsigned int eventType, void* pEventData)
+	bool Update(unsigned int eventType, MessageType eventData)
 	{
 		if (IsFirstTime())
 			m_CurrState = m_FirstState;
@@ -133,7 +134,7 @@ public:
 		if (transitionIterator == m_Transitions.end())
 			return false;
 
-		CFsmEvent event{eventType, pEventData};
+		CFsmEvent<MessageType> event{eventType, eventData};
 
 		// Save the default state transition (actions might call SetNextState
 		// to override this)

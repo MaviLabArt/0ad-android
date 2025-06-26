@@ -628,7 +628,7 @@ void CNetServerWorker::CheckClientConnections()
 	}
 }
 
-void CNetServerWorker::HandleMessageReceive(const CNetMessage* message, CNetServerSession* session)
+void CNetServerWorker::HandleMessageReceive(CNetMessage* message, CNetServerSession* session)
 {
 	// Handle non-FSM messages first
 	Status status = session->GetFileTransferer().HandleMessageReceive(*message);
@@ -652,7 +652,7 @@ void CNetServerWorker::HandleMessageReceive(const CNetMessage* message, CNetServ
 	}
 
 	// Update FSM
-	if (!session->Update(message->GetType(), (void*)message))
+	if (!session->Update(message->GetType(), message))
 		LOGERROR("Net server: Error running FSM update (type=%d state=%d)", (int)message->GetType(), (int)session->GetCurrState());
 }
 
@@ -904,7 +904,7 @@ void CNetServerWorker::ProcessLobbyAuth(const CStr& name, const CStr& token)
 	(*it)->SendMessage(&emptyMessage);
 }
 
-bool CNetServerWorker::OnClientHandshake(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnClientHandshake(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CLIENT_HANDSHAKE);
 
@@ -957,7 +957,7 @@ bool CNetServerWorker::OnClientHandshake(CNetServerSession* session, CFsmEvent* 
 	return true;
 }
 
-bool CNetServerWorker::OnAuthenticate(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnAuthenticate(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_AUTHENTICATE);
 
@@ -1177,7 +1177,7 @@ bool CNetServerWorker::OnAuthenticate(CNetServerSession* session, CFsmEvent* eve
 	return true;
 }
 
-bool CNetServerWorker::OnSimulationCommand(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnSimulationCommand(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_SIMULATION_COMMAND);
 
@@ -1214,7 +1214,7 @@ bool CNetServerWorker::OnSimulationCommand(CNetServerSession* session, CFsmEvent
 	return true;
 }
 
-bool CNetServerWorker::OnFlare(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnFlare(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_FLARE);
 
@@ -1226,7 +1226,7 @@ bool CNetServerWorker::OnFlare(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnSyncCheck(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnSyncCheck(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_SYNC_CHECK);
 
@@ -1238,7 +1238,7 @@ bool CNetServerWorker::OnSyncCheck(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnEndCommandBatch(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnEndCommandBatch(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_END_COMMAND_BATCH);
 
@@ -1251,7 +1251,7 @@ bool CNetServerWorker::OnEndCommandBatch(CNetServerSession* session, CFsmEvent* 
 	return true;
 }
 
-bool CNetServerWorker::OnChat(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnChat(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CHAT);
 
@@ -1277,7 +1277,7 @@ bool CNetServerWorker::OnChat(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnReady(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnReady(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_READY);
 
@@ -1297,7 +1297,7 @@ bool CNetServerWorker::OnReady(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnClearAllReady(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnClearAllReady(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CLEAR_ALL_READY);
 
@@ -1309,7 +1309,7 @@ bool CNetServerWorker::OnClearAllReady(CNetServerSession* session, CFsmEvent* ev
 	return true;
 }
 
-bool CNetServerWorker::OnGameSetup(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnGameSetup(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_GAME_SETUP);
 
@@ -1332,7 +1332,7 @@ bool CNetServerWorker::OnGameSetup(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnAssignPlayer(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnAssignPlayer(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_ASSIGN_PLAYER);
 	CNetServerWorker& server = session->GetServer();
@@ -1345,7 +1345,7 @@ bool CNetServerWorker::OnAssignPlayer(CNetServerSession* session, CFsmEvent* eve
 	return true;
 }
 
-bool CNetServerWorker::OnGameStart(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnGameStart(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_GAME_START);
 	CNetServerWorker& server = session->GetServer();
@@ -1358,7 +1358,7 @@ bool CNetServerWorker::OnGameStart(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnSavedGameStart(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnSavedGameStart(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == static_cast<uint>(NMT_SAVED_GAME_START));
 	CNetServerWorker& server{session->GetServer()};
@@ -1377,7 +1377,7 @@ bool CNetServerWorker::OnSavedGameStart(CNetServerSession* session, CFsmEvent* e
 	return true;
 }
 
-bool CNetServerWorker::OnLoadedGame(CNetServerSession* loadedSession, CFsmEvent* event)
+bool CNetServerWorker::OnLoadedGame(CNetServerSession* loadedSession, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_LOADED_GAME);
 
@@ -1411,7 +1411,7 @@ bool CNetServerWorker::OnLoadedGame(CNetServerSession* loadedSession, CFsmEvent*
 	return true;
 }
 
-bool CNetServerWorker::OnJoinSyncingLoadedGame(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnJoinSyncingLoadedGame(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	// A client rejoining an in-progress game has now finished loading the
 	// map and deserialized the initial state.
@@ -1463,7 +1463,7 @@ bool CNetServerWorker::OnJoinSyncingLoadedGame(CNetServerSession* session, CFsmE
 	return true;
 }
 
-bool CNetServerWorker::OnRejoined(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnRejoined(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	// A client has finished rejoining and the loading screen disappeared.
 	ENSURE(event->GetType() == (uint)NMT_REJOINED);
@@ -1487,7 +1487,7 @@ bool CNetServerWorker::OnRejoined(CNetServerSession* session, CFsmEvent* event)
 	return true;
 }
 
-bool CNetServerWorker::OnKickPlayer(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnKickPlayer(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_KICKED);
 
@@ -1501,7 +1501,7 @@ bool CNetServerWorker::OnKickPlayer(CNetServerSession* session, CFsmEvent* event
 	return true;
 }
 
-bool CNetServerWorker::OnDisconnect(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnDisconnect(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CONNECTION_LOST);
 
@@ -1512,7 +1512,7 @@ bool CNetServerWorker::OnDisconnect(CNetServerSession* session, CFsmEvent* event
 	return true;
 }
 
-bool CNetServerWorker::OnClientPaused(CNetServerSession* session, CFsmEvent* event)
+bool CNetServerWorker::OnClientPaused(CNetServerSession* session, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CLIENT_PAUSED);
 

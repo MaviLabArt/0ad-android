@@ -663,7 +663,7 @@ void CNetClient::StartGame(const JS::MutableHandleValue initAttributes, const st
 	m_Game->StartGame(initAttributes, savedState);
 }
 
-bool CNetClient::OnConnect(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnConnect(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CONNECT_COMPLETE);
 
@@ -674,7 +674,7 @@ bool CNetClient::OnConnect(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnHandshake(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnHandshake(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_SERVER_HANDSHAKE);
 	client->m_ServerHandshake = *static_cast<CSrvHandshakeMessage*>(event->GetParamRef());
@@ -685,7 +685,7 @@ bool CNetClient::OnHandshake(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnHandshakeResponse(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnHandshakeResponse(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_SERVER_HANDSHAKE_RESPONSE);
 
@@ -713,7 +713,7 @@ bool CNetClient::OnHandshakeResponse(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnAuthenticateRequest(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnAuthenticateRequest(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_AUTHENTICATE);
 
@@ -721,7 +721,7 @@ bool CNetClient::OnAuthenticateRequest(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnAuthenticate(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnAuthenticate(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_AUTHENTICATE_RESULT);
 
@@ -742,7 +742,7 @@ bool CNetClient::OnAuthenticate(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnChat(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnChat(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CHAT);
 
@@ -756,7 +756,7 @@ bool CNetClient::OnChat(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnReady(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnReady(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_READY);
 
@@ -770,7 +770,7 @@ bool CNetClient::OnReady(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnGameSetup(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnGameSetup(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_GAME_SETUP);
 
@@ -783,7 +783,7 @@ bool CNetClient::OnGameSetup(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnPlayerAssignment(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnPlayerAssignment(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_PLAYER_ASSIGNMENT);
 
@@ -810,7 +810,7 @@ bool CNetClient::OnPlayerAssignment(CNetClient* client, CFsmEvent* event)
 
 // This is called either when the host clicks the StartGame button or
 // if this client rejoins and finishes the download of the simstate.
-bool CNetClient::OnGameStart(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnGameStart(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_GAME_START);
 
@@ -826,7 +826,7 @@ bool CNetClient::OnGameStart(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnSavedGameStart(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnSavedGameStart(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == static_cast<uint>(NMT_SAVED_GAME_START));
 	CGameSavedStartMessage* message{static_cast<CGameSavedStartMessage*>(event->GetParamRef())};
@@ -850,7 +850,7 @@ bool CNetClient::OnSavedGameStart(CNetClient* client, CFsmEvent* event)
 }
 
 
-bool CNetClient::OnJoinSyncStart(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnJoinSyncStart(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_JOIN_SYNC_START);
 
@@ -875,7 +875,7 @@ bool CNetClient::OnJoinSyncStart(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnJoinSyncEndCommandBatch(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnJoinSyncEndCommandBatch(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_END_COMMAND_BATCH);
 
@@ -889,7 +889,7 @@ bool CNetClient::OnJoinSyncEndCommandBatch(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnRejoined(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnRejoined(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_REJOINED);
 
@@ -902,7 +902,7 @@ bool CNetClient::OnRejoined(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnKicked(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnKicked(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_KICKED);
 
@@ -916,7 +916,7 @@ bool CNetClient::OnKicked(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnClientTimeout(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnClientTimeout(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	// Report the timeout of some other client
 
@@ -933,7 +933,7 @@ bool CNetClient::OnClientTimeout(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnClientPerformance(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnClientPerformance(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	// Performance statistics for one or multiple clients
 
@@ -957,7 +957,7 @@ bool CNetClient::OnClientPerformance(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnClientsLoading(CNetClient* client, CFsmEvent *event)
+bool CNetClient::OnClientsLoading(CNetClient* client, CFsmEvent<CNetMessage*> *event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CLIENTS_LOADING);
 
@@ -974,7 +974,7 @@ bool CNetClient::OnClientsLoading(CNetClient* client, CFsmEvent *event)
 	return true;
 }
 
-bool CNetClient::OnClientPaused(CNetClient* client, CFsmEvent *event)
+bool CNetClient::OnClientPaused(CNetClient* client, CFsmEvent<CNetMessage*> *event)
 {
 	ENSURE(event->GetType() == (uint)NMT_CLIENT_PAUSED);
 
@@ -988,7 +988,7 @@ bool CNetClient::OnClientPaused(CNetClient* client, CFsmEvent *event)
 	return true;
 }
 
-bool CNetClient::OnLoadedGame(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnLoadedGame(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == (uint)NMT_LOADED_GAME);
 
@@ -1007,7 +1007,7 @@ bool CNetClient::OnLoadedGame(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnInGame(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnInGame(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	// TODO: should split each of these cases into a separate method
 
@@ -1035,7 +1035,7 @@ bool CNetClient::OnInGame(CNetClient* client, CFsmEvent* event)
 	return true;
 }
 
-bool CNetClient::OnFlare(CNetClient* client, CFsmEvent* event)
+bool CNetClient::OnFlare(CNetClient* client, CFsmEvent<CNetMessage*>* event)
 {
 	ENSURE(event->GetType() == static_cast<uint>(NMT_FLARE));
 
