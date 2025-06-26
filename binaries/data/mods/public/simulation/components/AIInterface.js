@@ -50,7 +50,7 @@ AIInterface.prototype.Serialize = function()
 	{
 		if (!Object.hasOwn(this, key))
 			continue;
-		if (typeof this[key] == "function")
+		if (typeof this[key] === "function")
 			continue;
 		if (key == "templates")
 			continue;

@@ -121,7 +121,7 @@ function formatPlayerInfo(playerDataArray, playerStates)
 			coloredText(
 				(g_Buddies.indexOf(playerNick) != -1 ? g_BuddySymbol + " " : "") +
 				escapeText(playerData.Name),
-				(typeof getPlayerColor == 'function' ?
+				(typeof getPlayerColor === 'function' ?
 					(isAI ? "white" : getPlayerColor(playerNick)) :
 					rgbToGuiColor(playerData.Color || g_Settings.PlayerDefaults[playerIdx].Color))),
 

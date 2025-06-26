@@ -57,7 +57,7 @@ var g_PluralTranslationsWithContext = {};
 
 function isTranslatableString(message)
 {
-	return typeof message == "string" && !!message.trim();
+	return typeof message === "string" && !!message.trim();
 }
 
 /**

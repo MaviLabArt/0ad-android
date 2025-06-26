@@ -378,7 +378,7 @@ function updateTutorial(notification)
 
 	const notificationText =
 		notification.instructions.reduce((instructions, item) =>
-			instructions + (typeof item == "string" ? translate(item) : colorizeHotkey(translate(item.text), item.hotkey)),
+			instructions + (typeof item === "string" ? translate(item) : colorizeHotkey(translate(item.text), item.hotkey)),
 		"");
 
 	Engine.GetGUIObjectByName("tutorialText").caption = g_TutorialMessages.concat(setStringTags(notificationText, g_TutorialNewMessageTags)).join("\n");
@@ -601,7 +601,7 @@ function openDialog(dialogName, data, player)
 		for (const key in data[objName])
 		{
 			const n = data[objName][key];
-			if (typeof n == "object" && n.message)
+			if (typeof n === "object" && n.message)
 			{
 				let message = n.message;
 				if (n.translateMessage)

@@ -212,7 +212,7 @@ function createObjectGroupsByAreas(group, player, constraints, amount, retryFact
 
 function createTerrain(terrain)
 {
-	return typeof terrain == "string" ?
+	return typeof terrain === "string" ?
 		new SimpleTerrain(...terrain.split(TERRAIN_SEPARATOR)) :
 		new RandomTerrain(terrain.map(t => createTerrain(t)));
 }

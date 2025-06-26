@@ -88,7 +88,7 @@ function validateMod(folder, modData, notify)
 			valid = false;
 		}
 
-		if (typeof modData[propertyName] != property.type)
+		if (typeof modData[propertyName] !== property.type)
 		{
 			if (notify)
 				warn(propertyName + " in mod '" + folder + "' is not of the type '" + property.type + "'!");

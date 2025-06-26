@@ -12,7 +12,7 @@ function calculateRatio(divident, divisor)
 
 function formatSummaryValue(values)
 {
-	if (typeof values != "object")
+	if (typeof values !== "object")
 		return values === Infinity ? g_InfinitySymbol : values;
 
 	let ret = "";
@@ -81,7 +81,7 @@ function summaryAddObject(obj1, obj2)
 function summaryArraySum(array)
 {
 	return array.reduce((sum, val) => {
-		if (typeof sum != "object")
+		if (typeof sum !== "object")
 			return sum + val;
 		summaryAddObject(sum, val);
 		return sum;

@@ -13,7 +13,7 @@ Trigger.prototype.InitTutorial = function(data)
 	{
 		for (const key in goal)
 		{
-			if (typeof goal[key] != "function" || this.tutorialEvents.indexOf(key) != -1)
+			if (typeof goal[key] !== "function" || this.tutorialEvents.indexOf(key) != -1)
 				continue;
 			if (key == "Init")
 				continue;
@@ -85,7 +85,7 @@ Trigger.prototype.GoalMessage = function(instructions, readyButton=false, leave=
 	cmpGUIInterface.PushNotification({
 		"type": "tutorial",
 		"players": [1],
-		"instructions": typeof instructions == "string" ? [instructions] : instructions,
+		"instructions": typeof instructions === "string" ? [instructions] : instructions,
 		"readyButton": readyButton,
 		"leave": leave
 	});

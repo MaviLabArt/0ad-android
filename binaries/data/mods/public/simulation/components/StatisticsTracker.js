@@ -504,10 +504,10 @@ StatisticsTracker.prototype.UpdatePeakPercentages = function()
 **/
 StatisticsTracker.prototype.PushValue = function(fromData, toData)
 {
-	if (typeof fromData == "object")
+	if (typeof fromData === "object")
 		for (const prop in fromData)
 		{
-			if (typeof toData[prop] != "object")
+			if (typeof toData[prop] !== "object")
 				toData[prop] = [fromData[prop]];
 			else
 				this.PushValue(fromData[prop], toData[prop]);

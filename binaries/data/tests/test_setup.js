@@ -64,7 +64,7 @@ global.TS_ASSERT_EXCEPTION = function(func)
 
 global.TS_ASSERT_NUMBER = function(value)
 {
-	if (typeof value != "number" || !isFinite(value))
+	if (typeof value !== "number" || !isFinite(value))
 		fail("The given value must be a real number!");
 };
 

@@ -75,7 +75,7 @@ function deepCompare(first, second)
 	// check what type one of the objects is, and then compare them.
 
 	// Check numbers seperately. Make sure this works with NaN, Infinity etc.
-	if (typeof first == "number")
+	if (typeof first === "number")
 		return uneval(first) === uneval(second);
 
 	// Functions and RegExps must have the same reference to be equal.

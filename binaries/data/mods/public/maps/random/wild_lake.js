@@ -12,7 +12,7 @@ export function* generateMap(mapSettings)
 	 */
 	function getArray(stringOrArrayOfStrings)
 	{
-		if (typeof stringOrArrayOfStrings == "string")
+		if (typeof stringOrArrayOfStrings === "string")
 			return [stringOrArrayOfStrings];
 		return stringOrArrayOfStrings;
 	}

@@ -319,7 +319,7 @@ function updateTypeDropdown(number, category, item, itemNumber)
 {
 	const testValue = g_ScorePanelsData[category].counters[itemNumber].fn(g_GameData.sim.playerStates[1], 0, item);
 	const hide = !g_ScorePanelsData[category].counters[itemNumber].fn ||
-		typeof testValue != "object" || Object.keys(testValue).length < 2;
+		typeof testValue !== "object" || Object.keys(testValue).length < 2;
 	Engine.GetGUIObjectByName("chart[" + number + "]TypeLabel").hidden = hide;
 	const chartType = Engine.GetGUIObjectByName("chart[" + number + "]TypeSelection");
 	chartType.hidden = hide;
