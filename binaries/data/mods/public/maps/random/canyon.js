@@ -85,7 +85,7 @@ export function* generateMap(mapSettings)
 				[
 					new TerrainPainter(tMainTerrain),
 					new SmoothElevationPainter(ELEVATION_SET, heightLand, 2),
-					new TileClassPainter(j == 1 || isNomad() ? clLand : clPlayer)
+					new TileClassPainter(j == 1 || mapSettings.Nomad ? clLand : clPlayer)
 				]);
 
 	g_Map.log("Creating center area");

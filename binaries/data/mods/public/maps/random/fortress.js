@@ -1,7 +1,7 @@
 Engine.LoadLibrary("rmgen");
 Engine.LoadLibrary("rmgen-common");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	const tGrass = ["temperate_grass_04", "temperate_grass_03", "temperate_grass_04"];
 	const tForestFloor = "temperate_forestfloor_01";
@@ -74,7 +74,7 @@ export function* generateMap()
 	const playerAngle = BUILDING_ORIENTATION;
 	for (let i = 0; i < numPlayers; ++i)
 	{
-		if (isNomad())
+		if (mapSettings.Nomad)
 			break;
 
 		// CC and units

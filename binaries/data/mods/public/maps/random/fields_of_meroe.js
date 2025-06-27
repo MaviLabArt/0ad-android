@@ -37,7 +37,7 @@ export function* generateMap(mapSettings)
 	const oField = "structures/kush/field";
 	const oPyramid = "structures/kush/pyramid_small";
 	const oPyramidLarge = "structures/kush/pyramid_large";
-	const oKushUnits = isNomad() ?
+	const oKushUnits = mapSettings.Nomad ?
 		"units/kush/support_female_citizen" :
 		"units/kush/infantry_javelineer_merc_e";
 
@@ -395,7 +395,7 @@ export function* generateMap(mapSettings)
 		50);
 
 	g_Map.log("Creating lions");
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		createObjectGroups(
 			new SimpleGroup([new SimpleObject(oLion, 2, 3, 0, 2)], true, clFood),
 			0,
@@ -450,7 +450,7 @@ export function* generateMap(mapSettings)
 			clRiver, 15,
 			clKushiteVillages, 15),
 		clForest,
-		stragglerTrees * (isNomad() ? 3 : 1));
+		stragglerTrees * (mapSettings.Nomad ? 3 : 1));
 
 	createStragglerTrees(
 		[oDatePalm, oSDatePalm],

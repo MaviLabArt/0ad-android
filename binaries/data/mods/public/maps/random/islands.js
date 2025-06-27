@@ -80,7 +80,7 @@ export function* generateMap(mapSettings)
 
 	const [playerIDs, playerPosition, playerAngle] = playerPlacementCircle(fractionToTiles(0.35));
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Creating player islands and docks");
 		for (let i = 0; i < numPlayers; i++)

@@ -87,7 +87,7 @@ export function* generateMap(mapSettings)
 			randomAngle(),
 			undefined);
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		for (let i = 0; i < numPlayers; ++i)
 			createArea(
 				new ClumpPlacer(diskArea(defaultPlayerBaseRadius()), 0.9, 0.5, Infinity,

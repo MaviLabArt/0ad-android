@@ -634,7 +634,7 @@ export function* generateMap(mapSettings)
 	yield 55;
 
 	g_Map.log("Placing players");
-	if (isNomad())
+	if (mapSettings.Nomad)
 		placePlayersNomad(
 			g_Map.createTileClass(),
 			[
@@ -648,12 +648,12 @@ export function* generateMap(mapSettings)
 			placeStartLocationResources(playerPosition[p]);
 		}
 
-	let mercenaryCamps = isNomad() ? 0 : Math.ceil(g_Map.size / 256);
+	let mercenaryCamps = mapSettings.Nomad ? 0 : Math.ceil(g_Map.size / 256);
 	g_Map.log("Placing at most " + mercenaryCamps + " mercenary camps");
 	for (let i = 0; i < resourceSpots.length; ++i)
 	{
 		let radius;
-		const choice = i % (isNomad() ? 4 : 5);
+		const choice = i % (mapSettings.Nomad ? 4 : 5);
 		if (choice == 0)
 			placeMine(resourceSpots[i], g_Gaia.stoneLarge);
 		if (choice == 1)

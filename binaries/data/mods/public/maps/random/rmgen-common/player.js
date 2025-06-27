@@ -26,11 +26,6 @@ var g_PlayerBaseFunctions = [
 	"Decoratives"
 ];
 
-function isNomad()
-{
-	return !!g_MapSettings.Nomad;
-}
-
 function getNumPlayers()
 {
 	return g_MapSettings.PlayerData.length - 1;
@@ -153,7 +148,7 @@ function placePlayerBases(playerBaseArgs)
  */
 function placePlayerBase(playerBaseArgs)
 {
-	if (isNomad())
+	if (g_MapSettings.Nomad)
 		return;
 
 	placeCivDefaultStartingEntities(
@@ -459,7 +454,7 @@ function placePlayerBaseDecoratives(args)
 
 function placePlayersNomad(playerClass, constraints)
 {
-	if (!isNomad())
+	if (!g_MapSettings.Nomad)
 		return undefined;
 
 	g_Map.log("Placing nomad starting units");

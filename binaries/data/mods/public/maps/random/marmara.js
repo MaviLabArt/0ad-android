@@ -124,7 +124,7 @@ export function* generateMap(mapSettings)
 		]);
 	yield 45;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Placing players");
 		const [playerIDs, playerPosition] = createBases(

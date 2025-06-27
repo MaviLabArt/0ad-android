@@ -76,7 +76,7 @@ export function* generateMap(mapSettings)
 	const clFood = g_Map.createTileClass();
 	const clBaseResource = g_Map.createTileClass();
 
-	const playerHillRadius = defaultPlayerBaseRadius() / (isNomad() ? 1.5 : 1);
+	const playerHillRadius = defaultPlayerBaseRadius() / (mapSettings.Nomad ? 1.5 : 1);
 
 	const [playerIDs, playerPosition, playerAngle] = playerPlacementCircle(fractionToTiles(0.35));
 

@@ -26,7 +26,7 @@ export function* generateMap(mapSettings)
 
 	yield 20;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		createBases(
 			...playerPlacementByPattern(

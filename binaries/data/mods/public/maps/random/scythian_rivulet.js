@@ -1,7 +1,7 @@
 Engine.LoadLibrary("rmgen");
 Engine.LoadLibrary("rmgen-common");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	const tMainTerrain = "alpine_snow_a";
 	const tTier1Terrain = "snow rough";
@@ -80,7 +80,7 @@ export function* generateMap()
 
 	const [playerIDs, playerPosition] = playerPlacementRiver(startAngle, fractionToTiles(0.6));
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		for (const position of playerPosition)
 			addCivicCenterAreaToClass(position, clPlayer);
 

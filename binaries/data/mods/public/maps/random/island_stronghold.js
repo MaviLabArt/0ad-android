@@ -88,7 +88,7 @@ export function* generateMap(mapSettings)
 
 	for (let i = 0; i < teams.length; ++i)
 	{
-		if (!teams[i] || isNomad())
+		if (!teams[i] || mapSettings.Nomad)
 			continue;
 
 		++teamNo;
@@ -212,8 +212,8 @@ export function* generateMap(mapSettings)
 	g_Map.log("Creating big islands");
 	createAreas(
 		new ChainPlacer(
-			Math.floor(scaleByMapSize(4, 8) * (isNomad() ? 2 : 1)),
-			Math.floor(scaleByMapSize(8, 16) * (isNomad() ? 2 : 1)),
+			Math.floor(scaleByMapSize(4, 8) * (mapSettings.Nomad ? 2 : 1)),
+			Math.floor(scaleByMapSize(8, 16) * (mapSettings.Nomad ? 2 : 1)),
 			Math.floor(scaleByMapSize(25, 60)),
 			0.07,
 			undefined,
@@ -224,7 +224,7 @@ export function* generateMap(mapSettings)
 			new TileClassPainter(clLand)
 		],
 		avoidClasses(clLand, 3, clPlayer, 3),
-		scaleByMapSize(4, 14) * (isNomad() ? 2 : 1),
+		scaleByMapSize(4, 14) * (mapSettings.Nomad ? 2 : 1),
 		1);
 
 	g_Map.log("Creating small islands");

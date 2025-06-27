@@ -208,7 +208,7 @@ export function* generateMap(mapSettings)
 
 	let playerIDs = [];
 	let playerPosition = [];
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Finding player locations");
 		[playerIDs, playerPosition] = playerPlacementRandom(sortAllPlayers(),
@@ -386,7 +386,7 @@ export function* generateMap(mapSettings)
 		50);
 	yield 80;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Creating lions");
 		createObjectGroups(

@@ -1,7 +1,7 @@
 Engine.LoadLibrary("rmgen");
 Engine.LoadLibrary("rmgen-common");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	TILE_CENTERED_HEIGHT_MAP = true;
 
@@ -123,7 +123,7 @@ export function* generateMap()
 				new TerrainPainter(tPrimary),
 				new SmoothElevationPainter(ELEVATION_SET, heightLand, 4),
 				new TileClassPainter(clIsland)
-			].concat(isNomad() ? [] : [new TileClassPainter(clPlayerIsland)]));
+			].concat(mapSettings.Nomad ? [] : [new TileClassPainter(clPlayerIsland)]));
 	yield 10;
 
 	g_Map.log("Creating islands");

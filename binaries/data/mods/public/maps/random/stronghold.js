@@ -115,7 +115,7 @@ export function* generateMap(mapSettings)
 		}
 	]));
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		createBluffsPassages(playerPosition);
 
 	yield 60;

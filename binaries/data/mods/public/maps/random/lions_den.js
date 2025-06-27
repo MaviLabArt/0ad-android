@@ -548,7 +548,7 @@ export function* generateMap(mapSettings)
 
 			// Den
 			createArea(
-				new ClumpPlacer(diskArea(fractionToTiles(0.1)) / (isNomad() ? 2 : 1), 0.9, 0.3,
+				new ClumpPlacer(diskArea(fractionToTiles(0.1)) / (mapSettings.Nomad ? 2 : 1), 0.9, 0.3,
 					Infinity, playerPosition),
 				[
 					new LayeredPainter([g_Terrains.cliff, base], [3]),

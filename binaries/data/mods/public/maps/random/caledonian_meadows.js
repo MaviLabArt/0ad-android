@@ -3,7 +3,7 @@ Engine.LoadLibrary("rmgen-common");
 Engine.LoadLibrary("rmbiome");
 Engine.LoadLibrary("heightmap");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	const tGrove = "temp_grass_plants";
 	const tPath = "road_rome_a";
@@ -614,7 +614,7 @@ export function* generateMap()
 	yield 80;
 
 	g_Map.log("Placing players");
-	if (isNomad())
+	if (mapSettings.Nomad)
 		placePlayersNomad(g_Map.createTileClass(),
 			new HeightConstraint(heighLimits[4], heighLimits[5]));
 	else
@@ -628,7 +628,7 @@ export function* generateMap()
 	for (let i = 0; i < resourceSpots.length; ++i)
 	{
 		const pos = new Vector2D(resourceSpots[i].x, resourceSpots[i].y);
-		const choice = i % (isNomad() ? 4 : 5);
+		const choice = i % (mapSettings.Nomad ? 4 : 5);
 		if (choice == 0)
 			placeMine(pos, "gaia/rock/temperate_large_02");
 		if (choice == 1)

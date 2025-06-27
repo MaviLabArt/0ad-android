@@ -63,7 +63,7 @@ export function* generateMap(mapSettings)
 	g_Map.log("Creating big grass patches around the playerbases");
 	for (let i = 0; i < numPlayers; ++i)
 	{
-		if (!isNomad())
+		if (!mapSettings.Nomad)
 			createArea(
 				new ClumpPlacer(diskArea(defaultPlayerBaseRadius()), 0.9, 0.5, Infinity,
 					playerPosition[i]),
@@ -73,7 +73,7 @@ export function* generateMap(mapSettings)
 			new ChainPlacer(
 				2,
 				Math.floor(scaleByMapSize(5, 12)),
-				Math.floor(scaleByMapSize(25, 60)) / (isNomad() ? 2 : 1),
+				Math.floor(scaleByMapSize(25, 60)) / (mapSettings.Nomad ? 2 : 1),
 				Infinity,
 				playerPosition[i],
 				0,
@@ -277,7 +277,7 @@ export function* generateMap(mapSettings)
 			stayClasses(clGrass, 3)
 		],
 		clForest,
-		stragglerTrees * (isNomad() ? 3 : 1));
+		stragglerTrees * (mapSettings.Nomad ? 3 : 1));
 
 	placePlayersNomad(clPlayer, avoidClasses(clForest, 1, clMetal, 4, clRock, 4, clHill, 4, clFood, 2));
 

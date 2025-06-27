@@ -1,7 +1,7 @@
 Engine.LoadLibrary("rmgen");
 Engine.LoadLibrary("rmgen-common");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	const tGrass = [
 		"tropic_grass_c",
@@ -194,7 +194,7 @@ export function* generateMap()
 
 	yield 40;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Creating gaia");
 		for (let i = 0; i < 2; ++i)

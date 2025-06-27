@@ -433,7 +433,7 @@ export function* generateMap(mapSettings)
 		0.05 * Math.PI,
 		0.55 * Math.PI);
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Marking player positions");
 		for (const position of playerPosition)
@@ -1271,7 +1271,7 @@ export function* generateMap(mapSettings)
 				[areaDesert]);
 	}
 
-	for (let i = 0; i < (isNomad() ? scaleByMapSize(6, 16) : scaleByMapSize(0, 8)); ++i)
+	for (let i = 0; i < (mapSettings.Nomad ? scaleByMapSize(6, 16) : scaleByMapSize(0, 8)); ++i)
 	{
 		const mineObjectsBiome = pickRandom(mineObjectsPerBiome);
 		createObjectGroupsByAreas(
@@ -1351,7 +1351,7 @@ export function* generateMap(mapSettings)
 		50,
 		[areaDesert]);
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Creating lions");
 		createObjectGroupsByAreas(
@@ -1381,7 +1381,7 @@ export function* generateMap(mapSettings)
 		[areaDesert]);
 
 	g_Map.log("Creating crocodiles");
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		createObjectGroupsByAreas(
 			new SimpleGroup([new SimpleObject(oCrocodile, 2, 3, 3, 5)], true, clFood),
 			0,
@@ -1467,7 +1467,7 @@ export function* generateMap(mapSettings)
 			avoidCollisions,
 			new NearTileClassConstraint(clPyramid, 10)
 		]);
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Placing soldiers near pyramids");
 		createObjectGroupsByAreas(

@@ -254,7 +254,7 @@ export function* generateMap(mapSettings)
 			"length": 0,
 			"indent": 4,
 			"bend": 0,
-			"templateName": mapSize >= normalMapSize ? (isNomad() ? oSentryTower : oTower) :
+			"templateName": mapSize >= normalMapSize ? (mapSettings.Nomad ? oSentryTower : oTower) :
 				oWatchTower
 		},
 		"pillar": readyWallElement(oPalisadePillar),
@@ -734,7 +734,7 @@ export function* generateMap(mapSettings)
 		clFood);
 
 	g_Map.log("Creating violent animals");
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		createFood(
 			[
 				[new SimpleObject(oWolf, 1, 3, 0, 4)],

@@ -171,7 +171,7 @@ export function* generateMap(mapSettings)
 			continue;
 		}
 
-		if (isNomad())
+		if (mapSettings.Nomad)
 			break;
 
 		g_Map.log("Finding player locations");
@@ -191,7 +191,7 @@ export function* generateMap(mapSettings)
 	}
 	yield 35;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Flattening initial CC area");
 		const playerRadius = defaultPlayerBaseRadius() * 0.8;
@@ -246,7 +246,7 @@ export function* generateMap(mapSettings)
 
 	for (let i = 0; i < numPlayers; ++i)
 	{
-		if (isNomad())
+		if (mapSettings.Nomad)
 			break;
 
 		const localBiome = constraintHighlands.allows(playerPosition[i]) ? biomes.highlands :

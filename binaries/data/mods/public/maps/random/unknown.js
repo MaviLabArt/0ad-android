@@ -131,7 +131,7 @@ export function* generateMap(mapSettings)
 			}
 		});
 
-		if (!isNomad())
+		if (!mapSettings.Nomad)
 		{
 			[playerIDs, playerPosition] =
 				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.6));
@@ -178,7 +178,7 @@ export function* generateMap(mapSettings)
 
 		const startAngle = randomAngle();
 
-		if (!isNomad())
+		if (!mapSettings.Nomad)
 		{
 			[playerIDs, playerPosition] =
 				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.5));
@@ -242,7 +242,7 @@ export function* generateMap(mapSettings)
 			g_StartingTreasures = true;
 
 			const [pIDs, islandPosition] = playerPlacementCircle(fractionToTiles(0.35));
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition] = [pIDs, islandPosition];
 				markPlayerArea("large");
@@ -255,7 +255,7 @@ export function* generateMap(mapSettings)
 					new ClumpPlacer(islandSize, 0.8, 0.1, Infinity, islandPosition[i]),
 					landElevationPainter);
 
-			switch (randIntInclusive(1, isNomad() ? 2 : 3))
+			switch (randIntInclusive(1, mapSettings.Nomad ? 2 : 3))
 			{
 			case 1:
 				g_Map.log("Creating archipelago");
@@ -319,7 +319,7 @@ export function* generateMap(mapSettings)
 		"Continent": () => {
 			const waterHeight = -5;
 
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				g_Map.log("Ensuring player area");
 				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.25));
@@ -392,7 +392,7 @@ export function* generateMap(mapSettings)
 				new ElevationPainter(heightLand));
 
 			let startAngle;
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				let playerAngle;
 				[playerIDs, playerPosition, playerAngle, startAngle] =
@@ -475,7 +475,7 @@ export function* generateMap(mapSettings)
 				new ElevationPainter(heightLand));
 
 			const startAngle = randomAngle();
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				playerIDs = sortAllPlayers();
 				playerPosition =
@@ -516,7 +516,7 @@ export function* generateMap(mapSettings)
 				new ElevationPainter(heightLand));
 
 			const startAngle = randomAngle();
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				g_Map.log("Determining player locations");
 
@@ -557,7 +557,7 @@ export function* generateMap(mapSettings)
 				new MapBoundsPlacer(),
 				new ElevationPainter(heightLand));
 
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
 				markPlayerArea("large");
@@ -589,7 +589,7 @@ export function* generateMap(mapSettings)
 
 			let playerAngle;
 			let startAngle;
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition, playerAngle, startAngle] =
 					playerPlacementCircle(fractionToTiles(0.35));
@@ -688,7 +688,7 @@ export function* generateMap(mapSettings)
 
 			let playerAngle;
 			let startAngle;
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition, playerAngle, startAngle] =
 					playerPlacementCircle(fractionToTiles(0.35));
@@ -745,7 +745,7 @@ export function* generateMap(mapSettings)
 				new MapBoundsPlacer(),
 				new ElevationPainter(3));
 
-			if (!isNomad())
+			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
 				markPlayerArea("small");

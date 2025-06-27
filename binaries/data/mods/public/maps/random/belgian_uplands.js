@@ -2,7 +2,7 @@ Engine.LoadLibrary("rmgen");
 Engine.LoadLibrary("rmgen-common");
 Engine.LoadLibrary("heightmap");
 
-export function* generateMap()
+export function* generateMap(mapSettings)
 {
 	const tPrimary = ["temp_grass", "temp_grass_b", "temp_grass_c", "temp_grass_d",
 		"temp_grass_long_b", "temp_grass_clovers_2", "temp_grass_mossy", "temp_grass_plants"];
@@ -261,7 +261,7 @@ export function* generateMap()
 
 	yield 90;
 
-	if (isNomad())
+	if (mapSettings.Nomad)
 		placePlayersNomad(g_Map.createTileClass(),
 			new HeightConstraint(lowerHeightLimit, upperHeightLimit));
 	else

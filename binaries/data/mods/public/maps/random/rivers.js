@@ -120,12 +120,12 @@ export function* generateMap(mapSettings)
 		]);
 
 	g_Map.log("Creating rivers between opponents");
-	const numRivers = isNomad() ? randIntInclusive(4, 8) : numPlayers;
+	const numRivers = mapSettings.Nomad ? randIntInclusive(4, 8) : numPlayers;
 	const rivers = distributePointsOnCircle(numRivers, startAngle + Math.PI / numRivers,
 		fractionToTiles(0.5), mapCenter)[0];
 	for (let i = 0; i < numRivers; ++i)
 	{
-		if (isNomad() ? randBool() : areAllies(playerIDs[i], playerIDs[(i + 1) % numPlayers]))
+		if (mapSettings.Nomad ? randBool() : areAllies(playerIDs[i], playerIDs[(i + 1) % numPlayers]))
 			continue;
 
 		const shallowLocation = randFloat(0.2, 0.7);

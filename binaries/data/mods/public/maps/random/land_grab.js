@@ -92,10 +92,10 @@ export function* generateMap(mapSettings)
 				new LayeredPainter([tWater, tShore, tMainTerrain], [1, 4]),
 				new SmoothElevationPainter(ELEVATION_SET, heightLand, 4),
 				new TileClassPainter(clIsland),
-				new TileClassPainter(isNomad() ? clLand : clPlayer)
+				new TileClassPainter(mapSettings.Nomad ? clLand : clPlayer)
 			]);
 
-		if (isNomad())
+		if (mapSettings.Nomad)
 			continue;
 
 		const dockLocation =

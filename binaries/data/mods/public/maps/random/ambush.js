@@ -35,7 +35,7 @@ export function* generateMap(mapSettings)
 				undefined),
 			playerbaseTypes[mapSettings.PlayerPlacement].walls);
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		markPlayerAvoidanceArea(playerPosition, defaultPlayerBaseRadius());
 
 	yield 20;
@@ -63,7 +63,7 @@ export function* generateMap(mapSettings)
 	]);
 	yield 30;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		createBluffsPassages(playerPosition);
 
 	addElements([
@@ -224,7 +224,7 @@ export function* generateMap(mapSettings)
 	]));
 	yield 90;
 
-	if (isNomad())
+	if (mapSettings.Nomad)
 	{
 		g_Map.log("Preventing units to be spawned at the map border");
 		createArea(

@@ -235,7 +235,7 @@ export function* generateMap(mapSettings)
 	for (let i = 0; i < numPlayers; ++i)
 	{
 		islandPos[i] = playerPosition[i];
-		createIsland(i, 1, isNomad() ? clLand : clPlayer);
+		createIsland(i, 1, mapSettings.Nomad ? clLand : clPlayer);
 	}
 
 	g_Map.log("Creating connectors");

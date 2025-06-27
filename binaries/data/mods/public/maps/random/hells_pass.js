@@ -274,7 +274,7 @@ export function* generateMap(mapSettings)
 		if (currentBiome() == "generic/autumn")
 			spineTerrain = g_Terrains.tier4Terrain;
 
-		const spineCount = isNomad() ? randIntInclusive(1, 4) : teamsArray.length;
+		const spineCount = mapSettings.Nomad ? randIntInclusive(1, 4) : teamsArray.length;
 
 		for (let i = 0; i < spineCount; ++i)
 		{

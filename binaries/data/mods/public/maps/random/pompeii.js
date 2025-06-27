@@ -169,7 +169,7 @@ export function* generateMap(mapSettings)
 		[areaVesuv]);
 	yield 48;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Placing players");
 		const [playerIDs, playerPosition] = createBases(

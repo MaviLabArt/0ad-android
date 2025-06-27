@@ -49,11 +49,11 @@ export function* generateMap(mapSettings)
 
 	const treasures = [{
 		"template": oWoodTreasure,
-		"count": isNomad() ? 16 : 14
+		"count": mapSettings.Nomad ? 16 : 14
 	}];
 
 	g_Map.log("Creating player markets");
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 		for (let i = 0; i < numPlayers; ++i)
 		{
 			const marketPos =
@@ -188,7 +188,7 @@ export function* generateMap(mapSettings)
 	createFood(
 		[
 			[new SimpleObject(oArcticFox, 1, 2, 0, 3)],
-			[new SimpleObject(isNomad() ? oArcticFox : oArcticWolf, 4, 6, 0, 4)],
+			[new SimpleObject(mapSettings.Nomad ? oArcticFox : oArcticWolf, 4, 6, 0, 4)],
 			[new SimpleObject(oWalrus, 2, 3, 0, 2)],
 			[new SimpleObject(oMuskox, 2, 3, 0, 2)]
 		],
@@ -246,7 +246,7 @@ export function* generateMap(mapSettings)
 		setSunElevation(Math.PI * randFloat(1/9, 1/7));
 	}
 
-	if (isNomad())
+	if (mapSettings.Nomad)
 	{
 		const constraint = avoidClasses(clWater, 4, clMetal, 4, clRock, 4, clHill, 4, clFood, 2);
 		[playerIDs, playerPosition] = placePlayersNomad(clPlayer, constraint);

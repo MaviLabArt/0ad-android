@@ -134,7 +134,7 @@ export function* generateMap(mapSettings)
 		new SlopeConstraint(2, Infinity));
 	yield 55;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Placing players");
 		const [playerIDs, playerPosition] = createBases(

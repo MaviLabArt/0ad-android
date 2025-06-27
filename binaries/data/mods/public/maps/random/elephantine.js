@@ -505,7 +505,7 @@ export function* generateMap(mapSettings)
 		50);
 	yield 83;
 
-	if (!isNomad())
+	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Creating lions");
 		createObjectGroups(
