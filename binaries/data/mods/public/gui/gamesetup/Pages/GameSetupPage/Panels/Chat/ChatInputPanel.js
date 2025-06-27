@@ -8,7 +8,7 @@ class ChatInputPanel
 		resizeGUIObjectToCaption(this.chatSubmitButton, { "horizontal": "left" }, { "horizontal": 8 });
 
 		this.chatInput = Engine.GetGUIObjectByName("chatInput");
-		this.chatSubmitButton.size.right = this.chatSubmitButton.size.left;
+		this.chatInput.size.right = this.chatSubmitButton.size.left;
 
 		this.chatInput = Engine.GetGUIObjectByName("chatInput");
 		this.chatInput.tooltip = colorizeAutocompleteHotkey(this.Tooltip);
