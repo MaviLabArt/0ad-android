@@ -16,12 +16,14 @@
 }
 html { font-size: 14px; font-family: "Source Code Pro", monospace; padding:10px;}
 * { box-sizing:border-box; margin:0; padding: 0; }
+h1 { margin: 0.75em 0 0.25em 0; }
 canvas { border: 1px #ddd solid; display:block;}
 header h1 { font-size:2em; }
-header nav { height:50px; margin:5px; border:1px solid gray; }
-header nav p { display:inline-block; height:100%; padding: 15px 10px; background:#aaa; cursor:pointer; border-right:1px solid gray; position:relative;}
-header nav p.loading { background:#ccf; cursor:progress; padding-right:15px; }
-header nav p.loading:after { content:""; position:absolute; right:5px; top:50%; transform:translateY(-50%); height:5px;width:5px;background:#ccc;border:1px solid gray; animation:rotate 2s infinite; }
+header > p { margin: 1em 0; }
+header nav { min-height:39px; margin:1em 0; border:1px solid gray; }
+header nav p { display:inline-block; height:100%; padding: 10px; background:#aaa; cursor:pointer; border-right:1px solid gray; position:relative;}
+header nav p.loading { background:#ccf; cursor:progress; padding-right: 25px; }
+header nav p.loading:after { content:""; position:absolute; right:5px; top:50%; transform:translateY(-50%); height:10px;width:10px;border:2px solid #555; border-radius:50%; border-bottom-color:transparent; animation:rotate 2s linear infinite; }
 header nav p.fail { background:#faa;cursor:not-allowed;}
 header nav p.active { cursor:pointer; background:#eee; box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);font-weight:bold;}
 #tooltip { background: #ffd; padding: 4px; font: 12px sans-serif; border: 1px #880 solid; }
@@ -48,7 +50,7 @@ header nav p.active { cursor:pointer; background:#eee; box-shadow: 0px 0px 2px 0
 <body>
 <button onclick="save_as_file()">Save Live Report to file</button>
 <label for="gameport">Port:</label>
-<input id="gameport" type="text" value="8000" onchange="updatePort()">
+<input id="gameport" type="text" value="8000" size="5" onchange="updatePort()">
 
 <header>
 	<h1>Open reports</h1>
