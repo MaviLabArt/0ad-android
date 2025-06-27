@@ -205,65 +205,62 @@ function addCivicCenterAreaToClass(position, tileClass)
 /**
  * Helper function.
  */
-function getPlayerBaseArgs(playerBaseArgs)
+function getPlayerBaseConstraint(playerBaseArgs)
 {
 	let baseResourceConstraint = playerBaseArgs.BaseResourceClass && avoidClasses(playerBaseArgs.BaseResourceClass, 4);
 
 	if (playerBaseArgs.baseResourceConstraint)
 		baseResourceConstraint = new AndConstraint([baseResourceConstraint, playerBaseArgs.baseResourceConstraint]);
 
-	return [
-		(property, defaultVal) => playerBaseArgs[property] === undefined ? defaultVal : playerBaseArgs[property],
-		baseResourceConstraint
-	];
+	return baseResourceConstraint;
 }
 
 function placePlayerBaseCityPatch(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
 	let painters = [];
 
 	if (args.outerTerrain && args.innerTerrain)
-		painters.push(new LayeredPainter([args.outerTerrain, args.innerTerrain], [get("width", 1)]));
+		painters.push(new LayeredPainter([args.outerTerrain, args.innerTerrain], [args.width ?? 1]));
 
 	if (args.painters)
 		painters = painters.concat(args.painters);
 
 	createArea(
 		new ClumpPlacer(
-			Math.floor(diskArea(get("radius", defaultPlayerBaseRadius() / 3))),
-			get("coherence", 0.6),
-			get("smoothness", 0.3),
-			get("failFraction", Infinity),
+			Math.floor(diskArea(args.radius ?? (defaultPlayerBaseRadius() / 3))),
+			args.coherence ?? 0.6,
+			args.smoothness ?? 0.3,
+			args.failFraction ?? Infinity,
 			args.playerPosition),
 		painters);
 }
 
 function placePlayerBaseStartingAnimal(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
-	const template = get("template", "gaia/fauna_chicken");
+	const template = args.template ?? "gaia/fauna_chicken";
 	const count = template === "gaia/fauna_chicken" ? 5 :
-		Math.round(5 * (Engine.GetTemplate("gaia/fauna_chicken").ResourceSupply.Max / Engine.GetTemplate(get("template")).ResourceSupply.Max));
+		Math.round(5 * (Engine.GetTemplate("gaia/fauna_chicken").ResourceSupply.Max / Engine.GetTemplate(args.template).ResourceSupply.Max));
 
-	for (let i = 0; i < get("groupCount", 2); ++i)
+	for (let i = 0; i < (args.groupCount ?? 2); ++i)
 	{
 		let success = false;
-		for (let tries = 0; tries < get("maxTries", 30); ++tries)
+		for (let tries = 0; tries < (args.maxTries ?? 30); ++tries)
 		{
-			const position = new Vector2D(0, get("distance", 9)).rotate(randomAngle()).add(
+			const position = new Vector2D(0, args.distance ?? 9).rotate(randomAngle()).add(
 				args.playerPosition);
 			if (createObjectGroup(
 				new SimpleGroup(
 					[
 						new SimpleObject(
 							template,
-							get("minGroupCount", count),
-							get("maxGroupCount", count),
-							get("minGroupDistance", 0),
-							get("maxGroupDistance", 2))
+							args.minGroupCount ?? count,
+							args.maxGroupCount ?? count,
+							args.minGroupDistance ?? 0,
+							args.maxGroupDistance ?? 2)
 					],
 					true,
 					args.BaseResourceClass,
@@ -286,14 +283,15 @@ function placePlayerBaseStartingAnimal(args)
 
 function placePlayerBaseBerries(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
-	for (let tries = 0; tries < get("maxTries", 30); ++tries)
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
+	for (let tries = 0; tries < (args.maxTries ?? 30); ++tries)
 	{
 		const position =
-			new Vector2D(0, get("distance", 12)).rotate(randomAngle()).add(args.playerPosition);
+			new Vector2D(0, args.distance ?? 12).rotate(randomAngle()).add(args.playerPosition);
 		if (createObjectGroup(
 			new SimpleGroup(
-				[new SimpleObject(args.template, get("minCount", 5), get("maxCount", 5), get("maxDist", 1), get("maxDist", 3))],
+				[new SimpleObject(args.template, args.minCount ?? 5, args.maxCount ?? 5,
+					args.maxDist ?? 1, args.maxDist ?? 3)],
 				true,
 				args.BaseResourceClass,
 				position),
@@ -307,16 +305,16 @@ function placePlayerBaseBerries(args)
 
 function placePlayerBaseMines(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
-	const angleBetweenMines = randFloat(get("minAngle", Math.PI / 6), get("maxAngle", Math.PI / 3));
+	const angleBetweenMines = randFloat(args.minAngle ?? (Math.PI / 6), args.maxAngle ?? (Math.PI / 3));
 	const mineCount = args.types.length;
 
 	let groupElements = [];
 	if (args.groupElements)
 		groupElements = groupElements.concat(args.groupElements);
 
-	for (let tries = 0; tries < get("maxTries", 75); ++tries)
+	for (let tries = 0; tries < (args.maxTries ?? 75); ++tries)
 	{
 		// First find a place where all mines can be placed
 		let pos = [];
@@ -324,7 +322,7 @@ function placePlayerBaseMines(args)
 		for (let i = 0; i < mineCount; ++i)
 		{
 			const angle = startAngle + angleBetweenMines * (i + (mineCount - 1) / 2);
-			pos[i] = new Vector2D(0, get("distance", 12)).rotate(angle).add(
+			pos[i] = new Vector2D(0, args.distance ?? 12).rotate(angle).add(
 				args.playerPosition).round();
 			if (!g_Map.validTilePassable(pos[i]) || !baseResourceConstraint.allows(pos[i]))
 			{
@@ -362,18 +360,19 @@ function placePlayerBaseMines(args)
 
 function placePlayerBaseTrees(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
-	const num = Math.floor(get("count", scaleByMapSize(7, 20)));
+	const num = Math.floor(args.count ?? scaleByMapSize(7, 20));
 
-	for (let x = 0; x < get("maxTries", 30); ++x)
+	for (let x = 0; x < (args.maxTries ?? 30); ++x)
 	{
-		const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13)))
+		const position = new Vector2D(0, randFloat(args.minDist ?? 11, args.maxDist ?? 13))
 			.rotate(randomAngle()).add(args.playerPosition).round();
 
 		if (createObjectGroup(
 			new SimpleGroup(
-				[new SimpleObject(args.template, num, num, get("minDistGroup", 0), get("maxDistGroup", 5))],
+				[new SimpleObject(args.template, num, num, args.minDistGroup ?? 0,
+					args.maxDistGroup ?? 5)],
 				false,
 				args.BaseResourceClass,
 				position),
@@ -387,22 +386,23 @@ function placePlayerBaseTrees(args)
 
 function placePlayerBaseTreasures(args)
 {
-	const [_, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
 	for (const resourceTypeArgs of args.types)
 	{
-		const get = (property, defaultVal) => resourceTypeArgs[property] === undefined ? defaultVal : resourceTypeArgs[property];
-
 		let success = false;
 
-		for (let tries = 0; tries < get("maxTries", 30); ++tries)
+		for (let tries = 0; tries < (resourceTypeArgs.maxTries ?? 30); ++tries)
 		{
-			const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13)))
+			const position = new Vector2D(0,
+				randFloat(resourceTypeArgs.minDist ?? 11, resourceTypeArgs.maxDist ?? 13))
 				.rotate(randomAngle()).add(args.playerPosition).round();
 
 			if (createObjectGroup(
 				new SimpleGroup(
-					[new SimpleObject(resourceTypeArgs.template, get("count", 14), get("count", 14), get("minDistGroup", 1), get("maxDistGroup", 3))],
+					[new SimpleObject(resourceTypeArgs.template, resourceTypeArgs.count ?? 14,
+						resourceTypeArgs.count ?? 14, resourceTypeArgs.minDistGroup ?? 1,
+						resourceTypeArgs.maxDistGroup ?? 3)],
 					false,
 					args.BaseResourceClass,
 					position),
@@ -426,19 +426,21 @@ function placePlayerBaseTreasures(args)
  */
 function placePlayerBaseDecoratives(args)
 {
-	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const baseResourceConstraint = getPlayerBaseConstraint(args);
 
-	for (let i = 0; i < get("count", scaleByMapSize(2, 5)); ++i)
+	for (let i = 0; i < (args.count ?? scaleByMapSize(2, 5)); ++i)
 	{
 		let success = false;
-		for (let x = 0; x < get("maxTries", 30); ++x)
+		for (let x = 0; x < (args.maxTries ?? 30); ++x)
 		{
-			const position = new Vector2D(0, randIntInclusive(get("minDist", 8), get("maxDist", 11)))
+			const position = new Vector2D(0,
+				randIntInclusive(args.minDist ?? 8, args.maxDist ?? 11))
 				.rotate(randomAngle()).add(args.playerPosition).round();
 
 			if (createObjectGroup(
 				new SimpleGroup(
-					[new SimpleObject(args.template, get("minCount", 2), get("maxCount", 5), 0, 1)],
+					[new SimpleObject(args.template, args.minCount ?? 2, args.maxCount ?? 5, 0,
+						1)],
 					false,
 					args.BaseResourceClass,
 					position),
