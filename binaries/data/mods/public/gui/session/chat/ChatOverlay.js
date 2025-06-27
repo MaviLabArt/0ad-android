@@ -39,11 +39,11 @@ class ChatOverlay
 			{
 				// First scale line width to maximum size.
 				const height = this.chatLines[i].size.bottom - this.chatLines[i].size.top;
-				Object.assign(this.chatLines[i].size, {
+				this.chatLines[i].size = {
 					"top": i * height,
 					"bottom": (i + 1) * height,
 					"rright": 100
-				});
+				};
 
 				this.chatLines[i].caption = chatMessage.text;
 
