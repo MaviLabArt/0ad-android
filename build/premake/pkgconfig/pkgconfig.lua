@@ -1,8 +1,13 @@
 local m = {}
-m._VERSION = "1.2.0-dev"
+m._VERSION = "1.3.0-dev"
 
 m.additional_pc_path = nil
 m.static_link_libs = false
+
+local pkg_config_command = "pkg-config"
+if os.getenv("PKG_CONFIG") then
+	pkg_config_command = os.getenv("PKG_CONFIG")
+end
 
 local function os_capture(cmd)
 	return io.popen(cmd, 'r'):read('*a'):gsub("\n", " ")
@@ -12,7 +17,7 @@ local function parse_pkg_config_includes(lib, alternative_cmd, alternative_flags
 	local result
 	if not alternative_cmd then
 		local pc_path = m.additional_pc_path and "PKG_CONFIG_PATH="..m.additional_pc_path or ""
-		result = os_capture(pc_path.." pkg-config --cflags "..lib)
+		result = os_capture(pc_path .. " " .. pkg_config_command .. " --cflags " .. lib)
 	else
 		if not alternative_flags then
 			result = os_capture(alternative_cmd.." --cflags")
@@ -65,7 +70,7 @@ function m.add_links(lib, alternative_cmd, alternative_flags)
 	if not alternative_cmd then
 		local pc_path = m.additional_pc_path and "PKG_CONFIG_PATH="..m.additional_pc_path or ""
 		local static = m.static_link_libs and " --static " or ""
-		result = os_capture(pc_path.." pkg-config --libs "..static..lib)
+		result = os_capture(pc_path .. " " .. pkg_config_command .. " --libs " .. static .. lib)
 	else
 		if not alternative_flags then
 			result = os_capture(alternative_cmd.." --libs")
