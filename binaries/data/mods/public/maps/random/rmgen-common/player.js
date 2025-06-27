@@ -214,14 +214,13 @@ function getPlayerBaseArgs(playerBaseArgs)
 
 	return [
 		(property, defaultVal) => playerBaseArgs[property] === undefined ? defaultVal : playerBaseArgs[property],
-		playerBaseArgs.playerPosition,
 		baseResourceConstraint
 	];
 }
 
 function placePlayerBaseCityPatch(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	let painters = [];
 
@@ -237,13 +236,13 @@ function placePlayerBaseCityPatch(args)
 			get("coherence", 0.6),
 			get("smoothness", 0.3),
 			get("failFraction", Infinity),
-			basePosition),
+			args.playerPosition),
 		painters);
 }
 
 function placePlayerBaseStartingAnimal(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	const template = get("template", "gaia/fauna_chicken");
 	const count = template === "gaia/fauna_chicken" ? 5 :
@@ -254,7 +253,8 @@ function placePlayerBaseStartingAnimal(args)
 		let success = false;
 		for (let tries = 0; tries < get("maxTries", 30); ++tries)
 		{
-			const position = new Vector2D(0, get("distance", 9)).rotate(randomAngle()).add(basePosition);
+			const position = new Vector2D(0, get("distance", 9)).rotate(randomAngle()).add(
+				args.playerPosition);
 			if (createObjectGroup(
 				new SimpleGroup(
 					[
@@ -286,10 +286,11 @@ function placePlayerBaseStartingAnimal(args)
 
 function placePlayerBaseBerries(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 	for (let tries = 0; tries < get("maxTries", 30); ++tries)
 	{
-		const position = new Vector2D(0, get("distance", 12)).rotate(randomAngle()).add(basePosition);
+		const position =
+			new Vector2D(0, get("distance", 12)).rotate(randomAngle()).add(args.playerPosition);
 		if (createObjectGroup(
 			new SimpleGroup(
 				[new SimpleObject(args.template, get("minCount", 5), get("maxCount", 5), get("maxDist", 1), get("maxDist", 3))],
@@ -306,7 +307,7 @@ function placePlayerBaseBerries(args)
 
 function placePlayerBaseMines(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	const angleBetweenMines = randFloat(get("minAngle", Math.PI / 6), get("maxAngle", Math.PI / 3));
 	const mineCount = args.types.length;
@@ -323,7 +324,8 @@ function placePlayerBaseMines(args)
 		for (let i = 0; i < mineCount; ++i)
 		{
 			const angle = startAngle + angleBetweenMines * (i + (mineCount - 1) / 2);
-			pos[i] = new Vector2D(0, get("distance", 12)).rotate(angle).add(basePosition).round();
+			pos[i] = new Vector2D(0, get("distance", 12)).rotate(angle).add(
+				args.playerPosition).round();
 			if (!g_Map.validTilePassable(pos[i]) || !baseResourceConstraint.allows(pos[i]))
 			{
 				pos = undefined;
@@ -360,13 +362,14 @@ function placePlayerBaseMines(args)
 
 function placePlayerBaseTrees(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	const num = Math.floor(get("count", scaleByMapSize(7, 20)));
 
 	for (let x = 0; x < get("maxTries", 30); ++x)
 	{
-		const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13))).rotate(randomAngle()).add(basePosition).round();
+		const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13)))
+			.rotate(randomAngle()).add(args.playerPosition).round();
 
 		if (createObjectGroup(
 			new SimpleGroup(
@@ -384,7 +387,7 @@ function placePlayerBaseTrees(args)
 
 function placePlayerBaseTreasures(args)
 {
-	const [_, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [_, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	for (const resourceTypeArgs of args.types)
 	{
@@ -394,7 +397,8 @@ function placePlayerBaseTreasures(args)
 
 		for (let tries = 0; tries < get("maxTries", 30); ++tries)
 		{
-			const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13))).rotate(randomAngle()).add(basePosition).round();
+			const position = new Vector2D(0, randFloat(get("minDist", 11), get("maxDist", 13)))
+				.rotate(randomAngle()).add(args.playerPosition).round();
 
 			if (createObjectGroup(
 				new SimpleGroup(
@@ -422,14 +426,15 @@ function placePlayerBaseTreasures(args)
  */
 function placePlayerBaseDecoratives(args)
 {
-	const [get, basePosition, baseResourceConstraint] = getPlayerBaseArgs(args);
+	const [get, baseResourceConstraint] = getPlayerBaseArgs(args);
 
 	for (let i = 0; i < get("count", scaleByMapSize(2, 5)); ++i)
 	{
 		let success = false;
 		for (let x = 0; x < get("maxTries", 30); ++x)
 		{
-			const position = new Vector2D(0, randIntInclusive(get("minDist", 8), get("maxDist", 11))).rotate(randomAngle()).add(basePosition).round();
+			const position = new Vector2D(0, randIntInclusive(get("minDist", 8), get("maxDist", 11)))
+				.rotate(randomAngle()).add(args.playerPosition).round();
 
 			if (createObjectGroup(
 				new SimpleGroup(
