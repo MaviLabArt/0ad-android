@@ -75,7 +75,7 @@ header nav p.active { cursor:pointer; background:#eee; box-shadow: 0px 0px 2px 0
 	</section>
 	<section id="history_graph">
 		<h2>Frame-by-Frame Graph</h2>
-		<input type="range" id="smooth" name="smooth" onchange="update_analysis()" min="0" max="10" step="1" value="3"/><label for="smooth">Degree of smoothing</label>
+		<input type="range" id="smooth" name="smooth" oninput="update_analysis()" min="0" max="10" step="1" value="3"/><label for="smooth">Degree of smoothing</label>
 		<div style="position:relative">
 			<aside></aside>
 			<div style="width:602px;overflow:auto;"><canvas id="canvas_history" width="600" height="600"></canvas></div>
