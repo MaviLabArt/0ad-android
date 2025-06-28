@@ -1,11 +1,43 @@
 local semver = require("semver")
 
-if (semver("5.0.0-beta5") <= semver(_PREMAKE_VERSION)) then
-	print("Using premake " .. _PREMAKE_VERSION .. "...")
-else
+print("Premake version: " .. _PREMAKE_VERSION)
+if (semver(_PREMAKE_VERSION) < semver("5.0.0-beta5")) then
 	print("Requires Premake 5.0.0-beta5 or later")
+	print("Aborting")
 	os.exit(1)
 end
+
+local function print_options()
+	local options = ""
+	local tkeys = {}
+	for key,_  in pairs(_OPTIONS) do table.insert(tkeys, key) end
+	table.sort(tkeys)
+	for _,key in pairs(tkeys) do
+		local value = _OPTIONS[key]
+		options = options .. " --" .. key
+		if (value and value ~= "") then
+			options = options .. "=" .. value
+		end
+	end
+	print("Premake options:" .. options)
+end
+print_options()
+print("")
+
+print("--------------------------------------------------------------------------------")
+print("Environment")
+print("")
+print("AR         : " .. (os.getenv("AR") or "unset"))
+print("CC         : " .. (os.getenv("CC") or "unset"))
+print("CXX        : " .. (os.getenv("CXX") or "unset"))
+print("HOSTTYPE   : " .. (os.getenv("HOSTTYPE") or "unset"))
+print("PKG_CONFIG : " .. (os.getenv("PKG_CONFIG") or "unset"))
+print("")
+print("CFLAGS     : " .. (os.getenv("CFLAGS") or "unset"))
+print("CXXFLAGS   : " .. (os.getenv("CXXFLAGS") or "unset"))
+print("LDFLAGS    : " .. (os.getenv("LDFLAGS") or "unset"))
+print("--------------------------------------------------------------------------------")
+print("")
 
 newoption { category = "Pyrogenesis", trigger = "android", description = "Use non-working Android cross-compiling mode" }
 newoption { category = "Pyrogenesis", trigger = "coverage", description = "Enable code coverage data collection (GCC only)" }
