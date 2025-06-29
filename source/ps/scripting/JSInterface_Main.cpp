@@ -21,6 +21,7 @@
 
 #include "graphics/FontMetrics.h"
 #include "graphics/MapReader.h"
+#include "lib/code_generation.h"
 #include "lib/sysdep/sysdep.h"
 #include "lib/utf8.h"
 #include "maths/Size2D.h"
@@ -88,7 +89,7 @@ int GetFps()
 
 CSize2D GetTextSize(const std::string& fontName, const std::wstring& text)
 {
-	LOGWARNING("Engine.GetTextSize is deprecated and will be removed in a future version.Use guiObject.GetPreferedTextSize for accurate text sizing or guiObject.getTextSize for sizing within GUI objects.");
+	ONCE(LOGWARNING("Engine.GetTextSize is deprecated and will be removed in a future version.Use guiObject.GetPreferedTextSize for accurate text sizing or guiObject.getTextSize for sizing within GUI objects."));
 	float width = 0;
 	float height = 0;
 	CStrIntern _fontName(fontName);

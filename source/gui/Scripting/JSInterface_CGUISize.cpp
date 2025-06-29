@@ -25,6 +25,7 @@
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/SettingTypes/CGUISize.h"
 #include "gui/Scripting/JSInterface_GUISize.h"
+#include "lib/code_generation.h"
 #include "maths/Rect.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptInterface.h"
@@ -179,7 +180,7 @@ bool CGUISimpleSetting<CGUISize>::DoFromJSVal(const ScriptRequest& rq, JS::Handl
 	}
 
 	if (JS_InstanceOf(rq.cx, obj, &JSI_GUISize::JSI_class, nullptr))
-		LOGWARNING("Assigning an GUISize to CGUISize is deprecated. Please use the object.size = {left:number, top:number, right:number, bottom:number} format instead. This support will be removed in a future version.");
+		ONCE(LOGWARNING("Assigning an GUISize to CGUISize is deprecated. Please use the object.size = {left:number, top:number, right:number, bottom:number} format instead. This support will be removed in a future version."));
 
 	bool atLeastOnePropertySet{false};
 	CRect pixel{};
