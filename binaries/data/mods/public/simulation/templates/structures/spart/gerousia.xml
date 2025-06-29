@@ -21,7 +21,7 @@
     <Civ>spart</Civ>
     <GenericName>Spartan Senate</GenericName>
     <SpecificName>Gerousia</SpecificName>
-    <Tooltip>Research technologies.</Tooltip>
+    <Tooltip>Research technologies and train heroes.</Tooltip>
     <Classes datatype="tokens">ConquestCritical</Classes>
     <VisibleClasses datatype="tokens">-City Town Council</VisibleClasses>
     <Icon>structures/tholos.png</Icon>
