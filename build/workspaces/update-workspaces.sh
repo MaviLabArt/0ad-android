@@ -40,8 +40,6 @@ if [ "$with_system_premake5" = "false" ]; then
 	premake_command="../../libraries/source/premake-core/bin/premake5"
 fi
 
-# If we're in bash then make HOSTTYPE available to Premake, for primitive arch-detection
-export HOSTTYPE="$HOSTTYPE"
 # Now run Premake to create the makefiles
 if [ "$OS" != "Darwin" ]; then
 	# shellcheck disable=SC2086
