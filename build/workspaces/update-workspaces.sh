@@ -42,8 +42,6 @@ fi
 
 echo
 
-# If we're in bash then make HOSTTYPE available to Premake, for primitive arch-detection
-export HOSTTYPE="$HOSTTYPE"
 # Now run Premake to create the makefiles
 echo "Premake args: ${premake_args}"
 if [ "$OS" != "Darwin" ]; then
