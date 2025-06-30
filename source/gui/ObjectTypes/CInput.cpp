@@ -45,9 +45,8 @@
 #include <SDL_scancode.h>
 #include <SDL_stdinc.h>
 #include <algorithm>
-#include <bits/wctype-wchar.h>
-#include <cstdlib>
 #include <cstring>
+#include <cwchar>
 #include <maths/Size2D.h>
 #include <memory>
 #include <string>

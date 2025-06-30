@@ -32,10 +32,10 @@
 #include "ps/Profile.h"
 
 #include <cmath>
+#include <cwchar>
 #include <limits>
 #include <optional>
 #include <string>
-#include <wchar.h>
 
 class CGUI;
 
