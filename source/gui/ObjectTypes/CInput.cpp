@@ -31,6 +31,7 @@
 #include "lib/external_libraries/libsdl.h"
 #include "lib/timer.h"
 #include "lib/utf8.h"
+#include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 #include "ps/CStrIntern.h"
 #include "ps/ConfigDB.h"
@@ -47,7 +48,6 @@
 #include <algorithm>
 #include <cstring>
 #include <cwchar>
-#include <maths/Size2D.h>
 #include <memory>
 #include <string>
 #include <unordered_map>
