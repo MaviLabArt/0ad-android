@@ -54,7 +54,6 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
-#include <fmt/base.h>
 #include <fmt/printf.h>
 #include <js/GCVector.h>
 #include <js/RootingAPI.h>
