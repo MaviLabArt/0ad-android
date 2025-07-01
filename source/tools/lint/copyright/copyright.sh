@@ -14,6 +14,9 @@ while [ "$#" -gt 0 ]; do
 			git checkout --quiet "${to_commitish}"
 			shift
 			;;
+		--fix)
+			fix=--fix
+			;;
 		-j*) ;;
 		*)
 			printf "Unknown option: %s\n\n" "$1"
@@ -34,9 +37,10 @@ fi
 
 if [ -n "${diff}" ]; then
 	for sha in $(git rev-list "${diff}"); do
+		# shellcheck disable=SC2086
 		git diff-tree --no-commit-id --name-status -r "${sha}" |
 			awk '!/^D/{$1=""; printf "%s\0", substr($0,2)}' |
-			xargs -0 -L100 ./source/tools/lint/copyright/check_copyright_year.py
+			xargs -0 -L100 ./source/tools/lint/copyright/check_copyright_year.py ${fix}
 	done
 else
 	echo "WARNING: running copyright linter without base commit, likely not what you want."
