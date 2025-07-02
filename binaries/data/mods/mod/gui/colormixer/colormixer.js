@@ -16,13 +16,16 @@ function resizeChanel(i)
 	object.size.bottom = (i + 1) * height0;
 }
 
-function initializeButtons()
+async function initializeButtons()
 {
 	const button = [];
 	const prom = setButtonCaptionsAndVisibility(button, captions,
 		Engine.GetGUIObjectByName("cancelHotkey"), "cmButton");
 	distributeButtonsHorizontally(button, captions);
-	return prom;
+	return {
+		"done": true,
+		"value": await prom
+	};
 }
 
 /**
@@ -34,49 +37,52 @@ export async function init(initialColor)
 	Engine.GetGUIObjectByName("infoLabel").caption =
 		translate("Move the sliders to change the Red, Green and Blue components of the Color");
 
-	const chanels = [];
 	const closePromise = initializeButtons();
 
-	const currentColor = () => chanels.map(chanel => chanel.color).join(" ");
-	const updateColorPreview = () => {
-		const colorDisplay = Engine.GetGUIObjectByName("colorDisplay");
-		colorDisplay.sprite = "color:" + currentColor();
-	};
+	const splitColor = initialColor.split(" ");
 
-	const updateFromSlider = chanel => {
-		chanel.color = Math.floor(chanel.slider.value);
-		chanel.valueText.caption = chanel.color;
-		updateColorPreview();
-	};
-
-	const c = initialColor.split(" ");
-
-	for (let i = 0; i < labels.length; i++)
-	{
-		const color = Math.floor(+c[i] || 0);
+	const chanels = labels.map((label, i) => {
+		Engine.GetGUIObjectByName("colorLabel[" + i + "]").caption = label;
 		resizeChanel(i);
+
+		const color = Math.floor(+splitColor[i] || 0);
+
+		const valueText = Engine.GetGUIObjectByName("colorValue[" + i + "]");
+		valueText.caption = color;
 
 		const slider = Engine.GetGUIObjectByName("colorSlider[" + i + "]");
 		slider.min_value = 0;
 		slider.max_value = 255;
 		slider.value = color;
-		slider.onValueChange = () => { updateFromSlider(chanels[i]); };
 
-		const valueText = Engine.GetGUIObjectByName("colorValue[" + i + "]");
-		valueText.caption = color;
-
-		chanels.push({
+		return {
 			"slider": slider,
 			"color": color,
 			"valueText": valueText
-		});
+		};
+	});
 
-		Engine.GetGUIObjectByName("colorLabel[" + i + "]").caption = labels[i];
-	}
-
-	updateColorPreview();
 	// Update return color on cancel to prevent malformed values from initial input.
+	const currentColor = () => chanels.map(chanel => chanel.color).join(" ");
 	const sanitizedColor = currentColor();
 
-	return await closePromise === 0 ? sanitizedColor : currentColor();
+	const colorDisplay = Engine.GetGUIObjectByName("colorDisplay");
+	while (true)
+	{
+		colorDisplay.sprite = "color:" + currentColor();
+		const chanelPromises = chanels.map(chanel => {
+			return new Promise(resolve => {
+				chanel.slider.onValueChange = resolve.bind(undefined, { "value": chanel });
+			});
+		});
+
+		const result = await Promise.race([...chanelPromises, closePromise]);
+
+		if (result.done)
+			return result.value === 0 ? sanitizedColor : currentColor();
+
+		const chanel = result.value;
+		chanel.color = Math.floor(chanel.slider.value);
+		chanel.valueText.caption = chanel.color;
+	}
 }
