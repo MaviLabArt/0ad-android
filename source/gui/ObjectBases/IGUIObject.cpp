@@ -31,6 +31,7 @@
 #include "ps/Profiler2.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "soundmanager/ISoundManager.h"
 
