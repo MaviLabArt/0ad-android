@@ -49,7 +49,7 @@
   </Health>
   <Identity>
     <GenericName>Fire Ship</GenericName>
-    <Tooltip>Counters: 3× vs Ships and Buildings. Cannot be garrisoned, and, after ignition, cannot be repaired. Strong against Ram Ships.</Tooltip>  
+    <Tooltip>Counters: 3× vs Ships and Buildings. Cannot be garrisoned, and, after ignition, cannot be repaired. Strong against Ram Ships.</Tooltip>
     <VisibleClasses datatype="tokens">Warship Fireship Melee</VisibleClasses>
     <Requirements>
       <Techs datatype="tokens">
