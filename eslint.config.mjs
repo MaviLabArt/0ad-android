@@ -95,6 +95,7 @@ const configEslintExtra = {
 		"default-case": "warn",
 		"dot-notation": "warn",
 		"no-caller": "warn",
+		"no-duplicate-imports": "warn",
 		"no-else-return": "warn",
 		"no-invalid-this": "warn",
 		"no-label-var": "warn",
