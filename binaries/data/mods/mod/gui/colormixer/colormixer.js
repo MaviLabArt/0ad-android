@@ -34,45 +34,49 @@ export async function init(initialColor)
 	Engine.GetGUIObjectByName("infoLabel").caption =
 		translate("Move the sliders to change the Red, Green and Blue components of the Color");
 
-	const color = [0, 0, 0];
-	const sliders = [];
-	const valuesText = [];
+	const chanels = [];
 	const closePromise = initializeButtons();
 
+	const currentColor = () => chanels.map(chanel => chanel.color).join(" ");
 	const updateColorPreview = () => {
 		const colorDisplay = Engine.GetGUIObjectByName("colorDisplay");
-		colorDisplay.sprite = "color:" + color.join(" ");
+		colorDisplay.sprite = "color:" + currentColor();
 	};
 
-	const updateFromSlider = index => {
-		color[index] = Math.floor(sliders[index].value);
-		valuesText[index].caption = color[index];
+	const updateFromSlider = chanel => {
+		chanel.color = Math.floor(chanel.slider.value);
+		chanel.valueText.caption = chanel.color;
 		updateColorPreview();
 	};
 
 	const c = initialColor.split(" ");
 
-	for (let i = 0; i < color.length; i++)
+	for (let i = 0; i < labels.length; i++)
 	{
-		color[i] = Math.floor(+c[i] || 0);
+		const color = Math.floor(+c[i] || 0);
 		resizeChanel(i);
 
-		sliders[i] = Engine.GetGUIObjectByName("colorSlider[" + i + "]");
-		const slider = sliders[i];
+		const slider = Engine.GetGUIObjectByName("colorSlider[" + i + "]");
 		slider.min_value = 0;
 		slider.max_value = 255;
-		slider.value = color[i];
-		slider.onValueChange = () => {updateFromSlider(i);};
+		slider.value = color;
+		slider.onValueChange = () => { updateFromSlider(chanels[i]); };
 
-		valuesText[i] = Engine.GetGUIObjectByName("colorValue[" + i + "]");
-		valuesText[i].caption = color[i];
+		const valueText = Engine.GetGUIObjectByName("colorValue[" + i + "]");
+		valueText.caption = color;
+
+		chanels.push({
+			"slider": slider,
+			"color": color,
+			"valueText": valueText
+		});
 
 		Engine.GetGUIObjectByName("colorLabel[" + i + "]").caption = labels[i];
 	}
 
 	updateColorPreview();
 	// Update return color on cancel to prevent malformed values from initial input.
-	const sanitizedColor = color.join(" ");
+	const sanitizedColor = currentColor();
 
-	return await closePromise === 0 ? sanitizedColor : color.join(" ");
+	return await closePromise === 0 ? sanitizedColor : currentColor();
 }
