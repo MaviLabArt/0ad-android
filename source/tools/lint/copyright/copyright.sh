@@ -1,8 +1,4 @@
 #!/bin/sh
-set -e
-
-cd "$(dirname "$0")/../../../.."
-
 while [ "$#" -gt 0 ]; do
 	case "$1" in
 		--from)
@@ -26,22 +22,28 @@ while [ "$#" -gt 0 ]; do
 	shift
 done
 
+cd "$(dirname "$0")/../../../.." || exit
+
 if [ -n "${from_commitish}" ]; then
 	if [ -n "${to_commitish}" ]; then
 		diff="${from_commitish}..${to_commitish}"
 	else
 		diff="${from_commitish}..$(git rev-parse HEAD)"
 	fi
-	printf "Running copyright linter for range\n%s\n\n" "${diff}"
+	printf "Running copyright linter for range:\n%s\n\n" "${diff}"
 fi
 
 if [ -n "${diff}" ]; then
-	for sha in $(git rev-list "${diff}"); do
-		# shellcheck disable=SC2086
-		git diff-tree --no-commit-id --name-status -r "${sha}" |
-			awk '!/^D/{$1=""; printf "%s\0", substr($0,2)}' |
-			xargs -0 -L100 ./source/tools/lint/copyright/check_copyright_year.py ${fix}
-	done
+	printf "Commits to check:\n%s\n\n" "$(git rev-list "${diff}")"
+	rm -f copyright-check-error.log
+	# shellcheck disable=SC2086
+	git rev-list "${diff}" |
+		xargs -L1 git diff-tree --no-commit-id --name-only --diff-filter AM -r |
+		xargs ./source/tools/lint/copyright/check_copyright_year.py ${fix} >copyright-check-error.log
+	cat copyright-check-error.log
+	if [ -s copyright-check-error.log ]; then
+		exit 1
+	fi
 else
 	echo "WARNING: running copyright linter without base commit, likely not what you want."
 	find . -type f -print0 |
