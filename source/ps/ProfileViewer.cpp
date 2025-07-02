@@ -200,7 +200,7 @@ void CProfileViewer::RenderProfile(CCanvas2D& canvas)
 
 	// Print table and column titles.
 	CTextRenderer textRenderer;
-	textRenderer.SetCurrentFont(font_name);
+	textRenderer.SetCurrentFont(font_name, CStrIntern{});
 	textRenderer.SetCurrentColor(CColor(1.0f, 1.0f, 1.0f, 1.0f));
 	textRenderer.PrintfAt(2.0f, height, L"%hs", table->GetTitle().c_str());
 	textRenderer.Translate(22.0f, height*2.0f);

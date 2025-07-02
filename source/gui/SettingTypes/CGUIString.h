@@ -66,6 +66,7 @@ public:
 				TAG_B,
 				TAG_I,
 				TAG_FONT,
+				TAG_LOCALE,
 				TAG_SIZE,
 				TAG_COLOR,
 				TAG_IMGLEFT,

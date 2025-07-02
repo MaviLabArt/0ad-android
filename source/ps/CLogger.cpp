@@ -182,7 +182,7 @@ void CLogger::Render(CCanvas2D& canvas)
 	float height{font.GetHeight()};
 
 	CTextRenderer textRenderer;
-	textRenderer.SetCurrentFont(font_name);
+	textRenderer.SetCurrentFont(font_name, CStrIntern{});
 	textRenderer.SetCurrentColor(CColor(1.0f, 1.0f, 1.0f, 1.0f));
 
 	// Offset by an extra 35px vertically to avoid the top bar.

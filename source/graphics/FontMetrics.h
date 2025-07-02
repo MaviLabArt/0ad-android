@@ -32,6 +32,7 @@ class CFontMetrics
 {
 public:
 	CFontMetrics(CStrIntern font);
+	CFontMetrics(CStrIntern font, CStrIntern locale);
 
 	float GetHeight() const;
 	float GetCapHeight();

@@ -61,7 +61,7 @@ public:
 	/**
 	 * Set the font for subsequent print calls.
 	 */
-	void SetCurrentFont(CStrIntern font);
+	void SetCurrentFont(CStrIntern font, CStrIntern locale);
 
 	/**
 	 * Print formatted text at (0,0) under the current transform,

@@ -471,7 +471,7 @@ void CGUIText::Draw(CGUI& pGUI, CCanvas2D& canvas, const CGUIColor& DefaultColor
 			continue;
 
 		textRenderer.SetCurrentColor(tc.m_UseCustomColor ? tc.m_Color : DefaultColor);
-		textRenderer.SetCurrentFont(tc.m_Font);
+		textRenderer.SetCurrentFont(tc.m_Font, tc.m_FontLocale);
 		textRenderer.Put(pos.X + tc.m_Pos.X, pos.Y + tc.m_Pos.Y, &tc.m_String);
 	}
 

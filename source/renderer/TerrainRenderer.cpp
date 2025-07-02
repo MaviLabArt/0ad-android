@@ -793,7 +793,7 @@ void TerrainRenderer::RenderPriorities(CCanvas2D& canvas, int cullGroup)
 	ENSURE(m->phase == Phase_Render);
 
 	CTextRenderer textRenderer;
-	textRenderer.SetCurrentFont(CStrIntern("mono-stroke-10"));
+	textRenderer.SetCurrentFont(CStrIntern{"mono-stroke-10"}, CStrIntern{});
 	textRenderer.SetCurrentColor(CColor(1.0f, 1.0f, 0.0f, 1.0f));
 
 	std::vector<CPatchRData*>& visiblePatches = m->visiblePatches[cullGroup];

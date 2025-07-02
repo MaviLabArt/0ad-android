@@ -55,7 +55,7 @@ CTextRenderer::CTextRenderer()
 {
 	ResetTranslate();
 	SetCurrentColor(CColor(1.0f, 1.0f, 1.0f, 1.0f));
-	SetCurrentFont(str_sans_10);
+	SetCurrentFont(str_sans_10, CStrIntern{});
 }
 
 void CTextRenderer::ResetTranslate(const CVector2D& translate)
@@ -84,12 +84,12 @@ void CTextRenderer::SetCurrentColor(const CColor& color)
 	}
 }
 
-void CTextRenderer::SetCurrentFont(CStrIntern font)
+void CTextRenderer::SetCurrentFont(CStrIntern font, CStrIntern locale)
 {
 	if (font != m_FontName)
 	{
 		m_FontName = font;
-		m_Font = g_Renderer.GetFontManager().LoadFont(font);
+		m_Font = g_Renderer.GetFontManager().LoadFont(font, locale);
 		m_Dirty = true;
 	}
 }

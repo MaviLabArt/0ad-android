@@ -207,6 +207,9 @@ void CGUIString::GenerateTextCall(const CGUI& pGUI, SFeedback& Feedback, CStrInt
 					// TODO Gee: (2004-08-15) Check if Font exists?
 					TextCall.m_Font = CStrIntern(utf8_from_wstring(tag.m_TagValue));
 					break;
+				case TextChunk::Tag::TAG_LOCALE:
+					TextCall.m_FontLocale = CStrIntern(utf8_from_wstring(tag.m_TagValue));
+					break;
 				case TextChunk::Tag::TAG_TOOLTIP:
 					TextCall.m_Tooltip = tag.m_TagValue;
 					break;
@@ -219,7 +222,7 @@ void CGUIString::GenerateTextCall(const CGUI& pGUI, SFeedback& Feedback, CStrInt
 			// Calculate the size of the font.
 			CSize2D size;
 			float cx, cy;
-			CFontMetrics font (TextCall.m_Font);
+			CFontMetrics font{TextCall.m_Font, TextCall.m_FontLocale};
 			font.CalculateStringSize(TextCall.m_String.c_str(), cx, cy);
 
 			size.Width = cx;
@@ -273,6 +276,8 @@ CGUIString::TextChunk::Tag::TagType CGUIString::TextChunk::Tag::GetTagType(const
 		return TAG_COLOR;
 	if (tagtype == L"font")
 		return TAG_FONT;
+	if (tagtype == L"locale")
+		return TAG_LOCALE;
 	if (tagtype == L"icon")
 		return TAG_ICON;
 	if (tagtype == L"imgleft")

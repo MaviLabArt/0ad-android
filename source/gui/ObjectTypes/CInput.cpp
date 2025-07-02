@@ -1255,7 +1255,7 @@ void CInput::DrawContent(CCanvas2D& canvas)
 	const float ls{font.GetHeight()};
 
 	CTextRenderer textRenderer;
-	textRenderer.SetCurrentFont(font_name);
+	textRenderer.SetCurrentFont(font_name, CStrIntern{});
 
 	textRenderer.Translate(
 		(float)(int)(m_CachedActualSize.left) + m_BufferZone,

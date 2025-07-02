@@ -110,11 +110,22 @@ CFontManager::CFontManager()
 	});
 }
 
-std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName)
+std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern locale)
 {
-	const std::string locale{g_L10n.GetCurrentLocale() != icu::Locale::getUS() ? g_L10n.GetCurrentLocaleString() : ""};
+	const std::string localeToUse{[&]
+		{
+			if (!locale.empty())
+				return locale.string();
+
+			if (g_L10n.GetCurrentLocale() == icu::Locale::getUS())
+				return std::string{};
+
+			// Use the current locale, but not US English.
+			return g_L10n.GetCurrentLocaleString();
+		} ()
+	};
 	const float guiScale{g_ConfigDB.Get("gui.scale", 1.0f)};
-	CStrIntern localeFontName{fmt::format("{}{}-{}", locale ,fontName.string(), guiScale)};
+	CStrIntern localeFontName{fmt::format("{}{}-{}", localeToUse ,fontName.string(), guiScale)};
 
 	FontsMap::iterator it{m_Fonts.find(localeFontName)};
 	if (it != m_Fonts.end())
@@ -148,13 +159,13 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName)
 
 			// TODO: explicit Locale like RTL or Arabic fonts.
 			// 1. Locale-specific fonts first
-			if (!locale.empty())
+			if (!localeToUse.empty())
 			{
 				if (fontSpec.bold)
-					candidateFonts.push_back(fmt::format("fonts.{}.{}.bold", locale, fontSpec.type));
+					candidateFonts.push_back(fmt::format("fonts.{}.{}.bold", localeToUse, fontSpec.type));
 				if (fontSpec.italic)
-					candidateFonts.push_back(fmt::format("fonts.{}.{}.italic", locale, fontSpec.type));
-				candidateFonts.push_back(fmt::format("fonts.{}.{}.regular", locale, fontSpec.type));
+					candidateFonts.push_back(fmt::format("fonts.{}.{}.italic", localeToUse, fontSpec.type));
+				candidateFonts.push_back(fmt::format("fonts.{}.{}.regular", localeToUse, fontSpec.type));
 			}
 
 			// 2. Then global fonts

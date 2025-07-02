@@ -40,7 +40,7 @@ public:
 	~CFontManager() = default;
 	NONCOPYABLE(CFontManager);
 
-	std::shared_ptr<CFont> LoadFont(CStrIntern fontName);
+	std::shared_ptr<CFont> LoadFont(CStrIntern fontName, CStrIntern locale);
 	void UploadTexturesAtlasToGPU();
 
 private:

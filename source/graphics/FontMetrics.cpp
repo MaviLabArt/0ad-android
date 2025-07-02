@@ -25,8 +25,13 @@
 #include "renderer/Renderer.h"
 
 CFontMetrics::CFontMetrics(CStrIntern font)
+	: CFontMetrics(font, CStrIntern())
 {
-	m_Font = g_Renderer.GetFontManager().LoadFont(font);
+}
+
+CFontMetrics::CFontMetrics(CStrIntern font, CStrIntern locale)
+{
+	m_Font = g_Renderer.GetFontManager().LoadFont(font, locale);
 }
 
 float CFontMetrics::GetHeight() const

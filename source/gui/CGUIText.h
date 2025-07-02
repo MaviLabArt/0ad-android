@@ -125,6 +125,19 @@ public:
 		CStrIntern m_Font;
 
 		/**
+		 * BCP-47 locale tag (e.g. `"en"`, `"ja"`, `"zh-hans"`) that tells the
+		 * FontManager which per-locale font to use for this portion of text.
+		 *
+		 * If the string is non-empty, the renderer tries to substitute a font
+		 * registered for that locale; otherwise it falls back to the game-wide
+		 * UI font so legacy captions behave exactly as before.
+		 *
+		 * The value is filled in by the `[locale='xx']…[/locale]` inline-markup
+		 * parser and read during glyph layout.
+		 */
+		CStrIntern m_FontLocale;
+
+		/**
 		 * Settings
 		 */
 		bool m_Bold, m_Italic, m_Underlined;

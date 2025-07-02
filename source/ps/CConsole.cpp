@@ -225,7 +225,7 @@ void CConsole::Render(CCanvas2D& canvas)
 	DrawWindow(canvas);
 
 	CTextRenderer textRenderer;
-	textRenderer.SetCurrentFont(CStrIntern(m_consoleFont));
+	textRenderer.SetCurrentFont(CStrIntern{m_consoleFont}, CStrIntern{});
 	// Animation: slide in from top of screen.
 	const float deltaY = (1.0f - m_VisibleFrac) * m_Height;
 	textRenderer.Translate(m_X, m_Y - deltaY);
