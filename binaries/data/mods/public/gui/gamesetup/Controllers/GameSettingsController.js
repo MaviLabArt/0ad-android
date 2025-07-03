@@ -103,11 +103,18 @@ class GameSettingsController
 			}
 		}
 
-		// If the new settings led to AI & players conflict, remove the AI.
 		for (const guid in g_PlayerAssignments)
+		{
+			// If the new settings led to AI & players conflict, remove the AI.
 			if (g_PlayerAssignments[guid].player !== -1 &&
 				g_GameSettings.playerAI.get(g_PlayerAssignments[guid].player - 1))
 				g_GameSettings.playerAI.set(g_PlayerAssignments[guid].player - 1, undefined);
+
+			// If the updated settings assign a player to a slot still marked as “removed”, clear that flag.
+			if (g_PlayerAssignments[guid].player !== -1 &&
+				g_GameSettings.playerRemoved.get(g_PlayerAssignments[guid].player - 1))
+				g_GameSettings.playerRemoved.set(g_PlayerAssignments[guid].player - 1, false);
+		}
 
 		for (const handler of this.settingsLoadedHandlers)
 			handler();
