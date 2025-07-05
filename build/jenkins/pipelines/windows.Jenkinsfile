@@ -108,7 +108,7 @@ pipeline {
                                 steps {
                                     powershell """
                                         cd build\\workspaces\\vs2017
-                                        & \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=${BUILD_TYPE} ${buildOptions} \$env:JOBS | Tee-Object -FilePath ${BUILD_TYPE}-build.log
+                                        & \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=${BUILD_TYPE} ${buildOptions} \$env:JOBS 2>&1 | Tee-Object -FilePath ${BUILD_TYPE}-build.log
                                     """
                                 }
                                 post {
