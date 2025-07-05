@@ -2,7 +2,7 @@ const g_CivData = loadCivData(false, false);
 
 var g_ScorePanelsData;
 
-var g_MaxHeadingTitle = 9;
+var g_MaxHeadingTitle = 18;
 var g_LongHeadingWidth = 250;
 var g_PlayerBoxYSize = 40;
 var g_PlayerBoxGap = 2;

@@ -61,10 +61,10 @@
 				<object name="playerNameHeading" type="text" style="ModernLeftTopLabelText">
 					<translatableAttribute id="caption">Player name</translatableAttribute>
 				</object>
-				<repeat var="x" count="9">
+				<repeat var="x" count="18">
 					<object name="titleHeading[x]" type="text" style="ModernTopLabelText"/>
 				</repeat>
-				<repeat var="x" count="9">
+				<repeat var="x" count="18">
 					<object name="Heading[x]" type="text" style="ModernLabelText"/>
 				</repeat>
 			</object>
@@ -78,14 +78,14 @@
 								<object name="playerOutcomet[i][n]" type="image" size="4 5 36 37"/>
 								<object name="playerNamet[i][n]" type="text" size="40 2 210 100%" style="ModernLeftLabelText"/>
 								<object name="civIcont[i][n]" type="image" size="210 5 242 37" />
-								<repeat var="x" count="9">
+								<repeat var="x" count="18">
 									<object name="valueDataTeam[i][n][x]" type="text" style="ModernLabelText"/>
 								</repeat>
 							</object>
 						</repeat>
 					</object>
 					<object name="teamHeadingt[i]" type="text" style="ModernLeftLabelText"/>
-					<repeat var="x" count="9">
+					<repeat var="x" count="18">
 						<object name="valueDataTeam[i][x]" type="text" style="ModernLabelText"/>
 					</repeat>
 				</object>
@@ -97,7 +97,7 @@
 						<object name="playerOutcome[n]" type="image" size="4 5 36 37"/>
 						<object name="playerName[n]" type="text" size="40 2 210 100%" style="ModernLeftLabelText"/>
 						<object name="civIcon[n]" type="image" size="210 5 242 37"/>
-						<repeat var="x" count="9">
+						<repeat var="x" count="18">
 							<object name="valueData[n][x]" type="text" style="ModernLabelText"/>
 						</repeat>
 					</object>
