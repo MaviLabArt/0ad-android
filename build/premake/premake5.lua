@@ -234,10 +234,6 @@ function project_set_build_flags()
 	end
 	sanitize(sanitizers)
 
-	if os.istarget("windows") then
-		warnings "Extra"
-	end
-
 	-- disable Windows debug heap, since it makes malloc/free hugely slower when
 	-- running inside a debugger
 	if os.istarget("windows") then
@@ -286,6 +282,9 @@ function project_set_build_flags()
 		defines { "CONFIG2_DAP_INTERFACE=0" }
 	end
 
+	-- hide warnings caused by library includes
+	externalwarnings "Off"
+
 	-- various platform-specific build flags
 	if os.istarget("windows") then
 
@@ -298,6 +297,9 @@ function project_set_build_flags()
 
 		-- use native wchar_t type (not typedef to unsigned short)
 		nativewchar "on"
+
+		-- enable most of the standard warnings
+		warnings "Extra"
 
 		-- FIXME: conversion warnings, should add -Wconversion to gcc and clang flags as well
 		disablewarnings { "4267" }

@@ -23,22 +23,7 @@
 #include "ScriptRequest.h"
 #include "StructuredClone.h"
 
-// Ignore warnings in SM headers.
-#if GCC_VERSION || CLANG_VERSION
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wunused-parameter"
-# pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
-#elif MSC_VERSION
-# pragma warning(push, 1)
-#endif
-
 #include "js/StructuredClone.h"
-
-#if GCC_VERSION || CLANG_VERSION
-# pragma GCC diagnostic pop
-#elif MSC_VERSION
-# pragma warning(pop)
-#endif
 
 Script::StructuredClone Script::WriteStructuredClone(const ScriptRequest& rq, JS::HandleValue v)
 {

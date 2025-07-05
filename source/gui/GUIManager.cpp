@@ -47,13 +47,7 @@
 #include <iterator>
 #include <js/Equality.h>
 #include <js/GCVector.h>
-#if MSC_VERSION
-# pragma warning(push, 1)
-#endif
 #include <js/Promise.h>
-#if MSC_VERSION
-# pragma warning(pop)
-#endif
 #include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/String.h>

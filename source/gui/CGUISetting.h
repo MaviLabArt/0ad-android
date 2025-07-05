@@ -21,15 +21,8 @@
 #include "lib/code_annotation.h"
 #include "ps/CStr.h"
 
-#if MSC_VERSION
-# pragma warning(push, 1)
-# pragma warning(disable: 4068)
-# pragma warning(disable: 4100)
-#endif
 #include <js/TypeDecls.h>
-#if MSC_VERSION
-# pragma warning(pop)
-#endif
+
 #include <utility>
 
 class IGUIObject;

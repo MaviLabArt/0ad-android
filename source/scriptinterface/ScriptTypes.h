@@ -32,52 +32,8 @@
 # endif
 #endif
 
-// Ignore some harmless warnings
-#if GCC_VERSION
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wunused-parameter"
-# pragma GCC diagnostic ignored "-Wredundant-decls"
-# pragma GCC diagnostic ignored "-Wundef" // Some versions of GCC will still print warnings (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=53431).
-# pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
-# pragma GCC diagnostic ignored "-Wignored-qualifiers"
-# pragma GCC diagnostic ignored "-Wextra"
-#endif
-#if CLANG_VERSION
-# pragma clang diagnostic push
-# pragma clang diagnostic ignored "-Wuninitialized"
-# pragma clang diagnostic ignored "-Wc++11-extensions"
-# pragma clang diagnostic ignored "-Wignored-qualifiers"
-# pragma clang diagnostic ignored "-Wmismatched-tags"
-// Ugly hack to deal with macro redefinitions from libc++
-# ifdef nullptr
-#  undef nullptr
-# endif
-# ifdef decltype
-#  undef decltype
-# endif
-#endif
-#if MSC_VERSION
-// reduce the warning level for the SpiderMonkey headers
-# pragma warning(push, 1)
-// ignore C4291 in <mozilla/Vector.h>
-# pragma warning(disable: 4291)
-// ignore C4068 in <mozilla/Casting.h>
-# pragma warning(disable: 4068)
-#endif
-
 #include "jspubtd.h"
 #include "jsapi.h"
-
-// restore user flags and re-enable the warnings disabled a few lines above
-#if MSC_VERSION
-# pragma warning(pop)
-#endif
-#if CLANG_VERSION
-# pragma clang diagnostic pop
-#endif
-#if GCC_VERSION
-# pragma GCC diagnostic pop
-#endif
 
 #if MOZJS_MAJOR_VERSION != 115
 #error Your compiler is trying to use an incorrect major version of the \

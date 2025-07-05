@@ -58,13 +58,7 @@
 
 #include <algorithm>
 #include <js/CallAndConstruct.h>
-#if MSC_VERSION
-# pragma warning(push, 1)
-#endif
 #include <js/Promise.h>
-#if MSC_VERSION
-# pragma warning(pop)
-#endif
 #include <js/ValueArray.h>
 #include <optional>
 #include <SDL_events.h>

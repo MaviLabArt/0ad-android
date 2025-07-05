@@ -24,24 +24,6 @@
 
 #include "scriptinterface/ScriptTypes.h"
 
-// Ignore some harmless warnings
-#if GCC_VERSION
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wunused-parameter"
-# pragma GCC diagnostic ignored "-Wredundant-decls"
-# pragma GCC diagnostic ignored "-Wnon-virtual-dtor"
-#endif
-#if CLANG_VERSION
-# pragma clang diagnostic push
-# pragma clang diagnostic ignored "-Wmismatched-tags"
-#endif
-#if MSC_VERSION
-// reduce the warning level for the SpiderMonkey headers
-# pragma warning(push, 1)
-// ignore C4291 in <mozilla/Maybe.h>
-# pragma warning(disable: 4291)
-#endif
-
 // Redefine signbit to fix build error in GCC
 #ifndef signbit
 # define signbit std::signbit
@@ -67,15 +49,5 @@
 #include "js/friend/ErrorMessages.h"
 
 #undef signbit
-
-#if MSC_VERSION
-# pragma warning(pop)
-#endif
-#if CLANG_VERSION
-# pragma clang diagnostic pop
-#endif
-#if GCC_VERSION
-# pragma GCC diagnostic pop
-#endif
 
 #endif // INCLUDED_SCRIPTEXTRAHEADERS
