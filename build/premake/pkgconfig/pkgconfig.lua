@@ -1,13 +1,18 @@
 local m = {}
-m._VERSION = "1.3.0-dev"
+m._VERSION = "1.4.0-dev"
 
-m.additional_pc_path = nil
 m.static_link_libs = false
 
 local pkg_config_command = "pkg-config"
 if os.getenv("PKG_CONFIG") then
 	pkg_config_command = os.getenv("PKG_CONFIG")
 end
+
+local pkg_config_path = ""
+if os.getenv("PKG_CONFIG_PATH") then
+	pkg_config_path = os.getenv("PKG_CONFIG_PATH")
+end
+
 
 local function os_capture(cmd)
 	return io.popen(cmd, 'r'):read('*a'):gsub("\n", " ")
@@ -16,8 +21,7 @@ end
 local function parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
 	local result
 	if not alternative_cmd then
-		local pc_path = m.additional_pc_path and "PKG_CONFIG_PATH="..m.additional_pc_path or ""
-		result = os_capture(pc_path .. " " .. pkg_config_command .. " --cflags " .. lib)
+		result = os_capture("PKG_CONFIG_PATH=" .. pkg_config_path .. " " .. pkg_config_command .. " --cflags " .. lib)
 	else
 		if not alternative_flags then
 			result = os_capture(alternative_cmd.." --cflags")
@@ -49,6 +53,14 @@ local function parse_pkg_config_includes(lib, alternative_cmd, alternative_flags
 	return dirs, files, options
 end
 
+function m.add_pkg_config_path(path)
+	if pkg_config_path == "" then
+		pkg_config_path = path
+	else
+		pkg_config_path = pkg_config_path .. ":" .. path
+	end
+end
+
 function m.add_includes(lib, alternative_cmd, alternative_flags)
 	local dirs, files, options = parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
 
@@ -68,9 +80,8 @@ end
 function m.add_links(lib, alternative_cmd, alternative_flags)
 	local result
 	if not alternative_cmd then
-		local pc_path = m.additional_pc_path and "PKG_CONFIG_PATH="..m.additional_pc_path or ""
 		local static = m.static_link_libs and " --static " or ""
-		result = os_capture(pc_path .. " " .. pkg_config_command .. " --libs " .. static .. lib)
+		result = os_capture("PKG_CONFIG_PATH=" .. pkg_config_path .. " " .. pkg_config_command .. " --libs " .. static .. lib)
 	else
 		if not alternative_flags then
 			result = os_capture(alternative_cmd.." --libs")

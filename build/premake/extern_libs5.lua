@@ -64,7 +64,7 @@ pkgconfig = require "pkgconfig"
 
 -- Configure pkgconfig for MacOSX systems
 if os.istarget("macosx") then
-	pkgconfig.additional_pc_path = libraries_dir .. "pkgconfig/"
+	pkgconfig.add_pkg_config_path(libraries_dir .. "pkgconfig/")
 	pkgconfig.static_link_libs = true
 end
 
