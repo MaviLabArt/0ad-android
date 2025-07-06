@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,15 +26,19 @@
 
 #include "precompiled.h"
 
-#include "lib/file/vfs/vfs_util.h"
+#include "vfs_util.h"
 
-#include <cstdio>
-#include <cstring>
-#include <queue>
-
+#include "lib/code_annotation.h"
+#include "lib/path.h"
 #include "lib/regex.h"
+#include "lib/secure_crt.h"
 #include "lib/sysdep/filesystem.h"
 
+#include <algorithm>
+#include <climits>
+#include <queue>
+#include <string>
+#include <vector>
 
 namespace vfs {
 

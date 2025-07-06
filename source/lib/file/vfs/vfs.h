@@ -28,10 +28,10 @@
 #ifndef INCLUDED_VFS
 #define INCLUDED_VFS
 
-#include "lib/debug.h"
 #include "lib/file/file_system.h"	// CFileInfo
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/os_path.h"
+#include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstddef>

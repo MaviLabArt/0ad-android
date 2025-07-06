@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,8 +26,8 @@
 
 #include "lib/debug.h"
 
+#include <SDL_error.h>
 #include <SDL_syswm.h>
-
 
 #if defined(SDL_VIDEO_DRIVER_X11) && !CONFIG2_GLES
 void* GetX11Display(SDL_Window* window)

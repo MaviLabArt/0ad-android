@@ -35,9 +35,9 @@
 #ifndef INCLUDED_TRACE
 #define INCLUDED_TRACE
 
-#include "lib/debug.h"
 #include "lib/os_path.h"
 #include "lib/path.h"
+#include "lib/status.h"
 
 #include <cstddef>
 #include <memory>

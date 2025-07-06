@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,6 +26,12 @@
 
 #ifndef INCLUDED_ADTS_RING_BUF
 #define INCLUDED_ADTS_RING_BUF
+
+#include "lib/debug.h"
+#include "lib/status.h"
+
+#include <cstddef>
+#include <iterator>
 
 template<class T, size_t n> class RingBuf
 {

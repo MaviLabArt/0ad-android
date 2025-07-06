@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,12 +25,15 @@
  */
 
 #include "precompiled.h"
-#include "lib/allocators/pool.h"
+
+#include "pool.h"
 
 #include "lib/alignment.h"
 #include "lib/allocators/freelist.h"
-
 #include "lib/timer.h"
+#include "lib/types.h"
+
+#include <algorithm>
 
 namespace Allocators {
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,20 +21,28 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/vfs/vfs.h"
 
+#include "vfs.h"
+
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
-#include "lib/file/file_system.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/file/common/file_loader.h"
 #include "lib/file/common/file_stats.h"
+#include "lib/file/common/real_directory.h"
 #include "lib/file/common/trace.h"
-#include "lib/file/archive/archive.h"
-#include "lib/file/io/io.h"
-#include "lib/file/vfs/vfs_tree.h"
+#include "lib/file/file.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs_lookup.h"
 #include "lib/file/vfs/vfs_populate.h"
+#include "lib/file/vfs/vfs_tree.h"
+#include "lib/path.h"
 
+#include <ctime>
+#include <map>
 #include <mutex>
-#include <thread>
+#include <utility>
 
 static const StatusDefinition vfsStatusDefinitions[] = {
 	{ ERR::VFS_DIR_NOT_FOUND, L"VFS directory not found" },

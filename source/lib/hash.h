@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,6 +22,9 @@
 
 #ifndef INCLUDED_HASH
 #define INCLUDED_HASH
+
+#include <cstddef>
+#include <memory>
 
 /**
  * This function is the same as hash_combine, i.e. allows dropping the boost dependency just for this function.

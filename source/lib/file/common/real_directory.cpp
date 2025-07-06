@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,11 +21,12 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/common/real_directory.h"
 
-#include "lib/sysdep/filesystem.h"
-#include "lib/file/file.h"
+#include "real_directory.h"
+
+#include "lib/debug.h"
 #include "lib/file/io/io.h"
+#include "lib/path.h"
 
 
 RealDirectory::RealDirectory(const OsPath& path, size_t priority, size_t flags)

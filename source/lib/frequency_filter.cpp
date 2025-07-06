@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,7 +21,15 @@
  */
 
 #include "precompiled.h"
-#include "lib/frequency_filter.h"
+
+#include "frequency_filter.h"
+
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
 
 static const double errorTolerance = 0.25;
 static const double g_Sensitivity = 0.10;

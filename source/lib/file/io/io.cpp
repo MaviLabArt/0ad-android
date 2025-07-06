@@ -21,10 +21,12 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/io/io.h"
+
+#include "io.h"
 
 #include "lib/config2.h"
-#include "lib/sysdep/rtl.h"
+
+#include <cerrno>
 
 static const StatusDefinition ioStatusDefinitions[] = {
 	{ ERR::IO, L"Error during IO", EIO }

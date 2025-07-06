@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,6 +26,10 @@
 
 #ifndef INCLUDED_SMBIOS
 #define INCLUDED_SMBIOS
+
+#include "lib/types.h"
+
+#include <string>
 
 namespace SMBIOS {
 

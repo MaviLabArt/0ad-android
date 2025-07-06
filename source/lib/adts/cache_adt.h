@@ -27,6 +27,9 @@
 #ifndef INCLUDED_CACHE_ADT
 #define INCLUDED_CACHE_ADT
 
+#include "lib/debug.h"
+
+#include <algorithm>
 #include <cfloat>
 #include <list>
 #include <queue> // std::priority_queue

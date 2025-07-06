@@ -26,6 +26,7 @@
 #include "lib/sysdep/rtl.h"
 #include "lib/sysdep/vm.h"
 
+#include <cstdlib>
 #include <memory>
 
 // NB: STL allocators are parameterized on the object type and indicate

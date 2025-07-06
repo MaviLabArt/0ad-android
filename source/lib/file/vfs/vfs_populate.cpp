@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,12 +25,22 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/vfs/vfs_populate.h"
 
+#include "vfs_populate.h"
+
+#include "lib/code_annotation.h"
+#include "lib/file/archive/archive.h"
 #include "lib/file/archive/archive_zip.h"
-#include "lib/file/vfs/vfs_tree.h"
-#include "lib/file/vfs/vfs_lookup.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"	// error codes
+#include "lib/file/vfs/vfs_lookup.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_tree.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+
+#include <cstddef>
+#include <cstdint>
 
 struct CompareFileInfoByName
 {

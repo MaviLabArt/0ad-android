@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,7 +25,13 @@
  */
 
 #include "precompiled.h"
-#include "lib/rand.h"
+
+#include "rand.h"
+
+#include "lib/debug.h"
+#include "lib/status.h"
+
+#include <cstdlib>
 
 // avoids several common pitfalls; see discussion at
 // http://www.azillionmonkeys.com/qed/random.html

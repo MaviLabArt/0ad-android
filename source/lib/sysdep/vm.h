@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,7 +28,10 @@
 #ifndef INCLUDED_SYSDEP_VM
 #define INCLUDED_SYSDEP_VM
 
+#include "lib/alignment.h"
 #include "lib/posix/posix_mman.h"	// PROT_*
+
+#include <cstdint>
 
 namespace vm {
 

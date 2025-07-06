@@ -25,14 +25,24 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/common/trace.h"
 
-#include <cstdio>
-#include <sstream>
+#include "trace.h"
 
+#include "lib/allocators/dynarray.h"
 #include "lib/allocators/pool.h"
-#include "lib/timer.h"	// timer_Time
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/secure_crt.h"
 #include "lib/sysdep/sysdep.h"	// sys_OpenFile
+#include "lib/timer.h"	// timer_Time
+
+#include <cerrno>
+#include <clocale>
+#include <cstdint>
+#include <cstdio>
+#include <cwchar>
+#include <new>
+#include <sstream>
 
 
 /*virtual*/ ITrace::~ITrace()

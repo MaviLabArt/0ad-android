@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,13 +21,18 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/io/write_buffer.h"
 
-#include "lib/bits.h"	// IsAligned
-#include "lib/sysdep/cpu.h"
+#include "write_buffer.h"
+
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/bits.h"	// IsAligned
+#include "lib/debug.h"
 #include "lib/file/io/io.h"
+#include "lib/sysdep/rtl.h"
 
+#include <algorithm>
+#include <cstring>
 
 static const size_t BLOCK_SIZE = 512*KiB;
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,12 +26,17 @@
 
 #include "precompiled.h"
 
+#include "secure_crt.h"
+
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+
+#include <algorithm>
+#include <cerrno>
+#include <cinttypes>
+#include <cstdarg>
 #include <cstdio>
 #include <cstring>
-#include <cerrno>
-#include <cstdarg>
-
-#include "lib/secure_crt.h"
 
 #if OS_ANDROID
 # include <boost/algorithm/string/replace.hpp>

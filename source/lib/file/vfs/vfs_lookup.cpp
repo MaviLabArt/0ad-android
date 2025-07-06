@@ -26,15 +26,22 @@
 
 #include "precompiled.h"
 
-#include "lib/file/vfs/vfs_lookup.h"
-#include "lib/sysdep/filesystem.h"
+#include "vfs_lookup.h"
+
+#include "lib/debug.h"
+#include "lib/file/common/real_directory.h"
 #include "lib/file/file.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"	// error codes
-#include "lib/file/vfs/vfs_tree.h"
 #include "lib/file/vfs/vfs_populate.h"
+#include "lib/file/vfs/vfs_tree.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/sysdep/filesystem.h"
 
-#include "lib/timer.h"
-
+#include <cerrno>
+#include <string>
 
 static Status CreateDirectory(const OsPath& path)
 {

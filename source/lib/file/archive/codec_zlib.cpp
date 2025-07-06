@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,14 +21,17 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/archive/codec_zlib.h"
+
+#include "codec_zlib.h"
 
 #include "lib/alignment.h"
-#include "lib/file/archive/codec.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/zlib.h"
+#include "lib/file/archive/codec.h"
+#include "lib/status.h"
+#include "lib/types.h"
 
-#include "lib/sysdep/cpu.h"
-
+#include <algorithm>
 #include <cstring>
 
 class Codec_ZLib : public ICodec

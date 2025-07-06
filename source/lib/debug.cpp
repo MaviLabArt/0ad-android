@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,17 +21,27 @@
  */
 
 #include "precompiled.h"
-#include "lib/debug.h"
+
+#include "debug.h"
 
 #include "lib/alignment.h"
 #include "lib/app_hooks.h"
 #include "lib/fnv_hash.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/secure_crt.h"
 #include "lib/sysdep/sysdep.h"
-#include "lib/sysdep/vm.h"
+#include "lib/utf8.h"
 
+#include <algorithm>
+#include <cerrno>
 #include <cstdarg>
-#include <cstring>
 #include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cwchar>
+#include <string>
+#include <utility>
 
 namespace
 {

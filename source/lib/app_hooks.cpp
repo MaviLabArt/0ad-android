@@ -22,9 +22,10 @@
 
 #include "precompiled.h"
 
-#include "lib/app_hooks.h"
+#include "app_hooks.h"
 
 #include "lib/sysdep/sysdep.h"
+#include "lib/types.h"
 
 #include <cstdio>
 

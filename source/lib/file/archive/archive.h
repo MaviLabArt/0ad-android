@@ -36,8 +36,8 @@
 #include "lib/types.h"
 
 #include <cstdint>
+#include <ctime>
 #include <memory>
-#include <time.h>
 
 // rationale: this module doesn't build a directory tree of the entries
 // within an archive. that task is left to the VFS; here, we are only

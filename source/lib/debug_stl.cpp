@@ -25,15 +25,20 @@
  */
 
 #include "precompiled.h"
-#include "lib/debug_stl.h"
 
+#include "debug_stl.h"
+
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/regex.h"
+#include "lib/secure_crt.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/sysdep/stl.h"
 
-#include <cassert>
+#include <cwchar>
 #include <deque>
 #include <list>
-#include <map>
-#include <set>
+#include <new>
 #include <vector>
 
 static const StatusDefinition debugStlStatusDefinitions[] = {

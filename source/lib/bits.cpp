@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,7 +25,10 @@
  */
 
 #include "precompiled.h"
-#include "lib/bits.h"
+
+#include "bits.h"
+
+#include "lib/types.h"
 
 #include <cstring>
 

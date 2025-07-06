@@ -60,6 +60,7 @@ scope
 #ifndef INCLUDED_LIB
 #define INCLUDED_LIB
 
+#include "lib/debug.h"
 #include "lib/types.h"
 
 #include <cmath>	// fabsf

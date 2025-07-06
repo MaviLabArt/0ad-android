@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,10 +21,11 @@
  */
 
 #include "precompiled.h"
-#include "lib/file/archive/stream.h"
 
-#include "lib/allocators/page_aligned.h"
+#include "stream.h"
+
 #include "lib/allocators/shared_ptr.h"
+#include "lib/debug.h"
 #include "lib/file/archive/codec.h"
 //#include "lib/timer.h"
 

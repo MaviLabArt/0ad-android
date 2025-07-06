@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,6 +22,8 @@
 
 #ifndef INCLUDED_FREQUENCY_FILTER
 #define INCLUDED_FREQUENCY_FILTER
+
+#include <memory>
 
 // calculate frequency of events (tuned for 100 Hz)
 struct IFrequencyFilter

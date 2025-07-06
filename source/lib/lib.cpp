@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,15 +25,10 @@
  */
 
 #include "precompiled.h"
-#include "lib/lib.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include "lib.h"
 
-#include "lib/app_hooks.h"
-#include "lib/sysdep/sysdep.h"
-
+#include "lib/status.h"
 
 //-----------------------------------------------------------------------------
 // type conversion
