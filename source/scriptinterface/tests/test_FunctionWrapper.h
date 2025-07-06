@@ -17,6 +17,8 @@
 
 #include "lib/self_test.h"
 
+#include "ps/CLogger.h"
+#include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/ScriptContext.h"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,30 +17,52 @@
 
 #include "precompiled.h"
 
+#include "WaterManager.h"
+
+#include "graphics/Camera.h"
+#include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/Terrain.h"
 #include "graphics/TextureManager.h"
-#include "graphics/ShaderManager.h"
-#include "graphics/ShaderProgram.h"
 #include "lib/bits.h"
-#include "lib/timer.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/secure_crt.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Frustum.h"
 #include "maths/MathUtil.h"
 #include "maths/Vector2D.h"
-#include "ps/CLogger.h"
+#include "maths/Vector3D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "renderer/backend/Backend.h"
-#include "renderer/backend/IDevice.h"
+#include "ps/containers/Span.h"
 #include "renderer/PostprocManager.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"
 #include "renderer/SceneRenderer.h"
-#include "renderer/WaterManager.h"
-#include "simulation2/Simulation2.h"
-#include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/components/ICmpRangeManager.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDevice.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IFramebuffer.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 
 #include <algorithm>
+#include <array>
+#include <climits>
+#include <cmath>
+#include <cstdint>
+#include <cstdlib>
+#include <deque>
+#include <set>
+#include <utility>
 
 struct CoastalPoint
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 #include "lib/ogl.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "ps/containers/Span.h"
-#include "ps/CStrForward.h"
+#include "ps/CStr.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/gl/Texture.h"
 #include "renderer/backend/IShaderProgram.h"

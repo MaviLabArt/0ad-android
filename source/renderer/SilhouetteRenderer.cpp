@@ -19,22 +19,41 @@
 
 #include "SilhouetteRenderer.h"
 
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
 #include "graphics/Camera.h"
 #include "graphics/HFTracer.h"
 #include "graphics/Model.h"
 #include "graphics/Overlay.h"
 #include "graphics/Patch.h"
+#include "graphics/RenderableObject.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "maths/Vector4D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
+#include "ps/containers/Span.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/Scene.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/PipelineState.h"
 
-#include <cfloat>
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <iterator>
+#include <limits>
+#include <memory>
+#include <sys/types.h>
 
 extern int g_xres, g_yres;
 

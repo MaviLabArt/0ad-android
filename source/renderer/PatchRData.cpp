@@ -19,39 +19,64 @@
 
 #include "renderer/PatchRData.h"
 
+#include "graphics/Camera.h"
+#include "graphics/Color.h"
 #include "graphics/GameView.h"
-#include "graphics/LOSTexture.h"
-#include "graphics/LightEnv.h"
+#include "graphics/Material.h"
+#include "graphics/MiniPatch.h"
 #include "graphics/Patch.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/Terrain.h"
 #include "graphics/TerrainTextureEntry.h"
+#include "graphics/TerrainTextureManager.h"
 #include "graphics/TextRenderer.h"
 #include "graphics/TextureManager.h"
+#include "lib/alignment.h"
 #include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
-#include "maths/MathUtil.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "maths/Matrix3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/Config.h"
 #include "ps/Profile.h"
-#include "ps/Pyrogenesis.h"
 #include "ps/VideoMode.h"
-#include "ps/World.h"
+#include "ps/containers/Span.h"
 #include "renderer/AlphaMapCalculator.h"
 #include "renderer/BlendShapes.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TerrainRenderer.h"
+#include "renderer/VertexBuffer.h"
 #include "renderer/WaterManager.h"
-#include "simulation2/Simulation2.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
 
 #include <algorithm>
+#include <array>
+#include <cstdint>
+#include <cstring>
+#include <functional>
+#include <iterator>
+#include <map>
+#include <memory>
 #include <numeric>
-#include <set>
+#include <string>
+#include <utility>
+
+namespace Renderer::Backend { class ITexture; }
 
 const ssize_t BlendOffsets[9][2] = {
 	{  0, -1 },

@@ -22,6 +22,8 @@
 #include "ps/CStrIntern.h"
 #include "renderer/backend/dummy/Device.h"
 
+#include <vector>
+
 namespace Renderer
 {
 

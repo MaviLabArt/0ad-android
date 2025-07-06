@@ -17,31 +17,53 @@
 
 #include "precompiled.h"
 
+#include "graphics/Camera.h"
 #include "graphics/Color.h"
 #include "graphics/LightEnv.h"
 #include "graphics/Material.h"
 #include "graphics/Model.h"
 #include "graphics/ModelDef.h"
+#include "graphics/SColor.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
+#include "graphics/Texture.h"
 #include "graphics/TextureManager.h"
+#include "lib/alignment.h"
 #include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
-#include "maths/Vector4D.h"
 #include "ps/CLogger.h"
-#include "ps/containers/Span.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
+#include "ps/containers/Span.h"
 #include "renderer/MikktspaceWrap.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/ModelVertexRenderer.h"
-#include "renderer/Renderer.h"
 #include "renderer/RenderModifiers.h"
+#include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/SkyManager.h"
 #include "renderer/TimeManager.h"
+#include "renderer/VertexArray.h"
 #include "renderer/WaterManager.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+
+#include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <functional>
+#include <new>
+#include <string>
+#include <unordered_map>
+#include <utility>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // ModelRenderer implementation

@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,11 @@
 
 #include "Framebuffer.h"
 
-#include "lib/code_annotation.h"
 #include "lib/config2.h"
+#include "lib/debug.h"
 #include "ps/CLogger.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/ITexture.h"
 #include "renderer/backend/gl/Device.h"
 #include "renderer/backend/gl/Texture.h"
 

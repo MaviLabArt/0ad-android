@@ -21,16 +21,21 @@
 
 #include "graphics/TextureManager.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
 #include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
 #include "ps/VideoMode.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/Renderer.h"
 #include "renderer/PostprocManager.h"
+#include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/ShadowMap.h"
 #include "renderer/WaterManager.h"
+#include "renderer/backend/IDevice.h"
+
+#include <functional>
+#include <string>
+#include <vector>
 
 CRenderingOptions g_RenderingOptions;
 

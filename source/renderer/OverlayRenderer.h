@@ -18,7 +18,6 @@
 #ifndef INCLUDED_OVERLAYRENDERER
 #define INCLUDED_OVERLAYRENDERER
 
-#include "graphics/ShaderProgram.h"
 #include "lib/code_annotation.h"
 
 class CCamera;

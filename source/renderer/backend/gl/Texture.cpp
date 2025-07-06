@@ -19,7 +19,10 @@
 
 #include "Texture.h"
 
+#include "graphics/Color.h"
 #include "lib/config2.h"
+#include "lib/debug.h"
+#include "ps/containers/Span.h"
 #include "renderer/backend/Sampler.h"
 #include "renderer/backend/gl/Device.h"
 #include "renderer/backend/gl/DeviceCommandContext.h"

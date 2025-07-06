@@ -19,25 +19,38 @@
 
 #include "renderer/PostprocManager.h"
 
-#include "graphics/GameView.h"
+#include "graphics/Color.h"
 #include "graphics/LightEnv.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
-#include "lib/bits.h"
-#include "maths/MathUtil.h"
-#include "ps/ConfigDB.h"
+#include "graphics/ShaderTechnique.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/lib.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
-#include "ps/Game.h"
 #include "ps/Profile.h"
 #include "ps/World.h"
-#include "renderer/backend/Backend.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/backend/Sampler.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IDevice.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/Sampler.h"
 #include "tools/atlas/GameInterface/GameLoop.h"
 
+#include <algorithm>
+#include <iterator>
+#include <sstream>
+#include <string>
 #include <string_view>
 
 namespace

@@ -20,30 +20,53 @@
 #include "OverlayRenderer.h"
 
 #include "graphics/Camera.h"
+#include "graphics/Color.h"
 #include "graphics/LOSTexture.h"
 #include "graphics/Overlay.h"
+#include "graphics/RenderableObject.h"
+#include "graphics/SColor.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
-#include "graphics/Terrain.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
+#include "graphics/Texture.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
-#include "maths/MathUtil.h"
-#include "maths/Quaternion.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
+#include "maths/Vector4D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/Game.h"
 #include "ps/Profile.h"
-#include "renderer/backend/PipelineState.h"
+#include "ps/containers/Span.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
+#include "renderer/Scene.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TexturedLineRData.h"
 #include "renderer/VertexArray.h"
-#include "renderer/VertexBuffer.h"
-#include "renderer/VertexBufferManager.h"
-#include "simulation2/components/ICmpWaterManager.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/PipelineState.h"
 #include "simulation2/Simulation2.h"
-#include "simulation2/system/SimContext.h"
 
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <iterator>
+#include <memory>
+#include <new>
 #include <unordered_map>
+#include <utility>
+#include <vector>
+
+namespace Renderer::Backend { class IDevice; }
 
 namespace
 {

@@ -20,30 +20,41 @@
 #include "ShadowMap.h"
 
 #include "graphics/Camera.h"
-#include "graphics/LightEnv.h"
-#include "graphics/ShaderManager.h"
+#include "graphics/Color.h"
 #include "lib/bits.h"
+#include "lib/config2.h"
+#include "lib/debug.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Brush.h"
 #include "maths/Frustum.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/Profile.h"
-#include "renderer/backend/Backend.h"
-#include "renderer/backend/CompareOp.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/backend/ITexture.h"
-#include "renderer/backend/IFramebuffer.h"
-#include "renderer/backend/Sampler.h"
+#include "ps/ConfigDB.h"
+#include "ps/containers/Span.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/CompareOp.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IDevice.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IFramebuffer.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 
+#include <algorithm>
 #include <array>
+#include <cmath>
+#include <cstdint>
+#include <memory>
+#include <vector>
 
 namespace
 {

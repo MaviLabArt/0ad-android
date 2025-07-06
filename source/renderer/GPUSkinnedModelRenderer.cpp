@@ -17,26 +17,44 @@
 
 #include "precompiled.h"
 
-#include "renderer/GPUSkinnedModelRenderer.h"
+#include "GPUSkinnedModelRenderer.h"
 
-#include "graphics/Color.h"
-#include "graphics/LightEnv.h"
+#include "graphics/MeshManager.h"
 #include "graphics/Model.h"
 #include "graphics/ModelDef.h"
+#include "graphics/RenderableObject.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
-#include "maths/MathUtil.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
+#include "lib/debug.h"
+#include "lib/lib.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
 #include "ps/CLogger.h"
-#include "ps/containers/StaticVector.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/containers/Span.h"
+#include "ps/containers/StaticVector.h"
 #include "renderer/ModelRenderer.h"
-#include "renderer/RenderModifiers.h"
 #include "renderer/Renderer.h"
 #include "renderer/VertexArray.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/VertexBufferManager.h"
 #include "renderer/backend/Barrier.h"
-#include "renderer/backend/PipelineState.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "third_party/mikktspace/weldmesh.h"
+
+#include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <string>
+#include <vector>
 
 namespace
 {

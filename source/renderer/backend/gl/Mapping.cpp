@@ -20,6 +20,7 @@
 #include "Mapping.h"
 
 #include "lib/config2.h"
+#include "lib/debug.h"
 #include "renderer/backend/CompareOp.h"
 #include "renderer/backend/PipelineState.h"
 

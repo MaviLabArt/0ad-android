@@ -17,27 +17,50 @@
 
 #include "precompiled.h"
 
-#include "renderer/SkyManager.h"
+#include "SkyManager.h"
 
+#include "graphics/Camera.h"
+#include "graphics/HeightMipmap.h"
 #include "graphics/LightEnv.h"
 #include "graphics/ShaderManager.h"
-#include "graphics/Terrain.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/TextureManager.h"
 #include "lib/bits.h"
+#include "lib/code_generation.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/status.h"
 #include "lib/tex/tex.h"
-#include "maths/MathUtil.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
 #include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
-#include "ps/Game.h"
-#include "renderer/backend/IDevice.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
-#include "renderer/RenderingOptions.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDevice.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 
 #include <algorithm>
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <string>
+#include <utility>
 
 SkyManager::SkyManager() :
 	m_VertexArray{Renderer::Backend::IBuffer::Type::VERTEX,

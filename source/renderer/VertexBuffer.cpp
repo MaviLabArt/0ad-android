@@ -19,8 +19,8 @@
 
 #include "VertexBuffer.h"
 
-#include "lib/sysdep/cpu.h"
-#include "ps/CLogger.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "renderer/Renderer.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"

@@ -20,15 +20,15 @@
 #include "lib/alignment.h"
 #include "lib/bits.h"
 #include "lib/sysdep/rtl.h"
-#include "maths/Vector3D.h"
-#include "maths/Vector4D.h"
 #include "ps/CLogger.h"
-#include "graphics/Color.h"
-#include "graphics/SColor.h"
 #include "renderer/Renderer.h"
 #include "renderer/VertexArray.h"
 #include "renderer/VertexBuffer.h"
 #include "renderer/VertexBufferManager.h"
+
+class CVector3D;
+class CVector4D;
+struct SColor4ub;
 
 namespace
 {

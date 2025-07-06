@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 #ifndef INCLUDED_RENDERER_BACKEND_GL_PIPELINESTATE
 #define INCLUDED_RENDERER_BACKEND_GL_PIPELINESTATE
 
-#include "lib/ogl.h"
+#include "graphics/Color.h"
 #include "renderer/backend/PipelineState.h"
 
 #include <memory>

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,11 +20,19 @@
 
 #include "renderer/backend/IFramebuffer.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <glad/vulkan.h>
+#include <limits>
 #include <memory>
 #include <tuple>
 #include <unordered_map>
 #include <vector>
+
+namespace Renderer::Backend::Vulkan { class CDevice; }
+namespace Renderer::Backend::Vulkan { class CFramebuffer; }
+namespace Renderer::Backend::Vulkan { class CRingCommandContext; }
+namespace Renderer::Backend::Vulkan { class CTexture; }
 
 namespace Renderer
 {
@@ -34,11 +42,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
-class CFramebuffer;
-class CRingCommandContext;
-class CTexture;
 
 class CSwapChain final
 {

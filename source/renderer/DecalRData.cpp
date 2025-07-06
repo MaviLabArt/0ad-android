@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,23 +19,44 @@
 
 #include "DecalRData.h"
 
+#include "graphics/Color.h"
 #include "graphics/Decal.h"
-#include "graphics/Model.h"
+#include "graphics/Material.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/Terrain.h"
 #include "graphics/TextureManager.h"
+#include "lib/alignment.h"
 #include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/Game.h"
 #include "ps/Profile.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/TerrainRenderer.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/Simulation2.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
 
 #include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <sys/types.h>
+#include <utility>
 
 // TODO: Currently each decal is a separate CDecalRData. We might want to use
 // lots of decals for special effects like shadows, footprints, etc, in which

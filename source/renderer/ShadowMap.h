@@ -18,15 +18,13 @@
 #ifndef INCLUDED_SHADOWMAP
 #define INCLUDED_SHADOWMAP
 
-#include "renderer/backend/IDeviceCommandContext.h"
-
 class CBoundingBoxAligned;
 class CCamera;
 class CFrustum;
 class CVector3D;
 namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IShaderProgram; }
-
 struct ShadowMapInternals;
 
 /**

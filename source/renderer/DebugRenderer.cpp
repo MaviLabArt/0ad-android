@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,23 +17,33 @@
 
 #include "precompiled.h"
 
-#include "renderer/DebugRenderer.h"
+#include "DebugRenderer.h"
 
 #include "graphics/Camera.h"
 #include "graphics/Color.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
-#include "graphics/ShaderProgram.h"
+#include "graphics/ShaderTechnique.h"
+#include "lib/code_generation.h"
 #include "lib/hash.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Brush.h"
 #include "maths/Matrix3D.h"
 #include "maths/Vector3D.h"
 #include "ps/CStrInternStatic.h"
-#include "renderer/backend/IDeviceCommandContext.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/PipelineState.h"
 
+#include <array>
 #include <cmath>
+#include <memory>
+#include <new>
+#include <utility>
 
 void CDebugRenderer::Initialize()
 {

@@ -19,18 +19,21 @@
 
 #include "Device.h"
 
+#include "ps/containers/Span.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IFramebuffer.h"
 #include "renderer/backend/dummy/Buffer.h"
 #include "renderer/backend/dummy/DeviceCommandContext.h"
 #include "renderer/backend/dummy/Framebuffer.h"
 #include "renderer/backend/dummy/PipelineState.h"
 #include "renderer/backend/dummy/ShaderProgram.h"
 #include "renderer/backend/dummy/Texture.h"
-#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/ScriptRequest.h"
 
 #include <SDL_video.h>
+#include <initializer_list>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
 
 namespace Renderer
 {
