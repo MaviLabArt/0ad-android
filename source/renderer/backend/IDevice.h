@@ -19,24 +19,36 @@
 #define INCLUDED_RENDERER_BACKEND_IDEVICE
 
 #include "graphics/Color.h"
-#include "ps/containers/Span.h"
-#include "renderer/backend/Backend.h"
-#include "renderer/backend/Format.h"
 #include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDevice.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IFramebuffer.h"
-#include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/ITexture.h"
-#include "renderer/backend/PipelineState.h"
-#include "scriptinterface/ScriptForward.h"
 
+#include <cstdint>
+#include <js/TypeDecls.h>
 #include <memory>
 #include <string>
 #include <vector>
 
 class CShaderDefines;
 class CStr;
+class ScriptRequest;
+namespace PS { template <typename T> class span; }
+namespace Renderer::Backend { class IComputePipelineState; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IFramebuffer; }
+namespace Renderer::Backend { class IGraphicsPipelineState; }
+namespace Renderer::Backend { class IShaderProgram; }
+namespace Renderer::Backend { class IVertexInputLayout; }
+namespace Renderer::Backend { enum class AttachmentLoadOp; }
+namespace Renderer::Backend { enum class AttachmentStoreOp; }
+namespace Renderer::Backend { enum class Backend; }
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend { struct SColorAttachment; }
+namespace Renderer::Backend { struct SComputePipelineStateDesc; }
+namespace Renderer::Backend { struct SDepthStencilAttachment; }
+namespace Renderer::Backend { struct SGraphicsPipelineStateDesc; }
+namespace Renderer::Backend { struct SVertexAttributeFormat; }
+namespace Renderer::Backend::Sampler { struct Desc; }
 
 namespace Renderer
 {

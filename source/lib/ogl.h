@@ -27,6 +27,7 @@
 #ifndef INCLUDED_OGL
 #define INCLUDED_OGL
 
+#include "lib/code_annotation.h"
 #include "lib/config2.h" // CONFIG2_GLES
 #include "lib/sysdep/os.h" // OS_WIN
 

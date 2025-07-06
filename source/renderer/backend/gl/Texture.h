@@ -19,11 +19,13 @@
 #define INCLUDED_RENDERER_BACKEND_GL_TEXTURE
 
 #include "lib/ogl.h"
+#include "renderer/backend/Format.h"
 #include "renderer/backend/ITexture.h"
-#include "renderer/backend/Sampler.h"
 
 #include <cstdint>
 #include <memory>
+
+namespace Renderer::Backend::Sampler { struct Desc; }
 
 namespace Renderer
 {

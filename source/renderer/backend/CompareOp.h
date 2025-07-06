@@ -18,9 +18,7 @@
 #ifndef INCLUDED_RENDERER_BACKEND_COMPAREOP
 #define INCLUDED_RENDERER_BACKEND_COMPAREOP
 
-#include "graphics/Color.h"
-
-class CStr;
+#include "ps/CStr.h"
 
 namespace Renderer
 {

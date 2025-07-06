@@ -43,6 +43,7 @@
 #include "ps/Game.h"
 #include "ps/Profile.h"
 #include "ps/World.h"
+#include "renderer/backend/Backend.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/CPUSkinnedModelRenderer.h"
 #include "renderer/DebugRenderer.h"

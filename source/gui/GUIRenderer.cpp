@@ -33,6 +33,7 @@
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/Sampler.h"
 
 #include <string>
 #include <utility>

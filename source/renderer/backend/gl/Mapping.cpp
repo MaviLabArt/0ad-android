@@ -20,6 +20,8 @@
 #include "Mapping.h"
 
 #include "lib/config2.h"
+#include "renderer/backend/CompareOp.h"
+#include "renderer/backend/PipelineState.h"
 
 namespace Renderer
 {

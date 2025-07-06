@@ -20,6 +20,9 @@
 
 #include "renderer/backend/IShaderProgram.h"
 
+#include "lib/file/vfs/vfs_path.h"
+
+#include <cstdint>
 #include <memory>
 
 namespace Renderer

@@ -18,14 +18,18 @@
 #ifndef INCLUDED_RENDERER_BACKEND_DUMMY_DEVICE
 #define INCLUDED_RENDERER_BACKEND_DUMMY_DEVICE
 
-#include "renderer/backend/dummy/DeviceForward.h"
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDevice.h"
+#include "renderer/backend/ITexture.h"
 
+#include <cstdint>
+#include <js/TypeDecls.h>
 #include <memory>
 #include <string>
 #include <vector>
 
-class CShaderDefines;
+namespace Renderer::Backend { class IFramebuffer; }
 
 namespace Renderer
 {
@@ -35,8 +39,6 @@ namespace Backend
 
 namespace Dummy
 {
-
-class CDeviceCommandContext;
 
 class CDevice : public IDevice
 {

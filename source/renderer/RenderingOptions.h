@@ -30,6 +30,8 @@
 #include "ps/CStr.h"
 #include "ps/CStrIntern.h"
 
+#include <memory>
+
 class CRenderer;
 
 enum RenderPath

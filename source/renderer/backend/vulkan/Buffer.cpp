@@ -19,6 +19,7 @@
 
 #include "Buffer.h"
 
+#include "renderer/backend/Backend.h"
 #include "renderer/backend/vulkan/Device.h"
 #include "renderer/backend/vulkan/Utilities.h"
 

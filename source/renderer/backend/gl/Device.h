@@ -18,6 +18,8 @@
 #ifndef INCLUDED_RENDERER_BACKEND_GL_DEVICE
 #define INCLUDED_RENDERER_BACKEND_GL_DEVICE
 
+#include "ps/CStr.h"
+#include "renderer/backend/Backend.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/gl/Buffer.h"
 #include "renderer/backend/gl/DeviceForward.h"

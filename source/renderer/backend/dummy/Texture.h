@@ -20,6 +20,9 @@
 
 #include "renderer/backend/ITexture.h"
 
+#include "renderer/backend/Format.h"
+
+#include <cstdint>
 #include <memory>
 
 namespace Renderer

@@ -22,7 +22,8 @@
 #ifndef INCLUDED_RENDERABLEOBJECT
 #define INCLUDED_RENDERABLEOBJECT
 
-
+#include "lib/code_annotation.h"
+#include "lib/types.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Matrix3D.h"
 

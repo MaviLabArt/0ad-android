@@ -20,6 +20,7 @@
 #include "Texture.h"
 
 #include "lib/config2.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/backend/gl/Device.h"
 #include "renderer/backend/gl/DeviceCommandContext.h"
 #include "renderer/backend/gl/Mapping.h"

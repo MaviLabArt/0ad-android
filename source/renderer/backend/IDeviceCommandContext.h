@@ -18,15 +18,19 @@
 #ifndef INCLUDED_RENDERER_BACKEND_IDEVICECOMMANDCONTEXT
 #define INCLUDED_RENDERER_BACKEND_IDEVICECOMMANDCONTEXT
 
-#include "ps/containers/Span.h"
-#include "renderer/backend/Barrier.h"
-#include "renderer/backend/Format.h"
-#include "renderer/backend/IDeviceObject.h"
-#include "renderer/backend/PipelineState.h"
-#include "renderer/backend/Sampler.h"
+#include "lib/types.h"
 
+#include "renderer/backend/IDeviceObject.h"
+#include <cstddef>
 #include <cstdint>
 #include <functional>
+
+namespace PS { template <typename T> class span; }
+namespace Renderer::Backend { class IComputePipelineState; }
+namespace Renderer::Backend { class IGraphicsPipelineState; }
+namespace Renderer::Backend { class IVertexInputLayout; }
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend::Sampler { enum class Filter; }
 
 namespace Renderer
 {
@@ -35,7 +39,6 @@ namespace Backend
 {
 
 class IBuffer;
-class IDevice;
 class IFramebuffer;
 class ITexture;
 

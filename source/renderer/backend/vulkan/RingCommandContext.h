@@ -21,6 +21,7 @@
 #include "renderer/backend/vulkan/SubmitScheduler.h"
 
 #include <glad/vulkan.h>
+#include <functional>
 #include <memory>
 #include <vector>
 

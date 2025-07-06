@@ -19,6 +19,9 @@
 
 #include "PipelineState.h"
 
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/CompareOp.h"
+
 #include <limits>
 
 namespace Renderer

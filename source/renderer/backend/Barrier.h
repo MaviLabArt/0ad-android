@@ -18,6 +18,8 @@
 #ifndef INCLUDED_RENDERER_BACKEND_BARRIER
 #define INCLUDED_RENDERER_BACKEND_BARRIER
 
+#include <cstdint>
+
 namespace Renderer
 {
 

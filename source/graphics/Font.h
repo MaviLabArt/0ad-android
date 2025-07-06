@@ -19,16 +19,26 @@
 #define INCLUDED_FONT
 
 #include "graphics/Texture.h"
+#include "lib/code_annotation.h"
+#include "lib/os_path.h"
+#include "lib/types.h"
 #include "maths/Rect.h"
+#include "maths/Vector2D.h"
 #include "renderer/Renderer.h"
-#include "ps/Filesystem.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/Sampler.h"
 
+#include <array>
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include FT_STROKER_H
 #include FT_GLYPH_H
+#include FT_IMAGE_H
+#include FT_STROKER_H
 #include <memory>
 #include <optional>
+#include <string>
+#include <type_traits>
+#include <vector>
 
 /**
  * Storage for a bitmap font. Loaded by CFontManager.

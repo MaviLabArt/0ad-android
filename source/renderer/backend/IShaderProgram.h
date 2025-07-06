@@ -19,9 +19,13 @@
 #define INCLUDED_RENDERER_BACKEND_ISHADERPROGRAM
 
 #include "lib/file/vfs/vfs_path.h"
-#include "ps/CStrIntern.h"
-#include "renderer/backend/Format.h"
 #include "renderer/backend/IDeviceObject.h"
+
+#include <cstdint>
+#include <vector>
+
+class CStrIntern;
+namespace Renderer::Backend { enum class Format; }
 
 namespace Renderer
 {

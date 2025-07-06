@@ -31,6 +31,8 @@
 #include "ps/Filesystem.h"
 #include "ps/Profile.h"
 #include "ps/XML/Xeromyces.h"
+#include "renderer/backend/Backend.h"
+#include "renderer/backend/CompareOp.h"
 #include "renderer/backend/IDevice.h"
 
 #define USE_SHADER_XML_VALIDATION 1

@@ -19,6 +19,7 @@
 
 #include "ShaderProgram.h"
 
+#include "ps/CStrIntern.h"
 #include "renderer/backend/dummy/Device.h"
 
 namespace Renderer

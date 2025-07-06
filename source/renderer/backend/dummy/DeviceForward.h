@@ -33,8 +33,6 @@ class IDevice;
 namespace Dummy
 {
 
-class CDevice;
-
 std::unique_ptr<IDevice> CreateDevice(SDL_Window* window);
 
 } // namespace Dummy

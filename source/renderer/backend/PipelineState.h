@@ -19,11 +19,13 @@
 #define INCLUDED_RENDERER_BACKEND_PIPELINESTATE
 
 #include "graphics/Color.h"
-#include "renderer/backend/CompareOp.h"
+#include "ps/CStr.h"
 #include "renderer/backend/IDeviceObject.h"
-#include "renderer/backend/IShaderProgram.h"
 
-class CStr;
+#include <cstdint>
+
+namespace Renderer::Backend { class IShaderProgram; }
+namespace Renderer::Backend { enum class CompareOp; }
 
 namespace Renderer
 {

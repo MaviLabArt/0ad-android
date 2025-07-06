@@ -18,19 +18,24 @@
 #ifndef INCLUDED_RENDERER_BACKEND_GL_DEVICECOMMANDCONTEXT
 #define INCLUDED_RENDERER_BACKEND_GL_DEVICECOMMANDCONTEXT
 
+#include "graphics/Color.h"
 #include "lib/ogl.h"
-#include "ps/containers/Span.h"
-#include "renderer/backend/Format.h"
-#include "renderer/backend/gl/Buffer.h"
+#include "lib/types.h"
+#include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/PipelineState.h"
 
 #include <array>
+#include <cstddef>
 #include <cstdint>
 #include <functional>
+#include <iterator>
 #include <memory>
-#include <optional>
 #include <utility>
+
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend::GL { class CBuffer; }
 
 namespace Renderer
 {

@@ -20,7 +20,8 @@
 
 #include "renderer/backend/PipelineState.h"
 
-#include <cstdint>
+#include "graphics/Color.h"
+
 #include <memory>
 
 namespace Renderer

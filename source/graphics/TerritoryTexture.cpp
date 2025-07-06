@@ -25,6 +25,7 @@
 #include "ps/Profile.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/Renderer.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/helpers/Grid.h"

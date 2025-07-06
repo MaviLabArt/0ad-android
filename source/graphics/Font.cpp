@@ -19,16 +19,28 @@
 #include "Font.h"
 
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/containers/Span.h"
+#include "renderer/Renderer.h"
+#include "renderer/backend/IDevice.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 
+#include FT_ERRORS_H
+#include FT_TYPES_H
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <numeric>
+#include <sstream>
 #include <string>
+#include <utility>
 #include <vector>
-#include <cstdlib>
 
 namespace
 {

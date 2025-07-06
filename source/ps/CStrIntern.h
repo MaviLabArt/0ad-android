@@ -18,6 +18,8 @@
 #ifndef INCLUDED_CSTRINTERN
 #define INCLUDED_CSTRINTERN
 
+#include "lib/types.h"
+
 class CStrInternInternals;
 
 /**

@@ -32,6 +32,7 @@
 #include "ps/World.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TerrainRenderer.h"

@@ -18,10 +18,7 @@
 #ifndef INCLUDED_RENDERER_BACKEND_SAMPLER
 #define INCLUDED_RENDERER_BACKEND_SAMPLER
 
-#include "graphics/Color.h"
-#include "renderer/backend/CompareOp.h"
-
-#include <cstdint>
+namespace Renderer::Backend { enum class CompareOp; }
 
 namespace Renderer
 {

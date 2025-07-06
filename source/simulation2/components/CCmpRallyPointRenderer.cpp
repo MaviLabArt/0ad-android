@@ -21,6 +21,7 @@
 
 #include "ps/algorithm.h"
 #include "ps/Profile.h"
+#include "renderer/backend/Sampler.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/helpers/Los.h"
 

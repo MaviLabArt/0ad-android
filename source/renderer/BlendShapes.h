@@ -18,6 +18,8 @@
 #ifndef INCLUDED_BLENDSHAPES
 #define INCLUDED_BLENDSHAPES
 
+#include <cstring>
+
 struct BlendShape4
 {
 public:

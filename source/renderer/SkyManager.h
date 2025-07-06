@@ -23,10 +23,11 @@
 #define INCLUDED_SKYMANAGER
 
 #include "graphics/Texture.h"
+#include "ps/CStr.h"
+#include "renderer/VertexArray.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/ITexture.h"
-#include "renderer/VertexArray.h"
 
 #include <memory>
 #include <vector>

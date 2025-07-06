@@ -18,6 +18,7 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_DEVICE
 #define INCLUDED_RENDERER_BACKEND_VULKAN_DEVICE
 
+#include "renderer/backend/Backend.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/vulkan/DeviceForward.h"
 #include "renderer/backend/vulkan/DeviceSelection.h"

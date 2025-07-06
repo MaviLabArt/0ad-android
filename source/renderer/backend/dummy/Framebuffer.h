@@ -20,6 +20,9 @@
 
 #include "renderer/backend/IFramebuffer.h"
 
+#include "graphics/Color.h"
+
+#include <cstdint>
 #include <memory>
 
 namespace Renderer

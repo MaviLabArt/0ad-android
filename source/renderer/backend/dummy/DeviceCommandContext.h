@@ -18,11 +18,15 @@
 #ifndef INCLUDED_RENDERER_BACKEND_DUMMY_DEVICECOMMANDCONTEXT
 #define INCLUDED_RENDERER_BACKEND_DUMMY_DEVICECOMMANDCONTEXT
 
-#include "renderer/backend/Format.h"
+#include "lib/types.h"
 #include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/PipelineState.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <functional>
 #include <memory>
+
+namespace Renderer::Backend::Dummy { class CDevice; }
 
 namespace Renderer
 {
@@ -32,12 +36,6 @@ namespace Backend
 
 namespace Dummy
 {
-
-class CDevice;
-class CBuffer;
-class CFramebuffer;
-class CShaderProgram;
-class CTexture;
 
 class CDeviceCommandContext : public IDeviceCommandContext
 {

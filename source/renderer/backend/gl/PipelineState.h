@@ -21,7 +21,6 @@
 #include "lib/ogl.h"
 #include "renderer/backend/PipelineState.h"
 
-#include <cstdint>
 #include <memory>
 
 namespace Renderer

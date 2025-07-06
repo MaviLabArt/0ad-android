@@ -21,6 +21,8 @@
 #include "graphics/Color.h"
 #include "renderer/backend/IDeviceObject.h"
 
+#include <cstdint>
+
 namespace Renderer
 {
 

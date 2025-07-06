@@ -33,8 +33,6 @@ class IDevice;
 namespace GL
 {
 
-class CDevice;
-
 std::unique_ptr<IDevice> CreateDevice(SDL_Window* window, const bool arb);
 
 } // namespace GL

@@ -19,6 +19,10 @@
 
 #include "CompareOp.h"
 
+#include "lib/debug.h"
+
+#include <string>
+
 namespace Renderer
 {
 

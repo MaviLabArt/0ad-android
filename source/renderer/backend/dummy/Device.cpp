@@ -30,6 +30,8 @@
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 
+#include <SDL_video.h>
+
 namespace Renderer
 {
 

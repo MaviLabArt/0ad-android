@@ -19,12 +19,13 @@
 
 #include "ArchiveBuilder.h"
 
-#include "graphics/TextureManager.h"
 #include "graphics/ColladaManager.h"
-#include "lib/tex/tex_codec.h"
+#include "graphics/TextureManager.h"
 #include "lib/file/archive/archive_zip.h"
 #include "lib/file/vfs/vfs_util.h"
+#include "lib/tex/tex_codec.h"
 #include "ps/XML/Xeromyces.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/backend/dummy/Device.h"
 
 #include <boost/algorithm/string/predicate.hpp>

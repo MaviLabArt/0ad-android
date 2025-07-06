@@ -24,6 +24,7 @@
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 
 #include <memory>
 

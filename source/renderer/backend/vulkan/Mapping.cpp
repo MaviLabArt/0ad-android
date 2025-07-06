@@ -21,6 +21,7 @@
 
 #include "lib/code_annotation.h"
 #include "lib/config2.h"
+#include "renderer/backend/CompareOp.h"
 
 namespace Renderer
 {

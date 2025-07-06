@@ -30,9 +30,11 @@
 #include "ps/CLogger.h"
 #include "ps/containers/StaticVector.h"
 #include "ps/CStrInternStatic.h"
-#include "renderer/Renderer.h"
 #include "renderer/RenderModifiers.h"
+#include "renderer/Renderer.h"
 #include "renderer/VertexArray.h"
+#include "renderer/backend/Barrier.h"
+#include "renderer/backend/PipelineState.h"
 #include "third_party/mikktspace/weldmesh.h"
 
 namespace

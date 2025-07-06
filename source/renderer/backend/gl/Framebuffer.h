@@ -35,7 +35,6 @@ namespace GL
 {
 
 class CDevice;
-class CTexture;
 
 class CFramebuffer final : public IFramebuffer
 {

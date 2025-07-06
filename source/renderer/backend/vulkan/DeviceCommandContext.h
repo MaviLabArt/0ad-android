@@ -19,13 +19,13 @@
 #define INCLUDED_RENDERER_VULKAN_DEVICECOMMANDCONTEXT
 
 #include "ps/containers/StaticVector.h"
-#include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/vulkan/DeviceObjectUID.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <glad/vulkan.h>
 #include <memory>
-#include <vector>
 
 namespace Renderer
 {

@@ -20,7 +20,6 @@
 
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IDeviceObject.h"
-#include "renderer/backend/Sampler.h"
 
 #include <cstdint>
 

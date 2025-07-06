@@ -31,6 +31,7 @@
 #include "lib/tex/tex.h"
 #include "ps/Filesystem.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/Sampler.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpTerrain.h"

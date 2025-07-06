@@ -20,6 +20,7 @@
 
 #include "renderer/backend/IBuffer.h"
 
+#include <cstdint>
 #include <memory>
 
 namespace Renderer

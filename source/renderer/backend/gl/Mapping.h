@@ -19,7 +19,11 @@
 #define INCLUDED_RENDERER_BACKEND_GL_MAPPING
 
 #include "lib/ogl.h"
-#include "renderer/backend/PipelineState.h"
+
+namespace Renderer::Backend { enum class BlendFactor; }
+namespace Renderer::Backend { enum class BlendOp; }
+namespace Renderer::Backend { enum class CompareOp; }
+namespace Renderer::Backend { enum class StencilOp; }
 
 namespace Renderer
 {

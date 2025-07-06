@@ -20,9 +20,14 @@
 #include "JSInterface_Renderer.h"
 
 #include "graphics/TextureManager.h"
-#include "renderer/RenderingOptions.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "renderer/Renderer.h"
+#include "renderer/RenderingOptions.h"
 #include "scriptinterface/FunctionWrapper.h"
+
+#include <js/PropertyAndElement.h>
+#include <string>
 
 namespace JSI_Renderer
 {
