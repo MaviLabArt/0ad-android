@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,8 +22,7 @@
 #ifndef INCLUDED_ALPHAMAPCALCULATOR
 #define INCLUDED_ALPHAMAPCALCULATOR
 
-#include <string.h>
-#include "BlendShapes.h"
+struct BlendShape8;
 
 // defines for blendmap flipping/rotating
 #define	BLENDMAP_FLIPV		0x01

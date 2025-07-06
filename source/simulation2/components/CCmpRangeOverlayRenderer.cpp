@@ -22,6 +22,7 @@
 #include "graphics/Overlay.h"
 #include "graphics/TextureManager.h"
 #include "renderer/Renderer.h"
+#include "renderer/Scene.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpOwnership.h"
 #include "simulation2/components/ICmpPlayer.h"

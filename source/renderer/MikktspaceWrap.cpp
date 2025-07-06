@@ -17,7 +17,15 @@
 
 #include "precompiled.h"
 
-#include "renderer/MikktspaceWrap.h"
+#include "MikktspaceWrap.h"
+
+#include "graphics/ModelDef.h"
+#include "lib/types.h"
+#include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
+
+#include <cstddef>
+#include <memory>
 
 MikkTSpace::MikkTSpace(const CModelDefPtr& m, std::vector<float>& v, bool gpuSkinning) : m_Model(m),
 			m_NewVertices(v), m_GpuSkinning(gpuSkinning)

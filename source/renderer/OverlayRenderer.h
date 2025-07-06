@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,16 +19,17 @@
 #define INCLUDED_OVERLAYRENDERER
 
 #include "graphics/ShaderProgram.h"
-#include "renderer/backend/IDeviceCommandContext.h"
+#include "lib/code_annotation.h"
 
+class CCamera;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
+struct OverlayRendererInternals;
 struct SOverlayLine;
-struct SOverlayTexturedLine;
-struct SOverlaySprite;
 struct SOverlayQuad;
 struct SOverlaySphere;
-class CCamera;
-
-struct OverlayRendererInternals;
+struct SOverlaySprite;
+struct SOverlayTexturedLine;
 
 /**
  * Class OverlayRenderer: Render various bits of data that overlay the

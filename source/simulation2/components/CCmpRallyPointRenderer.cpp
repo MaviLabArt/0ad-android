@@ -16,12 +16,14 @@
  */
 
 #include "precompiled.h"
-#include "CCmpRallyPointRenderer.h"
-#include "ICmpIdentity.h"
 
-#include "ps/algorithm.h"
+#include "CCmpRallyPointRenderer.h"
+
 #include "ps/Profile.h"
+#include "ps/algorithm.h"
+#include "renderer/Scene.h"
 #include "renderer/backend/Sampler.h"
+#include "simulation2/components/ICmpIdentity.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/helpers/Los.h"
 

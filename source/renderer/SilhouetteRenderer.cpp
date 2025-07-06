@@ -19,9 +19,12 @@
 
 #include "SilhouetteRenderer.h"
 
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "graphics/Camera.h"
 #include "graphics/HFTracer.h"
 #include "graphics/Model.h"
+#include "graphics/Overlay.h"
 #include "graphics/Patch.h"
 #include "graphics/ShaderManager.h"
 #include "maths/MathUtil.h"

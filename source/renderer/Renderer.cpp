@@ -53,6 +53,7 @@
 #include "ps/VideoMode.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/DebugRenderer.h"
+#include "renderer/ModelRenderer.h"
 #include "renderer/PostprocManager.h"
 #include "renderer/RenderingOptions.h"
 #include "renderer/RenderModifiers.h"

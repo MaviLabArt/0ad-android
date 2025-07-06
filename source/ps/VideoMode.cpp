@@ -20,6 +20,7 @@
 #include "VideoMode.h"
 
 #include "graphics/GameView.h"
+#include "graphics/ShaderDefines.h"
 #include "gui/GUIManager.h"
 #include "lib/config2.h"
 #include "lib/external_libraries/libsdl.h"

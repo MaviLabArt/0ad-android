@@ -20,18 +20,13 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "lib/code_annotation.h"
+
 #include <memory>
 
 class CProfiler2;
 class CProfiler2GPUImpl;
-
-namespace Renderer
-{
-namespace Backend
-{
-class IDeviceCommandContext;
-}
-}
+namespace Renderer::Backend { class IDeviceCommandContext; }
 
 /**
  * Used by CProfiler2 for GPU profiling support.

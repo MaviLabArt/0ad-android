@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,11 +24,8 @@
 #define INCLUDED_TERRAINRENDERER
 
 #include "graphics/Color.h"
-#include "maths/BoundingBoxAligned.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/ITexture.h"
-#include "renderer/backend/IShaderProgram.h"
 
+class CBoundingBoxAligned;
 class CCamera;
 class CCanvas2D;
 class CModelDecal;
@@ -36,9 +33,10 @@ class CPatch;
 class CShaderDefines;
 class CSimulation2;
 class CVector2D;
-
 class ShadowMap;
-
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
+namespace Renderer::Backend { class ITexture; }
 struct TerrainRendererInternals;
 
 /**

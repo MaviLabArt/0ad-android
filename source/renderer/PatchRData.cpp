@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 #include "renderer/PatchRData.h"
 
 #include "graphics/GameView.h"
-#include "graphics/LightEnv.h"
 #include "graphics/LOSTexture.h"
+#include "graphics/LightEnv.h"
 #include "graphics/Patch.h"
 #include "graphics/ShaderManager.h"
 #include "graphics/Terrain.h"
@@ -40,13 +40,14 @@
 #include "ps/VideoMode.h"
 #include "ps/World.h"
 #include "renderer/AlphaMapCalculator.h"
+#include "renderer/BlendShapes.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TerrainRenderer.h"
 #include "renderer/WaterManager.h"
-#include "simulation2/components/ICmpWaterManager.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/components/ICmpWaterManager.h"
 
 #include <algorithm>
 #include <numeric>

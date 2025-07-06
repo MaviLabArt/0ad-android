@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,13 +24,13 @@
 #define INCLUDED_MODELVERTEXRENDERER
 
 #include "graphics/MeshManager.h"
-#include "graphics/ShaderProgramPtr.h"
-#include "ps/containers/Span.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
 
 class CModel;
+class CModelDef;
 class CModelRData;
+namespace PS { template <typename T> class span; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
 
 /**
  * Class ModelVertexRenderer: Normal ModelRenderer implementations delegate

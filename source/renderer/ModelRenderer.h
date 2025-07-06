@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,13 +24,19 @@
 #ifndef INCLUDED_MODELRENDERER
 #define INCLUDED_MODELRENDERER
 
-#include <memory>
-
 #include "graphics/MeshManager.h"
 #include "graphics/RenderableObject.h"
-#include "graphics/SColor.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/VertexArray.h"
+#include "lib/types.h"
+
+#include <memory>
+#include <vector>
+
+class CModel;
+class CShaderDefines;
+class CVector3D;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+struct SColor4ub;
+template <typename T> class VertexArrayIterator;
 
 class RenderModifier;
 typedef std::shared_ptr<RenderModifier> RenderModifierPtr;
@@ -43,9 +49,6 @@ typedef std::shared_ptr<ModelVertexRenderer> ModelVertexRendererPtr;
 
 class ModelRenderer;
 typedef std::shared_ptr<ModelRenderer> ModelRendererPtr;
-
-class CModel;
-class CShaderDefines;
 
 /**
  * Class CModelRData: Render data that is maintained per CModel.

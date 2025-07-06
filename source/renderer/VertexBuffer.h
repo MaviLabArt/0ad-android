@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,12 +22,16 @@
 #ifndef INCLUDED_VERTEXBUFFER
 #define INCLUDED_VERTEXBUFFER
 
+#include "lib/code_annotation.h"
 #include "renderer/backend/IBuffer.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/backend/IDeviceCommandContext.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <vector>
+
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
 
 /**
  * CVertexBuffer: encapsulation of backend buffers, also supplying

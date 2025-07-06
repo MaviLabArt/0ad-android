@@ -24,14 +24,20 @@
 
 #include "Profiler2GPU.h"
 
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "ps/ConfigDB.h"
 #include "ps/Profiler2.h"
 #include "ps/VideoMode.h"
 #include "renderer/backend/IDevice.h"
-#include "renderer/Renderer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <deque>
-#include <stack>
+#include <iterator>
+#include <string>
+#include <utility>
 #include <vector>
 
 /**

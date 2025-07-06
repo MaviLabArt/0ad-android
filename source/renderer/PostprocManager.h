@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,12 +21,17 @@
 #include "graphics/ShaderTechniquePtr.h"
 #include "ps/CStr.h"
 #include "renderer/backend/IFramebuffer.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/ITexture.h"
 
 #include <array>
+#include <cstdint>
+#include <memory>
 #include <vector>
+
+class CShaderTechnique;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IVertexInputLayout; }
 
 class CPostprocManager
 {

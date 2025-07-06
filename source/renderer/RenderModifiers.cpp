@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,21 +17,23 @@
 
 #include "precompiled.h"
 
-#include "renderer/RenderModifiers.h"
+#include "RenderModifiers.h"
 
-#include "graphics/GameView.h"
-#include "graphics/LightEnv.h"
+#include "graphics/Camera.h"
 #include "graphics/LOSTexture.h"
+#include "graphics/LightEnv.h"
 #include "graphics/Model.h"
-#include "graphics/TextureManager.h"
-#include "maths/Vector3D.h"
-#include "maths/Vector4D.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
 #include "renderer/Renderer.h"
+#include "renderer/Scene.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/ShadowMap.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // LitRenderModifier implementation

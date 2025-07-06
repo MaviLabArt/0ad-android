@@ -19,17 +19,33 @@
 
 #include "TexturedLineRData.h"
 
-#include "graphics/ShaderProgram.h"
+#include "graphics/Color.h"
 #include "graphics/Terrain.h"
+#include "graphics/TextureManager.h"
+#include "lib/debug.h"
 #include "maths/Frustum.h"
 #include "maths/MathUtil.h"
 #include "maths/Quaternion.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/containers/Span.h"
 #include "renderer/OverlayRenderer.h"
 #include "renderer/Renderer.h"
-#include "simulation2/Simulation2.h"
-#include "simulation2/system/SimContext.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/SimContext.h"
+
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 
 /* Note: this implementation uses CVertexBufferManager directly rather than access it through the nicer VertexArray interface,
  * because it allows you to work with variable amounts of vertices and indices more easily. New code should prefer

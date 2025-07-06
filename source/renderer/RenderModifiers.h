@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -28,15 +28,15 @@
 #ifndef INCLUDED_RENDERMODIFIERS
 #define INCLUDED_RENDERMODIFIERS
 
-#include "ModelRenderer.h"
 #include "graphics/Color.h"
-#include "graphics/ShaderProgram.h"
-#include "graphics/ShaderTechnique.h"
-#include "graphics/Texture.h"
+
+#include <cstdint>
 
 class CLightEnv;
 class CModel;
 class ShadowMap;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
 
 /**
  * Class RenderModifier: Some ModelRenderer implementations provide vertex

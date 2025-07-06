@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,10 +24,15 @@
 
 #include "lib/types.h"
 #include "renderer/VertexBuffer.h"
+#include "renderer/backend/IBuffer.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <utility>
 #include <vector>
+
+namespace Renderer::Backend { class IDevice; }
 
 // CVertexBufferManager: owner object for CVertexBuffer objects; acts as
 // 'front end' for their allocation and destruction

@@ -24,15 +24,20 @@
 #define INCLUDED_TERRAINOVERLAY
 
 #include "graphics/ShaderTechniquePtr.h"
-#include "renderer/backend/ITexture.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
-#include "renderer/backend/PipelineState.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
 
+#include <cstddef>
+#include <memory>
+#include <sys/types.h>
+
+class CSimContext;
+class CTerrain;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class ITexture; }
+namespace Renderer::Backend { class IVertexInputLayout; }
 struct CColor;
 struct SColor4ub;
-class CTerrain;
-class CSimContext;
 
 /**
  * Common interface for terrain-tile-based and texture-based debug overlays.

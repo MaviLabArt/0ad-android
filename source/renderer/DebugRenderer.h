@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 
 #include "graphics/ShaderTechniquePtr.h"
 #include "ps/CStrIntern.h"
-#include "renderer/backend/IShaderProgram.h"
 
+#include <cstddef>
 #include <unordered_map>
 #include <vector>
 
@@ -30,7 +30,7 @@ class CBrush;
 class CCamera;
 class CMatrix3D;
 class CVector3D;
-
+namespace Renderer::Backend { class IVertexInputLayout; }
 struct CColor;
 
 // Helper for unoptimized rendering of geometrics primitives. Should not be

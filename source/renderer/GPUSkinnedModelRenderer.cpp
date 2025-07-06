@@ -30,6 +30,7 @@
 #include "ps/CLogger.h"
 #include "ps/containers/StaticVector.h"
 #include "ps/CStrInternStatic.h"
+#include "renderer/ModelRenderer.h"
 #include "renderer/RenderModifiers.h"
 #include "renderer/Renderer.h"
 #include "renderer/VertexArray.h"

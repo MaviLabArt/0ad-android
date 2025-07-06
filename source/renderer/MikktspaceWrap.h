@@ -19,10 +19,11 @@
 #define INCLUDED_MIKKWRAP
 
 #include "graphics/MeshManager.h"
-#include "graphics/ModelDef.h"
 #include "third_party/mikktspace/mikktspace.h"
 
 #include <vector>
+
+struct SModelVertex;
 
 class MikkTSpace
 {

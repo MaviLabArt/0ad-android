@@ -16,22 +16,32 @@
  */
 
 #include "precompiled.h"
-#include "renderer/InstancingModelRenderer.h"
 
-#include "graphics/Color.h"
-#include "graphics/LightEnv.h"
+#include "InstancingModelRenderer.h"
+
+#include "graphics/MeshManager.h"
 #include "graphics/Model.h"
 #include "graphics/ModelDef.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
-#include "ps/CLogger.h"
+#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
-#include "ps/CStrInternStatic.h"
+#include "renderer/ModelRenderer.h"
 #include "renderer/Renderer.h"
-#include "renderer/RenderModifiers.h"
 #include "renderer/VertexArray.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 #include "third_party/mikktspace/weldmesh.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
+#include <vector>
 
 struct IModelDef : public CModelDefRPrivate
 {

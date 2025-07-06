@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,12 +19,13 @@
 #define INCLUDED_SHADOWMAP
 
 #include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
 
 class CBoundingBoxAligned;
 class CCamera;
 class CFrustum;
 class CVector3D;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IShaderProgram; }
 
 struct ShadowMapInternals;
 

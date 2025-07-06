@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,19 @@
 #ifndef INCLUDED_VERTEXARRAY
 #define INCLUDED_VERTEXARRAY
 
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "renderer/VertexBuffer.h"
+#include "renderer/VertexBufferManager.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IBuffer.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/VertexBufferManager.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <sys/types.h>
 #include <vector>
+
+namespace Renderer::Backend { class IDeviceCommandContext; }
 
 // Iterator
 template<typename T>

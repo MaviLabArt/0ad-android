@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,10 @@
 #define INCLUDED_RENDERER
 
 #include "graphics/Camera.h"
-#include "graphics/ShaderDefines.h"
-#include "graphics/ShaderProgramPtr.h"
-#include "ps/containers/Span.h"
 #include "ps/Singleton.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
 #include "renderer/RenderingOptions.h"
-#include "renderer/Scene.h"
 
+#include <cstring>
 #include <memory>
 
 class CDebugRenderer;
@@ -38,6 +33,11 @@ class CShaderManager;
 class CTextureManager;
 class CTimeManager;
 class CVertexBufferManager;
+namespace PS { template <typename T> class span; }
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IVertexInputLayout; }
+namespace Renderer::Backend { struct SVertexAttributeFormat; }
 
 #define g_Renderer CRenderer::GetSingleton()
 

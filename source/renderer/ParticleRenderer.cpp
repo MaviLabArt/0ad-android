@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,32 @@
 
 #include "ParticleRenderer.h"
 
+#include "graphics/Camera.h"
+#include "graphics/Color.h"
 #include "graphics/ParticleEmitter.h"
+#include "graphics/ParticleEmitterType.h"
 #include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
-#include "graphics/TextureManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
+#include "lib/debug.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+
+#include <algorithm>
+#include <iterator>
+#include <memory>
+#include <utility>
+#include <vector>
 
 struct ParticleRendererInternals
 {

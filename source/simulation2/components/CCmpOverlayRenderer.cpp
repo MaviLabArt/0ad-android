@@ -17,18 +17,18 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpOverlayRenderer.h"
-#include "ICmpPosition.h"
-#include "ICmpRangeManager.h"
-
-#include "simulation2/MessageTypes.h"
 
 #include "graphics/Overlay.h"
 #include "graphics/TextureManager.h"
-#include "renderer/Renderer.h"
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
+#include "renderer/Renderer.h"
+#include "renderer/Scene.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/system/Component.h"
 
 class CCmpOverlayRenderer final : public ICmpOverlayRenderer
 {

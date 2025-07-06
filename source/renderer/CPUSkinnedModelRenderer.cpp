@@ -17,22 +17,28 @@
 
 #include "precompiled.h"
 
-#include "renderer/CPUSkinnedModelRenderer.h"
+#include "CPUSkinnedModelRenderer.h"
 
-#include "graphics/Color.h"
-#include "graphics/LightEnv.h"
+#include "graphics/MeshManager.h"
 #include "graphics/Model.h"
 #include "graphics/ModelDef.h"
-#include "graphics/ShaderProgram.h"
-#include "lib/bits.h"
-#include "lib/sysdep/rtl.h"
-#include "maths/Vector3D.h"
+#include "graphics/RenderableObject.h"
+#include "lib/debug.h"
+#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
+#include "renderer/ModelRenderer.h"
 #include "renderer/Renderer.h"
-#include "renderer/RenderModifiers.h"
 #include "renderer/VertexArray.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <vector>
+
+class CVector3D;
 
 namespace
 {
