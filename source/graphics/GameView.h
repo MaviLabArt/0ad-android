@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,11 +18,11 @@
 #ifndef INCLUDED_GAMEVIEW
 #define INCLUDED_GAMEVIEW
 
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/Scene.h"
-#include "simulation2/system/Entity.h"
-
+#include "lib/code_annotation.h"
 #include "lib/input.h" // InReaction - can't forward-declare enum
+#include "renderer/Scene.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "simulation2/system/Entity.h"
 
 class CCamera;
 class CCinemaManager;

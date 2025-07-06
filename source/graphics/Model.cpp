@@ -22,20 +22,26 @@
 #include "graphics/Decal.h"
 #include "graphics/MeshManager.h"
 #include "graphics/ModelDef.h"
-#include "graphics/ObjectEntry.h"
+#include "graphics/RenderableObject.h"
 #include "graphics/SkeletonAnim.h"
 #include "graphics/SkeletonAnimDef.h"
-#include "maths/BoundingBoxAligned.h"
-#include "maths/Quaternion.h"
 #include "lib/sysdep/rtl.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "renderer/RenderingOptions.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/Simulation2.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
 
+#include <algorithm>
+#include <utility>
 
 CModel::CModel(const CSimulation2& simulation, const CMaterial& material, const CModelDefPtr& modeldef)
 	: m_Simulation{simulation}, m_Material{material}, m_pModelDef{modeldef}

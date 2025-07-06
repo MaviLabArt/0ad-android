@@ -1,4 +1,4 @@
-/* Copyright (C) 2016 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #define INCLUDED_SKELETONANIM
 
 #include "maths/BoundingBoxAligned.h"
+#include "ps/CStr.h"
 
 class CSkeletonAnimDef;
 

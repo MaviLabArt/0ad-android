@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,48 +19,45 @@
 
 #include "GameView.h"
 
+#include "graphics/Camera.h"
 #include "graphics/CameraController.h"
 #include "graphics/CinemaManager.h"
 #include "graphics/ColladaManager.h"
-#include "graphics/HFTracer.h"
+#include "graphics/ICameraController.h"
 #include "graphics/LOSTexture.h"
-#include "graphics/LightEnv.h"
+#include "graphics/MeshManager.h"
 #include "graphics/MiniMapTexture.h"
-#include "graphics/Model.h"
 #include "graphics/ObjectManager.h"
 #include "graphics/Patch.h"
 #include "graphics/SkeletonAnimManager.h"
-#include "graphics/SmoothedValue.h"
 #include "graphics/Terrain.h"
 #include "graphics/TerrainTextureManager.h"
 #include "graphics/TerritoryTexture.h"
-#include "graphics/Unit.h"
-#include "graphics/UnitManager.h"
+#include "lib/external_libraries/libsdl.h"
 #include "lib/input.h"
-#include "lib/timer.h"
+#include "lib/posix/posix_types.h"
 #include "lobby/IXmppClient.h"
 #include "maths/BoundingBoxAligned.h"
-#include "maths/MathUtil.h"
-#include "maths/Matrix3D.h"
-#include "maths/Quaternion.h"
-#include "ps/ConfigDB.h"
+#include "maths/Frustum.h"
+#include "maths/Vector3D.h"
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/Globals.h"
 #include "ps/Hotkey.h"
 #include "ps/Loader.h"
 #include "ps/Profile.h"
-#include "ps/Pyrogenesis.h"
 #include "ps/TouchInput.h"
 #include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/WaterManager.h"
 #include "simulation2/Simulation2.h"
-#include "simulation2/components/ICmpPosition.h"
-#include "simulation2/components/ICmpRangeManager.h"
 
 #include <memory>
+#include <string>
+
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
 
 class CGameViewImpl
 {

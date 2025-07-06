@@ -20,16 +20,28 @@
 #include "FontManager.h"
 
 #include "graphics/Font.h"
-#include "graphics/TextureManager.h"
 #include "i18n/L10n.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/posix/posix.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
+#include "ps/CStr.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
-#include "renderer/Renderer.h"
 
-#include <string>
+#include <algorithm>
+#include <cmath>
+#include <fmt/format.h>
+#include <freetype/fttypes.h>
+#include <locale>
+#include <map>
 #include <regex>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+#include <unicode/locid.h>
+#include <utility>
+#include <vector>
 
 namespace {
 struct FontSpec {

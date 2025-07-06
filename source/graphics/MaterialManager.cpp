@@ -19,17 +19,25 @@
 
 #include "MaterialManager.h"
 
+#include "graphics/Material.h"
 #include "graphics/PreprocessorWrapper.h"
+#include "lib/path.h"
 #include "maths/MathUtil.h"
 #include "maths/Vector4D.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
-#include "renderer/RenderingOptions.h"
 
 #include <sstream>
+#include <string>
+#include <utility>
 
 CMaterialManager::CMaterialManager() :
 	qualityLevel{Clamp(g_ConfigDB.Get("materialmgr.quality", 5.0f), 0.0f, 10.0f)}

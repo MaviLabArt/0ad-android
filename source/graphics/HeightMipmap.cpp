@@ -19,15 +19,23 @@
 
 #include "HeightMipmap.h"
 
-#include "lib/bits.h"
-#include "lib/timer.h"
+#include "lib/alignment.h"
+#include "lib/allocators/dynarray.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/bits.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
 #include "lib/tex/tex.h"
 #include "maths/MathUtil.h"
 #include "ps/Filesystem.h"
 
 #include <cmath>
-#include <utility>
+#include <cstring>
+#include <memory>
+#include <tuple>
 
 CHeightMipmap::CHeightMipmap()
 {

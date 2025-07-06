@@ -23,7 +23,13 @@
 #include "ps/Profile.h"
 #include "renderer/Scene.h"
 
+#include <cstddef>
+#include <memory>
 #include <unordered_map>
+#include <utility>
+#include <vector>
+
+class CFrustum;
 
 static Status ReloadChangedFileCB(void* param, const VfsPath& path)
 {

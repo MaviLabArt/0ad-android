@@ -16,12 +16,12 @@
  */
 
 #include "precompiled.h"
+
 #include "FontMetrics.h"
 
 #include "graphics/Font.h"
 #include "graphics/FontManager.h"
-#include "ps/Filesystem.h"
-#include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "renderer/Renderer.h"
 
 CFontMetrics::CFontMetrics(CStrIntern font)

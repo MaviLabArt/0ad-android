@@ -18,6 +18,8 @@
 #ifndef INCLUDED_FONTMETRICS
 #define INCLUDED_FONTMETRICS
 
+#include <memory>
+
 class CFont;
 class CStrIntern;
 

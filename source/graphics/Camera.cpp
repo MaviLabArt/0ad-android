@@ -21,6 +21,9 @@
 
 #include "graphics/HFTracer.h"
 #include "graphics/Terrain.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
 #include "maths/MathUtil.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector4D.h"
@@ -29,6 +32,9 @@
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/WaterManager.h"
+
+#include <cmath>
+#include <cstddef>
 
 CCamera::CCamera()
 {

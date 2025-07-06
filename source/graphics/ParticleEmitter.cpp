@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,29 @@
 
 #include "ParticleEmitter.h"
 
-#include "graphics/LightEnv.h"
 #include "graphics/LOSTexture.h"
+#include "graphics/LightEnv.h"
 #include "graphics/ParticleEmitterType.h"
 #include "graphics/ParticleManager.h"
-#include "graphics/ShaderProgram.h"
+#include "graphics/RenderableObject.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
+#include "renderer/Scene.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+
+#include <array>
+#include <cmath>
+#include <cstdint>
 
 CParticleEmitter::CParticleEmitter(const CParticleEmitterTypePtr& type) :
 	m_Type(type), m_Active(true), m_NextParticleIdx(0), m_EmissionRoundingError(0.f),

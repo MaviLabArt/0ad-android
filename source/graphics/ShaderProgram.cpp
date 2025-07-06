@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,6 +20,8 @@
 #include "ShaderProgram.h"
 
 #include "renderer/backend/IDevice.h"
+
+#include <utility>
 
 CShaderProgram::CShaderProgram(
 	Renderer::Backend::IDevice* device, const CStr& name, const CShaderDefines& defines)

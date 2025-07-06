@@ -22,14 +22,28 @@
 #include "graphics/Color.h"
 #include "graphics/ParticleEmitter.h"
 #include "graphics/ParticleManager.h"
+#include "graphics/SColor.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/Quaternion.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/Sampler.h"
 
+#include <algorithm>
 #include <boost/random/uniform_real_distribution.hpp>
+#include <cmath>
+#include <cstddef>
+#include <map>
 
 
 /**

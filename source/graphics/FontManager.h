@@ -18,11 +18,13 @@
 #ifndef INCLUDED_FONTMANAGER
 #define INCLUDED_FONTMANAGER
 
+#include "lib/code_annotation.h"
 #include "ps/CStrIntern.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include <memory>
 #include <unordered_map>
 
 class CFont;

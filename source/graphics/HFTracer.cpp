@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,11 +25,13 @@
 
 #include "graphics/Patch.h"
 #include "graphics/Terrain.h"
+#include "lib/debug.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/MathUtil.h"
 #include "maths/Vector3D.h"
 
 #include <cfloat>
+#include <cmath>
 
 // To cope well with points that are slightly off the edge of the map,
 // we act as if there's an N-tile margin around the edges of the heightfield.

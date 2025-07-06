@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,9 +20,18 @@
 #include "ModelDef.h"
 
 #include "graphics/SkeletonAnimDef.h"
+#include "lib/debug.h"
 #include "lib/sysdep/arch/x86_x64/simd.h"
-#include "maths/Vector4D.h"
+#include "lib/sysdep/compiler.h"
+#include "maths/Vector2D.h"
 #include "ps/FileIo.h"
+#include "ps/containers/Span.h"
+#include "renderer/VertexArray.h"
+
+#include <algorithm>
+#include <memory>
+#include <string>
+#include <utility>
 
 #if COMPILER_HAS_SSE
 # include <xmmintrin.h>

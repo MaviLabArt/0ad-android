@@ -19,13 +19,19 @@
 
 #include "ShaderDefines.h"
 
-#include "graphics/ShaderProgram.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
 #include "maths/Vector4D.h"
+#include "ps/CStr.h"
 #include "ps/ThreadUtil.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 
 #include <algorithm>
+#include <iterator>
 #include <sstream>
+#include <string>
+#include <string_view>
 
 namespace std
 {

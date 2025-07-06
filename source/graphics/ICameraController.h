@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,9 @@
 #define INCLUDED_ICAMERACONTROLLER
 
 #include "graphics/Camera.h"
-#include "simulation2/system/Entity.h"
-
+#include "lib/code_annotation.h"
 #include "lib/input.h" // InReaction - can't forward-declare enum
+#include "simulation2/system/Entity.h"
 
 /**
  * @interface ICameraController defines a camera controller interface. The camera object

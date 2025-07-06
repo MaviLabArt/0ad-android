@@ -19,21 +19,19 @@
 
 #include "CameraController.h"
 
-#include "graphics/HFTracer.h"
+#include "graphics/Camera.h"
 #include "graphics/Terrain.h"
-#include "i18n/L10n.h"
+#include "lib/external_libraries/libsdl.h"
 #include "lib/input.h"
-#include "lib/timer.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Game.h"
 #include "ps/Globals.h"
 #include "ps/Hotkey.h"
-#include "ps/Pyrogenesis.h"
-#include "ps/TouchInput.h"
 #include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
@@ -41,7 +39,12 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/helpers/Los.h"
+#include "simulation2/system/CmpPtr.h"
+
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <string>
 
 extern int g_xres, g_yres;
 

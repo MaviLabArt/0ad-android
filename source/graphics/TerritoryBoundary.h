@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,13 +18,13 @@
 #ifndef INCLUDED_TERRITORYBOUNDARY
 #define INCLUDED_TERRITORYBOUNDARY
 
-#include <vector>
-
+#include "lib/types.h"
 #include "maths/Vector2D.h"
 #include "simulation2/helpers/Player.h"
 
-template<typename T>
-class Grid;
+#include <vector>
+
+template<typename T> class Grid;
 
 /**
  * Describes an outline of a territory, where the latter are understood to mean the largest sets of mutually connected tiles

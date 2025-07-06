@@ -19,9 +19,18 @@
 
 #include "Decal.h"
 
+#include "graphics/RenderableObject.h"
 #include "graphics/Terrain.h"
+#include "maths/BoundingBoxAligned.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+
+#include <algorithm>
+#include <cmath>
+#include <memory>
 
 std::unique_ptr<CModelAbstract> CModelDecal::Clone() const
 {

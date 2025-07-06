@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,16 +20,30 @@
 #include "Canvas2D.h"
 
 #include "graphics/Color.h"
+#include "graphics/ShaderDefines.h"
 #include "graphics/ShaderManager.h"
+#include "graphics/ShaderTechnique.h"
+#include "graphics/ShaderTechniquePtr.h"
 #include "graphics/TextRenderer.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Matrix3D.h"
 #include "maths/Rect.h"
 #include "maths/Vector2D.h"
-#include "ps/containers/StaticVector.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/containers/Span.h"
+#include "ps/containers/StaticVector.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 
+#include <algorithm>
 #include <array>
+#include <cmath>
+#include <cstddef>
 
 namespace
 {

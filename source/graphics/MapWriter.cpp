@@ -17,21 +17,29 @@
 
 #include "precompiled.h"
 
-#include "Camera.h"
-#include "CinemaManager.h"
-#include "GameView.h"
-#include "LightEnv.h"
-#include "MapReader.h"
 #include "MapWriter.h"
-#include "Patch.h"
-#include "Terrain.h"
-#include "TerrainTextureEntry.h"
-#include "TerrainTextureManager.h"
 
+#include "graphics/Camera.h"
+#include "graphics/Color.h"
+#include "graphics/HeightMipmap.h"
+#include "graphics/LightEnv.h"
+#include "graphics/MapIO.h"
+#include "graphics/MiniPatch.h"
+#include "graphics/Patch.h"
+#include "graphics/Terrain.h"
+#include "graphics/TerrainTextureEntry.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
 #include "maths/NUSpline.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
-#include "ps/Loader.h"
+#include "ps/FileIo.h"
 #include "ps/Filesystem.h"
 #include "ps/XML/XMLWriter.h"
 #include "renderer/PostprocManager.h"
@@ -47,6 +55,17 @@
 #include "simulation2/components/ICmpTurretHolder.h"
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/CinemaPath.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Components.h"
+#include "simulation2/system/Entity.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <map>
+#include <string>
+#include <utility>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // CMapWriter constructor: nothing to do at the minute

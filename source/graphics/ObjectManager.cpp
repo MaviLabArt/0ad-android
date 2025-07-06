@@ -21,15 +21,25 @@
 
 #include "graphics/ObjectBase.h"
 #include "graphics/ObjectEntry.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
-#include "ps/Game.h"
-#include "ps/Profile.h"
 #include "ps/Filesystem.h"
+#include "ps/Profiler2.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpVisual.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Components.h"
+#include "simulation2/system/Entity.h"
+
+#include <cstddef>
+#include <functional>
+#include <string>
 
 bool CObjectManager::ObjectKey::operator< (const CObjectManager::ObjectKey& a) const
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -26,6 +26,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Constructor
 CMiniPatch::CMiniPatch() :
-	Tex(NULL), Priority(0)
+	Tex(nullptr), Priority(0)
 {
 }

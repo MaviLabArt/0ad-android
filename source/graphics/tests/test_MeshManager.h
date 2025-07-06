@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,15 +17,14 @@
 
 #include "lib/self_test.h"
 
-#include "lib/file/file_system.h"
-#include "lib/file/vfs/vfs.h"
-#include "lib/file/io/io.h"
-#include "lib/allocators/shared_ptr.h"
-
 #include "graphics/ColladaManager.h"
 #include "graphics/MeshManager.h"
 #include "graphics/ModelDef.h"
-
+#include "lib/allocators/shared_ptr.h"
+#include "lib/file/file_system.h"
+#include "lib/file/io/io.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/secure_crt.h"
 #include "ps/CLogger.h"
 #include "ps/XML/RelaxNG.h"
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,8 +22,13 @@
 #include "precompiled.h"
 
 #include "Patch.h"
-#include "Terrain.h"
 
+#include "graphics/RenderableObject.h"
+#include "graphics/Terrain.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Vector3D.h"
+
+#include <algorithm>
 
 ///////////////////////////////////////////////////////////////////////////////
 // CPatch constructor

@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,9 +20,10 @@
 #include "Overlay.h"
 
 #include "graphics/TextureManager.h"
-#include "ps/CStr.h"
+#include "lib/debug.h"
 #include "renderer/Renderer.h"
 #include "renderer/TexturedLineRData.h"
+#include "renderer/backend/Sampler.h"
 
 SOverlayTexturedLine::LineCapType SOverlayTexturedLine::StrToLineCapType(const std::wstring& str)
 {

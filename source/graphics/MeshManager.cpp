@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,6 +24,9 @@
 #include "ps/CLogger.h"
 #include "ps/FileIo.h" // to get access to its CError
 #include "ps/Profile.h"
+
+#include <string>
+#include <utility>
 
 // TODO: should this cache models while they're not actively in the game?
 // (Currently they'll probably be deleted when the reference count drops to 0,

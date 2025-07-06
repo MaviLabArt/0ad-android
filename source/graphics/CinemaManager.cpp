@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,33 +17,28 @@
 
 #include "precompiled.h"
 
-#include "graphics/CinemaManager.h"
+#include "CinemaManager.h"
 
-#include "graphics/Camera.h"
 #include "graphics/Color.h"
 #include "graphics/GameView.h"
-#include "maths/MathUtil.h"
-#include "maths/Quaternion.h"
+#include "graphics/Terrain.h"
+#include "maths/FixedVector3D.h"
+#include "maths/NUSpline.h"
 #include "maths/Vector3D.h"
-#include "maths/Vector4D.h"
-#include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
 #include "ps/CStr.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/Config.h"
-#include "ps/Hotkey.h"
 #include "ps/World.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
-#include "simulation2/components/ICmpCinemaManager.h"
-#include "simulation2/components/ICmpOverlayRenderer.h"
-#include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/components/ICmpSelectable.h"
-#include "simulation2/components/ICmpTerritoryManager.h"
-#include "simulation2/helpers/CinemaPath.h"
-#include "simulation2/MessageTypes.h"
-#include "simulation2/system/ComponentManager.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/components/ICmpCinemaManager.h"
+#include "simulation2/helpers/CinemaPath.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/SimContext.h"
+
+#include <map>
+#include <utility>
+#include <vector>
 
 CCinemaManager::CCinemaManager()
 	: m_DrawPaths(false)
