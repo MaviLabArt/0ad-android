@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,8 +18,12 @@
 #ifndef INCLUDED_NETSTATS
 #define INCLUDED_NETSTATS
 
+#include "lib/code_annotation.h"
+#include "lib/external_libraries/enet.h"
+#include "ps/CStr.h"
 #include "ps/ProfileViewer.h"
 
+#include <cstddef>
 #include <mutex>
 #include <vector>
 

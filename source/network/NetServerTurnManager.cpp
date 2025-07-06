@@ -17,15 +17,21 @@
 
 #include "precompiled.h"
 
-#include "NetMessage.h"
 #include "NetServerTurnManager.h"
-#include "NetServer.h"
-#include "NetSession.h"
 
+#include "lib/debug.h"
 #include "lib/utf8.h"
+#include "network/NetHost.h"
+#include "network/NetMessage.h"
+#include "network/NetServer.h"
+#include "network/NetSession.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "simulation2/system/TurnManager.h"
+
+#include <limits>
+#include <memory>
+#include <new>
 
 #if 0
 #include "ps/Util.h"

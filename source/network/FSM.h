@@ -18,9 +18,9 @@
 #ifndef FSM_H
 #define FSM_H
 
+#include <cstddef>
 #include <limits>
 #include <unordered_map>
-
 
 constexpr unsigned int FSM_INVALID_STATE{std::numeric_limits<unsigned int>::max()};
 

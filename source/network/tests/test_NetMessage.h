@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,10 +17,17 @@
 
 #include "lib/self_test.h"
 
+#include "lib/types.h"
 #include "network/NetMessage.h"
-
-#include "scriptinterface/ScriptInterface.h"
+#include "ps/CStr.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <cstddef>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 
 class TestNetMessage : public CxxTest::TestSuite
 {

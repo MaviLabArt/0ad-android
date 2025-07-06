@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,22 @@
 #ifndef NETMESSAGE_H
 #define NETMESSAGE_H
 
-#include "Serialization.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "network/Serialization.h"
+#include "ps/CStr.h"
+
+#include <cstddef>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+
+class ScriptInterface;
 
 // We need the enum from NetMessages.h, but we can't create any classes in
 // NetMessages.h, since they in turn require CNetMessage to be defined
 #define ALLNETMSGS_DONT_CREATE_NMTS
-#include "NetMessages.h"
+#include "network/NetMessages.h" // IWYU pragma: keep
 #undef ALLNETMSGS_DONT_CREATE_NMTS
 
 /**
@@ -155,6 +165,6 @@ private:
 };
 
 // This time, the classes are created
-#include "NetMessages.h"
+#include "network/NetMessages.h" // IWYU pragma: keep
 
 #endif // NETMESSAGE_H

@@ -18,25 +18,27 @@
 #ifndef NETSESSION_H
 #define NETSESSION_H
 
+#include "lib/code_annotation.h"
 #include "lib/external_libraries/enet.h"
+#include "lib/types.h"
 #include "network/FSM.h"
 #include "network/NetFileTransfer.h"
 #include "network/NetHost.h"
 #include "ps/CStr.h"
 
-#include <boost/lockfree/queue.hpp>
-
 #include <atomic>
+#include <boost/lockfree/queue.hpp>
+#include <utility>
+
+class CNetClient;
+class CNetMessage;
+class CNetServerWorker;
+class CNetStatsTable;
 
 /**
  * Report the peer if we didn't receive a packet after this time (milliseconds).
  */
 inline constexpr u32 NETWORK_WARNING_TIMEOUT = 2000;
-
-class CNetClient;
-class CNetServerWorker;
-
-class CNetStatsTable;
 
 typedef struct _ENetHost ENetHost;
 

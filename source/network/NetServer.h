@@ -18,31 +18,35 @@
 #ifndef NETSERVER_H
 #define NETSERVER_H
 
-#include "NetFileTransfer.h"
-#include "NetHost.h"
+#include "lib/code_annotation.h"
 #include "lib/config2.h"
 #include "lib/types.h"
+#include "network/NetHost.h"
+#include "ps/CStr.h"
 #include "scriptinterface/ScriptTypes.h"
 
 #include <ctime>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <mutex>
 #include <optional>
 #include <string>
-#include <utility>
-#include <unordered_map>
-#include <vector>
 #include <thread>
+#include <unordered_map>
+#include <utility>
+#include <vector>
 
+class CNetMessage;
 class CNetServerSession;
 class CNetServerTurnManager;
-template <typename MessageType> class CFsmEvent;
-class CPlayerAssignmentMessage;
+class CNetServerWorker;
 class CNetStatsTable;
+class CPlayerAssignmentMessage;
 class CSimulationMessage;
 class ScriptInterface;
 class ScriptRequest;
-
-class CNetServerWorker;
+template <typename MessageType> class CFsmEvent;
 
 enum NetServerState
 {

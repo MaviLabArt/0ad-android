@@ -19,39 +19,57 @@
 
 #include "NetServer.h"
 
-#include "NetClient.h"
-#include "NetEnet.h"
-#include "NetMessage.h"
-#include "NetSession.h"
-#include "NetServerTurnManager.h"
-#include "NetStats.h"
-#include "NetProtocol.h"
-
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/enet.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
 #include "lib/types.h"
+#include "lib/utf8.h"
+#include "network/FSM.h"
+#include "network/NetEnet.h"
+#include "network/NetFileTransfer.h"
+#include "network/NetHost.h"
+#include "network/NetMessage.h"
+#include "network/NetProtocol.h"
+#include "network/NetServerTurnManager.h"
+#include "network/NetSession.h"
+#include "network/NetStats.h"
 #include "network/StunClient.h"
-#include "ps/algorithm.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/GUID.h"
 #include "ps/Hashing.h"
-#include "ps/Profile.h"
+#include "ps/ProfileViewer.h"
+#include "ps/Profiler2.h"
 #include "ps/Threading.h"
+#include "ps/algorithm.h"
+#include "scriptinterface/JSON.h"
+#include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/JSON.h"
-#include "simulation2/Simulation2.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/TurnManager.h"
 
+#include <algorithm>
+#include <cstring>
+#include <functional>
+#include <iterator>
+#include <js/PropertyAndElement.h>
+#include <memory>
 #if CONFIG2_MINIUPNPC
-#include <miniupnpc/miniwget.h>
+#include <miniupnpc/igd_desc_parse.h>
 #include <miniupnpc/miniupnpc.h>
 #include <miniupnpc/upnpcommands.h>
+#include <miniupnpc/upnpdev.h>
 #include <miniupnpc/upnperrors.h>
 #endif
-
+#include <new>
 #include <set>
+#include <sstream>
 #include <string>
+#include <type_traits>
+#include <utility>
 
 /**
  * Number of peers to allocate for the enet host.

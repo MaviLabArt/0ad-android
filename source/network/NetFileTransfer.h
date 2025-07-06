@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,15 +18,21 @@
 #ifndef NETFILETRANSFER_H
 #define NETFILETRANSFER_H
 
+#include "lib/alignment.h"
+#include "lib/status.h"
+#include "lib/types.h"
+
+#include <cstddef>
 #include <functional>
 #include <map>
 #include <string>
 #include <unordered_map>
+#include <utility>
 
-class CNetMessage;
-class CFileTransferResponseMessage;
-class CFileTransferDataMessage;
 class CFileTransferAckMessage;
+class CFileTransferDataMessage;
+class CFileTransferResponseMessage;
+class CNetMessage;
 class INetSession;
 
 // Assume this is sufficiently less than MTU that packets won't get

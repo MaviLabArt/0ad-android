@@ -17,24 +17,36 @@
 
 #include "lib/self_test.h"
 
-#include "graphics/TerrainTextureManager.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/enet.h"
-#include "lib/external_libraries/libsdl.h"
-#include "lib/tex/tex.h"
-#include "network/NetServer.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/types.h"
 #include "network/NetClient.h"
 #include "network/NetMessage.h"
-#include "network/NetMessages.h"
+#include "network/NetServer.h"
 #include "ps/CLogger.h"
-#include "ps/Game.h"
+#include "ps/CStr.h"
 #include "ps/Filesystem.h"
+#include "ps/Game.h"
 #include "ps/Loader.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "simulation2/Simulation2.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/TurnManager.h"
 
+#include <SDL_timer.h>
+#include <cstddef>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
 #include <optional>
+#include <string>
+#include <utility>
+#include <vector>
 
 class TestNetComms : public CxxTest::TestSuite
 {

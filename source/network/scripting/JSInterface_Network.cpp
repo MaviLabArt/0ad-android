@@ -19,30 +19,39 @@
 
 #include "JSInterface_Network.h"
 
-#include "lib/external_libraries/enet.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/types.h"
+#include "lib/utf8.h"
 #include "lobby/IXmppClient.h"
 #include "network/NetClient.h"
 #include "network/NetMessage.h"
 #include "network/NetServer.h"
-#include "network/StunClient.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
-#include "ps/Game.h"
 #include "ps/GUID.h"
+#include "ps/Game.h"
 #include "ps/Hashing.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/SavedGame.h"
-#include "ps/Util.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/StructuredClone.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "scriptinterface/StructuredClone.h"
 
-#include "third_party/encryption/pkcs5_pbkdf2.h"
-
+#include <fmt/format.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <optional>
 #include <stdexcept>
+#include <string>
+#include <utility>
+#include <vector>
+
+class ScriptInterface;
 
 namespace JSI_Network
 {

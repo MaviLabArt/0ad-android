@@ -18,14 +18,14 @@
 #ifndef NETPROTOCOL_H
 #define NETPROTOCOL_H
 
-#include "NetMessage.h"
 #include "network/NetMessage.h"
-#include "ps/Pyrogenesis.h"
 #include "ps/Mod.h"
+#include "ps/Pyrogenesis.h"
 
 #include <optional>
 #include <string>
 #include <type_traits>
+#include <vector>
 
 struct HandshakeError
 {

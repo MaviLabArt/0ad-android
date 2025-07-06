@@ -19,30 +19,42 @@
 
 #include "NetClient.h"
 
-#include "NetClientTurnManager.h"
-#include "NetEnet.h"
-#include "NetMessage.h"
-#include "NetProtocol.h"
-#include "NetSession.h"
-
 #include "lib/byte_order.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/enet.h"
-#include "lib/external_libraries/libsdl.h"
-#include "lib/sysdep/sysdep.h"
+#include "lib/status.h"
+#include "lib/utf8.h"
 #include "lobby/IXmppClient.h"
-#include "ps/CConsole.h"
+#include "network/NetClientTurnManager.h"
+#include "network/NetEnet.h"
+#include "network/NetFileTransfer.h"
+#include "network/NetMessage.h"
+#include "network/NetProtocol.h"
+#include "network/NetSession.h"
+#include "network/StunClient.h"
 #include "ps/CLogger.h"
-#include "ps/Compress.h"
 #include "ps/CStr.h"
+#include "ps/Compress.h"
 #include "ps/Game.h"
 #include "ps/Hashing.h"
-#include "ps/Loader.h"
 #include "ps/Profile.h"
 #include "ps/Threading.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
-#include "network/StunClient.h"
+#include "simulation2/system/TurnManager.h"
+
+#include <SDL_timer.h>
+#include <algorithm>
+#include <functional>
+#include <iterator>
+#include <js/GCAPI.h>
+#include <js/PropertyAndElement.h>
+#include <js/TracingAPI.h>
+#include <map>
+#include <memory>
+#include <sstream>
+#include <type_traits>
 
 /**
  * Once ping goes above turn length * command delay,

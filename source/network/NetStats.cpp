@@ -19,7 +19,7 @@
 
 #include "NetStats.h"
 
-#include "lib/external_libraries/enet.h"
+#include <string>
 
 enum
 {

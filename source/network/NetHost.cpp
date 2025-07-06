@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,13 @@
 
 #include "NetHost.h"
 
+#include "lib/debug.h"
 #include "lib/external_libraries/enet.h"
 #include "network/NetMessage.h"
 #include "ps/CLogger.h"
+
+#include <cstddef>
+#include <vector>
 
 bool CNetHost::SendMessage(const CNetMessage* message, ENetPeer* peer, const char* peerName)
 {

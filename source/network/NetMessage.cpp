@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,16 +16,16 @@
  */
 
 #include "precompiled.h"
+
 #include "NetMessage.h"
 
 #include "ps/CLogger.h"
 
-#include "ps/Game.h"
-#include "simulation2/Simulation2.h"
+#include <string>
 
 #undef ALLNETMSGS_DONT_CREATE_NMTS
 #define ALLNETMSGS_IMPLEMENT
-#include "NetMessages.h"
+#include "network/NetMessages.h"
 
 CNetMessage::CNetMessage()
 {

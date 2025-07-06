@@ -19,14 +19,24 @@
 
 #include "NetMessage.h"
 
-#include "lib/utf8.h"
-#include "scriptinterface/ScriptRequest.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "network/NetMessage.h"
+#include "ps/CStr.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/serialization/BinarySerializer.h"
 #include "simulation2/serialization/StdDeserializer.h"
-#include "simulation2/serialization/StdSerializer.h" // for DEBUG_SERIALIZER_ANNOTATE
+#include "simulation2/serialization/StdSerializer.h"
 
+#include <cstring>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <sstream>
+#include <string>
+
+class ScriptInterface;
 
 class CBufferBinarySerializerImpl
 {

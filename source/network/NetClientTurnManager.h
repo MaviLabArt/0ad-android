@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,18 @@
 #ifndef INCLUDED_NETCLIENTTURNMANAGER
 #define INCLUDED_NETCLIENTTURNMANAGER
 
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "network/NetMessage.h"
+#include "ps/CStr.h"
 #include "simulation2/system/TurnManager.h"
-#include "NetMessage.h"
+
+#include <js/TypeDecls.h>
+#include <vector>
 
 class CNetClient;
+class CSimulation2;
+class IReplayLogger;
 
 /**
  * Implementation of CTurnManager for network clients.

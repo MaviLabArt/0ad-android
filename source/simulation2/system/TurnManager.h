@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,16 +18,17 @@
 #ifndef INCLUDED_TURNMANAGER
 #define INCLUDED_TURNMANAGER
 
+#include "lib/code_annotation.h"
 #include "ps/CStr.h"
 #include "simulation2/helpers/SimulationCommand.h"
 
+#include <deque>
 #include <list>
 #include <map>
 #include <vector>
-#include <deque>
 
-class CSimulationMessage;
 class CSimulation2;
+class CSimulationMessage;
 class IReplayLogger;
 
 /**

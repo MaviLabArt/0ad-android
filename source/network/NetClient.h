@@ -18,23 +18,30 @@
 #ifndef NETCLIENT_H
 #define NETCLIENT_H
 
-
+#include "lib/code_annotation.h"
+#include "lib/external_libraries/enet.h"
+#include "lib/types.h"
 #include "network/FSM.h"
-#include "network/NetFileTransfer.h"
 #include "network/NetHost.h"
 #include "network/NetMessage.h"
-#include "scriptinterface/Object.h"
-
 #include "ps/CStr.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 
 #include <ctime>
 #include <deque>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <optional>
+#include <string>
 #include <thread>
+#include <vector>
 
 class CGame;
 class CNetClientSession;
 class CNetClientTurnManager;
+class JSTracer;
 class ScriptInterface;
 
 typedef struct _ENetHost ENetHost;

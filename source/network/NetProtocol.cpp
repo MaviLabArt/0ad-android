@@ -19,6 +19,12 @@
 
 #include "NetProtocol.h"
 
+#include "ps/CStr.h"
+
+#include <algorithm>
+#include <cstdint>
+#include <utility>
+
 namespace
 {
 template <typename ModType>

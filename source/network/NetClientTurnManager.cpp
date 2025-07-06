@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,17 +17,25 @@
 
 #include "precompiled.h"
 
-#include "NetClientTurnManager.h"
 #include "NetClient.h"
-
+#include "NetClientTurnManager.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/utf8.h"
+#include "network/NetMessage.h"
 #include "ps/CLogger.h"
+#include "ps/Profile.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/Replay.h"
-#include "ps/Profile.h"
 #include "ps/Util.h"
 #include "simulation2/Simulation2.h"
 
+#include <cstddef>
 #include <fstream>
+#include <js/RootingAPI.h>
+#include <sstream>
+#include <string>
 
 #if 0
 #define NETCLIENTTURN_LOG(...) debug_printf(__VA_ARGS__)

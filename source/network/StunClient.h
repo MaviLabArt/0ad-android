@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * Copyright (C) 2013-2016 SuperTuxKart-Team.
  * This file is part of 0 A.D.
  *
@@ -19,9 +19,12 @@
 #ifndef STUNCLIENT_H
 #define STUNCLIENT_H
 
-#include "ps/CStrForward.h"
+#include "lib/external_libraries/enet.h"
+#include "lib/types.h"
 
 #include <string>
+
+class CStr8;
 
 typedef struct _ENetHost ENetHost;
 

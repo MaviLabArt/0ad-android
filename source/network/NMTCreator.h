@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
  */
 
 #include "Serialization.h"
-#include <vector>
 
 // If included from within the NMT Creation process, perform a pass
 #ifdef CREATING_NMT
@@ -46,6 +45,8 @@
 #define CREATING_NMT
 
 #ifndef NMT_CREATOR_IMPLEMENT
+
+#include <vector>
 
 /*************************************************************************/
 // Pass 1, class definition
@@ -130,6 +131,8 @@ public: \
 #else // NMT_CREATOR_IMPLEMENT
 
 #include "StringConverters.h"
+
+#include <vector>
 
 /*************************************************************************/
 // Pass 2, GetSerializedLength

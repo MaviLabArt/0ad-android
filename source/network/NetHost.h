@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,22 +15,25 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NETHOST_H
-#define NETHOST_H
-
-#include "ps/CStr.h"
-
-#include <map>
-
 /**
  * @file
  * Various declarations shared by networking code.
  */
 
+#ifndef NETHOST_H
+#define NETHOST_H
+
+#include "lib/external_libraries/enet.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
+
+#include <map>
+
+class CNetMessage;
+
 typedef struct _ENetPeer ENetPeer;
 typedef struct _ENetPacket ENetPacket;
 typedef struct _ENetHost ENetHost;
-class CNetMessage;
 
 struct PlayerAssignment
 {

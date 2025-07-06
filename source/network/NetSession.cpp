@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,13 +19,17 @@
 
 #include "NetSession.h"
 
-#include "NetClient.h"
-#include "NetEnet.h"
-#include "NetMessage.h"
-#include "NetServer.h"
-#include "NetStats.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "network/NetClient.h"
+#include "network/NetEnet.h"
+#include "network/NetMessage.h"
+#include "network/NetServer.h"
+#include "network/NetStats.h"
 #include "ps/CLogger.h"
-#include "ps/Profile.h"
+#include "ps/ProfileViewer.h"
+
+#include <cstddef>
 
 constexpr int NETCLIENT_POLL_TIMEOUT = 50;
 
