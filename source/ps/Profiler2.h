@@ -81,6 +81,7 @@
 #include "lib/timer.h"
 #include "ps/ThreadUtil.h"
 
+#include <cstdarg>
 #include <mutex>
 #include <string>
 #include <thread>

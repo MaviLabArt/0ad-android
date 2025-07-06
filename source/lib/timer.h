@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,11 +28,13 @@
 #define INCLUDED_TIMER
 
 #include "lib/config2.h"	// CONFIG2_TIMER_ALLOW_RDTSC
+#include "lib/sysdep/arch.h"
 #if ARCH_X86_X64 && CONFIG2_TIMER_ALLOW_RDTSC
 # include "lib/sysdep/os_cpu.h"	// os_cpu_ClockFrequency
 # include "lib/sysdep/arch/x86_x64/x86_x64.h"	// x86_x64::rdtsc
 #endif
 
+#include "lib/debug.h"
 #include "lib/utf8.h"
 
 #include <cstring>

@@ -21,7 +21,6 @@
 #if CONFIG2_AUDIO
 
 #include "lib/byte_order.h"
-#include "lib/external_libraries/openal.h"
 #include "lib/external_libraries/vorbis.h"
 #include "lib/file/file_system.h"
 #include "lib/file/io/io.h"
@@ -30,6 +29,8 @@
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 
+#include <AL/al.h>
+#include <AL/alc.h>
 #include <algorithm>
 #include <stdexcept>
 

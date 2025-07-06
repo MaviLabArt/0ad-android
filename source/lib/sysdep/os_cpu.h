@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,6 +26,12 @@
 
 #ifndef INCLUDED_OS_CPU
 #define INCLUDED_OS_CPU
+
+#include "lib/status.h"
+
+#include <climits>
+#include <cstddef>
+#include <cstdint>
 
 namespace ERR
 {

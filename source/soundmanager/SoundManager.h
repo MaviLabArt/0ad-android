@@ -27,12 +27,13 @@
 #include "items/ISoundItem.h"
 #include "scripting/SoundGroup.h"
 
-#include "lib/external_libraries/openal.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "ps/CStr.h"
 #include "ps/Profiler2.h"
 #include "simulation2/system/Entity.h"
 
+#include <AL/al.h>
+#include <AL/alc.h>
 #include <map>
 #include <mutex>
 #include <vector>

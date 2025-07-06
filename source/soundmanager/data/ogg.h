@@ -21,8 +21,10 @@
 
 #if CONFIG2_AUDIO
 
-#include "lib/external_libraries/openal.h"
 #include "lib/file/vfs/vfs.h"
+
+#include <AL/al.h>
+#include <AL/alc.h>
 
 class OggStream
 {
