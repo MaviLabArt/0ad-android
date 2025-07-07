@@ -286,7 +286,7 @@ function placePlayerBaseBerries(args)
 		if (createObjectGroup(
 			new SimpleGroup(
 				[new SimpleObject(args.template, args.minCount ?? 5, args.maxCount ?? 5,
-					args.maxDist ?? 1, args.maxDist ?? 3)],
+					args.minDist ?? 1, args.maxDist ?? 3)],
 				true,
 				args.BaseResourceClass,
 				position),
