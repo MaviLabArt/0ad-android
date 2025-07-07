@@ -4,7 +4,7 @@ cd /D "%~dp0"
 
 rem **SVN revision to checkout for windows-libs or windows-libs-amd64**
 rem **Update this line when you commit an update to windows-libs or windows-libs-amd64**
-set "svnrev=28262"
+set "svnrev=28267"
 
 if "%1" == "--amd64" (
     set "LIBS_PATH=win64"
@@ -17,15 +17,6 @@ if "%1" == "--amd64" (
 svn co https://svn.wildfiregames.com/public/%REPO_NAME%/trunk@%svnrev% %LIBS_PATH% || ^
 svn export --force https://svn.wildfiregames.com/public/%REPO_NAME%/trunk@%svnrev% %LIBS_PATH% || ^
 exit /b 1
-
-rem **Fixup SpiderMonkey for Windows 7 on Win32**
-rem This change is performed separately to allow backporting to A27
-set "smrev=28263"
-if "%LIBS_PATH%" == "win32" (
-    svn up -r %smrev% win32/spidermonkey/bin || ^
-    svn export --force https://svn.wildfiregames.com/public/windows-libs/trunk/spidermonkey/bin@%smrev% win32/spidermonkey/bin || ^
-    exit /b 1
-)
 
 rem **Copy dependencies' binaries to binaries/system/**
 

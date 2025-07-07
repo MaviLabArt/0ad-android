@@ -15,10 +15,10 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// This pipeline builds the game on Windows (with the MSVC 15.0 compiler) and runs tests.
+// This pipeline builds the game on Windows (with the Visual Studio 2022 / 17.x compiler) and runs tests.
 
 def visualStudioPath = 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe'
-def buildOptions = '/p:PlatformToolset=v141_xp /p:XPDeprecationWarning=false /t:pyrogenesis /t:AtlasUI /t:test /nologo -clp:NoSummary'
+def buildOptions = '/p:PlatformToolset=v143 /t:pyrogenesis /t:AtlasUI /t:test /nologo -clp:NoSummary'
 
 def getHOSTTYPE(String arch) {
     return arch == 'win64' ? 'amd64' : 'x86'
@@ -91,14 +91,14 @@ pipeline {
                                             bat 'cd libraries && get-windows-libs.bat'
                                         }
                                     }
-                                    bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.6\\lib libraries\\${ARCH}\\wxwidgets\\lib) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
-                                    bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.6\\include libraries\\${ARCH}\\wxwidgets\\include) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
+                                    bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.8\\lib libraries\\${ARCH}\\wxwidgets\\lib) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
+                                    bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.8\\include libraries\\${ARCH}\\wxwidgets\\include) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
                                     bat 'cd build\\workspaces && update-workspaces.bat --jenkins-tests'
 
                                     script {
                                         if (params.CLEANBUILD) {
-                                            bat "cd build\\workspaces\\vs2017 && \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=Debug /t:Clean"
-                                            bat "cd build\\workspaces\\vs2017 && \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=Release /t:Clean"
+                                            bat "cd build\\workspaces\\vs2022 && \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=Debug /t:Clean"
+                                            bat "cd build\\workspaces\\vs2022 && \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=Release /t:Clean"
                                         }
                                     }
                                 }
@@ -107,7 +107,7 @@ pipeline {
                             stage('Build') {
                                 steps {
                                     powershell """
-                                        cd build\\workspaces\\vs2017
+                                        cd build\\workspaces\\vs2022
                                         & \"${visualStudioPath}\" pyrogenesis.sln /p:Configuration=${BUILD_TYPE} ${buildOptions} \$env:JOBS 2>&1 | Tee-Object -FilePath ${BUILD_TYPE}-build.log
                                     """
                                 }
@@ -127,7 +127,7 @@ pipeline {
                                                     analysisModelId: 'msbuild',
                                                     name: config['name'],
                                                     id : config['id'],
-                                                    pattern: "build\\workspaces\\vs2017\\${BUILD_TYPE}-build.log"
+                                                    pattern: "build\\workspaces\\vs2022\\${BUILD_TYPE}-build.log"
                                                 ),
                                                 skipPublishingChecks: true,
                                                 enabledForFailure: true,

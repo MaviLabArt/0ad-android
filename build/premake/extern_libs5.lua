@@ -212,8 +212,8 @@ extern_lib_defs = {
 	boost = {
 		compile_settings = function()
 			if os.istarget("windows") then
-				-- Force the autolink to use the vc141 libs.
-				defines { 'BOOST_LIB_TOOLSET="vc141"' }
+				-- Force the autolink to use the vc143 libs.
+				defines { 'BOOST_LIB_TOOLSET="vc143"' }
 				add_default_include_paths("boost")
 			elseif os.istarget("macosx") then
 				-- Suppress all the Boost warnings on OS X by including it as a system directory
@@ -227,7 +227,7 @@ extern_lib_defs = {
 		link_settings = function()
 			if os.istarget("windows") or os.istarget("macosx") then
 				if os.istarget("windows") then
-					defines { 'BOOST_LIB_TOOLSET="vc141"' }
+					defines { 'BOOST_LIB_TOOLSET="vc143"' }
 				end
 				add_default_lib_paths("boost")
 			end
@@ -703,15 +703,9 @@ extern_lib_defs = {
 		link_settings = function()
 			if os.istarget("windows") then
 				add_default_lib_paths("vorbis")
-				if arch == "amd64" then
-					add_default_links({
-						win_names  = { "vorbisfile" },
-					})
-				else
-					add_default_links({
-						win_names  = { "libvorbisfile" },
-					})
-				end
+				add_default_links({
+					win_names  = { "vorbisfile" },
+				})
 			else
 				pkgconfig.add_links("vorbisfile")
 			end

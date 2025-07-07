@@ -18,7 +18,7 @@
 // This pipeline is used to generate patched releases, suitable to be bundled and distributed.
 
 def visualStudioPath = '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"'
-def buildOptions = '/p:PlatformToolset=v141_xp /p:XPDeprecationWarning=false /t:pyrogenesis /t:AtlasUI %JOBS% /nologo -clp:Warningsonly -clp:ErrorsOnly'
+def buildOptions = '/p:PlatformToolset=v143 /t:pyrogenesis /t:AtlasUI %JOBS% /nologo -clp:Warningsonly -clp:ErrorsOnly'
 
 pipeline {
     agent {
@@ -59,10 +59,10 @@ pipeline {
                     unstash 'build_version'
                     bat 'cd libraries && get-windows-libs.bat'
 
-                    bat '(robocopy E:\\wxWidgets-3.2.6\\lib libraries\\win32\\wxwidgets\\lib /MIR /NDL /NJH /NJS /NP /NS /NC) ^& IF %ERRORLEVEL% LEQ 1 exit 0'
-                    bat '(robocopy E:\\wxWidgets-3.2.6\\include libraries\\win32\\wxwidgets\\include /MIR /NDL /NJH /NJS /NP /NS /NC) ^& IF %ERRORLEVEL% LEQ 1 exit 0'
+                    bat '(robocopy E:\\wxWidgets-3.2.8\\lib libraries\\win32\\wxwidgets\\lib /MIR /NDL /NJH /NJS /NP /NS /NC) ^& IF %ERRORLEVEL% LEQ 1 exit 0'
+                    bat '(robocopy E:\\wxWidgets-3.2.8\\include libraries\\win32\\wxwidgets\\include /MIR /NDL /NJH /NJS /NP /NS /NC) ^& IF %ERRORLEVEL% LEQ 1 exit 0'
                     bat 'cd build\\workspaces && update-workspaces.bat --without-pch --without-tests'
-                    bat "cd build\\workspaces\\vs2017 && ${visualStudioPath} pyrogenesis.sln /p:Configuration=Release ${buildOptions}"
+                    bat "cd build\\workspaces\\vs2022 && ${visualStudioPath} pyrogenesis.sln /p:Configuration=Release ${buildOptions}"
 
                     script {
                         def modifiedFiles = bat(script:'@svn status', returnStdout: true).split('\n').collect { l -> l.drop(8).trim() }.join(', ')
