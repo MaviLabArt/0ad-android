@@ -7,6 +7,15 @@ set "svnrev=28256"
 svn co https://svn.wildfiregames.com/public/windows-libs/trunk@%svnrev% win32 || ^
 svn export --force https://svn.wildfiregames.com/public/windows-libs/trunk@%svnrev% win32
 
+rem **Fixup SpiderMonkey for Windows 7 on Win32**
+rem This change is performed separately to allow backporting to A27
+set "smrev=28263"
+if "%LIBS_PATH%" == "win32" (
+    svn up -r %smrev% win32/spidermonkey/bin || ^
+    svn export --force https://svn.wildfiregames.com/public/windows-libs/trunk/spidermonkey/bin@%smrev% win32/spidermonkey/bin || ^
+    exit /b 1
+)
+
 rem **Copy dependencies' binaries to binaries/system/**
 
 set DIR_LIST=boost enet fcollada fmt freetype gloox iconv icu libcurl libpng libsodium libxml2 microsoft miniupnpc nvtt openal sdl2 spidermonkey vorbis wxwidgets zlib
