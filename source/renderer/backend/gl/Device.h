@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -84,12 +84,12 @@ public:
 	std::unique_ptr<ITexture> CreateTexture(
 		const char* name, const ITexture::Type type, const uint32_t usage,
 		const Format format, const uint32_t width, const uint32_t height,
-		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount) override;
+		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware) override;
 
 	std::unique_ptr<ITexture> CreateTexture2D(
 		const char* name, const uint32_t usage,
 		const Format format, const uint32_t width, const uint32_t height,
-		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount = 1, const uint32_t sampleCount = 1) override;
+		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount = 1, const uint32_t sampleCount = 1, const bool queueSubmitAware = false) override;
 
 	std::unique_ptr<IFramebuffer> CreateFramebuffer(
 		const char* name, SColorAttachment* colorAttachment,

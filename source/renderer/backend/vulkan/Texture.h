@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -54,6 +54,9 @@ public:
 	uint32_t GetSampleCount() const { return m_SampleCount; }
 	uint32_t GetLayerCount() const { return m_LayerCount; }
 
+	bool IsPendingQueueSubmit() const override { return m_PendingQueueSubmit; }
+	void SetPendingQueueSubmit(bool pending);
+
 	VkImage GetImage() { return m_Image; }
 	VkImageView GetAttachmentImageView() { return m_AttachmentImageView; }
 	VkImageView GetSamplerImageView() { return m_SamplerImageView; }
@@ -86,7 +89,7 @@ private:
 		CDevice* device, const char* name, const Type type, const uint32_t usage,
 		const Format format, const uint32_t width, const uint32_t height,
 		const Sampler::Desc& defaultSamplerDesc,
-		const uint32_t MIPLevelCount, const uint32_t sampleCount);
+		const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware = false);
 
 	static std::unique_ptr<CTexture> WrapBackbufferImage(
 		CDevice* device, const char* name, const VkImage image, const VkFormat format,
@@ -128,6 +131,14 @@ private:
 	// It's safe to store the current state while we use a single device command
 	// context.
 	bool m_Initialized = false;
+
+	// We store a flag to indicate that the texture is in Queue submit.
+	bool m_PendingQueueSubmit = false;
+
+	// If true, the texture is aware of queue submission useful for
+	// for dynamic textures that are updated frequently and needs to wait for
+	// the queue submission to finish before overwriting the texture data.
+	bool m_QueueSubmitAware = false;
 };
 
 } // namespace Vulkan

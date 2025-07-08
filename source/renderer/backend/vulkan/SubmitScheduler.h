@@ -65,6 +65,7 @@ public:
 
 	void Flush();
 
+	SubmitHandle GetCurrentHandle() const { return m_CurrentHandle; };
 private:
 	CSubmitScheduler(CDevice* device, VkQueue queue);
 

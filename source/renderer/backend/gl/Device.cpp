@@ -908,7 +908,7 @@ std::unique_ptr<IVertexInputLayout> CDevice::CreateVertexInputLayout(
 std::unique_ptr<ITexture> CDevice::CreateTexture(
 	const char* name, const ITexture::Type type, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
-	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount)
+	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool /*queueSubmitAware*/)
 {
 	return CTexture::Create(this, name, type, usage,
 		format, width, height, defaultSamplerDesc, MIPLevelCount, sampleCount);
@@ -917,10 +917,10 @@ std::unique_ptr<ITexture> CDevice::CreateTexture(
 std::unique_ptr<ITexture> CDevice::CreateTexture2D(
 	const char* name, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
-	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount)
+	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware)
 {
 	return CreateTexture(name, CTexture::Type::TEXTURE_2D, usage,
-		format, width, height, defaultSamplerDesc, MIPLevelCount, sampleCount);
+		format, width, height, defaultSamplerDesc, MIPLevelCount, sampleCount, queueSubmitAware);
 }
 
 std::unique_ptr<IFramebuffer> CDevice::CreateFramebuffer(

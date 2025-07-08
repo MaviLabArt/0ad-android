@@ -26,7 +26,9 @@
 #include "ps/Profiler2.h"
 #include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/Backend.h"
 #include "renderer/backend/IDevice.h"
+#include "renderer/backend/vulkan/Device.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/ITexture.h"
 #include "renderer/backend/Sampler.h"
@@ -288,7 +290,7 @@ bool CFont::ConstructTextureAtlas()
 		Renderer::Backend::ITexture::Usage::TRANSFER_DST |
 		Renderer::Backend::ITexture::Usage::SAMPLED,
 		m_TextureFormat,
-		textureSize, textureSize, defaultSamplerDesc
+		textureSize, textureSize, defaultSamplerDesc, 1, 1, true
 	));
 
 	if (!m_Texture)
@@ -296,8 +298,6 @@ bool CFont::ConstructTextureAtlas()
 		LOGERROR("Failed to create font texture %s", m_FontName);
 		return false;
 	}
-
-	m_IsLoadingTextureToGPU = true;
 
 	// Initialise texture with transparency, for the areas we don't
 	// overwrite with uploading later.
@@ -493,10 +493,7 @@ std::optional<CVector2D> CFont::GenerateGlyphBitmap(FT_Glyph& glyph, u16 codepoi
 
 void CFont::UploadTextureAtlasToGPU()
 {
-	if (std::exchange(m_IsLoadingTextureToGPU, false))
-		return;
-
-	if (!m_IsDirty)
+	if (m_Texture->GetBackendTexture()->IsPendingQueueSubmit() || !m_IsDirty)
 		return;
 
 	Renderer::Backend::IDeviceCommandContext* deviceCommandContext = g_Renderer.GetDeviceCommandContext();

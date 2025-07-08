@@ -164,6 +164,7 @@ void CRingCommandContext::ScheduleUpload(
 	const uint32_t level, const uint32_t layer)
 {
 	ENSURE(texture->GetType() != ITexture::Type::TEXTURE_2D_MULTISAMPLE);
+
 	const Format format = texture->GetFormat();
 	if (texture->GetType() != ITexture::Type::TEXTURE_CUBE)
 		ENSURE(layer == 0);
@@ -223,6 +224,7 @@ void CRingCommandContext::ScheduleUpload(
 		VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
 		VK_PIPELINE_STAGE_TRANSFER_BIT, dstStageMask);
 	texture->SetInitialized();
+	texture->SetPendingQueueSubmit(true);
 }
 
 void CRingCommandContext::ScheduleUpload(
