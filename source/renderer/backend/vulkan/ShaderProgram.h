@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,21 +18,31 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_SHADERPROGRAM
 #define INCLUDED_RENDERER_BACKEND_VULKAN_SHADERPROGRAM
 
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
+#include "ps/containers/Span.h"
+#include "renderer/backend/Format.h"
 #include "renderer/backend/IShaderProgram.h"
-#include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/DescriptorManager.h"
-#include "renderer/backend/vulkan/Texture.h"
 
 #include <array>
 #include <cstddef>
+#include <cstdint>
 #include <glad/vulkan.h>
 #include <memory>
 #include <optional>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 class CShaderDefines;
 class CStr;
+namespace Renderer::Backend::Vulkan { class CBuffer; }
+namespace Renderer::Backend::Vulkan { class CDevice; }
+namespace Renderer::Backend::Vulkan { class CRingCommandContext; }
+namespace Renderer::Backend::Vulkan { class CTexture; }
 
 namespace Renderer
 {
@@ -42,9 +52,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
-class CRingCommandContext;
 
 class CVertexInputLayout : public IVertexInputLayout
 {

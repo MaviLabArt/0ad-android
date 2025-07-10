@@ -41,9 +41,6 @@
 
 #include <array>
 #include <cmath>
-#include <memory>
-#include <new>
-#include <utility>
 
 void CDebugRenderer::Initialize()
 {

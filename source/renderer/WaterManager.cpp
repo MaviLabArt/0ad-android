@@ -28,6 +28,7 @@
 #include "lib/bits.h"
 #include "lib/code_annotation.h"
 #include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/secure_crt.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Frustum.h"

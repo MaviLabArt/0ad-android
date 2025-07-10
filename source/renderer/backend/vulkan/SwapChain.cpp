@@ -19,18 +19,26 @@
 
 #include "SwapChain.h"
 
+#include "graphics/Color.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
 #include "maths/MathUtil.h"
+#include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
-#include "ps/Profile.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/backend/vulkan/Device.h"
+#include "renderer/backend/vulkan/DeviceSelection.h"
 #include "renderer/backend/vulkan/Framebuffer.h"
 #include "renderer/backend/vulkan/RingCommandContext.h"
 #include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/Utilities.h"
 
 #include <algorithm>
+#include <cstdio>
+#include <iterator>
 #include <limits>
+#include <utility>
 
 namespace Renderer
 {

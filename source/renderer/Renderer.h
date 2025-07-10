@@ -18,7 +18,6 @@
 #ifndef INCLUDED_RENDERER
 #define INCLUDED_RENDERER
 
-#include "graphics/Camera.h"
 #include "ps/Singleton.h"
 #include "renderer/RenderingOptions.h"
 
@@ -38,8 +37,6 @@ namespace Renderer::Backend { class IDevice; }
 namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IVertexInputLayout; }
 namespace Renderer::Backend { struct SVertexAttributeFormat; }
-
-#define g_Renderer CRenderer::GetSingleton()
 
 /**
  * Higher level interface on top of the whole frame rendering. It does know
@@ -184,5 +181,7 @@ protected:
 
 	ScreenShotType m_ScreenShotType = ScreenShotType::NONE;
 };
+
+#define g_Renderer CRenderer::GetSingleton()
 
 #endif // INCLUDED_RENDERER

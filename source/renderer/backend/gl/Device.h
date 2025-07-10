@@ -18,22 +18,26 @@
 #ifndef INCLUDED_RENDERER_BACKEND_GL_DEVICE
 #define INCLUDED_RENDERER_BACKEND_GL_DEVICE
 
+#include "lib/ogl.h"
 #include "ps/CStr.h"
 #include "renderer/backend/Backend.h"
-#include "renderer/backend/Format.h"
-#include "renderer/backend/gl/Buffer.h"
-#include "renderer/backend/gl/DeviceForward.h"
-#include "renderer/backend/gl/Framebuffer.h"
-#include "renderer/backend/gl/ShaderProgram.h"
-#include "renderer/backend/gl/Texture.h"
+#include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDevice.h"
-#include "scriptinterface/ScriptForward.h"
+#include "renderer/backend/IFramebuffer.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/gl/DeviceForward.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <js/TypeDecls.h>
 #include <memory>
 #include <string>
 #include <tuple>
 #include <unordered_map>
 #include <vector>
+
+namespace Renderer::Backend::GL { class CDeviceCommandContext; }
+namespace Renderer::Backend::GL { class CFramebuffer; }
 
 typedef struct SDL_Window SDL_Window;
 typedef void* SDL_GLContext;
@@ -46,8 +50,6 @@ namespace Backend
 
 namespace GL
 {
-
-class CDeviceCommandContext;
 
 class CDevice final : public IDevice
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,11 +20,16 @@
 #include "RenderPassManager.h"
 
 #include "lib/hash.h"
+#include "ps/CLogger.h"
 #include "ps/containers/StaticVector.h"
+#include "renderer/backend/IFramebuffer.h"
+#include "renderer/backend/ITexture.h"
 #include "renderer/backend/vulkan/Device.h"
 #include "renderer/backend/vulkan/Mapping.h"
 #include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/Utilities.h"
+
+#include <utility>
 
 namespace Renderer
 {

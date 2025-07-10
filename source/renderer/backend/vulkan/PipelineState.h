@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,15 +18,18 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_PIPELINESTATE
 #define INCLUDED_RENDERER_BACKEND_VULKAN_PIPELINESTATE
 
+#include "graphics/Color.h"
 #include "renderer/backend/PipelineState.h"
-#include "renderer/backend/vulkan/Framebuffer.h"
-#include "renderer/backend/vulkan/ShaderProgram.h"
 #include "renderer/backend/vulkan/DeviceObjectUID.h"
 
-#include <cstdint>
+#include <cstddef>
 #include <glad/vulkan.h>
 #include <memory>
 #include <unordered_map>
+
+namespace Renderer::Backend::Vulkan { class CDevice; }
+namespace Renderer::Backend::Vulkan { class CFramebuffer; }
+namespace Renderer::Backend::Vulkan { class CVertexInputLayout; }
 
 namespace Renderer
 {
@@ -36,9 +39,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
-class CFramebuffer;
 
 class CGraphicsPipelineState final : public IGraphicsPipelineState
 {

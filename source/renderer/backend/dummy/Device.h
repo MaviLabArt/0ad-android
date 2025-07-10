@@ -18,6 +18,7 @@
 #ifndef INCLUDED_RENDERER_BACKEND_DUMMY_DEVICE
 #define INCLUDED_RENDERER_BACKEND_DUMMY_DEVICE
 
+#include "ps/CStr.h"
 #include "renderer/backend/Backend.h"
 #include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDevice.h"

@@ -19,11 +19,8 @@
 
 #include "DeviceCommandContext.h"
 
-#include "renderer/backend/dummy/Buffer.h"
+#include "ps/containers/Span.h"
 #include "renderer/backend/dummy/Device.h"
-#include "renderer/backend/dummy/Framebuffer.h"
-#include "renderer/backend/dummy/ShaderProgram.h"
-#include "renderer/backend/dummy/Texture.h"
 
 namespace Renderer
 {

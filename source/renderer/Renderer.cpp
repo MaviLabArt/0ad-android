@@ -25,7 +25,6 @@
 #include "graphics/Color.h"
 #include "graphics/FontManager.h"
 #include "graphics/GameView.h"
-#include "graphics/HeightMipmap.h"
 #include "graphics/ModelDef.h"
 #include "graphics/ShaderManager.h"
 #include "graphics/TerrainTextureManager.h"
@@ -37,10 +36,10 @@
 #include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_util.h"
 #include "lib/hash.h"
 #include "lib/os_path.h"
-#include "lib/path.h"
 #include "lib/secure_crt.h"
 #include "lib/status.h"
 #include "lib/tex/tex.h"
@@ -78,7 +77,6 @@
 #include "tools/atlas/GameInterface/View.h"
 
 #include <cstdlib>
-#include <new>
 #include <string>
 #include <unordered_map>
 #include <utility>

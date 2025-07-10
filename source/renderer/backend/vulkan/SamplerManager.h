@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,8 +20,8 @@
 
 #include "renderer/backend/Sampler.h"
 
+#include <cstddef>
 #include <glad/vulkan.h>
-#include <memory>
 #include <unordered_map>
 
 namespace Renderer

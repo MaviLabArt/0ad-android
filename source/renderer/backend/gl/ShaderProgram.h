@@ -18,22 +18,21 @@
 #ifndef INCLUDED_RENDERER_BACKEND_GL_SHADERPROGRAM
 #define INCLUDED_RENDERER_BACKEND_GL_SHADERPROGRAM
 
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/ogl.h"
-#include "lib/file/vfs/vfs_path.h"
-#include "ps/containers/Span.h"
 #include "ps/CStr.h"
+#include "ps/containers/Span.h"
 #include "renderer/backend/Format.h"
-#include "renderer/backend/gl/Texture.h"
 #include "renderer/backend/IShaderProgram.h"
 
-#include <map>
+#include <cstdint>
+#include <memory>
 #include <vector>
 
-struct CColor;
-class CMatrix3D;
-class CVector3D;
 class CShaderDefines;
 class CStrIntern;
+namespace Renderer::Backend::GL { class CDevice; }
 
 namespace Renderer
 {
@@ -43,8 +42,6 @@ namespace Backend
 
 namespace GL
 {
-
-class CDevice;
 
 class CVertexInputLayout : public IVertexInputLayout
 {

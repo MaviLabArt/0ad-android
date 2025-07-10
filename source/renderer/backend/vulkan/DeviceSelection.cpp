@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,16 +19,16 @@
 
 #include "DeviceSelection.h"
 
-#include "lib/code_annotation.h"
-#include "lib/config2.h"
-#include "renderer/backend/vulkan/Device.h"
+#include "ps/CLogger.h"
 #include "renderer/backend/vulkan/Utilities.h"
-#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 
 #include <algorithm>
+#include <iterator>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
 #include <limits>
 #include <string>
 #include <type_traits>

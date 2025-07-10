@@ -19,15 +19,25 @@
 
 #include "DeviceCommandContext.h"
 
+#include "graphics/Color.h"
 #include "lib/bits.h"
-#include "maths/MathUtil.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/IFramebuffer.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/PipelineState.h"
+#include "renderer/backend/Sampler.h"
 #include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/DescriptorManager.h"
 #include "renderer/backend/vulkan/Device.h"
+#include "renderer/backend/vulkan/DeviceSelection.h"
 #include "renderer/backend/vulkan/Framebuffer.h"
 #include "renderer/backend/vulkan/Mapping.h"
 #include "renderer/backend/vulkan/PipelineState.h"
@@ -38,7 +48,10 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstring>
+#include <iterator>
 #include <tuple>
+#include <utility>
 
 namespace Renderer
 {

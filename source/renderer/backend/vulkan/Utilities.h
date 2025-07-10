@@ -18,7 +18,8 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_UTILITIES
 #define INCLUDED_RENDERER_BACKEND_VULKAN_UTILITIES
 
-#include "ps/CStr.h"
+#include "lib/debug.h"
+#include "ps/CLogger.h"
 
 #include <cstdint>
 #include <glad/vulkan.h>

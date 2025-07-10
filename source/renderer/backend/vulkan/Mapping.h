@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,13 +18,19 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_MAPPING
 #define INCLUDED_RENDERER_BACKEND_VULKAN_MAPPING
 
-#include "renderer/backend/Barrier.h"
-#include "renderer/backend/Format.h"
-#include "renderer/backend/IFramebuffer.h"
-#include "renderer/backend/PipelineState.h"
-#include "renderer/backend/Sampler.h"
-
+#include <cstdint>
 #include <glad/vulkan.h>
+
+namespace Renderer::Backend { enum class AttachmentLoadOp; }
+namespace Renderer::Backend { enum class AttachmentStoreOp; }
+namespace Renderer::Backend { enum class BlendFactor; }
+namespace Renderer::Backend { enum class BlendOp; }
+namespace Renderer::Backend { enum class CompareOp; }
+namespace Renderer::Backend { enum class CullMode; }
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend { enum class PolygonMode; }
+namespace Renderer::Backend { enum class StencilOp; }
+namespace Renderer::Backend::Sampler { enum class AddressMode; }
 
 namespace Renderer
 {

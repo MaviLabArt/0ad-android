@@ -19,19 +19,43 @@
 
 #include "Device.h"
 
+#include "lib/alignment.h"
+#include "lib/code_generation.h"
+#include "lib/config2.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/hash.h"
 #include "lib/ogl.h"
+#include "lib/secure_crt.h"
+#include "lib/sysdep/os.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/Profile.h"
+#include "ps/containers/Span.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/gl/Buffer.h"
 #include "renderer/backend/gl/DeviceCommandContext.h"
+#include "renderer/backend/gl/DeviceForward.h"
+#include "renderer/backend/gl/Framebuffer.h"
 #include "renderer/backend/gl/PipelineState.h"
+#include "renderer/backend/gl/ShaderProgram.h"
 #include "renderer/backend/gl/Texture.h"
-#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/ScriptRequest.h"
+
+#include <SDL_error.h>
+#include <SDL_version.h>
+#include <SDL_video.h>
+#include <algorithm>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/constants.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <climits>
+#include <cstring>
+#include <iterator>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <limits>
+#include <utility>
 
 #if OS_WIN
 // We can't include wutil directly because GL headers conflict with Windows
@@ -39,18 +63,13 @@
 extern void* wutil_GetAppHDC();
 #endif
 
-#include <algorithm>
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/split.hpp>
-
 #if !CONFIG2_GLES && (defined(SDL_VIDEO_DRIVER_X11) || defined(SDL_VIDEO_DRIVER_WAYLAND))
 
 #if defined(SDL_VIDEO_DRIVER_X11)
+#include <X11/Xlib.h>
 #include <glad/glx.h>
 #endif
-#if defined(SDL_VIDEO_DRIVER_WAYLAND)
-#include <glad/egl.h>
-#endif
+
 #include <SDL_syswm.h>
 
 #endif // !CONFIG2_GLES && (defined(SDL_VIDEO_DRIVER_X11) || defined(SDL_VIDEO_DRIVER_WAYLAND))

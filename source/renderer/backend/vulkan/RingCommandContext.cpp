@@ -20,12 +20,20 @@
 #include "RingCommandContext.h"
 
 #include "lib/bits.h"
+#include "lib/debug.h"
+#include "ps/CLogger.h"
+#include "renderer/backend/Format.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/ITexture.h"
 #include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/Device.h"
+#include "renderer/backend/vulkan/DeviceSelection.h"
+#include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/Utilities.h"
 
 #include <algorithm>
 #include <cstddef>
+#include <cstring>
 #include <limits>
 
 namespace Renderer

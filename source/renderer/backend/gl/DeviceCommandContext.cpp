@@ -19,14 +19,16 @@
 
 #include "DeviceCommandContext.h"
 
+#include "lib/config2.h"
+#include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/containers/Span.h"
 #include "renderer/backend/Barrier.h"
 #include "renderer/backend/Format.h"
-#include "renderer/backend/IDeviceObject.h"
+#include "renderer/backend/IFramebuffer.h"
 #include "renderer/backend/IShaderProgram.h"
+#include "renderer/backend/ITexture.h"
 #include "renderer/backend/PipelineState.h"
-#include "renderer/backend/Sampler.h"
 #include "renderer/backend/Sampler.h"
 #include "renderer/backend/gl/Buffer.h"
 #include "renderer/backend/gl/Device.h"
@@ -39,6 +41,7 @@
 #include <algorithm>
 #include <cstring>
 #include <limits>
+#include <vector>
 
 namespace Renderer
 {

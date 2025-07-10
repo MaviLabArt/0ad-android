@@ -32,6 +32,7 @@
 #include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
 #include "lib/debug.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "maths/Matrix3D.h"
 #include "ps/CLogger.h"
@@ -55,7 +56,6 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
-#include <sys/types.h>
 #include <utility>
 
 // TODO: Currently each decal is a separate CDecalRData. We might want to use

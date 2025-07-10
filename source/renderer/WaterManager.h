@@ -24,6 +24,7 @@
 
 #include "graphics/Color.h"
 #include "graphics/Texture.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "maths/Matrix3D.h"
 #include "renderer/VertexBufferManager.h"
@@ -31,7 +32,6 @@
 #include <cstddef>
 #include <memory>
 #include <string>
-#include <sys/types.h>
 #include <vector>
 
 class CFrustum;

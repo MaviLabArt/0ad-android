@@ -19,30 +19,40 @@
 
 #include "ShaderProgram.h"
 
-#include "graphics/Color.h"
 #include "graphics/PreprocessorWrapper.h"
-#include "graphics/ShaderManager.h"
-#include "graphics/TextureManager.h"
+#include "graphics/ShaderDefines.h"
+#include "lib/config2.h"
+#include "lib/path.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
-#include "ps/containers/StaticVector.h"
+#include "ps/CStrIntern.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+#include "ps/containers/StaticVector.h"
+#include "renderer/backend/IBuffer.h"
+#include "renderer/backend/PipelineState.h"
 #include "renderer/backend/gl/Buffer.h"
 #include "renderer/backend/gl/Device.h"
 #include "renderer/backend/gl/DeviceCommandContext.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <map>
+#include <string>
+#include <tuple>
+#include <unordered_map>
+#include <utility>
+
 #define USE_SHADER_XML_VALIDATION 1
 
 #if USE_SHADER_XML_VALIDATION
-#include "ps/XML/RelaxNG.h"
 #include "ps/XML/XMLWriter.h"
 #endif
-
-#include <algorithm>
-#include <map>
-#include <tuple>
-#include <unordered_map>
 
 namespace Renderer
 {

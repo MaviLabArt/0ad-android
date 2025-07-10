@@ -20,21 +20,33 @@
 #include "ShaderProgram.h"
 
 #include "graphics/ShaderDefines.h"
+#include "lib/path.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
-#include "ps/containers/StaticVector.h"
 #include "ps/CStr.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+#include "ps/containers/StaticVector.h"
+#include "renderer/backend/ITexture.h"
+#include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/DescriptorManager.h"
 #include "renderer/backend/vulkan/Device.h"
+#include "renderer/backend/vulkan/DeviceSelection.h"
 #include "renderer/backend/vulkan/RingCommandContext.h"
 #include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/Utilities.h"
 
 #include <algorithm>
+#include <cstring>
+#include <iterator>
 #include <limits>
+#include <map>
+#include <string>
+#include <tuple>
 
 namespace Renderer
 {

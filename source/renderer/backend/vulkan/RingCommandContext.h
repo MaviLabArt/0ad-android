@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,20 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_RINGCOMMANDCONTEXT
 #define INCLUDED_RENDERER_BACKEND_VULKAN_RINGCOMMANDCONTEXT
 
+#include "lib/types.h"
 #include "renderer/backend/vulkan/SubmitScheduler.h"
 
-#include <glad/vulkan.h>
+#include <cstddef>
+#include <cstdint>
 #include <functional>
+#include <glad/vulkan.h>
 #include <memory>
 #include <vector>
+
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend::Vulkan { class CBuffer; }
+namespace Renderer::Backend::Vulkan { class CDevice; }
+namespace Renderer::Backend::Vulkan { class CTexture; }
 
 namespace Renderer
 {
@@ -33,9 +41,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CBuffer;
-class CDevice;
 
 /**
  * A simple helper class to decouple command buffers rotation from frames

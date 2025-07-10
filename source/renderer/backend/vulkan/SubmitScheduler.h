@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,11 +20,15 @@
 
 #include "renderer/backend/vulkan/Device.h"
 
+#include <array>
+#include <cstdint>
 #include <glad/vulkan.h>
 #include <memory>
 #include <queue>
-#include <utility>
 #include <vector>
+
+namespace Renderer::Backend::Vulkan { class CRingCommandContext; }
+namespace Renderer::Backend::Vulkan { class CSwapChain; }
 
 namespace Renderer
 {
@@ -34,10 +38,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
-class CRingCommandContext;
-class CSwapChain;
 
 /**
  * A helper class to batch VkQueueSubmit calls and track VkCommandBuffer usages

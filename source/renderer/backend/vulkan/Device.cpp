@@ -19,13 +19,15 @@
 
 #include "Device.h"
 
-#include "lib/external_libraries/libsdl.h"
-#include "lib/hash.h"
+#include "lib/alignment.h"
+#include "lib/debug.h"
 #include "lib/sysdep/os.h"
-#include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/Profile.h"
+#include "ps/containers/Span.h"
+#include "ps/containers/StaticVector.h"
+#include "renderer/backend/Format.h"
 #include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/DescriptorManager.h"
 #include "renderer/backend/vulkan/DeviceCommandContext.h"
@@ -41,18 +43,22 @@
 #include "renderer/backend/vulkan/SwapChain.h"
 #include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/Utilities.h"
-#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 
+#include <SDL_version.h>
+#include <SDL_video.h>
 #include <algorithm>
+#include <array>
 #include <iterator>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
 #include <limits>
 #include <string>
 #include <string_view>
-#include <type_traits>
 #include <vector>
+#include <vk_platform.h>
 
 // According to https://wiki.libsdl.org/SDL_Vulkan_LoadLibrary the following
 // functionality is supported since SDL 2.0.6.

@@ -18,22 +18,36 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_DEVICE
 #define INCLUDED_RENDERER_BACKEND_VULKAN_DEVICE
 
+#include "ps/CStr.h"
 #include "renderer/backend/Backend.h"
+#include "renderer/backend/IBuffer.h"
 #include "renderer/backend/IDevice.h"
+#include "renderer/backend/ITexture.h"
 #include "renderer/backend/vulkan/DeviceForward.h"
+#include "renderer/backend/vulkan/DeviceObjectUID.h"
 #include "renderer/backend/vulkan/DeviceSelection.h"
-#include "renderer/backend/vulkan/Texture.h"
 #include "renderer/backend/vulkan/VMA.h"
-#include "scriptinterface/ScriptForward.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <glad/vulkan.h>
-#include <memory>
+#include <js/TypeDecls.h>
 #include <limits>
+#include <memory>
 #include <queue>
 #include <string>
-#include <tuple>
-#include <unordered_map>
+#include <utility>
 #include <vector>
+
+namespace Renderer::Backend { enum class Format; }
+namespace Renderer::Backend::Vulkan { class CBuffer; }
+namespace Renderer::Backend::Vulkan { class CDescriptorManager; }
+namespace Renderer::Backend::Vulkan { class CRenderPassManager; }
+namespace Renderer::Backend::Vulkan { class CRingCommandContext; }
+namespace Renderer::Backend::Vulkan { class CSamplerManager; }
+namespace Renderer::Backend::Vulkan { class CSubmitScheduler; }
+namespace Renderer::Backend::Vulkan { class CSwapChain; }
+namespace Renderer::Backend::Vulkan { class CTexture; }
 
 typedef struct SDL_Window SDL_Window;
 
@@ -47,16 +61,6 @@ namespace Vulkan
 {
 
 static constexpr size_t NUMBER_OF_FRAMES_IN_FLIGHT = 3;
-
-class CBuffer;
-class CDescriptorManager;
-class CFramebuffer;
-class CRenderPassManager;
-class CRingCommandContext;
-class CSamplerManager;
-class CSubmitScheduler;
-class CSwapChain;
-class CTexture;
 
 class CDevice final : public IDevice
 {

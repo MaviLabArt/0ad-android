@@ -40,7 +40,6 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
-#include <memory>
 #include <vector>
 
 struct IModelDef : public CModelDefRPrivate

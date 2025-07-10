@@ -39,6 +39,7 @@
 #include "maths/Frustum.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
+#include "maths/Plane.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
 #include "ps/CStrIntern.h"

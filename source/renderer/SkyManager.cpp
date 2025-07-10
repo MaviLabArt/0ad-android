@@ -20,7 +20,6 @@
 #include "SkyManager.h"
 
 #include "graphics/Camera.h"
-#include "graphics/HeightMipmap.h"
 #include "graphics/LightEnv.h"
 #include "graphics/ShaderManager.h"
 #include "graphics/ShaderTechnique.h"
@@ -30,6 +29,7 @@
 #include "lib/code_generation.h"
 #include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/path.h"
 #include "lib/status.h"
 #include "lib/tex/tex.h"

@@ -18,13 +18,17 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_RENDERPASSMANAGER
 #define INCLUDED_RENDERER_BACKEND_VULKAN_RENDERPASSMANAGER
 
-#include "renderer/backend/IFramebuffer.h"
-
 #include <cstddef>
 #include <cstdint>
 #include <glad/vulkan.h>
 #include <optional>
 #include <unordered_map>
+
+namespace Renderer::Backend { enum class AttachmentLoadOp; }
+namespace Renderer::Backend { enum class AttachmentStoreOp; }
+namespace Renderer::Backend { struct SColorAttachment; }
+namespace Renderer::Backend { struct SDepthStencilAttachment; }
+namespace Renderer::Backend::Vulkan { class CDevice; }
 
 namespace Renderer
 {
@@ -34,8 +38,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
 
 /**
  * A helper class to store unique render passes.

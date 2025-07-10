@@ -19,11 +19,16 @@
 
 #include "SubmitScheduler.h"
 
+#include "lib/debug.h"
+#include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "renderer/backend/vulkan/Device.h"
 #include "renderer/backend/vulkan/RingCommandContext.h"
 #include "renderer/backend/vulkan/SwapChain.h"
 #include "renderer/backend/vulkan/Utilities.h"
+
+#include <cstddef>
+#include <limits>
 
 namespace Renderer
 {

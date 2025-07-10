@@ -21,6 +21,7 @@
 #include "graphics/Patch.h"
 #include "graphics/RenderableObject.h"
 #include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Vector2D.h"
@@ -28,7 +29,6 @@
 #include "renderer/VertexBufferManager.h"
 
 #include <cstddef>
-#include <sys/types.h>
 #include <vector>
 
 class CShaderDefines;

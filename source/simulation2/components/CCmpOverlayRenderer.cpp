@@ -21,6 +21,7 @@
 
 #include "graphics/Overlay.h"
 #include "graphics/TextureManager.h"
+#include "maths/Matrix3D.h"
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
 #include "renderer/Renderer.h"

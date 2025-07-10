@@ -29,6 +29,7 @@
 #include "graphics/ShaderManager.h"
 #include "graphics/ShaderTechnique.h"
 #include "lib/debug.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
@@ -52,8 +53,6 @@
 #include <cstdint>
 #include <iterator>
 #include <limits>
-#include <memory>
-#include <sys/types.h>
 
 extern int g_xres, g_yres;
 

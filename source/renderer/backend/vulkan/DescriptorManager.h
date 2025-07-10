@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,19 +18,25 @@
 #ifndef INCLUDED_RENDERER_BACKEND_VULKAN_DESCRIPTORMANAGER
 #define INCLUDED_RENDERER_BACKEND_VULKAN_DESCRIPTORMANAGER
 
+#include "lib/debug.h"
 #include "ps/CStrIntern.h"
-#include "renderer/backend/Sampler.h"
-#include "renderer/backend/vulkan/Buffer.h"
 #include "renderer/backend/vulkan/Device.h"
-#include "renderer/backend/vulkan/Texture.h"
+#include "renderer/backend/vulkan/DeviceObjectUID.h"
 
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
 #include <glad/vulkan.h>
 #include <limits>
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <utility>
 #include <vector>
+
+namespace Renderer::Backend { class ITexture; }
+namespace Renderer::Backend::Vulkan { class CBuffer; }
+namespace Renderer::Backend::Vulkan { class CTexture; }
 
 namespace Renderer
 {
@@ -40,8 +46,6 @@ namespace Backend
 
 namespace Vulkan
 {
-
-class CDevice;
 
 class CDescriptorManager
 {

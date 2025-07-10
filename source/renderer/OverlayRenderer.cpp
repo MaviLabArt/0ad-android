@@ -53,7 +53,6 @@
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/PipelineState.h"
-#include "simulation2/Simulation2.h"
 
 #include <array>
 #include <cmath>
@@ -61,7 +60,6 @@
 #include <cstdint>
 #include <iterator>
 #include <memory>
-#include <new>
 #include <unordered_map>
 #include <utility>
 #include <vector>

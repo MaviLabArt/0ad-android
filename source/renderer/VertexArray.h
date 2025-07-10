@@ -19,6 +19,7 @@
 #define INCLUDED_VERTEXARRAY
 
 #include "lib/debug.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "renderer/VertexBuffer.h"
 #include "renderer/VertexBufferManager.h"
@@ -27,7 +28,6 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <sys/types.h>
 #include <vector>
 
 namespace Renderer::Backend { class IDeviceCommandContext; }

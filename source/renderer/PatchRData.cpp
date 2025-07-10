@@ -46,7 +46,6 @@
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
 #include "ps/Profile.h"
-#include "ps/VideoMode.h"
 #include "ps/containers/Span.h"
 #include "renderer/AlphaMapCalculator.h"
 #include "renderer/BlendShapes.h"

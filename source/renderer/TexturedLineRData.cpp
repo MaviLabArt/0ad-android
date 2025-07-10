@@ -45,7 +45,6 @@
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
-#include <memory>
 
 /* Note: this implementation uses CVertexBufferManager directly rather than access it through the nicer VertexArray interface,
  * because it allows you to work with variable amounts of vertices and indices more easily. New code should prefer

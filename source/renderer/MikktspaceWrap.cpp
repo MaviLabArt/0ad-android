@@ -25,7 +25,6 @@
 #include "maths/Vector3D.h"
 
 #include <cstddef>
-#include <memory>
 
 MikkTSpace::MikkTSpace(const CModelDefPtr& m, std::vector<float>& v, bool gpuSkinning) : m_Model(m),
 			m_NewVertices(v), m_GpuSkinning(gpuSkinning)
