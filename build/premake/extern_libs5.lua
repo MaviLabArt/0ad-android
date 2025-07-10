@@ -65,7 +65,7 @@ pkgconfig = require "pkgconfig"
 -- Configure pkgconfig for MacOSX systems
 if os.istarget("macosx") then
 	pkgconfig.add_pkg_config_path(libraries_dir .. "pkgconfig/")
-	pkgconfig.static_link_libs = true
+	pkgconfig.set_static_link_libs(true)
 end
 
 local function add_delayload(name, suffix, def)

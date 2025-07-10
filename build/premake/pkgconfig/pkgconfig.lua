@@ -1,8 +1,3 @@
-local m = {}
-m._VERSION = "1.4.0-dev"
-
-m.static_link_libs = false
-
 local pkg_config_command = "pkg-config"
 if os.getenv("PKG_CONFIG") then
 	pkg_config_command = os.getenv("PKG_CONFIG")
@@ -12,6 +7,8 @@ local pkg_config_path = ""
 if os.getenv("PKG_CONFIG_PATH") then
 	pkg_config_path = os.getenv("PKG_CONFIG_PATH")
 end
+
+local static_link_libs = false
 
 
 local function os_capture(cmd)
@@ -53,34 +50,10 @@ local function parse_pkg_config_includes(lib, alternative_cmd, alternative_flags
 	return dirs, files, options
 end
 
-function m.add_pkg_config_path(path)
-	if pkg_config_path == "" then
-		pkg_config_path = path
-	else
-		pkg_config_path = pkg_config_path .. ":" .. path
-	end
-end
-
-function m.add_includes(lib, alternative_cmd, alternative_flags)
-	local dirs, files, options = parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
-
-	externalincludedirs(dirs)
-	forceincludes(files)
-	buildoptions(options)
-end
-
-function m.add_includes_after(lib, alternative_cmd, alternative_flags)
-	local dirs, files, options = parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
-
-	includedirsafter(dirs)
-	forceincludes(files)
-	buildoptions(options)
-end
-
-function m.add_links(lib, alternative_cmd, alternative_flags)
+local function parse_pkg_config_links(lib, alternative_cmd, alternative_flags)
 	local result
 	if not alternative_cmd then
-		local static = m.static_link_libs and " --static " or ""
+		local static = static_link_libs and " --static " or ""
 		result = os_capture("PKG_CONFIG_PATH=" .. pkg_config_path .. " " .. pkg_config_command .. " --libs " .. static .. lib)
 	else
 		if not alternative_flags then
@@ -108,8 +81,64 @@ function m.add_links(lib, alternative_cmd, alternative_flags)
 		end
 	end
 
-	links(libs)
+	return dirs, libs, options
+end
+
+-- ----------------------------------------------------------------------------
+-- Public API
+-- ----------------------------------------------------------------------------
+local m = {}
+m._VERSION = "2.0.0"
+
+--- Append path to PKG_CONFIG_PATH
+-- @param path string Path to append to PKG_CONFIG_PATH
+function m.add_pkg_config_path(path)
+	if pkg_config_path == "" then
+		pkg_config_path = path
+	else
+		pkg_config_path = pkg_config_path .. ":" .. path
+	end
+end
+
+--- Set whether to link libraries statically.
+-- @param value boolean True for static linking, false otherwise.
+function m.set_static_link_libs(value)
+	static_link_libs = value
+end
+
+--- Add include directories and build options for a library.
+-- @param lib string The library name.
+-- @param alternative_cmd string|nil Optional alternative command.
+-- @param alternative_flags string|nil Optional alternative flags.
+function m.add_includes(lib, alternative_cmd, alternative_flags)
+	local dirs, files, options = parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
+
+	externalincludedirs(dirs)
+	forceincludes(files)
+	buildoptions(options)
+end
+
+--- Add include directories after the default ones (used for overrides).
+-- @param lib string The library name.
+-- @param alternative_cmd string|nil Optional alternative command.
+-- @param alternative_flags string|nil Optional alternative flags.
+function m.add_includes_after(lib, alternative_cmd, alternative_flags)
+	local dirs, files, options = parse_pkg_config_includes(lib, alternative_cmd, alternative_flags)
+
+	includedirsafter(dirs)
+	forceincludes(files)
+	buildoptions(options)
+end
+
+--- Add library directories, libraries, and link options for a library.
+-- @param lib string The library name.
+-- @param alternative_cmd string|nil Optional alternative command.
+-- @param alternative_flags string|nil Optional alternative flags.
+function m.add_links(lib, alternative_cmd, alternative_flags)
+	local dirs, libs, options = parse_pkg_config_links(lib, alternative_cmd, alternative_flags)
+
 	libdirs(dirs)
+	links(libs)
 	linkoptions(options)
 end
 
