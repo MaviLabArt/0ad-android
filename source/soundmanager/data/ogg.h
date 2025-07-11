@@ -40,7 +40,7 @@ public:
 	virtual size_t GetNextChunk(PS::span<u8> buffer) = 0;
 };
 
-typedef std::shared_ptr<OggStream> OggStreamPtr;
+using OggStreamPtr = std::shared_ptr<OggStream>;
 
 /**
  * A non-streaming OggStream (reading the whole file in advance)
