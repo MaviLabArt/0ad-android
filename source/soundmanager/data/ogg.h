@@ -34,7 +34,7 @@ public:
 	virtual ~OggStream() { }
 	virtual ALenum Format() = 0;
 	virtual ALsizei SamplingRate() = 0;
-	virtual bool atFileEOF() = 0;
+	virtual bool AtFileEOF() = 0;
 	virtual Status ResetFile() = 0;
 
 	virtual size_t GetNextChunk(PS::span<u8> buffer) = 0;

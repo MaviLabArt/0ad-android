@@ -171,7 +171,7 @@ public:
 	{
 		return m_Info->rate;
 	}
-	virtual bool atFileEOF()
+	virtual bool AtFileEOF()
 	{
 		return m_FileEOF;
 	}

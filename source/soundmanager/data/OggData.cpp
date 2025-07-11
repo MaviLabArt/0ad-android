@@ -127,7 +127,7 @@ int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 	{
 		std::fill(PCMOut.begin(), PCMOut.end(), 0);
 		const size_t totalRet{m_Stream->GetNextChunk(PS::span<u8>(PCMOut))};
-		m_FileFinished = m_Stream->atFileEOF();
+		m_FileFinished = m_Stream->AtFileEOF();
 		if (totalRet == 0)
 			continue;
 
