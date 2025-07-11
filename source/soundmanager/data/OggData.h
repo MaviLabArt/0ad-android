@@ -36,19 +36,19 @@
 */
 constexpr int OGG_DEFAULT_BUFFER_COUNT = 50;
 
-class COggData : public CSoundData
+class COggData final : public CSoundData
 {
 public:
 	COggData();
-	virtual ~COggData();
+	~COggData();
 
-	virtual bool InitOggFile(const VfsPath& itemPath);
-	virtual bool IsFileFinished();
-	virtual bool IsOneShot();
-	virtual bool IsStereo();
+	bool InitOggFile(const VfsPath& itemPath);
+	bool IsFileFinished();
+	bool IsOneShot() override;
+	bool IsStereo() override;
 
-	virtual int FetchDataIntoBuffer(int count, ALuint* buffers);
-	virtual void ResetFile();
+	int FetchDataIntoBuffer(int count, ALuint* buffers);
+	void ResetFile();
 
 private:
 	ALuint m_Format;
@@ -61,9 +61,9 @@ protected:
 	int m_BuffersCount;
 
 	void SetFormatAndFreq(int form, ALsizei freq);
-	int  GetBufferCount();
-	unsigned int GetBuffer();
-	unsigned int* GetBufferPtr();
+	int GetBufferCount() override;
+	unsigned int GetBuffer() override;
+	unsigned int* GetBufferPtr() override;
 };
 
 #endif // CONFIG2_AUDIO
