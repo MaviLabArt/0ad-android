@@ -38,18 +38,18 @@
 constexpr int OGG_DEFAULT_BUFFER_SIZE = 98304;
 
 COggData::COggData()
-	: m_Format(0), m_Frequency(0), m_OneShot(false), m_BuffersUsed(0)
+	: m_Format(0), m_Frequency(0), m_OneShot(false), m_BuffersCount(0)
 {
 }
 
 COggData::~COggData()
 {
 	AL_CHECK;
-	if ( m_BuffersUsed > 0 )
-		alDeleteBuffers(m_BuffersUsed, &m_Buffer.at(0));
+	if (m_BuffersCount > 0)
+		alDeleteBuffers(m_BuffersCount, &m_Buffer.at(0));
 
 	AL_CHECK;
-	m_BuffersUsed = 0;
+	m_BuffersCount = 0;
 }
 
 void COggData::SetFormatAndFreq(int form, ALsizei freq)
@@ -83,14 +83,12 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 		return false;
 	}
 
-	m_BuffersUsed = FetchDataIntoBuffer(m_Buffer.size(), m_Buffer.data());
+	m_BuffersCount = FetchDataIntoBuffer(m_Buffer.size(), m_Buffer.data());
 	if (m_FileFinished)
 	{
 		m_OneShot = true;
-		if (m_BuffersUsed < OGG_DEFAULT_BUFFER_COUNT)
-		{
-			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersUsed, &m_Buffer.at(m_BuffersUsed));
-		}
+		if (m_BuffersCount < OGG_DEFAULT_BUFFER_COUNT)
+			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersCount, &m_Buffer.at(m_BuffersCount));
 	}
 	AL_CHECK;
 
@@ -99,7 +97,7 @@ bool COggData::InitOggFile(const VfsPath& itemPath)
 
 ALsizei COggData::GetBufferCount()
 {
-	return m_BuffersUsed;
+	return m_BuffersCount;
 }
 
 bool COggData::IsFileFinished()

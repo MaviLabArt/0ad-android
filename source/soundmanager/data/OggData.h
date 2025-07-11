@@ -58,7 +58,7 @@ protected:
 	bool m_FileFinished;
 	bool m_OneShot;
 	std::array<ALuint, OGG_DEFAULT_BUFFER_COUNT> m_Buffer{};
-	int m_BuffersUsed;
+	int m_BuffersCount;
 
 	void SetFormatAndFreq(int form, ALsizei freq);
 	int  GetBufferCount();
