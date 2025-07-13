@@ -33,6 +33,7 @@
 #include "ps/GameSetup/CmdLineArgs.h"
 #include "ps/GameSetup/Paths.h"
 #include "ps/Mod.h"
+#include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/Replay.h"
 #include "ps/Util.h"
@@ -116,7 +117,7 @@ void VisualReplay::StoreCacheFile(const ScriptInterface& scriptInterface, JS::Ha
 
 JS::HandleObject VisualReplay::ReloadReplayCache(const ScriptInterface& scriptInterface, bool compareFiles)
 {
-	TIMER(L"ReloadReplayCache");
+	PROFILE2("ReloadReplayCache");
 	ScriptRequest rq(scriptInterface);
 
 	// Maps the filename onto the index, mtime and size
@@ -236,7 +237,7 @@ JS::HandleObject VisualReplay::ReloadReplayCache(const ScriptInterface& scriptIn
 
 JS::Value VisualReplay::GetReplays(const ScriptInterface& scriptInterface, bool compareFiles)
 {
-	TIMER(L"GetReplays");
+	PROFILE2("GetReplays");
 
 	ScriptRequest rq(scriptInterface);
 	JS::RootedObject replays(rq.cx, ReloadReplayCache(scriptInterface, compareFiles));
@@ -459,7 +460,7 @@ JS::Value VisualReplay::GetReplayAttributes(const ScriptInterface& scriptInterfa
 
 void VisualReplay::AddReplayToCache(const ScriptInterface& scriptInterface, const CStrW& directoryName)
 {
-	TIMER(L"AddReplayToCache");
+	PROFILE2("AddReplayToCache");
 	ScriptRequest rq(scriptInterface);
 
 	JS::RootedValue replayData(rq.cx, LoadReplayData(scriptInterface, OsPath(directoryName)));

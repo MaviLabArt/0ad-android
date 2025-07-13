@@ -106,6 +106,7 @@ CConsole::~CConsole() = default;
 
 void CConsole::Init()
 {
+	PROFILE2("CConsole::Init");
 	// Initialise console history file
 	m_MaxHistoryLines = g_ConfigDB.Get("console.history.size", 200);
 	m_HistoryIgnoreDuplicates = g_ConfigDB.Get("console.history.ignore_duplicates", true);

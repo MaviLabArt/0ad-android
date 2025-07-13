@@ -168,7 +168,7 @@ void MountMods(const Paths& paths, const std::vector<CStr>& mods)
 
 void InitVfs(const CmdLineArgs& args)
 {
-	TIMER(L"InitVfs");
+	PROFILE2("InitVfs");
 
 	const Paths paths(args);
 
@@ -208,18 +208,8 @@ void InitVfs(const CmdLineArgs& args)
 
 static void InitPs(bool setup_gui, const CStrW& gui_page, ScriptInterface* srcScriptInterface, JS::HandleValue initData)
 {
-	{
-		// console
-		TIMER(L"ps_console");
-
-		g_Console->Init();
-	}
-
-	// hotkeys
-	{
-		TIMER(L"ps_lang_hotkeys");
-		LoadHotkeys(g_ConfigDB);
-	}
+	g_Console->Init();
+	LoadHotkeys(g_ConfigDB);
 
 	if (!setup_gui)
 	{

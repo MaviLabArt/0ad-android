@@ -34,6 +34,7 @@
 #include "ps/Profiler2.h"
 #include "ps/Profiler2GPU.h"
 #include "ps/Pyrogenesis.h"
+#include "ps/TaskManager.h"
 #include "third_party/mongoose/mongoose.h"
 
 #include <algorithm>
@@ -106,11 +107,17 @@ static void* MgCallback(mg_event event, struct mg_connection *conn, const struct
 
 		if (uri == "/download")
 		{
-			profiler->SaveToFile();
+			Threading::TaskManager::GetSingleton().PushTask([&]
+			{
+				profiler->SaveToFile();
+			}).Get();
 		}
 		else if (uri == "/overview")
 		{
-			profiler->ConstructJSONOverview(stream);
+			Threading::TaskManager::GetSingleton().PushTask([&]
+			{
+				profiler->ConstructJSONOverview(stream);
+			}).Get();
 		}
 		else if (uri == "/query")
 		{
@@ -130,7 +137,10 @@ static void* MgCallback(mg_event event, struct mg_connection *conn, const struct
 			}
 			std::string thread(buf);
 
-			const char* err = profiler->ConstructJSONResponse(stream, thread);
+			const char* err = Threading::TaskManager::GetSingleton().PushTask([&]
+			{
+				return profiler->ConstructJSONResponse(stream, thread);
+			}).Get();
 			if (err)
 			{
 				mg_printf(conn, "%s (%s)", header400, err);
@@ -642,7 +652,7 @@ void rewriteBuffer(u8* buffer, u32& bufferSize)
 
 void CProfiler2::ConstructJSONOverview(std::ostream& stream)
 {
-	TIMER(L"profile2 overview");
+	PROFILE2("CProfiler2::ConstructJSONOverview");
 
 	std::lock_guard<std::mutex> lock(m_Mutex);
 
@@ -665,7 +675,7 @@ void CProfiler2::ConstructJSONOverview(std::ostream& stream)
 template<typename V>
 void RunBufferVisitor(const std::string& buffer, V& visitor)
 {
-	TIMER(L"profile2 visitor");
+	PROFILE2("Profiler2 RunBufferVisitor");
 
 	// The buffer doesn't necessarily start at the beginning of an item
 	// (we just grabbed it from some arbitrary point in the middle),
@@ -817,12 +827,12 @@ public:
 
 const char* CProfiler2::ConstructJSONResponse(std::ostream& stream, const std::string& thread)
 {
-	TIMER(L"profile2 query");
+	PROFILE2("CProfiler2::ConstructJSONResponse");
 
 	std::string buffer;
 
 	{
-		TIMER(L"profile2 get buffer");
+		PROFILE2("Profiler2 get buffer");
 
 		std::lock_guard<std::mutex> lock(m_Mutex); // lock against changes to m_Threads or deletions of ThreadStorage
 

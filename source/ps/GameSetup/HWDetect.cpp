@@ -39,6 +39,7 @@
 #include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/Config.h"
+#include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/UserReport.h"
 #include "ps/VideoMode.h"
@@ -203,7 +204,7 @@ void ReportLibraries(const ScriptRequest& rq, JS::HandleValue settings)
 
 void WriteSystemInfo(Renderer::Backend::IDevice* device, const utsname& un)
 {
-	TIMER(L"write_sys_info");
+	PROFILE2("WriteSystemInfo");
 
 	OsPath pathname = psLogDir() / "system_info.txt";
 	FILE* f = sys_OpenFile(pathname, "w");
@@ -297,7 +298,7 @@ void RunHardwareDetection(bool writeSystemInfoBeforeDetection, Renderer::Backend
 	if (writeSystemInfoBeforeDetection)
 		WriteSystemInfo(device, un);
 
-	TIMER(L"RunHardwareDetection");
+	PROFILE2("RunHardwareDetection");
 
 	ScriptInterface scriptInterface("Engine", "HWDetect", g_ScriptContext);
 

@@ -43,7 +43,6 @@
 #include "lib/secure_crt.h"
 #include "lib/status.h"
 #include "lib/tex/tex.h"
-#include "lib/timer.h"
 #include "lib/types.h"
 #include "maths/Matrix3D.h"
 #include "ps/CConsole.h"
@@ -332,7 +331,7 @@ size_t CRenderer::Internals::VertexAttributesHash::operator()(
 
 CRenderer::CRenderer(Renderer::Backend::IDevice* device)
 {
-	TIMER(L"InitRenderer");
+	PROFILE2("InitRenderer");
 
 	m = std::make_unique<Internals>(device);
 

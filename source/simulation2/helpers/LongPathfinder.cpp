@@ -298,7 +298,6 @@ public:
 	void reset(const Grid<NavcellData>* terrain, pass_class_t passClass)
 	{
 		PROFILE2("JumpPointCache reset");
-		TIMER(L"JumpPointCache reset");
 
 		m_Width = terrain->m_W;
 		m_Height = terrain->m_H;

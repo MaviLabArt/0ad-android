@@ -27,6 +27,7 @@
 #include "ps/ConfigDB.h"
 #include "ps/Globals.h"
 #include "ps/KeyName.h"
+#include "ps/Profiler2.h"
 
 static bool unified[UNIFIED_LAST - UNIFIED_SHIFT];
 
@@ -133,6 +134,7 @@ static void LoadConfigBindings(CConfigDB& configDB)
 
 void LoadHotkeys(CConfigDB& configDB)
 {
+	PROFILE2("LoadHotkeys");
 	pressedHotkeys.clear();
 	LoadConfigBindings(configDB);
 }

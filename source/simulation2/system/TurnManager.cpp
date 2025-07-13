@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #include "maths/MathUtil.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "ps/CLogger.h"
 #include "ps/Replay.h"
 #include "ps/Util.h"
@@ -280,7 +281,7 @@ void CTurnManager::RewindTimeWarp()
 
 void CTurnManager::QuickSave(JS::HandleValue GUIMetadata)
 {
-	TIMER(L"QuickSave");
+	PROFILE2("QuickSave");
 
 	std::stringstream stream;
 	if (!m_Simulation2.SerializeState(stream))
@@ -302,7 +303,7 @@ void CTurnManager::QuickSave(JS::HandleValue GUIMetadata)
 
 void CTurnManager::QuickLoad()
 {
-	TIMER(L"QuickLoad");
+	PROFILE2("QuickLoad");
 
 	if (m_QuickSaveState.empty())
 	{

@@ -96,22 +96,6 @@ private:
 };
 
 /**
- * Measures the time taken to execute code up until end of the current scope;
- * displays it via debug_printf. Can safely be nested.
- * Useful for measuring time spent in a function or basic block.
- * <description> must remain valid over the lifetime of this object;
- * a string literal is safest.
- *
- * Example usage:
- * 	void func()
- * 	{
- * 		TIMER(L"description");
- * 		// code to be measured
- * 	}
- **/
-#define TIMER(description) ScopeTimer UID__(description)
-
-/**
  * Measures the time taken to execute code between BEGIN and END markers;
  * displays it via debug_printf. Can safely be nested.
  * Useful for measuring several pieces of code within the same function/block.

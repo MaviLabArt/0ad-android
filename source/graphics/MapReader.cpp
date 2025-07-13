@@ -1416,7 +1416,7 @@ int CMapReader::PollMapGeneration()
 
 int CMapReader::ParseTerrain()
 {
-	TIMER(L"ParseTerrain");
+	PROFILE2("ParseTerrain");
 	ScriptRequest rq(pSimulation2->GetScriptInterface());
 
 	// parse terrain from map data
@@ -1493,7 +1493,7 @@ if (!Script::GetProperty(rq, val, #prop, out))\
 
 int CMapReader::ParseEntities()
 {
-	TIMER(L"ParseEntities");
+	PROFILE2("ParseEntities");
 	ScriptRequest rq(pSimulation2->GetScriptInterface());
 
 	// parse entities from map data

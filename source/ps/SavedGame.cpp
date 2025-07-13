@@ -40,6 +40,7 @@
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/Mod.h"
+#include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
@@ -275,7 +276,7 @@ std::optional<SavedGames::LoadResult> SavedGames::Load(const ScriptInterface& sc
 
 JS::Value SavedGames::GetSavedGames(const ScriptInterface& scriptInterface)
 {
-	TIMER(L"GetSavedGames");
+	PROFILE2("GetSavedGames");
 	ScriptRequest rq(scriptInterface);
 
 	JS::RootedValue games(rq.cx);

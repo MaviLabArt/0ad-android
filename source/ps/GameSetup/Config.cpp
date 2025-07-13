@@ -20,9 +20,12 @@
 #include "Config.h"
 
 #include "lib/timer.h"
+#include "ps/CConsole.h"
+#include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/GameSetup/CmdLineArgs.h"
+#include "ps/Profiler2.h"
 
 #include <cstddef>
 #include <vector>
@@ -100,7 +103,7 @@ static void ProcessCommandLineArgs(const CmdLineArgs& args)
 
 void CONFIG_Init(const CmdLineArgs& args)
 {
-	TIMER(L"CONFIG_Init");
+	PROFILE2("CONFIG_Init");
 
 	CConfigDB::Initialise();
 

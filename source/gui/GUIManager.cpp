@@ -23,7 +23,6 @@
 #include "gui/SGUIMessage.h"
 #include "lib/debug.h"
 #include "lib/file/vfs/vfs_util.h"
-#include "lib/timer.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/Errors.h"
@@ -227,7 +226,6 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 		PROFILE2("load gui xml");
 		PROFILE2_ATTR("name: %s", name.c_str());
 
-		TIMER(nameW.c_str());
 		if (name.back() == '/')
 		{
 			VfsPath currentDirectory = VfsPath("gui") / nameW;

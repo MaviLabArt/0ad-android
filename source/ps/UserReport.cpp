@@ -344,10 +344,6 @@ private:
 
 		SetStatus("connecting");
 
-#if DEBUG_UPLOADS
-		TIMER(L"CUserReporterWorker request");
-#endif
-
 		CURLcode err = curl_easy_perform(m_Curl);
 
 #if DEBUG_UPLOADS

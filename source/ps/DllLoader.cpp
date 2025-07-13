@@ -24,6 +24,7 @@
 #include "lib/posix/posix_dlfcn.h"
 #include "lib/sysdep/os.h"
 #include "lib/timer.h"
+#include "ps/Profiler2.h"
 
 #include <cstddef>
 #include <sstream>
@@ -160,7 +161,7 @@ bool DllLoader::LoadDLL()
 	// postcondition: m_Handle valid or == HANDLE_UNAVAILABLE.
 	if (m_Handle == 0)
 	{
-		TIMER(L"LoadDLL");
+		PROFILE2("LoadDLL");
 
 		std::stringstream errors;
 		m_Handle = LoadAnyVariant(m_Name, errors);
