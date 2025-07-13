@@ -316,6 +316,7 @@ static void InitSDL()
 
 static void ShutdownSDL()
 {
+	PROFILE2("ShutdownSDL");
 	SDL_Quit();
 }
 
@@ -346,11 +347,7 @@ void ShutdownNetworkAndUI()
 	ShutdownPs();
 
 	if (hasRenderer)
-	{
-		TIMER_BEGIN(L"shutdown Renderer");
 		delete &g_Renderer;
-		TIMER_END(L"shutdown Renderer");
-	}
 
 	g_RenderingOptions.ClearHooks();
 
@@ -359,13 +356,8 @@ void ShutdownNetworkAndUI()
 	if (hasRenderer)
 		g_VideoMode.Shutdown();
 
-	TIMER_BEGIN(L"shutdown SDL");
 	ShutdownSDL();
-	TIMER_END(L"shutdown SDL");
-
-	TIMER_BEGIN(L"shutdown UserReporter");
 	g_UserReporter.Deinitialize();
-	TIMER_END(L"shutdown UserReporter");
 
 	// Cleanup curl now that g_ModIo and g_UserReporter have been shutdown.
 	curl_global_cleanup();
@@ -375,9 +367,7 @@ void ShutdownNetworkAndUI()
 
 void ShutdownConfigAndSubsequent()
 {
-	TIMER_BEGIN(L"shutdown ConfigDB");
 	CConfigDB::Shutdown();
-	TIMER_END(L"shutdown ConfigDB");
 
 	SAFE_DELETE(g_Console);
 
@@ -387,27 +377,26 @@ void ShutdownConfigAndSubsequent()
 
 	// resource
 	// first shut down all resource owners, and then the handle manager.
-	TIMER_BEGIN(L"resource modules");
+	{
+		PROFILE2("resource modules");
 
 		ISoundManager::SetEnabled(false);
 
 		g_VFS.reset();
 
 		file_stats_dump();
+	}
 
-	TIMER_END(L"resource modules");
+	PROFILE2("shutdown misc");
+	timer_DisplayClientTotals();
 
-	TIMER_BEGIN(L"shutdown misc");
-		timer_DisplayClientTotals();
+	CNetHost::Deinitialize();
 
-		CNetHost::Deinitialize();
+	// Should be destroyed last, since the above uses them.
+	delete &g_Profiler;
+	delete &g_ProfileViewer;
 
-		// should be last, since the above use them
-		delete &g_Profiler;
-		delete &g_ProfileViewer;
-
-		SAFE_DELETE(g_ScriptStatsTable);
-	TIMER_END(L"shutdown misc");
+	SAFE_DELETE(g_ScriptStatsTable);
 }
 
 #if OS_UNIX

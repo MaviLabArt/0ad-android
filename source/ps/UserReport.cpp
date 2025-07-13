@@ -573,6 +573,7 @@ void CUserReporter::Initialize()
 
 void CUserReporter::Deinitialize()
 {
+	PROFILE2("CUserReporter::Deinitialize");
 	if (!m_Worker)
 		return;
 

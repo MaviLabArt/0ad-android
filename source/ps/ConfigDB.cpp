@@ -30,6 +30,7 @@
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/Filesystem.h"
+#include "ps/Profiler2.h"
 
 #include <algorithm>
 #include <boost/algorithm/string/predicate.hpp>
@@ -135,6 +136,7 @@ void CConfigDB::Initialise()
 
 void CConfigDB::Shutdown()
 {
+	PROFILE2("CConfigDB::Shutdown");
 	g_ConfigDBPtr.reset();
 }
 

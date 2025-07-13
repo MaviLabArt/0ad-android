@@ -69,59 +69,6 @@ typedef i64 Cycles;
 std::string StringForSeconds(double seconds);
 std::string StringForCycles(Cycles cycles);
 
-
-//-----------------------------------------------------------------------------
-// scope timing
-
-/// used by TIMER
-class ScopeTimer
-{
-	NONCOPYABLE(ScopeTimer);
-public:
-	ScopeTimer(const wchar_t* description)
-		: m_t0(timer_Time()), m_description(description)
-	{
-	}
-
-	~ScopeTimer()
-	{
-		const double t1 = timer_Time();
-		const std::string elapsedTimeString = StringForSeconds(t1-m_t0);
-		debug_printf("TIMER| %s: %s\n", utf8_from_wstring(m_description).c_str(), elapsedTimeString.c_str());
-	}
-
-private:
-	double m_t0;
-	const wchar_t* m_description;
-};
-
-/**
- * Measures the time taken to execute code between BEGIN and END markers;
- * displays it via debug_printf. Can safely be nested.
- * Useful for measuring several pieces of code within the same function/block.
- * <description> must remain valid over the lifetime of this object;
- * a string literal is safest.
- *
- * Caveats:
- * - this wraps the code to be measured in a basic block, so any
- *   variables defined there are invisible to surrounding code.
- * - the description passed to END isn't inspected; you are responsible for
- *   ensuring correct nesting!
- *
- * Example usage:
- * 	void func2()
- * 	{
- * 		// uninteresting code
- * 		TIMER_BEGIN(L"description2");
- * 		// code to be measured
- * 		TIMER_END(L"description2");
- * 		// uninteresting code
- * 	}
- **/
-#define TIMER_BEGIN(description) { ScopeTimer UID__(description)
-#define TIMER_END(description) }
-
-
 //-----------------------------------------------------------------------------
 // cumulative timer API
 

@@ -23,6 +23,7 @@
 #include "lib/self_test.h"
 
 #include "lib/adts/cache_adt.h"
+#include "lib/timer.h"
 
 #include <cstddef>
 #include <queue>
@@ -54,7 +55,7 @@ public:
 		std::uniform_int_distribution<int> distribution9(0, 9);\
 		std::uniform_int_distribution<size_t> distribution99(1, 99);\
 		int cnt = 1;\
-		TIMER_BEGIN(desc);\
+		const double startTime = timer_Time();\
 		for(int i = 0; i < 30000; i++)\
 		{\
 			/* 70% add (random objects) */\
@@ -74,7 +75,7 @@ public:
 				c.remove_least_valuable(&value, &size);\
 			}\
 		}\
-		TIMER_END(desc);\
+		debug_printf("%s took %f s", desc, timer_Time() - startTime);\
 	}
 		MEASURE(c1, "naive")
 		MEASURE(c1r, "naiverecip")

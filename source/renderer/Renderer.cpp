@@ -359,6 +359,7 @@ CRenderer::CRenderer(Renderer::Backend::IDevice* device)
 
 CRenderer::~CRenderer()
 {
+	PROFILE2("~CRenderer");
 	delete &g_TexMan;
 
 	// We no longer UnloadWaterTextures here -
