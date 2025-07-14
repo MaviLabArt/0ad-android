@@ -94,7 +94,7 @@ void SetViewedPlayer(int id)
 	if (playerID == -1 || g_Game->CheatsEnabled() || g_Game->PlayerFinished(playerID) || g_Game->IsVisualReplay())
 		g_Game->SetViewedPlayerID(id);
 	else
-		std::logic_error{"Changing the perspective with cheats disabled is prohibited"};
+		throw std::logic_error{"Changing the perspective with cheats disabled is prohibited"};
 }
 
 float GetSimRate()
