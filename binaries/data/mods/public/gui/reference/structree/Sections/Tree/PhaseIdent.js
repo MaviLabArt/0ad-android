@@ -14,10 +14,10 @@ class PhaseIdent
 		for (let i = 0; i < this.Bars.children.length; ++i)
 		{
 			const bar = this.Bars.children[i];
-			bar.size = {
+			Object.assign(bar.size, {
 				"top": entityBoxHeight + prodIconSize.rowHeight * (i + 1),
 				"bottom": entityBoxHeight + prodIconSize.rowHeight * (i + 2) - prodIconSize.rowGap
-			};
+			});
 		}
 	}
 
