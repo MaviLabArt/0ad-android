@@ -80,7 +80,7 @@ CSize2D CButton::GetTextSize()
 
 CSize2D CButton::GetPreferredTextSize()
 {
-	return CGUIText{m_pGUI, m_Caption, m_Font, 0, m_BufferZone, m_TextAlign, this}.GetSize();
+	return CGUIText{m_pGUI, m_Caption, m_Font, m_pGUI.GetWindowSize().Width, m_BufferZone, m_TextAlign, this}.GetSize();
 }
 
 void CButton::HandleMessage(SGUIMessage& Message)

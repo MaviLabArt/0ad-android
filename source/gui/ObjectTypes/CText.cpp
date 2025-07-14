@@ -124,7 +124,7 @@ CSize2D CText::GetTextSize()
 
 CSize2D CText::GetPreferredTextSize()
 {
-	return CGUIText{m_pGUI, m_Caption, m_Font, 0, m_BufferZone, m_TextAlign, this}.GetSize();
+	return CGUIText{m_pGUI, m_Caption, m_Font, m_pGUI.GetWindowSize().Width, m_BufferZone, m_TextAlign, this}.GetSize();
 }
 
 const CStrW& CText::GetTooltipText() const
