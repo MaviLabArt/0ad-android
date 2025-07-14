@@ -258,9 +258,7 @@ namespace DAP
 			}
 			if (m_ServerSocket != -1)
 			{
-#if OS_LINUX
 				shutdown(m_ServerSocket, SHUT_RDWR);
-#endif
 				close(m_ServerSocket);
 				m_ServerSocket = -1;
 			}
