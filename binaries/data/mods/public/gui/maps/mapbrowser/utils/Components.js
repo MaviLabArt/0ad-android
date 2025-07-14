@@ -22,7 +22,7 @@ class LabelledControl
 	{
 		const labelWidth = this.label.getPreferredTextSize().width + 15;
 		this.label.size.right = labelWidth;
-		this.label.size.left = labelWidth;
+		this.control.size.left = labelWidth;
 	}
 }
 
