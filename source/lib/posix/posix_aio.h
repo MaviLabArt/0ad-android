@@ -63,6 +63,4 @@ struct aiocb
 # include <aio.h>
 #endif
 
-#include "lib/posix/posix_errno.h"	// for user convenience
-
 #endif	// #ifndef INCLUDED_POSIX_AIO

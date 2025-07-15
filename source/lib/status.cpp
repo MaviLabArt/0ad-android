@@ -27,13 +27,12 @@
  */
 
 #include "precompiled.h"
-#include "lib/status.h"
 
-#include <cstring>
+#include "status.h"
+
+#include <cerrno>
 #include <cstdio>
-
-#include "lib/posix/posix_errno.h"
-
+#include <cstring>
 
 static StatusDefinitionBucket* buckets;
 

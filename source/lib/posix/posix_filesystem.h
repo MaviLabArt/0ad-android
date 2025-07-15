@@ -29,5 +29,3 @@
 # include <sys/types.h>
 # include <dirent.h>
 #endif
-
-#include "lib/posix/posix_errno.h"	// for user convenience

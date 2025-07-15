@@ -29,7 +29,7 @@
 #include "ps/ConfigDB.h"
 #include "renderer/Renderer.h"
 
-#include <errno.h>
+#include <cerrno>
 
 namespace
 {

@@ -25,5 +25,3 @@
 #else
 # include <sys/time.h>
 #endif
-
-#include "lib/posix/posix_errno.h"	// for user convenience
