@@ -32,8 +32,9 @@
 
 #include "lib/posix/posix_filesystem.h"	// O_CREAT
 #include "lib/sysdep/os/win/wposix/wposix_internal.h"
-#include "lib/sysdep/os/win/wposix/wtime.h"			// timespec
 #include "lib/sysdep/os/win/wseh.h"		// wseh_ExceptionFilter
+
+#include <ctime>
 
 namespace
 {

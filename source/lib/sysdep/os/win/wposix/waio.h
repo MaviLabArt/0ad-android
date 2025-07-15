@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -29,8 +29,9 @@
 
 #include "lib/status.h"
 #include "lib/os_path.h"
-#include "lib/posix/posix_time.h"	// timespec
 #include "lib/sysdep/os/win/wposix/wposix_types.h"
+
+#include <ctime>
 
 // Note: transfer buffers, offsets, and lengths must be sector-aligned
 // (we don't bother copying to an align buffer because our block cache
