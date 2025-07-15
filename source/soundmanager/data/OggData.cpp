@@ -52,7 +52,7 @@ COggData::~COggData()
 	m_BuffersCount = 0;
 }
 
-void COggData::SetFormatAndFreq(int form, ALsizei freq)
+void COggData::SetFormatAndFreq(ALenum form, ALsizei freq)
 {
 	m_Format = form;
 	m_Frequency = freq;

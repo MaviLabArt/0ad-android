@@ -60,7 +60,7 @@ protected:
 	std::array<ALuint, OGG_DEFAULT_BUFFER_COUNT> m_Buffer{};
 	int m_BuffersCount;
 
-	void SetFormatAndFreq(int form, ALsizei freq);
+	void SetFormatAndFreq(ALenum form, ALsizei freq);
 	int GetBufferCount() override;
 	unsigned int GetBuffer() override;
 	unsigned int* GetBufferPtr() override;
