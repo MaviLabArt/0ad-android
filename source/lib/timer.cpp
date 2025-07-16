@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -43,6 +43,7 @@
 #endif
 #if OS_UNIX
 # include <unistd.h>
+# include <time.h>
 #endif
 
 #if OS_UNIX || OS_WIN
@@ -51,7 +52,7 @@
 # define HAVE_GETTIMEOFDAY 0
 #endif
 
-#if (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0)
+#if (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0) || OS_MACOSX
 # define HAVE_CLOCK_GETTIME 1
 #else
 # define HAVE_CLOCK_GETTIME 0
