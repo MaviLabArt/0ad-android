@@ -452,7 +452,7 @@ export function* generateMap(mapSettings)
 					]);
 			}
 
-			if (!isNomad && lake && randBool(2/3))
+			if (!mapSettings.Nomad && lake && randBool(2/3))
 			{
 				g_Map.log("Creating small central island");
 				createArea(
