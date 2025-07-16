@@ -19,6 +19,7 @@
 #define INCLUDED_RMS_ENTITY
 
 #include "lib/code_annotation.h"
+#include "lib/types.h"
 #include "maths/FixedVector3D.h"
 
 #include <string>

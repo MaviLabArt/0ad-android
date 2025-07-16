@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,14 +22,14 @@
 #ifndef INCLUDED_MODELDEF
 #define INCLUDED_MODELDEF
 
+#include "lib/code_annotation.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
-#include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
-#include "lib/file/vfs/vfs_path.h"
 #include "ps/CStr.h"
-#include "renderer/VertexArray.h"
 
 #include <cstring>
 #include <map>
@@ -38,6 +38,8 @@
 
 class CBoneState;
 class CSkeletonAnimDef;
+class CVector2D;
+template <typename T> class VertexArrayIterator;
 
 /**
  * Describes the position of a prop point within its parent model. A prop point is the location within a parent model

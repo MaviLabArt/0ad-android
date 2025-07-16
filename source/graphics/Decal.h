@@ -20,6 +20,10 @@
 
 #include "graphics/Material.h"
 #include "graphics/ModelAbstract.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
+
+#include <cstddef>
 
 class CTerrain;
 

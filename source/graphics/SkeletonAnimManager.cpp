@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,12 +24,15 @@
 #include "SkeletonAnimManager.h"
 
 #include "graphics/ColladaManager.h"
-#include "graphics/Model.h"
 #include "graphics/SkeletonAnim.h"
 #include "graphics/SkeletonAnimDef.h"
+#include "maths/BoundingBoxAligned.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/FileIo.h"
+
+#include <string>
+#include <utility>
 
 ///////////////////////////////////////////////////////////////////////////////
 // CSkeletonAnimManager constructor

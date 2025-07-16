@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,12 +21,13 @@
 #include "graphics/Color.h"
 #include "graphics/ShaderTechniquePtr.h"
 #include "graphics/Texture.h"
+#include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "maths/Vector2D.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
-#include "renderer/backend/ITexture.h"
 #include "renderer/VertexArray.h"
 
+#include <cstddef>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -36,6 +37,11 @@ class CLOSTexture;
 class CSimulation2;
 class CTerrain;
 class CTerritoryTexture;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IFramebuffer; }
+namespace Renderer::Backend { class ITexture; }
+namespace Renderer::Backend { class IVertexInputLayout; }
 
 class CMiniMapTexture
 {

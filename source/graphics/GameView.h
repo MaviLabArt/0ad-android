@@ -21,17 +21,18 @@
 #include "lib/code_annotation.h"
 #include "lib/input.h" // InReaction - can't forward-declare enum
 #include "renderer/Scene.h"
-#include "renderer/backend/IDeviceCommandContext.h"
 #include "simulation2/system/Entity.h"
 
 class CCamera;
 class CCinemaManager;
 class CGame;
+class CGameViewImpl;
 class CObjectManager;
 class CVector3D;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+struct SDL_Event_;
 struct SViewPort;
-
-class CGameViewImpl;
 
 class CGameView : private Scene
 {

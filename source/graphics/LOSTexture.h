@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,20 @@
 #define INCLUDED_LOSTEXTURE
 
 #include "graphics/ShaderTechniquePtr.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
 #include "maths/Matrix3D.h"
 #include "renderer/backend/Format.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IFramebuffer.h"
-#include "renderer/backend/IShaderProgram.h"
-#include "renderer/backend/ITexture.h"
-
+#include <cstddef>
+#include <cstdint>
 #include <memory>
 
 class CLosQuerier;
 class CSimulation2;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IFramebuffer; }
+namespace Renderer::Backend { class ITexture; }
+namespace Renderer::Backend { class IVertexInputLayout; }
 
 /**
  * Maintains the LOS (fog-of-war / shroud-of-darkness) texture, used for

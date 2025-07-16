@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,15 @@
 #define INCLUDED_CANVAS2D
 
 #include "graphics/Texture.h"
-#include "maths/Vector2D.h"
-#include "renderer/backend/IDeviceCommandContext.h"
 
+#include <cstdint>
 #include <memory>
 #include <vector>
 
 class CRect;
 class CTextRenderer;
-
+class CVector2D;
+namespace Renderer::Backend { class IDeviceCommandContext; }
 struct CColor;
 
 // Encapsulates 2D drawing functionality to hide and optimize

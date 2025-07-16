@@ -35,6 +35,7 @@
 #include "lib/utf8.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/Game.h"
 #include "ps/World.h"

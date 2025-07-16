@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,13 +20,19 @@
 #include "PreprocessorWrapper.h"
 
 #include "graphics/ShaderDefines.h"
+#include "lib/debug.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/Profile.h"
 
 #include <cctype>
+#include <cstdlib>
+#include <cstring>
 #include <deque>
+#include <map>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace

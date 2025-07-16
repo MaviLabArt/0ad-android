@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,11 +23,7 @@
 #define INCLUDED_LIGHTENV
 
 #include "graphics/Color.h"
-#include "maths/MathUtil.h"
 #include "maths/Vector3D.h"
-
-class CMapWriter;
-class CMapReader;
 
 /**
  * Class CLightEnv: description of a lighting environment - contains all the

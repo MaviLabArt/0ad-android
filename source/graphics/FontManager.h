@@ -23,11 +23,12 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
-
 #include <memory>
 #include <unordered_map>
+#include <utility>
 
 class CFont;
+struct FT_LibraryRec_;
 
 /**
  * Font manager: loads and caches bitmap fonts.

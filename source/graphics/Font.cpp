@@ -21,6 +21,7 @@
 #include "graphics/TextureManager.h"
 #include "lib/debug.h"
 #include "lib/file/vfs/vfs.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"

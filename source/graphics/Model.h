@@ -25,14 +25,23 @@
 #include "graphics/Material.h"
 #include "graphics/MeshManager.h"
 #include "graphics/ModelAbstract.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
+#include "maths/BoundingBoxAligned.h"
+#include "simulation2/helpers/Player.h"
 
+#include <cstddef>
+#include <memory>
+#include <string>
 #include <vector>
 
-struct SPropPoint;
+class CMatrix3D;
 class CObjectEntry;
+class CSimulation2;
 class CSkeletonAnim;
 class CSkeletonAnimDef;
-class CSimulation2;
+struct SPropPoint;
 
 // Holds world information for a particular instance of a model in the game.
 class CModel : public CModelAbstract

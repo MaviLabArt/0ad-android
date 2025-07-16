@@ -17,17 +17,23 @@
 
 #include "precompiled.h"
 
-#include <algorithm>
-#include <queue>
-
 #include "ObjectBase.h"
 
-#include "ObjectManager.h"
-#include "ps/XML/Xeromyces.h"
-#include "ps/Filesystem.h"
-#include "ps/CLogger.h"
-#include "lib/timer.h"
+#include "graphics/ObjectManager.h"
+#include "lib/debug.h"
 #include "maths/MathUtil.h"
+#include "ps/CLogger.h"
+#include "ps/Errors.h"
+#include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
+#include "ps/XML/Xeromyces.h"
+
+#include <algorithm>
+#include <cstddef>
+#include <queue>
+#include <string>
+#include <utility>
 
 namespace
 {

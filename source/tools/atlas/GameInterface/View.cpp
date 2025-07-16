@@ -32,6 +32,7 @@
 #include "lib/timer.h"
 #include "lib/utf8.h"
 #include "maths/MathUtil.h"
+#include "maths/Vector2D.h"
 #include "ps/ConfigDB.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/GameSetup.h"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,18 @@
 #include "lib/self_test.h"
 
 #include "graphics/Camera.h"
+
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Frustum.h"
 #include "maths/MathUtil.h"
-#include "maths/Vector2D.h"
+#include "maths/Matrix3D.h"
+#include "maths/Plane.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
 
 #include <cmath>
+#include <cstddef>
+#include <set>
 #include <vector>
 
 class TestCamera : public CxxTest::TestSuite

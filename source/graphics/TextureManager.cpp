@@ -20,30 +20,41 @@
 #include "TextureManager.h"
 
 #include "graphics/Color.h"
+#include "graphics/SColor.h"
 #include "graphics/TextureConverter.h"
-#include "lib/allocators/shared_ptr.h"
 #include "lib/bits.h"
-#include "lib/file/vfs/vfs_tree.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
-#include "lib/timer.h"
-#include "maths/MathUtil.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "lib/tex/tex.h"
 #include "maths/MD5.h"
-#include "ps/CacheLoader.h"
+#include "maths/MathUtil.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/CacheLoader.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "ps/Util.h"
 #include "renderer/backend/IDevice.h"
-#include "renderer/Renderer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/ITexture.h"
 
 #include <algorithm>
+#include <array>
 #include <boost/filesystem.hpp>
-#include <iomanip>
+#include <boost/iterator/iterator_facade.hpp>
+#include <chrono>
+#include <iterator>
 #include <set>
 #include <sstream>
+#include <string>
+#include <thread>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
+#include <vector>
 
 namespace
 {

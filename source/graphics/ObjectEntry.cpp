@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,24 +24,32 @@
 #include "graphics/MaterialManager.h"
 #include "graphics/MeshManager.h"
 #include "graphics/Model.h"
+#include "graphics/ModelAbstract.h"
 #include "graphics/ModelDef.h"
 #include "graphics/ModelDummy.h"
 #include "graphics/ObjectBase.h"
 #include "graphics/ObjectManager.h"
+#include "graphics/ParticleEmitter.h"
 #include "graphics/ParticleManager.h"
 #include "graphics/SkeletonAnim.h"
 #include "graphics/SkeletonAnimManager.h"
+#include "graphics/Texture.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
 #include "lib/rand.h"
+#include "lib/utf8.h"
+#include "maths/Vector4D.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/Game.h"
-#include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
-#include "simulation2/Simulation2.h"
+#include "renderer/backend/Sampler.h"
 
+#include <algorithm>
+#include <cstddef>
 #include <sstream>
+#include <utility>
 
 CObjectEntry::CObjectEntry(const std::shared_ptr<CObjectBase>& base, const CSimulation2& simulation) :
 	m_Base(base), m_Color(1.0f, 1.0f, 1.0f, 1.0f), m_Simulation(simulation)

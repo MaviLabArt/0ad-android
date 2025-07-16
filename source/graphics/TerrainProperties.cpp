@@ -16,19 +16,27 @@
  */
 
 #include "precompiled.h"
+
 #include "TerrainProperties.h"
-
-#include <string>
-#include <vector>
-
-#include <boost/tokenizer.hpp>
 
 #include "graphics/Color.h"
 #include "graphics/TerrainTextureManager.h"
+#include "lib/path.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+
+#include <boost/iterator/iterator_categories.hpp>
+#include <boost/iterator/iterator_facade.hpp>
+#include <boost/token_functions.hpp>
+#include <boost/tokenizer.hpp>
+#include <cmath>
+#include <string>
 
 CTerrainProperties::CTerrainProperties(CTerrainPropertiesPtr parent):
 	m_pParent(parent),

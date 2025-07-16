@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,14 +16,16 @@
  */
 
 #include "precompiled.h"
+
 #include "TerritoryBoundary.h"
 
-#include <algorithm> // for reverse
-
-#include "graphics/Terrain.h"
+#include "lib/debug.h"
+#include "maths/Fixed.h"
+#include "simulation2/components/ICmpTerritoryManager.h"
 #include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/Pathfinding.h"
-#include "simulation2/components/ICmpTerritoryManager.h"
+
+#include <cmath>
 
 std::vector<STerritoryBoundary> CTerritoryBoundaryCalculator::ComputeBoundaries(const Grid<u8>* territory)
 {

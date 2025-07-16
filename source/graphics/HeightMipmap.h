@@ -27,6 +27,7 @@
 #include "lib/code_annotation.h"
 #include "lib/types.h"
 
+#include <cstddef>
 #include <vector>
 
 class Path;

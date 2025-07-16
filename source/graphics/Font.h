@@ -23,10 +23,7 @@
 #include "lib/os_path.h"
 #include "lib/types.h"
 #include "maths/Rect.h"
-#include "maths/Vector2D.h"
-#include "renderer/Renderer.h"
 #include "renderer/backend/Format.h"
-#include "renderer/backend/Sampler.h"
 
 #include <array>
 #include <ft2build.h>
@@ -39,6 +36,9 @@
 #include <string>
 #include <type_traits>
 #include <vector>
+
+class CVector2D;
+namespace Renderer::Backend::Sampler { struct Desc; }
 
 /**
  * Storage for a bitmap font. Loaded by CFontManager.

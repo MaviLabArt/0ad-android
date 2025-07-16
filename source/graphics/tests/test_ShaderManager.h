@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,9 +17,9 @@
 
 #include "lib/self_test.h"
 
-#include "graphics/ShaderManager.h"
-
+#include "graphics/ShaderDefines.h"
 #include "maths/Vector4D.h"
+#include "ps/CStrIntern.h"
 
 class TestShaderManager : public CxxTest::TestSuite
 {

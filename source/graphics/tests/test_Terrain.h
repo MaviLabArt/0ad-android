@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,10 +21,16 @@
 
 #include "graphics/Patch.h"
 #include "graphics/RenderableObject.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector3D.h"
+#include "maths/Vector3D.h"
 
+#include <cmath>
+#include <cstddef>
 #include <sstream>
+#include <string>
 #include <vector>
 
 class TestTerrain : public CxxTest::TestSuite

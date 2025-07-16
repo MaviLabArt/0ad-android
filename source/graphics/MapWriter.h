@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,21 +19,20 @@
 #define INCLUDED_MAPWRITER
 
 #include "MapIO.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "ps/CStr.h"
-#include "ps/FileIo.h"
 
 #include <vector>
 
-
-class CLightEnv;
-class CTerrain;
 class CCamera;
 class CCinemaManager;
+class CFilePacker;
+class CLightEnv;
 class CPostprocManager;
-class WaterManager;
-class SkyManager;
 class CSimulation2;
-struct MapTrigger;
+class CTerrain;
+class SkyManager;
+class WaterManager;
 
 class CMapWriter : public CMapIO
 {

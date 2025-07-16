@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,14 @@
 #define INCLUDED_COLOR
 
 #include "graphics/SColor.h"
+#include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
 #include "ps/containers/Span.h"
-#include "ps/CStrForward.h"
+
+#include <cstddef>
+
+class CStr8;
 
 // Simple defines for 3 and 4 component floating point colors - just map to
 // corresponding vector types.

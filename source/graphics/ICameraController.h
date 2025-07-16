@@ -18,10 +18,13 @@
 #ifndef INCLUDED_ICAMERACONTROLLER
 #define INCLUDED_ICAMERACONTROLLER
 
-#include "graphics/Camera.h"
 #include "lib/code_annotation.h"
 #include "lib/input.h" // InReaction - can't forward-declare enum
 #include "simulation2/system/Entity.h"
+
+class CCamera;
+struct SDL_Event_;
+struct SViewPort;
 
 /**
  * @interface ICameraController defines a camera controller interface. The camera object

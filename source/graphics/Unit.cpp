@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,13 +20,17 @@
 #include "Unit.h"
 
 #include "graphics/Model.h"
+#include "graphics/ModelAbstract.h"
 #include "graphics/ObjectBase.h"
 #include "graphics/ObjectEntry.h"
 #include "graphics/ObjectManager.h"
-#include "graphics/SkeletonAnim.h"
-#include "graphics/SkeletonAnimDef.h"
 #include "graphics/UnitAnimation.h"
+#include "lib/code_generation.h"
 #include "ps/CLogger.h"
+
+#include <string>
+#include <utility>
+#include <vector>
 
 CUnit::CUnit(CObjectManager& objectManager, const CActorDef& actor, const entity_id_t id, const uint32_t seed)
 	: m_ObjectManager(objectManager), m_Actor(actor), m_ID(id), m_Seed(seed), m_Animation(nullptr)

@@ -19,18 +19,29 @@
 
 #include "TextureConverter.h"
 
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
 #include "lib/bits.h"
+#include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/regex.h"
+#include "lib/status.h"
 #include "lib/tex/tex.h"
-#include "lib/timer.h"
+#include "lib/types.h"
 #include "maths/MD5.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
+#include "ps/Future.h"
 #include "ps/Profiler2.h"
 #include "ps/TaskManager.h"
 #include "ps/Util.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+
+#include <cstring>
+#include <utility>
 
 #if CONFIG2_NVTT
 

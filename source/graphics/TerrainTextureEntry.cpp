@@ -20,19 +20,28 @@
 #include "TerrainTextureEntry.h"
 
 #include "graphics/MaterialManager.h"
-#include "graphics/Terrain.h"
 #include "graphics/TerrainProperties.h"
 #include "graphics/TerrainTextureManager.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/Sampler.h"
 
-#include <map>
+#include <cmath>
+#include <cstddef>
+#include <string>
+#include <utility>
 
 CTerrainTextureEntry::CTerrainTextureEntry(CTerrainPropertiesPtr properties, const VfsPath& path):
 	m_pProperties(properties),

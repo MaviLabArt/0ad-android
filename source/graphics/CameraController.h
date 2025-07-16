@@ -20,7 +20,16 @@
 
 #include "graphics/ICameraController.h"
 #include "graphics/SmoothedValue.h"
-#include "ps/ConfigDB.h"
+#include "lib/code_annotation.h"
+#include "lib/input.h"
+#include "simulation2/system/Entity.h"
+
+#include <memory>
+
+class CCamera;
+class CConfigDBHook;
+class CMatrix3D;
+class CVector3D;
 
 class CCameraController : public ICameraController
 {

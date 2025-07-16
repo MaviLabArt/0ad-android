@@ -25,6 +25,7 @@
 #include "lib/debug.h"
 #include "lib/posix/posix_types.h"
 #include "maths/MathUtil.h"
+#include "maths/Plane.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector4D.h"
 #include "ps/Game.h"

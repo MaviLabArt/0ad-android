@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,18 +20,21 @@
 #include "UnitAnimation.h"
 
 #include "graphics/Model.h"
+#include "graphics/ModelAbstract.h"
 #include "graphics/ObjectEntry.h"
 #include "graphics/SkeletonAnim.h"
 #include "graphics/SkeletonAnimDef.h"
-#include "graphics/Unit.h"
+#include "lib/debug.h"
 #include "lib/rand.h"
 #include "ps/CStr.h"
 #include "ps/Game.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpSoundManager.h"
+#include "simulation2/system/CmpPtr.h"
 
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
+#include <memory>
+#include <string>
 
 // Randomly modify the speed, so that units won't stay perfectly
 // synchronised if they're playing animations of the same length

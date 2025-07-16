@@ -20,31 +20,47 @@
 #include "graphics/ColladaManager.h"
 #include "graphics/Decal.h"
 #include "graphics/Material.h"
+#include "graphics/MeshManager.h"
 #include "graphics/Model.h"
+#include "graphics/ModelAbstract.h"
 #include "graphics/ModelDef.h"
-#include "graphics/ObjectEntry.h"
+#include "graphics/ObjectBase.h"
 #include "graphics/ObjectManager.h"
 #include "graphics/ShaderDefines.h"
 #include "graphics/SkeletonAnimManager.h"
 #include "graphics/Terrain.h"
 #include "graphics/Unit.h"
 #include "graphics/UnitManager.h"
+#include "lib/file/file_system.h"
 #include "lib/file/io/io.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "maths/Matrix3D.h"
+#include "maths/Quaternion.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/ProfileViewer.h"
 #include "ps/VideoMode.h"
 #include "ps/XML/Xeromyces.h"
-#include "renderer/backend/dummy/Device.h"
 #include "renderer/Renderer.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/system/Entity.h"
 
-#include <optional>
+#include <cstdint>
+#include <map>
 #include <memory>
+#include <optional>
 #include <string_view>
+#include <utility>
+#include <vector>
 
 namespace
 {

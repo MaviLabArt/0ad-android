@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,13 +17,21 @@
 
 #include "lib/self_test.h"
 
+#include "graphics/Texture.h"
 #include "graphics/TextureConverter.h"
-
-#include "lib/external_libraries/libsdl.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
 #include "lib/tex/tex.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
-#include "ps/XML/Xeromyces.h"
+#include "ps/XMB/XMBStorage.h"
+
+#include <SDL_timer.h>
+#include <cstddef>
+#include <memory>
+#include <string>
+#include <vector>
 
 class TestTextureConverter : public CxxTest::TestSuite
 {

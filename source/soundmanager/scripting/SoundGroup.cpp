@@ -21,6 +21,7 @@
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
 #include "lib/rand.h"
+#include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/CStr.h"

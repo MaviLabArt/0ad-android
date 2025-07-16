@@ -20,13 +20,21 @@
 #include "graphics/ColladaManager.h"
 #include "graphics/MeshManager.h"
 #include "graphics/ModelDef.h"
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
 #include "lib/file/file_system.h"
-#include "lib/file/io/io.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
 #include "lib/secure_crt.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
 #include "ps/XML/RelaxNG.h"
+
+#include <cstddef>
+#include <memory>
+#include <string>
 
 static OsPath MOD_PATH(DataDir() / "mods" / "_test.mesh" / "");
 static OsPath CACHE_PATH(DataDir() / "_testcache" / "");

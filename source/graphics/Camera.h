@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -26,9 +26,12 @@
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Frustum.h"
 #include "maths/Matrix3D.h"
-#include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
 
 #include <array>
+
+class CPlane;
+class CVector2D;
 
 // view port
 struct SViewPort

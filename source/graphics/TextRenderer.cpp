@@ -21,15 +21,27 @@
 
 #include "graphics/Font.h"
 #include "graphics/FontManager.h"
-#include "graphics/ShaderProgram.h"
 #include "graphics/TextureManager.h"
-#include "maths/Matrix3D.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
+#include "ps/CStr.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/ConfigDB.h"
 #include "renderer/Renderer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
 
+#include <algorithm>
 #include <cerrno>
+#include <cmath>
+#include <cstdarg>
+#include <cstdint>
+#include <cwchar>
+#include <iterator>
+#include <vector>
 
 namespace
 {

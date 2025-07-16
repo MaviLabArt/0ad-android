@@ -19,21 +19,32 @@
 
 #include "TerrainTextureManager.h"
 
-#include "graphics/TerrainTextureEntry.h"
 #include "graphics/TerrainProperties.h"
-#include "graphics/TextureManager.h"
+#include "graphics/TerrainTextureEntry.h"
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
 #include "lib/bits.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
+#include "lib/status.h"
 #include "lib/tex/tex.h"
-#include "lib/timer.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+#include "renderer/backend/Format.h"
 #include "renderer/backend/IDevice.h"
-#include "renderer/Renderer.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/Sampler.h"
 
 #include <algorithm>
+#include <cstdint>
+#include <utility>
 #include <vector>
+
+class CFileInfo;
 
 CTerrainTextureManager::CTerrainTextureManager(Renderer::Backend::IDevice* device)
 	: m_Device(device)

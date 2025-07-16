@@ -20,10 +20,16 @@
 
 #include "graphics/Color.h"
 #include "graphics/RenderableObject.h"
+#include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
+#include "maths/BoundingBoxAligned.h"
 #include "maths/BoundingBoxOriented.h"
 #include "simulation2/helpers/Player.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <memory>
+#include <string>
 
 class CModelDummy;
 class CModel;

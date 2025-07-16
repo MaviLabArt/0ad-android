@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,20 +17,19 @@
 
 #include "precompiled.h"
 
-#include "graphics/Terrain.h"
+#include "Terrain.h"
 
+#include "graphics/MiniPatch.h"
 #include "graphics/Patch.h"
-#include "graphics/TerrainProperties.h"
-#include "graphics/TerrainTextureEntry.h"
-#include "graphics/TerrainTextureManager.h"
-#include "lib/sysdep/cpu.h"
+#include "graphics/RenderableObject.h"
+#include "maths/BoundingBoxAligned.h"
 #include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
-#include "ps/CLogger.h"
-#include "renderer/Renderer.h"
-#include "simulation2/helpers/Pathfinding.h"
 
-#include <string.h>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <iterator>
 
 ///////////////////////////////////////////////////////////////////////////////
 // CTerrain constructor
