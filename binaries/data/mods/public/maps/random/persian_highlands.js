@@ -61,7 +61,7 @@ export function* generateMap(mapSettings)
 
 	const pattern = mapSettings.PlayerPlacement;
 	const teamDist = (pattern == "river") ? 0.50 : 0.35;
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			pattern,
 			fractionToTiles(teamDist),

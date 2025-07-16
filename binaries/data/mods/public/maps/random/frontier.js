@@ -29,7 +29,7 @@ export function* generateMap(mapSettings)
 	if (!mapSettings.Nomad)
 	{
 		createBases(
-			...playerPlacementByPattern(
+			playerPlacementByPattern(
 				mapSettings.PlayerPlacement,
 				fractionToTiles(randFloat(0.2, 0.35)),
 				fractionToTiles(randFloat(0.08, 0.1)),

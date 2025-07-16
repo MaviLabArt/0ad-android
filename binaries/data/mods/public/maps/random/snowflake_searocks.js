@@ -75,7 +75,7 @@ export function* generateMap(mapSettings)
 	const islandBetweenPlayerAndCenterRadius = 0.81;
 	const centralIslandRadius = 0.36;
 
-	const [playerIDs, playerPosition, playerAngle, startAngle] =
+	const { playerIDs, playerPosition, playerAngle, startAngle } =
 		playerPlacementCircle(fractionToTiles(0.35));
 
 	let numIslands = 0;

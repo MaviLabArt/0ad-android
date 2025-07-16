@@ -26,7 +26,7 @@ export function* generateMap(mapSettings)
 
 	const [playerIDs, playerPosition] =
 		createBases(
-			...playerPlacementByPattern(
+			playerPlacementByPattern(
 				"stronghold",
 				fractionToTiles(randFloat(0.2, 0.35)),
 				fractionToTiles(randFloat(0.05, 0.1)),

@@ -133,8 +133,8 @@ export function* generateMap(mapSettings)
 
 		if (!mapSettings.Nomad)
 		{
-			[playerIDs, playerPosition] =
-				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.6));
+			({ playerIDs, playerPosition } =
+				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.6)));
 			markPlayerArea("small");
 		}
 
@@ -180,8 +180,8 @@ export function* generateMap(mapSettings)
 
 		if (!mapSettings.Nomad)
 		{
-			[playerIDs, playerPosition] =
-				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.5));
+			({ playerIDs, playerPosition } =
+				playerPlacementRiver(startAngle + Math.PI / 2, fractionToTiles(0.5)));
 			markPlayerArea("large");
 		}
 
@@ -241,7 +241,8 @@ export function* generateMap(mapSettings)
 			g_StartingWalls = "towers";
 			g_StartingTreasures = true;
 
-			const [pIDs, islandPosition] = playerPlacementCircle(fractionToTiles(0.35));
+			const { "playerIDs": pIDs, "playerPosition": islandPosition } =
+				playerPlacementCircle(fractionToTiles(0.35));
 			if (!mapSettings.Nomad)
 			{
 				[playerIDs, playerPosition] = [pIDs, islandPosition];
@@ -322,7 +323,7 @@ export function* generateMap(mapSettings)
 			if (!mapSettings.Nomad)
 			{
 				g_Map.log("Ensuring player area");
-				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.25));
+				({ playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.25)));
 				markPlayerArea("small");
 
 				for (let i = 0; i < numPlayers; ++i)
@@ -394,9 +395,8 @@ export function* generateMap(mapSettings)
 			let startAngle;
 			if (!mapSettings.Nomad)
 			{
-				let playerAngle;
-				[playerIDs, playerPosition, playerAngle, startAngle] =
-					playerPlacementCircle(fractionToTiles(0.35));
+				({ playerIDs, playerPosition, startAngle } =
+					playerPlacementCircle(fractionToTiles(0.35)));
 				markPlayerArea("small");
 			}
 
@@ -559,7 +559,7 @@ export function* generateMap(mapSettings)
 
 			if (!mapSettings.Nomad)
 			{
-				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
+				({ playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.35)));
 				markPlayerArea("large");
 			}
 
@@ -587,12 +587,11 @@ export function* generateMap(mapSettings)
 				new MapBoundsPlacer(),
 				new ElevationPainter(heightLand));
 
-			let playerAngle;
 			let startAngle;
 			if (!mapSettings.Nomad)
 			{
-				[playerIDs, playerPosition, playerAngle, startAngle] =
-					playerPlacementCircle(fractionToTiles(0.35));
+				({ playerIDs, playerPosition, startAngle } =
+					playerPlacementCircle(fractionToTiles(0.35)));
 				markPlayerArea("small");
 			}
 			else
@@ -686,12 +685,11 @@ export function* generateMap(mapSettings)
 				new MapBoundsPlacer(),
 				new ElevationPainter(heightMountain));
 
-			let playerAngle;
 			let startAngle;
 			if (!mapSettings.Nomad)
 			{
-				[playerIDs, playerPosition, playerAngle, startAngle] =
-					playerPlacementCircle(fractionToTiles(0.35));
+				({ playerIDs, playerPosition, startAngle } =
+					playerPlacementCircle(fractionToTiles(0.35)));
 				markPlayerArea("small");
 			}
 			else
@@ -747,7 +745,7 @@ export function* generateMap(mapSettings)
 
 			if (!mapSettings.Nomad)
 			{
-				[playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
+				({ playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.35)));
 				markPlayerArea("small");
 			}
 		}

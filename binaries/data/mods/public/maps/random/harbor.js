@@ -34,7 +34,7 @@ export function* generateMap(mapSettings)
 	const startAngle = randomAngle();
 	const [playerIDs, playerPosition] =
 		createBases(
-			...playerPlacementByPattern(
+			playerPlacementByPattern(
 				"circle",
 				fractionToTiles(0.38),
 				fractionToTiles(0.05),

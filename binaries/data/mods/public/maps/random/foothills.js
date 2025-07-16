@@ -72,7 +72,7 @@ export function* generateMap(mapSettings)
 		"stronghold": 0.33
 	}[pattern];
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			pattern,
 			fractionToTiles(teamDist),

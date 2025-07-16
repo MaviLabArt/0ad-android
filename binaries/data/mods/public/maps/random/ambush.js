@@ -27,7 +27,7 @@ export function* generateMap(mapSettings)
 
 	const [playerIDs, playerPosition] =
 		createBases(
-			...playerPlacementByPattern(
+			playerPlacementByPattern(
 				mapSettings.PlayerPlacement,
 				fractionToTiles(randFloat(0.25, 0.35)),
 				fractionToTiles(randFloat(0.08, 0.1)),

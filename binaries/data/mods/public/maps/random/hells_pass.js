@@ -30,7 +30,7 @@ export function* generateMap(mapSettings)
 	const teamsArray = getTeamsArray();
 	const startAngle = randomAngle();
 	createBases(
-		...playerPlacementByPattern(
+		playerPlacementByPattern(
 			"groupedLines",
 			fractionToTiles(0.2),
 			fractionToTiles(0.08),

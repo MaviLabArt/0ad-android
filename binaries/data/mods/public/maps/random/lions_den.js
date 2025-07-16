@@ -32,7 +32,7 @@ export function* generateMap(mapSettings)
 	yield 10;
 
 	createBases(
-		...playerPlacementByPattern(
+		playerPlacementByPattern(
 			"circle",
 			fractionToTiles(0.4),
 			fractionToTiles(randFloat(0.05, 0.1)),

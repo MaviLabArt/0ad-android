@@ -174,7 +174,8 @@ export function* generateMap(mapSettings)
 			[areaPassage]);
 	}
 
-	const [playerIDs, playerPosition] = playerPlacementRandom(sortAllPlayers(), avoidClasses(clRiver, 15, clPlayer, 30));
+	const { playerIDs, playerPosition } =
+		playerPlacementRandom(sortAllPlayers(), avoidClasses(clRiver, 15, clPlayer, 30));
 	placePlayerBases({
 		"PlayerPlacement": [playerIDs, playerPosition],
 		"BaseResourceClass": clBaseResource,

@@ -68,7 +68,7 @@ export function* generateMap(mapSettings)
 		{ "template": oStoneTreasure, "count": 2 }
 	];
 
-	const [playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
+	const { playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.35));
 
 	g_Map.log("Creating playerbases");
 	const playerAngle = BUILDING_ORIENTATION;

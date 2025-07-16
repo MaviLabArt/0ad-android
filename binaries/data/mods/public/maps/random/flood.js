@@ -79,7 +79,7 @@ export function* generateMap(mapSettings)
 	const mapCenter = g_Map.getCenter();
 
 	g_Map.log("Creating player islands...");
-	const [playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.38));
+	const { playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.38));
 
 	for (let i = 0; i < numPlayers; ++i)
 		createArea(

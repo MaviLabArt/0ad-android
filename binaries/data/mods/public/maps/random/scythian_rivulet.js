@@ -78,7 +78,7 @@ export function* generateMap(mapSettings)
 
 	const startAngle = randomAngle();
 
-	const [playerIDs, playerPosition] = playerPlacementRiver(startAngle, fractionToTiles(0.6));
+	const { playerIDs, playerPosition } = playerPlacementRiver(startAngle, fractionToTiles(0.6));
 
 	if (!mapSettings.Nomad)
 		for (const position of playerPosition)

@@ -78,7 +78,7 @@ export function* generateMap(mapSettings)
 
 	const playerHillRadius = defaultPlayerBaseRadius() / (mapSettings.Nomad ? 1.5 : 1);
 
-	const [playerIDs, playerPosition, playerAngle] = playerPlacementCircle(fractionToTiles(0.35));
+	const { playerIDs, playerPosition, playerAngle } = playerPlacementCircle(fractionToTiles(0.35));
 
 	g_Map.log("Creating player hills and ramps");
 	for (let i = 0; i < numPlayers; ++i)

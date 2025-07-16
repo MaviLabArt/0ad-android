@@ -52,7 +52,7 @@ export function* generateMap(mapSettings)
 	const clBaseResource = g_Map.createTileClass();
 	const clGrass = g_Map.createTileClass();
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			mapSettings.PlayerPlacement,
 			fractionToTiles(0.35),

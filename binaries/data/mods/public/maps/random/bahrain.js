@@ -154,7 +154,7 @@ export function* generateMap(mapSettings)
 	{
 		g_Map.log("Placing players");
 		const [playerIDs, playerPosition] = createBases(
-			...playerPlacementRandom(
+			playerPlacementRandom(
 				sortAllPlayers(),
 				[
 					avoidClasses(g_TileClasses.island, 5),

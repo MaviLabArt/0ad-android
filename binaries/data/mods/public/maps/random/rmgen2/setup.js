@@ -158,7 +158,7 @@ function createBasesByPattern(type, distance, groupedDistance, startAngle)
 {
 	error("createBasesByPattern() has been deprecated. Use playerPlacementByPattern() instead.");
 	return createBases(
-		...playerPlacementByPattern(
+		playerPlacementByPattern(
 			type,			// patternName
 			distance,		// distance
 			groupedDistance,
@@ -167,7 +167,7 @@ function createBasesByPattern(type, distance, groupedDistance, startAngle)
 		undefined);			// walls
 }
 
-export function createBases(playerIDs, playerPosition, walls)
+export function createBases({ playerIDs, playerPosition }, walls)
 {
 	g_Map.log("Creating bases");
 

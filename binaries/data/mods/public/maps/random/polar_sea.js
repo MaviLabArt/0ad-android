@@ -45,7 +45,7 @@ export function* generateMap(mapSettings)
 	const clBaseResource = g_Map.createTileClass();
 	const clArcticWolf = g_Map.createTileClass();
 
-	let [playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
+	let { playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.35));
 
 	const treasures = [{
 		"template": oWoodTreasure,

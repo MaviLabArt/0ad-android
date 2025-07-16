@@ -183,7 +183,7 @@ export function* generateMap(mapSettings)
 
 		if (players)
 		{
-			[playerIDs, playerPosition] = players;
+			({ playerIDs, playerPosition } = players);
 			break;
 		}
 

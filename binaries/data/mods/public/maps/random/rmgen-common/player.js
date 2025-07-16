@@ -133,7 +133,8 @@ function placePlayerBases(playerBaseArgs)
 {
 	g_Map.log("Creating playerbases");
 
-	const [playerIDs, playerPosition] = playerBaseArgs.PlayerPlacement;
+	const [playerIDs, playerPosition] = Array.isArray(playerBaseArgs.PlayerPlacement) ?
+		playerBaseArgs.PlayerPlacement : Object.values(playerBaseArgs.PlayerPlacement);
 
 	for (let i = 0; i < getNumPlayers(); ++i)
 	{
@@ -623,7 +624,7 @@ function playerPlacementByPattern(patternName, distance = undefined, groupedDist
 	switch (patternName)
 	{
 	case "circle":
-		return playerPlacementCircle(distance, angle, center).slice(0, 2);
+		return playerPlacementCircle(distance, angle, center);
 	case "river":
 		return playerPlacementRiver(angle, distance, center);
 	case "groupedLines":
@@ -644,7 +645,12 @@ function playerPlacementCircle(radius, startingAngle = undefined, center = undef
 {
 	const startAngle = startingAngle !== undefined ? startingAngle : randomAngle();
 	const [playerPosition, playerAngle] = distributePointsOnCircle(getNumPlayers(), startAngle, radius, center || g_Map.getCenter());
-	return [getPlayerIDs(), playerPosition.map(p => p.round()), playerAngle, startAngle];
+	return {
+		"playerIDs": getPlayerIDs(),
+		"playerPosition": playerPosition.map(p => p.round()),
+		"playerAngle": playerAngle,
+		"startAngle": startAngle
+	};
 }
 
 /**
@@ -778,7 +784,10 @@ function placeLine(teamsArray, distance, groupedDistance, startAngle)
 		}
 	}
 
-	return [playerIDs, playerPosition];
+	return {
+		"playerIDs": playerIDs,
+		"playerPosition": playerPosition
+	};
 }
 
 /**
@@ -821,7 +830,10 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 		}
 	}
 
-	return [playerIDs, playerPosition];
+	return {
+		"playerIDs": playerIDs,
+		"playerPosition": playerPosition
+	};
 }
 
 /**
@@ -919,7 +931,10 @@ function groupPlayersByArea(playerIDs, locations)
 		}
 	});
 
-	return [playerIDs, minLocations];
+	return {
+		"playerIDs": playerIDs,
+		"playerPosition": minLocations
+	};
 }
 
 /**

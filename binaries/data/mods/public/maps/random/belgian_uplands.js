@@ -200,7 +200,7 @@ export function* generateMap(mapSettings)
 	const lowerHeightLimit = terrainTypes[3].upperHeightLimit;
 	const upperHeightLimit = terrainTypes[6].upperHeightLimit;
 
-	const [playerIDs, playerPosition] = (() => {
+	const { playerIDs, playerPosition } = (() => {
 		while (true)
 		{
 			g_Map.log("Randomizing heightmap");

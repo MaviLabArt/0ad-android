@@ -24,7 +24,7 @@ export function* generateMap(mapSettings)
 	const teamsArray = getTeamsArray();
 	const startAngle = randomAngle();
 	createBases(
-		...playerPlacementByPattern(
+		playerPlacementByPattern(
 			"stronghold",
 			fractionToTiles(0.37),
 			fractionToTiles(0.04),
@@ -43,7 +43,7 @@ export function* generateMap(mapSettings)
 		rotation = 5/4 * Math.PI;
 
 	createBases(
-		...playerPlacementByPattern(
+		playerPlacementByPattern(
 			"stronghold",
 			fractionToTiles(0.15),
 			fractionToTiles(0.04),

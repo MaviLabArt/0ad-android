@@ -78,7 +78,7 @@ export function* generateMap(mapSettings)
 
 	const playerIslandRadius = scaleByMapSize(20, 29);
 
-	const [playerIDs, playerPosition, playerAngle] = playerPlacementCircle(fractionToTiles(0.35));
+	const { playerIDs, playerPosition, playerAngle } = playerPlacementCircle(fractionToTiles(0.35));
 
 	if (!mapSettings.Nomad)
 	{

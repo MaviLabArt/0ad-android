@@ -181,7 +181,7 @@ export function* generateMap(mapSettings)
 	{
 		g_Map.log("Finding player positions");
 
-		const [playerIDs, playerPosition] = playerPlacementRandom(
+		const { playerIDs, playerPosition } = playerPlacementRandom(
 			sortAllPlayers(),
 			[
 				avoidClasses(g_TileClasses.mountain, 5),

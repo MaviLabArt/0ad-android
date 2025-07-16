@@ -79,7 +79,7 @@ export function* generateMap(mapSettings)
 
 	const oasisRadius = scaleByMapSize(14, 40);
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			mapSettings.PlayerPlacement,
 			fractionToTiles(0.35),

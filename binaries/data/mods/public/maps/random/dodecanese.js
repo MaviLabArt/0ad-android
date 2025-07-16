@@ -112,7 +112,7 @@ export function* generateMap(mapSettings)
 	const bridgeLength = 16;
 	const maxBridges = scaleByMapSize(2, 12);
 
-	const [playerIDs, playerPosition] = playerPlacementRandom(sortAllPlayers());
+	const { playerIDs, playerPosition } = playerPlacementRandom(sortAllPlayers());
 
 	g_Map.log("Creating player islands");
 	for (const position of playerPosition)

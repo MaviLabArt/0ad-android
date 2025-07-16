@@ -104,7 +104,7 @@ export function* generateMap(mapSettings)
 			}
 		}
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			mapSettings.PlayerPlacement,
 			fractionToTiles(0.35),

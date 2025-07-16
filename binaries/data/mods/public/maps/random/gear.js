@@ -82,7 +82,7 @@ export function* generateMap(mapSettings)
 	const radiusCentralIsland = fractionToTiles(0.14);
 	const radiusCentralHill = fractionToTiles(0.12);
 
-	const [playerIDs, playerPosition, playerAngle, startAngle] = playerPlacementCircle(radiusPlayers);
+	const { playerIDs, playerPosition, playerAngle, startAngle } = playerPlacementCircle(radiusPlayers);
 
 	g_Map.log("Determining number of rivers between players");
 	let split = 1;

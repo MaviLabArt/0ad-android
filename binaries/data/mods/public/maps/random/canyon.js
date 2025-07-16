@@ -73,7 +73,7 @@ export function* generateMap(mapSettings)
 
 	const playerCanyonRadius = scaleByMapSize(18, 32);
 
-	const [playerIDs, playerPosition] = playerPlacementCircle(fractionToTiles(0.35));
+	const { playerIDs, playerPosition } = playerPlacementCircle(fractionToTiles(0.35));
 
 	g_Map.log("Reserving space for the players, their initial forests and some less space therein " +
 		"without trees");

@@ -60,7 +60,7 @@ export function* generateMap(mapSettings)
 	const clBaseResource = g_Map.createTileClass();
 	const clTreasure = g_Map.createTileClass();
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			mapSettings.PlayerPlacement,
 			fractionToTiles(0.35),

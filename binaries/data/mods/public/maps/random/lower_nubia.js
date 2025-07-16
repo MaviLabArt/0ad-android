@@ -211,8 +211,8 @@ export function* generateMap(mapSettings)
 	if (!mapSettings.Nomad)
 	{
 		g_Map.log("Finding player locations");
-		[playerIDs, playerPosition] = playerPlacementRandom(sortAllPlayers(),
-			avoidClasses(clWater, scaleByMapSize(8, 12), clCliff, scaleByMapSize(8, 12)));
+		({ playerIDs, playerPosition } = playerPlacementRandom(sortAllPlayers(),
+			avoidClasses(clWater, scaleByMapSize(8, 12), clCliff, scaleByMapSize(8, 12))));
 
 		g_Map.log("Flatten the initial CC area");
 		for (const position of playerPosition)

@@ -79,7 +79,7 @@ export function* generateMap(mapSettings)
 		]);
 	yield 10;
 
-	const [playerIDs, playerPosition, playerAngle, startAngle] =
+	const { playerIDs, playerPosition, playerAngle, startAngle } =
 		playerPlacementCircle(fractionToTiles(0.3));
 	const halfway = distributePointsOnCircle(numPlayers, startAngle, fractionToTiles(0.375), mapCenter)[0]
 		.map(v => v.round());

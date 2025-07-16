@@ -86,7 +86,7 @@ export function* generateMap(mapSettings)
 			new TileClassPainter(clLand)
 		]);
 
-	const [playerIDs, playerPosition] =
+	const { playerIDs, playerPosition } =
 		playerPlacementByPattern(
 			mapSettings.PlayerPlacement,
 			fractionToTiles(0.25),
