@@ -21,8 +21,9 @@
 
 #include "graphics/MapReader.h"
 #include "graphics/Terrain.h"
-#include "lib/timer.h"
 #include "lib/file/vfs/vfs_util.h"
+#include "lib/sysdep/filesystem.h"
+#include "lib/timer.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"

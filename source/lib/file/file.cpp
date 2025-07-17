@@ -31,10 +31,12 @@
 #include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "lib/file/common/file_stats.h"
+#include "lib/posix/posix_filesystem.h"
 #include "lib/posix/posix_types.h"
 #include "lib/sysdep/filesystem.h"
 
 #include <cerrno>
+#include <fcntl.h>
 
 static const StatusDefinition fileStatusDefinitions[] = {
 	{ ERR::FILE_ACCESS, L"Insufficient access rights to open file", EACCES },

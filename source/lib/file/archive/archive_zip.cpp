@@ -54,6 +54,7 @@
 #include <cstring>
 #include <ctime>
 #include <exception>
+#include <fcntl.h>
 #include <memory>
 #include <string>
 

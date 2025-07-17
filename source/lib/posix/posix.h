@@ -60,11 +60,12 @@ need only be renamed (e.g. _open, _stat).
 #ifndef INCLUDED_POSIX
 #define INCLUDED_POSIX
 
+#include "lib/sysdep/compiler.h"
+#include "lib/sysdep/os.h"
+
 #if OS_WIN
 # include "lib/sysdep/os/win/wposix/wposix.h"
 #endif
-
-#include "lib/posix/posix_types.h"
 
 // disabled to reduce dependencies. include them where needed.
 //#include "lib/posix/posix_aio.h"

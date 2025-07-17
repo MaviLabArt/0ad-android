@@ -28,8 +28,8 @@
 #define INCLUDED_STREAM
 
 #include "lib/code_annotation.h"
-#include "lib/debug.h"
 #include "lib/file/archive/codec.h"
+#include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstddef>

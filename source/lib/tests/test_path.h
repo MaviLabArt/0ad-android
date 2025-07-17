@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,8 +22,11 @@
 
 #include "lib/self_test.h"
 
-#include "lib/path.h"
 #include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/sysdep/os.h"
+
+#include <string>
 
 class TestPath : public CxxTest::TestSuite
 {

@@ -24,7 +24,7 @@
 #define INCLUDED_HASH
 
 #include <cstddef>
-#include <memory>
+#include <functional>
 
 /**
  * This function is the same as hash_combine, i.e. allows dropping the boost dependency just for this function.

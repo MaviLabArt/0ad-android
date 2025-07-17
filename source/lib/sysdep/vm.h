@@ -31,6 +31,7 @@
 #include "lib/alignment.h"
 #include "lib/posix/posix_mman.h"	// PROT_*
 
+#include <cstddef>
 #include <cstdint>
 
 namespace vm {

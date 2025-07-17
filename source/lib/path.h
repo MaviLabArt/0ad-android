@@ -44,8 +44,11 @@
 
 #include <algorithm>
 #include <cstring>
+#include <cwchar>
 #include <filesystem>
-#include <functional>
+#include <istream>
+#include <string>
+#include <string_view>
 
 namespace ERR
 {

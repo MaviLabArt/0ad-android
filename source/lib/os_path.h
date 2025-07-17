@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,7 +23,13 @@
 #ifndef INCLUDED_OS_PATH
 #define INCLUDED_OS_PATH
 
+#include "lib/debug.h"
 #include "lib/path.h"
+#include "lib/sysdep/os.h"
+
+#include <climits>
+#include <cstddef>
+#include <string>
 
 // rationale:
 // users are responsible for ensuring the path doesn't contain any forbidden

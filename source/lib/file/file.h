@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,7 +28,9 @@
 #define INCLUDED_FILE
 
 #include "lib/os_path.h"
-#include "lib/sysdep/filesystem.h"	// O_*, S_*
+#include "lib/status.h"
+
+#include <memory>
 
 namespace ERR
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,8 +23,8 @@
 #ifndef INCLUDED_ALLOCATORS_OVERRUN_PROTECTOR
 #define INCLUDED_ALLOCATORS_OVERRUN_PROTECTOR
 
+#include "lib/code_annotation.h"
 #include "lib/config2.h"	// CONFIG2_ALLOCATORS_OVERRUN_PROTECTION
-#include "lib/sysdep/vm.h"
 
 /**
 OverrunProtector wraps an arbitrary object in isolated page(s) and

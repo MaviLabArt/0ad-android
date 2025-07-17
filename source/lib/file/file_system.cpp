@@ -28,12 +28,18 @@
 
 #include "lib/debug.h"
 #include "lib/file/file_system.h"
-
+#include "lib/posix/posix_filesystem.h"
 #include "lib/sysdep/filesystem.h"
+#include "lib/sysdep/os.h"
 
 #include <boost/filesystem.hpp>
 #include <boost/version.hpp>
+#include <cerrno>
+#include <cstring>
 #include <memory>
+#include <string>
+
+struct WDIR;
 
 bool DirectoryExists(const OsPath& path)
 {

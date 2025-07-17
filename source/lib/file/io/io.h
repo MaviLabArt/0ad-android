@@ -36,6 +36,8 @@
 #include "lib/lib.h"
 #include "lib/os_path.h"
 #include "lib/posix/posix_aio.h"	// LIO_READ, LIO_WRITE
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
 #include "lib/sysdep/filesystem.h"	// wtruncate
 #include "lib/sysdep/os.h"
 #include "lib/sysdep/rtl.h"
@@ -44,6 +46,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include <fcntl.h>
 #include <memory>
 
 namespace ERR

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,9 +22,15 @@
 
 #include "lib/self_test.h"
 
-#include "lib/file/vfs/vfs_util.h"
 #include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/types.h"
+
+#include <memory>
 
 static OsPath MOD_PATH(DataDir() / "mods" / "_test.vfs" / "");
 static OsPath CACHE_PATH(DataDir() / "_testcache" / "");

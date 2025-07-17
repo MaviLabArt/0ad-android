@@ -24,8 +24,11 @@
 #define INCLUDED_ALLOCATORS_ALLOCATOR_CHECKER
 
 #include "lib/debug.h"
+#include "lib/status.h"
 
+#include <cstddef>
 #include <map>
+#include <utility>
 
 /**
  * allocator test rig.

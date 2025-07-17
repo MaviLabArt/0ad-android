@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,13 +25,16 @@
  */
 
 #include "precompiled.h"
+
 #include "input.h"
 
+#include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/status.h"
 
+#include <SDL_events.h>
+#include <cstddef>
 #include <list>
-#include <stdio.h>
-#include <stdlib.h>
 
 const size_t MAX_HANDLERS = 10;
 static InHandler handler_stack[MAX_HANDLERS];

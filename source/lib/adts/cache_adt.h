@@ -28,12 +28,16 @@
 #define INCLUDED_CACHE_ADT
 
 #include "lib/debug.h"
+#include "lib/status.h"
 
 #include <algorithm>
 #include <cfloat>
+#include <cstddef>
 #include <list>
 #include <queue> // std::priority_queue
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
 /*
 Cache for items of variable size and value/"cost".

@@ -23,11 +23,12 @@
 #ifndef INCLUDED_STATELESS_ALLOCATORS
 #define INCLUDED_STATELESS_ALLOCATORS
 
+#include "lib/alignment.h"
+#include "lib/posix/posix_mman.h"
 #include "lib/sysdep/rtl.h"
 #include "lib/sysdep/vm.h"
 
 #include <cstdlib>
-#include <memory>
 
 // NB: STL allocators are parameterized on the object type and indicate
 // the number of elements to [de]allocate. however, these adapters are

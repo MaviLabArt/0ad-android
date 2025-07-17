@@ -37,6 +37,7 @@
 #include "lib/file/vfs/vfs_tree.h"
 #include "lib/os_path.h"
 #include "lib/path.h"
+#include "lib/posix/posix_filesystem.h"
 #include "lib/posix/posix_types.h"
 #include "lib/sysdep/filesystem.h"
 

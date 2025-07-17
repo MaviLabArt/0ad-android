@@ -22,10 +22,17 @@
 
 #include "lib/self_test.h"
 
+#include "lib/code_annotation.h"
 #include "lib/file/common/file_loader.h"
 #include "lib/file/vfs/vfs.h"
 #include "lib/file/vfs/vfs_lookup.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_tree.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
+
+#include <cstddef>
 
 class MockLoader : public IFileLoader
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,8 +27,14 @@
 #ifndef INCLUDED_VFS_UTIL
 #define INCLUDED_VFS_UTIL
 
-#include "lib/os_path.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+
+#include <cstddef>
+#include <cstdint>
 
 namespace vfs {
 

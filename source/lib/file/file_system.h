@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,7 +28,11 @@
 #define INCLUDED_FILE_SYSTEM
 
 #include "lib/os_path.h"
-#include "lib/posix/posix_filesystem.h"	// mode_t
+#include "lib/path.h"
+#include "lib/posix/posix_filesystem.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/types.h"
 
 #include <vector>
 

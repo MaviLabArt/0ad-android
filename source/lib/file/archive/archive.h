@@ -31,13 +31,14 @@
 #include "lib/file/file_system.h"	// FileInfo
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/os_path.h"
-#include "lib/path.h"
 #include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstdint>
 #include <ctime>
 #include <memory>
+
+class Path;
 
 // rationale: this module doesn't build a directory tree of the entries
 // within an archive. that task is left to the VFS; here, we are only

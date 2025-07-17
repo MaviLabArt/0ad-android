@@ -26,12 +26,26 @@
 
 #include "precompiled.h"
 
-#include "lib/byte_order.h"
-#include "lib/bits.h"
-#include "lib/timer.h"
-#include "lib/allocators/shared_ptr.h"
 #include "tex_codec.h"
 
+#include "lib/alignment.h"
+#include "lib/allocators/shared_ptr.h"
+#include "lib/bits.h"
+#include "lib/byte_order.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/lib.h"
+#include "lib/os_path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/tex/tex.h"
+#include "lib/tex/tex_internal.h"
+#include "lib/timer.h"
+#include "lib/types.h"
+
+#include <algorithm>
+#include <cstdlib>
+#include <memory>
 
 // NOTE: the convention is bottom-up for DDS, but there's no way to tell.
 

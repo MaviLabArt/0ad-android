@@ -26,12 +26,26 @@
 
 #include "precompiled.h"
 
-#include "lib/external_libraries/png.h"
-
-#include "lib/byte_order.h"
 #include "tex_codec.h"
+
+#include "lib/alignment.h"
+#include "lib/allocators/dynarray.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/byte_order.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/external_libraries/png.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/tex/tex.h"
 #include "lib/timer.h"
+#include "lib/types.h"
+
+#include <csetjmp>
+#include <cstring>
+#include <memory>
+#include <vector>
 
 #if MSC_VERSION
 

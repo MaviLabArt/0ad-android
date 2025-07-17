@@ -25,19 +25,29 @@
  */
 
 #include "precompiled.h"
-#include "lib/sysdep/smbios.h"
 
-#include "lib/bits.h"
+#include "smbios.h"
+
 #include "lib/alignment.h"
-#include "lib/byte_order.h"	// FOURCC_BE
+#include "lib/bits.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/module_init.h"
+#include "lib/posix/posix.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
 
 #if OS_WIN
-# include "lib/sysdep/os/win/wutil.h"
+# include "lib/byte_order.h"
 # include "lib/sysdep/os/win/wfirmware.h"
+# include "lib/sysdep/os/win/wutil.h"
 #endif
 
+#include <cinttypes>
+#include <cstdlib>
 #include <cstring>
+#include <limits>
 #include <sstream>
 #include <vector>
 

@@ -24,8 +24,9 @@
 #define INCLUDED_WRITE_BUFFER
 
 #include "lib/code_annotation.h"
-#include "lib/debug.h"
 #include "lib/file/file.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstddef>

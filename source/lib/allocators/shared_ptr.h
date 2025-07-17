@@ -24,7 +24,7 @@
 #define INCLUDED_ALLOCATORS_SHARED_PTR
 
 #include "lib/alignment.h"
-#include "lib/status.h"
+#include "lib/debug.h"
 #include "lib/sysdep/rtl.h" // rtl_AllocateAligned
 #include "lib/types.h"
 

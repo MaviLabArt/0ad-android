@@ -24,7 +24,10 @@
 #define INCLUDED_ALLOCATORS_DYNAMIC_ARENA
 
 #include "lib/bits.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 
+#include <cstdint>
 #include <cstdlib>
 #include <new> // bad_alloc
 #include <utility>

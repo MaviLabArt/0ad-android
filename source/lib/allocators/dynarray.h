@@ -27,7 +27,7 @@
 #ifndef INCLUDED_ALLOCATORS_DYNARRAY
 #define INCLUDED_ALLOCATORS_DYNARRAY
 
-#include "lib/debug.h"
+#include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstddef>

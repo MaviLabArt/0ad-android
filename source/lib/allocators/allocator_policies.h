@@ -29,9 +29,15 @@
 
 #include "lib/alignment.h"	// pageSize
 #include "lib/allocators/stateless_allocators.h"
-#include "lib/allocators/freelist.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/sysdep/vm.h"
 
+#include <algorithm>
+#include <cstdint>
 #include <cstring>
+#include <limits>
+#include <utility>
 
 namespace Allocators {
 

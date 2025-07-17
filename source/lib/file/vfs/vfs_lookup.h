@@ -27,8 +27,8 @@
 #ifndef INCLUDED_VFS_LOOKUP
 #define INCLUDED_VFS_LOOKUP
 
-#include "lib/debug.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
 
 #include <cstddef>
 

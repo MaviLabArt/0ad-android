@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,8 +22,9 @@
 #include "lib/timer.h"
 #include "lib/utf8.h"
 #include "lib/allocators/shared_ptr.h"
-#include "lib/file/file_system.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/file/file_system.h"
+#include "lib/sysdep/filesystem.h"
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"

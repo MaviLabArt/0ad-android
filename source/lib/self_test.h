@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,11 +23,14 @@
 #ifndef INCLUDED_SELF_TEST
 #define INCLUDED_SELF_TEST
 
-// for convenience, to avoid having to include all of these manually
 #include "lib/lib.h"
 #include "lib/os_path.h"
-#include "lib/status.h"
-#include "lib/posix/posix.h"
+#include "lib/self_test.h"
+
+#include <cstddef>
+#include <sstream>
+#include <string>
+#include <vector>
 
 #define CXXTEST_HAVE_EH
 #define CXXTEST_HAVE_STD

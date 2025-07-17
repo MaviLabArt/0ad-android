@@ -22,9 +22,15 @@
 
 #include "lib/self_test.h"
 
+#include "lib/debug.h"
 #include "lib/secure_crt.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
 
+#include <cerrno>
+#include <cstdarg>
 #include <cstring>
+#include <cwchar>
 
 // note: we only test the char version. this avoids having to
 // expose secure_crt.cpp's tchar / tcpy etc. macros in the header and/or

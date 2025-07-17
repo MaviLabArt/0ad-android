@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,8 +27,9 @@
 #ifndef INCLUDED_INPUT
 #define INCLUDED_INPUT
 
-
 #include "lib/external_libraries/libsdl_fwd.h"
+
+struct SDL_Event_;
 
 // input handler return values.
 enum InReaction

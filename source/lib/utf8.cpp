@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,7 +22,13 @@
 
 #include "precompiled.h"
 
-#include "lib/utf8.h"
+#include "utf8.h"
+
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+
+#include <cstddef>
 
 static const StatusDefinition utf8StatusDefinitions[] = {
 	{ ERR::UTF8_SURROGATE, L"UTF-16 surrogate pairs aren't supported" },

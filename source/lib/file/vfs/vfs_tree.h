@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -29,10 +29,12 @@
 
 #include <map>
 
-#include "lib/file/file_system.h"	// CFileInfo
 #include "lib/file/common/file_loader.h"	// PIFileLoader
 #include "lib/file/common/real_directory.h"	// PRealDirectory
 #include "lib/file/vfs/vfs_path.h"
+
+#include <ctime>
+#include <string>
 
 class VfsFile
 {

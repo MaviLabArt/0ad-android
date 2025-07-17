@@ -27,9 +27,7 @@
 #ifndef INCLUDED_FILE_STATS
 #define INCLUDED_FILE_STATS
 
-#include "lib/code_annotation.h"
-
-#include <sys/types.h>
+#include "lib/posix/posix_types.h"
 
 #define FILE_STATS_ENABLED 0
 

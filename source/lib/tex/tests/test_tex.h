@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,11 +22,12 @@
 
 #include "lib/self_test.h"
 
-#include "lib/tex/tex.h"
-#include "lib/tex/tex_codec.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/tex/tex.h"
+#include "lib/types.h"
 
 #include <cstring>
+#include <memory>
 
 class TestTex : public CxxTest::TestSuite
 {

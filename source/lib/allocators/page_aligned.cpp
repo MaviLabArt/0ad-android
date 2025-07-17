@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,10 +21,14 @@
  */
 
 #include "precompiled.h"
-#include "lib/allocators/page_aligned.h"
+
+#include "page_aligned.h"
 
 #include "lib/alignment.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_mman.h"
 
+#include <cerrno>
 
 //-----------------------------------------------------------------------------
 

@@ -31,6 +31,7 @@
 #include "ps/CStr.h"
 
 #include <array>
+#include <functional>
 #include <map>
 #include <memory>
 #include <mutex>

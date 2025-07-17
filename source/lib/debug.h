@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -38,11 +38,12 @@
 
 #include "lib/alignment.h"
 #include "lib/code_annotation.h"
-#include "lib/code_generation.h"
 #include "lib/status.h"
+#include "lib/sysdep/compiler.h"
 #include "lib/types.h"
 
 #include <atomic>
+#include <cstddef>
 
 /**
  * trigger a breakpoint when reached/"called".

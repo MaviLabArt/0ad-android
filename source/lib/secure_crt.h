@@ -29,8 +29,11 @@
 
 #include "lib/code_annotation.h"
 #include "lib/status.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/sysdep/os.h"
 
 #include <cstdarg>
+#include <cstddef>
 
 namespace ERR
 {

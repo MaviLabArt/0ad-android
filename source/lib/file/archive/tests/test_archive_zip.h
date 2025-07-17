@@ -22,11 +22,16 @@
 
 #include "lib/self_test.h"
 
+#include "lib/file/archive/archive.h"
 #include "lib/file/archive/archive_zip.h"
 #include "lib/file/file_system.h"
 #include "lib/file/io/io.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
 #include "lib/status.h"
 
+#include <cstdint>
 #include <iterator>
 #include <string>
 

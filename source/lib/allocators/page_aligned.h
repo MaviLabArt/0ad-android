@@ -23,8 +23,7 @@
 #ifndef INCLUDED_ALLOCATORS_PAGE_ALIGNED
 #define INCLUDED_ALLOCATORS_PAGE_ALIGNED
 
-#include "lib/posix/posix_mman.h"        // PROT_*
-#include "lib/debug.h"
+#include "lib/status.h"
 #include "lib/types.h"
 
 #include <cstddef>
