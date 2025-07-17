@@ -29,8 +29,6 @@
 #include "lib/timer.h"
 #include "maths/MathUtil.h"
 
-#include <boost/random/uniform_int_distribution.hpp>
-
 namespace
 {
 /**
@@ -594,7 +592,7 @@ std::set<CStr> CObjectBase::CalculateRandomRemainingSelections(rng_t& rng, const
 
 				// Choose a random number in the interval [0..totalFreq) to choose one of the variants.
 				// If the diversity is "none", force 0 to return the first valid variant.
-				int randNum = diversity == CObjectManager::VariantDiversity::NONE ? 0 : boost::random::uniform_int_distribution<int>(0, totalFreq-1)(rng);
+				int randNum = diversity == CObjectManager::VariantDiversity::NONE ? 0 : std::uniform_int_distribution<int>(0, totalFreq - 1)(rng);
 				for (size_t i = 0; i < grp->size(); ++i)
 				{
 					randNum -= (allZero ? 1 : (*grp)[i].m_Frequency);

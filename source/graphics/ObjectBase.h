@@ -28,9 +28,9 @@ class CObjectManager;
 class CXeromyces;
 class XMBElement;
 
-#include <boost/random/mersenne_twister.hpp>
 #include <map>
 #include <memory>
+#include <random>
 #include <set>
 #include <unordered_set>
 #include <vector>
@@ -185,7 +185,7 @@ private:
 	// A low-quality RNG like rand48 causes visible non-random patterns (particularly
 	// in large grids of the same actor with consecutive seeds, e.g. forests),
 	// so use a better one that appears to avoid those patterns
-	using rng_t = boost::mt19937;
+	using rng_t = std::mt19937;
 	std::set<CStr> CalculateRandomRemainingSelections(rng_t& rng, const std::vector<std::set<CStr>>& initialSelections) const;
 
 	/**

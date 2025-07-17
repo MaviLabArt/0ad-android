@@ -40,11 +40,9 @@
 #include "renderer/backend/Sampler.h"
 
 #include <algorithm>
-#include <boost/random/uniform_real_distribution.hpp>
 #include <cmath>
 #include <cstddef>
 #include <map>
-
 
 /**
  * Interface for particle state variables, which get evaluated for each newly
@@ -133,7 +131,7 @@ public:
 
 	virtual float Compute(CParticleEmitterType& type, CParticleEmitter&)
 	{
-		return boost::random::uniform_real_distribution<float>(m_Min, m_Max)(type.m_Manager.m_RNG);
+		return std::uniform_real_distribution<float>(m_Min, m_Max)(type.m_Manager.m_RNG);
 	}
 
 	virtual float Min(CParticleEmitterType&)

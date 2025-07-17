@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@
 #include "graphics/ParticleEmitter.h"
 #include "graphics/ParticleEmitterType.h"
 
-#include <boost/random/mersenne_twister.hpp>
 #include <list>
+#include <random>
 #include <unordered_map>
 
 class SceneCollector;
@@ -55,7 +55,7 @@ public:
 	Status ReloadChangedFile(const VfsPath& path);
 
 	/// Random number generator shared between all particle emitters.
-	boost::mt19937 m_RNG;
+	std::mt19937 m_RNG;
 
 private:
 	float m_CurrentTime;

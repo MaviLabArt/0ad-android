@@ -22,9 +22,7 @@
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpVision.h"
 
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_real_distribution.hpp>
-
+#include <random>
 #include <optional>
 
 class MockVisionRgm : public ICmpVision
@@ -175,11 +173,11 @@ public:
 		{ CMessagePositionChanged msg(100, true, entity_pos_t::FromInt(348), entity_pos_t::FromInt(83), entity_angle_t::Zero()); cmp->HandleMessage(msg, false); }
 		cmp->Verify();
 
-		boost::mt19937 rng;
+		std::mt19937 rng;
 		for (size_t i = 0; i < 1024; ++i)
 		{
-			double x = boost::random::uniform_real_distribution<double>(0.0, 512.0)(rng);
-			double z = boost::random::uniform_real_distribution<double>(0.0, 512.0)(rng);
+			double x = std::uniform_real_distribution<double>(0.0, 512.0)(rng);
+			double z = std::uniform_real_distribution<double>(0.0, 512.0)(rng);
 			{ CMessagePositionChanged msg(100, true, entity_pos_t::FromDouble(x), entity_pos_t::FromDouble(z), entity_angle_t::Zero()); cmp->HandleMessage(msg, false); }
 			cmp->Verify();
 		}
