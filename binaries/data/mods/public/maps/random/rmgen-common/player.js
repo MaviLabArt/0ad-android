@@ -804,6 +804,9 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 
 	const playerIDs = [];
 	const playerPosition = [];
+	const teamPositions = [];
+	const teamAngles = [];
+	const strongholdRadius = [];
 
 	for (let i = 0; i < teamsArray.length; ++i)
 	{
@@ -828,11 +831,17 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 			playerIDs.push(teamsArray[i][p]);
 			playerPosition.push(Vector2D.add(teamPosition, new Vector2D(teamGroupDistance, 0).rotate(-angle)).round());
 		}
+		teamPositions.push(teamPosition);
+		teamAngles.push(teamAngle);
+		strongholdRadius.push(teamGroupDistance);
 	}
 
 	return {
 		"playerIDs": playerIDs,
-		"playerPosition": playerPosition
+		"playerPosition": playerPosition,
+		"teamPosition": teamPositions,
+		"teamAngle": teamAngles,
+		"strongholdRadius": strongholdRadius
 	};
 }
 

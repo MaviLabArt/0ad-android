@@ -6,6 +6,10 @@
 		"SupportedBiomes": "generic/",
 		"Keywords": ["multiplayer"],
 		"Preview" : "cantabrian_highlands.png",
-		"CircularMap" : true
+		"CircularMap" : true,
+		"PlayerPlacements": [
+			"circle",
+			"stronghold"
+		]
 	}
 }

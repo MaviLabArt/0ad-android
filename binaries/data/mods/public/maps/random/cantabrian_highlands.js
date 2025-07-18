@@ -78,25 +78,27 @@ export function* generateMap(mapSettings)
 
 	const playerHillRadius = defaultPlayerBaseRadius() / (mapSettings.Nomad ? 1.5 : 1);
 
-	const { playerIDs, playerPosition, playerAngle } = playerPlacementCircle(fractionToTiles(0.35));
+	const startingPlacement = playerPlacementByPattern(mapSettings.PlayerPlacement,
+		fractionToTiles(0.35), fractionToTiles(0.02) + 7, 0);
 
 	g_Map.log("Creating player hills and ramps");
-	for (let i = 0; i < numPlayers; ++i)
+	const hillPositions = startingPlacement.teamPosition ?? startingPlacement.playerPosition;
+	const hillAngles = startingPlacement.teamAngle ?? startingPlacement.playerAngle;
+	for (let i = 0; i < hillPositions.length; ++i)
 	{
-		createArea(
-			new ClumpPlacer(diskArea(playerHillRadius), 0.95, 0.6, Infinity, playerPosition[i]),
+		const hillRadius = (startingPlacement.strongholdRadius?.[i] ?? 0) + playerHillRadius;
+		createArea(new ClumpPlacer(diskArea(hillRadius), 0.95, 0.6, Infinity, hillPositions[i]),
 			[
 				new LayeredPainter([tCliff, tHill], [2]),
 				new SmoothElevationPainter(ELEVATION_SET, heightHill, 2),
 				new TileClassPainter(clPlayer)
 			]);
 
-		const angle = playerAngle[i] + Math.PI * (1 + randFloat(-1, 1) / 8);
+		const angle = hillAngles[i] + Math.PI * (1 + randFloat(-1, 1) * fractionToTiles(0.005) / 8);
 		createPassage({
-			"start": Vector2D.add(playerPosition[i], new Vector2D(playerHillRadius + 15, 0)
-				.rotate(-angle)),
-			"end": Vector2D.add(playerPosition[i], new Vector2D(playerHillRadius - 3, 0)
-				.rotate(-angle)),
+			"start": Vector2D.add(hillPositions[i],
+				new Vector2D(hillRadius + 5 + fractionToTiles(0.02), 0).rotate(-angle)),
+			"end": Vector2D.add(hillPositions[i], new Vector2D(hillRadius - 3, 0).rotate(-angle)),
 			"startWidth": 10,
 			"endWidth": 10,
 			"smoothWidth": 2,
@@ -107,7 +109,7 @@ export function* generateMap(mapSettings)
 	}
 
 	placePlayerBases({
-		"PlayerPlacement": [playerIDs, playerPosition],
+		"PlayerPlacement": startingPlacement,
 		"PlayerTileClass": clPlayer,
 		"BaseResourceClass": clBaseResource,
 		"Walls": false,
