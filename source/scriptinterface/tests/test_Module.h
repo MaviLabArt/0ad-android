@@ -29,13 +29,13 @@
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
 
-#if OS_MAC || OS_MACOSX
+#if OS_MACOSX
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 #if OS_LINUX
 #include <cstdlib>
 #endif
-#if OS_WIN || OS_WIN64 || OS_MAC || OS_MACOSX
+#if OS_WIN || OS_WIN64 || OS_MACOSX
 #include <filesystem>
 #endif
 #include <fstream>
@@ -47,7 +47,7 @@ namespace
 {
 void ClearFromCache(const VfsPath& path)
 {
-#if OS_BSD && !(OS_MAC || OS_MACOSX)
+#if OS_BSD && !OS_MACOSX
 	TS_SKIP("On BSD hotload isn't implemented.");
 #endif
 
@@ -57,7 +57,7 @@ void ClearFromCache(const VfsPath& path)
 	PDirWatch dirWatch;
 	dir_watch_Add((file.Parent() / "").string8(), dirWatch);
 
-#if OS_WIN || OS_WIN64 || OS_MAC || OS_MACOSX
+#if OS_WIN || OS_WIN64 || OS_MACOSX
 	std::filesystem::last_write_time(file.string8(), std::filesystem::file_time_type::clock::now());
 #endif
 
@@ -71,7 +71,7 @@ void ClearFromCache(const VfsPath& path)
 	while (status == INFO::SKIPPED)
 	{
 		status = ReloadChangedFiles();
-#if OS_MAC || OS_MACOSX
+#if OS_MACOSX
 		// Console apps don't have a run loop, so we need to wait
 		// a bit for the file watcher to catch up.
 		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.1, true);

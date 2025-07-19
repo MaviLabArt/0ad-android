@@ -46,7 +46,7 @@
  **/
 #if OS_WIN
 extern bool ogl_Init(void* (load)(const char*), void* hdc);
-#elif !OS_MACOSX && !OS_MAC && !CONFIG2_GLES
+#elif !OS_MACOSX && !CONFIG2_GLES
 extern bool ogl_Init(void* (load)(const char*), void* display, int subsystem);
 #else
 extern bool ogl_Init(void* (load)(const char*));

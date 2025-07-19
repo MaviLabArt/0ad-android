@@ -34,7 +34,7 @@
 
 # if OS_WIN
 #  include <glad/wgl.h>
-# elif !OS_MACOSX && !OS_MAC
+# elif !OS_MACOSX
 #  include <SDL_syswm.h>
 #  if defined(SDL_VIDEO_DRIVER_X11)
 #   include <glad/glx.h>
@@ -220,7 +220,7 @@ bool ogl_HaveExtension(const char* ext)
 static int GLVersion;
 #if OS_WIN
 static int WGLVersion;
-#elif !CONFIG2_GLES && !OS_MACOSX && !OS_MAC
+#elif !CONFIG2_GLES && !OS_MACOSX
 #if defined(SDL_VIDEO_DRIVER_X11)
 static int GLXVersion;
 #endif
@@ -428,7 +428,7 @@ bool ogl_SquelchError(GLenum err_to_ignore)
 
 #if OS_WIN
 bool ogl_Init(void* (load)(const char*), void* hdc)
-#elif !CONFIG2_GLES && !OS_MACOSX && !OS_MAC
+#elif !CONFIG2_GLES && !OS_MACOSX
 bool ogl_Init(void* (load)(const char*), void* display, int subsystem)
 #else
 bool ogl_Init(void* (load)(const char*))
@@ -458,7 +458,7 @@ bool ogl_Init(void* (load)(const char*))
 		LOAD_ERROR("Failed to load WGL functions.");
 		return false;
 	}
-# elif !OS_MACOSX && !OS_MAC
+# elif !OS_MACOSX
 	const SDL_SYSWM_TYPE sysWMType = static_cast<SDL_SYSWM_TYPE>(subsystem);
 #  if defined(SDL_VIDEO_DRIVER_X11)
 	if (sysWMType == SDL_SYSWM_X11)
@@ -522,7 +522,7 @@ void ogl_SetVsyncEnabled(bool enabled)
 #if !CONFIG2_GLES && OS_WIN
 	if (ogl_HaveExtension("WGL_EXT_swap_control"))
 		wglSwapIntervalEXT(interval);
-#elif !CONFIG2_GLES && !OS_MACOSX && !OS_MAC
+#elif !CONFIG2_GLES && !OS_MACOSX
 #if defined(SDL_VIDEO_DRIVER_X11)
 	if (GLXVersion && ogl_HaveExtension("GLX_SGI_swap_control"))
 		glXSwapIntervalSGI(interval);

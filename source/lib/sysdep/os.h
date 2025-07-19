@@ -91,12 +91,6 @@
 #else
 # define OS_BEOS 0
 #endif
-// Mac OS 9 or below
-#if defined(macintosh)
-# define OS_MAC 1
-#else
-# define OS_MAC 0
-#endif
 // Amiga
 #if defined(AMIGA)
 # define OS_AMIGA 1
