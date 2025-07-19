@@ -63,7 +63,7 @@ public:
 		boost::filesystem::path components = pathname.string();
 		boost::filesystem::path::iterator it = components.begin();
 		std::advance(it, 2);
-		std::wstring dirname = GetWstringFromWpath(*it);
+		std::wstring dirname = it->wstring();
 
 		JS::RootedValue ai(rq.cx);
 		Script::CreateObject(rq, &ai);

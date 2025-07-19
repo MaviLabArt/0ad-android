@@ -803,9 +803,9 @@ public:
 			CTextureConverter::SettingsFile* f = GetSettingsFile(settingsPath);
 			if (f)
 				files.push_back(f);
-			p = p / GetWstringFromWpath(*it);
+			p = p / it->wstring();
 		}
-		return m_TextureConverter.ComputeSettings(GetWstringFromWpath(srcPath.filename()), files);
+		return m_TextureConverter.ComputeSettings(srcPath.filename().wstring(), files);
 	}
 
 	/**

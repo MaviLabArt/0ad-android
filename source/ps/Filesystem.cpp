@@ -25,8 +25,6 @@
 #include "ps/CStr.h"
 #include "ps/Profile.h"
 
-#include <boost/filesystem.hpp>
-
 PIVFS g_VFS;
 
 static std::vector<std::pair<FileReloadFunc, void*> > g_ReloadFuncs;
@@ -99,15 +97,6 @@ Status ReloadChangedFiles()
 		}
 	}
 	return INFO::OK;
-}
-
-std::wstring GetWstringFromWpath(const boost::filesystem::path& path)
-{
-#if BOOST_FILESYSTEM_VERSION == 3
-	return path.wstring();
-#else
-	return path.string();
-#endif
 }
 
 

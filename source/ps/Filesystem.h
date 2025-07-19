@@ -24,8 +24,6 @@
 #include "ps/CStrForward.h"
 #include "ps/Errors.h"
 
-#include <boost/filesystem.hpp>
-
 extern PIVFS g_VFS;
 
 extern bool VfsFileExists(const VfsPath& pathname);
@@ -55,11 +53,6 @@ void UnregisterFileReloadFunc(FileReloadFunc func, void* obj);
  * note: polling is much simpler than asynchronous notifications.
  **/
 extern Status ReloadChangedFiles();
-
-/**
- * Helper function to handle API differences between Boost Filesystem v2 and v3
- */
-std::wstring GetWstringFromWpath(const boost::filesystem::path& path);
 
 ERROR_GROUP(CVFSFile);
 ERROR_TYPE(CVFSFile, LoadFailed);
