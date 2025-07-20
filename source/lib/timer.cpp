@@ -140,12 +140,12 @@ double timer_Time()
 	ENSURE(start.tv_sec || start.tv_nsec);	// must have called timer_LatchStartTime first
 	struct timespec cur;
 	ENSURE(clock_gettime(CLOCK_MONOTONIC, &cur) == 0);
-	t = (cur.tv_sec - start.tv_sec) + (cur.tv_nsec - start.tv_nsec) * resolution;
+	t = (cur.tv_sec - start.tv_sec) + (cur.tv_nsec - start.tv_nsec) * 1e-9;
 #elif HAVE_GETTIMEOFDAY
 	ENSURE(start.tv_sec || start.tv_usec);	// must have called timer_LatchStartTime first
 	struct timeval cur;
 	ENSURE(gettimeofday(&cur, 0) == 0);
-	t = (cur.tv_sec - start.tv_sec) + (cur.tv_usec - start.tv_usec) * resolution;
+	t = (cur.tv_sec - start.tv_sec) + (cur.tv_usec - start.tv_usec) * 1e-6;
 #else
 # error "timer_Time: add timer implementation for this platform!"
 #endif
