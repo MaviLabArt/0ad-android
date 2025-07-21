@@ -73,7 +73,6 @@ public:
 		CConfigDB::Instance()->SetValueString(CFG_SYSTEM, "fonts.default", "LinBiolinum_Rah.ttf");
 		CConfigDB::Instance()->SetValueString(CFG_SYSTEM, "fonts.sans.regular", "LinBiolinum_Rah.ttf");
 		CConfigDB::Instance()->SetValueString(CFG_SYSTEM, "fonts.sans.bold", "LinBiolinum_RBah.ttf");
-		CConfigDB::Instance()->SetValueString(CFG_SYSTEM, "fonts.sans.italic", "LinBiolinum_RIah.ttf");
 		CConfigDB::Instance()->SetValueString(CFG_SYSTEM, "fonts.mono.regular", "DejaVuSansMono.ttf");
 
 		g_VideoMode.InitNonSDL();
@@ -341,8 +340,6 @@ public:
 
 	void test_regression_rP26522()
 	{
-		TS_ASSERT_OK(g_VFS->Mount(L"", DataDir() / "mods" / "mod" / "", VFS_MOUNT_MUST_EXIST));
-
 		CGUI gui{*g_ScriptContext};
 
 		const CStrW font{L"sans-bold-13"};
