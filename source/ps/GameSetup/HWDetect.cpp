@@ -18,41 +18,68 @@
 #include "precompiled.h"
 
 #include "lib/build_version.h"
+#include "lib/code_annotation.h"
+#include "lib/config2.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/path.h"
 #include "lib/posix/posix_utsname.h"
-#include "lib/timer.h"
+#include "lib/sysdep/arch.h"
+#include "lib/sysdep/compiler.h"
 #include "lib/sysdep/cpu.h"
 #include "lib/sysdep/numa.h"
+#include "lib/sysdep/os.h"
 #include "lib/sysdep/os_cpu.h"
 #include "lib/sysdep/smbios.h"
 #include "lib/sysdep/sysdep.h"	// sys_OpenFile
-#include "lib/utf8.h"
-#if CONFIG2_AUDIO
-#include "soundmanager/SoundManager.h"
-#endif
+#include "lib/timer.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/Config.h"
-#include "ps/Profile.h"
 #include "ps/Pyrogenesis.h"
-#include "ps/scripting/JSInterface_ConfigDB.h"
-#include "ps/scripting/JSInterface_Debug.h"
 #include "ps/UserReport.h"
 #include "ps/VideoMode.h"
+#include "ps/scripting/JSInterface_ConfigDB.h"
+#include "ps/scripting/JSInterface_Debug.h"
 #include "renderer/backend/IDevice.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
+#include "soundmanager/ISoundManager.h"
 
+#include <SDL_cpuinfo.h>
+#include <SDL_version.h>
+#include <SDL_video.h>
 #include <boost/version.hpp>
+#include <cstdio>
+#include <ctime>
+#include <cwchar>
 #include <fmt/format.h>
+#include <freetype/fttypes.h>
+#include <iterator>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <random>
+#include <sstream>
+#include <string>
+#include <thread>
+#include <vector>
 
 // FreeType headers might have an include order.
 #include <ft2build.h>
-#include <freetype/freetype.h>
+#include FT_FREETYPE_H
+
+#if ARCH_AMD64
+#include "lib/sysdep/arch/x86_x64/x86_x64.h"
+#endif
 
 #if OS_LINUX
 #include <fstream>
@@ -61,11 +88,6 @@
 #if CONFIG2_NVTT
 #include "nvtt/nvtt.h"
 #endif
-
-#include <random>
-#include <sstream>
-#include <string>
-#include <thread>
 
 namespace
 {

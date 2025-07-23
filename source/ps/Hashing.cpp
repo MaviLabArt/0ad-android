@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,10 +16,13 @@
  */
 #include "precompiled.h"
 
+#include "lib/debug.h"
 #include "ps/CStr.h"
 #include "ps/Util.h"
 
+#include <cstddef>
 #include <sodium.h>
+#include <string>
 
 CStr8 HashCryptographically(const CStr8& string, const CStr8& salt)
 {

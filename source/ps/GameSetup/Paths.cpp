@@ -16,18 +16,30 @@
  */
 
 #include "precompiled.h"
+
 #include "Paths.h"
 
+#include "lib/debug.h"
 #include "lib/file/file_system.h"
-#include "lib/sysdep/sysdep.h"	// sys_get_executable_name
+#include "lib/path.h"
+#include "lib/status.h"
 #include "lib/sysdep/filesystem.h"	// wrealpath
+#include "lib/sysdep/os.h"
+#include "lib/sysdep/sysdep.h"	// sys_get_executable_name
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/GameSetup/CmdLineArgs.h"
+
+#include <cerrno>
+#include <cstdlib>
+#include <string>
+
 #if OS_WIN
 # include "lib/sysdep/os/win/wutil.h"	// wutil_*Path
 #elif OS_MACOSX
 # include "lib/sysdep/os/osx/osx_paths.h"
 # include "lib/sysdep/os/osx/osx_bundle.h"
 #endif
-#include "ps/CLogger.h"
 
 
 Paths::Paths(const CmdLineArgs& args)

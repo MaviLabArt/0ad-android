@@ -19,8 +19,6 @@
 
 #include "Xeromyces.h"
 
-#include "RelaxNG.h"
-#include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "lib/file/vfs/vfs.h"
 #include "lib/path.h"
@@ -30,13 +28,13 @@
 #include "ps/CStr.h"
 #include "ps/CacheLoader.h"
 #include "ps/Filesystem.h"
+#include "ps/XML/RelaxNG.h"
 
 #include <cstring>
 #include <libxml/parser.h>
 #include <libxml/xmlerror.h>
 #include <libxml/xmlversion.h>
 #include <map>
-#include <memory>
 #include <mutex>
 #include <type_traits>
 #include <utility>

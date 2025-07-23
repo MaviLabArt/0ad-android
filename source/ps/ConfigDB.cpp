@@ -19,14 +19,23 @@
 
 #include "ConfigDB.h"
 
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/Filesystem.h"
 
+#include <algorithm>
 #include <boost/algorithm/string/predicate.hpp>
+#include <cstddef>
 #include <mutex>
+#include <sstream>
 #include <unordered_set>
 
 namespace

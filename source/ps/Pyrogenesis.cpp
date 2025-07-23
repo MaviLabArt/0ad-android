@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,12 +17,14 @@
 
 #include "precompiled.h"
 
-#include <cstdio>
-
 #include "Pyrogenesis.h"
 
-#include "lib/sysdep/sysdep.h"
 #include "lib/build_version.h"
+#include "lib/path.h"
+#include "lib/sysdep/sysdep.h"
+
+#include <cstdio>
+#include <cwchar>
 
 const char* engine_version = PYROGENESIS_VERSION;
 const char* main_window_name = "0 A.D.";

@@ -21,12 +21,15 @@
 
 #include "KeyName.h"
 
-#include "lib/external_libraries/libsdl.h"
 #include "ps/CStr.h"
 
+#include <SDL_keyboard.h>
+#include <SDL_keycode.h>
 #include <algorithm>
 #include <cstring>
+#include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 // Some scancodes <-> names that SDL doesn't recognise.

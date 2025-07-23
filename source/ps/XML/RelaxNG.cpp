@@ -19,7 +19,6 @@
 
 #include "RelaxNG.h"
 
-#include "lib/code_annotation.h"
 #include "lib/timer.h"
 #include "lib/types.h"
 #include "ps/CLogger.h"

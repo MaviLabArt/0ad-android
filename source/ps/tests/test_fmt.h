@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,9 +15,15 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <fmt/printf.h>
-
 #include "lib/self_test.h"
+
+#include "ps/CStr.h"
+
+#include <algorithm>
+#include <clocale>
+#include <cstdint>
+#include <fmt/printf.h>
+#include <string>
 
 class TestFmt : public CxxTest::TestSuite
 {

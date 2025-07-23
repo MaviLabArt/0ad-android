@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,6 +26,8 @@
 
 #ifndef INCLUDED_X86_X64
 #define INCLUDED_X86_X64
+
+#include "lib/sysdep/arch.h"
 
 #if !ARCH_X86_X64
 #error "including x86_x64.h without ARCH_X86_X64=1"

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,18 @@
 #include "CmdLineArgs.h"
 
 #include "lib/sysdep/sysdep.h"
+#include "ps/containers/Span.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 
 #include <algorithm>
-#include <iterator>
+#include <js/CallArgs.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
 #include <string_view>
 #include <unordered_map>
 

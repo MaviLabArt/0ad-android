@@ -20,32 +20,54 @@
 #include "CConsole.h"
 
 #include "graphics/Canvas2D.h"
+#include "graphics/Color.h"
 #include "graphics/FontMetrics.h"
 #include "graphics/TextRenderer.h"
 #include "gui/CGUI.h"
 #include "gui/GUIManager.h"
 #include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/external_libraries/libsdl.h"
+#include "lib/file/io/write_buffer.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/status.h"
 #include "lib/timer.h"
+#include "lib/types.h"
 #include "lib/utf8.h"
 #include "maths/MathUtil.h"
-#include "ps/CLogger.h"
+#include "maths/Rect.h"
+#include "maths/Vector2D.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 #include "ps/ConfigDB.h"
-#include "ps/CStrInternStatic.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/Globals.h"
 #include "ps/Hotkey.h"
+#include "ps/KeyName.h"
 #include "ps/Profile.h"
-#include "ps/Pyrogenesis.h"
 #include "ps/VideoMode.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <SDL_clipboard.h>
+#include <SDL_events.h>
+#include <SDL_keyboard.h>
+#include <SDL_keycode.h>
+#include <SDL_scancode.h>
+#include <SDL_stdinc.h>
 #include <algorithm>
 #include <cmath>
-#include <string_view>
+#include <cstring>
+#include <cwchar>
+#include <iterator>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <unordered_map>
+#include <utility>
 #include <vector>
-#include <wctype.h>
 
 namespace
 {

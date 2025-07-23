@@ -19,11 +19,19 @@
 
 #include "Filesystem.h"
 
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
 #include "lib/sysdep/dir_watch.h"
-#include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/Profile.h"
+
+#include <algorithm>
+#include <string>
+#include <utility>
+#include <vector>
 
 PIVFS g_VFS;
 

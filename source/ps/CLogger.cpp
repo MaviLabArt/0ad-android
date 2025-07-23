@@ -20,23 +20,27 @@
 #include "CLogger.h"
 
 #include "graphics/Canvas2D.h"
+#include "graphics/Color.h"
 #include "graphics/FontMetrics.h"
 #include "graphics/TextRenderer.h"
+#include "lib/debug.h"
 #include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/secure_crt.h"
 #include "lib/timer.h"
-#include "lib/utf8.h"
+#include "maths/Vector2D.h"
 #include "ps/CConsole.h"
 #include "ps/CStr.h"
-#include "ps/CStrInternStatic.h"
+#include "ps/CStrIntern.h"
 #include "ps/Profile.h"
 #include "ps/Pyrogenesis.h"
 
+#include <boost/algorithm/string/replace.hpp>
+#include <cstring>
 #include <ctime>
 #include <fstream>
 #include <iostream>
 #include <utility>
-
-#include <boost/algorithm/string/replace.hpp>
 
 CStrW g_UniqueLogPostfix;
 static const double RENDER_TIMEOUT = 10.0; // seconds before messages are deleted

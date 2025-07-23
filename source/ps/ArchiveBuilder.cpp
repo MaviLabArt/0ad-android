@@ -21,14 +21,19 @@
 
 #include "graphics/ColladaManager.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/file/archive/archive.h"
 #include "lib/file/archive/archive_zip.h"
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs_util.h"
-#include "lib/tex/tex_codec.h"
+#include "lib/path.h"
+#include "lib/tex/tex.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
-#include "renderer/backend/Sampler.h"
 #include "renderer/backend/dummy/Device.h"
 
 #include <boost/algorithm/string/predicate.hpp>
+#include <string>
 
 CArchiveBuilder::CArchiveBuilder(const OsPath& mod, const OsPath& tempdir) :
 	m_TempDir(tempdir), m_NumBaseMods(0)

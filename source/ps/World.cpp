@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,23 +17,28 @@
 
 #include "precompiled.h"
 
+#include "World.h"
+
 #include "graphics/GameView.h"
+#include "graphics/HeightMipmap.h"
 #include "graphics/LightEnv.h"
 #include "graphics/MapReader.h"
-#include "graphics/MapWriter.h"
-#include "graphics/Terrain.h"
 #include "graphics/Terrain.h"
 #include "graphics/UnitManager.h"
-#include "lib/timer.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
-#include "ps/Errors.h"
+#include "ps/FileIo.h"
 #include "ps/Game.h"
 #include "ps/Loader.h"
-#include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "simulation2/Simulation2.h"
+
+#include <js/RootingAPI.h>
+#include <string>
+
+class CTriggerManager;
 
 /**
  * Global light settings.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -69,6 +69,8 @@ And you can use it as an exception:
 plus a few extra things for converting between error codes and exceptions.
 
 */
+
+#include "lib/types.h"
 
 #include <exception>
 

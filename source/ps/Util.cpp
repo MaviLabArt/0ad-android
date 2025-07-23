@@ -17,16 +17,29 @@
 
 #include "precompiled.h"
 
-#include "ps/Util.h"
+#include "Util.h"
 
+#include "lib/allocators/dynarray.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/secure_crt.h"
 #include "lib/tex/tex.h"
-#include "ps/CLogger.h"
+#include "lib/utf8.h"
 #include "ps/Filesystem.h"
 #include "ps/Pyrogenesis.h"
 
+#include <ctime>
 #include <iomanip>
-#include <utility>
+#include <memory>
+#include <sstream>
+#include <tuple>
+
+struct tm;
 
 // not thread-safe!
 static const wchar_t* HardcodedErrorString(int err)

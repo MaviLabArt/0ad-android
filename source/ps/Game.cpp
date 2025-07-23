@@ -19,41 +19,54 @@
 
 #include "Game.h"
 
+#include "graphics/Color.h"
 #include "graphics/GameView.h"
 #include "graphics/LOSTexture.h"
-#include "graphics/ParticleManager.h"
 #include "graphics/UnitManager.h"
-#include "gui/GUIManager.h"
 #include "gui/CGUI.h"
-#include "lib/config2.h"
-#include "lib/timer.h"
+#include "gui/GUIManager.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "network/NetClient.h"
-#include "network/NetServer.h"
-#include "ps/CConsole.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/GameSetup/GameSetup.h"
 #include "ps/Loader.h"
 #include "ps/Profile.h"
 #include "ps/Replay.h"
-#include "ps/World.h"
 #include "ps/VideoMode.h"
+#include "ps/World.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TimeManager.h"
 #include "renderer/WaterManager.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/JSON.h"
+#include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpPlayer.h"
 #include "simulation2/components/ICmpPlayerManager.h"
+#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Components.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/LocalTurnManager.h"
 #include "simulation2/system/ReplayTurnManager.h"
-#include "soundmanager/ISoundManager.h"
+#include "simulation2/system/TurnManager.h"
 #include "tools/atlas/GameInterface/GameLoop.h"
 
+#include <cstddef>
 #include <fstream>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
+#include <memory>
+#include <sstream>
+#include <utility>
+
+class IComponent;
 
 extern GameLoopState* g_AtlasGameLoop;
 

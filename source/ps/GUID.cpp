@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,8 +15,14 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "precompiled.h"
+
+#include "lib/code_annotation.h"
+#include "lib/secure_crt.h"
 #include "lib/sysdep/sysdep.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
+
+#include <cstddef>
 
 CStr ps_generate_guid(void)
 {

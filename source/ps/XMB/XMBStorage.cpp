@@ -29,7 +29,6 @@
 #include "scriptinterface/ScriptRequest.h"
 
 #include <algorithm>
-#include <iterator>
 #include <js/Array.h>
 #include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>

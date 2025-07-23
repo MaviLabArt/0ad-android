@@ -20,22 +20,44 @@
 #include "SavedGame.h"
 
 #include "graphics/GameView.h"
-#include "i18n/L10n.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/file/archive/archive.h"
 #include "lib/file/archive/archive_zip.h"
+#include "lib/file/file_system.h"
 #include "lib/file/io/io.h"
-#include "lib/utf8.h"
+#include "lib/file/io/write_buffer.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
+#include "lib/sysdep/filesystem.h"
 #include "lib/timer.h"
+#include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/Mod.h"
 #include "ps/Pyrogenesis.h"
-#include "scriptinterface/Object.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
 #include "simulation2/Simulation2.h"
+
+#include <cstdint>
+#include <ctime>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <memory>
+#include <sstream>
+#include <utility>
+
+class ScriptInterface;
 
 // TODO: we ought to check version numbers when loading files
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,15 @@
 
 #include "CacheLoader.h"
 
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/utf8.h"
 #include "maths/MD5.h"
-#include "ps/CLogger.h"
 #include "ps/Util.h"
 
-#include <iomanip>
+#include <ctime>
 
 CCacheLoader::CCacheLoader(PIVFS vfs, const std::wstring& fileExtension) :
 	m_VFS(vfs), m_FileExtension(fileExtension)

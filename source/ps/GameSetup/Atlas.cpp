@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,8 +19,11 @@
 
 #include "Atlas.h"
 
-#include "ps/GameSetup/CmdLineArgs.h"
+#include "lib/debug.h"
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/DllLoader.h"
+#include "ps/GameSetup/CmdLineArgs.h"
 
 //----------------------------------------------------------------------------
 // Atlas (map editor) integration

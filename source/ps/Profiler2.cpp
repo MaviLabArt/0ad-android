@@ -25,21 +25,28 @@
 #include "Profiler2.h"
 
 #include "lib/allocators/shared_ptr.h"
+#include "lib/code_generation.h"
 #include "lib/os_path.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
 #include "ps/CStr.h"
+#include "ps/ConfigDB.h"
+#include "ps/Profiler2.h"
 #include "ps/Profiler2GPU.h"
 #include "ps/Pyrogenesis.h"
 #include "third_party/mongoose/mongoose.h"
 
+#include <algorithm>
+#include <cstdio>
 #include <fmt/format.h>
 #include <fstream>
 #include <iomanip>
 #include <map>
 #include <set>
+#include <sstream>
 #include <tuple>
 #include <unordered_map>
+#include <utility>
 
 CProfiler2 g_Profiler2;
 

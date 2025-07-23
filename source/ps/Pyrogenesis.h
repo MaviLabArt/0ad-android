@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,8 @@ Standard declarations which are included in all projects.
 
 #ifndef INCLUDED_PYROGENESIS
 #define INCLUDED_PYROGENESIS
+
+#include <cstdio>
 
 class Path;
 using OsPath = Path;

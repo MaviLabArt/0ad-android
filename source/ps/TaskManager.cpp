@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,17 +21,16 @@
 
 #include "lib/debug.h"
 #include "maths/MathUtil.h"
-#include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
-#include "ps/Threading.h"
-#include "ps/ThreadUtil.h"
 #include "ps/Profiler2.h"
+#include "ps/Threading.h"
 
+#include <atomic>
 #include <condition_variable>
 #include <deque>
 #include <functional>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <thread>
 
 namespace Threading
@@ -56,8 +55,6 @@ size_t GetDefaultNumberOfWorkers()
 }
 
 } // anonymous namespace
-
-class Thread;
 
 using QueueItem = std::function<void()>;
 

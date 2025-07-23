@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,6 +20,7 @@
 #include "Compress.h"
 
 #include "lib/byte_order.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/zlib.h"
 
 void CompressZLib(const std::string& data, std::string& out, bool includeLengthHeader)

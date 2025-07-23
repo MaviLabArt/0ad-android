@@ -20,22 +20,35 @@
 #include "ProfileViewer.h"
 
 #include "graphics/Canvas2D.h"
+#include "graphics/Color.h"
 #include "graphics/FontMetrics.h"
 #include "graphics/TextRenderer.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "maths/Rect.h"
 #include "maths/Size2D.h"
 #include "maths/Vector2D.h"
 #include "ps/CLogger.h"
-#include "ps/CStrInternStatic.h"
-#include "ps/Filesystem.h"
+#include "ps/CStrIntern.h"
 #include "ps/Hotkey.h"
 #include "ps/Profile.h"
 #include "ps/Pyrogenesis.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <SDL_events.h>
+#include <SDL_keycode.h>
 #include <algorithm>
 #include <ctime>
 #include <fstream>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
+
+class ScriptInterface;
 
 struct CProfileViewerInternals
 {

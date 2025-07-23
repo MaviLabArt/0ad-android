@@ -19,13 +19,19 @@
 
 #include "TouchInput.h"
 
-#include <cinttypes>
-
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
-#include "lib/timer.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/sysdep/os.h"
+#include "lib/timer.h"
+#include "maths/Matrix3D.h"
 #include "ps/Game.h"
+
+#include <SDL_events.h>
+#include <SDL_mouse.h>
+#include <cinttypes>
 
 // When emulation is enabled:
 // Left-click to put finger 0 down.

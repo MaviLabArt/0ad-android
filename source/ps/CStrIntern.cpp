@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,13 @@
 
 #include "CStrIntern.h"
 
+#include "lib/debug.h"
 #include "lib/fnv_hash.h"
-#include "ps/CLogger.h"
 #include "ps/ThreadUtil.h"
 
+#include <cstring>
 #include <unordered_map>
+#include <utility>
 
 class CStrInternInternals
 {

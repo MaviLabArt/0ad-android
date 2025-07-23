@@ -19,10 +19,24 @@
 
 #include "TemplateLoader.h"
 
+#include "lib/code_annotation.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
+#include "lib/status.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+
+#include <cstddef>
+#include <cstdint>
+#include <utility>
+
+class CFileInfo;
 
 static const wchar_t TEMPLATE_ROOT[] = L"simulation/templates/";
 static const wchar_t ACTOR_ROOT[] = L"art/actors/";

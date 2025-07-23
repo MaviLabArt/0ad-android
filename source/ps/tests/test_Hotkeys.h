@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,10 +23,22 @@
 #include "lib/self_test.h"
 
 #include "lib/external_libraries/libsdl.h"
-#include "ps/Hotkey.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/input.h"
+#include "lib/path.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
-#include "ps/Globals.h"
 #include "ps/Filesystem.h"
+#include "ps/Globals.h"
+#include "ps/Hotkey.h"
+
+#include <SDL_events.h>
+#include <SDL_keyboard.h>
+#include <initializer_list>
+#include <memory>
+#include <unordered_map>
+#include <vector>
 
 
 class TestHotkey : public CxxTest::TestSuite

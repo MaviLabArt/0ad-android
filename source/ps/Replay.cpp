@@ -19,38 +19,45 @@
 
 #include "Replay.h"
 
-#include "graphics/TerrainTextureManager.h"
-#include "lib/timer.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/file/file_system.h"
-#include "lib/tex/tex.h"
+#include "lib/path.h"
+#include "lib/timer.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/GameSetup.h"
 #include "ps/GameSetup/CmdLineArgs.h"
+#include "ps/GameSetup/GameSetup.h"
 #include "ps/GameSetup/Paths.h"
 #include "ps/Loader.h"
 #include "ps/Mod.h"
 #include "ps/Profile.h"
 #include "ps/ProfileViewer.h"
+#include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
-#include "ps/Mod.h"
 #include "ps/Util.h"
 #include "ps/VisualReplay.h"
-#include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptStats.h"
-#include "scriptinterface/JSON.h"
+#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpGuiInterface.h"
 #include "simulation2/helpers/Player.h"
 #include "simulation2/helpers/SimulationCommand.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Entity.h"
 
 #include <ctime>
 #include <fstream>
+#include <js/PropertyAndElement.h>
+#include <js/Value.h>
+#include <memory>
 
 /**
  * Number of turns between two saved profiler snapshots.

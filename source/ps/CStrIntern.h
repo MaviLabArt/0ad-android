@@ -20,7 +20,9 @@
 
 #include "lib/types.h"
 
+#include <cstddef>
 #include <string>
+#include <string_view>
 
 class CStrInternInternals;
 
