@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -50,12 +50,7 @@
 # include <sys/types.h>
 # include <stddef.h>
 # include <limits.h>
-# include <stdint.h>
-
-// but sometimes it still doesn't get defined, so define it ourselves
-# ifndef SIZE_MAX
-#  define SIZE_MAX ((size_t)-1)
-# endif
+# include <cstdint>
 
 # include <unistd.h>
 
