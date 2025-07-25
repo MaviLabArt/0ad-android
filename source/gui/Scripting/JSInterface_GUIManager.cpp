@@ -79,6 +79,7 @@ void RegisterScriptFunctions(const ScriptRequest& rq)
 	ScriptFunction::Register<&TemplateExists>(rq, "TemplateExists");
 	ScriptFunction::Register<&GetTemplate>(rq, "GetTemplate");
 
+	ScriptFunction::Register<&CGUI::TryFindObjectByName, &ScriptInterface::ObjectFromCBData<CGUI>>(rq, "TryGetGUIObjectByName");
 	ScriptFunction::Register<&CGUI::FindObjectByName, &ScriptInterface::ObjectFromCBData<CGUI>>(rq, "GetGUIObjectByName");
 	ScriptFunction::Register<&CGUI::SetGlobalHotkey, &ScriptInterface::ObjectFromCBData<CGUI>>(rq, "SetGlobalHotkey");
 	ScriptFunction::Register<&CGUI::UnsetGlobalHotkey, &ScriptInterface::ObjectFromCBData<CGUI>>(rq, "UnsetGlobalHotkey");

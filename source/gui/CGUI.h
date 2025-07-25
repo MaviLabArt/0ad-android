@@ -192,7 +192,17 @@ public:
 
 	/**
 	 * Returns the GUI object with the desired name, or nullptr
-	 * if no match is found,
+	 * if no match is found.
+	 *
+	 * @param Name String name of object
+	 * @return Matching object, or nullptr
+	 */
+	IGUIObject* TryFindObjectByName(const CStr& Name) const;
+
+	/**
+	 * Returns the GUI object with the desired name, or nullptr
+	 * and logs an error if no match is found.
+	 * .
 	 *
 	 * @param Name String name of object
 	 * @return Matching object, or nullptr

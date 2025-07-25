@@ -434,7 +434,7 @@ bool CGUI::ObjectExists(const CStr& Name) const
 	return m_pAllObjects.find(Name) != m_pAllObjects.end();
 }
 
-IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
+IGUIObject* CGUI::TryFindObjectByName(const CStr& Name) const
 {
 	map_pObjects::const_iterator it = m_pAllObjects.find(Name);
 
@@ -442,6 +442,15 @@ IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
 		return nullptr;
 
 	return it->second.get();
+}
+
+IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
+{
+	IGUIObject* obj = TryFindObjectByName(Name);
+	if (obj == nullptr)
+		LOGERROR("Failed to get GUI object by name: object '%s' not found.\nNote: Use 'Engine.TryGetGUIObjectByName' to query for potentially non-existent objects instead.", Name);
+
+	return obj;
 }
 
 IGUIObject* CGUI::FindObjectUnderMouse()
