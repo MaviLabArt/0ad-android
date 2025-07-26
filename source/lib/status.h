@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -161,6 +161,7 @@ To summarize: +/-1SHHCC (S=subsystem, HH=header, CC=code number)
 #ifndef INCLUDED_STATUS
 #define INCLUDED_STATUS
 
+#include "lib/code_annotation.h"
 #include "lib/types.h"
 
 #include <cstddef>

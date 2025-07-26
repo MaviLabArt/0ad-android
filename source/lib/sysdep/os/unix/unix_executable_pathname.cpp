@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,11 +24,17 @@
 
 #include "lib/sysdep/sysdep.h"
 
+#include "lib/os_path.h"
+#include "lib/posix/posix_dlfcn.h"
+
+#include <climits>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
 #define GNU_SOURCE
 #include "mocks/dlfcn.h"
 #include "mocks/unistd.h"
-
-#include <cstdio>
 
 OsPath unix_ExecutablePathname()
 {

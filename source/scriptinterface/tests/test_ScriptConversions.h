@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -208,7 +208,7 @@ public:
 		JS::RootedValue testNANVal(rq.cx);
 		Script::ToJSVal(rq, &testNANVal, NAN);
 		TS_ASSERT(Script::FromJSVal(rq, testNANVal, f));
-		TS_ASSERT(isnan(f));
+		TS_ASSERT(std::isnan(f));
 	}
 
 	// NOTE: fixed and vector conversions are defined in simulation2/scripting/EngineScriptConversions.cpp

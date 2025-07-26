@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -104,11 +104,17 @@ library and IO layer. Read and write are zero-copy.
 #ifndef INCLUDED_TEX
 #define INCLUDED_TEX
 
-#include "lib/os_path.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
-#include "lib/allocators/dynarray.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
 
+#include <cstddef>
+#include <memory>
 #include <vector>
+
+struct DynArray;
 
 namespace ERR
 {

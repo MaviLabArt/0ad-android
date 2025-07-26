@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -30,9 +30,9 @@
 
 #include "status.h"
 
+#include "lib/secure_crt.h"
+
 #include <cerrno>
-#include <cstdio>
-#include <cstring>
 
 static StatusDefinitionBucket* buckets;
 

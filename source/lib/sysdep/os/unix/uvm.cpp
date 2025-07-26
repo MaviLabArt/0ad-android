@@ -21,9 +21,16 @@
  */
 
 #include "precompiled.h"
+
 #include "lib/sysdep/vm.h"
 
-#include "lib/alignment.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_mman.h"
+#include "lib/status.h"
+
+#include <cerrno>
+#include <cstddef>
+#include <cstdint>
 
 // "anonymous" effectively means mapping /dev/zero, but is more efficient.
 // MAP_ANONYMOUS is not in SUSv3, but is a very common extension.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,6 +26,8 @@
 
 #ifndef INCLUDED_AMD64
 #define INCLUDED_AMD64
+
+#include "lib/sysdep/arch.h"
 
 #if !ARCH_AMD64
 #error "including amd64.h without ARCH_AMD64=1"

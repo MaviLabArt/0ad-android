@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,8 +27,16 @@
 #ifndef INCLUDED_TEX_CODEC
 #define INCLUDED_TEX_CODEC
 
-#include "tex.h"
-#include "tex_internal.h"	// for codec's convenience
+#include "lib/code_annotation.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
+
+#include <cstddef>
+#include <vector>
+
+class Tex;
+struct DynArray;
 
 /**
  * virtual method table for TexCodecs.

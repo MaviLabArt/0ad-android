@@ -32,8 +32,10 @@
 #include "lib/file/common/file_loader.h"	// PIFileLoader
 #include "lib/file/common/real_directory.h"	// PRealDirectory
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
 
 #include <ctime>
+#include <memory>
 #include <string>
 
 class VfsFile

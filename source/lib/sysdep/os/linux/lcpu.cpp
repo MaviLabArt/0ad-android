@@ -23,10 +23,20 @@
 #include "precompiled.h"
 
 #include "lib/sysdep/os_cpu.h"
+
 #include "lib/alignment.h"
 #include "lib/bits.h"
 #include "lib/config2.h"
+#include "lib/debug.h"
 #include "lib/module_init.h"
+#include "lib/posix/posix_pthread.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
+
+#include <cerrno>
+#include <cstddef>
+#include <cstdint>
 
 #if CONFIG2_VALGRIND
 # include "valgrind.h"

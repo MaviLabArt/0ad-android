@@ -82,6 +82,7 @@
 #include "ps/ThreadUtil.h"
 
 #include <cstdarg>
+#include <cstring>
 #include <mutex>
 #include <string>
 #include <thread>

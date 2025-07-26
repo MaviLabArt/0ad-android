@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,8 +25,6 @@
 #include "lib/sysdep/arch/x86_x64/simd.h"
 
 #if COMPILER_HAS_SSE
-#include "lib/code_generation.h"
-#include "lib/debug.h"
 #include "lib/sysdep/arch.h"
 
 #if ARCH_X86_X64

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,7 +25,13 @@
  */
 
 #include "precompiled.h"
-#include "lib/sysdep/cpu.h"
+
+#include "cpu.h"
+
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+
+#include <cstdint>
 
 static const StatusDefinition cpuStatusDefinitions[] = {
 	{ ERR::CPU_FEATURE_MISSING, L"This CPU doesn't support a required feature" },

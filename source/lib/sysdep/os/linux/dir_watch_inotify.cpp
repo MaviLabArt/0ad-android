@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,13 +23,27 @@
 #include "precompiled.h"
 
 #include "lib/sysdep/dir_watch.h"
-#include "lib/sysdep/sysdep.h"
+
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/posix/posix_pthread.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
 #include "ps/CLogger.h"
 
+#include <cerrno>
+#include <climits>
+#include <cstddef>
+#include <cstdint>
+#include <cstdlib>
 #include <map>
+#include <memory>
 #include <string>
 #include <sys/inotify.h>
-
+#include <sys/select.h>
+#include <utility>
+#include <vector>
 
 struct NotificationEvent
 {

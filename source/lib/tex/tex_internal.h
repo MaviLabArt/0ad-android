@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,7 +28,9 @@
 #define INCLUDED_TEX_INTERNAL
 
 #include "lib/allocators/dynarray.h"
-#include "lib/file/io/io.h"	// io::Allocate
+#include "lib/status.h"
+
+#include <cstddef>
 
 /**
  * check if the given texture format is acceptable: 8bpp grey,

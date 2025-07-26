@@ -39,19 +39,7 @@
 # include "lib/sysdep/os/win/wposix/wposix_types.h"
 #else
 
-// unix/linux/glibc/gcc says that this macro has to be defined when including
-// stdint.h from C++ for stdint.h to define SIZE_MAX and friends
-# ifndef __STDC_LIMIT_MACROS
-#  define __STDC_LIMIT_MACROS
-# endif
-
-# include <math.h>
-# include <wchar.h>
 # include <sys/types.h>
-# include <stddef.h>
-# include <limits.h>
-# include <cstdint>
-
 # include <unistd.h>
 
 #endif	// #if !OS_WIN

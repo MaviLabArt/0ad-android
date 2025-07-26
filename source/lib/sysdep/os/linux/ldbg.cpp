@@ -30,11 +30,20 @@
 
 #include "precompiled.h"
 
-#include "lib/sysdep/sysdep.h"
 #include "lib/debug.h"
 
+#include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
+
 #include <algorithm>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
+#include <cwchar>
+#include <string>
 #include <sys/syscall.h>
 
 #if OS_ANDROID

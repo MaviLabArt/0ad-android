@@ -29,14 +29,17 @@ symbol lookups and backtraces)
 
 #include "precompiled.h"
 
-#include <cstdio>
-#include <sys/types.h>
-#include <signal.h>
-
-#include "lib/timer.h"
-#include "lib/sysdep/sysdep.h"
 #include "lib/debug.h"
-#include "lib/utf8.h"
+
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
+
+#include <cstdio>
+
+#ifndef NDEBUG
+# include <signal.h>
+#endif
 
 
 Status debug_CaptureContext(void* /*context*/)

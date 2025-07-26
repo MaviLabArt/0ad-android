@@ -22,19 +22,25 @@
 
 #include "precompiled.h"
 
-#include <unistd.h>
-#include <stdio.h>
-#include <wchar.h>
-
 #include "lib/code_annotation.h"
-#include "lib/utf8.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
 #include "lib/sysdep/os/unix/udbg.h"
 #include "lib/sysdep/sysdep.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
 
 #include <boost/algorithm/string/replace.hpp>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <string>
 
 #define GNU_SOURCE
-#include <dlfcn.h>
 
 #include <sys/wait.h>
 

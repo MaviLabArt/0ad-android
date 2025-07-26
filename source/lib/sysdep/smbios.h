@@ -29,7 +29,76 @@
 
 #include "lib/types.h"
 
+#include <cstddef>
 #include <string>
+
+namespace SMBIOS { struct Baseboard; }
+namespace SMBIOS { struct BaseboardFlags; }
+namespace SMBIOS { struct BaseboardType; }
+namespace SMBIOS { struct Bios; }
+namespace SMBIOS { struct BiosFlags1; }
+namespace SMBIOS { struct BiosFlags2; }
+namespace SMBIOS { struct BiosFlags; }
+namespace SMBIOS { struct Cache; }
+namespace SMBIOS { struct CacheAssociativity; }
+namespace SMBIOS { struct CacheConfigurationFlags; }
+namespace SMBIOS { struct CacheFlags; }
+namespace SMBIOS { struct CacheLocation; }
+namespace SMBIOS { struct CacheMode; }
+namespace SMBIOS { struct CacheType; }
+namespace SMBIOS { struct Chassis; }
+namespace SMBIOS { struct ChassisSecurityStatus; }
+namespace SMBIOS { struct ChassisType; }
+namespace SMBIOS { struct CoolingDevice; }
+namespace SMBIOS { struct CoolingDeviceType; }
+namespace SMBIOS { struct ECC; }
+namespace SMBIOS { struct ManagementDevice; }
+namespace SMBIOS { struct ManagementDeviceAddressType; }
+namespace SMBIOS { struct ManagementDeviceComponent; }
+namespace SMBIOS { struct ManagementDeviceThreshold; }
+namespace SMBIOS { struct ManagementDeviceType; }
+namespace SMBIOS { struct MemoryArray; }
+namespace SMBIOS { struct MemoryArrayLocation; }
+namespace SMBIOS { struct MemoryArrayMappedAddress; }
+namespace SMBIOS { struct MemoryArrayUse; }
+namespace SMBIOS { struct MemoryDevice; }
+namespace SMBIOS { struct MemoryDeviceFormFactor; }
+namespace SMBIOS { struct MemoryDeviceMappedAddress; }
+namespace SMBIOS { struct MemoryDeviceType; }
+namespace SMBIOS { struct MemoryDeviceTypeFlags; }
+namespace SMBIOS { struct OnBoardDeviceType; }
+namespace SMBIOS { struct OnBoardDevices; }
+namespace SMBIOS { struct OnboardDevices2; }
+namespace SMBIOS { struct PortConnector; }
+namespace SMBIOS { struct PortConnectorType; }
+namespace SMBIOS { struct PortType; }
+namespace SMBIOS { struct PortableBattery; }
+namespace SMBIOS { struct PortableBatteryChemistry; }
+namespace SMBIOS { struct Processor; }
+namespace SMBIOS { struct ProcessorFlags; }
+namespace SMBIOS { struct ProcessorStatus; }
+namespace SMBIOS { struct ProcessorType; }
+namespace SMBIOS { struct ProcessorUpgrade; }
+namespace SMBIOS { struct State; }
+namespace SMBIOS { struct System; }
+namespace SMBIOS { struct SystemBoot; }
+namespace SMBIOS { struct SystemBootStatus; }
+namespace SMBIOS { struct SystemPowerSupply; }
+namespace SMBIOS { struct SystemPowerSupplyCharacteristics; }
+namespace SMBIOS { struct SystemPowerSupplyInputSwitching; }
+namespace SMBIOS { struct SystemPowerSupplyType; }
+namespace SMBIOS { struct SystemSlot; }
+namespace SMBIOS { struct SystemSlotBusWidth; }
+namespace SMBIOS { struct SystemSlotFlags1; }
+namespace SMBIOS { struct SystemSlotFlags2; }
+namespace SMBIOS { struct SystemSlotLength; }
+namespace SMBIOS { struct SystemSlotType; }
+namespace SMBIOS { struct SystemSlotUsage; }
+namespace SMBIOS { struct SystemWakeUpType; }
+namespace SMBIOS { struct TemperatureProbe; }
+namespace SMBIOS { struct TemperatureProbeLocation; }
+namespace SMBIOS { struct VoltageProbe; }
+namespace SMBIOS { struct VoltageProbeLocation; }
 
 namespace SMBIOS {
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,13 +25,14 @@
  */
 
 #include "precompiled.h"
+
 #include "tex_codec.h"
 
-#include <string.h>
-#include <stdlib.h>
-
-#include "lib/allocators/shared_ptr.h" // ArrayDeleter
-#include "tex.h"
+#include "lib/allocators/dynarray.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
+#include "lib/tex/tex.h"
+#include "lib/tex/tex_internal.h"
 
 // Statically allocate all of the codecs...
 TexCodecDds DdsCodec;

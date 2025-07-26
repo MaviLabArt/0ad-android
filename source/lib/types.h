@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -27,7 +27,7 @@
 #ifndef INCLUDED_TYPES
 #define INCLUDED_TYPES
 
-#include "lib/posix/posix_types.h"
+#include <cstdint>
 
 typedef int8_t i8;
 typedef int16_t i16;

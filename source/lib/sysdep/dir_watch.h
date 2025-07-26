@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -28,6 +28,7 @@
 #define INCLUDED_DIR_WATCH
 
 #include "lib/os_path.h"
+#include "lib/status.h"
 
 #include <vector>
 #include <memory>

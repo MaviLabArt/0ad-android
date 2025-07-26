@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,6 +23,12 @@
 #include "lib/self_test.h"
 
 #include "lib/file/common/trace.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+
+#include <climits>
+#include <cwchar>
+#include <string>
 
 class TestTraceEntry : public CxxTest::TestSuite
 {

@@ -26,8 +26,17 @@
 
 #include "precompiled.h"
 
-#include "lib/byte_order.h"
 #include "tex_codec.h"
+
+#include "lib/byte_order.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "lib/tex/tex.h"
+#include "lib/types.h"
+
+#include <cstdlib>
 
 #pragma pack(push, 1)
 

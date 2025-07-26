@@ -28,6 +28,10 @@
 #define INCLUDED_X86_X64
 
 #include "lib/sysdep/arch.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/types.h"
+
+#include <cstddef>
 
 #if !ARCH_X86_X64
 #error "including x86_x64.h without ARCH_X86_X64=1"

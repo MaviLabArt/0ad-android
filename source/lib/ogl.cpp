@@ -22,33 +22,29 @@
 
 #include "precompiled.h"
 
-#include "lib/ogl.h"
+#include "ogl.h"
 
 #include "lib/config2.h"
 #include "lib/debug.h"
-#include "lib/external_libraries/libsdl.h"
 #include "ps/CLogger.h"
 
-#if !CONFIG2_GLES
+#include <cstdarg>
+#include <cstring>
 
+#if !CONFIG2_GLES
 # if OS_WIN
 #  include <glad/wgl.h>
 # elif !OS_MACOSX
 #  include <SDL_syswm.h>
 #  if defined(SDL_VIDEO_DRIVER_X11)
+#   include <X11/Xlib.h>
 #   include <glad/glx.h>
 #  endif
 #  if defined(SDL_VIDEO_DRIVER_WAYLAND)
 #   include <glad/egl.h>
 #  endif
 # endif
-
 #endif // !CONFIG2_GLES
-
-#include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
-
 
 //----------------------------------------------------------------------------
 // extensions

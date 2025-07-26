@@ -21,15 +21,20 @@
  */
 
 #include "precompiled.h"
-#include "lib/sysdep/arch/x86_x64/apic.h"
+
+#include "apic.h"
 
 #include "lib/bits.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/module_init.h"
+#include "lib/status.h"
+#include "lib/sysdep/arch/x86_x64/x86_x64.h"
 #include "lib/sysdep/cpu.h"	// ERR::CPU_FEATURE_MISSING
 #include "lib/sysdep/os_cpu.h"
-#include "lib/sysdep/arch/x86_x64/x86_x64.h"
 
 #include <algorithm>
+#include <cstdint>
 
 ApicId GetApicId()
 {

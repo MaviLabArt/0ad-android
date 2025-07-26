@@ -30,7 +30,6 @@
 #include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
 #include "lib/file/vfs/vfs_path.h"
-#include "lib/os_path.h"
 #include "lib/status.h"
 
 #include <cstddef>

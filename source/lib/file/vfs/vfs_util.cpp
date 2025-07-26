@@ -32,7 +32,6 @@
 #include "lib/path.h"
 #include "lib/regex.h"
 #include "lib/secure_crt.h"
-#include "lib/sysdep/filesystem.h"
 
 #include <algorithm>
 #include <climits>

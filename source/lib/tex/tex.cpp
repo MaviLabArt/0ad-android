@@ -24,15 +24,18 @@
 
 #include "tex.h"
 
+#include "lib/alignment.h"
+#include "lib/allocators/dynarray.h"
 #include "lib/allocators/shared_ptr.h"
 #include "lib/bits.h"
-#include "lib/sysdep/cpu.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
 #include "lib/tex/tex_codec.h"
 #include "lib/timer.h"
 
 #include <algorithm>
-#include <cmath>
-#include <cstdlib>
+#include <cstdint>
+#include <cstring>
 
 static const StatusDefinition texStatusDefinitions[] =
 {

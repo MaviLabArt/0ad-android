@@ -22,10 +22,22 @@
 
 #include "lib/self_test.h"
 
-#include "lib/lib.h"
+#include "lib/code_annotation.h"
+#include "lib/os_path.h"
+#include "lib/posix/posix_dlfcn.h"
+#include "lib/posix/posix_filesystem.h"
+#include "lib/posix/posix_types.h"
 #include "lib/secure_crt.h"
 #include "lib/sysdep/filesystem.h"
+#include "lib/sysdep/os.h"
 #include "lib/sysdep/sysdep.h"
+#include "lib/types.h"
+
+#include <climits>
+#include <cstdio>
+#include <cstdlib>
+#include <cwchar>
+#include <string>
 
 #if OS_BSD || OS_LINUX
 # include "lib/sysdep/os/unix/unix_executable_pathname.h"

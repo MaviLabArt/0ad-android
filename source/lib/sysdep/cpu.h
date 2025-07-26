@@ -28,8 +28,8 @@
 #define INCLUDED_CPU
 
 #include "lib/status.h"
+#include "lib/sysdep/arch.h"
 #include "lib/sysdep/compiler.h"
-
 
 namespace ERR
 {

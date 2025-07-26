@@ -25,17 +25,18 @@
  */
 
 #include "precompiled.h"
-#include "lib/timer.h"
 
-#include <cfloat>
-#include <cmath>
-#include <cstdarg>
-#include <mutex>
-#include <numeric>
-#include <sstream>	// std::stringstream
+#include "timer.h"
 
 #include "lib/module_init.h"
-#include "lib/sysdep/cpu.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
+
+#include <algorithm>
+#include <ctime>
+#include <mutex>
+#include <sstream>
 
 #if OS_WIN
 #include "lib/sysdep/os/win/win.h"

@@ -36,6 +36,8 @@
 # define MINIMAL_PCH 0
 #endif
 
+// IWYU pragma: begin_keep
+
 #include "lib/config.h"	            // CONFIG_ENABLE_PCH
 #include "lib/sysdep/compiler.h"    // MSC_VERSION
 
@@ -99,5 +101,7 @@
 // and putting them in the precompiled header cuts a large amount of time even even on incremental builds.
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
+
+// IWYU pragma: end_keep
 
 #endif // #if CONFIG_ENABLE_PCH

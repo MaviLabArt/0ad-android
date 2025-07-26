@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,8 +22,11 @@
 
 #include "precompiled.h"
 
-#include "lib/sysdep/rtl.h"
 #include "lib/bits.h"
+#include "lib/sysdep/os.h"
+#include "lib/sysdep/rtl.h"
+
+#include <cstdlib>
 
 // Linux glibc has posix_memalign and (obsolete) memalign
 // Android libc has only memalign

@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -25,11 +25,22 @@
  */
 
 #include "precompiled.h"
+
 #include "lib/sysdep/filesystem.h"
 
-#include "lib/path.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/posix/posix_filesystem.h"
+#include "lib/posix/posix_types.h"
+#include "lib/secure_crt.h"
+#include "lib/sysdep/os.h"
 
+#include <climits>
 #include <cstdio>
+#include <cstdlib>
+#include <fcntl.h>
+#include <string>
 
 struct WDIR
 {

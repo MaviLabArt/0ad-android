@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -24,5 +24,6 @@
 # include "lib/sysdep/os/win/wposix/wpthread.h"
 #else
 # include <pthread.h>
+# include <sched.h>
 # include <semaphore.h>
 #endif

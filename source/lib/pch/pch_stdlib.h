@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,6 +22,8 @@
 
 #ifndef INCLUDED_PCH_STDLIB
 #define INCLUDED_PCH_STDLIB
+
+// IWYU pragma: begin_keep
 
 #if !MINIMAL_PCH
 // all new-form C library headers
@@ -89,5 +91,7 @@
 #include <typeinfo>
 #include <valarray>
 #endif // !MINIMAL_PCH
+
+// IWYU pragma: end_keep
 
 #endif	// #ifndef INCLUDED_PCH_STDLIB

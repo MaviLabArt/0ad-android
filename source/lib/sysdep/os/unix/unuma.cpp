@@ -21,10 +21,15 @@
  */
 
 #include "precompiled.h"
+
 #include "lib/sysdep/numa.h"
 
 #include "lib/bits.h"
+#include "lib/debug.h"
 #include "lib/sysdep/os_cpu.h"
+
+#include <cstddef>
+#include <cstdint>
 
 size_t numa_NumNodes()
 {
