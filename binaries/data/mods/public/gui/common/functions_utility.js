@@ -99,7 +99,7 @@ function playerDataToStringifiedTeamList(playerData)
 
 function stringifiedTeamListToPlayerData(stringifiedTeamList)
 {
-	let teamList = {};
+	let teamList;
 	try
 	{
 		teamList = JSON.parse(unescapeText(stringifiedTeamList));

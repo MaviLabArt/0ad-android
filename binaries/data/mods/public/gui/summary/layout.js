@@ -300,11 +300,10 @@ function updateGeneralPanelCounter(allCounters)
 {
 	const counters = allCounters.filter(counter => !counter.hideInSummary);
 	let rowPlayerObjectWidth = 0;
-	let left = 0;
 
 	for (let p = 0; p < g_MaxPlayers; ++p)
 	{
-		left = 240;
+		let left = 240;
 		let counterObject;
 
 		for (const w in counters)

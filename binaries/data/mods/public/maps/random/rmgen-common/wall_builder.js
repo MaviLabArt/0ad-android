@@ -880,7 +880,6 @@ function placeGenericFortress(center, radius = 20, playerId = 0, style, irregula
 	while (tries < maxTries && minOverlap > g_WallStyles[style].overlap)
 	{
 		const pointDerivation = [];
-		let distanceToTarget = 1000;
 		while (true)
 		{
 			const indent = randFloat(-irregularity * pointDistance, irregularity * pointDistance);
@@ -890,7 +889,7 @@ function placeGenericFortress(center, radius = 20, playerId = 0, style, irregula
 			actualOff.add(new Vector2D(pointDistance, 0).rotate(-tmpAngle));
 			actualAngle = getAngle(0, 0, actualOff.x, actualOff.y);
 			pointDerivation.push(actualOff.clone());
-			distanceToTarget = pointDerivation[0].distanceTo(actualOff);
+			const distanceToTarget = pointDerivation[0].distanceTo(actualOff);
 
 			const numPoints = pointDerivation.length;
 			if (numPoints > 3 && distanceToTarget < pointDistance) // Could be done better...

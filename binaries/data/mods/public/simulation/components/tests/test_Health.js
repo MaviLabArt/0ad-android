@@ -136,7 +136,7 @@ TS_ASSERT_EQUALS(cmpHealth.IsInjured(), false);
 cmpHealth = setEntityUp();
 
 // Check that increasing by more than required puts us at the max HP
-change = cmpHealth.Reduce(30);
+TS_ASSERT_UNEVAL_EQUALS(cmpHealth.Reduce(30), { "healthChange": -30 });
 change = cmpHealth.Increase(30);
 TS_ASSERT_EQUALS(injured_flag, false);
 TS_ASSERT_EQUALS(change.new, 50);

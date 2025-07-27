@@ -1539,7 +1539,7 @@ GuiInterface.prototype.SetWallPlacementPreview = function(player, cmd)
 	{
 		const entInfo = previewEntities[i];
 
-		let ent = null;
+		let ent;
 		const tpl = entInfo.template;
 		const tplData = this.placementWallEntities[tpl].templateData;
 		const entPool = this.placementWallEntities[tpl];
@@ -1926,32 +1926,29 @@ GuiInterface.prototype.GetTradingDetails = function(player, data)
 
 	const firstMarket = cmpEntityTrader.GetFirstMarket();
 	const secondMarket = cmpEntityTrader.GetSecondMarket();
-	let result = null;
 	if (data.target === firstMarket)
 	{
-		result = {
+		const result = {
 			"type": "is first",
 			"hasBothMarkets": cmpEntityTrader.HasBothMarkets()
 		};
 		if (cmpEntityTrader.HasBothMarkets())
 			result.gain = cmpEntityTrader.GetGoods().amount;
+		return result;
 	}
-	else if (data.target === secondMarket)
-		result = {
+	if (data.target === secondMarket)
+		return {
 			"type": "is second",
 			"gain": cmpEntityTrader.GetGoods().amount,
 		};
-	else if (!firstMarket)
-		result = { "type": "set first" };
-	else if (!secondMarket)
-		result = {
+	if (!firstMarket)
+		return { "type": "set first" };
+	if (!secondMarket)
+		return {
 			"type": "set second",
 			"gain": cmpEntityTrader.CalculateGain(firstMarket, data.target),
 		};
-	else
-		result = { "type": "set first" };
-
-	return result;
+	return { "type": "set first" };
 };
 
 GuiInterface.prototype.CanAttack = function(player, data)

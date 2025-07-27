@@ -446,16 +446,14 @@ function addElevation(constraint, el)
 		const smooth = Math.floor(elevation / el.steepness);
 
 		const offset = getRandomDeviation(el.size, el.deviation);
-		let pMinSize = Math.floor(minSize * offset);
 		let pMaxSize = Math.floor(maxSize * offset);
 		const pSpread = Math.floor(spread * offset);
 		let pSmooth = Math.abs(Math.floor(smooth * offset));
 		let pElevation = Math.floor(elevation * offset);
 
 		pElevation = Math.max(el.minElevation, Math.min(pElevation, el.maxElevation));
-		pMinSize = Math.min(pMinSize, pMaxSize);
 		pMaxSize = Math.min(pMaxSize, el.maxSize);
-		pMinSize = Math.max(pMaxSize, el.minSize);
+		const pMinSize = Math.max(pMaxSize, el.minSize);
 		pSmooth = Math.max(pSmooth, 1);
 
 		createAreas(

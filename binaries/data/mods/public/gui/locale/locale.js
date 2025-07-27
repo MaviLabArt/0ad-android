@@ -54,8 +54,7 @@ async function openAdvancedMenu()
 	var languageList = Engine.GetGUIObjectByName("languageList");
 
 	var currentLocaleDictName = Engine.GetFallbackToAvailableDictLocale(locale);
-	var index = -1;
-	index = languageList.list_data.indexOf(currentLocaleDictName);
+	const index = languageList.list_data.indexOf(currentLocaleDictName);
 
 	if (index != -1)
 		languageList.selected = index;

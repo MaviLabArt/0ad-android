@@ -60,7 +60,7 @@ GameSettings.prototype.Attributes.Landscape = class Landscape extends GameSettin
 		if (this.settings.map.map === "random" || !this.value || !this.value.startsWith("random"))
 			return false;
 
-		let items = [];
+		let items;
 		if (this.value.indexOf("_") !== -1)
 		{
 			const subgroup = this.data.find(x => x.Id == this.value);

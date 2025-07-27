@@ -101,25 +101,19 @@ Math.atan2 = function(y, x)
 	// Handle all edges cases to match the spec
 	if (uy === 0)
 		r = 0;
+	else if (uy === Infinity)
+	{
+		if (ux === Infinity)
+			r = Math.PI / 4;
+		else
+			r = Math.PI / 2;
+	}
 	else
 	{
-		if (ux === 0)
-			r = Math.PI / 2;
-
-		if (uy === Infinity)
-		{
-			if (ux === Infinity)
-				r = Math.PI / 4;
-			else
-				r = Math.PI / 2;
-		}
+		if (ux === Infinity)
+			r = 0;
 		else
-		{
-			if (ux === Infinity)
-				r = 0;
-			else
-				r = Math.atan(uy/ux);
-		}
+			r = Math.atan(uy/ux);
 	}
 
 	// puts the result into the correct quadrant

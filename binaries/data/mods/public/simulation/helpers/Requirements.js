@@ -37,7 +37,7 @@ RequirementsHelper.prototype.RequirementsSchema = function(recursionDepth)
 {
 	return "" +
 		"<oneOrMore>" +
-			this.ChoicesSchema(--recursionDepth) +
+			this.ChoicesSchema(recursionDepth - 1) +
 		"</oneOrMore>";
 };
 

@@ -118,7 +118,7 @@ BuildRestrictions.prototype.CheckPlacement = function()
 	}
 
 	// Check obstructions and terrain passability
-	var passClassName = "";
+	var passClassName;
 	switch (this.template.PlacementType)
 	{
 	case "shore":

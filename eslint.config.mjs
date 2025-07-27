@@ -109,6 +109,7 @@ const configEslintExtra = {
 		"no-unneeded-ternary": "warn",
 		"no-unused-expressions": "warn",
 		"no-use-before-define": ["error", "nofunc"],
+		"no-useless-assignment": "warn",
 		"operator-assignment": "warn",
 		"prefer-const": "warn",
 		"yoda": "warn",

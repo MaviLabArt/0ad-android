@@ -1059,12 +1059,10 @@ var g_UnitActions =
 
 			let tooltip;
 			const data = { "command": "walk" };
-			let cursor = "";
 			data.sound = false;
 
 			if (entState.attack && Engine.HotkeyIsPressed("session.focusfire"))
 			{
-				cursor = "action-target";
 				data.command = "attack-only";
 				if (targetState && playerCheck(entState, targetState, ["Enemy"]) && !targetState.resourceSupply)
 				{
@@ -1075,7 +1073,7 @@ var g_UnitActions =
 					"possible": true,
 					"data": data,
 					"position": targetState && targetState.position,
-					"cursor": cursor,
+					"cursor": "action-target",
 					"tooltip": tooltip
 				};
 			}

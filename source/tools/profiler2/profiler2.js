@@ -190,7 +190,6 @@ function draw_history_graph()
 	var series_data = {};
 
 	var frames_nb = Infinity;
-	var x_scale = 0;
 	var y_scale = 0;
 
 	var tooltip_helper = {};
@@ -211,7 +210,7 @@ function draw_history_graph()
 		}
 	}
 	canvas.width = Math.max(frames_nb, 600);
-	x_scale = frames_nb / canvas.width;
+	const x_scale = frames_nb / canvas.width;
 	y_scale *= 1 + y_padding / 100;
 	let id = 0;
 	for (const type in series_data)

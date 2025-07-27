@@ -63,8 +63,8 @@ export function* generateMap(mapSettings)
 	const mapCenter = g_Map.getCenter();
 	const numPlayers = getNumPlayers();
 
-	let clWater = g_Map.createTileClass();
-	let clCliffs = g_Map.createTileClass();
+	let clWater;
+	let clCliffs;
 	const clPlayer = g_Map.createTileClass();
 	const clForest = g_Map.createTileClass();
 	const clDirt = g_Map.createTileClass();

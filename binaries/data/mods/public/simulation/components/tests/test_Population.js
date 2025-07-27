@@ -43,7 +43,7 @@ Engine.RegisterGlobal("ApplyValueModificationsToEntity",
 	(valueName, currentValue, entityId) => currentValue
 );
 
-cmpPlayer = AddMock(player, IID_Player, {
+AddMock(player, IID_Player, {
 	"AddPopulationBonuses": () => TS_ASSERT(false)
 });
 cmpPopulation.OnValueModification({ "component": "bogus" });
@@ -109,3 +109,4 @@ cmpPlayer = AddMock(player, IID_Player, {
 spy = new Spy(cmpPlayer, "AddPopulationBonuses");
 cmpPopulation.OnOwnershipChanged({ "from": INVALID_PLAYER, "to": player });
 TS_ASSERT_EQUALS(spy._called, 1);
+

@@ -311,7 +311,7 @@ BuildingAI.prototype.FireArrows = function()
 	if (this.currentRound == 0)
 		this.arrowsLeft = this.GetArrowCount();
 
-	let arrowsToFire = 0;
+	let arrowsToFire;
 	if (this.currentRound == roundCount - 1)
 		arrowsToFire = this.arrowsLeft;
 	else

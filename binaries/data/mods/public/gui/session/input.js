@@ -978,7 +978,7 @@ function handleInputAfterGui(ev)
 				if (Engine.GetFollowedEntity() != clickedEntity)
 					Engine.CameraFollow(0);
 
-				let ents = [];
+				let ents;
 				if (ev.clicks == 1)
 					ents = [clickedEntity];
 				else

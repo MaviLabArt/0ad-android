@@ -135,7 +135,6 @@ TS_ASSERT_EQUALS(bought, Math.round(100 * (100 - cmpBarter.CONSTANT_DIFFERENCE -
 
 cmpBarter.priceDifferences = { "wood": 0, "stone": 0, "metal": 0 };
 cmpBarter.restoreTimer = undefined;
-timerActivated = false;
 AddMock(playerEnt, IID_Player, {
 	"TrySubtractResources": () => false,
 	"AddResource": () => {},

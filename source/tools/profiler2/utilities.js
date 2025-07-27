@@ -58,8 +58,8 @@ function slice_intervals(data, range)
 	if (!data.intervals.length)
 		return { "tmin": 0, "tmax": 0, "intervals": [] };
 
-	var tmin = 0;
-	var tmax = 0;
+	var tmin;
+	var tmax;
 	if (range.seconds && data.frames.length)
 	{
 		tmax = data.frames[data.frames.length-1].t1;

@@ -25,7 +25,7 @@ class ProductionRowManager
 		for (const prodType of Object.keys(template.production).reverse())
 			for (let prod of template.production[prodType])
 			{
-				let pIdx = 0;
+				let pIdx;
 				switch (prodType)
 				{
 
