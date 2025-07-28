@@ -777,12 +777,10 @@ static void RunGameOrAtlas(const PS::span<const char* const> argv)
 #if OS_ANDROID
 // In Android we compile the engine as a shared library, not an executable,
 // so rename main() to a different symbol that the wrapper library can load
-#undef main
-#define main pyrogenesis_main
-extern "C" __attribute__((visibility ("default"))) int main(int argc, char* argv[]);
+extern "C" __attribute__((visibility ("default"))) int pyrogenesis_main(int argc, char* argv[])
+#else
+int main(int argc, char* argv[])
 #endif
-
-extern "C" int main(int argc, char* argv[])
 {
 #if OS_UNIX
 	// Don't allow people to run the game with root permissions,
