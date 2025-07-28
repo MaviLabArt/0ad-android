@@ -37,6 +37,12 @@
 #  pragma GCC diagnostic ignored "-Wcast-function-type"
 #  pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 #  pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#  pragma GCC diagnostic ignored "-Wvolatile"
+# else
+#  pragma GCC diagnostic ignored "-Wdeprecated-volatile"
+#  if __clang_major__ >= 19
+#   pragma GCC diagnostic ignored "-Wcast-function-type-mismatch"
+#  endif
 # endif
 #endif
 
