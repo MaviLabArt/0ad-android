@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,13 @@
 #ifndef INCLUDED_TEXTURECONVERTER
 #define INCLUDED_TEXTURECONVERTER
 
+#include "graphics/Texture.h"
 #include "lib/config2.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
 
-#include "TextureManager.h"
+#include <string>
+#include <vector>
 
 #if CONFIG2_NVTT
 #include "ps/Future.h"

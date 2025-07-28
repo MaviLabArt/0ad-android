@@ -21,6 +21,7 @@
 
 #include "graphics/GameView.h"
 #include "graphics/ShaderDefines.h"
+#include "graphics/ShaderProgram.h"
 #include "gui/GUIManager.h"
 #include "lib/config2.h"
 #include "lib/external_libraries/libsdl.h"

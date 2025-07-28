@@ -15,13 +15,26 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "lib/self_test.h"
+
 #include "graphics/MapGenerator.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Future.h"
-#include "simulation2/system/ComponentTest.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/StructuredClone.h"
 
 #include <atomic>
+#include <functional>
+#include <js/PropertyDescriptor.h>
+#include <string>
+#include <vector>
 
 class TestMapGenerator : public CxxTest::TestSuite
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,15 +22,16 @@
 #ifndef INCLUDED_UNITMANAGER
 #define INCLUDED_UNITMANAGER
 
-#include "ps/CStrForward.h"
+#include "lib/posix/posix_types.h"
 #include "simulation2/system/Entity.h"
 
+#include <cstdint>
 #include <memory>
-#include <set>
 #include <vector>
 
-class CUnit;
 class CObjectManager;
+class CStrW;
+class CUnit;
 
 ///////////////////////////////////////////////////////////////////////////////
 // CUnitManager: simple container class holding all units within the world

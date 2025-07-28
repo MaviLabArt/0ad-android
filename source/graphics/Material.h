@@ -18,7 +18,6 @@
 #ifndef INCLUDED_MATERIAL
 #define INCLUDED_MATERIAL
 
-#include "graphics/Color.h"
 #include "graphics/ShaderDefines.h"
 #include "graphics/Texture.h"
 #include "ps/CStr.h"

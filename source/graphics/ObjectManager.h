@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,13 +18,18 @@
 #ifndef INCLUDED_OBJECTMANAGER
 #define INCLUDED_OBJECTMANAGER
 
-#include "ps/CStr.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
 
-#include <set>
+#include <cstdint>
 #include <map>
 #include <memory>
+#include <set>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 class CActorDef;

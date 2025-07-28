@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,24 @@
 #define INCLUDED_SHADERMANAGER
 
 #include "graphics/ShaderDefines.h"
-#include "graphics/ShaderProgram.h"
+#include "graphics/ShaderProgramPtr.h"
 #include "graphics/ShaderTechnique.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/backend/PipelineState.h"
+#include "graphics/ShaderTechniquePtr.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "ps/CStr.h"
+#include "ps/CStrIntern.h"
 
-#include <functional>
+#include <cstddef>
+#include <map>
 #include <memory>
 #include <set>
+#include <string>
 #include <unordered_map>
+
+class CShaderProgram;
+namespace Renderer::Backend { class IDevice; }
 
 /**
  * Shader manager: loads and caches shader programs.

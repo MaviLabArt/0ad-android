@@ -22,15 +22,21 @@
 #include "graphics/MapIO.h"
 #include "graphics/Patch.h"
 #include "graphics/Terrain.h"
-#include "lib/status.h"
-#include "lib/timer.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/utf8.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/FileIo.h"
+#include "ps/Filesystem.h"
 #include "ps/Future.h"
-#include "ps/scripting/JSInterface_VFS.h"
 #include "ps/TemplateLoader.h"
+#include "ps/scripting/JSInterface_VFS.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/ModuleLoader.h"
@@ -38,13 +44,25 @@
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/helpers/MapEdgeTiles.h"
+#include "simulation2/system/ParamNode.h"
 
 #include <boost/random/linear_congruential.hpp>
+#include <cstddef>
+#include <fmt/format.h>
+#include <js/Interrupt.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
 #include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
+
+struct JSContext;
 
 namespace
 {

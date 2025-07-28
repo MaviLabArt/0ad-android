@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,12 +19,17 @@
 #define INCLUDED_MAPGENERATOR
 
 #include "lib/file/vfs/vfs_path.h"
-#include "ps/Future.h"
+#include "lib/types.h"
 #include "scriptinterface/ScriptTypes.h"
 #include "scriptinterface/StructuredClone.h"
 
 #include <atomic>
+#include <js/PropertyDescriptor.h>
 #include <string>
+#include <string_view>
+
+class ScriptInterface;
+class StopToken;
 
 constexpr std::wstring_view RANDOM_MAP_PREFIX{L"maps/random/"};
 

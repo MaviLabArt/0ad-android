@@ -18,22 +18,25 @@
 #ifndef INCLUDED_OBJECTBASE
 #define INCLUDED_OBJECTBASE
 
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
 #include "ps/CStrIntern.h"
 
-class CActorDef;
-class CObjectEntry;
-class CObjectManager;
-class CXeromyces;
-class XMBElement;
-
+#include <cstdint>
 #include <map>
 #include <memory>
 #include <random>
 #include <set>
 #include <unordered_set>
 #include <vector>
+
+class CActorDef;
+class CObjectManager;
+class CXeromyces;
+class XMBElement;
 
 /**
  * Maintains the tree of possible objects from a specific actor definition at a given quality level.

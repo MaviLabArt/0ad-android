@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -27,15 +27,16 @@
 #ifndef INCLUDED_TERRAINPROPERTIES
 #define INCLUDED_TERRAINPROPERTIES
 
-#include <memory>
-
-#include "ps/CStr.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
+
+#include <memory>
+#include <vector>
 
 class CTerrainGroup;
-class XMBElement;
-class CXeromyces;
 class CTerrainProperties;
+class CXeromyces;
+class XMBElement;
 
 typedef std::shared_ptr<CTerrainProperties> CTerrainPropertiesPtr;
 

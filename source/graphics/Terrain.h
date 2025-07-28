@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,14 +24,15 @@
 
 #include "graphics/HeightMipmap.h"
 #include "graphics/SColor.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/Vector3D.h"
-#include "ps/CStr.h"
 
-class CPatch;
-class CMiniPatch;
-class CFixedVector3D;
 class CBoundingBoxAligned;
+class CFixedVector3D;
+class CMiniPatch;
+class CPatch;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Terrain Constants:

@@ -20,17 +20,23 @@
 #include "MapIO.h"
 
 #include "graphics/Patch.h"
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
 #include "lib/file/file.h"
+#include "lib/file/vfs/vfs.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/os_path.h"
+#include "lib/posix/posix_types.h"
 #include "lib/status.h"
 #include "lib/tex/tex.h"
 #include "maths/MathUtil.h"
 #include "ps/Filesystem.h"
 
-#include <fcntl.h>
 #include <algorithm>
+#include <cstddef>
+#include <fcntl.h>
+#include <memory>
+#include <string>
 #include <vector>
 
 Status ParseHeightmapImage(const std::shared_ptr<u8>& fileData, size_t fileSize, std::vector<u16>& heightmap);

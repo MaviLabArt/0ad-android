@@ -20,8 +20,9 @@
 
 #include "lib/code_annotation.h"
 #include "ps/CStr.h"
-#include "simulation2/system/Entity.h"	// entity_id_t
+#include "simulation2/system/Entity.h"
 
+#include <cstdint>
 #include <map>
 #include <memory>
 #include <set>

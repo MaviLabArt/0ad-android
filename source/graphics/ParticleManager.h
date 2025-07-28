@@ -20,11 +20,15 @@
 
 #include "graphics/ParticleEmitter.h"
 #include "graphics/ParticleEmitterType.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
+#include "lib/status.h"
 
 #include <list>
 #include <random>
 #include <unordered_map>
 
+class CFrustum;
 class SceneCollector;
 
 class CParticleManager

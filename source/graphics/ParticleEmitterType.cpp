@@ -43,6 +43,7 @@
 #include <cmath>
 #include <cstddef>
 #include <map>
+#include <random>
 
 /**
  * Interface for particle state variables, which get evaluated for each newly

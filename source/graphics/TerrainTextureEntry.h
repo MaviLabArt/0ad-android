@@ -22,10 +22,13 @@
 #include "graphics/TerrainTextureManager.h"
 #include "graphics/Texture.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "maths/Matrix3D.h"
 #include "ps/CStr.h"
 
 #include <vector>
+
+class CTerrainProperties;
 
 // CTerrainTextureEntry: class wrapping a terrain texture object; contains various other required
 // elements - color of minimap, terrain "group" it belongs to, etc

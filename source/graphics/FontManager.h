@@ -21,11 +21,11 @@
 #include "lib/code_annotation.h"
 #include "ps/CStrIntern.h"
 
+#include <array>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <memory>
 #include <unordered_map>
-#include <utility>
 
 class CFont;
 struct FT_LibraryRec_;

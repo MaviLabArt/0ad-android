@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,23 @@
 #define INCLUDED_TEXTUREMANAGER
 
 #include "graphics/Texture.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs.h"
-#include "lib/tex/tex.h"
-#include "renderer/backend/IDevice.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/ITexture.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
+#include "renderer/backend/Format.h"
 #include "renderer/backend/Sampler.h"
 
+#include <cstddef>
+#include <cstdint>
 #include <memory>
 
-class CTextureProperties;
 class CTextureManagerImpl;
+class CTextureProperties;
+class Tex;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class ITexture; }
 
 /**
  * Texture manager with asynchronous loading and automatic DDS conversion/compression.

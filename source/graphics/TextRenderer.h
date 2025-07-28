@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,16 +19,18 @@
 #define INCLUDED_TEXTRENDERER
 
 #include "graphics/Color.h"
-#include "graphics/ShaderProgram.h"
 #include "maths/Rect.h"
 #include "maths/Vector2D.h"
 #include "ps/CStrIntern.h"
-#include "renderer/backend/IDeviceCommandContext.h"
 
+#include <cstddef>
 #include <list>
+#include <memory>
+#include <string>
 
 class CFont;
-class CMatrix3D;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
 
 class CTextRenderer
 {

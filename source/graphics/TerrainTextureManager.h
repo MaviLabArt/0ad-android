@@ -19,24 +19,24 @@
 #define INCLUDED_TERRAINTEXTUREMANAGER
 
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
 #include "ps/Singleton.h"
-#include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/ITexture.h"
 
+#include <cstddef>
 #include <map>
 #include <memory>
 #include <vector>
 
-// access to sole CTerrainTextureManager object
-#define g_TexMan CTerrainTextureManager::GetSingleton()
-
-#define NUM_ALPHA_MAPS 14
-
-class CTerrainTextureEntry;
 class CTerrainProperties;
+class CTerrainTextureEntry;
+namespace Renderer::Backend { class IDevice; }
+namespace Renderer::Backend { class IDeviceCommandContext; }
 
 typedef std::shared_ptr<CTerrainProperties> CTerrainPropertiesPtr;
+
+#define NUM_ALPHA_MAPS 14
 
 class CTerrainGroup
 {
@@ -140,5 +140,8 @@ private:
 	// Once we get a properly threaded loading we might optimize that.
 	std::vector<CTerrainTextureManager::TerrainAlphaMap::iterator> m_AlphaMapsToUpload;
 };
+
+// access to sole CTerrainTextureManager object
+#define g_TexMan CTerrainTextureManager::GetSingleton()
 
 #endif // INCLUDED_TERRAINTEXTUREMANAGER

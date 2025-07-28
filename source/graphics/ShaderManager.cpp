@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,31 +19,33 @@
 
 #include "ShaderManager.h"
 
+#include "graphics/Color.h"
 #include "graphics/PreprocessorWrapper.h"
+#include "graphics/ShaderProgram.h"
 #include "graphics/ShaderTechnique.h"
-#include "lib/config2.h"
+#include "lib/debug.h"
 #include "lib/hash.h"
 #include "lib/timer.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/backend/Backend.h"
 #include "renderer/backend/CompareOp.h"
 #include "renderer/backend/IDevice.h"
-
-#define USE_SHADER_XML_VALIDATION 1
-
-#if USE_SHADER_XML_VALIDATION
-#include "ps/XML/RelaxNG.h"
-#include "ps/XML/XMLWriter.h"
-#endif
+#include "renderer/backend/PipelineState.h"
 
 #include <optional>
+#include <utility>
 #include <vector>
+
+#define USE_SHADER_XML_VALIDATION 1
 
 TIMER_ADD_CLIENT(tc_ShaderValidation);
 

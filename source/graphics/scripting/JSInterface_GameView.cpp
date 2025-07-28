@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,13 +22,22 @@
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
 #include "graphics/Terrain.h"
+#include "maths/Fixed.h"
 #include "maths/FixedVector3D.h"
+#include "maths/Vector3D.h"
+#include "ps/CLogger.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/helpers/Position.h"
+#include "simulation2/system/Entity.h"
+
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 
 namespace JSI_GameView
 {

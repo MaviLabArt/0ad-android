@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,20 @@
 #define INCLUDED_PARTICLEEMITTERTYPE
 
 #include "graphics/Texture.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "maths/BoundingBoxAligned.h"
 
 #include <memory>
 #include <string>
+#include <vector>
 
-class CVector3D;
 class CParticleEmitter;
 class CParticleManager;
-class IParticleVar;
+class CVector3D;
 class IParticleEffector;
+class IParticleVar;
 
 /**
  * Particle emitter type - stores the common state data for all emitters of that

@@ -20,30 +20,46 @@
 #include "MapReader.h"
 
 #include "graphics/Camera.h"
-#include "graphics/CinemaManager.h"
+#include "graphics/Color.h"
 #include "graphics/Entity.h"
 #include "graphics/GameView.h"
 #include "graphics/MapGenerator.h"
+#include "graphics/MapIO.h"
+#include "graphics/MiniPatch.h"
 #include "graphics/Patch.h"
 #include "graphics/Terrain.h"
 #include "graphics/TerrainTextureEntry.h"
 #include "graphics/TerrainTextureManager.h"
+#include "lib/alignment.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/timer.h"
+#include "lib/utf8.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/NUSpline.h"
 #include "ps/CLogger.h"
+#include "ps/Filesystem.h"
+#include "ps/Future.h"
 #include "ps/Loader.h"
 #include "ps/Profiler2.h"
 #include "ps/TaskManager.h"
 #include "ps/World.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/PostprocManager.h"
 #include "renderer/SkyManager.h"
 #include "renderer/WaterManager.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/JSON.h"
+#include "scriptinterface/StructuredClone.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpCinemaManager.h"
 #include "simulation2/components/ICmpGarrisonHolder.h"
@@ -56,8 +72,18 @@
 #include "simulation2/components/ICmpTurretHolder.h"
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/CinemaPath.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/CmpPtr.h"
 
+#include <algorithm>
+#include <atomic>
 #include <boost/algorithm/string/predicate.hpp>
+#include <functional>
+#include <js/PropertyAndElement.h>
+#include <string>
+#include <string_view>
+#include <utility>
 
 extern bool IsQuitRequested();
 

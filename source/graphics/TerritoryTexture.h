@@ -16,13 +16,16 @@
  */
 
 #include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "maths/Matrix3D.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/ITexture.h"
 
+#include <cstddef>
 #include <memory>
 
 class CSimulation2;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class ITexture; }
 template<typename T> class Grid;
 
 /**

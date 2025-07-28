@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,12 +22,16 @@
 #ifndef INCLUDED_SKELETONANIMDEF
 #define INCLUDED_SKELETONANIMDEF
 
-#include "maths/Vector3D.h"
-#include "maths/Quaternion.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
+#include "maths/Quaternion.h"
+#include "maths/Vector3D.h"
 
+#include <cstddef>
 #include <memory>
 #include <vector>
+
+class CMatrix3D;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // CBoneState: structure describing state of a bone at some point

@@ -24,10 +24,9 @@
 
 #include <vector>
 
-class CUnit;
 class CModel;
-class CSkeletonAnim;
 class CObjectEntry;
+class CSkeletonAnim;
 
 /**
  * Deals with synchronisation issues between raw animation data (CModel, CSkeletonAnim)

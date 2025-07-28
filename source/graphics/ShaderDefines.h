@@ -18,17 +18,19 @@
 #ifndef INCLUDED_SHADERDEFINES
 #define INCLUDED_SHADERDEFINES
 
-#include "ps/containers/StaticVector.h"
-#include "ps/CStr.h"
+#include "maths/Vector4D.h"
 #include "ps/CStrIntern.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
+#include "ps/containers/StaticVector.h"
 
+#include <cstddef>
 #include <map>
+#include <memory>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
-class CVector4D;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
 
 /**
  * Represents a mapping of name strings to value, for use with

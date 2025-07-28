@@ -23,6 +23,7 @@
 #include "simulation2/system/Entity.h"
 
 class CCamera;
+class CVector3D;
 struct SDL_Event_;
 struct SViewPort;
 

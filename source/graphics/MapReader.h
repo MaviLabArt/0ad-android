@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,27 +21,36 @@
 #include "MapIO.h"
 
 #include "graphics/LightEnv.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
+#include "maths/Vector3D.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/FileIo.h"
 #include "scriptinterface/ScriptTypes.h"
 #include "simulation2/system/Entity.h"
 
+#include <cstddef>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <memory>
+#include <vector>
 
-class CTerrain;
-class WaterManager;
-class SkyManager;
-class CLightEnv;
 class CCinemaManager;
-class CPostprocManager;
-class CTriggerManager;
-class CSimulation2;
-class CSimContext;
-class CTerrainTextureEntry;
 class CGameView;
+class CPostprocManager;
+class CSimContext;
+class CSimulation2;
+class CTerrain;
+class CTerrainTextureEntry;
+class CTriggerManager;
 class CXMLReader;
 class ScriptContext;
 class ScriptInterface;
+class SkyManager;
+class WaterManager;
 
 class CMapReader : public CMapIO
 {

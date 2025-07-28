@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,12 +20,23 @@
 
 #include "graphics/ModelAbstract.h"
 #include "graphics/ParticleEmitterType.h"
+#include "graphics/SColor.h"
+#include "lib/posix/posix_types.h"
+#include "maths/BoundingBoxAligned.h"
 #include "maths/Quaternion.h"
-#include "renderer/backend/IDeviceCommandContext.h"
-#include "renderer/backend/IShaderProgram.h"
+#include "maths/Vector3D.h"
 #include "renderer/VertexArray.h"
 
+#include <cstddef>
 #include <map>
+#include <memory>
+#include <string>
+#include <vector>
+
+class CParticleEmitter;
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
+namespace Renderer::Backend { class IVertexInputLayout; }
 
 /**
  * Simulation state for a single particle.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,19 +20,21 @@
 
 #include "graphics/Color.h"
 #include "graphics/ObjectBase.h"
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
 
 #include <map>
 #include <memory>
 #include <set>
+#include <string>
 #include <vector>
 
 class CModelAbstract;
-class CSkeletonAnim;
-class CObjectBase;
 class CObjectManager;
 class CSimulation2;
+class CSkeletonAnim;
 
 class CObjectEntry
 {
