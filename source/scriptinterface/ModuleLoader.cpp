@@ -433,12 +433,12 @@ ModuleLoader::Result::iterator& ModuleLoader::Result::iterator::operator++(int)
 	return *this;
 }
 
-[[nodiscard]] bool ModuleLoader::Result::iterator::operator==(const iterator&)
+[[nodiscard]] bool ModuleLoader::Result::iterator::operator==(const iterator&) const
 {
 	return false;
 }
 
-[[nodiscard]] bool ModuleLoader::Result::iterator::operator!=(const iterator&)
+[[nodiscard]] bool ModuleLoader::Result::iterator::operator!=(const iterator&) const
 {
 	return true;
 }

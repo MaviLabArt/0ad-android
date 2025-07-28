@@ -200,8 +200,8 @@ public:
 	iterator& operator++();
 	iterator& operator++(int);
 
-	[[nodiscard]] bool operator==(const iterator&);
-	[[nodiscard]] bool operator!=(const iterator&);
+	[[nodiscard]] bool operator==(const iterator&) const;
+	[[nodiscard]] bool operator!=(const iterator&) const;
 
 private:
 	Result* backRef{nullptr};
