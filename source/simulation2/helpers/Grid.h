@@ -46,23 +46,6 @@ template<typename T>
 class Grid
 {
 	friend struct SerializeHelper<Grid<T>>;
-protected:
-	// Tag-dispatching internal utilities for convenience.
-	struct default_type{};
-	struct is_pod { operator default_type() { return default_type{}; }};
-	struct is_container { operator default_type() { return default_type{}; }};
-
-	// helper to detect value_type
-	template <typename U, typename = int> struct has_value_type : std::false_type { };
-	template <typename U> struct has_value_type <U, decltype(std::declval<typename U::value_type>(), 0)> : std::true_type { };
-
-	template <typename U, typename A, typename B> using if_ = typename std::conditional<U::value, A, B>::type;
-
-	template<typename U>
-	using dispatch = if_< std::is_pod<U>, is_pod,
-						  if_<has_value_type<U>, is_container,
-						default_type>>;
-
 public:
 	Grid() : m_W(0), m_H(0), m_Data(NULL)
 	{
@@ -82,9 +65,6 @@ public:
 public:
 
 	// Ensure that o and this are the same size before calling.
-	void copy_data(T* o, default_type) { std::copy(o, o + m_H*m_W, &m_Data[0]); }
-	void copy_data(T* o, is_pod) { memcpy(m_Data, o, m_W*m_H*sizeof(T)); }
-
 	Grid& operator=(const Grid& g)
 	{
 		if (this == &g)
@@ -92,7 +72,10 @@ public:
 
 		if (m_W == g.m_W && m_H == g.m_H)
 		{
-			copy_data(g.m_Data, dispatch<T>{});
+			if constexpr (std::is_trivially_copyable_v<T>)
+				memcpy(m_Data, g.m_Data, m_W*m_H*sizeof(T));
+			else
+				std::copy(g.m_Data, g.m_Data + m_H*m_W, &m_Data[0]);
 			return *this;
 		}
 
@@ -102,7 +85,10 @@ public:
 		if (g.m_Data)
 		{
 			m_Data = new T[m_W * m_H];
-			copy_data(g.m_Data, dispatch<T>{});
+			if constexpr (std::is_trivially_copyable_v<T>)
+				memcpy(m_Data, g.m_Data, m_W*m_H*sizeof(T));
+			else
+				std::copy(g.m_Data, g.m_Data + m_H*m_W, &m_Data[0]);
 		}
 		return *this;
 	}
@@ -120,15 +106,16 @@ public:
 	}
 
 	// Ensure that o and this are the same size before calling.
-	bool compare_data(T* o, default_type) const { return std::equal(&m_Data[0], &m_Data[m_W*m_H], o); }
-	bool compare_data(T* o, is_pod) const { return memcmp(m_Data, o, m_W*m_H*sizeof(T)) == 0; }
 
 	bool operator==(const Grid& g) const
 	{
 		if (!compare_sizes(&g))
 			return false;
 
-		return compare_data(g.m_Data, dispatch<T>{});
+		if constexpr (std::is_standard_layout_v<T> && std::is_trivial_v<T>)
+			return memcmp(m_Data, g.m_Data, m_W*m_H*sizeof(T)) == 0;
+		else
+			return std::equal(&m_Data[0], &m_Data[m_W*m_H], g.m_Data);
 	}
 	bool operator!=(const Grid& g) const { return !(*this==g); }
 
@@ -140,41 +127,39 @@ public:
 	u16 width() const { return m_W; };
 	u16 height() const { return m_H; };
 
-
-	bool _any_set_in_square(int, int, int, int, default_type) const
-	{
-		static_assert(!std::is_same<T, T>::value, "Not implemented.");
-		return false; // Fix warnings.
-	}
-	bool _any_set_in_square(int i0, int j0, int i1, int j1, is_pod) const
-	{
-#if GRID_BOUNDS_DEBUG
-		ENSURE(i0 >= 0 && j0 >= 0 && i1 <= m_W && j1 <= m_H);
-#endif
-		for (int j = j0; j < j1; ++j)
-		{
-			int sum = 0;
-			for (int i = i0; i < i1; ++i)
-				sum += m_Data[j*m_W + i];
-			if (sum > 0)
-				return true;
-		}
-		return false;
-	}
-
 	bool any_set_in_square(int i0, int j0, int i1, int j1) const
 	{
-		return _any_set_in_square(i0, j0, i1, j1, dispatch<T>{});
+		if constexpr (std::is_standard_layout_v<T> && std::is_trivial_v<T>)
+		{
+#if GRID_BOUNDS_DEBUG
+			ENSURE(i0 >= 0 && j0 >= 0 && i1 <= m_W && j1 <= m_H);
+#endif
+			for (int j = j0; j < j1; ++j)
+			{
+				int sum = 0;
+				for (int i = i0; i < i1; ++i)
+					sum += m_Data[j*m_W + i];
+				if (sum > 0)
+					return true;
+			}
+			return false;
+		}
+		else
+		{
+			static_assert(!std::is_same<T, T>::value, "Not implemented.");
+			return false; // Fix warnings.
+		}
 	}
-
-	void reset_data(default_type) { std::fill(&m_Data[0], &m_Data[m_H*m_W], T{}); }
-	void reset_data(is_pod) { memset(m_Data, 0, m_W*m_H*sizeof(T)); }
 
 	// Reset the data to its default-constructed value (usually 0), not changing size.
 	void reset()
 	{
-		if (m_Data)
-			reset_data(dispatch<T>{});
+		if (m_Data) {
+			if constexpr (std::is_standard_layout_v<T> && std::is_trivial_v<T>)
+				memset(m_Data, 0, m_W*m_H*sizeof(T));
+			else
+				std::fill(&m_Data[0], &m_Data[m_H*m_W], T{});
+		}
 	}
 
 	// Clear the grid setting the size to 0 and freeing any data.

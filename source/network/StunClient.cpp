@@ -88,7 +88,7 @@ ENetAddress m_PublicAddress;
 template<typename T, size_t n = sizeof(T)>
 void AddToBuffer(std::vector<u8>& buffer, const T value)
 {
-	static_assert(std::is_pod_v<T>, "T must be POD");
+	static_assert(std::is_standard_layout_v<T> && std::is_trivial_v<T>, "T must be POD");
 	buffer.reserve(buffer.size() + n);
 	// std::byte* can alias anything so this is legal.
 	const std::byte* ptr = reinterpret_cast<const std::byte*>(&value);
@@ -107,7 +107,7 @@ void AddToBuffer(std::vector<u8>& buffer, const T value)
 template<typename T, size_t n = sizeof(T)>
 bool GetFromBuffer(const std::vector<u8>& buffer, u32& offset, T& result)
 {
-	static_assert(std::is_pod_v<T>, "T must be POD");
+	static_assert(std::is_standard_layout_v<T> && std::is_trivial_v<T>, "T must be POD");
 	if (offset + n > buffer.size())
 		return false;
 
