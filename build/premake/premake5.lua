@@ -485,7 +485,7 @@ function project_create(project_name, target_type)
 
 	project(project_name)
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++20"
 	kind(target_type)
 
 	filter "action:vs2022"
