@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -52,11 +52,11 @@ char* dlerror()
 	switch(GetLastError())
 	{
 	case ERROR_MOD_NOT_FOUND:
-		return "module not found";
+		return const_cast<char*>("module not found");
 	case ERROR_PROC_NOT_FOUND:
-		return "symbol not found";
+		return const_cast<char*>("symbol not found");
 	default:
-		return "unknown";
+		return const_cast<char*>("unknown");
 	}
 }
 

@@ -236,7 +236,7 @@ class TestWdbgSym : public CxxTest::TestSuite
 	// also exercises all basic types because we need to display some values
 	// anyway (to see at a glance whether symbol engine addrs are correct)
 	static void m_test_addrs([[maybe_unused]] int p_int, [[maybe_unused]] double p_double,
-		[[maybe_unused]] char* p_pchar, [[maybe_unused]] uintptr_t p_uintptr)
+		[[maybe_unused]] const char* p_pchar, [[maybe_unused]] uintptr_t p_uintptr)
 	{
 		[[maybe_unused]] size_t l_uint = 0x1234;
 		[[maybe_unused]] bool l_bool = true;
@@ -247,7 +247,7 @@ class TestWdbgSym : public CxxTest::TestSuite
 
 		static double s_double = -2.718;
 		static char s_chars[] = {'c','h','a','r','s',0};
-		static void (*s_funcptr)(int, double, char*, uintptr_t) = m_test_addrs;
+		static void (*s_funcptr)(int, double, const char*, uintptr_t) = m_test_addrs;
 		static void* s_ptr = (void*)(uintptr_t)0x87654321;
 		static HDC s_hdc = (HDC)0xff0;
 
