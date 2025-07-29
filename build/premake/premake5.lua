@@ -358,10 +358,16 @@ function project_set_build_flags()
 				}
 			filter {}
 
-			-- issues with gcc 12 to 14, workaround for CI which sets CC=gcc-12
+			-- issues with gcc 12 to 14 with pch enabled, workaround for CI which sets CC=gcc-12
 			if cc == "gcc-12" then
 				buildoptions {
+					-- mozilla
 					"-Wno-dangling-pointer",
+					-- fortify source
+					"-Wno-stringop-overflow",
+					"-Wno-attribute-warning",
+					"-Wno-array-bounds",
+					"-Wno-restrict",
 				}
 			end
 
