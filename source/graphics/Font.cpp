@@ -95,7 +95,7 @@ float CFont::GetHeight() const {
 float CFont::GetCapHeight()
 {
 	const CFont::GlyphData* g{GetGlyph(L'I')};
-	return (g ? g->yadvance : 0) + std::abs(FPosF26Dot6ToFloat(m_Faces.front()->size->metrics.descender));
+	return (g ? g->yadvance : 0) + std::abs(FPosF26Dot6ToFloat(m_Faces.front()->size->metrics.descender)) / m_Scale;
 }
 
 float CFont::GetCharacterWidth(wchar_t c)
