@@ -29,13 +29,13 @@ class CSoundData;
 class CBufferItem : public CSoundBase
 {
 public:
-  CBufferItem(CSoundData* sndData);
+  CBufferItem(COggData* sndData);
   virtual ~CBufferItem();
 
   virtual void SetLooping(bool loops);
   virtual bool IdleTask();
 
-  virtual void Attach(CSoundData* itemData);
+  virtual void Attach(COggData* itemData);
 
 protected:
   void ReleaseOpenALBuffer();

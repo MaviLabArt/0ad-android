@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 #include "maths/Vector3D.h"
 #include "ps/CStr.h"
-#include "soundmanager/data/SoundData.h"
+#include "soundmanager/data/OggData.h"
 
 class ISoundItem
 {
@@ -44,7 +44,7 @@ public:
 	virtual void Play() = 0;
 	virtual void Stop() = 0;
 
-	virtual void Attach(CSoundData* itemData) = 0;
+	virtual void Attach(COggData* itemData) = 0;
 
 	virtual void EnsurePlay() = 0;
 

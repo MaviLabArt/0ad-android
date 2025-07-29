@@ -23,32 +23,43 @@
 #if CONFIG2_AUDIO
 
 #include "ogg.h"
-#include "SoundData.h"
 
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
 
 #include <AL/al.h>
 #include <array>
+#include <string>
+#include <stdexcept>
+
 
 /*
 * 50 buffers of 98304 bytes each gives us 4.9 seconds of audio, which is a good amount to have buffered at once.
 */
 constexpr int OGG_DEFAULT_BUFFER_COUNT = 50;
 
-class COggData final : public CSoundData
+struct OggDataError : std::runtime_error
+{
+	using std::runtime_error::runtime_error;
+};
+
+class COggData
 {
 public:
-	COggData();
+	COggData(const VfsPath& itemPath);
 	~COggData();
-
-	bool InitOggFile(const VfsPath& itemPath);
 	bool IsFileFinished();
-	bool IsOneShot() override;
-	bool IsStereo() override;
+	bool IsOneShot();
+	bool IsStereo();
 
 	int FetchDataIntoBuffer(int count, ALuint* buffers);
 	void ResetFile();
 
+	int GetBufferCount();
+	ALuint GetBuffer();
+	ALuint* GetBufferPtr();
+
+	Path m_FileName;
 private:
 	ALuint m_Format;
 	ALsizei m_Frequency;
@@ -60,9 +71,6 @@ protected:
 	int m_BuffersCount;
 
 	void SetFormatAndFreq(ALenum form, ALsizei freq);
-	int GetBufferCount() override;
-	unsigned int GetBuffer() override;
-	unsigned int* GetBufferPtr() override;
 };
 
 #endif // CONFIG2_AUDIO

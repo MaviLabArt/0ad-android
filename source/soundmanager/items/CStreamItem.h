@@ -22,6 +22,7 @@
 
 #if CONFIG2_AUDIO
 
+#include "soundmanager/data/OggData.h"
 #include "CSoundBase.h"
 
 class CSoundData;
@@ -29,12 +30,12 @@ class CSoundData;
 class CStreamItem : public CSoundBase
 {
 public:
-  CStreamItem(CSoundData* sndData);
+  CStreamItem(COggData* sndData);
   virtual ~CStreamItem();
 
   virtual void SetLooping(bool loops);
   virtual bool IdleTask();
-  virtual void Attach(CSoundData* itemData);
+  virtual void Attach(COggData* itemData);
 
 protected:
   void ReleaseOpenALStream();

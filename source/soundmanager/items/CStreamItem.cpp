@@ -24,12 +24,11 @@
 #include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
 #include "soundmanager/data/OggData.h"
-#include "soundmanager/data/SoundData.h"
 
 #include <AL/al.h>
 #include <cstddef>
 
-CStreamItem::CStreamItem(CSoundData* sndData)
+CStreamItem::CStreamItem(COggData* sndData)
 {
 	ResetVars();
 	if (InitOpenAL())
@@ -85,7 +84,7 @@ bool CStreamItem::IdleTask()
 	if (m_SoundData == nullptr)
 		return true;
 
-	COggData* theData = (COggData*)m_SoundData;
+	COggData* theData{static_cast<COggData*>(m_SoundData)};
 
 	if (!theData->IsFileFinished())
 	{
@@ -118,20 +117,14 @@ bool CStreamItem::IdleTask()
 	return true;
 }
 
-void CStreamItem::Attach(CSoundData* itemData)
+void CStreamItem::Attach(COggData* itemData)
 {
-	if (m_SoundData != NULL)
-	{
-		CSoundData::ReleaseSoundData(m_SoundData);
-		m_SoundData = 0;
-	}
+	if (!itemData)
+		return;
 
-	if (itemData != NULL)
-	{
-		m_SoundData = itemData->IncrementCount();
-		alSourceQueueBuffers(m_ALSource, m_SoundData->GetBufferCount(), (const ALuint *)m_SoundData->GetBufferPtr());
-		AL_CHECK;
-	}
+	m_SoundData = itemData;
+	alSourceQueueBuffers(m_ALSource, m_SoundData->GetBufferCount(), m_SoundData->GetBufferPtr());
+	AL_CHECK;
 }
 
 void CStreamItem::SetLooping(bool loops)

@@ -23,13 +23,14 @@
 
 #include "lib/status.h"
 #include "lib/types.h"
-#include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "soundmanager/SoundManager.h"
 #include "soundmanager/data/ogg.h"
 
+#include <AL/al.h>
 #include <algorithm>
-#include <cstddef>
+#include <fmt/format.h>
+#include <stdexcept>
 #include <span>
 #include <vector>
 
@@ -41,9 +42,33 @@
 */
 constexpr int OGG_DEFAULT_BUFFER_SIZE = 98304;
 
-COggData::COggData()
+COggData::COggData(const VfsPath& itemPath)
 	: m_Format(0), m_Frequency(0), m_OneShot(false), m_BuffersCount(0)
 {
+	if (OpenOggNonstream(g_VFS, itemPath, m_Stream) != INFO::OK)
+		throw new OggDataError("Can't open Ogg file");
+
+	m_FileFinished = false;
+
+	SetFormatAndFreq(m_Stream->Format(), m_Stream->SamplingRate());
+	m_FileName = itemPath;
+
+	AL_CHECK;
+	alGenBuffers(m_Buffer.size(), m_Buffer.data());
+
+	ALenum err{alGetError()};
+	if (err != AL_NO_ERROR)
+		throw new OggDataError(fmt::format("Failed to create initial buffer. OpenAL error: {}", alGetString(err)));
+
+	m_BuffersCount = FetchDataIntoBuffer(m_Buffer.size(), m_Buffer.data());
+	if (!m_FileFinished)
+		return;
+
+	m_OneShot = true;
+	if (m_BuffersCount < OGG_DEFAULT_BUFFER_COUNT)
+		alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersCount, &m_Buffer.at(m_BuffersCount));
+
+	AL_CHECK;
 }
 
 COggData::~COggData()
@@ -65,38 +90,6 @@ void COggData::SetFormatAndFreq(ALenum form, ALsizei freq)
 bool COggData::IsStereo()
 {
 	return m_Format == AL_FORMAT_STEREO16;
-}
-
-bool COggData::InitOggFile(const VfsPath& itemPath)
-{
-	if (OpenOggNonstream(g_VFS, itemPath, m_Stream) != INFO::OK)
-		return false;
-
-	m_FileFinished = false;
-
-	SetFormatAndFreq(m_Stream->Format(), m_Stream->SamplingRate());
-	SetFileName(itemPath);
-
-	AL_CHECK;
-	alGenBuffers(m_Buffer.size(), m_Buffer.data());
-
-	ALenum err{alGetError()};
-	if (err != AL_NO_ERROR)
-	{
-		LOGERROR("Failed to create initial buffer. OpenAL error: %s\n", alGetString(err));
-		return false;
-	}
-
-	m_BuffersCount = FetchDataIntoBuffer(m_Buffer.size(), m_Buffer.data());
-	if (m_FileFinished)
-	{
-		m_OneShot = true;
-		if (m_BuffersCount < OGG_DEFAULT_BUFFER_COUNT)
-			alDeleteBuffers(OGG_DEFAULT_BUFFER_COUNT - m_BuffersCount, &m_Buffer.at(m_BuffersCount));
-	}
-	AL_CHECK;
-
-	return true;
 }
 
 ALsizei COggData::GetBufferCount()
@@ -149,5 +142,4 @@ ALuint* COggData::GetBufferPtr()
 {
 	return m_Buffer.data();
 }
-
 #endif // CONFIG2_AUDIO

@@ -50,7 +50,7 @@ extern CGame *g_Game;
 #include "ps/XMB/XMBData.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "soundmanager/ISoundManager.h"
-#include "soundmanager/data/SoundData.h"
+#include "soundmanager/data/OggData.h"
 
 #include <AL/al.h>
 #include <cmath>
@@ -137,12 +137,6 @@ CSoundGroup::CSoundGroup(const VfsPath& pathnameXML)
 	LoadSoundGroup(pathnameXML);
 }
 
-CSoundGroup::~CSoundGroup()
-{
-	// clean up all the handles from this group.
-	ReleaseGroup();
-}
-
 float CSoundGroup::RadiansOffCenter([[maybe_unused]] const CVector3D& position,
 	[[maybe_unused]] bool& onScreen, [[maybe_unused]] float& itemRollOff)
 {
@@ -214,7 +208,7 @@ void CSoundGroup::UploadPropertiesAndPlay([[maybe_unused]] size_t index,
 	if (m_SoundGroups.size() <= index)
 		return;
 
-	CSoundData* sndData = m_SoundGroups[index];
+	COggData* sndData = m_SoundGroups.at(index);
 	if (!sndData)
 		return;
 
@@ -231,7 +225,7 @@ void CSoundGroup::UploadPropertiesAndPlay([[maybe_unused]] size_t index,
 			itemRollOff = 0;
 
 		if (sndData->IsStereo())
-			LOGWARNING("OpenAL: stereo sounds can't be positioned: %s", sndData->GetFileName().string8());
+			LOGWARNING("OpenAL: stereo sounds can't be positioned: %s", sndData->m_FileName.string8());
 
 		hSound->SetLocation(CVector3D(itemDist * sin(offset), 0, -itemDist * cos(offset)));
 		hSound->SetRollOff(itemRollOff, m_MinDist, m_MaxDist);
@@ -273,33 +267,24 @@ void CSoundGroup::Reload()
 {
 	m_CurrentSoundIndex = 0;
 #if CONFIG2_AUDIO
-	ReleaseGroup();
+	m_SoundGroups.clear();
 
 	if (!g_SoundManager)
 		return;
 
+	CSoundManager* soundManager{static_cast<CSoundManager*>(g_SoundManager)};
 	for (const std::wstring& filename : m_Filenames)
 	{
 		VfsPath absolutePath = m_Filepath / filename;
-		CSoundData* itemData = CSoundData::SoundDataFromFile(absolutePath);
+		COggData* itemData{soundManager->GetSoundDataFromFile(absolutePath)};
 		if (!itemData)
 			HandleError(L"error loading sound", absolutePath, ERR::FAIL);
 		else
-			m_SoundGroups.push_back(itemData->IncrementCount());
+			m_SoundGroups.push_back(itemData);
 	}
 
 	if (TestFlag(eRandOrder))
 		std::shuffle(m_SoundGroups.begin(), m_SoundGroups.end(), CFastRand(m_Seed));
-#endif
-}
-
-void CSoundGroup::ReleaseGroup()
-{
-#if CONFIG2_AUDIO
-	for (CSoundData* soundGroup : m_SoundGroups)
-		CSoundData::ReleaseSoundData(soundGroup);
-
-	m_SoundGroups.clear();
 #endif
 }
 

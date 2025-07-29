@@ -26,7 +26,7 @@
 #include "maths/Vector3D.h"
 #include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
-#include "soundmanager/data/SoundData.h"
+#include "soundmanager/data/OggData.h"
 
 #include <algorithm>
 
@@ -52,23 +52,15 @@ void CSoundBase::ReleaseOpenAL()
 		AL_CHECK;
 		m_ALSource = 0;
 	}
-	if (m_SoundData != 0)
-	{
-		AL_CHECK;
-		CSoundData::ReleaseSoundData(m_SoundData);
-		AL_CHECK;
-		m_SoundData = 0;
-	}
 }
 
-void CSoundBase::Attach(CSoundData* /*itemData*/)
+void CSoundBase::Attach(COggData*)
 {
 }
 
 void CSoundBase::ResetVars()
 {
 	m_ALSource = 0;
-	m_SoundData = 0;
 	m_LastPlay = false;
 	m_Looping = false;
 	m_StartFadeTime = 0;
@@ -365,7 +357,7 @@ void CSoundBase::Stop()
 const Path CSoundBase::GetName()
 {
 	if (m_SoundData)
-		return m_SoundData->GetFileName();
+		return m_SoundData->m_FileName;
 
 	return Path();
 }

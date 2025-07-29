@@ -24,16 +24,16 @@
 
 #include "CSoundBase.h"
 
-class CSoundData;
+class COggData;
 
 class CSoundItem : public CSoundBase
 {
 public:
   CSoundItem();
-  CSoundItem(CSoundData* sndData);
+  CSoundItem(COggData* sndData);
   virtual ~CSoundItem();
 
-  void Attach(CSoundData* itemData);
+  void Attach(COggData* itemData);
   bool IdleTask();
 };
 

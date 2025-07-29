@@ -22,7 +22,7 @@
 
 #if CONFIG2_AUDIO
 
-#include "lib/file/vfs/vfs_path.h"
+#include "soundmanager/data/OggData.h"
 #include "soundmanager/items/ISoundItem.h"
 
 #include <AL/al.h>
@@ -36,7 +36,7 @@ class CSoundBase : public ISoundItem
 protected:
 
 	ALuint m_ALSource;
-	CSoundData* m_SoundData;
+	COggData* m_SoundData;
 
 	bool m_LastPlay;
 	bool m_Looping;
@@ -91,7 +91,7 @@ public:
 
 	virtual void SetLooping(bool loops);
 	virtual bool IdleTask();
-	virtual void Attach(CSoundData* itemData);
+	virtual void Attach(COggData* itemData);
 
 protected:
 
