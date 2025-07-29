@@ -241,6 +241,11 @@ function project_set_build_flags()
 		debugenvs { "_NO_DEBUG_HEAP=1" }
 	end
 
+	if os.istarget("windows") then
+		-- mozilla 115 linked list destructor in debug build
+		defines { "__PRETTY_FUNCTION__=__FUNCSIG__" }
+	end
+
 	filter { "Debug", "action:vs*" }
 		defines { "DEBUG" }
 
