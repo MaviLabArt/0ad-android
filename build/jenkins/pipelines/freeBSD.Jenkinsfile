@@ -35,7 +35,7 @@ pipeline {
 
     environment {
         USE = 'iconv'
-        WX_CONFIG = '/usr/local/bin/wxgtk3u-3.0-config'
+        WX_CONFIG = '/usr/local/bin/wxgtk3u-3.2-config'
         CXXFLAGS = '-stdlib=libc++ '
         LLVM_OBJDUMP = '/usr/bin/llvm-objdump'
     }
