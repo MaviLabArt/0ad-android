@@ -15,6 +15,8 @@ export function* generateMap(mapSettings)
 	const tTier2Terrain = g_Terrains.tier2Terrain;
 	const tTier3Terrain = g_Terrains.tier3Terrain;
 	const tTier4Terrain = g_Terrains.tier4Terrain;
+	const tLowland = tMainTerrain.map(singleTerrain =>
+		singleTerrain + TERRAIN_SEPARATOR + "obstructors/placement");
 
 	const oTree1 = g_Gaia.tree1;
 	const oTree2 = g_Gaia.tree2;
@@ -71,7 +73,7 @@ export function* generateMap(mapSettings)
 	createArea(
 		new ClumpPlacer(diskArea(fractionToTiles(0.15)), 0.7, 0.1, Infinity, mapCenter),
 		[
-			new TerrainPainter(tMainTerrain),
+			new TerrainPainter(tLowland),
 			new SmoothElevationPainter(ELEVATION_SET, heightLand, 3),
 			new TileClassPainter(clLand)
 		]);
@@ -105,7 +107,7 @@ export function* generateMap(mapSettings)
 			new PathPlacer(mapCenter, passage[i], scaleByMapSize(14, 24), 0.4, scaleByMapSize(3, 9),
 				0.2, 0.05),
 			[
-				new TerrainPainter(tMainTerrain),
+				new TerrainPainter(tLowland),
 				new SmoothElevationPainter(ELEVATION_SET, heightLand, 4)
 			]);
 
