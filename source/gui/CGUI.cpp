@@ -448,7 +448,7 @@ IGUIObject* CGUI::FindObjectByName(const CStr& Name) const
 {
 	IGUIObject* obj = TryFindObjectByName(Name);
 	if (obj == nullptr)
-		LOGERROR("Failed to get GUI object by name: object '%s' not found.\nNote: Use 'Engine.TryGetGUIObjectByName' to query for potentially non-existent objects instead.", Name);
+		LOGERROR("Failed to get GUI object by name: object '%s' not found. Note: Use 'Engine.TryGetGUIObjectByName' to query for potentially non-existent objects instead.", Name);
 
 	return obj;
 }

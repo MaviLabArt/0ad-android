@@ -79,8 +79,8 @@ function setupUnitPanel(guiName, unitEntStates, playerState)
 			// depending on the XML, some of the GUI objects may be undefined
 			"button": Engine.GetGUIObjectByName("unit" + guiName + "Button[" + i + "]"),
 			"icon": Engine.GetGUIObjectByName("unit" + guiName + "Icon[" + i + "]"),
-			"guiSelection": Engine.GetGUIObjectByName("unit" + guiName + "Selection[" + i + "]"),
-			"countDisplay": Engine.GetGUIObjectByName("unit" + guiName + "Count[" + i + "]")
+			"guiSelection": Engine.TryGetGUIObjectByName("unit" + guiName + "Selection[" + i + "]"),
+			"countDisplay": Engine.TryGetGUIObjectByName("unit" + guiName + "Count[" + i + "]")
 		};
 
 		if (data.button)

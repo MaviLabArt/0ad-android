@@ -25,7 +25,6 @@ class ChatOverlay
 		 */
 		this.chatMessages = [];
 
-		this.chatText = Engine.GetGUIObjectByName("chatText");
 		this.chatLines = Engine.GetGUIObjectByName("chatLines").children;
 		this.chatLinesNumber = Math.min(this.chatLinesNumber, this.chatLines.length);
 	}
