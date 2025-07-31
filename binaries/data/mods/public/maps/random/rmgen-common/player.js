@@ -203,12 +203,10 @@ function addCivicCenterAreaToClass(position, tileClass)
  */
 function getPlayerBaseConstraint(playerBaseArgs)
 {
-	let baseResourceConstraint = playerBaseArgs.BaseResourceClass && avoidClasses(playerBaseArgs.BaseResourceClass, 4);
-
-	if (playerBaseArgs.baseResourceConstraint)
-		baseResourceConstraint = new AndConstraint([baseResourceConstraint, playerBaseArgs.baseResourceConstraint]);
-
-	return baseResourceConstraint;
+	return new AndConstraint([
+		playerBaseArgs.BaseResourceClass ? avoidClasses(playerBaseArgs.BaseResourceClass, 4) : [],
+		playerBaseArgs.baseResourceConstraint || []
+	].flat());
 }
 
 function placePlayerBaseCityPatch(args)
