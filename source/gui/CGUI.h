@@ -162,14 +162,14 @@ public:
 	/**
 	 * Allows the JS side to modify the hotkey setting assigned to a GUI object.
 	 */
-	void SetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag);
-	void UnsetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag);
+	void SetObjectHotkey(IGUIObject& object, const CStr& hotkeyTag);
+	void UnsetObjectHotkey(IGUIObject& object, const CStr& hotkeyTag);
 
 	/**
 	 * Allows the JS side to modify the style setting assigned to a GUI object.
 	 */
-	void SetObjectStyle(IGUIObject* pObject, const CStr& styleName);
-	void UnsetObjectStyle(IGUIObject* pObject);
+	void SetObjectStyle(IGUIObject& object, const CStr& styleName);
+	void UnsetObjectStyle(IGUIObject& object);
 
 	/**
 	 * Allows the JS side to add or remove global hotkeys.
@@ -455,7 +455,7 @@ private:
 	 *
 	 * @see LoadXmlFile()
 	 */
-	void Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+	void Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject& parent,
 		std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
 		u32 nesting_depth);
 
@@ -465,7 +465,7 @@ private:
 	 * 'var' enclosed in square brackets) in its descendants' names with "[0]",
 	 * "[1]", etc.
 	 */
-	void Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
+	void Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject& parent,
 		std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
 		u32 nesting_depth);
 

@@ -490,25 +490,25 @@ void CGUI::SetFocusedObject(IGUIObject* pObject)
 	}
 }
 
-void CGUI::SetObjectStyle(IGUIObject* pObject, const CStr& styleName)
+void CGUI::SetObjectStyle(IGUIObject& object, const CStr& styleName)
 {
 	// If the style is not recognised (or an empty string) then ApplyStyle will
 	// emit an error message. Thus we don't need to handle it here.
-	pObject->ApplyStyle(styleName);
+	object.ApplyStyle(styleName);
 }
 
-void CGUI::UnsetObjectStyle(IGUIObject* pObject)
+void CGUI::UnsetObjectStyle(IGUIObject& object)
 {
-	SetObjectStyle(pObject, "default");
+	SetObjectStyle(object, "default");
 }
 
-void CGUI::SetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag)
+void CGUI::SetObjectHotkey(IGUIObject& object, const CStr& hotkeyTag)
 {
 	if (!hotkeyTag.empty())
-		m_HotkeyObjects[hotkeyTag].push_back(pObject);
+		m_HotkeyObjects[hotkeyTag].push_back(&object);
 }
 
-void CGUI::UnsetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag)
+void CGUI::UnsetObjectHotkey(IGUIObject& object, const CStr& hotkeyTag)
 {
 	if (hotkeyTag.empty())
 		return;
@@ -519,8 +519,8 @@ void CGUI::UnsetObjectHotkey(IGUIObject* pObject, const CStr& hotkeyTag)
 		std::remove_if(
 			assignment.begin(),
 			assignment.end(),
-			[&pObject](const IGUIObject* hotkeyObject)
-				{ return pObject == hotkeyObject; }),
+			[&object](const IGUIObject* hotkeyObject)
+				{ return &object == hotkeyObject; }),
 		assignment.end());
 }
 
@@ -622,7 +622,7 @@ void CGUI::Xeromyces_ReadRootObjects(const XMBData& xmb, XMBElement element, std
 			Xeromyces_ReadScript(xmb, child, Paths);
 		else
 			// Read in this whole object into the GUI
-			Xeromyces_ReadObject(xmb, child, m_BaseObject.get(), subst, Paths, 0);
+			Xeromyces_ReadObject(xmb, child, *m_BaseObject, subst, Paths, 0);
 	}
 }
 
@@ -656,11 +656,10 @@ void CGUI::Xeromyces_ReadRootSetup(const XMBData& xmb, XMBElement element)
 	}
 }
 
-void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject* pParent,
-	std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
+void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObject& parent,
+	std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths,
+	u32 nesting_depth)
 {
-	ENSURE(pParent);
-
 	XMBAttributeList attributes = element.GetAttributes();
 
 	CStr type(attributes.GetNamedItem(xmb.GetAttributeID("type")));
@@ -707,11 +706,11 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 	//
 	//	Always load default (if it's available) first!
 	//
-	SetObjectStyle(object, "default");
+	SetObjectStyle(*object, "default");
 
 	CStr argStyle(attributes.GetNamedItem(attr_style));
 	if (!argStyle.empty())
-		SetObjectStyle(object, argStyle);
+		SetObjectStyle(*object, argStyle);
 
 	bool NameSet = false;
 	bool ManuallySetZ = false;
@@ -769,7 +768,7 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 		if (element_name == elmt_object)
 		{
 			// Call this function on the child
-			Xeromyces_ReadObject(xmb, child, object, NameSubst, Paths, nesting_depth);
+			Xeromyces_ReadObject(xmb, child, *object, NameSubst, Paths, nesting_depth);
 		}
 		else if (element_name == elmt_action)
 		{
@@ -816,7 +815,7 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 		}
 		else if (element_name == elmt_repeat)
 		{
-			Xeromyces_ReadRepeat(xmb, child, object, NameSubst, Paths, nesting_depth);
+			Xeromyces_ReadRepeat(xmb, child, *object, NameSubst, Paths, nesting_depth);
 		}
 		else if (element_name == elmt_translatableAttribute)
 		{
@@ -893,7 +892,8 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 					continue;
 				}
 
-				Xeromyces_ReadObject(xeroIncluded, node, object, NameSubst, Paths, nesting_depth+1);
+				Xeromyces_ReadObject(xeroIncluded, node, *object, NameSubst, Paths,
+					nesting_depth + 1);
 			}
 			else if (!directory.empty())
 			{
@@ -923,7 +923,8 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 						LOGERROR("GUI: Error reading included XML: '%s', root element must have be of type 'object'.", path.string8());
 						continue;
 					}
-					Xeromyces_ReadObject(xeroIncluded, node, object, NameSubst, Paths, nesting_depth+1);
+					Xeromyces_ReadObject(xeroIncluded, node, *object, NameSubst, Paths,
+						nesting_depth + 1);
 				}
 
 			}
@@ -946,17 +947,18 @@ void CGUI::Xeromyces_ReadObject(const XMBData& xmb, XMBElement element, IGUIObje
 		if (object->m_Absolute)
 			// If the object is absolute, we'll have to get the parent's Z buffered,
 			// and add to that!
-			object->m_Z.Set(pParent->GetBufferedZ() + 10.f, false);
+			object->m_Z.Set(parent.GetBufferedZ() + 10.f, false);
 		else
 			// If the object is relative, then we'll just store Z as "10"
 			object->m_Z.Set(10.f, false);
 	}
 
-	if (!AddObject(*pParent, *object))
+	if (!AddObject(parent, *object))
 		delete object;
 }
 
-void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject* pParent, std::vector<std::pair<CStr, CStr> >& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
+void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObject& parent,
+	std::vector<std::pair<CStr, CStr>>& NameSubst, std::unordered_set<VfsPath>& Paths, u32 nesting_depth)
 {
 	#define ELMT(x) int elmt_##x = xmb.GetElementID(#x)
 	#define ATTR(x) int attr_##x = xmb.GetAttributeID(#x)
@@ -978,7 +980,7 @@ void CGUI::Xeromyces_ReadRepeat(const XMBData& xmb, XMBElement element, IGUIObje
 		XERO_ITER_EL(element, child)
 		{
 			if (child.GetNodeName() == elmt_object)
-				Xeromyces_ReadObject(xmb, child, pParent, NameSubst, Paths, nesting_depth);
+				Xeromyces_ReadObject(xmb, child, parent, NameSubst, Paths, nesting_depth);
 		}
 		NameSubst.pop_back();
 	}

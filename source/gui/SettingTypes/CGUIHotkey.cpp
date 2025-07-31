@@ -27,18 +27,18 @@
 
 bool CGUIHotkey::DoFromString(const CStrW& value)
 {
-	m_Object.GetGUI().UnsetObjectHotkey(&m_Object, m_Setting);
+	m_Object.GetGUI().UnsetObjectHotkey(m_Object, m_Setting);
 	m_Setting = value.ToUTF8();
-	m_Object.GetGUI().SetObjectHotkey(&m_Object, m_Setting);
+	m_Object.GetGUI().SetObjectHotkey(m_Object, m_Setting);
 	return true;
 }
 
 bool CGUIHotkey::DoFromJSVal(const ScriptRequest& rq, JS::HandleValue value)
 {
-	m_Object.GetGUI().UnsetObjectHotkey(&m_Object, m_Setting);
+	m_Object.GetGUI().UnsetObjectHotkey(m_Object, m_Setting);
 	if (!Script::FromJSVal(rq, value, m_Setting))
 		return false;
-	m_Object.GetGUI().SetObjectHotkey(&m_Object, m_Setting);
+	m_Object.GetGUI().SetObjectHotkey(m_Object, m_Setting);
 	return true;
 }
 

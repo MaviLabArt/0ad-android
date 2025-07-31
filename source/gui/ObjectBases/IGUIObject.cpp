@@ -151,7 +151,7 @@ void IGUIObject::SettingChanged(const CStr& Setting, const bool SendMessage)
 			RecurseObject(nullptr, &IGUIObject::ResetStates);
 	}
 	else if (Setting == "style")
-		m_pGUI.SetObjectStyle(this, m_Style);
+		m_pGUI.SetObjectStyle(*this, m_Style);
 
 	if (SendMessage)
 	{
