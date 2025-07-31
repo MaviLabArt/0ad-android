@@ -162,6 +162,11 @@ function placePlayerBase(playerBaseArgs)
 	if (playerBaseArgs.PlayerTileClass)
 		addCivicCenterAreaToClass(playerBaseArgs.playerPosition, playerBaseArgs.PlayerTileClass);
 
+	const baseResourceConstraint = new AndConstraint([
+		playerBaseArgs.BaseResourceClass ? avoidClasses(playerBaseArgs.BaseResourceClass, 4) : [],
+		playerBaseArgs.baseResourceConstraint || []
+	].flat());
+
 	for (const functionID of g_PlayerBaseFunctions)
 	{
 		const funcName = "placePlayerBase" + functionID;
@@ -175,10 +180,10 @@ function placePlayerBase(playerBaseArgs)
 		const args = playerBaseArgs[functionID];
 
 		// Copy some global arguments to the arguments for each function
-		for (const prop of ["playerID", "playerPosition", "BaseResourceClass", "baseResourceConstraint"])
+		for (const prop of ["playerID", "playerPosition", "BaseResourceClass"])
 			args[prop] = playerBaseArgs[prop];
 
-		func(args);
+		func(args, baseResourceConstraint);
 	}
 }
 
@@ -198,21 +203,8 @@ function addCivicCenterAreaToClass(position, tileClass)
 		new TileClassPainter(tileClass));
 }
 
-/**
- * Helper function.
- */
-function getPlayerBaseConstraint(playerBaseArgs)
-{
-	return new AndConstraint([
-		playerBaseArgs.BaseResourceClass ? avoidClasses(playerBaseArgs.BaseResourceClass, 4) : [],
-		playerBaseArgs.baseResourceConstraint || []
-	].flat());
-}
-
 function placePlayerBaseCityPatch(args)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	let painters = [];
 
 	if (args.outerTerrain && args.innerTerrain)
@@ -231,10 +223,8 @@ function placePlayerBaseCityPatch(args)
 		painters);
 }
 
-function placePlayerBaseStartingAnimal(args)
+function placePlayerBaseStartingAnimal(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	const template = args.template ?? "gaia/fauna_chicken";
 	const count = template === "gaia/fauna_chicken" ? 5 :
 		Math.round(5 * (Engine.GetTemplate("gaia/fauna_chicken").ResourceSupply.Max / Engine.GetTemplate(args.template).ResourceSupply.Max));
@@ -275,9 +265,8 @@ function placePlayerBaseStartingAnimal(args)
 	}
 }
 
-function placePlayerBaseBerries(args)
+function placePlayerBaseBerries(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
 	for (let tries = 0; tries < (args.maxTries ?? 30); ++tries)
 	{
 		const position =
@@ -297,10 +286,8 @@ function placePlayerBaseBerries(args)
 	error("Could not place berries for player " + args.playerID);
 }
 
-function placePlayerBaseMines(args)
+function placePlayerBaseMines(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	const angleBetweenMines = randFloat(args.minAngle ?? (Math.PI / 6), args.maxAngle ?? (Math.PI / 3));
 	const mineCount = args.types.length;
 
@@ -352,10 +339,8 @@ function placePlayerBaseMines(args)
 	error("Could not place mines for player " + args.playerID);
 }
 
-function placePlayerBaseTrees(args)
+function placePlayerBaseTrees(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	const num = Math.floor(args.count ?? scaleByMapSize(7, 20));
 
 	for (let x = 0; x < (args.maxTries ?? 30); ++x)
@@ -378,10 +363,8 @@ function placePlayerBaseTrees(args)
 	error("Could not place starting trees for player " + args.playerID);
 }
 
-function placePlayerBaseTreasures(args)
+function placePlayerBaseTreasures(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	for (const resourceTypeArgs of args.types)
 	{
 		let success = false;
@@ -418,10 +401,8 @@ function placePlayerBaseTreasures(args)
 /**
  * Typically used for placing grass tufts around the civic centers.
  */
-function placePlayerBaseDecoratives(args)
+function placePlayerBaseDecoratives(args, baseResourceConstraint)
 {
-	const baseResourceConstraint = getPlayerBaseConstraint(args);
-
 	for (let i = 0; i < (args.count ?? scaleByMapSize(2, 5)); ++i)
 	{
 		let success = false;
