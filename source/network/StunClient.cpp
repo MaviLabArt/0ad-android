@@ -27,8 +27,10 @@
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 
+#include <bit>
 #include <cerrno>
 #include <chrono>
+#include <concepts>
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
@@ -82,43 +84,41 @@ ENetAddress m_StunServer;
 ENetAddress m_PublicAddress;
 
 /**
- * Push POD data to a network-byte-order buffer.
- * TODO: this should be optimised & moved to byte_order.h
+ * Push integral type to a network-byte-order buffer.
  */
-template<typename T, size_t n = sizeof(T)>
+template<std::integral T, size_t n = sizeof(T)>
 void AddToBuffer(std::vector<u8>& buffer, const T value)
 {
-	static_assert(std::is_standard_layout_v<T> && std::is_trivial_v<T>, "T must be POD");
 	buffer.reserve(buffer.size() + n);
 	// std::byte* can alias anything so this is legal.
 	const std::byte* ptr = reinterpret_cast<const std::byte*>(&value);
 	for (size_t a = 0; a < n; ++a)
-#if BYTE_ORDER == LITTLE_ENDIAN
-		buffer.push_back(static_cast<u8>(*(ptr + n - 1 - a)));
-#else
-		buffer.push_back(static_cast<u8>(*(ptr + a)));
-#endif
+	{
+		if constexpr (std::endian::native == std::endian::little)
+			buffer.push_back(static_cast<u8>(*(ptr + n - 1 - a)));
+		else
+			buffer.push_back(static_cast<u8>(*(ptr + a)));
+	}
 }
 
 /**
- * Read POD data from a network-byte-order buffer.
- * TODO: this should be optimised & moved to byte_order.h
+ * Read integral type from a network-byte-order buffer.
  */
-template<typename T, size_t n = sizeof(T)>
+template<std::integral T, size_t n = sizeof(T)>
 bool GetFromBuffer(const std::vector<u8>& buffer, u32& offset, T& result)
 {
-	static_assert(std::is_standard_layout_v<T> && std::is_trivial_v<T>, "T must be POD");
 	if (offset + n > buffer.size())
 		return false;
 
 	// std::byte* can alias anything so this is legal.
 	std::byte* ptr = reinterpret_cast<std::byte*>(&result);
 	for (size_t a = 0; a < n; ++a)
-#if BYTE_ORDER == LITTLE_ENDIAN
-		*ptr++ = static_cast<std::byte>(buffer[offset + n - 1 - a]);
-#else
-		*ptr++ = static_cast<std::byte>(buffer[offset + a]);
-#endif
+	{
+		if constexpr (std::endian::native == std::endian::little)
+			*ptr++ = static_cast<std::byte>(buffer[offset + n - 1 - a]);
+		else
+			*ptr++ = static_cast<std::byte>(buffer[offset + a]);
+	}
 
 	offset += n;
 	return true;
