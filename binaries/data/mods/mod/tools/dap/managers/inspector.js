@@ -336,7 +336,7 @@ class InspectorManager extends Plugin {
 		for (const varName of varReference.values)
 		{
 			this.logger.debug(`Expanding variable: ${varName}`);
-			let value = null;
+			let value;
 			if (varReference.jsObject)
 				value = varReference.jsObject.getOwnPropertyDescriptor(varName)?.value;
 			else if (varName === 'this' && frame.this instanceof Debugger.Object)
