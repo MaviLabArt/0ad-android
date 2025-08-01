@@ -215,8 +215,8 @@ void CTextRenderer::Render(
 	std::vector<CVector2D> positions;
 	std::vector<CVector2D> uvs;
 
-	const bool debugFontBox{g_ConfigDB.Get("fonts.debugBox", false)};
-	const std::string debugFontBoxColor{ g_ConfigDB.Get("fonts.debugBoxColor", std::string{"128 0 128"})};
+	const bool debugFontBox{g_ConfigDB.Get("fonts.debugbox", false)};
+	const std::string debugFontBoxColor{ g_ConfigDB.Get("fonts.debugboxcolor", std::string{"128 0 128"})};
 	CColor debugBoxColor;
 	debugBoxColor.ParseString(debugFontBoxColor.c_str());
 
