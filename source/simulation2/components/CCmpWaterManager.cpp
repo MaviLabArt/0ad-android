@@ -17,7 +17,6 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpWaterManager.h"
 
 #include "graphics/RenderableObject.h"
@@ -26,7 +25,11 @@
 #include "renderer/SceneRenderer.h"
 #include "renderer/WaterManager.h"
 #include "simulation2/MessageTypes.h"
-#include "tools/atlas/GameInterface/GameLoop.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <string>
 
 class CCmpWaterManager final : public ICmpWaterManager
 {

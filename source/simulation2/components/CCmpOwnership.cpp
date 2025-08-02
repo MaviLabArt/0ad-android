@@ -17,10 +17,14 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpOwnership.h"
 
 #include "simulation2/MessageTypes.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <string>
 
 /**
  * Basic ICmpOwnership implementation.

@@ -17,12 +17,13 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpTerritoryInfluence.h"
 
-#include "simulation2/components/ICmpOwnership.h"
-#include "simulation2/components/ICmpPlayerManager.h"
+#include "lib/types.h"
 #include "simulation2/components/ICmpValueModificationManager.h"
+#include "simulation2/system/Component.h"
+
+#include <string>
 
 class CCmpTerritoryInfluence final : public ICmpTerritoryInfluence
 {

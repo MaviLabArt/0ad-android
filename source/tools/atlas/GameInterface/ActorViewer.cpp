@@ -64,6 +64,7 @@
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/components/ICmpWaterManager.h"
 #include "simulation2/helpers/Render.h"
+#include "simulation2/system/Component.h"
 
 extern int g_xres, g_yres;
 

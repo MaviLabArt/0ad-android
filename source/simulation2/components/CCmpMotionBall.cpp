@@ -17,13 +17,20 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpMotion.h"
 
-#include "ICmpPosition.h"
-#include "simulation2/MessageTypes.h"
-
 #include "graphics/Terrain.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Vector3D.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <cmath>
+#include <string>
 
 class CCmpMotionBall final : public ICmpMotion
 {

@@ -17,13 +17,16 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpParticleManager.h"
 
 #include "graphics/ParticleManager.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "simulation2/MessageTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <string>
 
 class CCmpParticleManager final : public ICmpParticleManager
 {

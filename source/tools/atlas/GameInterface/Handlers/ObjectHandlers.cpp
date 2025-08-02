@@ -52,6 +52,7 @@
 #include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/helpers/Selection.h"
+#include "simulation2/system/Component.h"
 #include "ps/XML/XMLWriter.h"
 
 namespace AtlasMessage

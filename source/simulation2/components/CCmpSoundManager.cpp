@@ -17,15 +17,19 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpSoundManager.h"
 
-#include "simulation2/MessageTypes.h"
+#include "lib/path.h"
+#include "maths/Vector3D.h"
+#include "simulation2/components/ICmpOwnership.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/components/ICmpOwnership.h"
-
+#include "simulation2/helpers/Player.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 #include "soundmanager/ISoundManager.h"
+
+#include <string>
 
 class CCmpSoundManager final : public ICmpSoundManager
 {

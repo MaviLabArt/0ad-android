@@ -17,15 +17,28 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpCommandQueue.h"
 
+#include "lib/types.h"
 #include "ps/CLogger.h"
 #include "ps/Game.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/SimulationCommand.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/TurnManager.h"
+
+#include <cstddef>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
+#include <vector>
+
+class ScriptInterface;
 
 class CCmpCommandQueue final : public ICmpCommandQueue
 {

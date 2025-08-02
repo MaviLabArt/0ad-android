@@ -17,13 +17,15 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpVision.h"
 
 #include "simulation2/MessageTypes.h"
-#include "simulation2/components/ICmpPlayerManager.h"
-#include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/components/ICmpValueModificationManager.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <string>
 
 class CCmpVision final : public ICmpVision
 {

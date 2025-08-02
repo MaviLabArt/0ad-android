@@ -34,6 +34,7 @@
 #include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpSoundManager.h"
+#include "simulation2/system/Component.h"
 
 extern void (*Atlas_GLSwapBuffers)(void* context);
 

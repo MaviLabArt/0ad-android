@@ -20,13 +20,21 @@
 #include "JSInterface_Simulation.h"
 
 #include "graphics/GameView.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
 #include "ps/ConfigDB.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/Pyrogenesis.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
+#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpAIManager.h"
 #include "simulation2/components/ICmpCommandQueue.h"
 #include "simulation2/components/ICmpGuiInterface.h"
@@ -34,12 +42,23 @@
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpSelectable.h"
 #include "simulation2/helpers/Geometry.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Selection.h"
-#include "simulation2/Simulation2.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
+#include <algorithm>
 #include <array>
+#include <cstddef>
 #include <fstream>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
+#include <vector>
+
+class ScriptInterface;
 
 namespace JSI_Simulation
 {

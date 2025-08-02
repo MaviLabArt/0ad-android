@@ -24,27 +24,55 @@
 
 #include "CCmpPathfinder_Common.h"
 
+#include "graphics/Terrain.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/MathUtil.h"
+#include "ps/CLogger.h"
+#include "ps/Filesystem.h"
+#include "ps/Future.h"
+#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/TaskManager.h"
+#include "ps/XML/Xeromyces.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpObstruction.h"
 #include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/HierarchicalPathfinder.h"
 #include "simulation2/helpers/LongPathfinder.h"
 #include "simulation2/helpers/MapEdgeTiles.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Rasterize.h"
 #include "simulation2/helpers/VertexPathfinder.h"
+#include "simulation2/serialization/SerializeTemplates.h"
 #include "simulation2/serialization/SerializedPathfinder.h"
 #include "simulation2/serialization/SerializedTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
 
-#include "ps/CLogger.h"
-#include "ps/CStr.h"
-#include "ps/Profile.h"
-#include "ps/XML/Xeromyces.h"
-#include "renderer/Scene.h"
-
+#include <algorithm>
+#include <atomic>
+#include <cstring>
+#include <map>
+#include <memory>
+#include <string>
 #include <type_traits>
+#include <utility>
+#include <vector>
+
+class SceneCollector;
 
 REGISTER_COMPONENT_TYPE(Pathfinder)
 

@@ -17,17 +17,31 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpCinemaManager.h"
 
+#include "lib/debug.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "maths/NUSpline.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpOverlayRenderer.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/components/ICmpSelectable.h"
 #include "simulation2/components/ICmpTerritoryManager.h"
-#include "simulation2/MessageTypes.h"
-#include "simulation2/Simulation2.h"
+#include "simulation2/helpers/CinemaPath.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <list>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
 
 class CCmpCinemaManager final : public ICmpCinemaManager
 {

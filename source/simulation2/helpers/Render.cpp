@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,19 +19,27 @@
 
 #include "Render.h"
 
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
 #include "graphics/Terrain.h"
+#include "lib/debug.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/BoundingBoxOriented.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
 #include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
 #include "ps/Profile.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/helpers/Geometry.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+
+#include <algorithm>
+#include <cmath>
+#include <utility>
 
 void SimRender::ConstructLineOnGround(const CSimContext& context, const std::vector<float>& xz,
 		SOverlayLine& overlay, bool floating, float heightOffset)

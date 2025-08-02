@@ -18,15 +18,38 @@
 #include "precompiled.h"
 
 #include "CCmpUnitMotion.h"
-#include "CCmpUnitMotionManager.h"
 
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/CCmpUnitMotionManager.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPathfinder.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/components/ICmpUnitMotion.h"
+#include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/EntityMap.h"
+#include "simulation2/system/Message.h"
 
 #include <algorithm>
+#include <cstdint>
+#include <cstdlib>
 #include <limits>
+#include <new>
+#include <string>
+#include <type_traits>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 #define DEBUG_STATS 0

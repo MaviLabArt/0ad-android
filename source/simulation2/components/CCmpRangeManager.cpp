@@ -17,32 +17,61 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpRangeManager.h"
 
 #include "ICmpTerrain.h"
-#include "simulation2/system/EntityMap.h"
+#include "graphics/Color.h"
+#include "graphics/Overlay.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
+#include "maths/MathUtil.h"
+#include "maths/Sqrt.h"
+#include "ps/CLogger.h"
+#include "ps/Profile.h"
+#include "renderer/Scene.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpFogging.h"
 #include "simulation2/components/ICmpMirage.h"
+#include "simulation2/components/ICmpObstruction.h"
 #include "simulation2/components/ICmpOwnership.h"
+#include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpPosition.h"
-#include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/components/ICmpTerritoryManager.h"
 #include "simulation2/components/ICmpVisibility.h"
 #include "simulation2/components/ICmpVision.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/Los.h"
 #include "simulation2/helpers/MapEdgeTiles.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Render.h"
 #include "simulation2/helpers/Spatial.h"
+#include "simulation2/serialization/SerializeTemplates.h"
 #include "simulation2/serialization/SerializedTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/EntityMap.h"
+#include "simulation2/system/Message.h"
 
-#include "graphics/Overlay.h"
-#include "lib/timer.h"
-#include "ps/CLogger.h"
-#include "ps/Profile.h"
-#include "renderer/Scene.h"
+#include <algorithm>
+#include <array>
+#include <cstdint>
+#include <cstdlib>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <new>
+#include <set>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
 
 #define DEBUG_RANGE_MANAGER_BOUNDS 0
 

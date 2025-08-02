@@ -17,30 +17,37 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpUnitRenderer.h"
 
-#include "simulation2/MessageTypes.h"
-
-#include "ICmpPosition.h"
-#include "ICmpRangeManager.h"
-#include "ICmpSelectable.h"
-#include "ICmpVisibility.h"
-#include "ICmpVisual.h"
-
+#include "graphics/Color.h"
 #include "graphics/ModelAbstract.h"
-#include "graphics/ObjectEntry.h"
 #include "graphics/Overlay.h"
 #include "graphics/Unit.h"
+#include "lib/debug.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/BoundingBoxOriented.h"
 #include "maths/BoundingSphere.h"
 #include "maths/Frustum.h"
 #include "maths/Matrix3D.h"
-#include "ps/GameSetup/Config.h"
+#include "maths/Vector3D.h"
 #include "ps/Profile.h"
 #include "renderer/RenderingOptions.h"
 #include "renderer/Scene.h"
-
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/components/ICmpSelectable.h"
+#include "simulation2/components/ICmpVisibility.h"
+#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
 #include "tools/atlas/GameInterface/GameLoop.h"
+
+#include <cstddef>
+#include <string>
+#include <utility>
+#include <vector>
 
 /**
  * Efficiently(ish) renders all the units in the world.

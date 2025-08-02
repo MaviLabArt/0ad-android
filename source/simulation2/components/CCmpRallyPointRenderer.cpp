@@ -19,13 +19,37 @@
 
 #include "CCmpRallyPointRenderer.h"
 
+#include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "ps/CLogger.h"
 #include "ps/Profile.h"
 #include "ps/algorithm.h"
+#include "renderer/Renderer.h"
 #include "renderer/Scene.h"
 #include "renderer/backend/Sampler.h"
+#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpIdentity.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpOwnership.h"
+#include "simulation2/components/ICmpPlayer.h"
+#include "simulation2/components/ICmpPlayerManager.h"
 #include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Geometry.h"
 #include "simulation2/helpers/Los.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/helpers/Render.h"
+#include "simulation2/system/Message.h"
+
+#include <algorithm>
+#include <cmath>
+
+class CFrustum;
 
 std::string CCmpRallyPointRenderer::GetSchema()
 {

@@ -17,24 +17,35 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpPosition.h"
 
-#include "simulation2/MessageTypes.h"
-#include "simulation2/serialization/SerializedTypes.h"
-
-#include "ICmpTerrain.h"
-#include "ICmpVisual.h"
-#include "ICmpWaterManager.h"
-
-#include "graphics/Terrain.h"
-#include "lib/rand.h"
+#include "maths/BoundingBoxOriented.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
-#include "maths/Vector3D.h"
 #include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Profile.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/serialization/SerializedTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
+
+#include <algorithm>
+#include <cmath>
+#include <set>
+#include <string>
+#include <utility>
 
 /**
  * Basic ICmpPosition implementation.

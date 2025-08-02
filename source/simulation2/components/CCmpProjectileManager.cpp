@@ -17,26 +17,34 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpProjectileManager.h"
 
-#include "ICmpObstruction.h"
-#include "ICmpObstructionManager.h"
-#include "ICmpPosition.h"
-#include "ICmpRangeManager.h"
-#include "ICmpTerrain.h"
-#include "simulation2/helpers/Los.h"
-#include "simulation2/MessageTypes.h"
-
-#include "graphics/Model.h"
+#include "graphics/ModelAbstract.h"
 #include "graphics/Unit.h"
 #include "graphics/UnitManager.h"
+#include "lib/posix/posix_types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/Frustum.h"
 #include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
 #include "maths/Vector3D.h"
-#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "renderer/Scene.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/helpers/Los.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
+
+#include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <string>
+#include <utility>
+#include <vector>
 
 // Time (in seconds) before projectiles that stuck in the ground are destroyed
 const static float PROJECTILE_DECAY_TIME = 30.f;

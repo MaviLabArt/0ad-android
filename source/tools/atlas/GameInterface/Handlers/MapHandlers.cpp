@@ -55,6 +55,7 @@
 #include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpVisual.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/ParamNode.h"
 
 #include <algorithm>

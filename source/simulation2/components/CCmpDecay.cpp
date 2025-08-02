@@ -17,16 +17,26 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpDecay.h"
 
-#include "simulation2/MessageTypes.h"
-
-#include "ICmpPosition.h"
-#include "ICmpTerrain.h"
-#include "ICmpVisual.h"
-
+#include "lib/debug.h"
+#include "maths/BoundingBoxAligned.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Vector3D.h"
 #include "ps/Profile.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
+
+#include <algorithm>
+#include <cmath>
+#include <string>
 
 /**
  * Fairly basic decay implementation, for units and buildings etc.

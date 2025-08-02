@@ -17,11 +17,15 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpTest.h"
 
-#include "simulation2/scripting/ScriptComponent.h"
 #include "simulation2/MessageTypes.h"
+#include "simulation2/scripting/ScriptComponent.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <cstdint>
+#include <string>
 
 class CCmpTest1A : public ICmpTest1
 {

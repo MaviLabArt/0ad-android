@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,15 +18,18 @@
 #ifndef INCLUDED_SIMULATION2
 #define INCLUDED_SIMULATION2
 
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
-#include "simulation2/helpers/SimulationCommand.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/Components.h"
+#include "lib/status.h"
+#include "simulation2/system/Entity.h"
 
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <memory>
 #include <ostream>
 #include <string>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 class CFrustum;
@@ -37,8 +40,9 @@ class CTerrain;
 class CUnitManager;
 class IComponent;
 class SceneCollector;
-class ScriptInterface;
 class ScriptContext;
+class ScriptInterface;
+struct SimulationCommand;
 
 /**
  * Public API for simulation system.

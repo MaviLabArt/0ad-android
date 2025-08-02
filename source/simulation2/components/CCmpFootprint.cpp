@@ -17,9 +17,12 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpFootprint.h"
 
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
 #include "ps/Profile.h"
 #include "simulation2/components/ICmpObstruction.h"
 #include "simulation2/components/ICmpObstructionManager.h"
@@ -28,8 +31,15 @@
 #include "simulation2/components/ICmpRallyPoint.h"
 #include "simulation2/components/ICmpUnitMotion.h"
 #include "simulation2/helpers/Geometry.h"
-#include "simulation2/MessageTypes.h"
-#include "maths/FixedVector2D.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+
+#include <algorithm>
+#include <string>
+#include <utility>
+#include <vector>
 
 class CCmpFootprint final : public ICmpFootprint
 {

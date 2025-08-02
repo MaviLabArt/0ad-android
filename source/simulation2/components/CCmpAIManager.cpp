@@ -17,40 +17,73 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpAIManager.h"
 
-#include "simulation2/MessageTypes.h"
-
-#include "graphics/Terrain.h"
-#include "lib/timer.h"
-#include "lib/tex/tex.h"
+#include "graphics/HeightMipmap.h"
+#include "lib/alignment.h"
 #include "lib/allocators/shared_ptr.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/tex/tex.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
+#include "maths/FixedVector2D.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Profile.h"
-#include "ps/scripting/JSInterface_VFS.h"
+#include "ps/Profiler2.h"
 #include "ps/TemplateLoader.h"
 #include "ps/Util.h"
+#include "ps/scripting/JSInterface_VFS.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
 #include "simulation2/components/ICmpAIInterface.h"
 #include "simulation2/components/ICmpCommandQueue.h"
-#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/components/ICmpTerritoryManager.h"
+#include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/HierarchicalPathfinder.h"
 #include "simulation2/helpers/LongPathfinder.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Player.h"
 #include "simulation2/serialization/DebugSerializer.h"
+#include "simulation2/serialization/SerializeTemplates.h"
 #include "simulation2/serialization/SerializedTypes.h"
 #include "simulation2/serialization/StdDeserializer.h"
 #include "simulation2/serialization/StdSerializer.h"
+#include "simulation2/system/Component.h"
 
+#include <boost/random/linear_congruential.hpp>
+#include <cstring>
+#include <js/Array.h>
+#include <js/GCAPI.h>
+#include <js/GCVector.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TracingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/experimental/TypedData.h>
+#include <map>
+#include <memory>
+#include <set>
+#include <sstream>
+#include <string>
+#include <tuple>
 #include <utility>
+#include <vector>
 
 extern void QuitEngine();
 

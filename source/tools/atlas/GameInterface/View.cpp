@@ -46,6 +46,7 @@
 #include "simulation2/components/ICmpParticleManager.h"
 #include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/system/Component.h"
 #include "soundmanager/ISoundManager.h"
 
 extern void (*Atlas_GLSwapBuffers)(void* context);

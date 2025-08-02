@@ -19,16 +19,19 @@
 
 #include "ICmpSelectable.h"
 
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
 #include "graphics/Terrain.h"
 #include "graphics/TextureManager.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "maths/BoundingBoxAligned.h"
 #include "maths/Ease.h"
 #include "maths/Frustum.h"
-#include "maths/MathUtil.h"
-#include "maths/Matrix3D.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStrIntern.h"
 #include "ps/Profile.h"
 #include "renderer/Renderer.h"
 #include "renderer/Scene.h"
@@ -42,8 +45,17 @@
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Render.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <string>
+#include <vector>
 
 // Minimum alpha value for always visible overlays [0 fully transparent, 1 fully opaque]
 static const float MIN_ALPHA_ALWAYS_VISIBLE = 0.65f;

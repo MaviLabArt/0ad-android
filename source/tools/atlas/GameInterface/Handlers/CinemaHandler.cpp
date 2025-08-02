@@ -34,7 +34,7 @@
 #include "maths/Vector3D.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpCinemaManager.h"
-
+#include "simulation2/system/Component.h"
 
 namespace AtlasMessage
 {

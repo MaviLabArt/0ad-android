@@ -19,8 +19,10 @@
 
 #include "ICmpRangeOverlayRenderer.h"
 
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
-#include "graphics/TextureManager.h"
+#include "maths/Vector2D.h"
+#include "ps/CStrIntern.h"
 #include "renderer/Renderer.h"
 #include "renderer/Scene.h"
 #include "simulation2/MessageTypes.h"
@@ -28,10 +30,16 @@
 #include "simulation2/components/ICmpPlayer.h"
 #include "simulation2/components/ICmpPlayerManager.h"
 #include "simulation2/components/ICmpPosition.h"
+#include "simulation2/helpers/Player.h"
 #include "simulation2/helpers/Render.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
 
 #include <memory>
+#include <string>
+#include <vector>
+
+class CFrustum;
 
 class CCmpRangeOverlayRenderer final : public ICmpRangeOverlayRenderer
 {

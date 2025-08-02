@@ -17,25 +17,43 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpObstructionManager.h"
 
-#include "ICmpPosition.h"
-#include "ICmpRangeManager.h"
-
-#include "simulation2/MessageTypes.h"
-#include "simulation2/helpers/Geometry.h"
-#include "simulation2/helpers/Grid.h"
-#include "simulation2/helpers/Rasterize.h"
-#include "simulation2/helpers/Render.h"
-#include "simulation2/helpers/Spatial.h"
-#include "simulation2/serialization/SerializedTypes.h"
-
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
 #include "maths/MathUtil.h"
 #include "ps/Profile.h"
 #include "renderer/Scene.h"
-#include "ps/CLogger.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpPathfinder.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/helpers/Geometry.h"
+#include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/helpers/Rasterize.h"
+#include "simulation2/helpers/Render.h"
+#include "simulation2/helpers/Spatial.h"
+#include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/serialization/SerializedTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <map>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
 
 // Externally, tags are opaque non-zero positive integers.
 // Internally, they are tagged (by shape) indexes into shape lists.

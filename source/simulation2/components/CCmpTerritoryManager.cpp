@@ -17,14 +17,24 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpTerritoryManager.h"
 
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
-#include "graphics/Terrain.h"
-#include "graphics/TextureManager.h"
+#include "graphics/SColor.h"
 #include "graphics/TerritoryBoundary.h"
+#include "graphics/Texture.h"
+#include "graphics/TextureManager.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
 #include "maths/MathUtil.h"
+#include "maths/Vector2D.h"
+#include "ps/Filesystem.h"
 #include "ps/Profile.h"
 #include "ps/XML/Xeromyces.h"
 #include "renderer/Renderer.h"
@@ -40,11 +50,26 @@
 #include "simulation2/components/ICmpTerritoryDecayManager.h"
 #include "simulation2/components/ICmpTerritoryInfluence.h"
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Render.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
 
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <map>
 #include <queue>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
 
 class CCmpTerritoryManager;
+class CFrustum;
 
 class TerritoryOverlay final : public TerrainTextureOverlay
 {

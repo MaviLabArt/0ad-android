@@ -17,17 +17,25 @@
 
 #include "precompiled.h"
 
-#include "simulation2/system/Component.h"
 #include "ICmpTerrain.h"
 
 #include "graphics/Terrain.h"
+#include "lib/debug.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Vector3D.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/WaterManager.h"
-#include "maths/Vector3D.h"
+#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/MessageTypes.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+
+#include <string>
 
 class CCmpTerrain final : public ICmpTerrain
 {

@@ -20,19 +20,24 @@
 #include "Selection.h"
 
 #include "graphics/Camera.h"
+#include "lib/debug.h"
+#include "maths/Frustum.h"
 #include "maths/Vector2D.h"
-#include "ps/CLogger.h"
+#include "maths/Vector3D.h"
 #include "ps/Profiler2.h"
 #include "simulation2/components/ICmpIdentity.h"
 #include "simulation2/components/ICmpOwnership.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/components/ICmpSelectable.h"
-#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/components/ICmpUnitRenderer.h"
-#include "simulation2/system/ComponentManager.h"
+#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/system/Component.h"
 
+#include <algorithm>
+#include <cstddef>
 #include <string_view>
+#include <unordered_map>
 
 entity_id_t EntitySelection::PickEntityAtPoint(CSimulation2& simulation, const CCamera& camera, int screenX, int screenY, player_id_t player, bool allowEditorSelectables)
 {

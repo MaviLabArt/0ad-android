@@ -19,17 +19,28 @@
 
 #include "ICmpOverlayRenderer.h"
 
+#include "graphics/Color.h"
+#include "graphics/HeightMipmap.h"
 #include "graphics/Overlay.h"
 #include "graphics/TextureManager.h"
+#include "maths/FixedVector2D.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Profile.h"
 #include "renderer/Renderer.h"
 #include "renderer/Scene.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/helpers/Player.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <cstddef>
+#include <string>
+#include <vector>
 
 class CCmpOverlayRenderer final : public ICmpOverlayRenderer
 {
