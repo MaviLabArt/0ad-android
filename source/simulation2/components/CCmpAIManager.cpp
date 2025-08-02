@@ -41,7 +41,9 @@
 #include "ps/scripting/JSInterface_VFS.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
@@ -128,10 +130,6 @@ private:
 
 		bool Initialise()
 		{
-			// LoadScripts will only load each script once even though we call it for each player
-			if (!m_Worker.LoadScripts(m_AIName))
-				return false;
-
 			ScriptRequest rq(m_ScriptInterface);
 
 			OsPath path = L"simulation/ai/" + m_AIName + L"/data.json";
@@ -144,24 +142,23 @@ private:
 			}
 
 			// Get the constructor name from the metadata
-			std::string moduleName;
+			std::string filename;
 			std::string constructor;
-			JS::RootedValue objectWithConstructor(rq.cx); // object that should contain the constructor function
-			JS::RootedValue global(rq.cx, rq.globalValue());
 			JS::RootedValue ctor(rq.cx);
-			if (!Script::HasProperty(rq, metadata, "moduleName"))
+			if (!Script::HasProperty(rq, metadata, "filename"))
 			{
-				LOGERROR("Failed to create AI player: %s: missing 'moduleName'", path.string8());
+				LOGERROR("Failed to create AI player: %s: missing 'filename'", path.string8());
 				return false;
 			}
 
-			Script::GetProperty(rq, metadata, "moduleName", moduleName);
-			if (!Script::GetProperty(rq, global, moduleName.c_str(), &objectWithConstructor)
-			    || objectWithConstructor.isUndefined())
-			{
-				LOGERROR("Failed to create AI player: %s: can't find the module that should contain the constructor: '%s'", path.string8(), moduleName);
-				return false;
-			}
+			Script::GetProperty(rq, metadata, "filename", filename);
+
+
+			auto result = m_ScriptInterface->GetModuleLoader().LoadModule(rq,
+				"simulation/ai/" + utf8_from_wstring(m_AIName) + "/" + filename);
+
+			g_ScriptContext->RunJobs();
+			JS::RootedValue objectWithConstructor(rq.cx, JS::ObjectValue(*result.begin()->Get()));
 
 			if (!Script::GetProperty(rq, metadata, "constructor", constructor))
 			{
@@ -267,7 +264,11 @@ public:
 	{
 		// Create the script interface in the same compartment as the simulation interface.
 		// This will allow us to directly share data from the sim to the AI (and vice versa, should the need arise).
-		m_ScriptInterface = std::make_shared<ScriptInterface>("Engine", "AI", simInterface);
+		m_ScriptInterface = std::make_shared<ScriptInterface>("Engine", "AI", simInterface,
+			[](const VfsPath& path)
+			{
+				return path.string().find(L"simulation/ai/") == 0;
+			});
 
 		ScriptRequest rq(m_ScriptInterface);
 
