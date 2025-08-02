@@ -19,36 +19,52 @@
 
 #include "VideoMode.h"
 
+#include "graphics/Camera.h"
 #include "graphics/GameView.h"
 #include "graphics/ShaderDefines.h"
 #include "graphics/ShaderProgram.h"
 #include "gui/GUIManager.h"
 #include "lib/config2.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
 #include "lib/sysdep/os.h"
 #include "lib/tex/tex.h"
+#include "lib/types.h"
 #include "ps/CConsole.h"
 #include "ps/CLogger.h"
-#include "ps/ConfigDB.h"
 #include "ps/CStr.h"
-#if OS_MACOSX && SDL_VERSION_ATLEAST(2, 0, 6)
-#include "ps/DllLoader.h"
-#endif
+#include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/Pyrogenesis.h"
+#include "renderer/Renderer.h"
+#include "renderer/backend/IDevice.h"
 #include "renderer/backend/dummy/DeviceForward.h"
 #include "renderer/backend/gl/DeviceForward.h"
-#include "renderer/backend/IDevice.h"
 #include "renderer/backend/vulkan/DeviceForward.h"
-#include "renderer/Renderer.h"
 
+#include <SDL.h>
+#include <SDL_error.h>
+#include <SDL_events.h>
+#include <SDL_mouse.h>
+#include <SDL_pixels.h>
+#include <SDL_stdinc.h>
+#include <SDL_surface.h>
+#include <SDL_version.h>
+#include <SDL_video.h>
+#include <algorithm>
+#include <cstdlib>
+#include <sstream>
+#include <string>
 #include <string_view>
 
 #if OS_MACOSX && SDL_VERSION_ATLEAST(2, 0, 6)
+#include "ps/DllLoader.h"
+
 #include <SDL_vulkan.h>
-#include <stdlib.h>
 #endif
 
 using namespace std::literals;

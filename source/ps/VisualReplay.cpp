@@ -18,28 +18,39 @@
 #include "precompiled.h"
 
 #include "VisualReplay.h"
-#include "graphics/GameView.h"
-#include "lib/timer.h"
-#include "lib/utf8.h"
-#include "lib/allocators/shared_ptr.h"
-#include "lib/external_libraries/libsdl.h"
+
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/file/file_system.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
 #include "lib/sysdep/filesystem.h"
+#include "lib/types.h"
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"
-#include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/CmdLineArgs.h"
 #include "ps/GameSetup/Paths.h"
-#include "ps/Mod.h"
 #include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
-#include "ps/Replay.h"
-#include "ps/Util.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <SDL_events.h>
+#include <SDL_quit.h>
 #include <fstream>
+#include <iterator>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <map>
+#include <string>
+#include <tuple>
+#include <utility>
+#include <vector>
 
 /**
  * Filter too short replays (value in seconds).

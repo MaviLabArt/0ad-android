@@ -19,6 +19,7 @@
 
 #include "ProfileViewer.h"
 
+#include "lib/code_annotation.h"
 #include "graphics/Canvas2D.h"
 #include "graphics/Color.h"
 #include "graphics/FontMetrics.h"

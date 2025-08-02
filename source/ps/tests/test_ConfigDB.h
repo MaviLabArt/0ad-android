@@ -17,10 +17,15 @@
 
 #include "lib/self_test.h"
 
+#include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 
 #include <memory>
+#include <string>
+#include <vector>
 
 extern PIVFS g_VFS;
 

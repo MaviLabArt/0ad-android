@@ -22,12 +22,16 @@
 #include "i18n/L10n.h"
 #include "lib/build_version.h"
 #include "lib/debug.h"
+#include "lib/utf8.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptRequest.h"
 
-#include <unicode/smpdtfmt.h>
 #include <ctime>
+#include <js/PropertyAndElement.h>
+#include <jsapi.h>
 #include <string>
+#include <unicode/locid.h>
+#include <unicode/smpdtfmt.h>
+#include <unicode/utypes.h>
 
 namespace JSI_Debug
 {

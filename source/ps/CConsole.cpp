@@ -46,6 +46,7 @@
 #include "ps/Hotkey.h"
 #include "ps/KeyName.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "ps/VideoMode.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/ScriptInterface.h"

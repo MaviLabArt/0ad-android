@@ -19,7 +19,13 @@
 
 #include "JSInterface_Game.h"
 
+#include "graphics/HeightMipmap.h"
 #include "graphics/Terrain.h"
+#include "lib/config2.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"
@@ -29,12 +35,20 @@
 #include "ps/Replay.h"
 #include "ps/World.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
-#include "simulation2/system/TurnManager.h"
 #include "simulation2/Simulation2.h"
-#include "soundmanager/SoundManager.h"
+#include "simulation2/system/TurnManager.h"
+#include "soundmanager/ISoundManager.h"
 
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <stdexcept>
+#include <string>
+
+class ScriptInterface;
 
 namespace JSI_Game
 {

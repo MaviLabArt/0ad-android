@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,12 +17,21 @@
 
 #include "lib/self_test.h"
 
-#include "ps/XML/Xeromyces.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XMB/XMBStorage.h"
+#include "ps/XML/Xeromyces.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <cstring>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <libxml/parser.h>
 #include <memory>
+#include <string>
 
 class TestXMBData : public CxxTest::TestSuite
 {

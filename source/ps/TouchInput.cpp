@@ -21,7 +21,6 @@
 
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
-#include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/sysdep/os.h"

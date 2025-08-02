@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -22,10 +22,15 @@
 
 #include "lib/self_test.h"
 
-#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Mod.h"
-#include "scriptinterface/JSON.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <jsapi.h>
+#include <vector>
 
 class TestMod : public CxxTest::TestSuite
 {

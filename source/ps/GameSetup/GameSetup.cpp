@@ -17,34 +17,41 @@
 
 #include "precompiled.h"
 
-#include "ps/GameSetup/GameSetup.h"
+#include "GameSetup.h"
 
 #include "graphics/GameView.h"
-#include "graphics/MapReader.h"
-#include "graphics/TerrainTextureManager.h"
 #include "gui/CGUI.h"
 #include "gui/GUIManager.h"
 #include "gui/Scripting/JSInterface_GUIManager.h"
 #include "i18n/L10n.h"
 #include "lib/app_hooks.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
 #include "lib/config2.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/debug.h"
+#include "lib/external_libraries/curl.h"
 #include "lib/file/common/file_stats.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/input.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "lib/sysdep/os.h"
 #include "lib/timer.h"
 #include "lobby/IXmppClient.h"
 #include "network/NetClient.h"
+#include "network/NetHost.h"
 #include "network/NetMessage.h"
-#include "network/NetMessages.h"
 #include "network/NetServer.h"
 #include "network/scripting/JSInterface_Network.h"
 #include "ps/CConsole.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/GUID.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/Atlas.h"
 #include "ps/GameSetup/CmdLineArgs.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/GameSetup/HWDetect.h"
@@ -59,31 +66,64 @@
 #include "ps/ProfileViewer.h"
 #include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"	// psSetLogDir
+#include "ps/TemplateLoader.h"
+#include "ps/ThreadUtil.h"
 #include "ps/TouchInput.h"
 #include "ps/UserReport.h"
-#include "ps/Util.h"
 #include "ps/VideoMode.h"
-#include "ps/VisualReplay.h"
 #include "ps/World.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
-#include "ps/scripting/JSInterface_Console.h"
 #include "ps/scripting/JSInterface_Game.h"
 #include "ps/scripting/JSInterface_Main.h"
 #include "ps/scripting/JSInterface_VFS.h"
 #include "renderer/Renderer.h"
+#include "renderer/RenderingOptions.h"
 #include "renderer/SceneRenderer.h"
-#include "renderer/VertexBufferManager.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/JSON.h"
+#include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptStats.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/scripting/JSInterface_Simulation.h"
-#include "soundmanager/scripting/JSInterface_Sound.h"
+#include "simulation2/system/ParamNode.h"
 #include "soundmanager/ISoundManager.h"
-#include "tools/atlas/GameInterface/GameLoop.h"
+
+#include <SDL.h>
+#include <SDL_error.h>
+#include <SDL_hints.h>
+#include <SDL_keyboard.h>
+#include <SDL_version.h>
+#include <algorithm>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/constants.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <chrono>
+#include <cstdlib>
+#include <ctime>
+#include <fmt/format.h>
+#include <fstream>
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/Object.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <locale>
+#include <memory>
+#include <optional>
+#include <stdexcept>
+#include <string>
+#include <thread>
+#include <unordered_set>
+#include <utility>
+
 
 #if !(OS_WIN || OS_MACOSX || OS_ANDROID) // assume all other platforms use X11 for wxWidgets
 #define MUST_INIT_X11 1
@@ -93,13 +133,6 @@
 #endif
 
 extern void RestartEngine();
-
-#include <fstream>
-#include <iostream>
-
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/join.hpp>
-#include <boost/algorithm/string/split.hpp>
 
 using namespace std::literals;
 

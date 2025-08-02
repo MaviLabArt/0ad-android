@@ -19,9 +19,14 @@
 
 #include "Joystick.h"
 
-#include "lib/external_libraries/libsdl.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
+
+#include <SDL.h>
+#include <SDL_error.h>
+#include <SDL_events.h>
+#include <cstddef>
+#include <cstdint>
 
 CJoystick g_Joystick;
 

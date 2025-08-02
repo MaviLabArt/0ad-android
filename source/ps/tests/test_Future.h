@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,13 @@
 
 #include "ps/Future.h"
 
+#include <cstring>
 #include <exception>
 #include <functional>
+#include <memory>
+#include <new>
 #include <type_traits>
+#include <utility>
 
 class TestFuture : public CxxTest::TestSuite
 {

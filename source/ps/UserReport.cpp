@@ -19,25 +19,36 @@
 
 #include "UserReport.h"
 
-#include "lib/timer.h"
-#include "lib/utf8.h"
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/curl.h"
 #include "lib/external_libraries/zlib.h"
-#include "lib/file/archive/stream.h"
 #include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
 #include "lib/sysdep/sysdep.h"
+#include "lib/timer.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
-#include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/Threading.h"
 
+#include <algorithm>
 #include <condition_variable>
+#include <cstring>
+#include <ctime>
 #include <deque>
 #include <fstream>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <thread>
+#include <utility>
 
 #define DEBUG_UPLOADS 0
 

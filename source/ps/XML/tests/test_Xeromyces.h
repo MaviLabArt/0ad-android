@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,8 +18,9 @@
 #include "lib/self_test.h"
 
 #include "ps/CLogger.h"
+#include "ps/Errors.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
-#include "lib/file/vfs/vfs.h"
 
 class TestXeromyces : public CxxTest::TestSuite
 {

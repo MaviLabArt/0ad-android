@@ -16,18 +16,30 @@
  */
 
 #include "precompiled.h"
+
 #include "Hotkey.h"
 
-#include <boost/tokenizer.hpp>
-
 #include "lib/external_libraries/libsdl.h"
-#include "ps/CConsole.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Globals.h"
 #include "ps/KeyName.h"
 #include "ps/Profiler2.h"
+
+#include <SDL_events.h>
+#include <SDL_mouse.h>
+#include <SDL_scancode.h>
+#include <algorithm>
+#include <boost/iterator/iterator_categories.hpp>
+#include <boost/iterator/iterator_facade.hpp>
+#include <boost/token_functions.hpp>
+#include <boost/tokenizer.hpp>
+#include <cstddef>
+#include <map>
+#include <string>
+#include <type_traits>
+#include <utility>
 
 static bool unified[UNIFIED_LAST - UNIFIED_SHIFT];
 

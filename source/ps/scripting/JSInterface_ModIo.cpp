@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,24 @@
 
 #include "JSInterface_ModIo.h"
 
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
 #include "ps/ModIo.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
+namespace JS { class CallArgs; }
 
 namespace JSI_ModIo
 {

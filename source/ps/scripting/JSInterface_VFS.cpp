@@ -19,18 +19,42 @@
 
 #include "JSInterface_VFS.h"
 
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/file/io/write_buffer.h"
+#include "lib/file/vfs/vfs.h"
 #include "lib/file/vfs/vfs_util.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/status.h"
 #include "lib/sysdep/filesystem.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 
 #include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <fmt/format.h>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <sstream>
 #include <stdexcept>
+#include <string>
+#include <string_view>
+
+class ScriptInterface;
 
 namespace JSI_VFS
 {

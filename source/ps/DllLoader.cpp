@@ -23,7 +23,6 @@
 #include "lib/debug.h"
 #include "lib/posix/posix_dlfcn.h"
 #include "lib/sysdep/os.h"
-#include "lib/timer.h"
 #include "ps/Profiler2.h"
 
 #include <cstddef>

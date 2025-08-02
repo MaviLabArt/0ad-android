@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,14 +19,16 @@
 
 #include "JSInterface_ConfigDB.h"
 
-#include "ps/ConfigDB.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/ConfigDB.h"
 #include "ps/VideoMode.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptRequest.h"
 
+#include <js/PropertyAndElement.h>
 #include <string>
 #include <unordered_set>
+#include <vector>
 
 namespace JSI_ConfigDB
 {

@@ -33,7 +33,6 @@
 #include "lib/file/vfs/vfs_util.h"
 #include "lib/path.h"
 #include "lib/sysdep/filesystem.h"
-#include "lib/timer.h"
 #include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "ps/CLogger.h"

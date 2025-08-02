@@ -25,7 +25,10 @@
 #include "ModIo.h"
 
 #include "i18n/L10n.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
 #include "lib/file/file_system.h"
+#include "lib/status.h"
 #include "lib/sysdep/filesystem.h"
 #include "lib/sysdep/sysdep.h"
 #include "maths/MD5.h"
@@ -36,14 +39,26 @@
 #include "ps/Mod.h"
 #include "ps/ModInstaller.h"
 #include "ps/Util.h"
-#include "scriptinterface/ScriptConversions.h"
-#include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <algorithm>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <cstdio>
+#include <cstring>
+#include <fmt/printf.h>
+#include <initializer_list>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+
+class ScriptInterface;
 
 ModIo* g_ModIo = nullptr;
 

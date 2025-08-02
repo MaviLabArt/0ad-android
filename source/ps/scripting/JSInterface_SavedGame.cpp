@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,27 @@
 
 #include "JSInterface_SavedGame.h"
 
+#include "lib/debug.h"
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"
 #include "ps/Game.h"
 #include "ps/SavedGame.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/system/TurnManager.h"
 
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <optional>
+#include <string>
+
+class ScriptInterface;
 
 namespace JSI_SavedGame
 {

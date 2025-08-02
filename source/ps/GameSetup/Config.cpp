@@ -19,9 +19,6 @@
 
 #include "Config.h"
 
-#include "lib/timer.h"
-#include "ps/CConsole.h"
-#include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/GameSetup/CmdLineArgs.h"

@@ -19,14 +19,27 @@
 
 #include "JSInterface_Mod.h"
 
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Mod.h"
 #include "ps/Pyrogenesis.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <fmt/format.h>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <stdexcept>
+#include <vector>
+
+class ScriptInterface;
+namespace JS { class CallArgs; }
 
 extern void RestartEngine();
 

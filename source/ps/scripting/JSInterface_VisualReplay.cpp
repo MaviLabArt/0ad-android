@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,14 @@
 
 #include "JSInterface_VisualReplay.h"
 
+#include "lib/os_path.h"
+#include "lib/utf8.h"
 #include "ps/CStr.h"
 #include "ps/VisualReplay.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptRequest.h"
+
+#include <js/PropertyAndElement.h>
+#include <string>
 
 namespace JSI_VisualReplay
 {

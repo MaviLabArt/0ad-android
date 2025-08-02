@@ -22,19 +22,31 @@
 #include "graphics/FontMetrics.h"
 #include "graphics/MapReader.h"
 #include "lib/code_generation.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/frequency_filter.h"
 #include "lib/sysdep/sysdep.h"
-#include "lib/utf8.h"
-#include "maths/Size2D.h"
+#include "lib/types.h"
 #include "maths/MD5.h"
+#include "maths/Size2D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/CStrIntern.h"
+#include "ps/Errors.h"
 #include "ps/GUID.h"
 #include "ps/GameSetup/Atlas.h"
 #include "ps/Globals.h"
-#include "ps/Hotkey.h"
 #include "ps/Util.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "tools/atlas/GameInterface/GameLoop.h"
+
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <string>
+
+class ScriptInterface;
 
 namespace JSI_Main
 {

@@ -31,7 +31,7 @@
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
-#include "ps/Profiler2.h"
+#include "ps/Future.h"
 #include "ps/Profiler2GPU.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/TaskManager.h"
@@ -48,6 +48,7 @@
 #include <tuple>
 #include <unordered_map>
 #include <utility>
+#include <variant>
 
 CProfiler2 g_Profiler2;
 

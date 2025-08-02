@@ -20,7 +20,12 @@
 #include "ps/containers/StaticVector.h"
 
 #include <algorithm>
+#include <cinttypes>
+#include <cstddef>
+#include <iterator>
+#include <limits>
 #include <numeric>
+#include <stdexcept>
 #include <type_traits>
 #include <utility>
 

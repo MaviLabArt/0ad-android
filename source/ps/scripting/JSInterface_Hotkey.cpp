@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,27 @@
 
 #include "JSInterface_Hotkey.h"
 
-#include "lib/external_libraries/libsdl.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Hotkey.h"
 #include "ps/KeyName.h"
+#include "ps/containers/StaticVector.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 
-#include <unordered_map>
-#include <vector>
+#include <SDL_scancode.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
 #include <set>
+#include <string>
+#include <unordered_map>
+#include <utility>
+#include <vector>
 
 /**
  * Convert an unordered map to a JS object, mapping keys to values.
