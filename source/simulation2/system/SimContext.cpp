@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,10 @@
 
 #include "SimContext.h"
 
-#include "ComponentManager.h"
-
 #include "ps/Game.h"
+#include "simulation2/system/Component.h"
+
+#include <cstddef>
 
 CSimContext::CSimContext(CTerrain* terrain /*= nullptr*/, CUnitManager* unitManager /*= nullptr*/) :
 	m_UnitManager{unitManager},

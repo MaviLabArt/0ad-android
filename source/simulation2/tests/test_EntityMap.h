@@ -16,15 +16,17 @@
  */
 
 #include "lib/self_test.h"
+
 #include "lib/timer.h"
-
-#include "simulation2/serialization/ISerializer.h"
-#include "simulation2/serialization/IDeserializer.h"
-
 #include "simulation2/system/EntityMap.h"
 
 #include <algorithm>
+#include <cstdio>
+#include <cstdlib>
+#include <new>
 #include <random>
+#include <utility>
+#include <vector>
 
 class TestEntityMap : public CxxTest::TestSuite
 {

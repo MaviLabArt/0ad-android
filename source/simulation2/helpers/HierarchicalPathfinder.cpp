@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,24 @@
 
 #include "HierarchicalPathfinder.h"
 
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
+#include "lib/code_generation.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
 #include "renderer/Scene.h"
-
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/helpers/Render.h"
+
+#include <algorithm>
+#include <cstring>
+
+class CSimContext;
 
 // Find the root ID of a region, used by InitRegions
 inline u16 RootID(u16 x, const std::vector<u16>& v)

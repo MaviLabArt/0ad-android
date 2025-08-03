@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,25 +15,44 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
-
-#include "simulation2/components/ICmpObstructionManager.h"
-#include "simulation2/components/ICmpPathfinder.h"
-#include "simulation2/helpers/Grid.h"
+#include "lib/self_test.h"
 
 #include "graphics/MapReader.h"
 #include "graphics/Terrain.h"
-#include "graphics/TerrainTextureManager.h"
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
 #include "lib/timer.h"
-#include "lib/tex/tex.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "ps/Filesystem.h"
 #include "ps/Loader.h"
-#include "ps/Pyrogenesis.h"
-#include "scriptinterface/ScriptContext.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPathfinder.h"
+#include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 
+#include <cmath>
+#include <cstdio>
 #include <fstream>
+#include <js/CallArgs.h>
+#include <js/RootingAPI.h>
+#include <memory>
 #include <optional>
 #include <random>
+#include <string>
+#include <vector>
 
 class TestCmpPathfinder : public CxxTest::TestSuite
 {

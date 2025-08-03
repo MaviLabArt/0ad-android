@@ -15,12 +15,26 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
+#include "lib/self_test.h"
 
-#include "simulation2/components/ICmpObstructionManager.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/ComponentTest.h"
+#include "simulation2/system/Entity.h"
 
+#include <cmath>
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 #include <optional>
+#include <string>
+#include <vector>
 
 class MockObstruction : public ICmpObstruction
 {

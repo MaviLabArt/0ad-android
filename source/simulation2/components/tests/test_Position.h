@@ -15,11 +15,24 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
+#include "lib/self_test.h"
 
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/ComponentTest.h"
+#include "simulation2/system/Entity.h"
+
+#include <memory>
+#include <string>
 
 class MockWater : public ICmpWaterManager
 {

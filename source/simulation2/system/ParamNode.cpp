@@ -19,20 +19,36 @@
 
 #include "ParamNode.h"
 
+#include "lib/debug.h"
+#include "lib/path.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/CStrIntern.h"
 #include "ps/Filesystem.h"
+#include "ps/XMB/XMBData.h"
 #include "ps/XML/Xeromyces.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
+#include "simulation2/system/Component.h"
 
+#include <algorithm>
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/constants.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <cstdlib>
+#include <js/CharacterEncoding.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/String.h>
+#include <js/Value.h>
+#include <jsapi.h>
 #include <sstream>
 #include <string_view>
+#include <utility>
+#include <vector>
 
 static CParamNode g_NullNode(false);
 

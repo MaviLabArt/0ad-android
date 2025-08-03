@@ -20,15 +20,23 @@
 #include "TurnManager.h"
 
 #include "gui/GUIManager.h"
+#include "lib/debug.h"
 #include "maths/MathUtil.h"
-#include "ps/Pyrogenesis.h"
+#include "ps/CLogger.h"
 #include "ps/Profile.h"
 #include "ps/Profiler2.h"
-#include "ps/CLogger.h"
 #include "ps/Replay.h"
-#include "ps/Util.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "scriptinterface/StructuredClone.h"
 #include "simulation2/Simulation2.h"
+
+#include <algorithm>
+#include <iterator>
+#include <js/ValueArray.h>
+#include <limits>
+#include <sstream>
+#include <utility>
 
 #if 0
 #define NETTURN_LOG(...) debug_printf(__VA_ARGS__)

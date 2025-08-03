@@ -19,18 +19,38 @@
 
 #include "StdDeserializer.h"
 
+#include "lib/alignment.h"
 #include "lib/byte_order.h"
+#include "lib/debug.h"
 #include "lib/utf8.h"
-#include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptConversions.h"
-#include "scriptinterface/ScriptExtraHeaders.h" // For typed arrays and ArrayBuffer
+#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/serialization/ISerializer.h"
 #include "simulation2/serialization/SerializedScriptTypes.h"
-#include "simulation2/serialization/StdSerializer.h" // for DEBUG_SERIALIZER_ANNOTATE
+#include "simulation2/serialization/StdSerializer.h"
+
+#include <cstdint>
+#include <cstdlib>
+#include <istream>
+#include <js/Array.h>
+#include <js/ArrayBuffer.h>
+#include <js/CallAndConstruct.h>
+#include <js/ComparisonOperators.h>
+#include <js/GCAPI.h>
+#include <js/MapAndSet.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/String.h>
+#include <js/TracingAPI.h>
+#include <js/ValueArray.h>
+#include <js/experimental/TypedData.h>
+#include <jsapi.h>
+#include <jspubtd.h>
+
+class JSObject;
 
 CStdDeserializer::CStdDeserializer(const ScriptInterface& scriptInterface, std::istream& stream) :
 	m_ScriptInterface(scriptInterface), m_Stream(stream)

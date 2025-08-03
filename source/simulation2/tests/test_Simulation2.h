@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,15 +17,23 @@
 
 #include "lib/self_test.h"
 
-#include "scriptinterface/ScriptInterface.h"
-#include "simulation2/Simulation2.h"
-#include "simulation2/MessageTypes.h"
-#include "simulation2/components/ICmpTest.h"
-
 #include "graphics/Terrain.h"
-#include "ps/CLogger.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/types.h"
 #include "ps/Filesystem.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/Simulation2.h"
+#include "simulation2/components/ICmpTest.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+
+#include <cstddef>
+#include <memory>
+#include <string>
 
 class TestSimulation2 : public CxxTest::TestSuite
 {

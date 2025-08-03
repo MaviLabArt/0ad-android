@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,9 +15,24 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
+#include "lib/self_test.h"
 
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
+#include "maths/NUSpline.h"
+#include "ps/CStr.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpCinemaManager.h"
+#include "simulation2/helpers/CinemaPath.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/ComponentTest.h"
+#include "simulation2/system/Entity.h"
+
+#include <cstddef>
+#include <memory>
+#include <string>
 
 class TestCmpCinemaManager : public CxxTest::TestSuite
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,30 +17,44 @@
 
 #include "lib/self_test.h"
 
-#include "simulation2/serialization/DebugSerializer.h"
-#include "simulation2/serialization/HashSerializer.h"
-#include "simulation2/serialization/StdSerializer.h"
-#include "simulation2/serialization/StdDeserializer.h"
-#include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptInterface.h"
-
 #include "graphics/MapReader.h"
 #include "graphics/Terrain.h"
-#include "graphics/TerrainTextureManager.h"
 #include "lib/config2.h"
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
 #include "lib/timer.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Loader.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/serialization/DebugSerializer.h"
+#include "simulation2/serialization/HashSerializer.h"
+#include "simulation2/serialization/StdDeserializer.h"
+#include "simulation2/serialization/StdSerializer.h"
+#include "simulation2/system/Component.h"
+
+#include <cstdint>
+#include <cstdio>
+#include <iostream>
+#include <js/CallArgs.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+#include <sstream>
+#include <string>
 
 #if CONFIG2_VALGRIND
 # include "callgrind.h"
 #endif
-
-#include <iostream>
 
 #define TS_ASSERT_STREAM(stream, len, buffer) \
 	TS_ASSERT_EQUALS(stream.str().length(), (size_t)len); \

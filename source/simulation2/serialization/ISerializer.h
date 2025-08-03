@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,16 @@
 #ifndef INCLUDED_ISERIALIZER
 #define INCLUDED_ISERIALIZER
 
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "ps/Errors.h"
 #include "scriptinterface/ScriptTypes.h"
+
+#include <cstddef>
+#include <cstdint>
+#include <iosfwd>
+#include <js/TypeDecls.h>
+#include <string>
 
 ERROR_GROUP(Serialize);
 ERROR_TYPE(Serialize, OutOfBounds);

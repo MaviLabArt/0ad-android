@@ -15,19 +15,45 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
+#include "lib/self_test.h"
 
-#include "maths/Matrix3D.h"
-#include "ps/CStr.h"
-#include "graphics/Terrain.h"
 #include "graphics/TerritoryBoundary.h"
-#include "simulation2/helpers/Grid.h"
-#include "simulation2/components/ICmpTerritoryManager.h"
-#include "simulation2/components/ICmpPlayerManager.h"
-#include "simulation2/components/ICmpTerritoryInfluence.h"
+#include "lib/debug.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector2D.h"
+#include "ps/CStr.h"
+#include "ps/Filesystem.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpObstruction.h"
 #include "simulation2/components/ICmpOwnership.h"
+#include "simulation2/components/ICmpPathfinder.h"
+#include "simulation2/components/ICmpPlayerManager.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpTerritoryInfluence.h"
+#include "simulation2/components/ICmpTerritoryManager.h"
+#include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/ComponentTest.h"
+#include "simulation2/system/Entity.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 #include <optional>
+#include <string>
+#include <vector>
 
 class MockPathfinderTerrMan : public ICmpPathfinder
 {

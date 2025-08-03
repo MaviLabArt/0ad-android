@@ -21,6 +21,7 @@
 #include "BinarySerializer.h"
 
 #include <cstring>
+#include <memory>
 
 #define DEBUG_SERIALIZER_ANNOTATE 0 // annotate the stream to help debugging if you're reading the output in a hex editor
 

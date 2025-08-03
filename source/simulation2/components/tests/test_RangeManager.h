@@ -15,15 +15,34 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "maths/Matrix3D.h"
-#include "simulation2/system/ComponentTest.h"
-#include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/components/ICmpObstruction.h"
-#include "simulation2/components/ICmpPosition.h"
-#include "simulation2/components/ICmpVision.h"
+#include "lib/self_test.h"
 
-#include <random>
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
+#include "maths/Matrix3D.h"
+#include "ps/CStr.h"
+#include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/components/ICmpVision.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/ComponentTest.h"
+#include "simulation2/system/Entity.h"
+
+#include <cstddef>
+#include <cstdint>
+#include <memory>
 #include <optional>
+#include <random>
+#include <string>
+#include <vector>
 
 class MockVisionRgm : public ICmpVision
 {

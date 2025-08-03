@@ -17,21 +17,28 @@
 
 #include "precompiled.h"
 
-#include "ComponentManager.h"
-#include "IComponent.h"
-#include "ParamNode.h"
-
-#include "simulation2/MessageTypes.h"
-
-#include "simulation2/serialization/DebugSerializer.h"
-#include "simulation2/serialization/HashSerializer.h"
-#include "simulation2/serialization/StdSerializer.h"
-#include "simulation2/serialization/StdDeserializer.h"
-
-#include "simulation2/components/ICmpTemplateManager.h"
-
+#include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/Profiler2.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpTemplateManager.h"
+#include "simulation2/serialization/DebugSerializer.h"
+#include "simulation2/serialization/HashSerializer.h"
+#include "simulation2/serialization/StdDeserializer.h"
+#include "simulation2/serialization/StdSerializer.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+
+#include <algorithm>
+#include <boost/random/linear_congruential.hpp>
+#include <cstdint>
+#include <cstdio>
+#include <map>
+#include <set>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
 std::string SerializeRNG(const boost::random::rand48& rng)
 {

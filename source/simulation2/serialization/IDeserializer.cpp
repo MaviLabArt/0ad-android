@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,8 +20,10 @@
 #include "IDeserializer.h"
 
 #include "lib/byte_order.h"
+#include "lib/debug.h"
+#include "lib/status.h"
 #include "lib/utf8.h"
-#include "ps/CStr.h"
+#include "simulation2/system/Component.h"
 
 IDeserializer::~IDeserializer()
 {

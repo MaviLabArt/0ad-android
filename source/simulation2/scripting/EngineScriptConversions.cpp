@@ -17,20 +17,37 @@
 
 #include "precompiled.h"
 
-#include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptConversions.h"
-#include "scriptinterface/ScriptInterface.h"
-
 #include "graphics/Color.h"
+#include "lib/code_generation.h"
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
 #include "maths/FixedVector3D.h"
-#include "maths/Rect.h"
+#include "maths/NUSpline.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/helpers/CinemaPath.h"
 #include "simulation2/helpers/Grid.h"
-#include "simulation2/system/IComponent.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/Component.h"
+
+#include <cstring>
+#include <js/Array.h>
+#include <js/CallAndConstruct.h>
+#include <js/Conversions.h>
+#include <js/GCAPI.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <js/experimental/TypedData.h>
+#include <string>
+#include <vector>
 
 #define FAIL(msg) STMT(LOGERROR(msg); return false)
 #define FAIL_VOID(msg) STMT(ScriptException::Raise(rq, msg); return)

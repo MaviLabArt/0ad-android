@@ -19,6 +19,14 @@
 
 #include "LocalTurnManager.h"
 
+#include "lib/debug.h"
+#include "simulation2/system/TurnManager.h"
+
+#include <js/RootingAPI.h>
+
+class CSimulation2;
+class IReplayLogger;
+
 CLocalTurnManager::CLocalTurnManager(CSimulation2& simulation, IReplayLogger& replay)
 	: CTurnManager(simulation, DEFAULT_TURN_LENGTH, COMMAND_DELAY_SP, 0, replay)
 {

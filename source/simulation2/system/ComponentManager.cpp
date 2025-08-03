@@ -19,23 +19,37 @@
 
 #include "ComponentManager.h"
 
+#include "graphics/HeightMipmap.h"
 #include "lib/utf8.h"
-#include "ps/algorithm.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/algorithm.h"
 #include "ps/scripting/JSInterface_VFS.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
-#include "simulation2/components/ICmpTemplateManager.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpTemplateManager.h"
+#include "simulation2/helpers/Player.h"
 #include "simulation2/system/DynamicSubscription.h"
-#include "simulation2/system/IComponent.h"
-#include "simulation2/system/ParamNode.h"
-#include "simulation2/system/SimContext.h"
+#include "simulation2/system/Message.h"
 
+#include <algorithm>
+#include <cstdint>
+#include <cstdlib>
+#include <fmt/format.h>
+#include <iterator>
+#include <js/GCAPI.h>
+#include <js/PropertyAndElement.h>
+#include <js/TracingAPI.h>
+#include <js/ValueArray.h>
 #include <stdexcept>
 #include <string_view>
+
+class ScriptContext;
 
 /**
  * Used for script-only message types.

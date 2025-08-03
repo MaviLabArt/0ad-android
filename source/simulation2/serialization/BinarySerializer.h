@@ -25,6 +25,7 @@
 #include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptForward.h"
 
+#include <memory>
 #include <ostream>
 #include <streambuf>
 

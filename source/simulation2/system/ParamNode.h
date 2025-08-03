@@ -19,18 +19,22 @@
 #define INCLUDED_PARAMNODE
 
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "ps/Errors.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <cstddef>
+#include <iosfwd>
+#include <js/TypeDecls.h>
 #include <map>
+#include <memory>
 #include <string>
-
-class XMBData;
-class XMBElement;
 
 class CStrIntern;
 class ScriptRequest;
+class XMBData;
+class XMBElement;
 
 /**
  * An entity initialisation parameter node.

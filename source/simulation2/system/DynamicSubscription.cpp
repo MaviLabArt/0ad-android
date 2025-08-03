@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,6 +18,12 @@
 #include "precompiled.h"
 
 #include "DynamicSubscription.h"
+
+#include "lib/debug.h"
+
+#include <algorithm>
+#include <cstddef>
+#include <iterator>
 
 void CDynamicSubscription::Add(IComponent* cmp)
 {

@@ -18,23 +18,30 @@
 #ifndef INCLUDED_COMPONENTMANAGER
 #define INCLUDED_COMPONENTMANAGER
 
-#include "ps/Filesystem.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "simulation2/helpers/Player.h"
-#include "simulation2/system/Components.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/DynamicSubscription.h"
 #include "simulation2/system/Entity.h"
-#include "simulation2/system/IComponent.h"
 
 #include <boost/random/linear_congruential.hpp>
+#include <iosfwd>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <map>
+#include <memory>
 #include <set>
+#include <string>
 #include <unordered_map>
+#include <utility>
+#include <vector>
 
-class IComponent;
-class CParamNode;
 class CMessage;
-class CSimContext;
-class CDynamicSubscription;
+class JSTracer;
+class ScriptContext;
 
 class CComponentManager
 {

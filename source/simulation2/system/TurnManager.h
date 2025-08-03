@@ -19,12 +19,18 @@
 #define INCLUDED_TURNMANAGER
 
 #include "lib/code_annotation.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
 #include "simulation2/helpers/SimulationCommand.h"
 
+#include <cstddef>
 #include <deque>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <list>
 #include <map>
+#include <string>
 #include <vector>
 
 class CSimulation2;

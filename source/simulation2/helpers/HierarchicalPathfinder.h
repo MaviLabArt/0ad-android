@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,13 +20,25 @@
 
 #include "Pathfinding.h"
 
+#include "graphics/SColor.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
 #include "renderer/TerrainOverlay.h"
-#include "Render.h"
-#include "graphics/SColor.h"
+#include "simulation2/helpers/Grid.h"
 
+#include <cstddef>
+#include <limits>
 #include <map>
 #include <set>
+#include <string>
+#include <utility>
+#include <vector>
+
+class CSimContext;
+class PathGoal;
+struct SOverlayLine;
 
 /**
  * Hierarchical pathfinder.

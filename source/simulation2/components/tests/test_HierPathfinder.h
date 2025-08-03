@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,12 +15,23 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "simulation2/system/ComponentTest.h"
+#include "lib/self_test.h"
+
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+
+#include <cmath>
+#include <cstdio>
+#include <map>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
 
 #define TEST
-
-#include "maths/Vector2D.h"
-#include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/HierarchicalPathfinder.h"
 
 class TestHierarchicalPathfinder : public CxxTest::TestSuite

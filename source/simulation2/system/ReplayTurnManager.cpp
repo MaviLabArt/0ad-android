@@ -20,14 +20,25 @@
 #include "ReplayTurnManager.h"
 
 #include "gui/GUIManager.h"
+#include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/Util.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/JSON.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/system/LocalTurnManager.h"
 
+#include <js/GCVector.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <tuple>
 #include <utility>
+
+class IReplayLogger;
+class ScriptInterface;
 
 const CStr CReplayTurnManager::EventNameReplayFinished = "ReplayFinished";
 const CStr CReplayTurnManager::EventNameReplayOutOfSync = "ReplayOutOfSync";

@@ -15,15 +15,33 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "lib/self_test.h"
+
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_util.h"
-#include "simulation2/system/ComponentTest.h"
-#include "simulation2/serialization/StdDeserializer.h"
-#include "simulation2/serialization/StdSerializer.h"
-
+#include "lib/path.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
-
+#include "ps/XML/Xeromyces.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "simulation2/serialization/StdDeserializer.h"
+#include "simulation2/serialization/StdSerializer.h"
+#include "simulation2/system/Component.h"
+
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+#include <sstream>
+#include <string>
+#include <vector>
 
 class TestComponentScripts : public CxxTest::TestSuite
 {

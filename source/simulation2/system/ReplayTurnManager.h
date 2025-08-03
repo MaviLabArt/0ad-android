@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,18 @@
 #ifndef INCLUDED_REPLAYTURNMANAGER
 #define INCLUDED_REPLAYTURNMANAGER
 
-#include "LocalTurnManager.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/system/LocalTurnManager.h"
+
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
+class CSimulation2;
+class IReplayLogger;
 
 /**
  * Implementation of CLocalTurnManager for replay games.
