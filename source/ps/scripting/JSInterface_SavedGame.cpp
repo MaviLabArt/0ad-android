@@ -23,6 +23,7 @@
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Game.h"
 #include "ps/SavedGame.h"
 #include "scriptinterface/FunctionWrapper.h"

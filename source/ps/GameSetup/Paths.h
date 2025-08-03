@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,7 +19,8 @@
 #define INCLUDED_PS_GAMESETUP_PATHS
 
 #include "lib/os_path.h"
-#include "CmdLineArgs.h"
+
+class CmdLineArgs;
 
 /**
  * Wrapper class for OS paths used by the game

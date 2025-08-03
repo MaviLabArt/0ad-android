@@ -30,6 +30,7 @@
 #include "network/NetClient.h"
 #include "network/NetServer.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/CmdLineArgs.h"
 #include "ps/GameSetup/Paths.h"
@@ -46,6 +47,7 @@
 #include <js/Array.h>
 #include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
+#include <js/Value.h>
 #include <map>
 #include <string>
 #include <tuple>

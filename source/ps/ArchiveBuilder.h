@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,7 +19,15 @@
 #define INCLUDED_ARCHIVEBUILDER
 
 #include "lib/file/vfs/vfs.h"
-#include "ps/CStr.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+
+#include <cstddef>
+#include <cstdint>
+#include <vector>
+
+class CFileInfo;
 
 /**
  * Packages a mod's files into a distributable archive.

@@ -26,9 +26,11 @@
 #include "ps/CStr.h"
 #include "ps/Singleton.h"
 
+#include <cstddef>
 #include <vector>
 
 class CCanvas2D;
+struct SDL_Event_;
 
 /**
  * Struct ProfileColumn: Describes one column of an AbstractProfileTable.

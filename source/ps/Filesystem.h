@@ -18,11 +18,16 @@
 #ifndef INCLUDED_PS_FILESYSTEM
 #define INCLUDED_PS_FILESYSTEM
 
-#include "lib/file/file.h"
-#include "lib/file/io/write_buffer.h"
-#include "lib/file/vfs/vfs_util.h"
-#include "ps/CStrForward.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
 #include "ps/Errors.h"
+
+#include <cstddef>
+#include <memory>
+
+class CStr8;
 
 extern PIVFS g_VFS;
 

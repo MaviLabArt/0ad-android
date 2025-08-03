@@ -24,14 +24,17 @@
 #ifndef INCLUDED_WORLD
 #define INCLUDED_WORLD
 
-#include "ps/CStrForward.h"
 #include "ps/Errors.h"
 
-#include <js/PropertyAndElement.h>
-#include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
-#include <js/Value.h>
 #include <memory>
+
+class CGame;
+class CMapReader;
+class CStrW;
+class CTerrain;
+class CUnitManager;
+class ScriptContext;
 
 #ifndef ERROR_GROUP_GAME_DEFINED
 #define ERROR_GROUP_GAME_DEFINED
@@ -39,12 +42,6 @@ ERROR_GROUP(Game);
 #endif
 ERROR_SUBGROUP(Game, World);
 ERROR_TYPE(Game_World, MapLoadFailed);
-
-class CGame;
-class CUnitManager;
-class CTerrain;
-class CMapReader;
-class ScriptContext;
 
 /**
  * CWorld is a general data class containing whatever is needed to accurately represent the world.

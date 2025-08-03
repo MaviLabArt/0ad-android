@@ -28,6 +28,7 @@
 #define INCLUDED_CONFIGDB
 
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "ps/CStr.h"
 
 #include <array>
@@ -35,8 +36,8 @@
 #include <map>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <string_view>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -64,8 +65,6 @@ using CConfigValueSet = std::vector<CStr>;
 // Would be defined in CConfigDB but then it couldn't be forward-declared, which is rather annoying.
 // Actually defined below - requires access to CConfigDB.
 class CConfigDBHook;
-
-#define g_ConfigDB (*CConfigDB::Instance())
 
 class CConfigDB
 {
@@ -109,7 +108,7 @@ public:
 	[[nodiscard]] static T GetIfInitialised(const std::string_view name, T defaultValue,
 		const EConfigNamespace ns = CFG_USER)
 	{
-		return IsInitialised() ? g_ConfigDB.Get(name, std::move(defaultValue), ns) : defaultValue;
+		return IsInitialised() ? Instance()->Get(name, std::move(defaultValue), ns) : defaultValue;
 	}
 
 	/**
@@ -253,4 +252,7 @@ private:
 	std::multimap<CStr, std::function<void()>>::iterator m_Ptr;
 	CConfigDB& m_ConfigDB;
 };
+
+#define g_ConfigDB (*CConfigDB::Instance())
+
 #endif // INCLUDED_CONFIGDB

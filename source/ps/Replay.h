@@ -18,15 +18,20 @@
 #ifndef INCLUDED_REPLAY
 #define INCLUDED_REPLAY
 
+#include "lib/code_annotation.h"
 #include "lib/os_path.h"
-#include "ps/CStr.h"
+#include "lib/types.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <iosfwd>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <string>
 #include <vector>
 
-struct SimulationCommand;
 class CSimulation2;
 class ScriptInterface;
+struct SimulationCommand;
 
 /**
  * Replay log recorder interface.

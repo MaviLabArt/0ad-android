@@ -19,13 +19,16 @@
 #define INCLUDED_SAVEDGAME
 
 #include "lib/status.h"
-#include "ps/CStr.h"
 #include "scriptinterface/ScriptTypes.h"
 #include "scriptinterface/StructuredClone.h"
 
+#include <js/Value.h>
 #include <optional>
+#include <string>
 
 class CSimulation2;
+class CStrW;
+class ScriptInterface;
 
 /**
  * @file

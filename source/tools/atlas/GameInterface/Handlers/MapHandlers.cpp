@@ -33,6 +33,7 @@
 #include "graphics/TerrainTextureManager.h"
 #include "lib/bits.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/status.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"

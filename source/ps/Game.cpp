@@ -49,8 +49,7 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpPlayer.h"
 #include "simulation2/components/ICmpPlayerManager.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/Components.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 #include "simulation2/system/LocalTurnManager.h"
 #include "simulation2/system/ReplayTurnManager.h"
@@ -65,8 +64,6 @@
 #include <memory>
 #include <sstream>
 #include <utility>
-
-class IComponent;
 
 extern GameLoopState* g_AtlasGameLoop;
 

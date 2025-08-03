@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 #ifndef INCLUDED_JOYSTICK
 #define INCLUDED_JOYSTICK
 
-#include "lib/external_libraries/libsdl.h"
+#include <SDL_joystick.h>
 
 class CJoystick
 {

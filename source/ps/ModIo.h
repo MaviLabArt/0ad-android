@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -23,14 +23,18 @@
 #ifndef INCLUDED_MODIO
 #define INCLUDED_MODIO
 
+#include "lib/code_annotation.h"
 #include "lib/external_libraries/curl.h"
 #include "lib/os_path.h"
-#include "scriptinterface/ScriptForward.h"
+#include "lib/types.h"
 
+#include <cstddef>
 #include <map>
 #include <sodium.h>
 #include <string>
 #include <vector>
+
+class ScriptInterface;
 
 // TODO: Allocate instance of the below two using sodium_malloc?
 struct PKStruct

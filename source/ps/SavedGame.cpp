@@ -36,6 +36,7 @@
 #include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/Mod.h"

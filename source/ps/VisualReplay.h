@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,13 @@
 #define INCLUDED_VISUAL_REPLAY
 
 #include "lib/os_path.h"
-#include "ps/CStrForward.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <js/TypeDecls.h>
+
+class CStrW;
 class ScriptInterface;
+namespace JS { class Value; }
 
 /**
  * Contains functions for visually replaying past games.

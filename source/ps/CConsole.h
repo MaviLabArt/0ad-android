@@ -22,9 +22,11 @@
 #ifndef INCLUDED_CCONSOLE
 #define INCLUDED_CCONSOLE
 
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/input.h"
 
+#include <cstddef>
 #include <deque>
 #include <memory>
 #include <mutex>
@@ -32,6 +34,7 @@
 
 class CCanvas2D;
 class CTextRenderer;
+struct SDL_Event_;
 
 /**
  * In-game console.

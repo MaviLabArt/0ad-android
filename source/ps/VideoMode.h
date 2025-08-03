@@ -18,21 +18,14 @@
 #ifndef INCLUDED_VIDEOMODE
 #define INCLUDED_VIDEOMODE
 
-#include "graphics/Camera.h"
-#include "ps/CStrForward.h"
 #include "renderer/backend/Backend.h"
 
 #include <memory>
 
-typedef struct SDL_Window SDL_Window;
+class CStrW;
+namespace Renderer::Backend { class IDevice; }
 
-namespace Renderer
-{
-namespace Backend
-{
-class IDevice;
-}
-}
+typedef struct SDL_Window SDL_Window;
 
 class CVideoMode
 {

@@ -31,12 +31,15 @@
  * triggered. All with the hotkey name stored in ev.user.data1 as a const char*.
  */
 
-#include "CStr.h"
 #include "lib/input.h"
+#include "lib/types.h"
+#include "ps/CStr.h"
 #include "ps/containers/StaticVector.h"
 
 #include <unordered_map>
 #include <vector>
+
+struct SDL_Event_;
 
 // SDL_Scancode is an enum, we'll use an explicit int to avoid including SDL in this header.
 using SDL_Scancode_ = int;

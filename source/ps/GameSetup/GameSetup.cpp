@@ -73,6 +73,7 @@
 #include "ps/VideoMode.h"
 #include "ps/World.h"
 #include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "ps/scripting/JSInterface_Game.h"
 #include "ps/scripting/JSInterface_Main.h"
@@ -89,7 +90,7 @@
 #include "scriptinterface/ScriptStats.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/scripting/JSInterface_Simulation.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/Component.h"
 #include "soundmanager/ISoundManager.h"
 
 #include <SDL.h>

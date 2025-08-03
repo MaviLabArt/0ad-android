@@ -27,7 +27,7 @@
 #include "lib/config2.h"
 #include "lib/debug.h"
 #include "lib/file/vfs/vfs.h"
-#include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
 #include "lib/status.h"
 #include "lib/sysdep/os.h"
 #include "lib/tex/tex.h"
@@ -45,6 +45,7 @@
 #include "renderer/backend/dummy/DeviceForward.h"
 #include "renderer/backend/gl/DeviceForward.h"
 #include "renderer/backend/vulkan/DeviceForward.h"
+#include "scriptinterface/ScriptInterface.h"
 
 #include <SDL.h>
 #include <SDL_error.h>

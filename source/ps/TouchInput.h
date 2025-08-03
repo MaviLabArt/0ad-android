@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,10 @@
 #include "lib/input.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
+
+#include <cstddef>
+
+struct SDL_Event_;
 
 /**
  * Maps touch events (e.g. on Android touchscreen devices) onto mouse events

@@ -21,10 +21,11 @@
 #ifndef INCLUDED_LOADER
 #define INCLUDED_LOADER
 
+#include "lib/debug.h"
 #include "lib/status.h"
 
+#include <cstddef>
 #include <functional>
-#include <wchar.h>
 
 /*
 

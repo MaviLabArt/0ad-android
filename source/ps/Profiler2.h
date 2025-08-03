@@ -78,30 +78,26 @@
 #ifndef INCLUDED_PROFILER2
 #define INCLUDED_PROFILER2
 
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/timer.h"
+#include "lib/types.h"
 #include "ps/ThreadUtil.h"
 
 #include <cstdarg>
 #include <cstring>
+#include <iosfwd>
+#include <memory>
 #include <mutex>
 #include <string>
-#include <thread>
 #include <vector>
 
-namespace Renderer
-{
-namespace Backend
-{
-class IDeviceCommandContext;
-}
-}
-
+class CProfiler2GPU;
+namespace Renderer::Backend { class IDeviceCommandContext; }
 struct mg_context;
 
 // Note: Lots of functions are defined inline, to hypothetically
 // minimise performance overhead.
-
-class CProfiler2GPU;
 
 class CProfiler2
 {

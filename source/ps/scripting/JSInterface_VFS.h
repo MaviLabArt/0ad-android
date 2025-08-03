@@ -21,6 +21,8 @@
 #include "lib/types.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <js/PropertyDescriptor.h>
+
 class ScriptRequest;
 
 namespace JSI_VFS

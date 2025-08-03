@@ -20,6 +20,7 @@
 #include "ScriptInterface.h"
 
 #include "lib/debug.h"
+#include "lib/file/vfs/vfs_util.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"

@@ -22,19 +22,17 @@
 #ifndef INCLUDED_PROFILE
 #define INCLUDED_PROFILE
 
-#include <vector>
-
 #include "lib/adts/ring_buf.h"
-#include "lib/posix/posix_pthread.h"
+#include "lib/code_annotation.h"
 #include "ps/Profiler2.h"
 #include "ps/Singleton.h"
 
+#include <vector>
+
+class CProfileNodeTable;
 
 #define PROFILE_AMORTIZE_FRAMES 30
 #define PROFILE_AMORTIZE_TURNS 5
-
-class CProfileManager;
-class CProfileNodeTable;
 
 // To profile scripts usefully, we use a call hook that's called on every enter/exit,
 // and need to find the function name. But most functions are anonymous so we make do

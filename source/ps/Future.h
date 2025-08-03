@@ -18,12 +18,10 @@
 #ifndef INCLUDED_FUTURE
 #define INCLUDED_FUTURE
 
-#include "ps/FutureForward.h"
-
 #include <atomic>
 #include <condition_variable>
 #include <exception>
-#include <functional>
+#include <memory>
 #include <mutex>
 #include <type_traits>
 #include <utility>
