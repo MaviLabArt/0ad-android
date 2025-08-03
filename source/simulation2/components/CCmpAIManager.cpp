@@ -297,7 +297,6 @@ public:
 	ScriptFunction::Register<&CAIWorker::func, ScriptInterface::ObjectFromCBData<CAIWorker>>(rq, name);
 
 		REGISTER_FUNC_NAME(PostCommand, "PostCommand");
-		REGISTER_FUNC_NAME(LoadScripts, "IncludeModule");
 		ScriptFunction::Register<QuitEngine>(rq, "Exit");
 
 		REGISTER_FUNC_NAME(ComputePathScript, "ComputePath");
@@ -315,35 +314,6 @@ public:
 	}
 
 	bool HasLoadedEntityTemplates() const { return m_HasLoadedEntityTemplates; }
-
-	bool LoadScripts(const std::wstring& moduleName)
-	{
-		// Ignore modules that are already loaded
-		if (m_LoadedModules.find(moduleName) != m_LoadedModules.end())
-			return true;
-
-		// Mark this as loaded, to prevent it recursively loading itself
-		m_LoadedModules.insert(moduleName);
-
-		// Load and execute *.js
-		VfsPaths pathnames;
-		if (vfs::GetPathnames(g_VFS, L"simulation/ai/" + moduleName + L"/", L"*.js", pathnames) < 0)
-		{
-			LOGERROR("Failed to load AI scripts for module %s", utf8_from_wstring(moduleName));
-			return false;
-		}
-
-		for (const VfsPath& path : pathnames)
-		{
-			if (!m_ScriptInterface->LoadGlobalScriptFile(path))
-			{
-				LOGERROR("Failed to load script %s", path.string8());
-				return false;
-			}
-		}
-
-		return true;
-	}
 
 	void PostCommand(int playerid, JS::HandleValue cmd)
 	{
@@ -442,30 +412,21 @@ public:
 		ScriptRequest rq(m_ScriptInterface);
 
 		// we don't need to load it.
-		if (!m_HasSharedComponent)
+		if (!std::exchange(m_HasSharedComponent, true))
 			return false;
 
-		// reset the value so it can be used to determine if we actually initialized it.
-		m_HasSharedComponent = false;
+		auto result = m_ScriptInterface->GetModuleLoader().LoadModule(rq,
+			"simulation/ai/common-api/shared.js");
 
-		if (LoadScripts(L"common-api"))
-			m_HasSharedComponent = true;
-		else
-			return false;
+		g_ScriptContext->RunJobs();
 
 		// mainly here for the error messages
 		OsPath path = L"simulation/ai/common-api/";
 
 		// Constructor name is SharedScript, it's in the module API3
 		// TODO: Hardcoding this is bad, we need a smarter way.
-		JS::RootedValue AIModule(rq.cx);
-		JS::RootedValue global(rq.cx, rq.globalValue());
+		JS::RootedValue AIModule(rq.cx, JS::ObjectValue(*result.begin()->Get()));
 		JS::RootedValue ctor(rq.cx);
-		if (!Script::GetProperty(rq, global, "API3", &AIModule) || AIModule.isUndefined())
-		{
-			LOGERROR("Failed to create shared AI component: %s: can't find module '%s'", path.string8(), "API3");
-			return false;
-		}
 
 		if (!Script::GetProperty(rq, AIModule, "SharedScript", &ctor)
 		    || ctor.isUndefined())
