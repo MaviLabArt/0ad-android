@@ -15,14 +15,8 @@ patch -p1 <"${PATCHES}"/FixRustLinkage.diff
 patch -p1 <"${PATCHES}"/FixLibNames.diff
 
 # Add needed debug define in pkg-config file.
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1935346
 patch -p1 <"${PATCHES}"/FixPkgConfigDebug.diff
-
-# On macOS, embedded build is broken due to a faulty check for pkg-config
-# https://bugzilla.mozilla.org/show_bug.cgi?id=1776255
-# The fix above is included in ESR 128, but does not apply to 115
-# Instead, require pkg-config on macOS even though it's not needed here
-# (from https://bugzilla.mozilla.org/show_bug.cgi?id=1783570)
-patch -p1 <"${PATCHES}"/FixMacOSPkgConfig.diff
 
 # There is an issue on 32-bit linux builds sometimes.
 # NB: the patch here is Comment 21 modified by Comment 25
@@ -33,19 +27,15 @@ if [ "$(uname -m)" = "i686" ] && [ "${OS}" != "Windows_NT" ]; then
 	patch -p1 <"${PATCHES}"/FixFpNormIssue.diff
 fi
 
-# Fix build with clang19
-# https://bugzilla.mozilla.org/show_bug.cgi?id=1894423
-# Fixed in ESR 128
-patch -p1 <"${PATCHES}"/FixClang19.diff
-
-# Fix build with Python >=3.12.8 and Python >=3.13.1
-# https://bugzilla.mozilla.org/show_bug.cgi?id=1935621
-patch -p1 <"${PATCHES}"/FixPython3.12.8.diff
-
-# Fix build for profiling with samply.
-# https://bugzilla.mozilla.org/show_bug.cgi?id=1876415
-# Fixed in ESR 128
-patch -p1 <"${PATCHES}"/FixProfiling.diff
+# Fix build on macOS
+# Workarounds adapted from Homebrew's formula at https://github.com/Homebrew/homebrew-core/blob/main/Formula/s/spidermonkey.rb
+# - Allow use of pkg-config to use the same zlib for SM and pyrogenesis (https://bugzilla.mozilla.org/show_bug.cgi?id=1783570)
+# - Force allowing build with older macOS SDK
+# - Fix invocation of recent compiler (https://bugzilla.mozilla.org/show_bug.cgi?id=1844694)
+if [ "${OS}" = "Darwin" ]; then
+	patch -p1 <"${PATCHES}"/FixMacOSBuild.diff
+fi
 
 # Supress warning on newer GCC compilers.
-patch -p1 <"${PATCHES}"/SupressDanglingPointerWarning.patch
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1953622
+patch -p1 <"${PATCHES}"/SuppressDanglingPointerWarning.patch

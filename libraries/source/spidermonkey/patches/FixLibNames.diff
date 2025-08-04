@@ -1,7 +1,7 @@
 --- a/js/src/old-configure
 +++ b/js/src/old-configure
-@@ -5081,10 +5081,10 @@
- 
+@@ -2595,10 +2595,10 @@
+ fi
  
  
 -if test -n "$JS_STANDALONE"; then
@@ -13,4 +13,4 @@
 +JS_LIBRARY_NAME="mozjs$MOZILLA_SYMBOLVERSION-release"
  fi
  JS_CONFIG_LIBS="$NSPR_LIBS $LIBS"
- if test -n "$GNU_CC"; then
+ if test "$CC_TYPE" != clang-cl ; then

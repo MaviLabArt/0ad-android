@@ -6,11 +6,11 @@ set -e
 cd "$(dirname "$0")"
 
 # This should match the version in config/milestone.txt
-PV=115.16.1
+PV=128.13.0
 FOLDER="mozjs-${PV}"
 # If same-version changes are needed, increment this.
-LIB_VERSION="${PV}+wfg6"
-LIB_NAME="mozjs115"
+LIB_VERSION="${PV}+wfg0"
+LIB_NAME="mozjs128"
 
 build_archive()
 {
@@ -74,14 +74,6 @@ rm -Rf "${FOLDER}"
 # patch
 (
 	cd "${FOLDER}"
-
-	# Fix build on recent macOS versions.
-	# https://bugzilla.mozilla.org/show_bug.cgi?id=1844694
-	# The --enable-bootstrap fix mentioned on the ticket does not fix the issue. Instead,
-	# use Homebrew's workaround.
-	if [ "${OS}" = "Darwin" ]; then
-		sed -i '' 's/\["-Wl,--version"]/["-Wl,-ld_classic,--version"]/g' build/moz.configure/toolchain.configure
-	fi
 
 	# shellcheck disable=SC1091
 	. ../patches/patch.sh
@@ -220,7 +212,7 @@ DEB="debug"
 REL="release"
 
 # Fetch the jsrust static library. Path is grepped from the build file as it varies by rust toolset.
-rust_path=$(grep jsrust <"${FOLDER}/build-release/js/src/build/backend.mk" | cut -d = -f 2 | cut -c2-)
+rust_path="${FOLDER}/build-release/$(grep jsrust "${FOLDER}/build-release/js/src/build/backend.mk" | cut -d / -f 2-)"
 cp -L "${rust_path}" "lib/${LIB_PREFIX}${LIB_NAME}-rust${STATIC_LIB_SUFFIX}"
 
 if [ "${OS}" = "Darwin" ]; then
@@ -229,21 +221,21 @@ if [ "${OS}" = "Darwin" ]; then
 	cp -L "${FOLDER}/build-${REL}/js/src/build/${LIB_PREFIX}js_static${LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}"
 elif [ "${OS}" = "Windows_NT" ]; then
 	# Windows needs DLLs to binaries/, static stubs to lib/ and debug symbols
-	cp -L "${FOLDER}/build-${DEB}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}" "bin/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}"
-	cp -L "${FOLDER}/build-${REL}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}" "bin/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}"
+	cp -L "${FOLDER}/build-${DEB}/dist/bin/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}" "bin/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}"
+	cp -L "${FOLDER}/build-${REL}/dist/bin/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}" "bin/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}"
 	cp -L "${FOLDER}/build-${DEB}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${DEB}${STATIC_LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${DEB}${STATIC_LIB_SUFFIX}"
 	cp -L "${FOLDER}/build-${REL}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${REL}${STATIC_LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${REL}${STATIC_LIB_SUFFIX}"
 	# Copy debug symbols as well.
 	cp -L "${FOLDER}/build-${DEB}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${DEB}.pdb" "bin/${LIB_PREFIX}${LIB_NAME}-${DEB}.pdb"
 	cp -L "${FOLDER}/build-${REL}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${REL}.pdb" "bin/${LIB_PREFIX}${LIB_NAME}-${REL}.pdb"
 	# Copy the debug jsrust library.
-	rust_path=$(grep jsrust <"${FOLDER}/build-debug/js/src/build/backend.mk" | cut -d = -f 2 | cut -c2-)
+	rust_path="${FOLDER}/build-debug/$(grep jsrust "${FOLDER}/build-debug/js/src/build/backend.mk" | cut -d / -f 2-)"
 	cp -L "${rust_path}" "lib/${LIB_PREFIX}${LIB_NAME}-rust-debug${STATIC_LIB_SUFFIX}"
 else
 	# Copy shared libs to lib/, they will also be copied to binaries/system, so the compiler and executable (resp.) can find them.
-	cp -L "${FOLDER}/build-${REL}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}"
+	cp -L "${FOLDER}/build-${REL}/dist/bin/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${REL}${LIB_SUFFIX}"
 	if [ "${OS}" != "FreeBSD" ]; then
-		cp -L "${FOLDER}/build-${DEB}/js/src/build/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}"
+		cp -L "${FOLDER}/build-${DEB}/dist/bin/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}" "lib/${LIB_PREFIX}${LIB_NAME}-${DEB}${LIB_SUFFIX}"
 	fi
 fi
 

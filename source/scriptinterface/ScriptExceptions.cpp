@@ -83,7 +83,7 @@ bool ScriptException::CatchPending(const ScriptRequest& rq)
 	msg << "JavaScript error: ";
 	if (report->filename)
 	{
-		msg << report->filename;
+		msg << report->filename.c_str();
 		msg << " line " << report->lineno << "\n";
 	}
 

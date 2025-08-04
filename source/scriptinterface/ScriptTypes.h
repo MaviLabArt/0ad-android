@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@
 #include "jspubtd.h"
 #include "jsapi.h"
 
-#if MOZJS_MAJOR_VERSION != 115
+#if MOZJS_MAJOR_VERSION != 128
 #error Your compiler is trying to use an incorrect major version of the \
 SpiderMonkey library. The SpiderMonkey API is subject to changes, and the \
 game will not build with the selected version of the library. Make sure \

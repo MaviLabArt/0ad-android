@@ -1,0 +1,35 @@
+diff --git a/build/moz.configure/pkg.configure b/build/moz.configure/pkg.configure
+index 418331b87..65a20b17b 100644
+--- a/build/moz.configure/pkg.configure
++++ b/build/moz.configure/pkg.configure
+@@ -12,7 +12,7 @@ def pkg_config(prefixes):
+ 
+ @depends(compile_environment, target)
+ def use_pkg_config(compile_environment, target):
+-    return compile_environment and target.os not in ("WINNT", "OSX", "Android")
++    return compile_environment and target.os not in ("WINNT", "Android")
+ 
+ 
+ pkg_config = check_prog(
+diff --git a/build/moz.configure/toolchain.configure b/build/moz.configure/toolchain.configure
+index 264027e57..e1b3cfabd 100644
+--- a/build/moz.configure/toolchain.configure
++++ b/build/moz.configure/toolchain.configure
+@@ -100,7 +100,7 @@ with only_when(host_is_osx | target_is_osx):
+     )
+ 
+     def mac_sdk_min_version():
+-        return "14.4"
++        return "13.3"
+ 
+     @depends(
+         "--with-macos-sdk",
+@@ -1875,7 +1875,7 @@ def select_linker_tmpl(host_or_target):
+             die("Unsupported linker " + linker)
+ 
+         # Check the kind of linker
+-        version_check = ["-Wl,--version"]
++        version_check = ["-Wl,-ld_classic,--version"]
+         cmd_base = c_compiler.wrapper + [c_compiler.compiler] + c_compiler.flags
+ 
+         def try_linker(linker):

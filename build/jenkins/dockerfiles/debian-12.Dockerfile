@@ -51,10 +51,12 @@ RUN apt-get -qqy update \
         zlib1g-dev \
     && apt-get clean
 
-# Install rust and Cargo via rustup, available in Debian12 1.63, need 1.66
+# Install rust and Cargo via rustup, available in Debian12 1.63, need 1.76
 ENV RUSTUP_HOME=/usr/local/rust
 ENV CARGO_HOME=/usr/local/rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain 1.66.0 -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain 1.76.0 -y
+# Install cbindgen for building SpiderMonkey
+RUN /usr/local/rust/bin/cargo install cbindgen
 
 ENV PATH="${RUSTUP_HOME}/bin:${PATH}"
 ENV SHELL=/bin/bash

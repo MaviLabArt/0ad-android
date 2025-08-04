@@ -373,7 +373,7 @@ void CBinarySerializerScriptImpl::HandleScriptVal(const ScriptRequest& rq, JS::H
 		JS::RootedFunction func(rq.cx, JS_ValueToFunction(rq.cx, val));
 		if (func)
 		{
-			JS::RootedString string(rq.cx, JS_GetFunctionId(func));
+			JS::RootedString string(rq.cx, JS_GetMaybePartialFunctionId(func));
 			if (string)
 			{
 				if (JS::StringHasLatin1Chars(string))

@@ -411,10 +411,12 @@ JS::Value CStdDeserializer::ReadScriptVal(const char* /*name*/, JS::HandleObject
 #if BYTE_ORDER != LITTLE_ENDIAN
 #error TODO: need to convert JS ArrayBuffer data from little-endian
 #endif
-		void* contents = malloc(length);
-		ENSURE(contents);
-		RawBytes("buffer data", (u8*)contents, length);
-		JS::RootedObject bufferObj(rq.cx, JS::NewArrayBufferWithContents(rq.cx, length, contents));
+		void* bufferData = js_malloc(length);
+		ENSURE(bufferData);
+		RawBytes("buffer data", (u8*)bufferData, length);
+
+		mozilla::UniquePtr<void, JS::FreePolicy> contents{ bufferData };
+		JS::RootedObject bufferObj(rq.cx, JS::NewArrayBufferWithContents(rq.cx, length, std::move(contents)));
 		AddScriptBackref(bufferObj);
 
 		return JS::ObjectValue(*bufferObj);

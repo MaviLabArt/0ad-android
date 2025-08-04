@@ -1,8 +1,8 @@
 --- a/js/src/moz.build
 +++ b/js/src/moz.build
-@@ -50,9 +50,12 @@
- if CONFIG["ENABLE_WASM_CRANELIFT"]:
-     CONFIGURE_SUBST_FILES += ["rust/extra-bindgen-flags"]
+@@ -47,9 +47,12 @@
+ with Files("builtin/intl/*"):
+     BUG_COMPONENT = component_intl
  
 +DIRS += [
 +    "rust"

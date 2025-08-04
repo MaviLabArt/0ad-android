@@ -46,6 +46,7 @@ private:
 		JS::HandleObject) final;
 
 	bool empty() const final;
+	bool isDrainingStopped() const final { return false; }
 
 	js::UniquePtr<JS::JobQueue::SavedJobQueue> saveJobQueue(JSContext*) final;
 
