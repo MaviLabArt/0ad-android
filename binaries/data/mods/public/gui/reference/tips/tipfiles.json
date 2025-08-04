@@ -129,6 +129,12 @@
         ]
       },
       {
+        "textFile": "town_bell.txt",
+        "imageFiles": [
+          "town_bell.png"
+        ]
+      },
+      {
         "textFile": "trading.txt",
         "imageFiles": [
           "trading.png"
@@ -211,6 +217,12 @@
         ]
       },
       {
+        "textFile": "idle_units.txt",
+        "imageFiles": [
+          "idle_units.png"
+        ]
+      },
+      {
         "textFile": "formations.txt",
         "imageFiles": [
           "formations.png"
@@ -265,6 +277,12 @@
         ]
       },
       {
+        "textFile": "siege_tower.txt",
+        "imageFiles": [
+          "siege_tower.png"
+        ]
+      },
+      {
         "textFile": "snapping.txt",
         "imageFiles": [
           "snapping.png"
@@ -274,6 +292,12 @@
         "textFile": "territory_decay.txt",
         "imageFiles": [
           "territory_decay.png"
+        ]
+      },
+      {
+        "textFile": "territory_extend.txt",
+        "imageFiles": [
+          "territory_extend.png"
         ]
       },
       {
@@ -342,6 +366,18 @@
         "textFile": "default_formation.txt",
         "imageFiles": [
           "default_formation.png"
+        ]
+      },
+      {
+        "textFile": "tributes.txt",
+        "imageFiles": [
+          "tributes.png"
+        ]
+      },
+      {
+        "textFile": "diplomacy_colors.txt",
+        "imageFiles": [
+          "diplomacy_colors.png"
         ]
       },
       {
