@@ -205,12 +205,6 @@ if [ "${OS}" = "Windows_NT" ]; then
 		cd "${FOLDER}"/build-release/dist/include
 		rm -f mozzconf.h zconf.h zlib.h
 	)
-
-	# SpiderMonkey can be linked/included in projects built with MSVC, however, since clang is now the only
-	# supported compiler on Windows, the codebase has accumulated some divergences with MSVC.
-	# Upstream tries on a best-effort basis to keep the SM headers MSVC-compatible.
-	patch -d "${FOLDER}"/build-debug/dist/include -p1 <patches/FixHeadersForMSVC.diff
-	patch -d "${FOLDER}"/build-release/dist/include -p1 <patches/FixHeadersForMSVC.diff
 fi
 
 # js-config.h is different for debug and release builds, so we need different include directories for both

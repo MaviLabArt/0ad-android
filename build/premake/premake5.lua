@@ -296,6 +296,11 @@ function project_set_build_flags()
 		-- Finally since VS2012 it's enabled implicitely when not set.
 		vectorextensions "SSE2"
 
+		-- SpiderMonkey only supports building with MSVC on a best-effort basis,
+		-- and the traditional MSVC preprocessor is incompatible with some headers.
+		-- Use the modern, standard-compliant MSVC preprocessor instead.
+		usestandardpreprocessor "On"
+
 		-- use native wchar_t type (not typedef to unsigned short)
 		nativewchar "on"
 

@@ -1337,7 +1337,7 @@ static bool udt_should_suppress(const wchar_t* type_name)
 	// removed obsolete defs: HEVENT, HFILE, HUMPD
 	if(type_name[0] != 'H')
 		goto not_handle;
-#define SUPPRESS_HANDLE(name) if(!wcscmp(type_name, L#name L"__")) return true;
+#define SUPPRESS_HANDLE(name) if(!wcscmp(type_name, L""#name L"__")) return true;
 	SUPPRESS_HANDLE(HACCEL);
 	SUPPRESS_HANDLE(HBITMAP);
 	SUPPRESS_HANDLE(HBRUSH);
