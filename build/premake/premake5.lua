@@ -178,6 +178,7 @@ targetdir(rootdir.."/binaries/system")
 libdirs(rootdir.."/binaries/system")
 location(_OPTIONS["outpath"])
 configurations { "Release", "Debug" }
+startproject "pyrogenesis"
 
 source_root = rootdir.."/source/" -- default for most projects - overridden by local in others
 
