@@ -18,11 +18,28 @@
 #ifndef INCLUDED_SCRIPTINTERFACE_OBJECT
 #define INCLUDED_SCRIPTINTERFACE_OBJECT
 
-#include "ScriptConversions.h"
-#include "ScriptRequest.h"
-#include "ScriptTypes.h"
-
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "scriptinterface/ScriptTypes.h"
+
+#include <cwchar>
+#include <js/Array.h>
+#include <js/GCVector.h>
+#include <js/Id.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <jsfriendapi.h>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <vector>
 
 /**
  * Wraps SM APIs for manipulating JS objects.

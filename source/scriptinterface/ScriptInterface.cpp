@@ -20,11 +20,15 @@
 #include "ScriptInterface.h"
 
 #include "lib/debug.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_util.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Filesystem.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/ThreadUtil.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Object.h"
@@ -33,8 +37,27 @@
 #include "scriptinterface/ScriptStats.h"
 #include "scriptinterface/StructuredClone.h"
 
-#include <map>
+#include <cstdio>
+#include <cstring>
+#include <js/CallAndConstruct.h>
+#include <js/Class.h>
+#include <js/ComparisonOperators.h>
+#include <js/CompilationAndEvaluation.h>
+#include <js/CompileOptions.h>
+#include <js/GCVector.h>
+#include <js/GlobalObject.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/Realm.h>
+#include <js/RealmOptions.h>
+#include <js/SourceText.h>
+#include <jsapi.h>
+#include <mozilla/Maybe.h>
 #include <string>
+#include <vector>
+
+namespace JS { class Compartment; }
+namespace mozilla { union Utf8Unit; }
 
 #define BOOST_MULTI_INDEX_DISABLE_SERIALIZATION
 #include <boost/preprocessor/punctuation/comma_if.hpp>

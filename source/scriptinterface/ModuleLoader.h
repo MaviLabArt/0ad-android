@@ -19,18 +19,27 @@
 #define INCLUDED_SCRIPTMODULELOADER
 
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/path.h"
 #include "scriptinterface/ScriptTypes.h"
 
 #include <cstddef>
 #include <exception>
 #include <functional>
+#include <iterator>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <tuple>
 #include <unordered_map>
+#include <utility>
 #include <variant>
 #include <vector>
 
+class JSObject;
 class ScriptContext;
 class ScriptInterface;
 class ScriptRequest;
+namespace JS { class Value; }
+struct JSContext;
 
 namespace Script
 {

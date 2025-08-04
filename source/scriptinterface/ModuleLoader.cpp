@@ -19,18 +19,41 @@
 
 #include "ModuleLoader.h"
 
+#include "js/Modules.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/os_path.h"
+#include "lib/status.h"
+#include "ps/CLogger.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/Promises.h"
 #include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
-#include "js/Modules.h"
+#include <algorithm>
+#include <filesystem>
 #include <fmt/format.h>
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/CompileOptions.h>
+#include <js/Object.h>
+#include <js/Promise.h>
+#include <js/SourceText.h>
+#include <js/Value.h>
+#include <jsapi.h>
 #include <numeric>
 #include <stdexcept>
+#include <string>
+#include <string_view>
+
+class JSObject;
+namespace mozilla { union Utf8Unit; }
+struct JSContext;
 
 namespace Script
 {

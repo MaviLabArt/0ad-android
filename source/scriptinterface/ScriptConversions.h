@@ -18,14 +18,24 @@
 #ifndef INCLUDED_SCRIPTCONVERSIONS
 #define INCLUDED_SCRIPTCONVERSIONS
 
+#include "lib/code_generation.h"
 #include "lib/debug.h"
-#include "ScriptRequest.h"
-#include "ScriptExceptions.h"
-#include "ScriptExtraHeaders.h" // for typed arrays
+#include "lib/types.h"
+#include "ps/CStr.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/experimental/TypedData.h>
 #include <limits>
 #include <optional>
-#include <type_traits>
+#include <string>
+#include <utility>
 #include <vector>
 
 namespace Script

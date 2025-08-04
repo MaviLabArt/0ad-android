@@ -19,17 +19,30 @@
 
 #include "ScriptContext.h"
 
+#include "js/Modules.h"
+#include "js/friend/PerformanceHint.h"
 #include "lib/alignment.h"
-#include "ps/GameSetup/Config.h"
+#include "lib/debug.h"
 #include "ps/Profile.h"
+#include "ps/Profiler2.h"
+#include "ps/ThreadUtil.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Promises.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptEngine.h"
-#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptExtraHeaders.h"
 
-#include "js/friend/PerformanceHint.h"
-#include "js/Modules.h"
+#include <js/Context.h>
+#include <js/GCAPI.h>
+#include <js/Initialization.h>
+#include <js/Promise.h>
+#include <js/SliceBudget.h>
+#include <js/Stack.h>
+#include <jsapi.h>
+#include <jsfriendapi.h>
+
+namespace JS { class Realm; }
+struct JSContext;
+struct JSRuntime;
 
 void GCSliceCallbackHook(JSContext*, JS::GCProgress progress, const JS::GCDescription&)
 {

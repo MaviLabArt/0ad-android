@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,13 +17,18 @@
 
 #include "precompiled.h"
 
-#include "ps/Profile.h"
-#include "ScriptExceptions.h"
-#include "ScriptInterface.h"
-#include "ScriptRequest.h"
 #include "StructuredClone.h"
 
-#include "js/StructuredClone.h"
+#include "lib/debug.h"
+#include "ps/Profile.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <js/CallArgs.h>
+#include <js/RootingAPI.h>
+#include <js/StructuredClone.h>
+
+class ScriptInterface;
 
 Script::StructuredClone Script::WriteStructuredClone(const ScriptRequest& rq, JS::HandleValue v)
 {

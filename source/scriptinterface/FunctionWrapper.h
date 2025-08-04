@@ -18,19 +18,39 @@
 #ifndef INCLUDED_FUNCTIONWRAPPER
 #define INCLUDED_FUNCTIONWRAPPER
 
-#include "ScriptConversions.h"
-#include "ScriptExceptions.h"
-#include "ScriptRequest.h"
+#include "lib/types.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <exception>
 #include <fmt/format.h>
+#include <js/CallAndConstruct.h>
+#include <js/CallArgs.h>
+#include <js/Class.h>
+#include <js/GCVector.h>
+#include <js/Object.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/PropertySpec.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
 #include <memory>
-#include <tuple>
-#include <type_traits>
 #include <stdexcept>
 #include <string>
+#include <tuple>
+#include <type_traits>
 #include <utility>
 
+class JSFunction;
+class JSObject;
 class ScriptInterface;
+namespace JS { class GCContext; }
+struct JSContext;
 
 /**
  * This class introduces templates to conveniently wrap C++ functions in JSNative functions.

@@ -18,14 +18,39 @@
 #ifndef INCLUDED_SCRIPTINTERFACE
 #define INCLUDED_SCRIPTINTERFACE
 
+#include "lib/code_annotation.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 #include "ps/Errors.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptTypes.h"
 
-#include <unordered_map>
 #include <functional>
+#include <js/CallArgs.h>
+#include <js/Object.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <memory>
+#include <string>
+#include <type_traits>
+#include <unordered_map>
+#include <utility>
+
+class JSObject;
+class Path;
+class ScriptContext;
+namespace JS { class HandleValueArray; }
+namespace Script { class ModuleLoader; }
+namespace boost { namespace random { class rand48; } }
+struct JSClass;
+struct JSContext;
+struct JSFunctionSpec;
+struct JSPropertySpec;
+struct ScriptInterface_impl;
 
 ERROR_GROUP(Scripting);
 ERROR_TYPE(Scripting, SetupFailed);
@@ -48,12 +73,6 @@ ERROR_TYPE(Scripting_DefineType, CreationFailed);
 // but as large as necessary for all wrapped functions)
 #define SCRIPT_INTERFACE_MAX_ARGS 8
 
-namespace boost { namespace random { class rand48; } }
-class Path;
-class ScriptContext;
-class ScriptInterface;
-struct ScriptInterface_impl;
-namespace Script { class ModuleLoader; }
 using VfsPath = Path;
 
 // Using a global object for the context is a workaround until Simulation, AI, etc,

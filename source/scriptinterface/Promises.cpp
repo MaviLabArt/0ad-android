@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,10 +20,20 @@
 #include "Promises.h"
 
 #include "lib/debug.h"
+#include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
+
+#include <js/CallAndConstruct.h>
+#include <js/GlobalObject.h>
+#include <js/Promise.h>
+#include <js/Value.h>
+#include <js/ValueArray.h>
+#include <string>
+#include <utility>
+
+struct JSContext;
 
 namespace Script
 {

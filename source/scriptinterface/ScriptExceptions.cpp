@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,10 +20,24 @@
 
 #include "ScriptExceptions.h"
 
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/secure_crt.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptRequest.h"
+
+#include <cstdarg>
+#include <js/CharacterEncoding.h>
+#include <js/ErrorReport.h>
+#include <js/Exception.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <sstream>
+#include <string>
 
 bool ScriptException::IsPending(const ScriptRequest& rq)
 {

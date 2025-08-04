@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,25 @@
 
 #include "JSON.h"
 
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
+#include "lib/types.h"
+#include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <js/Exception.h>
+#include <js/JSON.h>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
+#include <sstream>
 #include <string>
-
-#include "js/JSON.h"
 
 bool Script::ParseJSON(const ScriptRequest& rq, const std::string& string_utf8, JS::MutableHandleValue out)
 {

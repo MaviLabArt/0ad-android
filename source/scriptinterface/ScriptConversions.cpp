@@ -18,15 +18,19 @@
 #include "precompiled.h"
 
 #include "ScriptConversions.h"
-#include "ScriptExceptions.h"
-#include "ScriptExtraHeaders.h"
 
 #include "graphics/Entity.h"
-#include "lib/file/vfs/vfs_path.h"
-#include "maths/Vector2D.h"
-#include "ps/CLogger.h"
+#include "lib/path.h"
 #include "ps/CStr.h"
+#include "scriptinterface/ScriptExceptions.h"
+#include "scriptinterface/ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptRequest.h"
 
+#include <cstddef>
+#include <js/Conversions.h>
+#include <js/GCAPI.h>
+#include <js/String.h>
+#include <jsapi.h>
 #include <string>
 
 // Catch the raised exception right away to ensure the stack trace gets printed.

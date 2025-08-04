@@ -18,16 +18,32 @@
 #include "lib/self_test.h"
 
 #include "lib/file/vfs/vfs.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
 #include "lib/status.h"
 #include "lib/sysdep/dir_watch.h"
+#include "lib/sysdep/os.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/Promises.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <exception>
+#include <functional>
+#include <js/Promise.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <tuple>
+#include <utility>
 
 #if OS_MACOSX
 #include <CoreFoundation/CoreFoundation.h>
@@ -38,7 +54,6 @@
 #if OS_WIN || OS_WIN64 || OS_MACOSX
 #include <filesystem>
 #endif
-#include <fstream>
 
 Status wdir_watch_Init();
 Status wdir_watch_Shutdown();

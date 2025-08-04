@@ -17,17 +17,24 @@
 
 #include "lib/self_test.h"
 
-#include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptInterface.h"
-
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
 #include "maths/FixedVector3D.h"
-#include "maths/MathUtil.h"
-#include "ps/CLogger.h"
 #include "ps/Filesystem.h"
+#include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
-#include "jsapi.h"
+#include <cmath>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <limits>
+#include <string>
 
 class TestScriptConversions : public CxxTest::TestSuite
 {

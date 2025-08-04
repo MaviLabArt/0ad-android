@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,15 @@
 #ifndef INCLUDED_SCRIPTCONTEXT
 #define INCLUDED_SCRIPTCONTEXT
 
-#include "ScriptTypes.h"
-#include "ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptTypes.h"
 
+#include <cstdint>
 #include <list>
+#include <memory>
+
+namespace JS { class Realm; }
+struct JSContext;
 
 // Those are minimal defaults. The runtime for the main game is larger and GCs upon a larger growth.
 constexpr int DEFAULT_CONTEXT_SIZE = 16 * 1024 * 1024;

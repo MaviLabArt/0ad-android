@@ -17,12 +17,24 @@
 
 #include "lib/self_test.h"
 
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ModuleLoader.h"
-#include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+
+#include <functional>
+#include <js/CallArgs.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <stdexcept>
+#include <string>
+#include <tuple>
+#include <type_traits>
 
 class TestFunctionWrapper : public CxxTest::TestSuite
 {
