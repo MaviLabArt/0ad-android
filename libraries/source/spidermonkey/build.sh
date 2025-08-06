@@ -128,8 +128,7 @@ rm -Rf "${FOLDER}"
 		fi
 		CONF_OPTS="${CONF_OPTS} --target=$ARCH-apple-darwin"
 
-		# Link to custom-built zlib
-		export PKG_CONFIG_PATH="=${ZLIB_DIR}:${PKG_CONFIG_PATH}"
+		# This needs PKG_CONFIG_PATH to be exported in build-macos-libs.sh
 		CONF_OPTS="${CONF_OPTS} --with-system-zlib"
 		# Specify target versions and SDK
 		if [ "${MIN_OSX_VERSION}" ] && [ "${MIN_OSX_VERSION-_}" ]; then

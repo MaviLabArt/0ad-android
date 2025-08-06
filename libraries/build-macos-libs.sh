@@ -183,6 +183,7 @@ if [ $force_rebuild = "true" ]; then
 	rm -rf "$PC_PATH"
 fi
 mkdir -p "$PC_PATH"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:${PC_PATH}"
 
 echo "Building third-party dependencies..."
 # --------------------------------------------------------------
