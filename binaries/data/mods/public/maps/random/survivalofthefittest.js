@@ -15,8 +15,6 @@ export function* generateMap(mapSettings)
 	const tTier2Terrain = g_Terrains.tier2Terrain;
 	const tTier3Terrain = g_Terrains.tier3Terrain;
 	const tTier4Terrain = g_Terrains.tier4Terrain;
-	const tLowland = tMainTerrain.map(singleTerrain =>
-		singleTerrain + TERRAIN_SEPARATOR + "obstructors/placement");
 
 	const oTree1 = g_Gaia.tree1;
 	const oTree2 = g_Gaia.tree2;
@@ -44,6 +42,7 @@ export function* generateMap(mapSettings)
 	];
 
 	const oTreasureSeeker = "nonbuilder|undeletable|skirmish/units/default_support_female_citizen";
+	const oObstruction = "obstructors/placement_24x24";
 
 	const triggerPointAttacker = "trigger/trigger_point_A";
 	const triggerPointTreasures = [
@@ -73,7 +72,7 @@ export function* generateMap(mapSettings)
 	createArea(
 		new ClumpPlacer(diskArea(fractionToTiles(0.15)), 0.7, 0.1, Infinity, mapCenter),
 		[
-			new TerrainPainter(tLowland),
+			new TerrainPainter(tMainTerrain),
 			new SmoothElevationPainter(ELEVATION_SET, heightLand, 3),
 			new TileClassPainter(clLand)
 		]);
@@ -107,7 +106,7 @@ export function* generateMap(mapSettings)
 			new PathPlacer(mapCenter, passage[i], scaleByMapSize(14, 24), 0.4, scaleByMapSize(3, 9),
 				0.2, 0.05),
 			[
-				new TerrainPainter(tLowland),
+				new TerrainPainter(tMainTerrain),
 				new SmoothElevationPainter(ELEVATION_SET, heightLand, 4)
 			]);
 
@@ -239,6 +238,18 @@ export function* generateMap(mapSettings)
 		stragglerTrees);
 
 	yield 95;
+
+	// Forbid placing foundations at the center
+	const vec = new Vector2D();
+	const maxHeight = (heightHill + heightLand) / 2;
+	for (vec.x = 0; vec.x < mapSize; vec.x += 6)
+	{
+		for (vec.y = 0; vec.y < mapSize; vec.y += 6)
+		{
+			if (g_Map.getHeight(vec) < maxHeight)
+				g_Map.placeEntityAnywhere(oObstruction, 0, vec, Math.PI / 2);
+		}
+	}
 
 	return g_Map;
 }
