@@ -698,16 +698,18 @@ extern_lib_defs = {
 			else
 				pkgconfig.add_includes("ogg")
 				pkgconfig.add_includes("vorbisfile")
+				pkgconfig.add_includes("vorbis")
 			end
 		end,
 		link_settings = function()
 			if os.istarget("windows") then
 				add_default_lib_paths("vorbis")
 				add_default_links({
-					win_names  = { "vorbisfile" },
+					win_names  = { "vorbisfile", "vorbis" },
 				})
 			else
 				pkgconfig.add_links("vorbisfile")
+				pkgconfig.add_links("vorbis")
 			end
 		end,
 	},

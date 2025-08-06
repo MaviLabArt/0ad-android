@@ -21,6 +21,10 @@
 #include "lib/code_annotation.h"
 #include "lib/config2.h"
 #include "lib/debug.h"
+#include "lib/external_libraries/curl.h"
+#include "lib/external_libraries/enet.h"
+#include "lib/external_libraries/gloox.h"
+#include "lib/external_libraries/png.h"
 #include "lib/external_libraries/libsdl.h"
 #include "lib/path.h"
 #include "lib/posix/posix_utsname.h"
@@ -68,11 +72,15 @@
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
+#include <libxml/xmlversion.h>
 #include <random>
+#include <sodium.h>
 #include <sstream>
 #include <string>
 #include <thread>
+#include <unicode/uvernum.h>
 #include <vector>
+#include <zlib.h>
 
 // FreeType headers might have an include order.
 #include <ft2build.h>
@@ -88,6 +96,14 @@
 
 #if CONFIG2_NVTT
 #include "nvtt/nvtt.h"
+#endif
+
+#if CONFIG2_MINIUPNPC
+#include <miniupnpc/miniupnpc.h>
+#endif
+
+#if CONFIG2_AUDIO
+#include <vorbis/codec.h>
 #endif
 
 namespace
@@ -191,7 +207,22 @@ void ReportLibraries(const ScriptRequest& rq, JS::HandleValue settings)
 	appendLibrary(MakeFreeTypeReport(rq));
 
 	appendLibrary(LibraryReporter{rq, "boost"}.Add("version", BOOST_VERSION).MakeReport());
+	appendLibrary(LibraryReporter{rq, "enet"}.Add("version", std::to_string(ENET_VERSION)).MakeReport());
 	appendLibrary(LibraryReporter{rq, "fmt"}.Add("version", FMT_VERSION).MakeReport());
+	appendLibrary(LibraryReporter{rq, "gloox"}.Add("version", gloox_version()).MakeReport());
+	appendLibrary(LibraryReporter{rq, "libicu"}.Add("version", U_ICU_VERSION).MakeReport());
+	appendLibrary(LibraryReporter{rq, "libcurl"}.Add("version", std::string(curl_version())).MakeReport());
+#if CONFIG2_AUDIO
+	appendLibrary(LibraryReporter{rq, "libvorbis"}.Add("version", std::string(vorbis_version_string())).MakeReport());
+#endif
+	appendLibrary(LibraryReporter{rq, "libpng"}.Add("version", std::string(png_get_libpng_ver(nullptr))).MakeReport());
+	appendLibrary(LibraryReporter{rq, "libsodium"}.Add("version", std::string(sodium_version_string())).MakeReport());
+	appendLibrary(LibraryReporter{rq, "libxml2"}.Add("version", LIBXML_DOTTED_VERSION).MakeReport());
+#if CONFIG2_MINIUPNPC
+	appendLibrary(LibraryReporter{rq, "miniunpnpc"}.Add("version", MINIUPNPC_VERSION).MakeReport());
+#endif
+	appendLibrary(LibraryReporter{rq, "zlib"}.Add("version", ZLIB_VERSION).MakeReport());
+
 #if CONFIG2_NVTT
 	appendLibrary(LibraryReporter{rq, "nvtt"}
 		.Add("build_version", NVTT_VERSION)

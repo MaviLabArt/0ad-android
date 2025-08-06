@@ -852,14 +852,21 @@ function setup_all_libs ()
 		"zlib",
 		"boost",
 		"enet",
+		"gloox",
 		"libcurl",
 		"tinygettext",
 		"icu",
 		"iconv",
 		"libsodium",
+		"libpng",
 		"fmt",
 		"freetype",
 	}
+
+
+	if not _OPTIONS["without-miniupnpc"] then
+		table.insert(extern_libs, "miniupnpc")
+	end
 
 	if not _OPTIONS["without-nvtt"] then
 		table.insert(extern_libs, "nvtt")
