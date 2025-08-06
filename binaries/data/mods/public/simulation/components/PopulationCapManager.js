@@ -22,7 +22,7 @@ PopulationCapManager.prototype.SetPopulationCapType = function(type)
 	else
 	{
 		warn(`Attempted to set an unknown population capacity type: '${type}'. Continuing with type 'Player Population'...`);
-		this.popCapType = CAPTYPE_PLAYER_POPULATION;
+		this.popCapType = this.CAPTYPE_PLAYER_POPULATION;
 	}
 	if (this.popCap)
 		this.InitializePopCaps();
