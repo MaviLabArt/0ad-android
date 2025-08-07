@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,12 @@
 
 #include "PathGoal.h"
 
-#include "graphics/Terrain.h"
-#include "Pathfinding.h"
+#include "lib/code_annotation.h"
+#include "maths/MathUtil.h"
+#include "simulation2/helpers/Geometry.h"
+#include "simulation2/helpers/Pathfinding.h"
 
-#include "Geometry.h"
+#include <algorithm>
 
 static bool NavcellContainsCircle(int i, int j, fixed x, fixed z, fixed r, bool inside)
 {

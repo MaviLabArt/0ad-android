@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,9 +17,17 @@
 #ifndef INCLUDED_ENTITYMAP
 #define INCLUDED_ENTITYMAP
 
-#include "Entity.h"
-
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+
+#include <cstddef>
+#include <cstdint>
+#include <cstdlib>
+#include <iterator>
+#include <new>
 
 /**
  * A fast replacement for map<entity_id_t, T>.

@@ -18,10 +18,14 @@
 #ifndef INCLUDED_STDSERIALIZER
 #define INCLUDED_STDSERIALIZER
 
-#include "BinarySerializer.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "simulation2/serialization/BinarySerializer.h"
 
 #include <cstring>
-#include <memory>
+#include <ostream>
+
+class ScriptInterface;
 
 #define DEBUG_SERIALIZER_ANNOTATE 0 // annotate the stream to help debugging if you're reading the output in a hex editor
 

@@ -18,9 +18,13 @@
 #ifndef INCLUDED_HASHSERIALIZER
 #define INCLUDED_HASHSERIALIZER
 
-#include "BinarySerializer.h"
-
+#include "lib/types.h"
 #include "maths/MD5.h"
+#include "simulation2/serialization/BinarySerializer.h"
+
+#include <cstddef>
+
+class ScriptInterface;
 
 class CHashSerializerImpl
 {

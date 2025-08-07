@@ -17,8 +17,6 @@
 
 #include "lib/self_test.h"
 
-#include "simulation2/system/ComponentManager.h"
-
 #include "graphics/Terrain.h"
 #include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"

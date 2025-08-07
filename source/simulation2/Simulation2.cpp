@@ -63,7 +63,6 @@
 #include <fstream>
 #include <iomanip>
 #include <js/CallArgs.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <memory>
 #include <set>

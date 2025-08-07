@@ -34,16 +34,24 @@
 
 #include "VertexPathfinder.h"
 
-#include "lib/timer.h"
-#include "ps/Profile.h"
+#include "graphics/Color.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "maths/MathUtil.h"
+#include "ps/Profiler2.h"
 #include "renderer/Scene.h"
 #include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/PriorityQueue.h"
 #include "simulation2/helpers/Render.h"
-#include "simulation2/system/SimContext.h"
 
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
 #include <mutex>
+#include <queue>
 
 namespace
 {

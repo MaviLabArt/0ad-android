@@ -26,7 +26,6 @@
 #include "lib/types.h"
 #include "ps/CLogger.h"
 #include "renderer/TerrainOverlay.h"
-#include "simulation2/helpers/Grid.h"
 
 #include <cstddef>
 #include <limits>
@@ -39,6 +38,7 @@
 class CSimContext;
 class PathGoal;
 struct SOverlayLine;
+template <typename T> class Grid;
 
 /**
  * Hierarchical pathfinder.

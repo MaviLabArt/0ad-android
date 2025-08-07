@@ -21,13 +21,27 @@
 #include "ISerializer.h"
 
 #include "lib/byte_order.h"
-
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
-#include "scriptinterface/ScriptForward.h"
+#include "simulation2/system/Component.h"
 
+#include <cstddef>
+#include <cstdint>
+#include <js/AllocPolicy.h>
+#include <js/GCHashTable.h>
+#include <js/Id.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
 #include <memory>
 #include <ostream>
-#include <streambuf>
+#include <string>
+
+class JSTracer;
+class ScriptInterface;
+class ScriptRequest;
 
 /**
  * Wrapper for redirecting ostream writes to CBinarySerializer's impl

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,18 @@
 
 #include "DebugSerializer.h"
 
+#include "lib/debug.h"
+#include "lib/secure_crt.h"
+#include "ps/CStr.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/JSON.h"
 
-#include "lib/secure_crt.h"
-#include "lib/utf8.h"
-#include "ps/CStr.h"
-
-#include <sstream>
 #include <iomanip>
+#include <js/RootingAPI.h>
+#include <js/Value.h>
+#include <sstream>
 
 /*
  * The output format here is intended to be compatible with YAML,

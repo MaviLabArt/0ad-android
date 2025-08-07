@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,15 +19,18 @@
 
 #include "CinemaPath.h"
 
-#include <sstream>
-#include <string>
-
 #include "graphics/Camera.h"
+#include "lib/debug.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
 #include "maths/Vector3D.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
+
+#include <cmath>
+#include <string>
+#include <vector>
 
 CCinemaPath::CCinemaPath(const CCinemaData& data, const TNSpline& spline, const TNSpline& targetSpline)
 	: CCinemaData(data), TNSpline(spline), m_TargetSpline(targetSpline), m_TimeElapsed(0.f)

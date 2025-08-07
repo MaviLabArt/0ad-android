@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,13 @@
 
 #include "Pathfinding.h"
 
-#include "graphics/Terrain.h"
+#include "lib/debug.h"
+#include "maths/FixedVector2D.h"
 #include "ps/CLogger.h"
 #include "simulation2/helpers/Grid.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/Component.h"
+
+#include <string>
 
 namespace Pathfinding
 {

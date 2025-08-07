@@ -19,13 +19,21 @@
 
 #include "LongPathfinder.h"
 
+#include "graphics/SColor.h"
 #include "lib/bits.h"
-#include "ps/Profile.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "ps/CLogger.h"
+#include "ps/Profiler2.h"
+#include "renderer/TerrainOverlay.h"
+#include "simulation2/helpers/HierarchicalPathfinder.h"
+#include "simulation2/helpers/Pathfinding.h"
 
-#include "Geometry.h"
-#include "HierarchicalPathfinder.h"
-
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
 #include <mutex>
+#include <utility>
 
 namespace
 {

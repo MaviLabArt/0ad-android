@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,19 @@
 #define INCLUDED_VERTEXPATHFINDER
 
 #include "graphics/Overlay.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
 #include "simulation2/helpers/Pathfinding.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 
 #include <atomic>
 #include <vector>
+
+class ICmpObstructionManager;
+class PathGoal;
+class SceneCollector;
+template <typename T> class Grid;
 
 // A vertex around the corners of an obstruction
 // (paths will be sequences of these vertexes)

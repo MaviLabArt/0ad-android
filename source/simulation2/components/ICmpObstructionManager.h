@@ -18,20 +18,24 @@
 #ifndef INCLUDED_ICMPOBSTRUCTIONMANAGER
 #define INCLUDED_ICMPOBSTRUCTIONMANAGER
 
-#include "simulation2/system/Interface.h"
-
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
 #include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Interface.h"
 
+#include <js/Value.h>
 #include <vector>
 
 class IObstructionTestFilter;
-template<typename T>
-class Grid;
-struct GridUpdateInformation;
-using NavcellData = u16;
 class PathfinderPassability;
+struct GridUpdateInformation;
+template<typename T> class Grid;
 
+using NavcellData = u16;
 
 /**
  * Obstruction manager: provides efficient spatial queries over objects in the world.

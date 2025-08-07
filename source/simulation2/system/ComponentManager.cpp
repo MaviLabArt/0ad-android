@@ -43,7 +43,6 @@
 #include <fmt/format.h>
 #include <iterator>
 #include <js/GCAPI.h>
-#include <js/PropertyAndElement.h>
 #include <js/TracingAPI.h>
 #include <js/ValueArray.h>
 #include <stdexcept>

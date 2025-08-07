@@ -18,7 +18,12 @@
 #ifndef INCLUDED_SPATIAL
 #define INCLUDED_SPATIAL
 
+#include "maths/FixedVector2D.h"
+#include "maths/MathUtil.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/serialization/SerializeTemplates.h"
+
+#include <vector>
 
 /**
  * A very basic subdivision scheme for finding items in ranges.

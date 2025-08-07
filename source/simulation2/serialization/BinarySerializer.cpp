@@ -19,15 +19,36 @@
 
 #include "BinarySerializer.h"
 
-#include "lib/alignment.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/JSON.h"
+#include "simulation2/serialization/SerializedScriptTypes.h"
 
-#include "SerializedScriptTypes.h"
+#include <cmath>
+#include <js/Array.h>
+#include <js/ArrayBuffer.h>
+#include <js/Class.h>
+#include <js/ComparisonOperators.h>
+#include <js/Conversions.h>
+#include <js/ForOfIterator.h>
+#include <js/GCAPI.h>
+#include <js/MapAndSet.h>
+#include <js/Object.h>
+#include <js/PropertyAndElement.h>
+#include <js/PropertyDescriptor.h>
+#include <js/ScalarType.h>
+#include <js/String.h>
+#include <js/Value.h>
+#include <js/experimental/TypedData.h>
+#include <jsapi.h>
+#include <jspubtd.h>
+#include <mozilla/HashTable.h>
+#include <mozilla/Maybe.h>
+
+class JSObject;
 
 static u8 GetArrayType(js::Scalar::Type arrayType)
 {

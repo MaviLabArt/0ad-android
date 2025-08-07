@@ -18,20 +18,24 @@
 #ifndef INCLUDED_ICMPPATHFINDER
 #define INCLUDED_ICMPPATHFINDER
 
-#include "simulation2/system/Interface.h"
-
+#include "lib/types.h"
 #include "simulation2/components/ICmpObstruction.h"
 #include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Interface.h"
 
+#include <js/Value.h>
 #include <map>
+#include <string>
+#include <vector>
 
+class CFixedVector2D;
 class IObstructionTestFilter;
 class PathGoal;
-
+struct GridUpdateInformation;
 template<typename T> class Grid;
-
-// Returned by asynchronous workers, used to send messages in the main thread.
-struct WaypointPath;
 
 struct PathResult
 {

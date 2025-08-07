@@ -19,14 +19,15 @@
 #define INCLUDED_SELECTION
 
 #include "ps/Profiler2.h"
-#include "simulation2/helpers/Player.h"
 #include "simulation2/Simulation2.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
-#include "simulation2/system/IComponent.h"
 
+#include <string>
+#include <utility>
 #include <vector>
 
-class CSimulation2;
 class CCamera;
 
 bool CheckEntityInRect(CEntityHandle handle, const CCamera& camera, int sx0, int sy0, int sx1, int sy1, bool allowEditorSelectables);

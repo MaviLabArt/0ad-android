@@ -18,31 +18,45 @@
 #ifndef INCLUDED_CCMPUNITMOTION
 #define INCLUDED_CCMPUNITMOTION
 
-#include "simulation2/system/Component.h"
-#include "ICmpUnitMotion.h"
-
-#include "simulation2/components/CCmpUnitMotionManager.h"
-#include "simulation2/components/ICmpObstruction.h"
-#include "simulation2/components/ICmpObstructionManager.h"
-#include "simulation2/components/ICmpOwnership.h"
-#include "simulation2/components/ICmpPosition.h"
-#include "simulation2/components/ICmpPathfinder.h"
-#include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/components/ICmpValueModificationManager.h"
-#include "simulation2/components/ICmpVisual.h"
-#include "simulation2/helpers/Geometry.h"
-#include "simulation2/helpers/Render.h"
-#include "simulation2/MessageTypes.h"
-#include "simulation2/serialization/SerializedPathfinder.h"
-#include "simulation2/serialization/SerializedTypes.h"
-
+#include "graphics/Color.h"
 #include "graphics/Overlay.h"
+#include "lib/debug.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
+#include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
 #include "renderer/Scene.h"
+#include "simulation2/MessageTypes.h"
+#include "simulation2/components/CCmpUnitMotionManager.h"
+#include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpPathfinder.h"
+#include "simulation2/components/ICmpPosition.h"
+#include "simulation2/components/ICmpUnitMotion.h"
+#include "simulation2/components/ICmpUnitMotionManager.h"
+#include "simulation2/components/ICmpValueModificationManager.h"
+#include "simulation2/components/ICmpVisual.h"
+#include "simulation2/helpers/Geometry.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/helpers/Render.h"
+#include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/serialization/SerializedPathfinder.h"
+#include "simulation2/serialization/SerializedTypes.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
 
 #include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <string>
+#include <utility>
+#include <vector>
 
 // NB: this implementation of ICmpUnitMotion is very tightly coupled with UnitMotionManager.
 // As such, both are compiled in the same TU.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,11 +21,13 @@
 
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
-#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/Object.h"
-#include "simulation2/serialization/ISerializer.h"
-#include "simulation2/serialization/IDeserializer.h"
-#include "simulation2/system/ComponentManager.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Message.h"
+
+#include <string>
+
+class ScriptInterface;
 
 CComponentTypeScript::CComponentTypeScript(const ScriptInterface& scriptInterface, JS::HandleValue instance) :
 	m_ScriptInterface(scriptInterface), m_Instance(instance)

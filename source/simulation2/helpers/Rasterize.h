@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,8 +23,11 @@
  * Helper functions related to rasterizing geometric shapes to grids.
  */
 
+#include "lib/types.h"
 #include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/helpers/Position.h"
+
+#include <vector>
 
 namespace SimRasterize
 {

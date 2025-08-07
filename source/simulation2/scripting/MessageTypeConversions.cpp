@@ -16,9 +16,29 @@
  */
 #include "precompiled.h"
 
-#include "ps/CLogger.h"
 #include "scriptinterface/ScriptConversions.h"
+
+#include "maths/Fixed.h"
+#include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/MessageTypes.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Entity.h"
+#include "simulation2/system/Message.h"
+
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <jsapi.h>
+#include <memory>
+#include <string>
+#include <vector>
 
 #define TOJSVAL_SETUP() \
 	JS::RootedObject obj(rq.cx, JS_NewPlainObject(rq.cx)); \

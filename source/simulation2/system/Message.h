@@ -21,6 +21,11 @@
 #include "lib/code_annotation.h"
 #include "scriptinterface/ScriptTypes.h"
 
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+
 class ScriptRequest;
 
 class CMessage

@@ -18,10 +18,22 @@
 #ifndef INCLUDED_STDDESERIALIZER
 #define INCLUDED_STDDESERIALIZER
 
-#include "IDeserializer.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "simulation2/system/Component.h"
 
+#include <cstddef>
+#include <iosfwd>
+#include <js/Id.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <string>
 #include <vector>
+
+class JSObject;
+class JSTracer;
+class ScriptInterface;
+namespace JS { template <typename T> class Heap; }
 
 class CStdDeserializer : public IDeserializer
 {

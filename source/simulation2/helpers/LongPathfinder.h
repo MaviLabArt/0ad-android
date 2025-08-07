@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,13 +20,21 @@
 
 #include "Pathfinding.h"
 
-#include "graphics/Overlay.h"
-#include "renderer/Scene.h"
-#include "renderer/TerrainOverlay.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/PathGoal.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/PriorityQueue.h"
 
+#include <atomic>
+#include <functional>
 #include <map>
+#include <memory>
+#include <new>
+#include <queue>
+#include <vector>
 
 /**
  * Represents the 2D coordinates of a tile.

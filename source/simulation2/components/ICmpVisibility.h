@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,12 @@
 #ifndef INCLUDED_ICMPVISIBILITY
 #define INCLUDED_ICMPVISIBILITY
 
+#include "simulation2/components/ICmpRangeManager.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Interface.h"
 
-#include "simulation2/components/ICmpRangeManager.h"
+#include <js/Value.h>
 
 /**
  * The Visibility component is a scripted component that allows any part of the simulation to

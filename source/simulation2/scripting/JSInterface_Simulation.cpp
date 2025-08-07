@@ -51,7 +51,6 @@
 #include <array>
 #include <cstddef>
 #include <fstream>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

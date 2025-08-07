@@ -34,7 +34,6 @@
 #include "simulation2/serialization/StdSerializer.h"
 #include "simulation2/system/Component.h"
 
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

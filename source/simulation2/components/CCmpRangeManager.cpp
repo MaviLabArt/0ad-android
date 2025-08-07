@@ -66,7 +66,6 @@
 #include <iterator>
 #include <limits>
 #include <map>
-#include <new>
 #include <set>
 #include <string>
 #include <type_traits>

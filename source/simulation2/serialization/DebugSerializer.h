@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,6 +19,19 @@
 #define INCLUDED_DEBUGSERIALIZER
 
 #include "ISerializer.h"
+
+#include "simulation2/system/Component.h"
+#include "lib/code_annotation.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+
+#include <js/TypeDecls.h>
+#include <cstddef>
+#include <cstdint>
+#include <iosfwd>
+#include <string>
+
+class ScriptInterface;
 
 /**
  * Serialize to a human-readable YAML-like format.
