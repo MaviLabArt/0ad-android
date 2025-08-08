@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,7 +19,13 @@
 
 #include "SnapSplitterWindow.h"
 
-#include <wx/confbase.h>
+#include <wx/chartype.h>
+#include <wx/config.h>
+#include <wx/debug.h>
+#include <wx/splitter.h>
+#include <wx/toolbar.h>
+
+class wxWindow;
 
 BEGIN_EVENT_TABLE(SnapSplitterWindow, wxSplitterWindow)
 	EVT_SPLITTER_SASH_POS_CHANGING(wxID_ANY, SnapSplitterWindow::OnSashPosChanging)

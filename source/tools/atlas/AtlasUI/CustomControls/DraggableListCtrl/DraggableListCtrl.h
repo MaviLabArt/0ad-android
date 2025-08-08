@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -25,11 +25,18 @@
 	Use just like a normal listctrl.
 */
 
-#include "EditableListCtrl/EditableListCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrl.h"
 
-#include "wx/listctrl.h"
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/listctrl.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/validate.h>
 
-class DragCommand;
+class wxPoint;
+class wxSize;
+class wxWindow;
 
 class DraggableListCtrl : public EditableListCtrl
 {

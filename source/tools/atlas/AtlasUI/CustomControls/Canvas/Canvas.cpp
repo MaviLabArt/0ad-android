@@ -25,7 +25,7 @@
 #include <wx/chartype.h>
 #include <wx/mousestate.h>
 #include <wx/string.h>
-#include <wx/tbarbase.h>
+#include <wx/toolbar.h>
 
 class wxWindow;
 

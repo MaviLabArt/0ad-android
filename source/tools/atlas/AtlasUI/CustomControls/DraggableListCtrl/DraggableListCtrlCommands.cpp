@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,8 +19,14 @@
 
 #include "DraggableListCtrlCommands.h"
 
-#include "DraggableListCtrl.h"
-#include "EditableListCtrl/EditableListCtrl.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/DraggableListCtrl/DraggableListCtrl.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+
+#include <algorithm>
+#include <wx/debug.h>
+#include <wx/rtti.h>
+#include <wx/translation.h>
 
 //////////////////////////////////////////////////////////////////////////
 

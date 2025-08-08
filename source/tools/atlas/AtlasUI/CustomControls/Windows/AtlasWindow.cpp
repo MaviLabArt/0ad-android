@@ -20,7 +20,9 @@
 #include "AtlasWindow.h"
 
 #include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/FileHistory/FileHistory.h"
 #include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
 #include "tools/atlas/AtlasUI/General/Datafile.h"
 
 #include <boost/signals2/optional_last_value.hpp>

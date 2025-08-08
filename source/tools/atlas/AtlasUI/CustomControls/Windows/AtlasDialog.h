@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,19 @@
 #ifndef INCLUDED_ATLASDIALOG
 #define INCLUDED_ATLASDIALOG
 
-#include "wx/dialog.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/General/IAtlasSerialiser.h"
 
-#include "General/AtlasWindowCommandProc.h"
-#include "General/IAtlasSerialiser.h"
+#include <wx/defs.h>
+#include <wx/dialog.h>
+#include <wx/event.h>
+#include <wx/object.h>
 
-class FieldEditCtrl_Dialog;
+class wxClassInfo;
+class wxPanel;
+class wxSize;
+class wxString;
+class wxWindow;
 
 class AtlasDialog : public wxDialog, public IAtlasSerialiser
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,12 +19,21 @@
 
 #include "EditableListCtrl.h"
 
-#include "EditableListCtrlCommands.h"
-#include "FieldEditCtrl.h"
-#include "General/AtlasWindowCommandProc.h"
-#include "AtlasObject/AtlasObject.h"
-#include "AtlasObject/AtlasObjectText.h"
-#include "General/AtlasClipboard.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasObject/AtlasObjectText.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrlCommands.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/FieldEditCtrl.h"
+#include "tools/atlas/AtlasUI/General/AtlasClipboard.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+
+#include <cstddef>
+#include <string>
+#include <wx/chartype.h>
+#include <wx/colour.h>
+#include <wx/debug.h>
+#include <wx/gdicmn.h>
+
+class wxWindow;
 
 const int BlanksAtEnd = 2;
 

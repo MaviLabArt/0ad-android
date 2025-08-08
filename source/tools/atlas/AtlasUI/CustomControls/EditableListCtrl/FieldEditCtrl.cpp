@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,25 +19,26 @@
 
 #include "FieldEditCtrl.h"
 
-#include "EditableListCtrlCommands.h"
-#include "ListCtrlValidator.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrlCommands.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/ListCtrlValidator.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/QuickComboBox.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/QuickFileCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/QuickTextCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasDialog.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
 
-#include "QuickTextCtrl.h"
-#include "QuickComboBox.h"
-#include "QuickFileCtrl.h"
-
-#include "Windows/AtlasDialog.h"
-#include "EditableListCtrl/EditableListCtrl.h"
-#include "AtlasObject/AtlasObject.h"
-#include "AtlasObject/AtlasObjectText.h"
-#include "General/Datafile.h"
-
-#include "wx/colour.h"
-#include "wx/colordlg.h"
-#include "wx/regex.h"
-#include "wx/filename.h"
-
-#include <string>
+#include <wx/arrstr.h>
+#include <wx/chartype.h>
+#include <wx/colordlg.h>
+#include <wx/colour.h>
+#include <wx/debug.h>
+#include <wx/defs.h>
+#include <wx/filename.h>
+#include <wx/regex.h>
+#include <wx/window.h>
 
 //////////////////////////////////////////////////////////////////////////
 

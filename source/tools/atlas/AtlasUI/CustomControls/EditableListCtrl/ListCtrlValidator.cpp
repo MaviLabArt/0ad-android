@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,13 +19,17 @@
 
 #include "ListCtrlValidator.h"
 
-#include "General/AtlasWindowCommandProc.h"
-#include "EditableListCtrl/EditableListCtrl.h"
-#include "EditableListCtrl/EditableListCtrlCommands.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrlCommands.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
 
-#include "AtlasObject/AtlasObject.h"
-#include "AtlasObject/AtlasObjectText.h"
-
+#include <cstddef>
+#include <wx/combobox.h>
+#include <wx/defs.h>
+#include <wx/log.h>
+#include <wx/object.h>
+#include <wx/string.h>
+#include <wx/textctrl.h>
 
 ListCtrlValidator::ListCtrlValidator()
 : m_listCtrl(NULL)

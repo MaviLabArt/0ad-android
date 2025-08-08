@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,13 +15,17 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//#include "wx/tglbtn.h"
-
 #include <map>
+#include <wx/button.h>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
 
-class ITool;
 class SectionLayout;
 class ToolManager;
+class wxSize;
+class wxWindow;
 
 class ToolButton : public wxButton
 {

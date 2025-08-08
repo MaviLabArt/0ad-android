@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 
 #include "FileHistory.h"
 
-#include "wx/confbase.h"
+#include <wx/config.h>
 
 FileHistory::FileHistory(const wxString& configSubdir)
 : wxFileHistory(9), m_configSubdir(configSubdir)

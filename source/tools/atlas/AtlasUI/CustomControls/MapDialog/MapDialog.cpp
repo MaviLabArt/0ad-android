@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,11 +19,29 @@
 
 #include "MapDialog.h"
 
-#include "GameInterface/MessagePasser.h"
-#include "GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
 
+#include <cstddef>
+#include <string>
+#include <vector>
+#include <wx/button.h>
+#include <wx/clntdata.h>
 #include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/listbox.h>
+#include <wx/msgdlg.h>
 #include <wx/notebook.h>
+#include <wx/object.h>
+#include <wx/panel.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
+#include <wx/textctrl.h>
+#include <wx/toolbar.h>
+#include <wx/toplevel.h>
+#include <wx/translation.h>
+
+class wxWindow;
 
 enum {
 	ID_MapDialogFilename = 1,

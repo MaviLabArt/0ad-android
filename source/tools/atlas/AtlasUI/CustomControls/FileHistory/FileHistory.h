@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,10 @@
 #ifndef INCLUDED_FILEHISTORY
 #define INCLUDED_FILEHISTORY
 
-#include "wx/docview.h"
+#include <wx/filehistory.h>
+#include <wx/string.h>
+
+class wxConfigBase;
 
 class FileHistory : public wxFileHistory
 {

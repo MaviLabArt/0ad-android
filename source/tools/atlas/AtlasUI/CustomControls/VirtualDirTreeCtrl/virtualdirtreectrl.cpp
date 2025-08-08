@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,20 +21,17 @@
 
 #include "precompiled.h"
 
-//#ifdef __GNUG__
-//    #pragma implementation "wxVirtualDirTreeCtrl.cpp"
-//#endif
-
-// For compilers that support precompilation, includes "wx/wx.h".
-#include "wx/wxprec.h"
-
-#ifdef __BORLANDC__
-    #pragma hdrstop
-#endif
-
-#include <wx/dir.h>
-#include <wx/busyinfo.h>
 #include "virtualdirtreectrl.h"
+
+#include "wx/imaglist.h"
+#include <wx/bitmap.h>
+#include <wx/busyinfo.h>
+#include <wx/dir.h>
+#include <wx/filefn.h>
+#include <wx/log.h>
+#include <wx/translation.h>
+
+class wxWindow;
 
 // default images
 

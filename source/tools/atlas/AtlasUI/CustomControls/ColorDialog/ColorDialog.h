@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,6 +19,10 @@
 #define INCLUDED_COLORDIALOG
 
 #include <wx/colordlg.h>
+#include <wx/colour.h>
+#include <wx/string.h>
+
+class wxWindow;
 
 class ColorDialog : public wxColourDialog
 {

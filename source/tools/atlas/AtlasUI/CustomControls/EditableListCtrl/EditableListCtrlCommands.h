@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,13 +15,16 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "General/AtlasWindowCommand.h"
-
-#include "AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
 
 #include <vector>
+#include <wx/defs.h>
+#include <wx/object.h>
+#include <wx/string.h>
 
 class EditableListCtrl;
+class wxClassInfo;
 
 class EditCommand_Dialog : public AtlasWindowCommand
 {

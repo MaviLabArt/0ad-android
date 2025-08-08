@@ -27,6 +27,7 @@
 #include <string>
 #include <wx/button.h>
 #include <wx/clntdata.h>
+#include <wx/gdicmn.h>
 #include <wx/listbox.h>
 #include <wx/sizer.h>
 #include <wx/statline.h>

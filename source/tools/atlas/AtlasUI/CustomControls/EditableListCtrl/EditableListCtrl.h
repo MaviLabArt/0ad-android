@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,15 +18,23 @@
 #ifndef INCLUDED_EDITABLELISTCTRL
 #define INCLUDED_EDITABLELISTCTRL
 
-#include "wx/listctrl.h"
-
-#include "General/IAtlasSerialiser.h"
+#include "tools/atlas/AtlasUI/General/IAtlasSerialiser.h"
 
 #include <vector>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/listctrl.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/validate.h>
 
-class FieldEditCtrl;
-class AtObj;
 class AtIter;
+class AtObj;
+class FieldEditCtrl;
+class wxPoint;
+class wxRect;
+class wxSize;
+class wxWindow;
 
 class EditableListCtrl : public wxListCtrl, public IAtlasSerialiser
 {

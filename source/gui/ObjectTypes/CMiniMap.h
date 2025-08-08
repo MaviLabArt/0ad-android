@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -22,12 +22,12 @@
 #include "graphics/Texture.h"
 #include "gui/CGUISetting.h"
 #include "gui/ObjectBases/IGUIObject.h"
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "maths/Vector2D.h"
 #include "ps/CStr.h"
 
 #include <deque>
-#include <sys/types.h>
 #include <vector>
 
 class CCanvas2D;

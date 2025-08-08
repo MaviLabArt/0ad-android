@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,24 @@
 
 #include "QuickFileCtrl.h"
 
-#include "General/Datafile.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
 
-#include "wx/filename.h"
+#include <wx/anybutton.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/debug.h>
+#include <wx/event.h>
+#include <wx/filedlg.h>
+#include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/log.h>
+#include <wx/rtti.h>
+#include <wx/sizer.h>
+#include <wx/string.h>
+#include <wx/textctrl.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+#include <wx/window.h>
 
 const int verticalPadding = 2;
 

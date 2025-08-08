@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,7 +15,12 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "wx/splitter.h"
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/splitter.h>
+#include <wx/string.h>
+
+class wxWindow;
 
 class SnapSplitterWindow : public wxSplitterWindow
 {

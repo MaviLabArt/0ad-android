@@ -36,7 +36,7 @@
 #include <wx/graphics.h>
 #include <wx/mousestate.h>
 #include <wx/pen.h>
-#include <wx/tbarbase.h>
+#include <wx/toolbar.h>
 #include <wx/wxcrt.h>
 
 class wxWindow;
