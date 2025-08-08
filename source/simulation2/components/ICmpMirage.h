@@ -19,9 +19,7 @@
 #define INCLUDED_ICMPMIRAGE
 
 #include "simulation2/helpers/Player.h"
-#include "simulation2/helpers/Player.h"
 #include "simulation2/system/Component.h"
-#include "simulation2/system/Interface.h"
 #include "simulation2/system/Interface.h"
 
 #include <js/Value.h>

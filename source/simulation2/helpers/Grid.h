@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,18 @@
 #ifndef INCLUDED_GRID
 #define INCLUDED_GRID
 
+#include "lib/code_annotation.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/system/Component.h"
 
+#include <algorithm>
 #include <cstring>
+#include <new>
+#include <type_traits>
+#include <utility>
 
 #ifdef NDEBUG
 #define GRID_BOUNDS_DEBUG 0

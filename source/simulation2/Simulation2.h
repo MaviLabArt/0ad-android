@@ -24,7 +24,6 @@
 #include "simulation2/system/Entity.h"
 
 #include <js/TypeDecls.h>
-#include <js/Value.h>
 #include <memory>
 #include <ostream>
 #include <string>
@@ -42,6 +41,7 @@ class IComponent;
 class SceneCollector;
 class ScriptContext;
 class ScriptInterface;
+namespace JS { class Value; }
 struct SimulationCommand;
 
 /**

@@ -18,13 +18,16 @@
 #ifndef INCLUDED_ICMPPOSITION
 #define INCLUDED_ICMPPOSITION
 
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "maths/FixedVector3D.h"
+#include "ps/CStr.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 #include "simulation2/system/Interface.h"
 
-#include "simulation2/helpers/Position.h"
-#include "maths/FixedVector3D.h"
-#include "maths/FixedVector2D.h"
-#include "ps/CStr.h"
-
+#include <js/Value.h>
 #include <set>
 
 class CMatrix3D;

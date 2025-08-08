@@ -18,16 +18,22 @@
 #ifndef INCLUDED_CCMPUNITMOTIONMANAGER
 #define INCLUDED_CCMPUNITMOTIONMANAGER
 
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
 #include "simulation2/MessageTypes.h"
-#include "simulation2/components/ICmpPosition.h"
-#include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpUnitMotionManager.h"
 #include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/Position.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 #include "simulation2/system/EntityMap.h"
 
+#include <cstdint>
+#include <string>
+#include <vector>
+
 class CCmpUnitMotion;
+class ICmpPosition;
 
 class CCmpUnitMotionManager final : public ICmpUnitMotionManager
 {

@@ -25,6 +25,7 @@
 #include "graphics/TextureManager.h"
 #include "lib/code_generation.h"
 #include "lib/debug.h"
+#include "lib/path.h"
 #include "maths/BoundingBoxAligned.h"
 #include "maths/Ease.h"
 #include "maths/Frustum.h"

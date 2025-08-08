@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,9 @@
 
 #include "ICmpObstruction.h"
 
+#include "lib/debug.h"
 #include "simulation2/system/InterfaceScripted.h"
 
-#include "simulation2/system/SimContext.h"
 
 std::string ICmpObstruction::CheckFoundation_wrapper(const std::string& className, bool onlyCenterPoint) const
 {

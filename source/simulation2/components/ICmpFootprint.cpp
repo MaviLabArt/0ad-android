@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,16 @@
 
 #include "ICmpFootprint.h"
 
+#include "maths/FixedVector3D.h"
+#include "scriptinterface/ScriptConversions.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/InterfaceScripted.h"
 
-#include "simulation2/system/SimContext.h"
-#include "maths/FixedVector3D.h"
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <jsapi.h>
+#include <string>
 
 JS::Value ICmpFootprint::GetShape_wrapper() const
 {

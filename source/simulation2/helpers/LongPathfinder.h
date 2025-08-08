@@ -29,11 +29,9 @@
 #include "simulation2/helpers/PriorityQueue.h"
 
 #include <atomic>
-#include <functional>
 #include <map>
 #include <memory>
 #include <new>
-#include <queue>
 #include <vector>
 
 /**

@@ -18,10 +18,14 @@
 #ifndef INCLUDED_ICMPPLAYER
 #define INCLUDED_ICMPPLAYER
 
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Interface.h"
 
-struct CColor;
+#include <js/Value.h>
+#include <string>
+
 class CFixedVector3D;
+struct CColor;
 
 /**
  * Player data.

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,13 @@
 #ifndef INCLUDED_CINEMAPATH
 #define INCLUDED_CINEMAPATH
 
+#include "maths/Fixed.h"
 #include "maths/NUSpline.h"
+#include "maths/Vector3D.h"
 #include "ps/CStr.h"
 
-class CVector3D;
+#include <cstddef>
+
 class CCamera;
 
 class CCinemaData

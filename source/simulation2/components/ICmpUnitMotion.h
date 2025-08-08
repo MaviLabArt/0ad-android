@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,16 @@
 #ifndef INCLUDED_ICMPUNITMOTION
 #define INCLUDED_ICMPUNITMOTION
 
+#include "maths/Fixed.h"
+#include "maths/FixedVector2D.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 #include "simulation2/system/Interface.h"
 
-#include "simulation2/components/ICmpPathfinder.h" // for pass_class_t
-#include "simulation2/components/ICmpPosition.h" // for entity_pos_t
+#include <js/Value.h>
+#include <string>
 
 /**
  * Motion interface for entities with complex movement capabilities.

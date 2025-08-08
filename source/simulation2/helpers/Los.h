@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,11 @@
 #ifndef INCLUDED_LOS
 #define INCLUDED_LOS
 
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
 // It doesn't seem worth moving the implementation to c++ and early-declaring Grid
 // since files must include "Los.h" explicitly, and that's only done in .cpp files.
-#include "Grid.h"
+#include "simulation2/helpers/Grid.h"
 
 /**
  * Computing LOS data at a very high resolution is not necessary and quite slow.

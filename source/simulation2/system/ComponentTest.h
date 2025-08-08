@@ -20,17 +20,29 @@
 
 #include "lib/self_test.h"
 
+#include "graphics/Terrain.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/Vector3D.h"
-#include "ps/XML/Xeromyces.h"
-#include "simulation2/MessageTypes.h"
-#include "simulation2/system/Component.h"
+#include "ps/Errors.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/components/ICmpTerrain.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/serialization/DebugSerializer.h"
 #include "simulation2/serialization/HashSerializer.h"
-#include "simulation2/serialization/StdSerializer.h"
 #include "simulation2/serialization/StdDeserializer.h"
+#include "simulation2/serialization/StdSerializer.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 
+#include <cstdio>
 #include <iostream>
+#include <sstream>
+#include <string>
+
+class CMessage;
+class ScriptContext;
 
 /**
  * @file

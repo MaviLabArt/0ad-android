@@ -810,6 +810,7 @@ function setup_all_libs ()
 		"fmt",
 		"libxml2",
 		"iconv",
+		"cxxtest",
 	}
 	setup_static_lib_project("simulation2", source_dirs, extern_libs, {})
 

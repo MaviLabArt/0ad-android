@@ -64,6 +64,7 @@
 #include <iomanip>
 #include <js/CallArgs.h>
 #include <js/RootingAPI.h>
+#include <js/Value.h>
 #include <memory>
 #include <set>
 #include <sstream>

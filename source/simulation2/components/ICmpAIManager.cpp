@@ -19,14 +19,27 @@
 
 #include "ICmpAIManager.h"
 
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_util.h"
+#include "lib/path.h"
+#include "lib/status.h"
+#include "lib/types.h"
 #include "ps/Filesystem.h"
-#include "simulation2/system/InterfaceScripted.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
+#include "simulation2/system/InterfaceScripted.h"
 
 #include <boost/filesystem.hpp>
+#include <iterator>
+#include <js/Array.h>
+#include <js/PropertyAndElement.h>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+
+class CFileInfo;
 
 BEGIN_INTERFACE_WRAPPER(AIManager)
 DEFINE_INTERFACE_METHOD("AddPlayer", ICmpAIManager, AddPlayer)

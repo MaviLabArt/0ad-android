@@ -1,4 +1,4 @@
-/* Copyright (C) 2018 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,10 @@
 #ifndef INCLUDED_ICMPRALLYPOINT
 #define INCLUDED_ICMPRALLYPOINT
 
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Interface.h"
+
+#include <js/Value.h>
 
 class CFixedVector2D;
 

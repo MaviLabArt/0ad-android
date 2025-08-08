@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,6 +17,8 @@
 
 #ifndef INCLUDED_MAP_EDGE_TILES
 #define INCLUDED_MAP_EDGE_TILES
+
+#include "lib/posix/posix_types.h"
 
 /**
  * Number of impassable, unexplorable tiles at the map border.

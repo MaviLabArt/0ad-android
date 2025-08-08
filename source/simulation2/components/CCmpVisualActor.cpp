@@ -21,7 +21,6 @@
 
 #include "graphics/Color.h"
 #include "graphics/Decal.h"
-#include "graphics/HeightMipmap.h"
 #include "graphics/Model.h"
 #include "graphics/ModelAbstract.h"
 #include "graphics/ObjectBase.h"
@@ -43,13 +42,11 @@
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/algorithm.h"
-#include "renderer/Scene.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpFootprint.h"
 #include "simulation2/components/ICmpIdentity.h"
 #include "simulation2/components/ICmpMirage.h"
 #include "simulation2/components/ICmpOwnership.h"
-#include "simulation2/components/ICmpPlayerManager.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpSound.h"
 #include "simulation2/components/ICmpTemplateManager.h"
@@ -61,9 +58,12 @@
 #include "simulation2/serialization/SerializeTemplates.h"
 #include "simulation2/serialization/SerializedTypes.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Interface.h"
 #include "simulation2/system/Message.h"
 
 #include <cstddef>
+#include <js/Value.h>
 #include <map>
 #include <memory>
 #include <string>

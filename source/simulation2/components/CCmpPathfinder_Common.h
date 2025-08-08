@@ -27,27 +27,32 @@
  * The long-range pathfinding is done by a LongPathfinder object.
  */
 
-#include "simulation2/system/Component.h"
-
-#include "ICmpPathfinder.h"
-
 #include "graphics/Overlay.h"
-#include "graphics/Terrain.h"
-#include "maths/MathUtil.h"
-#include "ps/CLogger.h"
-#include "ps/TaskManager.h"
+#include "graphics/SColor.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "ps/Future.h"
 #include "renderer/TerrainOverlay.h"
-#include "simulation2/components/ICmpObstructionManager.h"
+#include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/HierarchicalPathfinder.h"
+#include "simulation2/helpers/LongPathfinder.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/helpers/VertexPathfinder.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 
+#include <atomic>
+#include <cstddef>
+#include <map>
+#include <memory>
+#include <string>
 #include <vector>
 
-class HierarchicalPathfinder;
-class LongPathfinder;
-class VertexPathfinder;
-
-class SceneCollector;
 class AtlasOverlay;
+class SceneCollector;
 
 #ifdef NDEBUG
 #define PATHFIND_DEBUG 0

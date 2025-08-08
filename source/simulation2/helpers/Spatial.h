@@ -22,6 +22,7 @@
 #include "maths/MathUtil.h"
 #include "simulation2/helpers/Position.h"
 #include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/system/Entity.h"
 
 #include <vector>
 

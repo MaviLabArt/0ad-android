@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,14 @@
 #ifndef INCLUDED_ICMPVALUEMODIFICATIONMANAGER
 #define INCLUDED_ICMPVALUEMODIFICATIONMANAGER
 
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
 #include "simulation2/system/Interface.h"
 
-#include "maths/Fixed.h"
+#include <js/Value.h>
+#include <string>
 
 /**
  * value modification manager interface.

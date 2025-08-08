@@ -42,6 +42,7 @@
 #include "renderer/TerrainOverlay.h"
 #include "renderer/backend/Sampler.h"
 #include "simulation2/MessageTypes.h"
+#include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/components/ICmpOwnership.h"
 #include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpPlayer.h"

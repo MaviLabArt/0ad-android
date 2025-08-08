@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,16 +18,17 @@
 #ifndef INCLUDED_HELPER_RENDER
 #define INCLUDED_HELPER_RENDER
 
+#include "maths/Vector2D.h"
+
+#include <cstddef>
 #include <vector>
 
-class CSimContext;
-class CVector2D;
-class CVector3D;
-class CFixedVector3D;
-class CMatrix3D;
 class CBoundingBoxAligned;
 class CBoundingBoxOriented;
-
+class CFixedVector3D;
+class CMatrix3D;
+class CSimContext;
+class CVector3D;
 struct SOverlayLine;
 struct SOverlayTexturedLine;
 

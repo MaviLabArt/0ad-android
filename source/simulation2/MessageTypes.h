@@ -18,18 +18,24 @@
 #ifndef INCLUDED_MESSAGETYPES
 #define INCLUDED_MESSAGETYPES
 
-#include "simulation2/system/Components.h"
+#include "lib/types.h"
+#include "maths/Fixed.h"
+#include "maths/Vector3D.h"
+#include "ps/CStr.h"
+#include "simulation2/helpers/Pathfinding.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 #include "simulation2/system/Message.h"
 
-#include "simulation2/helpers/Player.h"
-#include "simulation2/helpers/Position.h"
+#include <array>
+#include <cstdint>
+#include <js/TypeDecls.h>
+#include <string>
+#include <vector>
 
-#include "simulation2/components/ICmpPathfinder.h"
-
-#include "maths/Vector3D.h"
-
-#include "ps/CStr.h"
+class ScriptRequest;
 
 #define DEFAULT_MESSAGE_IMPL(name) \
 	virtual int GetType() const { return MT_##name; } \

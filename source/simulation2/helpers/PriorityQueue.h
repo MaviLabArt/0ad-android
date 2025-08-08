@@ -23,6 +23,12 @@
  * (These probably aren't suitable for more general uses.)
  */
 
+#include "lib/posix/posix_types.h"
+
+#include <cstddef>
+#include <functional>
+#include <vector>
+
 #ifdef NDEBUG
 #define PRIORITYQUEUE_DEBUG 0
 #else

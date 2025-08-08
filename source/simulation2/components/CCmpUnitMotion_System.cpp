@@ -20,7 +20,6 @@
 #include "CCmpUnitMotion.h"
 
 #include "lib/debug.h"
-#include "lib/path.h"
 #include "lib/types.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
@@ -37,6 +36,8 @@
 #include "simulation2/components/ICmpUnitMotion.h"
 #include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/Position.h"
+#include "simulation2/serialization/SerializeTemplates.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 #include "simulation2/system/EntityMap.h"
 #include "simulation2/system/Message.h"
@@ -45,7 +46,6 @@
 #include <cstdint>
 #include <cstdlib>
 #include <limits>
-#include <new>
 #include <string>
 #include <type_traits>
 #include <unordered_set>
