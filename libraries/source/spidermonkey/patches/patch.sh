@@ -18,6 +18,10 @@ patch -p1 <"${PATCHES}"/FixLibNames.diff
 # https://bugzilla.mozilla.org/show_bug.cgi?id=1935346
 patch -p1 <"${PATCHES}"/FixPkgConfigDebug.diff
 
+# Fix a regression in GC tracing, which creates segfaults during GCs
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1982134
+patch -p1 <"${PATCHES}"/FixExtraGCTracing.diff
+
 # There is an issue on 32-bit linux builds sometimes.
 # NB: the patch here is Comment 21 modified by Comment 25
 # but that seems to imperfectly fix the issue with GCC.
