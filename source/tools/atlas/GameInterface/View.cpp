@@ -19,35 +19,36 @@
 
 #include "View.h"
 
-#include "ActorViewer.h"
-#include "GameLoop.h"
-#include "Messages.h"
-#include "SimState.h"
-
 #include "graphics/Canvas2D.h"
 #include "graphics/CinemaManager.h"
+#include "graphics/Color.h"
 #include "graphics/GameView.h"
-#include "graphics/ParticleManager.h"
-#include "graphics/UnitManager.h"
-#include "lib/timer.h"
+#include "lib/debug.h"
 #include "lib/utf8.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
 #include "maths/Vector2D.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Game.h"
-#include "ps/GameSetup/GameSetup.h"
 #include "ps/VideoMode.h"
-#include "ps/World.h"
-#include "renderer/backend/IDevice.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
-#include "simulation2/components/ICmpObstructionManager.h"
+#include "renderer/backend/IDevice.h"
+#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpParticleManager.h"
 #include "simulation2/components/ICmpPathfinder.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/system/Component.h"
 #include "soundmanager/ISoundManager.h"
+#include "tools/atlas/GameInterface/ActorViewer.h"
+#include "tools/atlas/GameInterface/GameLoop.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/SimState.h"
+
+#include <sstream>
+#include <utility>
+#include <vector>
 
 extern void (*Atlas_GLSwapBuffers)(void* context);
 

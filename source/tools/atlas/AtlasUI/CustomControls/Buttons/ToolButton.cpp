@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,15 +17,27 @@
 
 #include "precompiled.h"
 
-#include "wx/sysopt.h"
-#include "wx/wfstream.h"
-#include "wx/filename.h"
-#include "wx/image.h"
-
 #include "ToolButton.h"
-#include "ScenarioEditor/Tools/Common/Tools.h"
-#include "ScenarioEditor/SectionLayout.h"
-#include "General/Datafile.h"
+
+#include "tools/atlas/AtlasUI/General/Datafile.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/SectionLayout.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+
+#include <utility>
+#include <wx/bitmap.h>
+#include <wx/chartype.h>
+#include <wx/colour.h>
+#include <wx/debug.h>
+#include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/image.h>
+#include <wx/log.h>
+#include <wx/settings.h>
+#include <wx/sysopt.h>
+#include <wx/translation.h>
+#include <wx/wfstream.h>
+
+class wxWindow;
 
 BEGIN_EVENT_TABLE(ToolButton, wxButton)
 	EVT_BUTTON(wxID_ANY, ToolButton::OnClick)

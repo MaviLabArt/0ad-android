@@ -1,4 +1,4 @@
-/* Copyright (C) 2010 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,10 +19,15 @@
 
 #include "InputProcessor.h"
 
-#include "ps/Game.h"
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
+#include "maths/Matrix3D.h"
 #include "maths/Quaternion.h"
+#include "maths/Vector3D.h"
+#include "ps/Game.h"
+#include "tools/atlas/GameInterface/GameLoop.h"
+
+#include <cmath>
 
 static float g_ViewZoomSmoothness = 0.02f;
 static float g_ViewRotateScale = 0.02f;

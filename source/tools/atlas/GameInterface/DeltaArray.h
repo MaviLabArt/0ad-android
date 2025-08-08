@@ -1,4 +1,4 @@
-/* Copyright (C) 2019 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,6 +17,13 @@
 
 #ifndef INCLUDED_DELTAARRAY
 #define INCLUDED_DELTAARRAY
+
+#include "lib/posix/posix_types.h"
+
+#include <cstddef>
+#include <functional>
+#include <unordered_map>
+#include <utility>
 
 template<typename T> class DeltaArray2D
 {

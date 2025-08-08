@@ -18,20 +18,20 @@
 #ifndef INCLUDED_VIEW
 #define INCLUDED_VIEW
 
-#include <map>
-
 #include "graphics/Camera.h"
 #include "maths/Rect.h"
-
-#include "Messages.h"
+#include "maths/Vector3D.h"
 #include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
-class CCanvas2D;
-class CUnit;
-class CSimulation2;
+#include <cstddef>
+#include <map>
+#include <string>
 
-class AtlasViewGame;
 class AtlasViewActor;
+class AtlasViewGame;
+class CCanvas2D;
+class CSimulation2;
 
 /**
  * Superclass for all Atlas game views.

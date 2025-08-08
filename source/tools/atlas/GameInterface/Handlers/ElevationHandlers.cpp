@@ -17,23 +17,30 @@
 
 #include "precompiled.h"
 
-#include "MessageHandler.h"
-
-#include "../CommandProc.h"
-
 #include "graphics/RenderableObject.h"
 #include "graphics/Terrain.h"
 #include "graphics/UnitManager.h"
-#include "ps/CStr.h"
+#include "lib/posix/posix_types.h"
+#include "lib/types.h"
+#include "maths/MathUtil.h"
+#include "maths/Vector3D.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "maths/MathUtil.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/Brushes.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/DeltaArray.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
-#include "../Brushes.h"
-#include "../DeltaArray.h"
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <vector>
+
 
 namespace AtlasMessage {
 

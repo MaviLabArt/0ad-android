@@ -18,24 +18,41 @@
 #include "precompiled.h"
 
 #include "MessageHandler.h"
-#include "../CommandProc.h"
-#include "../GameLoop.h"
-#include "../View.h"
+
 #include "graphics/Camera.h"
 #include "graphics/CinemaManager.h"
 #include "graphics/GameView.h"
-#include "ps/Game.h"
-#include "ps/CStr.h"
-#include "ps/CLogger.h"
-#include "ps/Filesystem.h"
+#include "lib/debug.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/NUSpline.h"
 #include "maths/Quaternion.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
-#include "simulation2/Simulation2.h"
+#include "ps/CStr.h"
+#include "ps/Game.h"
 #include "simulation2/components/ICmpCinemaManager.h"
 #include "simulation2/helpers/CinemaPath.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/GameLoop.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
+
+#include <cstddef>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
+namespace AtlasMessage { struct cAddPathNode; }
+namespace AtlasMessage { struct cDeletePathNode; }
+namespace AtlasMessage { struct cMovePathNode; }
 
 namespace AtlasMessage
 {

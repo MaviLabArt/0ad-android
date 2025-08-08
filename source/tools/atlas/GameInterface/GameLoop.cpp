@@ -19,31 +19,22 @@
 
 #include "GameLoop.h"
 
-#include "MessagePasserImpl.h"
-#include "Messages.h"
-#include "SharedMemory.h"
-#include "Handlers/MessageHandler.h"
-#include "ActorViewer.h"
-#include "View.h"
-
-#include "InputProcessor.h"
-
 #include "graphics/TextureManager.h"
-#include "lib/app_hooks.h"
-#include "lib/external_libraries/libsdl.h"
+#include "lib/debug.h"
 #include "lib/timer.h"
-#include "ps/CLogger.h"
 #include "ps/DllLoader.h"
-#include "ps/Filesystem.h"
-#include "ps/Profile.h"
-#include "ps/ThreadUtil.h"
 #include "ps/GameSetup/Paths.h"
+#include "ps/ThreadUtil.h"
 #include "renderer/Renderer.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/MessagePasserImpl.h"
+#include "tools/atlas/GameInterface/SharedMemory.h"
+#include "tools/atlas/GameInterface/View.h"
+
+#include <cstddef>
+#include <string>
 
 using namespace AtlasMessage;
-
-#include <thread>
-
 
 namespace AtlasMessage
 {

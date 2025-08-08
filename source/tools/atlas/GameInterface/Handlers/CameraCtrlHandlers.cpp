@@ -18,21 +18,24 @@
 #include "precompiled.h"
 
 #include "MessageHandler.h"
-#include "../GameLoop.h"
-#include "../View.h"
 
-#include "maths/MathUtil.h"
-#include "maths/Vector3D.h"
-#include "maths/Quaternion.h"
-#include "ps/Game.h"
-#include "renderer/Renderer.h"
-#include "graphics/GameView.h"
+#include "graphics/Camera.h"
 #include "graphics/CinemaManager.h"
-
-#include "ps/World.h"
+#include "graphics/GameView.h"
 #include "graphics/Terrain.h"
-
-#include <assert.h>
+#include "lib/debug.h"
+#include "maths/MathUtil.h"
+#include "maths/Matrix3D.h"
+#include "maths/Quaternion.h"
+#include "maths/Vector3D.h"
+#include "ps/Game.h"
+#include "ps/World.h"
+#include "renderer/Renderer.h"
+#include "tools/atlas/GameInterface/GameLoop.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
 
 namespace AtlasMessage {
 

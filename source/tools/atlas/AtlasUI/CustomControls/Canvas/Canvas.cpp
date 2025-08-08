@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,8 +19,15 @@
 
 #include "Canvas.h"
 
-#include "GameInterface/Messages.h"
-#include "ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+
+#include <wx/chartype.h>
+#include <wx/mousestate.h>
+#include <wx/string.h>
+#include <wx/tbarbase.h>
+
+class wxWindow;
 
 Canvas::Canvas(wxWindow* parent, int* attribList, long style)
 	: wxGLCanvas(parent, -1, attribList, wxDefaultPosition, wxDefaultSize, style, _T("GLCanvas")),

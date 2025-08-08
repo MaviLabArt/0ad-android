@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,22 +17,18 @@
 
 #include "precompiled.h"
 
-#include "Messages.h"
-#include "Handlers/MessageHandler.h"
-#include "CommandProc.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/Handlers/MessageHandler.h"
+#include "tools/atlas/GameInterface/Messages.h"
+
+#include <string>
+#include <utility>
+
+namespace AtlasMessage { struct IMessage; }
 
 // We want to include Messages.h again below, with some different definitions,
 // so cheat and undefine its include-guard
 #undef INCLUDED_MESSAGES
-
-#include <map>
-#include <string>
-
-#include "SharedTypes.h"
-#include "Shareable.h"
-
-#include <map>
-#include <string>
 
 namespace AtlasMessage
 {

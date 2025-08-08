@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,11 +18,13 @@
 #ifndef INCLUDED_COMMANDPROC
 #define INCLUDED_COMMANDPROC
 
-#include <string>
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
+
+#include <cstddef>
 #include <list>
 #include <map>
-
-#include "SharedMemory.h"
+#include <string>
 
 namespace AtlasMessage
 {

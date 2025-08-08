@@ -19,11 +19,11 @@
 
 #include "MessageHandler.h"
 
-#include "../CommandProc.h"
-
+#include "graphics/Color.h"
 #include "graphics/LightEnv.h"
 #include "graphics/Terrain.h"
-#include "maths/MathUtil.h"
+#include "lib/debug.h"
+#include "maths/Vector3D.h"
 #include "ps/CStr.h"
 #include "ps/Game.h"
 #include "ps/World.h"
@@ -32,9 +32,18 @@
 #include "renderer/SceneRenderer.h"
 #include "renderer/SkyManager.h"
 #include "renderer/WaterManager.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpWaterManager.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+
+#include <cmath>
+#include <string>
+#include <vector>
 
 namespace AtlasMessage {
 

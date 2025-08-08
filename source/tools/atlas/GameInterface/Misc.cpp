@@ -19,13 +19,13 @@
 
 // TODO: organise things better, rather than sticking them in Misc
 
-#include "Messages.h"
-
+#include "graphics/Camera.h"
+#include "graphics/GameView.h"
+#include "lib/debug.h"
 #include "maths/Vector2D.h"
 #include "maths/Vector3D.h"
 #include "ps/Game.h"
-#include "graphics/GameView.h"
-#include "graphics/Camera.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
 CVector3D AtlasMessage::Position::GetWorldSpace(bool floating) const
 {

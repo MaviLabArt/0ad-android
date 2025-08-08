@@ -1348,6 +1348,7 @@ function setup_atlas_projects()
 
 	setup_atlas_project("AtlasUI", "SharedLib", atlas_src,
 	{	-- include
+		"../../..",
 		"..",
 		"CustomControls",
 		"Misc",

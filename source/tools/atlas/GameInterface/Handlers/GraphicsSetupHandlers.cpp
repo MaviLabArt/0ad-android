@@ -18,33 +18,39 @@
 #include "precompiled.h"
 
 #include "MessageHandler.h"
-#include "../GameLoop.h"
-#include "../CommandProc.h"
-#include "../ActorViewer.h"
-#include "../View.h"
-#include "../InputProcessor.h"
 
-#include "graphics/GameView.h"
-#include "graphics/ObjectManager.h"
 #include "gui/GUIManager.h"
+#include "lib/debug.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/input.h"
+#include "lib/sysdep/os.h"
 #include "lib/timer.h"
-#include "maths/MathUtil.h"
-#include "ps/CConsole.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Filesystem.h"
-#include "ps/Profile.h"
-#include "ps/Profiler2.h"
-#include "ps/Game.h"
-#include "ps/VideoMode.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/GameSetup/GameSetup.h"
-#include "renderer/backend/IDevice.h"
+#include "ps/Profile.h"
+#include "ps/VideoMode.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
+#include "renderer/backend/IDevice.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "tools/atlas/GameInterface/ActorViewer.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/GameLoop.h"
+#include "tools/atlas/GameInterface/InputProcessor.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
 
+#include <SDL.h>
+#include <SDL_error.h>
+#include <SDL_video.h>
+#include <memory>
 #include <optional>
+#include <vector>
 
 #if OS_WIN
 // We don't include wutil header directly to prevent including Windows headers.

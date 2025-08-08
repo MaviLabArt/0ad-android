@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,13 +19,37 @@
 
 #include "AtlasWindow.h"
 
-#include "AtlasObject/AtlasObject.h"
-#include "General/AtlasWindowCommand.h"
-#include "General/Datafile.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
 
-#include "wx/artprov.h"
-#include "wx/config.h"
-#include "wx/file.h"
+#include <boost/signals2/optional_last_value.hpp>
+#include <cassert>
+#include <list>
+#include <string>
+#include <wx/artprov.h>
+#include <wx/bitmap.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/config.h>
+#include <wx/debug.h>
+#include <wx/dialog.h>
+#include <wx/file.h>
+#include <wx/filedlg.h>
+#include <wx/filename.h>
+#include <wx/icon.h>
+#include <wx/log.h>
+#include <wx/menu.h>
+#include <wx/menuitem.h>
+#include <wx/rtti.h>
+#include <wx/sizer.h>
+#include <wx/statbmp.h>
+#include <wx/stattext.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+
+class wxSize;
+class wxWindow;
 
 //////////////////////////////////////////////////////////////////////////
 

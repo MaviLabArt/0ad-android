@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,21 +18,25 @@
 #ifndef INCLUDED_ATLASWINDOW
 #define INCLUDED_ATLASWINDOW
 
-#include "General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/CustomControls/FileHistory/FileHistory.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/General/IAtlasSerialiser.h"
 
-#include "General/IAtlasSerialiser.h"
-#include "FileHistory/FileHistory.h"
+#include <boost/function.hpp>
+#include <boost/signals2/signal.hpp>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/filename.h>
+#include <wx/frame.h>
+#include <wx/object.h>
+#include <wx/string.h>
 
-#include "wx/filename.h"
-
-#include <boost/version.hpp>
-#if BOOST_VERSION >= 104000
-# include <boost/signals2/signal.hpp>
-#else
-# error Atlas requires Boost 1.40 or later
-#endif
-
-class AtObj;
+class wxClassInfo;
+class wxMenu;
+class wxMenuBar;
+class wxMenuItem;
+class wxSize;
+class wxWindow;
 
 class AtlasWindow : public wxFrame, public IAtlasSerialiser
 {

@@ -19,30 +19,47 @@
 
 #include "MessageHandler.h"
 
-#include "../CommandProc.h"
-
-#include "graphics/Patch.h"
-#include "graphics/TerrainTextureManager.h"
-#include "graphics/TerrainTextureEntry.h"
+#include "graphics/MiniPatch.h"
+#include "graphics/RenderableObject.h"
 #include "graphics/Terrain.h"
+#include "graphics/TerrainTextureEntry.h"
+#include "graphics/TerrainTextureManager.h"
 #include "graphics/TextureManager.h"
+#include "lib/debug.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/status.h"
+#include "lib/tex/tex.h"
+#include "lib/types.h"
+#include "maths/Vector3D.h"
+#include "ps/CStr.h"
+#include "ps/Filesystem.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "lib/tex/tex.h"
-#include "ps/Filesystem.h"
 #include "renderer/Renderer.h"
-#include "renderer/backend/Sampler.h"
-#include "simulation2/Simulation2.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/components/ICmpPathfinder.h"
-#include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/helpers/Grid.h"
+#include "simulation2/helpers/Pathfinding.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/Brushes.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/DeltaArray.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
 
-#include "../Brushes.h"
-#include "../DeltaArray.h"
-#include "../View.h"
-
+#include <algorithm>
+#include <cwchar>
+#include <map>
+#include <memory>
 #include <queue>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace AtlasMessage
 {

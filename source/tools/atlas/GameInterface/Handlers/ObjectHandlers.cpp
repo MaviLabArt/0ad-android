@@ -17,43 +17,57 @@
 
 #include "precompiled.h"
 
-#include <cfloat>
-#include <map>
-
 #include "MessageHandler.h"
-#include "../CommandProc.h"
-#include "../SimState.h"
-#include "../View.h"
 
+#include "graphics/Camera.h"
+#include "graphics/Color.h"
 #include "graphics/GameView.h"
-#include "graphics/Model.h"
-#include "graphics/ObjectBase.h"
-#include "graphics/ObjectEntry.h"
-#include "graphics/ObjectManager.h"
 #include "graphics/Terrain.h"
-#include "graphics/Unit.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "lib/utf8.h"
+#include "maths/Fixed.h"
+#include "maths/FixedVector3D.h"
 #include "maths/MathUtil.h"
 #include "maths/Matrix3D.h"
 #include "maths/Vector2D.h"
+#include "maths/Vector3D.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "renderer/Renderer.h"
-#include "renderer/WaterManager.h"
+#include "ps/XML/XMLWriter.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpObstruction.h"
-#include "simulation2/components/ICmpUnitMotion.h"
 #include "simulation2/components/ICmpOwnership.h"
-#include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpPlayer.h"
 #include "simulation2/components/ICmpPlayerManager.h"
+#include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpSelectable.h"
 #include "simulation2/components/ICmpTemplateManager.h"
+#include "simulation2/components/ICmpUnitMotion.h"
 #include "simulation2/components/ICmpVisual.h"
+#include "simulation2/helpers/Player.h"
+#include "simulation2/helpers/Position.h"
 #include "simulation2/helpers/Selection.h"
 #include "simulation2/system/Component.h"
-#include "ps/XML/XMLWriter.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
+
+#include <algorithm>
+#include <cmath>
+#include <cstdint>
+#include <cwchar>
+#include <map>
+#include <set>
+#include <string>
+#include <unordered_map>
+#include <utility>
+#include <vector>
 
 namespace AtlasMessage
 {

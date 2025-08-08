@@ -18,23 +18,35 @@
 #include "precompiled.h"
 
 #include "MessageHandler.h"
-#include "../MessagePasserImpl.h"
-
-#include "../GameLoop.h"
-#include "../View.h"
-#include "graphics/GameView.h"
-#include "gui/GUIManager.h"
 #include "gui/CGUI.h"
+#include "gui/GUIManager.h"
 #include "lib/external_libraries/libsdl.h"
+#include "lib/input.h"
+#include "lib/path.h"
+#include "lib/types.h"
 #include "maths/MathUtil.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/Config.h"
-#include "ps/GameSetup/GameSetup.h"
 #include "renderer/Renderer.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpSoundManager.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/MessagePasserImpl.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+#include "tools/atlas/GameInterface/View.h"
+
+#include <SDL_events.h>
+#include <SDL_keyboard.h>
+#include <SDL_keycode.h>
+#include <cstddef>
+#include <js/CallArgs.h>
+#include <js/RootingAPI.h>
+#include <memory>
+#include <string>
 
 extern void (*Atlas_GLSwapBuffers)(void* context);
 

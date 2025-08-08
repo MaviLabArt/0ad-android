@@ -23,6 +23,12 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/system/Component.h"
+#include "simulation2/system/Entity.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+
+#include <string>
+#include <vector>
 
 namespace AtlasMessage {
 

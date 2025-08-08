@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,16 +19,27 @@
 
 #include "PseudoMiniMapPanel.h"
 
-#include "GameInterface/MessagePasser.h"
-#include "GameInterface/Messages.h"
-#include "ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
+#include <vector>
+#include <wx/brush.h>
+#include <wx/clntdata.h>
+#include <wx/colour.h>
 #include <wx/dcbuffer.h>
 #include <wx/dcgraph.h>
 #include <wx/defs.h>
 #include <wx/event.h>
+#include <wx/graphics.h>
+#include <wx/mousestate.h>
+#include <wx/pen.h>
+#include <wx/tbarbase.h>
+#include <wx/wxcrt.h>
+
+class wxWindow;
 
 namespace
 {
