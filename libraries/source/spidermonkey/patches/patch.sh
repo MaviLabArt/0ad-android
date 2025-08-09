@@ -36,6 +36,7 @@ fi
 # - Allow use of pkg-config to use the same zlib for SM and pyrogenesis (https://bugzilla.mozilla.org/show_bug.cgi?id=1783570)
 # - Force allowing build with older macOS SDK
 # - Fix invocation of recent compiler (https://bugzilla.mozilla.org/show_bug.cgi?id=1844694)
+# - Fix linker selection on macOS 15 (https://bugzilla.mozilla.org/show_bug.cgi?id=1964280)
 if [ "${OS}" = "Darwin" ]; then
 	patch -p1 <"${PATCHES}"/FixMacOSBuild.diff
 fi
