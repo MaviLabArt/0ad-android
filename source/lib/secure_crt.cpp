@@ -66,7 +66,7 @@ STATUS_ADD_DEFINITIONS(secureCrtStatusDefinitions);
 # define tchar wchar_t
 # define tstring std::wstring
 # define T(string_literal) L ## string_literal
-# define tnlen wcsnlen
+# define tnlen_s wcsnlen_s
 # define tncpy_s wcsncpy_s
 # define tcpy_s wcscpy_s
 # define tncat_s wcsncat_s
@@ -80,7 +80,7 @@ STATUS_ADD_DEFINITIONS(secureCrtStatusDefinitions);
 # define tchar char
 # define tstring std::string
 # define T(string_literal) string_literal
-# define tnlen strnlen
+# define tnlen_s strnlen_s
 # define tncpy_s strncpy_s
 # define tcpy_s strcpy_s
 # define tncat_s strncat_s
@@ -118,12 +118,11 @@ STATUS_ADD_DEFINITIONS(secureCrtStatusDefinitions);
 // self-test and the t* defines (needed for test).
 #if EMULATE_SECURE_CRT
 
-#if !OS_UNIX || OS_MACOSX || OS_OPENBSD
 // return length [in characters] of a string, not including the trailing
 // null character. to protect against access violations, only the
 // first <max_len> characters are examined; if the null character is
 // not encountered by then, <max_len> is returned.
-size_t tnlen(const tchar* str, size_t max_len)
+size_t tnlen_s(const tchar* str, size_t max_len)
 {
 	// note: we can't bail - what would the return value be?
 	ENSURE(str != 0);
@@ -137,7 +136,6 @@ size_t tnlen(const tchar* str, size_t max_len)
 
 	return len;
 }
-#endif // !OS_UNIX
 
 #if OS_ANDROID
 static tstring androidFormat(const tchar *fmt)
@@ -217,9 +215,9 @@ int tncat_s(tchar* dst, size_t max_dst_chars, const tchar* src, size_t max_src_c
 	// src is checked in tncpy_s
 
 	// WARN_IF_PTR_LEN not necessary: both max_dst_chars and max_src_chars
-	// are checked by tnlen / tncpy_s (respectively).
+	// are checked by tnlen_s / tncpy_s (respectively).
 
-	const size_t dst_len = tnlen(dst, max_dst_chars);
+	const size_t dst_len = tnlen_s(dst, max_dst_chars);
 	if(dst_len == max_dst_chars)
 	{
 		*dst = '\0';
@@ -289,7 +287,7 @@ int tsprintf_s(tchar* buf, size_t max_chars, const tchar* fmt, ...)
 
 #undef tchar
 #undef T
-#undef tnlen
+#undef tnlen_s
 #undef tncpy_s
 #undef tcpy_s
 #undef tncat_s
