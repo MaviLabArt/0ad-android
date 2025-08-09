@@ -658,9 +658,6 @@ bool ModIo::ParseGameIdResponse(const ScriptInterface& scriptInterface, const st
 	JS::RootedValue idProperty(rq.cx);
 	ENSURE(JS_GetProperty(rq.cx, firstObj, "id", &idProperty));
 
-	// Make sure the property is not set to something that could be converted to a bogus value
-	// TODO: We should be able to convert JS::Values to C++ variables in a way that actually
-	// fails when types do not match (see https://gitea.wildfiregames.com/0ad/0ad/issues/5128).
 	if (!idProperty.isNumber())
 		FAIL("id property not a number.");
 
