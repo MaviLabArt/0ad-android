@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,24 @@
 
 #include "Brushes.h"
 
-#include "GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
 
-#include "wx/spinctrl.h"
+#include <cmath>
+#include <cstddef>
+#include <wx/arrstr.h>
+#include <wx/chartype.h>
+#include <wx/debug.h>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/radiobox.h>
+#include <wx/sizer.h>
+#include <wx/spinbutt.h>
+#include <wx/spinctrl.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
 
 Brush g_Brush_Elevation; // shared between several elevation-related tools; other tools have their own brushes
 

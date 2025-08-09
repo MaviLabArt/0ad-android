@@ -26,17 +26,29 @@
 
 #include "lib/self_test.h"
 
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/os_path.h"
+#include "lib/path.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/sysdep/os.h"
 #include "lib/sysdep/sysdep.h"
 #include "lib/timer.h"
+#include "lib/utf8.h"
 #include "ps/Profiler2.h"
 #include "ps/TaskManager.h"
+#include "ps/ThreadUtil.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptEngine.h"
 #include "scriptinterface/ScriptInterface.h"
+#include "scriptinterface/ScriptRequest.h"
 
 #include <fstream>
+#include <iterator>
+#include <memory>
 #include <optional>
+#include <string>
 
 class LeakReporter : public CxxTest::GlobalFixture
 {

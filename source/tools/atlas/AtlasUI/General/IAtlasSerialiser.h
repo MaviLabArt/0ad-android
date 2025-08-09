@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
 #ifndef INCLUDED_IATLASSERIALISER
 #define INCLUDED_IATLASSERIALISER
 
-#include "AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
 
 // An interface for GUI components to transfer their contents to/from AtObjs.
 // (Maybe "serialise" isn't quite correct, since AtObjs aren't serial, but

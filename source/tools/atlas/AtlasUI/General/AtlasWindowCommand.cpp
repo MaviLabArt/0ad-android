@@ -24,7 +24,6 @@
 
 #include <wx/cmdproc.h>
 #include <wx/log.h>
-#include <wx/rtti.h>
 #include <wx/translation.h>
 
 IMPLEMENT_ABSTRACT_CLASS(AtlasWindowCommand, wxCommand);

@@ -25,7 +25,6 @@
 
 #include <algorithm>
 #include <wx/debug.h>
-#include <wx/rtti.h>
 #include <wx/translation.h>
 
 //////////////////////////////////////////////////////////////////////////

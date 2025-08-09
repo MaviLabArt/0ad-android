@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,12 @@
 #include <map>
 #include <string>
 
+class ScenarioEditor;
+class SidebarBook;
+class SnapSplitterWindow;
+class wxString;
+class wxWindow;
+
 // Some platform dependent sizes
 #if defined(__WXGTK__)
 	#define SIDEBAR_SIZE 285
@@ -32,11 +38,6 @@
 	#define SIDEBAR_SIZE 235
 	#define BOTTOMBAR_SIZE 180
 #endif
-
-class ScenarioEditor;
-class SnapSplitterWindow;
-class SidebarBook;
-class wxWindow;
 
 class SectionLayout
 {

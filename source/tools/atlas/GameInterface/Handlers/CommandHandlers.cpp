@@ -17,9 +17,16 @@
 
 #include "precompiled.h"
 
-#include "MessageHandler.h"
+#include "lib/debug.h"
+#include "tools/atlas/GameInterface/CommandProc.h"
+#include "tools/atlas/GameInterface/Handlers/MessageHandler.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
 
-#include "../CommandProc.h"
+#include <cstddef>
+#include <map>
+#include <string>
+#include <utility>
 
 namespace AtlasMessage {
 

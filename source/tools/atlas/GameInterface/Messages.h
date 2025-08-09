@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,7 +24,7 @@
 
 // Opens namespace AtlasMessage, closes it on second inclusion!
 #ifndef MESSAGES_SKIP_SETUP
-#include "MessagesSetup.h"
+#include "MessagesSetup.h" // IWYU pragma: keep
 #endif
 
 // TODO: organisation, documentation, etc
@@ -746,7 +746,7 @@ QUERY(GetSelectedObjectsTemplateNames,
 
 
 #ifndef MESSAGES_SKIP_SETUP
-#include "MessagesSetup.h"
+#include "MessagesSetup.h" // IWYU pragma: keep
 #endif
 
 #endif // INCLUDED_MESSAGES

@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -57,15 +57,18 @@ after their definition.
 
 */
 
-#include "SharedMemory.h"
-
-#include <cstring>
-#include <vector>
-#include <string>
-
 // we want to use placement new without grief
 // (Duplicated in SharedMemory.h)
 #undef new
+
+#include "tools/atlas/GameInterface/SharedMemory.h"
+
+#include <cstring>
+#include <new>
+#include <string>
+#include <vector>
+
+namespace AtlasMessage { template <typename T> class Shareable; }
 
 namespace AtlasMessage
 {

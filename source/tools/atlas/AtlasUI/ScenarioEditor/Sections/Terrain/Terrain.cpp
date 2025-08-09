@@ -41,6 +41,7 @@
 #include <vector>
 #include <wx/arrstr.h>
 #include <wx/bitmap.h>
+#include <wx/bmpbuttn.h>
 #include <wx/bookctrl.h>
 #include <wx/busyinfo.h>
 #include <wx/button.h>

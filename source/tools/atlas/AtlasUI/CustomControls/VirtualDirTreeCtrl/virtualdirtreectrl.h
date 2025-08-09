@@ -23,21 +23,21 @@
 #define INCLUDED_VIRTUALDIRTREECTRL
 
 #include <cstdlib>
-#include <cstring>
 #include <wx/arrstr.h>
 #include <wx/chartype.h>
 #include <wx/debug.h>
 #include <wx/defs.h>
 #include <wx/dynarray.h>
 #include <wx/event.h>
-#include <wx/filename.h>
-#include <wx/gdicmn.h>
 #include <wx/string.h>
 #include <wx/toolbar.h>
 #include <wx/treebase.h>
 #include <wx/treectrl.h>
 #include <wx/validate.h>
 
+class wxFileName;
+class wxPoint;
+class wxSize;
 class wxBitmap;
 class wxImageList;
 class wxWindow;

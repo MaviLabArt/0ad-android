@@ -21,6 +21,7 @@
 
 #include "tools/atlas/AtlasObject/AtlasObject.h"
 #include "tools/atlas/AtlasUI/ActorEditor/ActorEditorListCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasWindow.h"
 #include "tools/atlas/AtlasUI/General/Datafile.h"
 
 #include <boost/algorithm/string/predicate.hpp>

@@ -17,14 +17,18 @@
 
 #include "precompiled.h"
 
-#include <cstdio>
-
 #include "MessagePasserImpl.h"
-#include "Messages.h"
-#include "Handlers/MessageHandler.h"
 
+#include "lib/debug.h"
 #include "lib/timer.h"
 #include "ps/CLogger.h"
+#include "tools/atlas/GameInterface/Handlers/MessageHandler.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/SharedMemory.h"
+
+#include <map>
+#include <string>
+#include <utility>
 
 using namespace AtlasMessage;
 

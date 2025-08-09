@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,20 @@
 #ifndef INCLUDED_TOOLS
 #define INCLUDED_TOOLS
 
-#include "General/AtlasWindowCommand.h"
-#include "General/Observable.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h" // IWYU pragma: keep - required for POST_COMMAND
 
-class wxMouseEvent;
-class wxKeyEvent;
+#include <cstddef>
+#include <wx/debug.h>
+#include <wx/defs.h>
+#include <wx/object.h>
+
 class ScenarioEditor;
+class wxKeyEvent;
+class wxMouseEvent;
+class wxString;
+class wxToolBar;
+template <typename T> class ObservablePtr;
 
 class ITool : public wxObject
 {

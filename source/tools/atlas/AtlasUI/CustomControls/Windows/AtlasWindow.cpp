@@ -43,7 +43,6 @@
 #include <wx/log.h>
 #include <wx/menu.h>
 #include <wx/menuitem.h>
-#include <wx/rtti.h>
 #include <wx/sizer.h>
 #include <wx/statbmp.h>
 #include <wx/stattext.h>

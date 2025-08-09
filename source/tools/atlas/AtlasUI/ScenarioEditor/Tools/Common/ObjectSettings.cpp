@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,8 +19,16 @@
 
 #include "ObjectSettings.h"
 
-#include "GameInterface/Messages.h"
-#include "ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+
+#include <cstddef>
+#include <list>
+#include <string>
 
 ObjectSettings::ObjectSettings(Observable<std::vector<AtlasMessage::ObjectID> >& selectedObjects, int view)
 : m_PlayerID(0), m_SelectedObjects(selectedObjects), m_View(view)

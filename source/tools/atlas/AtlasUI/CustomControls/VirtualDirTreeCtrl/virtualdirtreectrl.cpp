@@ -23,11 +23,12 @@
 
 #include "virtualdirtreectrl.h"
 
-#include "wx/imaglist.h"
 #include <wx/bitmap.h>
 #include <wx/busyinfo.h>
 #include <wx/dir.h>
 #include <wx/filefn.h>
+#include <wx/filename.h>
+#include <wx/imaglist.h>
 #include <wx/log.h>
 #include <wx/translation.h>
 

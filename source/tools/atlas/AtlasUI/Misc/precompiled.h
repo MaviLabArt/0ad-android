@@ -45,33 +45,33 @@
 #endif
 
 // Include useful wx headers
-#include "wx/wxprec.h"
+#include <wx/wxprec.h>
 
-#include "wx/artprov.h"
-#include "wx/cmdproc.h"
-#include "wx/colordlg.h"
-#include "wx/config.h"
-#include "wx/dialog.h"
-#include "wx/dir.h"
-#include "wx/dnd.h"
-#include "wx/docview.h"
-#include "wx/file.h"
-#include "wx/filename.h"
-#include "wx/filesys.h"
-#include "wx/glcanvas.h"
-#include "wx/image.h"
-#include "wx/listctrl.h"
-#include "wx/mstream.h"
-#include "wx/notebook.h"
-#include "wx/progdlg.h"
-#include "wx/regex.h"
-#include "wx/sound.h"
-#include "wx/spinctrl.h"
-#include "wx/splitter.h"
-#include "wx/tooltip.h"
-#include "wx/treectrl.h"
-#include "wx/wfstream.h"
-#include "wx/zstream.h"
+#include <wx/artprov.h>
+#include <wx/cmdproc.h>
+#include <wx/colordlg.h>
+#include <wx/config.h>
+#include <wx/dialog.h>
+#include <wx/dir.h>
+#include <wx/dnd.h>
+#include <wx/docview.h>
+#include <wx/file.h>
+#include <wx/filename.h>
+#include <wx/filesys.h>
+#include <wx/glcanvas.h>
+#include <wx/image.h>
+#include <wx/listctrl.h>
+#include <wx/mstream.h>
+#include <wx/notebook.h>
+#include <wx/progdlg.h>
+#include <wx/regex.h>
+#include <wx/sound.h>
+#include <wx/spinctrl.h>
+#include <wx/splitter.h>
+#include <wx/tooltip.h>
+#include <wx/treectrl.h>
+#include <wx/wfstream.h>
+#include <wx/zstream.h>
 
 #ifdef __GNUC__
 # pragma GCC diagnostic pop
@@ -101,13 +101,10 @@
 # endif
 #endif
 
-#else // HAVE_PCH
-
-// If no PCH, just include the most common headers anyway
-# include "wx/wx.h"
-
 #endif // HAVE_PCH
 
+#include <wx/platform.h>
+#include <wx/version.h>
 // wxWidgets 3.0 or later required
 #if !wxCHECK_VERSION(3, 0, 0)
 # error You are using an old wxWidgets release. At least wxWidgets >= 3.0.0 is required.

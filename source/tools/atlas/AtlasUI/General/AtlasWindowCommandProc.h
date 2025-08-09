@@ -18,7 +18,7 @@
 #ifndef INCLUDED_ATLASWINDOWCOMMANDPROC
 #define INCLUDED_ATLASWINDOWCOMMANDPROC
 
-#include "wx/cmdproc.h"
+#include <wx/cmdproc.h>
 
 class wxWindow;
 

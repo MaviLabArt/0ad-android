@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,10 +18,13 @@
 #ifndef INCLUDED_OBJECTSETTINGS
 #define INCLUDED_OBJECTSETTINGS
 
-#include <vector>
-#include <set>
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/MiscState.h"
 
-#include "ScenarioEditor/Tools/Common/MiscState.h"
+#include <set>
+#include <vector>
+#include <wx/arrstr.h>
+#include <wx/string.h>
 
 namespace AtlasMessage
 {

@@ -51,7 +51,6 @@
 #include <wx/listbox.h>
 #include <wx/object.h>
 #include <wx/panel.h>
-#include <wx/rtti.h>
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>

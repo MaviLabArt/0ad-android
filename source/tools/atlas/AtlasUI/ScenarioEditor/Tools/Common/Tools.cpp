@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,8 +18,18 @@
 #include "precompiled.h"
 
 #include "Tools.h"
-#include "GameInterface/Messages.h"
-#include "CustomControls/Buttons/ToolButton.h"
+
+#include "tools/atlas/AtlasUI/CustomControls/Buttons/ToolButton.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+
+#include <list>
+#include <vector>
+#include <wx/object.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
 
 class DummyTool : public ITool
 {

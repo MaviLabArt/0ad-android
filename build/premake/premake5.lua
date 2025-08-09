@@ -1306,14 +1306,15 @@ function setup_atlas_projects()
 	setup_atlas_project("AtlasObject", "StaticLib",
 	{	-- src
 		".",
-		"../../../third_party/jsonspirit"
-
 	},{	-- include
-		"../../../third_party/jsonspirit"
+		"../../../",
 	},{	-- extern_libs
 		"boost",
 		"iconv",
-		"libxml2"
+		"libxml2",
+		"sdl",
+		"spidermonkey",
+		"cxxtest",
 	},{	-- extra_params
 		no_pch = 1
 	})
@@ -1367,10 +1368,6 @@ function setup_atlas_projects()
 	setup_atlas_project("AtlasUI", "SharedLib", atlas_src,
 	{	-- include
 		"../../..",
-		"..",
-		"CustomControls",
-		"Misc",
-		"../../../third_party/jsonspirit"
 	},
 	atlas_extern_libs,
 	{	-- extra_params

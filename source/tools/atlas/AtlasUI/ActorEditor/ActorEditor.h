@@ -15,9 +15,8 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Windows/AtlasWindow.h"
-
 #include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasWindow.h"
 
 #include <wx/defs.h>
 #include <wx/event.h>

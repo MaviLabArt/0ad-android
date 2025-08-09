@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,16 +18,25 @@
 #ifndef INCLUDED_SCENARIOEDITOR
 #define INCLUDED_SCENARIOEDITOR
 
-#include "wx/toolbar.h"
-
-#include "General/AtlasWindowCommandProc.h"
-#include "General/Observable.h"
-#include "Tools/Common/ObjectSettings.h"
-#include "Tools/Common/Tools.h"
-#include "CustomControls/FileHistory/FileHistory.h"
-#include "SectionLayout.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/FileHistory/FileHistory.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/SectionLayout.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/MiscState.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/ObjectSettings.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
 
 #include <map>
+#include <vector>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/frame.h>
+#include <wx/icon.h>
+#include <wx/string.h>
+#include <wx/timer.h>
+
+class AtlasWindowCommandProc;
+class wxWindow;
 
 class ScenarioEditor : public wxFrame
 {

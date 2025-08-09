@@ -19,37 +19,61 @@
 
 #include "ScenarioEditor.h"
 
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/Buttons/ToolButton.h"
+#include "tools/atlas/AtlasUI/CustomControls/Canvas/Canvas.h"
+#include "tools/atlas/AtlasUI/CustomControls/FileHistory/FileHistory.h"
+#include "tools/atlas/AtlasUI/CustomControls/HighResTimer/HighResTimer.h"
+#include "tools/atlas/AtlasUI/CustomControls/MapDialog/MapDialog.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
 #include "tools/atlas/AtlasUI/Misc/DLLInterface.h"
+#include "tools/atlas/AtlasUI/Misc/KeyMap.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/SectionLayout.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/MiscState.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/ObjectSettings.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
-#include "wx/busyinfo.h"
-#include "wx/clipbrd.h"
-#include "wx/config.h"
-#include "wx/dir.h"
-#include "wx/evtloop.h"
-#include "wx/ffile.h"
-#include "wx/filename.h"
-#include "wx/image.h"
-#include "wx/sstream.h"
-#include "wx/sysopt.h"
-#include "wx/tooltip.h"
-#include "wx/xml/xml.h"
+#include <cstddef>
+#include <list>
+#include <string>
+#include <utility>
+#include <wx/busyinfo.h>
+#include <wx/chartype.h>
+#include <wx/clipbrd.h>
+#include <wx/config.h>
+#include <wx/dataobj.h>
+#include <wx/datetime.h>
+#include <wx/debug.h>
+#include <wx/ffile.h>
+#include <wx/filedlg.h>
+#include <wx/filefn.h>
+#include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/glcanvas.h>
+#include <wx/imagbmp.h>
+#include <wx/image.h>
+#include <wx/imagpng.h>
+#include <wx/log.h>
+#include <wx/menu.h>
+#include <wx/msgdlg.h>
+#include <wx/sstream.h>
+#include <wx/sysopt.h>
+#include <wx/textdlg.h>
+#include <wx/toolbar.h>
+#include <wx/tooltip.h>
+#include <wx/toplevel.h>
+#include <wx/translation.h>
+#include <wx/utils.h>
+#include <wx/xml/xml.h>
 
-#include "General/AtlasEventLoop.h"
-#include "General/Datafile.h"
-
-#include "CustomControls/Buttons/ToolButton.h"
-#include "CustomControls/Canvas/Canvas.h"
-#include "CustomControls/HighResTimer/HighResTimer.h"
-#include "CustomControls/MapDialog/MapDialog.h"
-
-#include "GameInterface/MessagePasser.h"
-#include "GameInterface/Messages.h"
-
-#include "Misc/KeyMap.h"
-
-#include "Tools/Common/Tools.h"
-#include "Tools/Common/Brushes.h"
-#include "Tools/Common/MiscState.h"
+class wxInputStream;
+class wxWindow;
 
 static HighResTimer g_Timer;
 

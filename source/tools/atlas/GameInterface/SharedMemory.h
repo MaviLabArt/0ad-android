@@ -18,11 +18,12 @@
 #ifndef INCLUDED_SHAREDMEMORY
 #define INCLUDED_SHAREDMEMORY
 
-#include <cstddef>
-
 // we want to use placement new without grief
 // (Duplicated in Shareable.h)
 #undef new
+
+#include <cstddef>
+#include <new>
 
 namespace AtlasMessage
 {

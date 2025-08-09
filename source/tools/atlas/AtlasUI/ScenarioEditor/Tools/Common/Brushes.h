@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,11 +18,10 @@
 #ifndef INCLUDED_BRUSHES
 #define INCLUDED_BRUSHES
 
-class BrushShapeCtrl;
-class BrushSizeCtrl;
-class BrushStrengthCtrl;
-
 #include <vector>
+
+class wxSizer;
+class wxWindow;
 
 class Brush
 {

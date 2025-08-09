@@ -30,7 +30,6 @@
 #include <wx/filename.h>
 #include <wx/gdicmn.h>
 #include <wx/log.h>
-#include <wx/rtti.h>
 #include <wx/sizer.h>
 #include <wx/string.h>
 #include <wx/textctrl.h>

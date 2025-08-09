@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,7 +18,10 @@
 #ifndef INCLUDED_MISCSTATE
 #define INCLUDED_MISCSTATE
 
-#include "General/Observable.h"
+#include <vector>
+
+class wxString;
+template <typename T> class Observable;
 
 namespace AtlasMessage
 {

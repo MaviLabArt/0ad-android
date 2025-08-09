@@ -24,7 +24,6 @@
 #include <wx/accel.h>
 #include <wx/button.h>
 #include <wx/panel.h>
-#include <wx/rtti.h>
 #include <wx/sizer.h>
 #include <wx/statline.h>
 #include <wx/toolbar.h>

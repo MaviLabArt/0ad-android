@@ -18,7 +18,8 @@
 #ifndef INCLUDED_MESSAGEHANDLER
 #define INCLUDED_MESSAGEHANDLER
 
-#include "../Messages.h"
+#include "lib/debug.h"
+#include "tools/atlas/GameInterface/Messages.h"
 
 #include <map>
 #include <string>

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,18 +17,18 @@
 
 #include "precompiled.h"
 
-#include "Common/Tools.h"
-#include "Common/Brushes.h"
-#include "Common/MiscState.h"
-#include "Common/ObjectSettings.h"
-#include "GameInterface/Messages.h"
-#include "ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
-#include <wx/clipbrd.h>
-#include <wx/sstream.h>
-#include <wx/version.h>
-#include <wx/xml/xml.h>
-
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/gdicmn.h>
+#include <wx/object.h>
 
 using AtlasMessage::Position;
 

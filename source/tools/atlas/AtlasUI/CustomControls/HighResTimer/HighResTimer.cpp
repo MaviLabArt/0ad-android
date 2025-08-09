@@ -25,6 +25,11 @@
 
 #ifdef __WXMSW__
 
+#include "lib/sysdep/os/win/win.h"
+
+#include <wx/intl.h>
+#include <wx/log.h>
+
 HighResTimer::HighResTimer()
 {
 	LARGE_INTEGER freq;

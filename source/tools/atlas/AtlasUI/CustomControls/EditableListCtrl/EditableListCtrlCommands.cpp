@@ -23,7 +23,6 @@
 #include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/EditableListCtrl.h"
 #include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
 
-#include <wx/rtti.h>
 #include <wx/translation.h>
 
 //////////////////////////////////////////////////////////////////////////

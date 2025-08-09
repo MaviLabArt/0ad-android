@@ -23,7 +23,6 @@
 #include <wx/object.h>
 
 class DraggableListCtrl;
-class wxClassInfo;
 
 class DragCommand : public AtlasWindowCommand
 {

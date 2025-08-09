@@ -30,8 +30,8 @@
 #include "lib/config2.h"
 #include "lib/external_libraries/libsdl_fwd.h"
 
-# include "SDL.h"
-# include "SDL_thread.h"
+# include <SDL.h>
+# include <SDL_thread.h>
 
 #if !SDL_VERSION_ATLEAST(2,0,2)
 #error You are using an old libsdl release. At least libsdl2 >= 2.0.2 is required.
@@ -41,7 +41,7 @@
 // in static bswap routines. doesn't matter - modern compilers
 // will strip them if unused, and this is more convenient than
 // another header that toggles between wsdl and SDL_endian.h.
-# include "SDL_endian.h"
+# include <SDL_endian.h>
 
 // complete definition of our forward-declared SDL_Event (see sdl_fwd.h)
 struct SDL_Event_

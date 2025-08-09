@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -29,8 +29,8 @@
  #pragma warning(disable: 4512)
 #endif
 
-# include "json_spirit_writer_template.h"
-# include "json_spirit_reader_template.h"
+# include "third_party/jsonspirit/json_spirit_writer_template.h"
+# include "third_party/jsonspirit/json_spirit_reader_template.h"
 
 #ifdef _MSC_VER
  #pragma warning(default: 4100)

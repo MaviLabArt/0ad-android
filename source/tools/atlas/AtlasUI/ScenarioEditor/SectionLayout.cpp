@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,18 +19,39 @@
 
 #include "SectionLayout.h"
 
-#include "CustomControls/SnapSplitterWindow/SnapSplitterWindow.h"
-#include "General/Datafile.h"
-#include "ScenarioEditor.h"
-#include "Sections/Cinema/Cinema.h"
-#include "Sections/Environment/Environment.h"
-#include "Sections/Map/Map.h"
-#include "Sections/Object/Object.h"
-#include "Sections/Player/Player.h"
-#include "Sections/Terrain/Terrain.h"
+#include "tools/atlas/AtlasUI/CustomControls/SnapSplitterWindow/SnapSplitterWindow.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Cinema/Cinema.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Common/Sidebar.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Environment/Environment.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Map/Map.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Object/Object.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Player/Player.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Terrain/Terrain.h"
 
+#include <cstddef>
+#include <utility>
+#include <vector>
+#include <wx/bitmap.h>
+#include <wx/bmpbndl.h>
+#include <wx/bmpbuttn.h>
+#include <wx/chartype.h>
+#include <wx/colour.h>
+#include <wx/defs.h>
+#include <wx/event.h>
 #include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/image.h>
+#include <wx/log.h>
+#include <wx/panel.h>
+#include <wx/settings.h>
+#include <wx/sizer.h>
+#include <wx/splitter.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
 #include <wx/wfstream.h>
+#include <wx/window.h>
 
 //////////////////////////////////////////////////////////////////////////
 
