@@ -1,4 +1,4 @@
-/* Copyright (C) 2020 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,23 +19,35 @@
 
 #include "DLLInterface.h"
 
-#include "General/AtlasEventLoop.h"
+#include "tools/atlas/AtlasUI/ActorEditor/ActorEditor.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasWindow.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/SharedMemory.h"
 
-#include "General/Datafile.h"
-
-#include "ActorEditor/ActorEditor.h"
-#include "ScenarioEditor/ScenarioEditor.h"
-
-#include "GameInterface/MessagePasser.h"
-
-#include "wx/config.h"
-#include "wx/debugrpt.h"
-#include "wx/file.h"
-
-// wx and libxml both want to define ATTRIBUTE_PRINTF (with similar
-// meanings), so undef it to avoid a warning
-#undef ATTRIBUTE_PRINTF
-#include <libxml/parser.h>
+#include <cstdio>
+#include <cstdlib>
+#include <libxml/xmlversion.h>
+#include <wx/app.h>
+#include <wx/chartype.h>
+#include <wx/cmdargs.h>
+#include <wx/config.h>
+#include <wx/debug.h>
+#include <wx/defs.h>
+#include <wx/file.h>
+#include <wx/fileconf.h>
+#include <wx/filename.h>
+#include <wx/frame.h>
+#include <wx/init.h>
+#include <wx/log.h>
+#include <wx/object.h>
+#include <wx/setup.h>
+#include <wx/string.h>
+#include <wx/translation.h>
+#include <wx/unichar.h>
+#include <wx/utils.h>
+#include <wx/wxcrt.h>
 
 #ifndef LIBXML_THREAD_ENABLED
 #error libxml2 must have threading support enabled

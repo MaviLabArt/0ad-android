@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,11 +18,14 @@
 #ifndef INCLUDED_LIGHTCONTROL
 #define INCLUDED_LIGHTCONTROL
 
-#include "GameInterface/Messages.h"
-#include "GameInterface/Shareable.h"
-#include "General/Observable.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+
+#include <wx/panel.h>
 
 class LightSphere;
+class wxSize;
+class wxWindow;
+namespace AtlasMessage { struct sEnvironmentSettings; }
 
 class LightControl : public wxPanel
 {

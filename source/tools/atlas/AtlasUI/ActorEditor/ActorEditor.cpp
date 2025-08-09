@@ -1,4 +1,4 @@
-/* Copyright (C) 2023 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -17,16 +17,36 @@
 
 #include "precompiled.h"
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "ActorEditor.h"
 
-#include "ActorEditorListCtrl.h"
-#include "AtlasObject/AtlasObject.h"
-#include "AtlasObject/AtlasObjectText.h"
-#include "General/Datafile.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/ActorEditor/ActorEditorListCtrl.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
 
-#include "wx/file.h"
+#include <boost/algorithm/string/predicate.hpp>
+#include <cstring>
+#include <string>
+#include <wx/arrstr.h>
+#include <wx/chartype.h>
+#include <wx/checkbox.h>
+#include <wx/combobox.h>
+#include <wx/debug.h>
+#include <wx/file.h>
+#include <wx/filedlg.h>
+#include <wx/filename.h>
+#include <wx/gdicmn.h>
+#include <wx/icon.h>
+#include <wx/log.h>
+#include <wx/menu.h>
+#include <wx/msgdlg.h>
+#include <wx/panel.h>
+#include <wx/sizer.h>
+#include <wx/statbox.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+
+class wxWindow;
 
 BEGIN_EVENT_TABLE(ActorEditor, AtlasWindow)
 	EVT_MENU(ID_CreateEntity, ActorEditor::OnCreateEntity)

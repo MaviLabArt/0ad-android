@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,21 +19,52 @@
 
 #include "Terrain.h"
 
-#include "Buttons/ToolButton.h"
-#include "ScenarioEditor/ScenarioEditor.h"
-#include "ScenarioEditor/Tools/Common/Brushes.h"
-#include "ScenarioEditor/Tools/Common/MiscState.h"
+#include "tools/atlas/AtlasUI/CustomControls/Buttons/ToolButton.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Common/Sidebar.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Brushes.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/MiscState.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
 
-#include "GameInterface/Messages.h"
-
+#include <algorithm>
 #include <chrono>
+#include <cstdlib>
+#include <cstring>
+#include <list>
+#include <string>
 #include <unordered_map>
-#include <wx/spinctrl.h>
-#include <wx/listctrl.h>
-#include <wx/image.h>
-#include <wx/imaglist.h>
+#include <utility>
+#include <vector>
+#include <wx/arrstr.h>
+#include <wx/bitmap.h>
+#include <wx/bookctrl.h>
 #include <wx/busyinfo.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/checkbox.h>
+#include <wx/choice.h>
+#include <wx/clntdata.h>
+#include <wx/colour.h>
+#include <wx/gdicmn.h>
+#include <wx/image.h>
 #include <wx/notebook.h>
+#include <wx/object.h>
+#include <wx/panel.h>
+#include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/statbmp.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/timer.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+#include <wx/unichar.h>
+#include <wx/window.h>
+#include <wx/wxcrt.h>
 
 namespace
 {

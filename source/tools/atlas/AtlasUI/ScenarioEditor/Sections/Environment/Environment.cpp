@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,12 +18,38 @@
 #include "precompiled.h"
 
 #include "Environment.h"
-#include "LightControl.h"
 
-#include "GameInterface/Messages.h"
-#include "ScenarioEditor/ScenarioEditor.h"
-#include "General/Observable.h"
-#include "CustomControls/ColorDialog/ColorDialog.h"
+#include "tools/atlas/AtlasUI/CustomControls/ColorDialog/ColorDialog.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Common/Sidebar.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Environment/LightControl.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
+
+#include <cmath>
+#include <cstddef>
+#include <list>
+#include <string>
+#include <vector>
+#include <wx/arrstr.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/colour.h>
+#include <wx/colourdata.h>
+#include <wx/combobox.h>
+#include <wx/gdicmn.h>
+#include <wx/panel.h>
+#include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/slider.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+
+class wxWindow;
 
 using AtlasMessage::Shareable;
 

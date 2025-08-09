@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,6 +18,11 @@
 #include "precompiled.h"
 
 #include "Sidebar.h"
+
+#include <cstddef>
+#include <wx/defs.h>
+#include <wx/sizer.h>
+#include <wx/window.h>
 
 Sidebar::Sidebar(ScenarioEditor& scenarioEditor, wxWindow* sidebarContainer, wxWindow* WXUNUSED(bottomBarContainer))
 	: wxPanel(sidebarContainer), m_ScenarioEditor(scenarioEditor), m_BottomBar(NULL), m_AlreadyDisplayed(false)

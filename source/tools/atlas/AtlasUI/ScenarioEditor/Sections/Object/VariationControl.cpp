@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,7 +19,25 @@
 
 #include "VariationControl.h"
 
-#include "ScenarioEditor/Tools/Common/ObjectSettings.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/ObjectSettings.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+
+#include <cstddef>
+#include <list>
+#include <set>
+#include <wx/arrstr.h>
+#include <wx/combobox.h>
+#include <wx/debug.h>
+#include <wx/defs.h>
+#include <wx/event.h>
+#include <wx/gdicmn.h>
+#include <wx/object.h>
+#include <wx/sizer.h>
+#include <wx/string.h>
+#include <wx/toolbar.h>
+#include <wx/types.h>
+
+class wxWindow;
 
 VariationControl::VariationControl(wxWindow* parent, Observable<ObjectSettings>& objectSettings)
 : wxScrolledWindow(parent, -1),

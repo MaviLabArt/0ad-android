@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,16 @@
 
 #include "AtlasWindowCommandProc.h"
 
-#include "AtlasWindowCommand.h"
-#include "Windows/AtlasWindow.h"
-#include "Windows/AtlasDialog.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasDialog.h"
+#include "tools/atlas/AtlasUI/CustomControls/Windows/AtlasWindow.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommand.h"
+
+#include <cstddef>
+#include <wx/chartype.h>
+#include <wx/cmdproc.h>
+#include <wx/debug.h>
+#include <wx/object.h>
+#include <wx/window.h>
 
 AtlasWindowCommandProc* AtlasWindowCommandProc::GetFromParentFrame(wxWindow* object)
 {

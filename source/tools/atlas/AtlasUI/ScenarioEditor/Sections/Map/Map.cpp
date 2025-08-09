@@ -19,20 +19,50 @@
 
 #include "Map.h"
 
-#include "AtlasObject/AtlasObject.h"
-#include "AtlasObject/JSONSpiritInclude.h"
-#include "GameInterface/Messages.h"
-#include "MapResizeDialog/MapResizeDialog.h"
-#include "ScenarioEditor/ScenarioEditor.h"
-#include "ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/CustomControls/MapResizeDialog/MapResizeDialog.h"
+#include "tools/atlas/AtlasUI/General/AtlasWindowCommandProc.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Common/Sidebar.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
 
 #include <algorithm>
+#include <cstdint>
 #include <ctime>
+#include <list>
+#include <map>
 #include <random>
+#include <set>
 #include <string>
-#include <wx/busyinfo.h>
-#include <wx/filename.h>
+#include <utility>
 #include <vector>
+#include <wx/busyinfo.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/checkbox.h>
+#include <wx/choice.h>
+#include <wx/clntdata.h>
+#include <wx/collpane.h>
+#include <wx/debug.h>
+#include <wx/gdicmn.h>
+#include <wx/log.h>
+#include <wx/object.h>
+#include <wx/panel.h>
+#include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/textctrl.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+#include <wx/utils.h>
+#include <wx/valtext.h>
+#include <wx/window.h>
+#include <wx/wxcrt.h>
 
 #define CREATE_CHECKBOX(window, parentSizer, name, description, ID) \
 	parentSizer->Add(new wxStaticText(window, wxID_ANY, _(name)), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)); \

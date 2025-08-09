@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -15,7 +15,12 @@
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+
+#include <string>
+
+class wxArrayString;
+class wxString;
 
 namespace Datafile
 {

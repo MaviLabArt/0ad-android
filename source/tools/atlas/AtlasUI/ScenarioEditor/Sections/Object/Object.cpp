@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,17 +19,49 @@
 
 #include "Object.h"
 
-#include "Buttons/ToolButton.h"
-#include "General/Datafile.h"
-#include "ScenarioEditor/ScenarioEditor.h"
-#include "ScenarioEditor/Tools/Common/ObjectSettings.h"
-#include "ScenarioEditor/Tools/Common/MiscState.h"
-#include "VariationControl.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/General/Datafile.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/ScenarioEditor.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Common/Sidebar.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Sections/Object/VariationControl.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/MiscState.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/ObjectSettings.h"
+#include "tools/atlas/AtlasUI/ScenarioEditor/Tools/Common/Tools.h"
+#include "tools/atlas/GameInterface/MessagePasser.h"
+#include "tools/atlas/GameInterface/Messages.h"
+#include "tools/atlas/GameInterface/Shareable.h"
+#include "tools/atlas/GameInterface/SharedTypes.h"
 
-#include "GameInterface/Messages.h"
-
-#include "wx/busyinfo.h"
-#include "wx/wxcrt.h"
+#include <algorithm>
+#include <cstddef>
+#include <list>
+#include <string>
+#include <vector>
+#include <wx/arrstr.h>
+#include <wx/busyinfo.h>
+#include <wx/button.h>
+#include <wx/chartype.h>
+#include <wx/checkbox.h>
+#include <wx/choice.h>
+#include <wx/clntdata.h>
+#include <wx/combobox.h>
+#include <wx/control.h>
+#include <wx/gdicmn.h>
+#include <wx/listbox.h>
+#include <wx/object.h>
+#include <wx/panel.h>
+#include <wx/rtti.h>
+#include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/textctrl.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+#include <wx/unichar.h>
+#include <wx/window.h>
+#include <wx/wxcrt.h>
 
 enum
 {

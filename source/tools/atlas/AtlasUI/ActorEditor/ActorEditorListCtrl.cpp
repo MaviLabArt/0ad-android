@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,12 +19,23 @@
 
 #include "ActorEditorListCtrl.h"
 
-#include "AnimListEditor.h"
-#include "TexListEditor.h"
-#include "PropListEditor.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+#include "tools/atlas/AtlasUI/ActorEditor/AnimListEditor.h"
+#include "tools/atlas/AtlasUI/ActorEditor/PropListEditor.h"
+#include "tools/atlas/AtlasUI/ActorEditor/TexListEditor.h"
+#include "tools/atlas/AtlasUI/CustomControls/DraggableListCtrl/DraggableListCtrl.h"
+#include "tools/atlas/AtlasUI/CustomControls/EditableListCtrl/FieldEditCtrl.h"
 
-#include "AtlasObject/AtlasObject.h"
-#include "EditableListCtrl/FieldEditCtrl.h"
+#include <cstddef>
+#include <string>
+#include <vector>
+#include <wx/chartype.h>
+#include <wx/colour.h>
+#include <wx/defs.h>
+#include <wx/toolbar.h>
+#include <wx/translation.h>
+
+class wxWindow;
 
 ActorEditorListCtrl::ActorEditorListCtrl(wxWindow* parent)
 	: DraggableListCtrl(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize,

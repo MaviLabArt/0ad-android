@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,16 @@
 #ifndef INCLUDED_VARIATIONCONTROL
 #define INCLUDED_VARIATIONCONTROL
 
-#include "General/Observable.h"
+#include "tools/atlas/AtlasUI/General/Observable.h"
+
+#include <vector>
+#include <wx/scrolwin.h>
 
 class ObjectSettings;
+class wxComboBox;
+class wxCommandEvent;
+class wxSizer;
+class wxWindow;
 
 class VariationControl : public wxScrolledWindow
 {

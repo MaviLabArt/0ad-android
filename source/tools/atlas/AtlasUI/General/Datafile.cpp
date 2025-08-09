@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -19,9 +19,17 @@
 
 #include "Datafile.h"
 
-#include "wx/file.h"
-#include "wx/filename.h"
-#include "wx/dir.h"
+#include "tools/atlas/AtlasObject/AtlasObject.h"
+
+#include <wx/arrstr.h>
+#include <wx/chartype.h>
+#include <wx/debug.h>
+#include <wx/dir.h>
+#include <wx/file.h>
+#include <wx/filename.h>
+#include <wx/log.h>
+#include <wx/string.h>
+#include <wx/translation.h>
 
 static wxString g_DataDir;
 

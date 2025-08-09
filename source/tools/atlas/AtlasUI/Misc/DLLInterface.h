@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,9 +18,17 @@
 #ifndef DLLINTERFACE_INCLUDED
 #define DLLINTERFACE_INCLUDED
 
-#include <wchar.h>
+#include <cstddef>
 
 namespace AtlasMessage { class MessagePasser; }
+
+#ifdef _WIN32
+# define ATLASDLLIMPEXP extern "C" __declspec(dllexport)
+#elif defined(__GNUC__)
+# define ATLASDLLIMPEXP extern "C" __attribute__ ((visibility ("default")))
+#else
+# define ATLASDLLIMPEXP extern "C"
+#endif
 
 ATLASDLLIMPEXP void Atlas_SetMessagePasser(AtlasMessage::MessagePasser*);
 ATLASDLLIMPEXP void Atlas_SetDataDirectory(const wchar_t* path);

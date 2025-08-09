@@ -1,4 +1,4 @@
-/* Copyright (C) 2014 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -40,6 +40,10 @@ variable_to_be_watched.NotifyObservers();
 */
 
 #include <boost/signals2.hpp>
+#include <cstddef>
+#include <functional>
+#include <vector>
+
 typedef boost::signals2::connection ObservableConnection;
 typedef boost::signals2::scoped_connection ObservableScopedConnection;
 

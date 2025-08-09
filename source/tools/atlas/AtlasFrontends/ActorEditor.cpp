@@ -1,4 +1,4 @@
-/* Copyright (C) 2011 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -16,18 +16,12 @@
  */
 
 #ifdef _WIN32
-
 # define WIN32_LEAN_AND_MEAN
 # include <windows.h>
-
 /* Don't use pragmas here to set the manifests, instead do this in premake.lua
  * since pragmas get ignored by the autobuilder
  * (see comments in lib\sysdep\os\win\manifest.cpp)
  */
-
-# define ATLASDLLIMPEXP extern "C" __declspec(dllimport)
-#else
-# define ATLASDLLIMPEXP extern "C"
 #endif
 
 #include "AtlasUI/Misc/DLLInterface.h"
