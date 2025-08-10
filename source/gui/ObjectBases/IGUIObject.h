@@ -75,6 +75,11 @@ class IGUIObject
 public:
 	NONCOPYABLE(IGUIObject);
 
+	// IGUIObjects must not be moved in memory: SpiderMonkey keeps a pointer to
+	// them in order to trace script handlers during GCs (see Set/UnsetScriptHandlers())
+	IGUIObject(IGUIObject&&) = delete;
+	IGUIObject& operator=(IGUIObject&&) = delete;
+
 	IGUIObject(CGUI& pGUI);
 	virtual ~IGUIObject();
 

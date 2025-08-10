@@ -94,8 +94,6 @@ CInput::CInput(CGUI& pGUI)
 	m_PlaceholderText(this, "placeholder_text"),
 	m_PlaceholderColor(this, "placeholder_color")
 {
-	;
-
 	auto bar = std::make_unique<CGUIScrollBarVertical>(pGUI);
 	bar->SetRightAligned(true);
 	AddScrollBar(std::move(bar));

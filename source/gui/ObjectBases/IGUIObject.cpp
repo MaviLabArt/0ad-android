@@ -31,9 +31,8 @@
 #include "ps/CLogger.h"
 #include "ps/Profiler2.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
-#include "scriptinterface/ScriptRequest.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "soundmanager/ISoundManager.h"
 
 #include <algorithm>
@@ -84,7 +83,7 @@ IGUIObject::IGUIObject(CGUI& pGUI)
 IGUIObject::~IGUIObject()
 {
 	if (!m_ScriptHandlers.empty())
-		JS_RemoveExtraGCRootsTracer(ScriptRequest(m_pGUI.GetScriptInterface()).cx, Trace, this);
+		JS_RemoveExtraGCRootsTracer(m_pGUI.GetScriptInterface()->GetGeneralJSContext(), Trace, this);
 
 	// m_Children is deleted along all other GUI Objects in the CGUI destructor
 }
@@ -357,7 +356,7 @@ void IGUIObject::RegisterScriptHandler(const CStr& eventName, const CStr& Code, 
 void IGUIObject::SetScriptHandler(const CStr& eventName, JS::HandleObject Function)
 {
 	if (m_ScriptHandlers.empty())
-		JS_AddExtraGCRootsTracer(ScriptRequest(m_pGUI.GetScriptInterface()).cx, Trace, this);
+		JS_AddExtraGCRootsTracer(m_pGUI.GetScriptInterface()->GetGeneralJSContext(), Trace, this);
 
 	m_ScriptHandlers[eventName] = JS::Heap<JSObject*>(Function);
 
@@ -375,7 +374,7 @@ void IGUIObject::UnsetScriptHandler(const CStr& eventName)
 	m_ScriptHandlers.erase(it);
 
 	if (m_ScriptHandlers.empty())
-		JS_RemoveExtraGCRootsTracer(ScriptRequest(m_pGUI.GetScriptInterface()).cx, Trace, this);
+		JS_RemoveExtraGCRootsTracer(m_pGUI.GetScriptInterface()->GetGeneralJSContext(), Trace, this);
 
 	std::unordered_map<CStr, std::vector<IGUIObject*>>::iterator it2 = m_pGUI.m_EventObjects.find(eventName);
 	if (it2 == m_pGUI.m_EventObjects.end())
