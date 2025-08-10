@@ -58,10 +58,6 @@ CText::CText(CGUI& pGUI)
 	AddText();
 }
 
-CText::~CText()
-{
-}
-
 void CText::SetupText()
 {
 	if (m_GeneratedTexts.empty())

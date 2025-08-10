@@ -41,7 +41,6 @@ class CHotkeyPicker : public IGUIObject
 
 public:
 	CHotkeyPicker(CGUI& pGUI);
-	virtual ~CHotkeyPicker();
 
 	// Do nothing.
 	virtual void Draw(CCanvas2D&) {};

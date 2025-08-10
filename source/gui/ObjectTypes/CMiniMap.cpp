@@ -119,8 +119,6 @@ CMiniMap::CMiniMap(CGUI& pGUI) :
 	m_MouseHovering = false;
 }
 
-CMiniMap::~CMiniMap() = default;
-
 void CMiniMap::HandleMessage(SGUIMessage& Message)
 {
 	IGUIObject::HandleMessage(Message);

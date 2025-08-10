@@ -41,7 +41,6 @@ class CMiniMap : public IGUIObject
 
 public:
 	CMiniMap(CGUI& pGUI);
-	virtual ~CMiniMap();
 
 	bool Flare(const CVector2D& pos, const CStr& colorStr);
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -40,7 +40,6 @@ class CTooltip : public IGUIObject, public IGUITextOwner
 
 public:
 	CTooltip(CGUI& pGUI);
-	virtual ~CTooltip();
 
 	const CStr& GetUsedObject() const { return m_UseObject; }
 	i32 GetTooltipDelay() const { return m_Delay; }

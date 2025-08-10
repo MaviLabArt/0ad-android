@@ -1,4 +1,4 @@
-/* Copyright (C) 20244 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -35,7 +35,6 @@ class CScrollPanel : public IGUIPanel, public IGUIScrollBarOwner
 	mutable std::vector<IGUIObject*> m_ModifiedChildren; // To store the modified vector
 public:
 	CScrollPanel(CGUI& pGUI);
-	virtual ~CScrollPanel();
 
 	virtual void UpdateCachedSize();
 	virtual void ResetStates();

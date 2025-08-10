@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -35,10 +35,6 @@ CCheckBox::CCheckBox(CGUI& pGUI)
 	  m_SpriteCheckedOver(this, "sprite2_over"),
 	  m_SpriteCheckedPressed(this, "sprite2_pressed"),
 	  m_SpriteCheckedDisabled(this, "sprite2_disabled")
-{
-}
-
-CCheckBox::~CCheckBox()
 {
 }
 

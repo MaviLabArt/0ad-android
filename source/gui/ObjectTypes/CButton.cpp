@@ -48,10 +48,6 @@ CButton::CButton(CGUI& pGUI)
 	AddText();
 }
 
-CButton::~CButton()
-{
-}
-
 void CButton::SetupText()
 {
 	ENSURE(m_GeneratedTexts.size() == 1);

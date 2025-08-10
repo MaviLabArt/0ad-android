@@ -101,10 +101,6 @@ CInput::CInput(CGUI& pGUI)
 	AddScrollBar(std::move(bar));
 }
 
-CInput::~CInput()
-{
-}
-
 void CInput::UpdateBufferPositionSetting()
 {
 	m_BufferPosition.Set(m_iBufferPos, false);

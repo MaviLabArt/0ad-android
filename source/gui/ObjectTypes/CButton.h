@@ -37,7 +37,6 @@ class CButton : public IGUIObject, public IGUITextOwner, public IGUIButtonBehavi
 	GUI_OBJECT(CButton)
 public:
 	CButton(CGUI& pGUI);
-	virtual ~CButton();
 
 	/**
 	 * @see IGUIObject#ResetStates()

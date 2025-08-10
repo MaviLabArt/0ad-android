@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -61,10 +61,6 @@ CHotkeyPicker::CHotkeyPicker(CGUI& pGUI) : IGUIObject(pGUI), m_TimeToCombination
 {
 	// 8 keys at the same time is probably more than we'll ever need.
 	m_KeysPressed.reserve(8);
-}
-
-CHotkeyPicker::~CHotkeyPicker()
-{
 }
 
 void CHotkeyPicker::FireEvent(const CStr& event)

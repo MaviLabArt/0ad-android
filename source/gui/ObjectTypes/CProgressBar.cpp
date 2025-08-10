@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -31,10 +31,6 @@ CProgressBar::CProgressBar(CGUI& pGUI)
 	  m_SpriteBackground(this, "sprite_background"),
 	  m_SpriteBar(this, "sprite_bar"),
 	  m_Progress(this, "progress") // Between 0 and 100.
-{
-}
-
-CProgressBar::~CProgressBar()
 {
 }
 

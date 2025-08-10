@@ -39,7 +39,6 @@ class CText : public IGUIObject, public IGUIScrollBarOwner, public IGUITextOwner
 	GUI_OBJECT(CText)
 public:
 	CText(CGUI& pGUI);
-	virtual ~CText();
 
 	/**
 	 * @see IGUIObject#ResetStates()

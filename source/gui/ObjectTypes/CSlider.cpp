@@ -41,10 +41,6 @@ CSlider::CSlider(CGUI& pGUI)
 	m_Value.Set(Clamp<float>(m_Value, m_MinValue, m_MaxValue), false);
 }
 
-CSlider::~CSlider()
-{
-}
-
 void CSlider::ResetStates()
 {
 	IGUIObject::ResetStates();
