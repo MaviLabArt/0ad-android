@@ -39,7 +39,6 @@
 #include "scriptinterface/StructuredClone.h"
 
 #include <iostream>
-#include <iterator>
 #include <js/GCAPI.h>
 #include <js/PropertyAndElement.h>
 #include <js/PropertyDescriptor.h>

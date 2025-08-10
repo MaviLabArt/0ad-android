@@ -49,12 +49,11 @@
 #include <functional>
 #include <iterator>
 #include <js/GCAPI.h>
-#include <js/PropertyAndElement.h>
 #include <js/TracingAPI.h>
 #include <map>
 #include <memory>
 #include <sstream>
-#include <type_traits>
+#include <utility>
 
 /**
  * Once ping goes above turn length * command delay,

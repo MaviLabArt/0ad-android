@@ -30,8 +30,7 @@
 #include "simulation2/system/TurnManager.h"
 
 #include <limits>
-#include <memory>
-#include <new>
+#include <utility>
 
 #if 0
 #include "ps/Util.h"

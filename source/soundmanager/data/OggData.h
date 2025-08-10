@@ -28,7 +28,6 @@
 #include "lib/file/vfs/vfs_path.h"
 
 #include <AL/al.h>
-#include <AL/alc.h>
 #include <array>
 
 /*

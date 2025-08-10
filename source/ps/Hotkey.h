@@ -32,7 +32,7 @@
  */
 
 #include "lib/input.h"
-#include "lib/types.h"
+#include "lib/posix/posix_types.h"
 #include "ps/CStr.h"
 #include "ps/containers/StaticVector.h"
 

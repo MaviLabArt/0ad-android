@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -20,12 +20,18 @@
 
 #include "simulation2/system/Interface.h"
 
-#include "ps/CStr.h"
-#include "maths/BoundingBoxOriented.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/types.h"
 #include "maths/BoundingBoxAligned.h"
+#include "maths/BoundingBoxOriented.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector3D.h"
-#include "lib/file/vfs/vfs_path.h"
+#include "maths/Vector3D.h"
+#include "ps/CStr.h"
+#include "simulation2/system/Component.h"
+
+#include <js/Value.h>
+#include <string>
 
 class CUnit;
 

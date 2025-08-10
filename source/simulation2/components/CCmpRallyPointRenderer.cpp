@@ -21,6 +21,7 @@
 
 #include "graphics/TextureManager.h"
 #include "lib/debug.h"
+#include "lib/path.h"
 #include "maths/Fixed.h"
 #include "maths/FixedVector3D.h"
 #include "ps/CLogger.h"

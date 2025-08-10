@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -24,6 +24,8 @@
 # undef USING_PCH
 #endif
 #include "lib/precompiled.h"
+
+#include "lib/sysdep/os.h"
 
 // Cause calls to be redirected to the real function by default
 #define DEFAULT(name) static T::Real_##name real_##name

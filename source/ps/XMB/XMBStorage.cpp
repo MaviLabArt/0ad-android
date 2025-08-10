@@ -30,7 +30,6 @@
 
 #include <algorithm>
 #include <js/Array.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/Value.h>
 #include <jsapi.h>

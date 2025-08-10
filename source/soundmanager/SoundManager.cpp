@@ -17,23 +17,34 @@
 
 #include "precompiled.h"
 
-#include "ISoundManager.h"
 #include "SoundManager.h"
-#include "data/SoundData.h"
+
 #include "items/CBufferItem.h"
 #include "items/CSoundItem.h"
 #include "items/CStreamItem.h"
-
-#include "lib/external_libraries/libsdl.h"
+#include "lib/code_generation.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/sysdep/os.h"
+#include "lib/timer.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
 #include "ps/Threading.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+#include "soundmanager/ISoundManager.h"
+#include "soundmanager/data/SoundData.h"
+#include "soundmanager/items/ISoundItem.h"
+#include "soundmanager/scripting/SoundGroup.h"
 
+#include <SDL_timer.h>
+#include <algorithm>
+#include <cstring>
 #include <thread>
+#include <utility>
 
 ISoundManager* g_SoundManager = NULL;
 

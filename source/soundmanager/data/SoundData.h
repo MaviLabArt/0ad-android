@@ -1,4 +1,4 @@
-/* Copyright (C) 2015 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,9 +23,10 @@
 #if CONFIG2_AUDIO
 
 #include "lib/file/vfs/vfs_path.h"
-#include "ps/CStr.h"
+#include "lib/path.h"
 
 #include <map>
+#include <string>
 
 class CSoundData;
 typedef std::map<std::wstring, CSoundData*> DataMap;

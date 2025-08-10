@@ -1,4 +1,4 @@
-/* Copyright (C) 2012 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -23,6 +23,8 @@
 #if CONFIG2_AUDIO
 
 #include "CSoundBase.h"
+
+class CSoundData;
 
 class CBufferItem : public CSoundBase
 {

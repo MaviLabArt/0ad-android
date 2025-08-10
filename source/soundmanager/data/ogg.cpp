@@ -21,19 +21,22 @@
 #if CONFIG2_AUDIO
 
 #include "lib/byte_order.h"
-#include "lib/external_libraries/vorbis.h"
-#include "lib/file/file_system.h"
+#include "lib/code_annotation.h"
+#include "lib/debug.h"
 #include "lib/file/io/io.h"
-#include "lib/file/vfs/vfs_util.h"
+#include "lib/posix/posix_types.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/containers/Span.h"
-#include "ps/Filesystem.h"
 
 #include <AL/al.h>
-#include <AL/alc.h>
 #include <algorithm>
+#include <fcntl.h>
+#include <fmt/format.h>
+#include <iterator>
 #include <stdexcept>
+#include <vorbis/codec.h>
+#include <vorbis/vorbisfile.h>
 
 static Status LibErrorFromVorbis(int err)
 {

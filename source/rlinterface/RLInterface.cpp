@@ -22,22 +22,31 @@
 #include "rlinterface/RLInterface.h"
 
 #include "gui/GUIManager.h"
+#include "lib/debug.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
+#include "ps/Errors.h"
 #include "ps/Game.h"
 #include "ps/GameSetup/GameSetup.h"
 #include "ps/Loader.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/JSON.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpAIInterface.h"
 #include "simulation2/components/ICmpTemplateManager.h"
 #include "simulation2/system/Component.h"
 #include "simulation2/system/LocalTurnManager.h"
+#include "simulation2/system/TurnManager.h"
 
-#include <queue>
+#include <cstdlib>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <sstream>
-#include <tuple>
+#include <utility>
 
 namespace RL
 {

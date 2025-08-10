@@ -55,7 +55,6 @@
 
 #include <ctime>
 #include <fstream>
-#include <js/PropertyAndElement.h>
 #include <js/Value.h>
 #include <memory>
 

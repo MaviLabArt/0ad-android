@@ -40,7 +40,6 @@
 #include "scriptinterface/ScriptRequest.h"
 #include "tools/atlas/GameInterface/GameLoop.h"
 
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

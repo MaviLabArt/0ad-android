@@ -31,7 +31,6 @@
 #include <atomic>
 #include <map>
 #include <memory>
-#include <new>
 #include <vector>
 
 /**

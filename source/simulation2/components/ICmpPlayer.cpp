@@ -21,9 +21,10 @@
 
 #include "graphics/Color.h"
 #include "maths/FixedVector3D.h"
+#include "simulation2/scripting/ScriptComponent.h"
 #include "simulation2/system/Component.h"
 #include "simulation2/system/InterfaceScripted.h"
-#include "simulation2/scripting/ScriptComponent.h"
+#include "simulation2/system/Message.h"
 
 BEGIN_INTERFACE_WRAPPER(Player)
 END_INTERFACE_WRAPPER(Player)

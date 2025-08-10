@@ -36,6 +36,7 @@
 #include "ps/Errors.h"
 #include "ps/Filesystem.h"
 #include "ps/GameSetup/GameSetup.h"
+#include "scriptinterface/ScriptInterface.h"
 
 #include <algorithm>
 #include <boost/algorithm/string/predicate.hpp>

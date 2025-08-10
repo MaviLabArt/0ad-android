@@ -25,7 +25,6 @@
 #include "ps/VideoMode.h"
 #include "scriptinterface/FunctionWrapper.h"
 
-#include <js/PropertyAndElement.h>
 #include <string>
 #include <unordered_set>
 #include <vector>

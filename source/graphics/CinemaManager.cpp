@@ -33,8 +33,7 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpCinemaManager.h"
 #include "simulation2/helpers/CinemaPath.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/SimContext.h"
+#include "simulation2/system/Component.h"
 
 #include <map>
 #include <utility>

@@ -51,7 +51,6 @@
 
 #include <cstdint>
 #include <ctime>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <memory>

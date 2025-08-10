@@ -39,7 +39,6 @@
 #include "simulation2/components/ICmpUnitMotionManager.h"
 #include "simulation2/components/ICmpValueModificationManager.h"
 #include "simulation2/components/ICmpVisual.h"
-#include "simulation2/helpers/Geometry.h"
 #include "simulation2/helpers/PathGoal.h"
 #include "simulation2/helpers/Pathfinding.h"
 #include "simulation2/helpers/Position.h"

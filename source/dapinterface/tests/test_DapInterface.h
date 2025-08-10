@@ -18,10 +18,15 @@
 #include "lib/self_test.h"
 
 #include "dapinterface/DapInterface.h"
+#include "lib/file/vfs/vfs.h"
+#include "lib/path.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
+#include "scriptinterface/ScriptInterface.h"
 
 #include <fmt/format.h>
+#include <memory>
+#include <string>
 
 class TestDapInterface : public CxxTest::TestSuite
 {

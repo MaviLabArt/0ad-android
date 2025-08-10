@@ -17,21 +17,31 @@
 
 #include "lib/precompiled.h"
 
-#include "dapinterface/DapInterface.h"
+#include "DapInterface.h"
 
-#include "fmt/format.h"
-#include "js/Debug.h"
+#include "lib/debug.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/sysdep/os.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Object.h"
+#include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 
+#include <cstddef>
+#include <fmt/format.h>
+#include <js/Debug.h>
+#include <jsapi.h>
 #include <memory>
-
+#include <thread>
+#include <utility>
 
 #if OS_WIN
 #include <WinSock2.h>
@@ -40,10 +50,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <unistd.h>
 #endif
-#include <thread>
-#include <ps/Filesystem.h>
 
 namespace DAP
 {

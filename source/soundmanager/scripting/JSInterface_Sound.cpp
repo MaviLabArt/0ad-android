@@ -19,14 +19,12 @@
 #include "JSInterface_Sound.h"
 
 #include "lib/config2.h"
-#include "lib/utf8.h"
-#include "maths/Vector3D.h"
-#include "ps/Filesystem.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptRequest.h"
+#include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
 
-#include <sstream>
+#include <string>
 
 namespace JSI_Sound
 {

@@ -1,4 +1,4 @@
-/* Copyright (C) 2022 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,6 +21,8 @@
 
 #include "simulation2/system/InterfaceScripted.h"
 #include "simulation2/scripting/ScriptComponent.h"
+
+#include <string>
 
 BEGIN_INTERFACE_WRAPPER(TerritoryDecayManager)
 END_INTERFACE_WRAPPER(TerritoryDecayManager)

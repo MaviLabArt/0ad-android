@@ -55,8 +55,12 @@
 #include <cstring>
 #include <functional>
 #include <iterator>
-#include <js/PropertyAndElement.h>
 #include <memory>
+#include <set>
+#include <sstream>
+#include <string>
+#include <utility>
+
 #if CONFIG2_MINIUPNPC
 #include <miniupnpc/igd_desc_parse.h>
 #include <miniupnpc/miniupnpc.h>
@@ -64,12 +68,6 @@
 #include <miniupnpc/upnpdev.h>
 #include <miniupnpc/upnperrors.h>
 #endif
-#include <new>
-#include <set>
-#include <sstream>
-#include <string>
-#include <type_traits>
-#include <utility>
 
 /**
  * Number of peers to allocate for the enet host.

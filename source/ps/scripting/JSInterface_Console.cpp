@@ -23,8 +23,6 @@
 #include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
 
-#include <js/PropertyAndElement.h>
-
 namespace JS { class CallArgs; }
 
 namespace JSI_Console

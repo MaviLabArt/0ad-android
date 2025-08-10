@@ -28,7 +28,6 @@
 
 #include <atomic>
 #include <boost/lockfree/queue.hpp>
-#include <utility>
 
 class CNetClient;
 class CNetMessage;

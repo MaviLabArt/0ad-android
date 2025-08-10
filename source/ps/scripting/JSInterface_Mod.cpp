@@ -31,7 +31,6 @@
 
 #include <fmt/format.h>
 #include <js/Array.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

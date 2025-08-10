@@ -26,7 +26,6 @@
 #include "scriptinterface/FunctionWrapper.h"
 
 #include <ctime>
-#include <js/PropertyAndElement.h>
 #include <jsapi.h>
 #include <string>
 #include <unicode/locid.h>

@@ -18,6 +18,7 @@
 #ifndef IXMPPCLIENT_H
 #define IXMPPCLIENT_H
 
+#include "lib/types.h"
 #include "scriptinterface/ScriptTypes.h"
 
 class ScriptRequest;

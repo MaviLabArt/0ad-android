@@ -58,7 +58,6 @@
 
 #include <cstddef>
 #include <fstream>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/Value.h>
 #include <memory>

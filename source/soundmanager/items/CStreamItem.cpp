@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -21,8 +21,13 @@
 
 #if CONFIG2_AUDIO
 
+#include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
 #include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
+
+#include <AL/al.h>
+#include <cstddef>
 
 CStreamItem::CStreamItem(CSoundData* sndData)
 {

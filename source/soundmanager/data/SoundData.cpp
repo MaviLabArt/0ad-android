@@ -22,8 +22,13 @@
 
 #if CONFIG2_AUDIO
 
-#include "OggData.h"
 #include "ps/CLogger.h"
+#include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
+
+#include <AL/al.h>
+#include <cstddef>
+#include <utility>
 
 DataMap CSoundData::sSoundData;
 

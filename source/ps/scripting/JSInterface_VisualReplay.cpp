@@ -25,7 +25,6 @@
 #include "ps/VisualReplay.h"
 #include "scriptinterface/FunctionWrapper.h"
 
-#include <js/PropertyAndElement.h>
 #include <string>
 
 namespace JSI_VisualReplay

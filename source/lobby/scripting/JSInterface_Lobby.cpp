@@ -32,15 +32,12 @@
 #include "ps/Util.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptExceptions.h"
-#include "scriptinterface/ScriptRequest.h"
 #include "third_party/encryption/pkcs5_pbkdf2.h"
 
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
-#include <sodium/core.h>
-#include <sodium/crypto_hash_sha256.h>
+#include <sodium.h>
 #include <stdexcept>
 #include <string>
 

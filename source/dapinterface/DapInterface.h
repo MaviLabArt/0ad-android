@@ -18,16 +18,19 @@
 #ifndef INCLUDED_DAPINTERFACE
 #define INCLUDED_DAPINTERFACE
 
-#include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptInterface.h"
-#include "ps/GameSetup/Paths.h"
+#include "lib/code_annotation.h"
 
 #include <condition_variable>
-#include <iostream>
-#include <thread>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
 #include <mutex>
-#include <string>
 #include <stdexcept>
+#include <string>
+
+class ScriptContext;
+class ScriptInterface;
 
 namespace DAP
 {

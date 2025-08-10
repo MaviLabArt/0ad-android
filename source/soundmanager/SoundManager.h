@@ -23,22 +23,22 @@
 #if CONFIG2_AUDIO
 
 #include "ISoundManager.h"
-#include "data/SoundData.h"
 #include "items/ISoundItem.h"
-#include "scripting/SoundGroup.h"
-
+#include "lib/code_annotation.h"
 #include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
 #include "ps/CStr.h"
-#include "ps/Profiler2.h"
+#include "scripting/SoundGroup.h"
 #include "simulation2/system/Entity.h"
 
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <map>
 #include <mutex>
+#include <string>
 #include <vector>
 
-#define AL_CHECK CSoundManager::al_check(__func__, __LINE__)
+class CSoundData;
 
 struct ALSourceHolder
 {
@@ -170,6 +170,8 @@ protected:
 private:
 	CSoundManager(CSoundManager* /*other*/){};
 };
+
+#define AL_CHECK CSoundManager::al_check(__func__, __LINE__)
 
 #else // !CONFIG2_AUDIO
 

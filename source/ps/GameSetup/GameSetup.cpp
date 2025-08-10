@@ -109,13 +109,9 @@
 #include <fmt/format.h>
 #include <fstream>
 #include <js/CallArgs.h>
-#include <js/Class.h>
-#include <js/Object.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
-#include <jsapi.h>
 #include <locale>
 #include <memory>
 #include <optional>

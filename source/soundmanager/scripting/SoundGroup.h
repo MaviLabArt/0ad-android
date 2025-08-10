@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,14 +18,17 @@
 #ifndef INCLUDED_SOUNDGROUP_H
 #define INCLUDED_SOUNDGROUP_H
 
+#include "lib/code_annotation.h"
 #include "lib/config2.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/types.h"
 #include "simulation2/system/Entity.h"
-#include "soundmanager/data/SoundData.h"
 
+#include <cstddef>
+#include <string>
 #include <vector>
 
+class CSoundData;
 class CVector3D;
 
 enum eSndGrpFlags

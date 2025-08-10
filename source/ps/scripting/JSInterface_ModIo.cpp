@@ -27,7 +27,6 @@
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptRequest.h"
 
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

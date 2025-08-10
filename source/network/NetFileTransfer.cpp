@@ -28,8 +28,7 @@
 #include "ps/CStr.h"
 
 #include <algorithm>
-#include <memory>
-#include <new>
+#include <utility>
 
 Status CNetFileTransferer::HandleMessageReceive(const CNetMessage& message)
 {

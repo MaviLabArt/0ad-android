@@ -18,6 +18,7 @@
 #include "precompiled.h"
 
 #include "SoundGroup.h"
+
 #include "graphics/Camera.h"
 #include "graphics/GameView.h"
 #include "lib/rand.h"
@@ -35,11 +36,25 @@
 #include "soundmanager/SoundManager.h"
 
 #include <algorithm>
-#include <random>
 
 extern CGame *g_Game;
 
 #if CONFIG2_AUDIO
+
+#include "lib/path.h"
+#include "lib/status.h"
+#include "lib/utf8.h"
+#include "maths/Matrix3D.h"
+#include "maths/Vector3D.h"
+#include "ps/Errors.h"
+#include "ps/XMB/XMBData.h"
+#include "scriptinterface/ScriptInterface.h"
+#include "soundmanager/ISoundManager.h"
+#include "soundmanager/data/SoundData.h"
+
+#include <AL/al.h>
+#include <cmath>
+#include <utility>
 
 constexpr ALfloat DEFAULT_ROLLOFF = 0.5f;
 constexpr ALfloat MAX_ROLLOFF = 0.7f;

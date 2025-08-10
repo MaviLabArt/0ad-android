@@ -102,6 +102,7 @@
 #include "ps/CLogger.h"
 #include "ps/Profile.h"
 
+#endif // #if CONFIG_ENABLE_PCH
+
 // IWYU pragma: end_keep
 
-#endif // #if CONFIG_ENABLE_PCH

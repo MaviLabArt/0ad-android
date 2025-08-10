@@ -21,12 +21,16 @@
 
 #if CONFIG2_AUDIO
 
+#include "lib/status.h"
+#include "lib/types.h"
 #include "ps/CLogger.h"
-#include "ps/containers/Span.h"
 #include "ps/Filesystem.h"
+#include "ps/containers/Span.h"
 #include "soundmanager/SoundManager.h"
+#include "soundmanager/data/ogg.h"
 
 #include <algorithm>
+#include <cstddef>
 #include <vector>
 
 /*

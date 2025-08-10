@@ -22,12 +22,14 @@
 
 #if CONFIG2_AUDIO
 
-#include "soundmanager/data/SoundData.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "soundmanager/items/ISoundItem.h"
 
 #include <AL/al.h>
-#include <AL/alc.h>
 #include <mutex>
+
+class CSoundData;
+class CVector3D;
 
 class CSoundBase : public ISoundItem
 {

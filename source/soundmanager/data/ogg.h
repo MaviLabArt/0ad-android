@@ -22,11 +22,15 @@
 #if CONFIG2_AUDIO
 
 #include "lib/file/vfs/vfs.h"
+#include "lib/file/vfs/vfs_path.h"
+#include "lib/status.h"
 #include "lib/types.h"
-#include "ps/containers/Span.h"
 
 #include <AL/al.h>
-#include <AL/alc.h>
+#include <cstddef>
+#include <memory>
+
+namespace PS { template <typename T> class span; }
 
 class OggStream
 {

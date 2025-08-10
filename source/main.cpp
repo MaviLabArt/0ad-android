@@ -31,20 +31,40 @@ that of Atlas depending on commandline parameters.
 #define MINIMAL_PCH 2
 #include "lib/precompiled.h"
 
+#include "dapinterface/DapInterface.h"
+#include "graphics/GameView.h"
+#include "graphics/TextureManager.h"
+#include "gui/GUIManager.h"
+#include "lib/code_annotation.h"
+#include "lib/config2.h"
 #include "lib/debug.h"
-#include "lib/status.h"
-#include "lib/secure_crt.h"
+#include "lib/external_libraries/libsdl.h"
+#include "lib/file/file_system.h"
+#include "lib/file/vfs/vfs.h"
 #include "lib/frequency_filter.h"
 #include "lib/input.h"
+#include "lib/path.h"
+#include "lib/posix/posix_types.h"
+#include "lib/secure_crt.h"
+#include "lib/status.h"
+#include "lib/sysdep/compiler.h"
+#include "lib/sysdep/os.h"
 #include "lib/timer.h"
-#include "lib/external_libraries/libsdl.h"
-
+#include "lib/types.h"
+#include "lobby/IXmppClient.h"
+#include "network/NetClient.h"
 #include "ps/ArchiveBuilder.h"
 #include "ps/CConsole.h"
 #include "ps/CLogger.h"
+#include "ps/CStr.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Game.h"
+#include "ps/GameSetup/Atlas.h"
+#include "ps/GameSetup/CmdLineArgs.h"
+#include "ps/GameSetup/Config.h"
+#include "ps/GameSetup/GameSetup.h"
+#include "ps/GameSetup/Paths.h"
 #include "ps/Globals.h"
 #include "ps/Hotkey.h"
 #include "ps/Loader.h"
@@ -54,37 +74,39 @@ that of Atlas depending on commandline parameters.
 #include "ps/Profiler2.h"
 #include "ps/Pyrogenesis.h"
 #include "ps/Replay.h"
+#include "ps/TaskManager.h"
 #include "ps/TouchInput.h"
 #include "ps/UserReport.h"
-#include "ps/Util.h"
 #include "ps/VideoMode.h"
-#include "ps/TaskManager.h"
-#include "ps/World.h"
-#include "ps/GameSetup/GameSetup.h"
-#include "ps/GameSetup/Atlas.h"
-#include "ps/GameSetup/Config.h"
-#include "ps/GameSetup/CmdLineArgs.h"
-#include "ps/GameSetup/Paths.h"
 #include "ps/XML/Xeromyces.h"
-#include "network/NetClient.h"
-#include "network/NetServer.h"
-#include "network/NetSession.h"
-#include "lobby/IXmppClient.h"
-#include "graphics/Camera.h"
-#include "graphics/GameView.h"
-#include "graphics/TextureManager.h"
-#include "gui/GUIManager.h"
-#include "renderer/backend/IDevice.h"
+#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "rlinterface/RLInterface.h"
+#include "scriptinterface/JSON.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptEngine.h"
 #include "scriptinterface/ScriptInterface.h"
-#include "scriptinterface/JSON.h"
-#include "simulation2/Simulation2.h"
+#include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/TurnManager.h"
 #include "soundmanager/ISoundManager.h"
-#include "dapinterface/DapInterface.h"
+
+#include <SDL_events.h>
+#include <SDL_stdinc.h>
+#include <SDL_timer.h>
+#include <SDL_video.h>
+#include <chrono>
+#include <cstdlib>
+#include <ctime>
+#include <exception>
+#include <js/RootingAPI.h>
+#include <js/TypeDecls.h>
+#include <js/Value.h>
+#include <memory>
+#include <optional>
+#include <string>
+#include <utility>
+#include <vector>
 
 #if OS_UNIX
 #include <iostream>
@@ -124,9 +146,6 @@ extern "C"
 	__declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 0x00000001;
 }
 #endif
-
-#include <chrono>
-#include <utility>
 
 extern CStrW g_UniqueLogPostfix;
 

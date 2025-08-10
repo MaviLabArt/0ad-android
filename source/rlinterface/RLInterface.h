@@ -1,4 +1,4 @@
-/* Copyright (C) 2024 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -18,13 +18,17 @@
 #ifndef INCLUDED_RLINTERFACE
 #define INCLUDED_RLINTERFACE
 
+#include "lib/code_annotation.h"
 #include "simulation2/helpers/Player.h"
 #include "third_party/mongoose/mongoose.h"
 
 #include <condition_variable>
 #include <exception>
 #include <mutex>
+#include <string>
 #include <vector>
+
+struct mg_context;
 
 namespace RL
 {
