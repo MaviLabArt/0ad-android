@@ -21,7 +21,6 @@
 
 #include "graphics/Camera.h"
 #include "graphics/Color.h"
-#include "graphics/HeightMipmap.h"
 #include "graphics/LightEnv.h"
 #include "graphics/MapIO.h"
 #include "graphics/MiniPatch.h"
@@ -45,6 +44,7 @@
 #include "renderer/PostprocManager.h"
 #include "renderer/SkyManager.h"
 #include "renderer/WaterManager.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpCinemaManager.h"
 #include "simulation2/components/ICmpGarrisonHolder.h"
@@ -56,8 +56,7 @@
 #include "simulation2/components/ICmpVisual.h"
 #include "simulation2/components/ICmpWaterManager.h"
 #include "simulation2/helpers/CinemaPath.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/Components.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
 #include <algorithm>

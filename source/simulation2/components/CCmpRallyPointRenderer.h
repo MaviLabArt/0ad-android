@@ -24,9 +24,6 @@
 #include "lib/types.h"
 #include "maths/FixedVector2D.h"
 #include "maths/Vector2D.h"
-#include "simulation2/components/ICmpFootprint.h"
-#include "simulation2/components/ICmpPathfinder.h"
-#include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpRallyPointRenderer.h"
 #include "simulation2/helpers/Player.h"
 #include "simulation2/system/Component.h"
@@ -37,6 +34,9 @@
 #include <vector>
 
 class CFrustum;
+class ICmpFootprint;
+class ICmpPathfinder;
+class ICmpPosition;
 class SceneCollector;
 
 struct SVisibilitySegment

@@ -37,7 +37,7 @@
 #include "renderer/RenderingOptions.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
 #include <algorithm>

@@ -32,7 +32,6 @@
 #include "lib/debug.h"
 #include "lib/file/common/file_stats.h"
 #include "lib/posix/posix_filesystem.h"
-#include "lib/posix/posix_types.h"
 #include "lib/sysdep/filesystem.h"
 
 #include <cerrno>

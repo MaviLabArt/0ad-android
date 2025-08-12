@@ -27,13 +27,11 @@
 #include "gui/SettingTypes/CGUISize.h"
 #include "i18n/L10n.h"
 #include "lib/file/vfs/vfs_path.h"
-#include "lib/path.h"
 #include "lib/utf8.h"
 #include "maths/Vector2D.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "renderer/Renderer.h"
-#include "renderer/backend/Sampler.h"
 
 #include <string>
 #include <utility>

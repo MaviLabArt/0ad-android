@@ -26,7 +26,6 @@
 
 #include <algorithm>
 #include <iterator>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/Value.h>
 #include <limits>

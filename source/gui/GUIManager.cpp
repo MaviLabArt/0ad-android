@@ -22,6 +22,7 @@
 #include "gui/CGUI.h"
 #include "gui/SGUIMessage.h"
 #include "lib/debug.h"
+#include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_util.h"
 #include "lib/utf8.h"
 #include "ps/CLogger.h"
@@ -31,6 +32,7 @@
 #include "ps/Profiler2.h"
 #include "ps/VideoMode.h"
 #include "ps/XMB/XMBData.h"
+#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "ps/containers/StaticVector.h"
 #include "scriptinterface/FunctionWrapper.h"
@@ -40,14 +42,13 @@
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/Component.h"
 
 #include <algorithm>
 #include <iterator>
 #include <js/Equality.h>
 #include <js/GCVector.h>
 #include <js/Promise.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/String.h>
 #include <js/Symbol.h>

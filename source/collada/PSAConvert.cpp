@@ -42,8 +42,8 @@
 #include <FUtils/Platforms.h>
 #include <algorithm>
 #include <cassert>
+#include <cfloat>
 #include <cstring>
-#include <float.h>
 #include <iterator>
 #include <limits>
 #include <vector>

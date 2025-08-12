@@ -24,20 +24,18 @@
 
 #include "precompiled.h"
 
-#include <fstream>
-
 #include "lib/self_test.h"
-#include <cxxtest/GlobalFixture.h>
 
-#include "lib/timer.h"
 #include "lib/sysdep/sysdep.h"
+#include "lib/timer.h"
 #include "ps/Profiler2.h"
 #include "ps/TaskManager.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptEngine.h"
 #include "scriptinterface/ScriptContext.h"
+#include "scriptinterface/ScriptEngine.h"
 #include "scriptinterface/ScriptInterface.h"
 
+#include <fstream>
 #include <optional>
 
 class LeakReporter : public CxxTest::GlobalFixture

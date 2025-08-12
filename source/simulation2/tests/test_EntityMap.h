@@ -22,8 +22,6 @@
 
 #include <algorithm>
 #include <cstdio>
-#include <cstdlib>
-#include <new>
 #include <random>
 #include <utility>
 #include <vector>

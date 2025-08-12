@@ -19,12 +19,12 @@
 #define INCLUDED_GUIMANAGER
 
 #include "lib/code_annotation.h"
-#include "lib/file/vfs/vfs_path.h"
 #include "lib/input.h"
 #include "lib/path.h"
 #include "lib/status.h"
 #include "ps/CStr.h"
 #include "ps/TemplateLoader.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/StructuredClone.h"
 
 #include <cstddef>
@@ -39,7 +39,6 @@ class CCanvas2D;
 class CGUI;
 class CParamNode;
 class ScriptContext;
-class ScriptInterface;
 namespace JS { class HandleValueArray; }
 namespace JS { class Value; }
 namespace PS { template <typename T, size_t N> class StaticVector; }

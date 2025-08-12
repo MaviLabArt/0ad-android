@@ -34,6 +34,7 @@
 #include <fcntl.h>
 #include <fmt/format.h>
 #include <iterator>
+#include <ogg/config_types.h>
 #include <stdexcept>
 #include <vorbis/codec.h>
 #include <vorbis/vorbisfile.h>

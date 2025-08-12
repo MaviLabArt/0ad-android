@@ -35,6 +35,7 @@
 # if OS_WIN
 #  include <glad/wgl.h>
 # elif !OS_MACOSX
+#  include <SDL_config.h>
 #  include <SDL_syswm.h>
 #  if defined(SDL_VIDEO_DRIVER_X11)
 #   include <X11/Xlib.h>

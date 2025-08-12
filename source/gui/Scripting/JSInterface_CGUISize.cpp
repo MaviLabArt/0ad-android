@@ -40,7 +40,6 @@
 #include <js/Class.h>
 #include <js/Conversions.h>
 #include <js/Object.h>
-#include <js/PropertyAndElement.h>
 #include <js/PropertyDescriptor.h>
 #include <js/PropertySpec.h>
 #include <js/RootingAPI.h>

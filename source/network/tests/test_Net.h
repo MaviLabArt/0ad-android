@@ -22,7 +22,7 @@
 #include "lib/file/file_system.h"
 #include "lib/file/vfs/vfs.h"
 #include "lib/path.h"
-#include "lib/types.h"
+#include "lib/posix/posix_types.h"
 #include "network/NetClient.h"
 #include "network/NetMessage.h"
 #include "network/NetServer.h"
@@ -42,10 +42,8 @@
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
-#include <memory>
 #include <optional>
 #include <string>
-#include <utility>
 #include <vector>
 
 class TestNetComms : public CxxTest::TestSuite

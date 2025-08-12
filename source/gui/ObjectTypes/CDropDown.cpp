@@ -32,6 +32,7 @@
 #include <SDL_events.h>
 #include <SDL_keycode.h>
 #include <algorithm>
+#include <cmath>
 #include <cstdlib>
 #include <vector>
 

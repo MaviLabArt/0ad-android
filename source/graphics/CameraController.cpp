@@ -40,7 +40,7 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpPosition.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 
 #include <algorithm>
 #include <cmath>

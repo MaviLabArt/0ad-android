@@ -76,10 +76,6 @@ struct EdgeAA
 	fixed c1;
 };
 
-class ICmpObstructionManager;
-class CSimContext;
-class SceneCollector;
-
 class VertexPathfinder
 {
 public:

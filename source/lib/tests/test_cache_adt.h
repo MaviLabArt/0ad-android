@@ -23,7 +23,6 @@
 #include "lib/self_test.h"
 
 #include "lib/adts/cache_adt.h"
-#include "lib/timer.h"
 
 #include <cstddef>
 #include <queue>

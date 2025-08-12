@@ -25,7 +25,6 @@
 #include "apic.h"
 
 #include "lib/bits.h"
-#include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "lib/module_init.h"
 #include "lib/status.h"

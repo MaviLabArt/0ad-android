@@ -42,6 +42,7 @@
 #include "renderer/backend/gl/Texture.h"
 #include "scriptinterface/Object.h"
 
+#include <SDL_config.h>
 #include <SDL_error.h>
 #include <SDL_version.h>
 #include <SDL_video.h>
@@ -52,7 +53,6 @@
 #include <climits>
 #include <cstring>
 #include <iterator>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <limits>
 #include <utility>

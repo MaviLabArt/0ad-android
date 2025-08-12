@@ -44,9 +44,8 @@
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/helpers/Los.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
-#include "simulation2/system/SimContext.h"
 
 #include <array>
 #include <cstring>

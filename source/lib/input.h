@@ -27,8 +27,6 @@
 #ifndef INCLUDED_INPUT
 #define INCLUDED_INPUT
 
-#include "lib/external_libraries/libsdl_fwd.h"
-
 struct SDL_Event_;
 
 // input handler return values.

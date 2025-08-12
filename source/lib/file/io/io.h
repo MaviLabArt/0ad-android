@@ -49,8 +49,6 @@
 #include <fcntl.h>
 #include <memory>
 
-#include <utility>
-
 namespace ERR
 {
 	const Status IO = -110301;

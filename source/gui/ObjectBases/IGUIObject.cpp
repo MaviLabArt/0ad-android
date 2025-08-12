@@ -36,7 +36,6 @@
 #include "soundmanager/ISoundManager.h"
 
 #include <algorithm>
-#include <iterator>
 #include <js/CallAndConstruct.h>
 #include <js/ComparisonOperators.h>
 #include <js/CompilationAndEvaluation.h>

@@ -20,7 +20,6 @@
 
 #include "maths/Fixed.h"
 #include "maths/FixedVector2D.h"
-#include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpUnitMotionManager.h"
 #include "simulation2/helpers/Grid.h"
 #include "simulation2/helpers/Position.h"

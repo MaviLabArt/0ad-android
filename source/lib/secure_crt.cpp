@@ -36,7 +36,6 @@
 #include <cinttypes>
 #include <cstdarg>
 #include <cstdio>
-#include <cstring>
 
 #if OS_ANDROID
 # include <boost/algorithm/string/replace.hpp>

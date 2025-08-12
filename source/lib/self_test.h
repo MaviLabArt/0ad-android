@@ -38,6 +38,7 @@
 // If HAVE_STD wasn't defined at the point the ValueTraits header was included
 // this header won't have been included and the default traits will be used for
 // all variables... So fix that now ;-)
+#include <cxxtest/GlobalFixture.h>
 #include <cxxtest/StdValueTraits.h>
 #include <cxxtest/TestSuite.h>
 

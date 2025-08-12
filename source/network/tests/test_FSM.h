@@ -21,9 +21,6 @@
 
 #include <array>
 #include <cstddef>
-#include <memory>
-#include <new>
-#include <unordered_map>
 #include <utility>
 #include <variant>
 

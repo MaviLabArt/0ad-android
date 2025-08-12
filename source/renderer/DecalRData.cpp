@@ -48,7 +48,7 @@
 #include "renderer/backend/IDeviceCommandContext.h"
 #include "renderer/backend/IShaderProgram.h"
 #include "simulation2/components/ICmpWaterManager.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
 #include <algorithm>

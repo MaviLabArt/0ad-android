@@ -39,10 +39,8 @@
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/StructuredClone.h"
 
-#include <iterator>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
-#include <js/Value.h>
 #include <map>
 #include <memory>
 #include <optional>
@@ -50,6 +48,7 @@
 #include <string_view>
 #include <unordered_map>
 #include <unordered_set>
+#include <utility>
 #include <vector>
 
 class CCanvas2D;
@@ -65,6 +64,7 @@ class ScriptRequest;
 class XMBData;
 class XMBElement;
 namespace JS { class HandleValueArray; }
+namespace JS { class Value; }
 namespace js { class BaseProxyHandler; }
 struct SDL_Event_;
 struct SGUIImageEffects;

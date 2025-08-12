@@ -28,13 +28,12 @@
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
-#include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
+#include "scriptinterface/ScriptInterface.h"
 #include "simulation2/Simulation2.h"
 #include "simulation2/components/ICmpTerrain.h"
 #include "simulation2/components/ICmpVisual.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/Components.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
 #include <cstddef>

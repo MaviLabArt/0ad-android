@@ -47,7 +47,7 @@
 #include "renderer/backend/ITexture.h"
 #include "renderer/backend/PipelineState.h"
 #include "renderer/backend/Sampler.h"
-#include "simulation2/system/SimContext.h"
+#include "simulation2/system/Component.h"
 
 #include <algorithm>
 #include <array>

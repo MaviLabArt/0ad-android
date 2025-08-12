@@ -19,7 +19,6 @@
 #define INCLUDED_SCRIPTINTERFACE
 
 #include "lib/code_annotation.h"
-#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "ps/Errors.h"
 #include "scriptinterface/ScriptConversions.h"
@@ -43,7 +42,6 @@
 class JSObject;
 class Path;
 class ScriptContext;
-namespace JS { class HandleValueArray; }
 namespace Script { class ModuleLoader; }
 namespace boost { namespace random { class rand48; } }
 struct JSClass;

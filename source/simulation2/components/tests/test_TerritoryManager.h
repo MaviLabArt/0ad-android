@@ -34,6 +34,7 @@
 #include "scriptinterface/ScriptInterface.h"
 #include "simulation2/MessageTypes.h"
 #include "simulation2/components/ICmpObstruction.h"
+#include "simulation2/components/ICmpObstructionManager.h"
 #include "simulation2/components/ICmpOwnership.h"
 #include "simulation2/components/ICmpPathfinder.h"
 #include "simulation2/components/ICmpPlayerManager.h"

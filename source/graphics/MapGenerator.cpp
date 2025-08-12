@@ -46,7 +46,7 @@
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/helpers/MapEdgeTiles.h"
-#include "simulation2/system/ParamNode.h"
+#include "simulation2/system/Component.h"
 
 #include <boost/random/linear_congruential.hpp>
 #include <cstddef>

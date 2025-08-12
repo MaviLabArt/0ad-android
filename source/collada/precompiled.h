@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 Wildfire Games.
+/* Copyright (C) 2025 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -14,6 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with 0 A.D.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+// IWYU pragma: begin_keep
 
 #ifndef INCLUDED_COLLADA_PRECOMPILED
 #define INCLUDED_COLLADA_PRECOMPILED
@@ -61,3 +63,5 @@ extern void Log(int severity, const char* fmt, ...);
 #undef max
 
 #endif // INCLUDED_COLLADA_PRECOMPILED
+
+// IWYU pragma: end_keep

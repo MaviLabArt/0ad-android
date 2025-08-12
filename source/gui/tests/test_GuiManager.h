@@ -25,7 +25,6 @@
 #include "lib/file/vfs/vfs.h"
 #include "lib/input.h"
 #include "lib/path.h"
-#include "lib/sysdep/compiler.h"
 #include "ps/CLogger.h"
 #include "ps/CStr.h"
 #include "ps/ConfigDB.h"
@@ -40,18 +39,18 @@
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/StructuredClone.h"
 
+#include <SDL_events.h>
+#include <SDL_scancode.h>
 #include <array>
 #include <js/CallArgs.h>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
 #include <memory>
 #include <optional>
-#include <SDL_events.h>
-#include <SDL_scancode.h>
 #include <stdexcept>
 #include <tuple>
+#include <utility>
 #include <variant>
 
 #include "js/Promise.h"

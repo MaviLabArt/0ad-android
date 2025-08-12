@@ -47,13 +47,14 @@
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/components/ICmpRangeManager.h"
-#include "simulation2/system/CmpPtr.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
 
 #include <SDL_mouse.h>
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <fmt/printf.h>
 #include <js/GCVector.h>
 #include <js/RootingAPI.h>
@@ -61,7 +62,6 @@
 #include <js/Value.h>
 #include <js/ValueArray.h>
 #include <memory>
-#include <stddef.h>
 #include <string>
 #include <tuple>
 #include <vector>

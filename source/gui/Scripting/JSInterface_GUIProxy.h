@@ -22,7 +22,6 @@
 #include "lib/sysdep/compiler.h"
 #include "scriptinterface/ScriptExtraHeaders.h"
 
-#include <iterator>
 #include <js/GCVector.h>
 #include <js/Id.h>
 #include <js/Proxy.h>
@@ -31,7 +30,9 @@
 #include <js/Value.h>
 #include <memory>
 #include <string>
+#include <string_view>
 #include <utility>
+#include <vector>
 
 class JSFunction;
 class JSObject;

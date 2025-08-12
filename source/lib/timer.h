@@ -31,7 +31,6 @@
 #include "lib/config2.h"	// CONFIG2_TIMER_ALLOW_RDTSC
 #include "lib/debug.h"
 #include "lib/sysdep/arch.h"
-#include "lib/utf8.h"
 
 #include <cstdint>
 #include <string>

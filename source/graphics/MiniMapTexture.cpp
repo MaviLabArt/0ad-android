@@ -65,11 +65,8 @@
 #include "simulation2/components/ICmpMinimap.h"
 #include "simulation2/components/ICmpRangeManager.h"
 #include "simulation2/helpers/Position.h"
-#include "simulation2/system/CmpPtr.h"
-#include "simulation2/system/Components.h"
+#include "simulation2/system/Component.h"
 #include "simulation2/system/Entity.h"
-#include "simulation2/system/ParamNode.h"
-#include "simulation2/system/SimContext.h"
 
 #include <algorithm>
 #include <array>

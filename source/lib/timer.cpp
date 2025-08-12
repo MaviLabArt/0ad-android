@@ -32,6 +32,7 @@
 #include "lib/posix/posix_types.h"
 #include "lib/status.h"
 #include "lib/sysdep/os.h"
+#include "lib/utf8.h"
 
 #include <algorithm>
 #include <ctime>

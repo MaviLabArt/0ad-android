@@ -23,7 +23,6 @@
 #include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
 
-#include <js/PropertyAndElement.h>
 #include <unicode/utypes.h>
 #include <string>
 #include <vector>

@@ -32,7 +32,6 @@
 
 #include <SDL_video.h>
 #include <initializer_list>
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 
 namespace Renderer

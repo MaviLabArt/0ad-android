@@ -19,17 +19,18 @@
 #define INCLUDED_JSI_GUISIZE
 
 
+#include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "ps/CStr.h"
 #include "scriptinterface/ScriptTypes.h"
-
-#include <js/PropertySpec.h>
 
 class ScriptInterface;
 namespace JS { class Value; }
 struct JSClass;
 struct JSClassOps;
 struct JSContext;
+struct JSFunctionSpec;
+struct JSPropertySpec;
 
 namespace JSI_GUISize
 {

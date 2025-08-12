@@ -34,7 +34,6 @@
 #include "simulation2/helpers/Position.h"
 #include "simulation2/system/Entity.h"
 
-#include <js/PropertyAndElement.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>

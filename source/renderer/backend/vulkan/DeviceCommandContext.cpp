@@ -21,7 +21,6 @@
 
 #include "graphics/Color.h"
 #include "lib/bits.h"
-#include "lib/code_annotation.h"
 #include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"

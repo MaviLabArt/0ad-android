@@ -21,18 +21,17 @@
 
 #include "gui/CGUI.h"
 #include "gui/GUIManager.h"
+#include "ps/CStr.h"
 #include "ps/VideoMode.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/StructuredClone.h"
-#include "simulation2/system/ParamNode.h"
-#include <js/PropertyAndElement.h>
+#include "simulation2/system/Component.h"
+
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
 #include <js/Value.h>
 #include <string>
-
-#include <stdexcept>
 
 namespace JSI_GUIManager
 {
