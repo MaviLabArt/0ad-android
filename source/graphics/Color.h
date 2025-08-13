@@ -71,7 +71,7 @@ struct CColor
 	}
 
 	// For passing to uniform as vec3/vec4.
-	std::span<const float> AsFloatArray() const
+	std::span<const float, 4> AsFloatArray() const
 	{
 		// Additional check to prevent a weird compiler has a different
 		// alignement for an array and a class members.
@@ -82,7 +82,7 @@ struct CColor
 			offsetof(CColor, b) == sizeof(float) * 2u &&
 			offsetof(CColor, a) == sizeof(float) * 3u,
 			"CColor should be properly layouted to use AsFloatArray");
-		return std::span(&r, 4);
+		return std::span<const float, 4>(&r, 4);
 	}
 
 	// For passing to CRenderer:

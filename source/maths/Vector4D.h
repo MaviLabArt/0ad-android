@@ -126,7 +126,7 @@ public:
 	}
 
 	// Returns 4 element array of floats, e.g. for vec4 uniforms.
-	std::span<const float> AsFloatArray() const
+	std::span<const float, 4> AsFloatArray() const
 	{
 		// Additional check to prevent a weird compiler has a different
 		// alignement for an array and a class members.
@@ -135,7 +135,7 @@ public:
 			offsetof(CVector4D, X) == 0 &&
 			offsetof(CVector4D, W) == sizeof(float) * 3u,
 			"CVector4D should be properly layouted to use AsFloatArray");
-		return std::span<const float>(&X, 4);
+		return std::span<const float, 4>(&X, 4);
 	}
 
 	float X, Y, Z, W;

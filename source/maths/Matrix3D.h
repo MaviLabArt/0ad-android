@@ -334,7 +334,7 @@ public:
 	CVector3D RotateTransposed(const CVector3D& vector) const;
 
 	// Returns 16 element array of floats, e.g. for mat4 uniforms.
-	std::span<const float> AsFloatArray() const
+	std::span<const float, 16> AsFloatArray() const
 	{
 		// Additional check to prevent a weird compiler has a different
 		// alignement for an array and a class members.
@@ -344,7 +344,7 @@ public:
 			offsetof(CMatrix3D, _11) == 0 &&
 			offsetof(CMatrix3D, _44) == sizeof(float) * 15u,
 			"CMatrix3D should be properly layouted to use AsFloatArray");
-		return std::span<const float>(_data, 16);
+		return std::span<const float, 16>(_data);
 	}
 };
 
