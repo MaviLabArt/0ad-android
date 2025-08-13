@@ -25,7 +25,6 @@
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"
@@ -38,6 +37,7 @@
 #include <cmath>
 #include <cstring>
 #include <numeric>
+#include <span>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -528,7 +528,7 @@ void CFont::BlendGlyphBitmapToTextureRGBA(const FT_Bitmap& bitmap, int targetX, 
 
 		for (uint x{0}; x != bitmap.width; ++x)
 		{
-			const PS::span<u8> tempDstRow{dstRow + x * m_TextureFormatStride, 4};
+			const std::span<u8> tempDstRow{dstRow + x * m_TextureFormatStride, 4};
 			u8 alpha{srcRow[x]};
 
 			const float srcAlpha{m_StrokeWidth > 0 ? (*m_GammaCorrectionLUT)[alpha] : alpha/255.0f};

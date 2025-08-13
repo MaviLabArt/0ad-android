@@ -21,6 +21,7 @@
 #include "lib/os_path.h"
 #include "ps/CStr.h"
 
+#include <span>
 #include <utility>
 #include <vector>
 
@@ -40,7 +41,7 @@ public:
 	 *
 	 * @param argv span of arguments; argv[0] should be the program's name
 	 */
-	CmdLineArgs(const PS::span<const char* const> argv);
+	CmdLineArgs(const std::span<const char* const> argv);
 
 	/**
 	 * Test whether the given name was specified, as either <tt>-name</tt> or

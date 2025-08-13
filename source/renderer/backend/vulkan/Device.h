@@ -35,6 +35,7 @@
 #include <limits>
 #include <memory>
 #include <queue>
+#include <span>
 #include <string>
 #include <utility>
 #include <vector>
@@ -90,7 +91,7 @@ public:
 		const SComputePipelineStateDesc& pipelineStateDesc) override;
 
 	std::unique_ptr<IVertexInputLayout> CreateVertexInputLayout(
-		const PS::span<const SVertexAttributeFormat> attributes) override;
+		const std::span<const SVertexAttributeFormat> attributes) override;
 
 	std::unique_ptr<ITexture> CreateTexture(
 		const char* name, const ITexture::Type type, const uint32_t usage,

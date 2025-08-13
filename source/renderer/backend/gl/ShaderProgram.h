@@ -22,12 +22,12 @@
 #include "lib/debug.h"
 #include "lib/ogl.h"
 #include "ps/CStr.h"
-#include "ps/containers/Span.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IShaderProgram.h"
 
 #include <cstdint>
 #include <memory>
+#include <span>
 #include <vector>
 
 class CShaderDefines;
@@ -46,7 +46,7 @@ namespace GL
 class CVertexInputLayout : public IVertexInputLayout
 {
 public:
-	CVertexInputLayout(CDevice* device, const PS::span<const SVertexAttributeFormat> attributes)
+	CVertexInputLayout(CDevice* device, const std::span<const SVertexAttributeFormat> attributes)
 		: m_Device(device), m_Attributes(attributes.begin(), attributes.end())
 	{
 		for (const SVertexAttributeFormat& attribute : m_Attributes)
@@ -130,7 +130,7 @@ public:
 		const float valueX, const float valueY,
 		const float valueZ, const float valueW) = 0;
 	virtual void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values) = 0;
+		const int32_t bindingSlot, std::span<const float> values) = 0;
 
 	// Vertex attribute pointers (equivalent to glVertexPointer etc).
 	virtual void VertexAttribPointer(

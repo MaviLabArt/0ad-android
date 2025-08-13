@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <js/TypeDecls.h>
 #include <memory>
+#include <span>
 #include <string>
 #include <tuple>
 #include <unordered_map>
@@ -79,7 +80,7 @@ public:
 		const SComputePipelineStateDesc& pipelineStateDesc) override;
 
 	std::unique_ptr<IVertexInputLayout> CreateVertexInputLayout(
-		const PS::span<const SVertexAttributeFormat> attributes) override;
+		const std::span<const SVertexAttributeFormat> attributes) override;
 
 	CDeviceCommandContext* GetActiveCommandContext() { return m_ActiveCommandContext; }
 

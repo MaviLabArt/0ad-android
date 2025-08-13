@@ -31,7 +31,6 @@
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
 #include "ps/Profile.h"
-#include "ps/containers/Span.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/gl/Buffer.h"
 #include "renderer/backend/gl/DeviceCommandContext.h"
@@ -919,7 +918,7 @@ std::unique_ptr<IComputePipelineState> CDevice::CreateComputePipelineState(
 }
 
 std::unique_ptr<IVertexInputLayout> CDevice::CreateVertexInputLayout(
-	const PS::span<const SVertexAttributeFormat> attributes)
+	const std::span<const SVertexAttributeFormat> attributes)
 {
 	return std::make_unique<CVertexInputLayout>(this, attributes);
 }

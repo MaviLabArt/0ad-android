@@ -20,10 +20,10 @@
 #include "lib/sysdep/os.h"
 #include "ps/CStr.h"
 #include "ps/GameSetup/CmdLineArgs.h"
-#include "ps/containers/Span.h"
 
 #include <array>
 #include <cstddef>
+#include <span>
 #include <vector>
 
 class TestCmdLineArgs : public CxxTest::TestSuite
@@ -96,7 +96,7 @@ public:
 		CmdLineArgs c(argv);
 		TS_ASSERT_WSTR_EQUALS(c.GetArg0().string(), L"program");
 
-		CmdLineArgs c2(PS::span<const char* const>{});
+		CmdLineArgs c2(std::span<const char* const>{});
 		TS_ASSERT_WSTR_EQUALS(c2.GetArg0().string(), L"");
 
 		const std::array<const char*, 1> argv3 = { "ab/cd/ef/gh/../ij" };

@@ -793,7 +793,7 @@ void CShaderProgram::SetUniform(
 	const float value)
 {
 	const float values[1] = {value};
-	SetUniform(bindingSlot, PS::span<const float>(values, values + 1));
+	SetUniform(bindingSlot, std::span<const float>(values, values + 1));
 }
 
 void CShaderProgram::SetUniform(
@@ -801,7 +801,7 @@ void CShaderProgram::SetUniform(
 	const float valueX, const float valueY)
 {
 	const float values[2] = {valueX, valueY};
-	SetUniform(bindingSlot, PS::span<const float>(values, values + 2));
+	SetUniform(bindingSlot, std::span<const float>(values, values + 2));
 }
 
 void CShaderProgram::SetUniform(
@@ -810,7 +810,7 @@ void CShaderProgram::SetUniform(
 	const float valueZ)
 {
 	const float values[3] = {valueX, valueY, valueZ};
-	SetUniform(bindingSlot, PS::span<const float>(values, values + 3));
+	SetUniform(bindingSlot, std::span<const float>(values, values + 3));
 }
 
 void CShaderProgram::SetUniform(
@@ -819,10 +819,10 @@ void CShaderProgram::SetUniform(
 	const float valueZ, const float valueW)
 {
 	const float values[4] = {valueX, valueY, valueZ, valueW};
-	SetUniform(bindingSlot, PS::span<const float>(values, values + 4));
+	SetUniform(bindingSlot, std::span<const float>(values, values + 4));
 }
 
-void CShaderProgram::SetUniform(const int32_t bindingSlot, PS::span<const float> values)
+void CShaderProgram::SetUniform(const int32_t bindingSlot, std::span<const float> values)
 {
 	if (bindingSlot < 0)
 		return;

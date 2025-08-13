@@ -36,7 +36,6 @@
 #include "ps/Filesystem.h"
 #include "ps/Profile.h"
 #include "ps/World.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"
 #include "renderer/backend/Backend.h"

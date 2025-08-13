@@ -36,7 +36,6 @@
 #include "ps/CLogger.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/Renderer.h"
@@ -366,7 +365,7 @@ CModelRData* GPUSkinnedModelModelRenderer::CreateModelData(const void* key, CMod
 
 void GPUSkinnedModelModelRenderer::UpdateModelsData(
 	Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-	PS::span<CModel*> models)
+	std::span<CModel*> models)
 {
 	if (models.empty())
 		return;
@@ -434,7 +433,7 @@ void GPUSkinnedModelModelRenderer::UpdateModelData(
 		// Add 1 to NumBones because of the special 'root' bone.
 		deviceCommandContext->SetUniform(
 			shaderProgram->GetBindingSlot(str_skinBlendMatrices),
-			PS::span<const float>(
+			std::span<const float>(
 				model->GetAnimatedBoneMatrices()[0]._data,
 				model->GetAnimatedBoneMatrices()[0].AsFloatArray().size() * (modelDef->GetNumBones() + 1)));
 
@@ -455,7 +454,7 @@ void GPUSkinnedModelModelRenderer::UpdateModelData(
 }
 
 void GPUSkinnedModelModelRenderer::UploadModelsData(Renderer::Backend::IDeviceCommandContext*,
-	PS::span<CModel*>)
+	std::span<CModel*>)
 {
 }
 

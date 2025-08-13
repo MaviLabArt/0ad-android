@@ -26,13 +26,13 @@
 #include <cstdint>
 #include <js/TypeDecls.h>
 #include <memory>
+#include <span>
 #include <string>
 #include <vector>
 
 class CShaderDefines;
 class CStr;
 class ScriptRequest;
-namespace PS { template <typename T> class span; }
 namespace Renderer::Backend { class IComputePipelineState; }
 namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IFramebuffer; }
@@ -109,7 +109,7 @@ public:
 	 * layouts as posible.
 	 */
 	virtual std::unique_ptr<IVertexInputLayout> CreateVertexInputLayout(
-		const PS::span<const SVertexAttributeFormat> attributes) = 0;
+		const std::span<const SVertexAttributeFormat> attributes) = 0;
 
 	virtual std::unique_ptr<ITexture> CreateTexture(
 		const char* name, const ITexture::Type type, const uint32_t usage,

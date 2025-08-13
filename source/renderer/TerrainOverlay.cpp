@@ -36,7 +36,6 @@
 #include "ps/Game.h"
 #include "ps/Profile.h"
 #include "ps/World.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/TerrainRenderer.h"

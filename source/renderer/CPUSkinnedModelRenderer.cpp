@@ -24,7 +24,6 @@
 #include "graphics/ModelDef.h"
 #include "graphics/RenderableObject.h"
 #include "lib/debug.h"
-#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/Renderer.h"
@@ -195,7 +194,7 @@ CModelRData* CPUSkinnedModelVertexRenderer::CreateModelData(const void* key, CMo
 }
 
 void CPUSkinnedModelVertexRenderer::UpdateModelsData(Renderer::Backend::IDeviceCommandContext*,
-	PS::span<CModel*> models)
+	std::span<CModel*> models)
 {
 	for (CModel* model : models)
 	{
@@ -226,7 +225,7 @@ void CPUSkinnedModelVertexRenderer::UpdateModelData(CModel* model, CModelRData* 
 
 void CPUSkinnedModelVertexRenderer::UploadModelsData(
 	Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-	PS::span<CModel*> models)
+	std::span<CModel*> models)
 {
 	for (CModel* model : models)
 	{

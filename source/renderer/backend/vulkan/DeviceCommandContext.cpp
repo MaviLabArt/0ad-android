@@ -24,7 +24,6 @@
 #include "lib/debug.h"
 #include "ps/CLogger.h"
 #include "ps/ConfigDB.h"
-#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IBuffer.h"
@@ -112,7 +111,7 @@ class ScopedImageLayoutTransition
 {
 public:
 	ScopedImageLayoutTransition(
-		CRingCommandContext& commandContext, const PS::span<CTexture* const> textures,
+		CRingCommandContext& commandContext, const std::span<CTexture* const> textures,
 		const VkImageLayout layout, const VkAccessFlags accessMask, const VkPipelineStageFlags stageMask)
 		: m_CommandContext(commandContext), m_Textures(textures), m_Layout(layout),
 		m_AccessMask(accessMask), m_StageMask(stageMask)
@@ -147,7 +146,7 @@ public:
 
 private:
 	CRingCommandContext& m_CommandContext;
-	const PS::span<CTexture* const> m_Textures;
+	const std::span<CTexture* const> m_Textures;
 	const VkImageLayout m_Layout = VK_IMAGE_LAYOUT_UNDEFINED;
 	const VkAccessFlags m_AccessMask = 0;
 	const VkPipelineStageFlags m_StageMask = 0;
@@ -215,7 +214,7 @@ public:
 	CBuffer* GetBuffer() { return m_Buffer.get(); }
 
 	uint32_t ScheduleUpload(
-		VkCommandBuffer commandBuffer, const PS::span<const std::byte> data,
+		VkCommandBuffer commandBuffer, const std::span<const std::byte> data,
 		const uint32_t alignment);
 
 	void ExecuteUploads(VkCommandBuffer commandBuffer);
@@ -271,7 +270,7 @@ void CDeviceCommandContext::CUploadRing::ResizeIfNeeded(
 }
 
 uint32_t CDeviceCommandContext::CUploadRing::ScheduleUpload(
-	VkCommandBuffer commandBuffer, const PS::span<const std::byte> data,
+	VkCommandBuffer commandBuffer, const std::span<const std::byte> data,
 	const uint32_t alignment)
 {
 	ENSURE(data.size() > 0);
@@ -820,7 +819,7 @@ void CDeviceCommandContext::SetVertexBufferData(
 
 	const uint32_t offset = m_VertexUploadRing->ScheduleUpload(
 		m_PrependCommandContext->GetCommandBuffer(),
-		PS::span<const std::byte>{static_cast<const std::byte*>(data), dataSize}, ALIGNMENT);
+		std::span<const std::byte>{static_cast<const std::byte*>(data), dataSize}, ALIGNMENT);
 	BindVertexBuffer(bindingSlot, m_VertexUploadRing->GetBuffer(), offset);
 }
 
@@ -837,7 +836,7 @@ void CDeviceCommandContext::SetIndexBufferData(
 
 	const uint32_t offset = m_IndexUploadRing->ScheduleUpload(
 		m_PrependCommandContext->GetCommandBuffer(),
-		PS::span<const std::byte>{static_cast<const std::byte*>(data), dataSize}, ALIGNMENT);
+		std::span<const std::byte>{static_cast<const std::byte*>(data), dataSize}, ALIGNMENT);
 	BindIndexBuffer(m_IndexUploadRing->GetBuffer(), offset);
 }
 
@@ -1017,7 +1016,7 @@ void CDeviceCommandContext::SetUniform(
 }
 
 void CDeviceCommandContext::SetUniform(
-	const int32_t bindingSlot, PS::span<const float> values)
+	const int32_t bindingSlot, std::span<const float> values)
 {
 	ENSURE(m_InsidePass || m_InsideComputePass);
 	m_ShaderProgram->SetUniform(bindingSlot, values);
@@ -1158,7 +1157,7 @@ void CDeviceCommandContext::UpdateOutdatedConstants()
 			std::max(static_cast<VkDeviceSize>(16), m_Device->GetChoosenPhysicalDevice().properties.limits.minUniformBufferOffsetAlignment);
 		const uint32_t offset = m_UniformUploadRing->ScheduleUpload(
 			m_PrependCommandContext->GetCommandBuffer(),
-			PS::span<const std::byte>{
+			std::span<const std::byte>{
 				m_ShaderProgram->GetMaterialConstantsData(),
 				m_ShaderProgram->GetMaterialConstantsDataSize()}, alignment);
 		m_ShaderProgram->UpdateMaterialConstantsData();

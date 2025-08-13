@@ -42,7 +42,6 @@
 #include "ps/CStrInternStatic.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/SceneRenderer.h"
 #include "renderer/backend/Format.h"

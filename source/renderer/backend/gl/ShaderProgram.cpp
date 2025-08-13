@@ -531,7 +531,7 @@ public:
 	}
 
 	void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values) override
+		const int32_t bindingSlot, std::span<const float> values) override
 	{
 		if (bindingSlot < 0 || bindingSlot >= static_cast<int32_t>(m_BindingSlots.size()))
 			return;
@@ -619,7 +619,7 @@ private:
 	}
 
 	void SetUniformMatrix(
-		const BindingSlot& bindingSlot, PS::span<const float> values)
+		const BindingSlot& bindingSlot, std::span<const float> values)
 	{
 		const size_t mat4ElementCount = 16;
 		ENSURE(values.size() == mat4ElementCount);
@@ -628,7 +628,7 @@ private:
 	}
 
 	void SetUniformMatrix(
-		const GLenum target, const int location, PS::span<const float> values)
+		const GLenum target, const int location, std::span<const float> values)
 	{
 		if (location >= 0)
 		{
@@ -661,7 +661,7 @@ class CShaderProgramGLSL final : public CShaderProgram
 public:
 	CShaderProgramGLSL(
 		CDevice* device, const CStr& name,
-		const VfsPath& programPath, PS::span<const std::tuple<VfsPath, GLenum>> shaderStages,
+		const VfsPath& programPath, std::span<const std::tuple<VfsPath, GLenum>> shaderStages,
 		const CShaderDefines& defines,
 		const std::map<CStrIntern, int>& vertexAttribs,
 		int streamflags) :
@@ -1201,7 +1201,7 @@ public:
 	}
 
 	void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values) override
+		const int32_t bindingSlot, std::span<const float> values) override
 	{
 		if (bindingSlot < 0 || bindingSlot >= static_cast<int32_t>(m_BindingSlots.size()))
 			return;

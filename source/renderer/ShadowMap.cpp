@@ -34,7 +34,6 @@
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/ConfigDB.h"
-#include "ps/containers/Span.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"
@@ -54,6 +53,7 @@
 #include <cmath>
 #include <cstdint>
 #include <memory>
+#include <span>
 #include <vector>
 
 namespace
@@ -694,12 +694,12 @@ void ShadowMap::BindTo(
 		}
 		deviceCommandContext->SetUniform(
 			shader->GetBindingSlot(str_shadowTransform),
-			PS::span<const float>(
+			std::span<const float>(
 				shadowTransforms[0]._data,
 				shadowTransforms[0].AsFloatArray().size() * GetCascadeCount()));
 		deviceCommandContext->SetUniform(
 			shader->GetBindingSlot(str_shadowDistance),
-			PS::span<const float>(shadowDistances.data(), shadowDistances.size()));
+			std::span<const float>(shadowDistances.data(), shadowDistances.size()));
 	}
 }
 

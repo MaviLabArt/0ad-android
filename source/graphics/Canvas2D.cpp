@@ -33,7 +33,6 @@
 #include "maths/Vector2D.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
 #include "renderer/Renderer.h"
 #include "renderer/backend/Format.h"

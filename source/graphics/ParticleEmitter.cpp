@@ -30,7 +30,6 @@
 #include "maths/Matrix3D.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/Scene.h"
 #include "renderer/SceneRenderer.h"

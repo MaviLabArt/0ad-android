@@ -22,8 +22,8 @@
 #include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
-#include "ps/containers/Span.h"
 
+#include <span>
 #include <cstddef>
 
 class CStr8;
@@ -71,7 +71,7 @@ struct CColor
 	}
 
 	// For passing to uniform as vec3/vec4.
-	PS::span<const float> AsFloatArray() const
+	std::span<const float> AsFloatArray() const
 	{
 		// Additional check to prevent a weird compiler has a different
 		// alignement for an array and a class members.
@@ -82,7 +82,7 @@ struct CColor
 			offsetof(CColor, b) == sizeof(float) * 2u &&
 			offsetof(CColor, a) == sizeof(float) * 3u,
 			"CColor should be properly layouted to use AsFloatArray");
-		return PS::span(&r, 4);
+		return std::span(&r, 4);
 	}
 
 	// For passing to CRenderer:

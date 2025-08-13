@@ -39,7 +39,6 @@
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
 #include "ps/World.h"
-#include "ps/containers/Span.h"
 #include "renderer/PostprocManager.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderingOptions.h"

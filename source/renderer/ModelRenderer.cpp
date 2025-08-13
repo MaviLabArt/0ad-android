@@ -42,7 +42,6 @@
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
-#include "ps/containers/Span.h"
 #include "renderer/MikktspaceWrap.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/ModelVertexRenderer.h"
@@ -60,6 +59,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <functional>
+#include <span>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -364,7 +364,7 @@ struct SMRMaterialBucketKeyHash
 struct SMRTechBucket
 {
 	CShaderTechniquePtr tech;
-	PS::span<CModel*> models;
+	std::span<CModel*> models;
 
 	// Model list is stored as pointers, not as a std::vector,
 	// so that sorting lists of this struct is fast

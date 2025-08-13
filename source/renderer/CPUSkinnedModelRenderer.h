@@ -21,6 +21,7 @@
 #include "renderer/ModelVertexRenderer.h"
 
 #include <memory>
+#include <span>
 
 class CModel;
 class CModelRData;
@@ -41,11 +42,11 @@ public:
 	CModelRData* CreateModelData(const void* key, CModel* model) override;
 	void UpdateModelsData(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-		PS::span<CModel*> models) override;
+		std::span<CModel*> models) override;
 
 	void UploadModelsData(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-		PS::span<CModel*> models) override;
+		std::span<CModel*> models) override;
 
 	void PrepareModelDef(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,

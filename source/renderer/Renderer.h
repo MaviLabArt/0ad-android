@@ -23,6 +23,7 @@
 
 #include <cstring>
 #include <memory>
+#include <span>
 
 class CDebugRenderer;
 class CFontManager;
@@ -32,7 +33,6 @@ class CShaderManager;
 class CTextureManager;
 class CTimeManager;
 class CVertexBufferManager;
-namespace PS { template <typename T> class span; }
 namespace Renderer::Backend { class IDevice; }
 namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IVertexInputLayout; }
@@ -142,7 +142,7 @@ public:
 	 * TODO: we need to make VertexArray less error prone by passing layout.
 	 */
 	Renderer::Backend::IVertexInputLayout* GetVertexInputLayout(
-		const PS::span<const Renderer::Backend::SVertexAttributeFormat> attributes);
+		const std::span<const Renderer::Backend::SVertexAttributeFormat> attributes);
 
 protected:
 	friend class CDecalRData;

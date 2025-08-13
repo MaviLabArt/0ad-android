@@ -59,7 +59,6 @@
 #include "ps/Util.h"
 #include "ps/VideoMode.h"
 #include "ps/World.h"
-#include "ps/containers/Span.h"
 #include "renderer/DebugRenderer.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/PostprocManager.h"
@@ -923,7 +922,7 @@ Renderer::Backend::IDeviceCommandContext* CRenderer::GetDeviceCommandContext()
 }
 
 Renderer::Backend::IVertexInputLayout* CRenderer::GetVertexInputLayout(
-	const PS::span<const Renderer::Backend::SVertexAttributeFormat> attributes)
+	const std::span<const Renderer::Backend::SVertexAttributeFormat> attributes)
 {
 	const auto [it, inserted] = m->vertexInputLayouts.emplace(
 		std::vector<Renderer::Backend::SVertexAttributeFormat>{attributes.begin(), attributes.end()}, nullptr);

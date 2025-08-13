@@ -39,7 +39,6 @@
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "renderer/TerrainRenderer.h"
 #include "renderer/VertexBuffer.h"

@@ -22,7 +22,6 @@
 #include "lib/file/vfs/vfs_path.h"
 #include "ps/CStr.h"
 #include "ps/CStrIntern.h"
-#include "ps/containers/Span.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IShaderProgram.h"
 #include "renderer/backend/vulkan/DescriptorManager.h"
@@ -33,6 +32,7 @@
 #include <glad/vulkan.h>
 #include <memory>
 #include <optional>
+#include <span>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -56,7 +56,7 @@ namespace Vulkan
 class CVertexInputLayout : public IVertexInputLayout
 {
 public:
-	CVertexInputLayout(CDevice* device, const PS::span<const SVertexAttributeFormat> attributes)
+	CVertexInputLayout(CDevice* device, const std::span<const SVertexAttributeFormat> attributes)
 		: m_Device(device), m_Attributes(attributes.begin(), attributes.end())
 	{
 		static uint32_t m_LastAvailableUID = 1;
@@ -125,7 +125,7 @@ public:
 		const float valueX, const float valueY,
 		const float valueZ, const float valueW);
 	void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values);
+		const int32_t bindingSlot, std::span<const float> values);
 
 	void SetTexture(const int32_t bindingSlot, CTexture* texture);
 	void SetStorageTexture(const int32_t bindingSlot, CTexture* texture);

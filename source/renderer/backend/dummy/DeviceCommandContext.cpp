@@ -19,7 +19,6 @@
 
 #include "DeviceCommandContext.h"
 
-#include "ps/containers/Span.h"
 #include "renderer/backend/dummy/Device.h"
 
 namespace Renderer
@@ -238,7 +237,7 @@ void CDeviceCommandContext::SetUniform(
 {
 }
 
-void CDeviceCommandContext::SetUniform(const int32_t, PS::span<const float>)
+void CDeviceCommandContext::SetUniform(const int32_t, std::span<const float>)
 {
 }
 

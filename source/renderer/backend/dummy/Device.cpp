@@ -19,7 +19,6 @@
 
 #include "Device.h"
 
-#include "ps/containers/Span.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IFramebuffer.h"
 #include "renderer/backend/dummy/Buffer.h"
@@ -90,7 +89,7 @@ std::unique_ptr<IComputePipelineState> CDevice::CreateComputePipelineState(
 }
 
 std::unique_ptr<IVertexInputLayout> CDevice::CreateVertexInputLayout(
-	const PS::span<const SVertexAttributeFormat>)
+	const std::span<const SVertexAttributeFormat>)
 {
 	return nullptr;
 }

@@ -25,10 +25,11 @@
 
 #include "graphics/MeshManager.h"
 
+#include <span>
+
 class CModel;
 class CModelDef;
 class CModelRData;
-namespace PS { template <typename T> class span; }
 namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IShaderProgram; }
 
@@ -84,7 +85,7 @@ public:
 	 */
 	virtual void UpdateModelsData(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-		PS::span<CModel*> models) = 0;
+		std::span<CModel*> models) = 0;
 
 	/**
 	 * Upload per-model data to backend.
@@ -100,7 +101,7 @@ public:
 	 */
 	virtual void UploadModelsData(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
-		PS::span<CModel*> models) = 0;
+		std::span<CModel*> models) = 0;
 
 	/**
 	 * PrepareModelDef: Setup backend state for rendering of models that

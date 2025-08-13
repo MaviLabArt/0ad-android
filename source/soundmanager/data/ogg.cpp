@@ -27,7 +27,6 @@
 #include "lib/posix/posix_types.h"
 #include "maths/MathUtil.h"
 #include "ps/CLogger.h"
-#include "ps/containers/Span.h"
 
 #include <AL/al.h>
 #include <algorithm>
@@ -187,7 +186,7 @@ public:
 		return INFO::OK;
 	}
 
-	virtual size_t GetNextChunk(PS::span<u8> buffer)
+	virtual size_t GetNextChunk(std::span<u8> buffer)
 	{
 		// We may have to call ov_read multiple times because it
 		// treats the buffer size "as a limit and not a request".

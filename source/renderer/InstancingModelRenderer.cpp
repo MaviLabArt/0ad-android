@@ -26,7 +26,6 @@
 #include "lib/types.h"
 #include "maths/Vector3D.h"
 #include "maths/Vector4D.h"
-#include "ps/containers/Span.h"
 #include "ps/containers/StaticVector.h"
 #include "renderer/ModelRenderer.h"
 #include "renderer/Renderer.h"
@@ -267,13 +266,13 @@ CModelRData* InstancingModelRenderer::CreateModelData(const void* key, CModel* m
 }
 
 void InstancingModelRenderer::UpdateModelsData(Renderer::Backend::IDeviceCommandContext*,
-	PS::span<CModel*>)
+	std::span<CModel*>)
 {
 	// We have no per-CModel data
 }
 
 void InstancingModelRenderer::UploadModelsData(Renderer::Backend::IDeviceCommandContext*,
-	PS::span<CModel*>)
+	std::span<CModel*>)
 {
 	// Data uploaded once during creation as we don't update it dynamically.
 }

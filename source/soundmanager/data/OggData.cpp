@@ -25,12 +25,12 @@
 #include "lib/types.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
-#include "ps/containers/Span.h"
 #include "soundmanager/SoundManager.h"
 #include "soundmanager/data/ogg.h"
 
 #include <algorithm>
 #include <cstddef>
+#include <span>
 #include <vector>
 
 /*
@@ -128,7 +128,7 @@ int COggData::FetchDataIntoBuffer(int count, ALuint* buffers)
 	for (int i{0}; i < count && !m_FileFinished; ++i)
 	{
 		std::fill(PCMOut.begin(), PCMOut.end(), 0);
-		const size_t totalRet{m_Stream->GetNextChunk(PS::span<u8>(PCMOut))};
+		const size_t totalRet{m_Stream->GetNextChunk(std::span<u8>(PCMOut))};
 		m_FileFinished = m_Stream->AtFileEOF();
 		if (totalRet == 0)
 			continue;

@@ -29,8 +29,7 @@
 #include <AL/al.h>
 #include <cstddef>
 #include <memory>
-
-namespace PS { template <typename T> class span; }
+#include <span>
 
 class OggStream
 {
@@ -41,7 +40,7 @@ public:
 	virtual bool AtFileEOF() = 0;
 	virtual Status ResetFile() = 0;
 
-	virtual size_t GetNextChunk(PS::span<u8> buffer) = 0;
+	virtual size_t GetNextChunk(std::span<u8> buffer) = 0;
 };
 
 using OggStreamPtr = std::shared_ptr<OggStream>;

@@ -19,7 +19,6 @@
 #include "CmdLineArgs.h"
 
 #include "lib/sysdep/sysdep.h"
-#include "ps/containers/Span.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptRequest.h"
@@ -55,7 +54,7 @@ private:
 
 } // namespace
 
-CmdLineArgs::CmdLineArgs(const PS::span<const char* const> argv)
+CmdLineArgs::CmdLineArgs(const std::span<const char* const> argv)
 {
 	if (argv.empty())
 		return;

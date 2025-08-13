@@ -25,6 +25,7 @@
 #include <cstdint>
 #include <functional>
 #include <memory>
+#include <span>
 
 namespace Renderer::Backend::Dummy { class CDevice; }
 
@@ -142,7 +143,7 @@ public:
 		const float valueX, const float valueY,
 		const float valueZ, const float valueW) override;
 	void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values) override;
+		const int32_t bindingSlot, std::span<const float> values) override;
 
 	void InsertTimestampQuery(const uint32_t handle, const bool isScopeBegin) override;
 

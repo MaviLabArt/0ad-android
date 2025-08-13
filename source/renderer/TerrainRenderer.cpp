@@ -42,7 +42,6 @@
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Profile.h"
-#include "ps/containers/Span.h"
 #include "renderer/DecalRData.h"
 #include "renderer/PatchRData.h"
 #include "renderer/PostprocManager.h"

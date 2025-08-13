@@ -21,11 +21,12 @@
 #include "lib/types.h"
 
 #include "renderer/backend/IDeviceObject.h"
+
 #include <cstddef>
 #include <cstdint>
 #include <functional>
+#include <span>
 
-namespace PS { template <typename T> class span; }
 namespace Renderer::Backend { class IComputePipelineState; }
 namespace Renderer::Backend { class IGraphicsPipelineState; }
 namespace Renderer::Backend { class IVertexInputLayout; }
@@ -223,7 +224,7 @@ public:
 		const float valueX, const float valueY,
 		const float valueZ, const float valueW) = 0;
 	virtual void SetUniform(
-		const int32_t bindingSlot, PS::span<const float> values) = 0;
+		const int32_t bindingSlot, std::span<const float> values) = 0;
 
 	/**
 	 * Insert a timestamp query which can be later requested via IDevice.

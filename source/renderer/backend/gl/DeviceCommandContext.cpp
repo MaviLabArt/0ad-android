@@ -22,7 +22,6 @@
 #include "lib/config2.h"
 #include "lib/debug.h"
 #include "ps/CLogger.h"
-#include "ps/containers/Span.h"
 #include "renderer/backend/Barrier.h"
 #include "renderer/backend/Format.h"
 #include "renderer/backend/IFramebuffer.h"
@@ -1421,7 +1420,7 @@ void CDeviceCommandContext::SetUniform(
 }
 
 void CDeviceCommandContext::SetUniform(
-	const int32_t bindingSlot, PS::span<const float> values)
+	const int32_t bindingSlot, std::span<const float> values)
 {
 	ENSURE(m_ShaderProgram);
 	m_ShaderProgram->SetUniform(bindingSlot, values);

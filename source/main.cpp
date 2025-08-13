@@ -79,7 +79,6 @@ that of Atlas depending on commandline parameters.
 #include "ps/UserReport.h"
 #include "ps/VideoMode.h"
 #include "ps/XML/Xeromyces.h"
-#include "ps/containers/Span.h"
 #include "renderer/Renderer.h"
 #include "rlinterface/RLInterface.h"
 #include "scriptinterface/JSON.h"
@@ -104,6 +103,7 @@ that of Atlas depending on commandline parameters.
 #include <js/Value.h>
 #include <memory>
 #include <optional>
+#include <span>
 #include <string>
 #include <utility>
 #include <vector>
@@ -553,7 +553,7 @@ static std::optional<DAP::Interface> CreateDAPInterface(const CmdLineArgs& args)
 
 // moved into a helper function to ensure args is destroyed before
 // exit(), which may result in a memory leak.
-static void RunGameOrAtlas(const PS::span<const char* const> argv)
+static void RunGameOrAtlas(const std::span<const char* const> argv)
 {
 	const CmdLineArgs args(argv);
 

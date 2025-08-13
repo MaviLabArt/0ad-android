@@ -28,7 +28,6 @@
 #include "maths/Quaternion.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
-#include "ps/containers/Span.h"
 #include "renderer/OverlayRenderer.h"
 #include "renderer/Renderer.h"
 #include "renderer/VertexBuffer.h"

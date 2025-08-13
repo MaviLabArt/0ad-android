@@ -24,7 +24,6 @@
 #include "lib/path.h"
 #include "lib/timer.h"
 #include "maths/Vector3D.h"
-#include "ps/containers/Span.h"
 #include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
 #include "soundmanager/data/SoundData.h"

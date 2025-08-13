@@ -18,10 +18,9 @@
 #ifndef INCLUDED_VECTOR2D
 #define INCLUDED_VECTOR2D
 
-#include "ps/containers/Span.h"
-
 #include <cmath>
 #include <cstddef>
+#include <span>
 
 class CSize2D;
 
@@ -165,7 +164,7 @@ public:
 	void operator-=(const CSize2D& size);
 
 	// Returns 2 element array of floats, e.g. for vec2 uniforms.
-	PS::span<const float> AsFloatArray() const
+	std::span<const float> AsFloatArray() const
 	{
 		// Additional check to prevent a weird compiler having a different
 		// alignement for an array and a class members.
@@ -174,7 +173,7 @@ public:
 			offsetof(CVector2D, X) == 0 &&
 			offsetof(CVector2D, Y) == sizeof(float),
 			"Vector2D should be properly layouted to use AsFloatArray");
-		return PS::span<const float>(&X, 2);
+		return std::span<const float>(&X, 2);
 	}
 
 public:

@@ -25,7 +25,6 @@
 #include "lib/sysdep/compiler.h"
 #include "maths/Vector2D.h"
 #include "ps/FileIo.h"
-#include "ps/containers/Span.h"
 #include "renderer/VertexArray.h"
 
 #include <algorithm>
