@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")"
 
 PV=28209
-LIB_VERSION=${PV}+wfg1
+LIB_VERSION=${PV}+wfg2
 
 fetch()
 {
