@@ -528,7 +528,7 @@ void CFont::BlendGlyphBitmapToTextureRGBA(const FT_Bitmap& bitmap, int targetX, 
 
 		for (uint x{0}; x != bitmap.width; ++x)
 		{
-			const std::span<u8, 4> tempDstRow{dstRow + x * m_TextureFormatStride, 4};
+			u8* tempDstRow{dstRow + x * m_TextureFormatStride};
 			u8 alpha{srcRow[x]};
 
 			const float srcAlpha{m_StrokeWidth > 0 ? (*m_GammaCorrectionLUT)[alpha] : alpha/255.0f};
