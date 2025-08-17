@@ -167,7 +167,7 @@ class CheckRefs:
                 self.inError = True
 
         if args.validate_meshes:
-            from validate_dae import DaeValidator
+            from validate_dae import DaeValidator  # noqa: PLC0415
 
             dv = DaeValidator(self.vfs_root, self.mods)
             self.inError = self.inError or not dv.run()

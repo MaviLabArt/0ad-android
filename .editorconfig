@@ -19,6 +19,7 @@ indent_style = space
 [*.sh]
 indent_style = tab
 function_next_line = true
+simplify = true
 switch_case_indent = true
 
 [*.{yaml,yml}]

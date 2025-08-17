@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2024 Wildfire Games.
+# Copyright (C) 2025 Wildfire Games.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -166,7 +166,7 @@ def compile_and_reflect(input_mod_path, dependencies, stage, path, out_path, def
         preprocessor_output_path = os.path.abspath(
             os.path.join(os.path.dirname(__file__), "preprocessed_file.glsl")
         )
-        execute(command[:-2] + ["-g", "-E", "-o", preprocessor_output_path])
+        execute([*command[:-2], "-g", "-E", "-o", preprocessor_output_path])
         raise ValueError(err)
 
     spirv_reflect = get_spirv_reflect_location()

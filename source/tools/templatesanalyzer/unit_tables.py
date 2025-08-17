@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# ruff: noqa: SIM115
+# ruff: noqa: FURB122,SIM115
 
 import sys
 import xml.etree.ElementTree as ET
