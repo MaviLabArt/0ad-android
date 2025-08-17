@@ -75,6 +75,8 @@
 class wxInputStream;
 class wxWindow;
 
+#include <array>
+
 static HighResTimer g_Timer;
 
 /**
@@ -125,38 +127,38 @@ public:
 
 private:
 
+	void SetScrolling(int dir, float speed, bool enable)
+	{
+		POST_MESSAGE(ScrollConstant, (eRenderView::GAME, dir, enable ? speed : 0.0f));
+	}
+
 	bool KeyScroll(wxKeyEvent& evt, bool enable)
 	{
-		int dir;
+		static std::array<bool, 6> scrolling{};
+
 		switch (evt.GetKeyCode())
 		{
-		case 'A': case WXK_LEFT:  dir = eScrollConstantDir::LEFT; break;
-		case 'D': case WXK_RIGHT: dir = eScrollConstantDir::RIGHT; break;
-		case 'W': case WXK_UP:    dir = eScrollConstantDir::FORWARDS; break;
-		case 'S': case WXK_DOWN:  dir = eScrollConstantDir::BACKWARDS; break;
-		case 'Q': case '[':       dir = eScrollConstantDir::CLOCKWISE; break;
-		case 'E': case ']':       dir = eScrollConstantDir::ANTICLOCKWISE; break;
-		case WXK_SHIFT: case WXK_CONTROL: dir = -1; break;
+		case 'A': case WXK_LEFT:  std::get<0>(scrolling) = enable; break;
+		case 'D': case WXK_RIGHT: std::get<1>(scrolling) = enable; break;
+		case 'W': case WXK_UP:    std::get<2>(scrolling) = enable; break;
+		case 'S': case WXK_DOWN:  std::get<3>(scrolling) = enable; break;
+		case 'Q': case '[':       std::get<4>(scrolling) = enable; break;
+		case 'E': case ']':       std::get<5>(scrolling) = enable; break;
+		// Modifier keys changing speed and therefore requiring update.
+		case WXK_SHIFT: case WXK_CONTROL: break;
 		default: return false;
 		}
 
 		float speed = 120.f * ScenarioEditor::GetSpeedModifier();
 
-		if (dir == -1) // changed modifier keys - update all currently-scrolling directions
-		{
-			if (wxGetKeyState(WXK_LEFT))       POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::LEFT, speed));
-			if (wxGetKeyState(WXK_RIGHT))      POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::RIGHT, speed));
-			if (wxGetKeyState(WXK_UP))         POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::FORWARDS, speed));
-			if (wxGetKeyState(WXK_DOWN))       POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::BACKWARDS, speed));
-			if (wxGetKeyState((wxKeyCode)'[')) POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::CLOCKWISE, speed));
-			if (wxGetKeyState((wxKeyCode)']')) POST_MESSAGE(ScrollConstant, (eRenderView::GAME, eScrollConstantDir::ANTICLOCKWISE, speed));
-			return false;
-		}
-		else
-		{
-			POST_MESSAGE(ScrollConstant, (eRenderView::GAME, dir, enable ? speed : 0.0f));
-			return true;
-		}
+		SetScrolling(eScrollConstantDir::LEFT, speed, std::get<0>(scrolling));
+		SetScrolling(eScrollConstantDir::RIGHT, speed, std::get<1>(scrolling));
+		SetScrolling(eScrollConstantDir::FORWARDS, speed, std::get<2>(scrolling));
+		SetScrolling(eScrollConstantDir::BACKWARDS, speed, std::get<3>(scrolling));
+		SetScrolling(eScrollConstantDir::CLOCKWISE, speed, std::get<4>(scrolling));
+		SetScrolling(eScrollConstantDir::ANTICLOCKWISE, speed, std::get<5>(scrolling));
+
+		return true;
 	}
 
 	void OnKeyDown(wxKeyEvent& evt)
