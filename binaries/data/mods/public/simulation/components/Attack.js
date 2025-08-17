@@ -475,7 +475,7 @@ Attack.prototype.RepeatRangeCheck = function(type) {
  *
  * @return {boolean} - Whether we started attacking.
  */
-Attack.prototype.StartAttacking = function(target, type, callerIID)
+Attack.prototype.StartAttacking = function(target, type, callerIID, force)
 {
 	if (this.target)
 		this.StopAttacking();
@@ -525,6 +525,7 @@ Attack.prototype.StartAttacking = function(target, type, callerIID)
 	this.resyncAnimation = prepare != timings.prepare;
 	this.target = target;
 	this.callerIID = callerIID;
+	this.force = force;
 	this.timer = cmpTimer.SetInterval(this.entity, IID_Attack, "Attack", prepare, timings.repeat, type);
 	this.checkTimer = cmpTimer.SetInterval(this.entity, IID_Attack, "RepeatRangeCheck", checkStart, repeatPerCheck, type);
 	return true;
@@ -597,6 +598,13 @@ Attack.prototype.Attack = function(type, lateness)
 	if (!this.IsTargetInRange(this.target, type))
 	{
 		this.StopAttacking("OutOfRange");
+		return;
+	}
+
+	// If a low preference unit is attacked without player direction, check for higher preference.
+	if (this.GetPreference(this.target) === undefined && !this.force)
+	{
+		this.StopAttacking("TargetInvalidated");
 		return;
 	}
 

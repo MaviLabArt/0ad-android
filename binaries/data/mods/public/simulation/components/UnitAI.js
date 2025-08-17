@@ -2198,7 +2198,7 @@ UnitAI.prototype.UnitFsmSpec = {
 					if (this.order.data.hunting && this.orderQueue.length > 1 && this.orderQueue[1].type === "Gather")
 						this.RememberTargetPosition(this.orderQueue[1].data);
 
-					if (!cmpAttack.StartAttacking(this.order.data.target, this.order.data.attackType, IID_UnitAI))
+					if (!cmpAttack.StartAttacking(this.order.data.target, this.order.data.attackType, IID_UnitAI, this.order.data.force))
 					{
 						this.ProcessMessage("TargetInvalidated");
 						return true;
@@ -2250,7 +2250,7 @@ UnitAI.prototype.UnitFsmSpec = {
 					if (this.order.data.attackType == "Capture" && (this.GetStance().targetAttackersAlways || !this.order.data.force) &&
 						this.order.data.target != msg.data.attacker && this.GetBestAttackAgainst(msg.data.attacker, true) != "Capture")
 						this.RespondToTargetedEntities([msg.data.attacker]);
-				},
+				}
 			},
 
 			"FINDINGNEWTARGET": {
