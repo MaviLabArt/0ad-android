@@ -734,6 +734,7 @@ extern_lib_defs = {
 				-- so we have to use wxwidgets' own config tool
 				pkgconfig.add_includes(nil, wx_config_path(), "--unicode=yes --cxxflags")
 			end
+			defines({ "wxNO_REQUIRE_LITERAL_MSGIDS" })
 		end,
 		link_settings = function()
 			if os.istarget("windows") then
