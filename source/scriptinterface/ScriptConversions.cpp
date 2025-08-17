@@ -258,40 +258,6 @@ template<> void Script::ToJSVal<const char*>(const ScriptRequest& rq,  JS::Mutab
 		ret.setUndefined();
 }
 
-#define TOJSVAL_CHAR(N) \
-template<> void Script::ToJSVal<wchar_t[N]>(const ScriptRequest& rq,  JS::MutableHandleValue ret, const wchar_t (&val)[N]) \
-{ \
-	ToJSVal(rq, ret, static_cast<const wchar_t*>(val)); \
-} \
-template<> void Script::ToJSVal<char[N]>(const ScriptRequest& rq,  JS::MutableHandleValue ret, const char (&val)[N]) \
-{ \
-	ToJSVal(rq, ret, static_cast<const char*>(val)); \
-}
-
-TOJSVAL_CHAR(3)
-TOJSVAL_CHAR(5)
-TOJSVAL_CHAR(6)
-TOJSVAL_CHAR(7)
-TOJSVAL_CHAR(8)
-TOJSVAL_CHAR(9)
-TOJSVAL_CHAR(10)
-TOJSVAL_CHAR(11)
-TOJSVAL_CHAR(12)
-TOJSVAL_CHAR(13)
-TOJSVAL_CHAR(14)
-TOJSVAL_CHAR(15)
-TOJSVAL_CHAR(16)
-TOJSVAL_CHAR(17)
-TOJSVAL_CHAR(18)
-TOJSVAL_CHAR(19)
-TOJSVAL_CHAR(20)
-TOJSVAL_CHAR(24)
-TOJSVAL_CHAR(29)
-TOJSVAL_CHAR(33)
-TOJSVAL_CHAR(35)
-TOJSVAL_CHAR(256)
-#undef TOJSVAL_CHAR
-
 template<> void Script::ToJSVal<CStrW>(const ScriptRequest& rq,  JS::MutableHandleValue ret, const CStrW& val)
 {
 	ToJSVal(rq, ret, static_cast<const std::wstring&>(val));

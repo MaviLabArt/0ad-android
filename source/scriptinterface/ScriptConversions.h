@@ -68,6 +68,17 @@ bool FromJSVal(const ScriptRequest& rq, JS::HandleValue v, std::optional<T>& out
  */
 template<typename T> void ToJSVal(const ScriptRequest& rq, JS::MutableHandleValue ret, T const& val);
 
+template<std::size_t N>
+void ToJSVal(const ScriptRequest& rq, JS::MutableHandleValue ret, const char (&val)[N])
+{
+	ToJSVal(rq, ret, static_cast<const char*>(val));
+}
+template<std::size_t N>
+void ToJSVal(const ScriptRequest& rq, JS::MutableHandleValue ret, const wchar_t (&val)[N])
+{
+	ToJSVal(rq, ret, static_cast<const wchar_t*>(val));
+}
+
 template<>
 inline void ToJSVal<JS::PersistentRootedValue>(const ScriptRequest&, JS::MutableHandleValue handle,
 	const JS::PersistentRootedValue& a)
