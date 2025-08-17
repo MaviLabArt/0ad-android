@@ -35,6 +35,7 @@
 #include <wx/listbox.h>
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
+#include <wx/statbox.h>
 #include <wx/string.h>
 #include <wx/textctrl.h>
 #include <wx/toolbar.h>
@@ -66,27 +67,27 @@ CinemaSidebar::CinemaSidebar(ScenarioEditor& scenarioEditor, wxWindow* sidebarCo
 	scrolledWindow->SetSizer(scrollSizer);
 	m_MainSizer->Add(scrolledWindow, wxSizerFlags().Proportion(1).Expand());
 
-	wxSizer* commonSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Common settings"));
+	wxStaticBoxSizer* commonSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Common settings"));
 	scrollSizer->Add(commonSizer, wxSizerFlags().Expand());
 
 	wxFlexGridSizer* gridSizer = new wxFlexGridSizer(2, 5, 5);
 	gridSizer->AddGrowableCol(1);
 
-	gridSizer->Add(Tooltipped(m_DrawPath = new wxCheckBox(scrolledWindow, ID_PathsDrawing, _("Draw all paths")),
+	gridSizer->Add(Tooltipped(m_DrawPath = new wxCheckBox(commonSizer->GetStaticBox(), ID_PathsDrawing, _("Draw all paths")),
 		_("Display every cinematic path added to the map")));
 
 	commonSizer->Add(gridSizer, wxSizerFlags().Expand());
 
 	// Paths list panel
-	wxSizer* pathsSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Paths"));
-	scrollSizer->Add(pathsSizer, wxSizerFlags().Proportion(1).Expand());
+	wxStaticBoxSizer* pathsSizer = new wxStaticBoxSizer(wxVERTICAL, commonSizer->GetStaticBox(), _T("Paths"));
+	commonSizer->Add(pathsSizer, wxSizerFlags().Proportion(1).Expand());
 
-	pathsSizer->Add(m_PathList = new wxListBox(scrolledWindow, ID_PathsList, wxDefaultPosition, wxDefaultSize, 0, NULL, wxLB_SINGLE | wxLB_SORT), wxSizerFlags().Proportion(1).Expand());
-	scrollSizer->AddSpacer(3);
-	pathsSizer->Add(Tooltipped(new wxButton(scrolledWindow, ID_DeletePath, _("Delete")), _T("Delete selected path")), wxSizerFlags().Expand());
+	pathsSizer->Add(m_PathList = new wxListBox(pathsSizer->GetStaticBox(), ID_PathsList, wxDefaultPosition, wxDefaultSize, 0, NULL, wxLB_SINGLE | wxLB_SORT), wxSizerFlags().Proportion(1).Expand());
+	commonSizer->AddSpacer(3);
+	pathsSizer->Add(Tooltipped(new wxButton(pathsSizer->GetStaticBox(), ID_DeletePath, _("Delete")), _T("Delete selected path")), wxSizerFlags().Expand());
 
-	pathsSizer->Add(m_NewPathName = new wxTextCtrl(scrolledWindow, wxID_ANY), wxSizerFlags().Expand());
-	pathsSizer->Add(new wxButton(scrolledWindow, ID_AddPath, _("Add")), wxSizerFlags().Expand());
+	pathsSizer->Add(m_NewPathName = new wxTextCtrl(pathsSizer->GetStaticBox(), wxID_ANY), wxSizerFlags().Expand());
+	pathsSizer->Add(new wxButton(pathsSizer->GetStaticBox(), ID_AddPath, _("Add")), wxSizerFlags().Expand());
 }
 
 void CinemaSidebar::OnFirstDisplay()

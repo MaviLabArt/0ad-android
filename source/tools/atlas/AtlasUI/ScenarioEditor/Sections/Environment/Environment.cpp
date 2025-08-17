@@ -45,6 +45,7 @@
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
 #include <wx/slider.h>
+#include <wx/statbox.h>
 #include <wx/string.h>
 #include <wx/toolbar.h>
 #include <wx/translation.h>
@@ -70,7 +71,7 @@ public:
 		m_Sizer = new wxStaticBoxSizer(wxVERTICAL, this, label);
 		SetSizer(m_Sizer);
 
-		m_Slider = new wxSlider(this, -1, 0, 0, range);
+		m_Slider = new wxSlider(m_Sizer->GetStaticBox(), -1, 0, 0, range);
 		m_Sizer->Add(m_Slider, wxSizerFlags().Expand());
 	}
 
@@ -116,7 +117,7 @@ public:
 		SetSizer(m_Sizer);
 
 		m_Combo = new wxComboBox(
-			this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize,
+			m_Sizer->GetStaticBox(), -1, wxEmptyString, wxDefaultPosition, wxDefaultSize,
 			wxArrayString(), wxCB_READONLY),
 		m_Sizer->Add(m_Combo, wxSizerFlags().Expand());
 	}
@@ -172,7 +173,7 @@ public:
 		m_Sizer = new wxStaticBoxSizer(wxVERTICAL, this, label);
 		SetSizer(m_Sizer);
 
-		m_Button = new wxButton(this, -1);
+		m_Button = new wxButton(m_Sizer->GetStaticBox(), -1);
 		m_Sizer->Add(m_Button, wxSizerFlags().Expand());
 	}
 
@@ -243,69 +244,69 @@ EnvironmentSidebar::EnvironmentSidebar(
 	scrolledWindow->SetSizer(scrollSizer);
 	m_MainSizer->Add(scrolledWindow,  wxSizerFlags().Proportion(1).Expand());
 
-	wxSizer* waterSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Water settings"));
+	wxStaticBoxSizer* waterSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Water settings"));
 	scrollSizer->Add(waterSizer, wxSizerFlags().Expand());
 	waterSizer->Add(new wxButton(
-		scrolledWindow, ID_RecomputeWaterData, _("Reset Water Data")), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), ID_RecomputeWaterData, _("Reset Water Data")), wxSizerFlags().Expand());
 	waterSizer->Add(m_WaterTypeList = new VariableListBox(
-		scrolledWindow, _("Water Type"), g_EnvironmentSettings.watertype), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water Type"), g_EnvironmentSettings.watertype), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Water height"), g_EnvironmentSettings.waterheight, 0.f, 1.2f), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water height"), g_EnvironmentSettings.waterheight, 0.f, 1.2f), wxSizerFlags().Expand());
 	waterSizer->Add(new wxButton(
-		scrolledWindow, ID_PickWaterHeight, _("Pick Water Height")), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), ID_PickWaterHeight, _("Pick Water Height")), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Water waviness"), g_EnvironmentSettings.waterwaviness, 0.f, 10.f), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water waviness"), g_EnvironmentSettings.waterwaviness, 0.f, 10.f), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Water murkiness"), g_EnvironmentSettings.watermurkiness, 0.f, 1.f), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water murkiness"), g_EnvironmentSettings.watermurkiness, 0.f, 1.f), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Wind angle"), g_EnvironmentSettings.windangle, -static_cast<float>(M_PI), static_cast<float>(M_PI)), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Wind angle"), g_EnvironmentSettings.windangle, -static_cast<float>(M_PI), static_cast<float>(M_PI)), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableColorBox(
-		scrolledWindow, _("Water color"), g_EnvironmentSettings.watercolor), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water color"), g_EnvironmentSettings.watercolor), wxSizerFlags().Expand());
 	waterSizer->Add(new VariableColorBox(
-		scrolledWindow, _("Water tint"), g_EnvironmentSettings.watertint), wxSizerFlags().Expand());
+		waterSizer->GetStaticBox(), _("Water tint"), g_EnvironmentSettings.watertint), wxSizerFlags().Expand());
 
 	std::vector<std::wstring> list;
 	list.push_back(L"ocean"); list.push_back(L"lake"); list.push_back(L"clap");
 	m_WaterTypeList->SetChoices(list);
 
 
-	wxSizer* sunSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Sun / lighting settings"));
+	wxStaticBoxSizer* sunSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Sun / lighting settings"));
 	scrollSizer->Add(sunSizer, wxSizerFlags().Expand().Border(wxTOP, 8));
 
 	sunSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Sun rotation"), g_EnvironmentSettings.sunrotation, -static_cast<float>(M_PI), static_cast<float>(M_PI)), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Sun rotation"), g_EnvironmentSettings.sunrotation, -static_cast<float>(M_PI), static_cast<float>(M_PI)), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Sun elevation"), g_EnvironmentSettings.sunelevation, -static_cast<float>(M_PI) / 2.0f, static_cast<float>(M_PI) / 2.0f), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Sun elevation"), g_EnvironmentSettings.sunelevation, -static_cast<float>(M_PI) / 2.0f, static_cast<float>(M_PI) / 2.0f), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Sun overbrightness"), g_EnvironmentSettings.sunoverbrightness, 1.0f, 3.0f), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Sun overbrightness"), g_EnvironmentSettings.sunoverbrightness, 1.0f, 3.0f), wxSizerFlags().Expand());
 	sunSizer->Add(new LightControl(
-		scrolledWindow, wxSize(150, 150), g_EnvironmentSettings));
+		sunSizer->GetStaticBox(), wxSize(150, 150), g_EnvironmentSettings));
 	sunSizer->Add(new VariableColorBox(
-		scrolledWindow, _("Sun color"), g_EnvironmentSettings.suncolor), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Sun color"), g_EnvironmentSettings.suncolor), wxSizerFlags().Expand());
 	sunSizer->Add(m_SkyList = new VariableListBox(
-		scrolledWindow, _("Sky set"), g_EnvironmentSettings.skyset), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Sky set"), g_EnvironmentSettings.skyset), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Fog Factor"), g_EnvironmentSettings.fogfactor, 0.0f, 0.01f), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Fog Factor"), g_EnvironmentSettings.fogfactor, 0.0f, 0.01f), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Fog Thickness"), g_EnvironmentSettings.fogmax, 0.5f, 0.0f), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Fog Thickness"), g_EnvironmentSettings.fogmax, 0.5f, 0.0f), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableColorBox(
-		scrolledWindow, _("Fog color"), g_EnvironmentSettings.fogcolor), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Fog color"), g_EnvironmentSettings.fogcolor), wxSizerFlags().Expand());
 	sunSizer->Add(new VariableColorBox(
-		scrolledWindow, _("Ambient color"), g_EnvironmentSettings.ambientcolor), wxSizerFlags().Expand());
+		sunSizer->GetStaticBox(), _("Ambient color"), g_EnvironmentSettings.ambientcolor), wxSizerFlags().Expand());
 
-	wxSizer* postProcSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Post-processing settings"));
+	wxStaticBoxSizer* postProcSizer = new wxStaticBoxSizer(wxVERTICAL, scrolledWindow, _T("Post-processing settings"));
 	scrollSizer->Add(postProcSizer, wxSizerFlags().Expand().Border(wxTOP, 8));
 
 	postProcSizer->Add(m_PostEffectList = new VariableListBox(
-		scrolledWindow, _("Post Effect"), g_EnvironmentSettings.posteffect), wxSizerFlags().Expand());
+		postProcSizer->GetStaticBox(), _("Post Effect"), g_EnvironmentSettings.posteffect), wxSizerFlags().Expand());
 	postProcSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Brightness"), g_EnvironmentSettings.brightness, -0.5f, 0.5f), wxSizerFlags().Expand());
+		postProcSizer->GetStaticBox(), _("Brightness"), g_EnvironmentSettings.brightness, -0.5f, 0.5f), wxSizerFlags().Expand());
 	postProcSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Contrast (HDR)"), g_EnvironmentSettings.contrast, 0.5f, 1.5f), wxSizerFlags().Expand());
+		postProcSizer->GetStaticBox(), _("Contrast (HDR)"), g_EnvironmentSettings.contrast, 0.5f, 1.5f), wxSizerFlags().Expand());
 	postProcSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Saturation"), g_EnvironmentSettings.saturation, 0.0f, 2.0f), wxSizerFlags().Expand());
+		postProcSizer->GetStaticBox(), _("Saturation"), g_EnvironmentSettings.saturation, 0.0f, 2.0f), wxSizerFlags().Expand());
 	postProcSizer->Add(new VariableSliderBox(
-		scrolledWindow, _("Bloom"), g_EnvironmentSettings.bloom, 0.2f, 0.0f), wxSizerFlags().Expand());
+		postProcSizer->GetStaticBox(), _("Bloom"), g_EnvironmentSettings.bloom, 0.2f, 0.0f), wxSizerFlags().Expand());
 
 	m_Conn = g_EnvironmentSettings.RegisterObserver(0, &SendToGame);
 }

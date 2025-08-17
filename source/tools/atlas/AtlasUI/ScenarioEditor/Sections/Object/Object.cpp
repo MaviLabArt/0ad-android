@@ -53,6 +53,7 @@
 #include <wx/panel.h>
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
+#include <wx/statbox.h>
 #include <wx/stattext.h>
 #include <wx/string.h>
 #include <wx/textctrl.h>
@@ -565,25 +566,25 @@ ObjectBottomBar::ObjectBottomBar(
 	m_ViewerPanel = new wxPanel(this, wxID_ANY);
 	wxSizer* viewerSizer = new wxBoxSizer(wxHORIZONTAL);
 
-	wxSizer* viewerButtonsSizer = new wxStaticBoxSizer(wxHORIZONTAL, m_ViewerPanel, _("Display settings"));
+	wxStaticBoxSizer* viewerButtonsSizer = new wxStaticBoxSizer(wxHORIZONTAL, m_ViewerPanel, _("Display settings"));
 	{
 		wxSizer* viewerButtonsLeft = new wxBoxSizer(wxVERTICAL);
 		viewerButtonsLeft->SetMinSize(110, -1);
-		viewerButtonsLeft->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerWireframe,   _("Wireframe")),      _("Toggle wireframe / solid rendering")), wxSizerFlags().Expand());
-		viewerButtonsLeft->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerMove,        _("Move")),           _("Toggle movement along ground when playing walk/run animations")), wxSizerFlags().Expand());
-		viewerButtonsLeft->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerGround,      _("Ground")),         _("Toggle the ground plane")), wxSizerFlags().Expand());
+		viewerButtonsLeft->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerWireframe,   _("Wireframe")),      _("Toggle wireframe / solid rendering")), wxSizerFlags().Expand());
+		viewerButtonsLeft->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerMove,        _("Move")),           _("Toggle movement along ground when playing walk/run animations")), wxSizerFlags().Expand());
+		viewerButtonsLeft->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerGround,      _("Ground")),         _("Toggle the ground plane")), wxSizerFlags().Expand());
 		// TODO: disabled until https://gitea.wildfiregames.com/0ad/0ad/issues/2692 is fixed
-		wxButton* waterButton = new wxButton(m_ViewerPanel, ID_ViewerWater, _("Water"));
+		wxButton* waterButton = new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerWater, _("Water"));
 		waterButton->Enable(false);
 		viewerButtonsLeft->Add(Tooltipped(waterButton, _("Toggle the water plane")), wxSizerFlags().Expand());
-		viewerButtonsLeft->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerShadows,     _("Shadows")),        _("Toggle shadow rendering")), wxSizerFlags().Expand());
-		viewerButtonsLeft->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerPolyCount,   _("Poly count")),     _("Toggle polygon-count statistics - turn off ground and shadows for more useful data")), wxSizerFlags().Expand());
+		viewerButtonsLeft->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerShadows,     _("Shadows")),        _("Toggle shadow rendering")), wxSizerFlags().Expand());
+		viewerButtonsLeft->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerPolyCount,   _("Poly count")),     _("Toggle polygon-count statistics - turn off ground and shadows for more useful data")), wxSizerFlags().Expand());
 
 		wxSizer* viewerButtonsRight = new wxBoxSizer(wxVERTICAL);
 		viewerButtonsRight->SetMinSize(110,-1);
-		viewerButtonsRight->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerBoundingBox, _("Bounding Boxes")), _("Toggle bounding boxes")), wxSizerFlags().Expand());
-		viewerButtonsRight->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerAxesMarker,  _("Axes Marker")), _("Toggle the axes marker (R=X, G=Y, B=Z)")), wxSizerFlags().Expand());
-		viewerButtonsRight->Add(Tooltipped(new wxButton(m_ViewerPanel, ID_ViewerPropPoints,  _("Prop Points")), _("Toggle prop points (works best in wireframe mode)")), wxSizerFlags().Expand());
+		viewerButtonsRight->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerBoundingBox, _("Bounding Boxes")), _("Toggle bounding boxes")), wxSizerFlags().Expand());
+		viewerButtonsRight->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerAxesMarker,  _("Axes Marker")), _("Toggle the axes marker (R=X, G=Y, B=Z)")), wxSizerFlags().Expand());
+		viewerButtonsRight->Add(Tooltipped(new wxButton(viewerButtonsSizer->GetStaticBox(), ID_ViewerPropPoints,  _("Prop Points")), _("Toggle prop points (works best in wireframe mode)")), wxSizerFlags().Expand());
 
 		viewerButtonsSizer->Add(viewerButtonsLeft, wxSizerFlags().Expand());
 		viewerButtonsSizer->Add(viewerButtonsRight, wxSizerFlags().Expand());
@@ -594,7 +595,7 @@ ObjectBottomBar::ObjectBottomBar(
 
 	// --- animations panel -------------------------------------------------------------------------------
 
-	wxSizer* viewerAnimSizer = new wxStaticBoxSizer(wxVERTICAL, m_ViewerPanel, _("Animation"));
+	wxStaticBoxSizer* viewerAnimSizer = new wxStaticBoxSizer(wxVERTICAL, m_ViewerPanel, _("Animation"));
 
 	// TODO: this list should come from the actor
 	wxArrayString animChoices;
@@ -603,14 +604,14 @@ ObjectBottomBar::ObjectBottomBar(
 	{
 		animChoices.Add(wxString(*a));
 	}
-	wxChoice* viewerAnimSelector = new wxChoice(m_ViewerPanel, ID_ViewerAnimation, wxDefaultPosition, wxDefaultSize, animChoices);
+	wxChoice* viewerAnimSelector = new wxChoice(viewerAnimSizer->GetStaticBox(), ID_ViewerAnimation, wxDefaultPosition, wxDefaultSize, animChoices);
 	viewerAnimSelector->SetSelection(0);
 	viewerAnimSizer->Add(viewerAnimSelector, wxSizerFlags().Expand());
 
 	wxSizer* viewerAnimSpeedSizer = new wxBoxSizer(wxHORIZONTAL);
-	viewerAnimSpeedSizer->Add(new wxButton(m_ViewerPanel, ID_ViewerPlay, _("Play"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
-	viewerAnimSpeedSizer->Add(new wxButton(m_ViewerPanel, ID_ViewerPause, _("Pause"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
-	viewerAnimSpeedSizer->Add(new wxButton(m_ViewerPanel, ID_ViewerSlow, _("Slow"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
+	viewerAnimSpeedSizer->Add(new wxButton(viewerAnimSizer->GetStaticBox(), ID_ViewerPlay, _("Play"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
+	viewerAnimSpeedSizer->Add(new wxButton(viewerAnimSizer->GetStaticBox(), ID_ViewerPause, _("Pause"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
+	viewerAnimSpeedSizer->Add(new wxButton(viewerAnimSizer->GetStaticBox(), ID_ViewerSlow, _("Slow"), wxDefaultPosition, wxSize(50, -1)), wxSizerFlags().Expand());
 	viewerAnimSizer->Add(viewerAnimSpeedSizer);
 
 	viewerSizer->Add(viewerAnimSizer, wxSizerFlags().Expand());
@@ -638,9 +639,9 @@ ObjectBottomBar::ObjectBottomBar(
 	playerVariationSizer->AddSpacer(3);
 
 
-	wxWindow* variationSelect = new VariationControl(this, objectSettings);
+	wxStaticBoxSizer* variationSizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Variation"));
+	wxWindow* variationSelect = new VariationControl(variationSizer->GetStaticBox(), objectSettings);
 	variationSelect->SetMinSize(wxSize(160, -1));
-	wxSizer* variationSizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Variation"));
 	variationSizer->Add(variationSelect, wxSizerFlags().Proportion(1).Expand());
 	playerVariationSizer->Add(variationSizer, wxSizerFlags().Proportion(1));
 
@@ -649,8 +650,8 @@ ObjectBottomBar::ObjectBottomBar(
 
 	// ----------------------------------------------------------------------------------
 	// --- display template name
-	wxSizer* displaySizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Selected entities"));
-	m_TemplateNames = new wxScrolledWindow(this);
+	wxStaticBoxSizer* displaySizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Selected entities"));
+	m_TemplateNames = new wxScrolledWindow(displaySizer->GetStaticBox());
 	m_TemplateNames->SetMinSize(wxSize(250, -1));
 	m_TemplateNames->SetScrollRate(0, 5);
 	wxSizer* scrollwindowSizer = new wxBoxSizer(wxVERTICAL);

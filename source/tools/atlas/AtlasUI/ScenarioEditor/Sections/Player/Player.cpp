@@ -54,6 +54,7 @@
 #include <wx/sizer.h>
 #include <wx/spinbutt.h>
 #include <wx/spinctrl.h>
+#include <wx/statbox.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/toolbar.h>
@@ -153,28 +154,28 @@ public:
 			wxFlexGridSizer* gridSizer = new wxFlexGridSizer(3, 5, 5);
 			gridSizer->AddGrowableCol(2);
 
-			wxTextCtrl* nameCtrl = new wxTextCtrl(this, wxID_ANY);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultName, nameCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Name")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxTextCtrl* nameCtrl = new wxTextCtrl(playerInfoSizer->GetStaticBox(), wxID_ANY);
+			gridSizer->Add(new DefaultCheckbox(playerInfoSizer->GetStaticBox(), ID_DefaultName, nameCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(playerInfoSizer->GetStaticBox(), wxID_ANY, _("Name")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(nameCtrl, wxSizerFlags(1).Expand().Align(wxALIGN_RIGHT));
 			m_Controls.name = nameCtrl;
 
-			wxChoice* civChoice = new wxChoice(this, wxID_ANY);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultCiv, civChoice), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Civilisation")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxChoice* civChoice = new wxChoice(playerInfoSizer->GetStaticBox(), wxID_ANY);
+			gridSizer->Add(new DefaultCheckbox(playerInfoSizer->GetStaticBox(), ID_DefaultCiv, civChoice), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(playerInfoSizer->GetStaticBox(), wxID_ANY, _("Civilisation")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(civChoice, wxSizerFlags(1).Expand().Align(wxALIGN_RIGHT));
 			m_Controls.civ = civChoice;
 
-			wxButton* colorButton = new wxButton(this, ID_PlayerColor);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultColor, colorButton), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Color")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxButton* colorButton = new wxButton(playerInfoSizer->GetStaticBox(), ID_PlayerColor);
+			gridSizer->Add(new DefaultCheckbox(playerInfoSizer->GetStaticBox(), ID_DefaultColor, colorButton), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(playerInfoSizer->GetStaticBox(), wxID_ANY, _("Color")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(colorButton,
 				_("Set player color")), wxSizerFlags(1).Expand().Align(wxALIGN_RIGHT));
 			m_Controls.color = colorButton;
 
-			wxChoice* aiChoice = new wxChoice(this, wxID_ANY);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultAI, aiChoice), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("AI")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxChoice* aiChoice = new wxChoice(playerInfoSizer->GetStaticBox(), wxID_ANY);
+			gridSizer->Add(new DefaultCheckbox(playerInfoSizer->GetStaticBox(), ID_DefaultAI, aiChoice), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(playerInfoSizer->GetStaticBox(), wxID_ANY, _("AI")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(aiChoice,
 				_("Select AI")), wxSizerFlags(1).Expand().Align(wxALIGN_RIGHT));
 			m_Controls.ai = aiChoice;
@@ -190,37 +191,37 @@ public:
 			wxFlexGridSizer* gridSizer = new wxFlexGridSizer(3, 5, 5);
 			gridSizer->AddGrowableCol(2);
 
-			wxSpinCtrl* foodCtrl = new wxSpinCtrl(this, ID_PlayerFood, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultFood, foodCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Food")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxSpinCtrl* foodCtrl = new wxSpinCtrl(resourceSizer->GetStaticBox(), ID_PlayerFood, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
+			gridSizer->Add(new DefaultCheckbox(resourceSizer->GetStaticBox(), ID_DefaultFood, foodCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(resourceSizer->GetStaticBox(), wxID_ANY, _("Food")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(foodCtrl,
 				_("Initial value of food resource")), wxSizerFlags().Expand());
 			m_Controls.food = foodCtrl;
 
-			wxSpinCtrl* woodCtrl = new wxSpinCtrl(this, ID_PlayerWood, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultWood, woodCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Wood")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxSpinCtrl* woodCtrl = new wxSpinCtrl(resourceSizer->GetStaticBox(), ID_PlayerWood, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
+			gridSizer->Add(new DefaultCheckbox(resourceSizer->GetStaticBox(), ID_DefaultWood, woodCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(resourceSizer->GetStaticBox(), wxID_ANY, _("Wood")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(woodCtrl,
 				_("Initial value of wood resource")), wxSizerFlags().Expand());
 			m_Controls.wood = woodCtrl;
 
-			wxSpinCtrl* metalCtrl = new wxSpinCtrl(this, ID_PlayerMetal, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultMetal, metalCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Metal")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxSpinCtrl* metalCtrl = new wxSpinCtrl(resourceSizer->GetStaticBox(), ID_PlayerMetal, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
+			gridSizer->Add(new DefaultCheckbox(resourceSizer->GetStaticBox(), ID_DefaultMetal, metalCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(resourceSizer->GetStaticBox(), wxID_ANY, _("Metal")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(metalCtrl,
 				_("Initial value of metal resource")), wxSizerFlags().Expand());
 			m_Controls.metal = metalCtrl;
 
-			wxSpinCtrl* stoneCtrl = new wxSpinCtrl(this, ID_PlayerStone, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultStone, stoneCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Stone")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxSpinCtrl* stoneCtrl = new wxSpinCtrl(resourceSizer->GetStaticBox(), ID_PlayerStone, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
+			gridSizer->Add(new DefaultCheckbox(resourceSizer->GetStaticBox(), ID_DefaultStone, stoneCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(resourceSizer->GetStaticBox(), wxID_ANY, _("Stone")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(stoneCtrl,
 				_("Initial value of stone resource")), wxSizerFlags().Expand());
 			m_Controls.stone = stoneCtrl;
 
-			wxSpinCtrl* popCtrl = new wxSpinCtrl(this, ID_PlayerPop, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
-			gridSizer->Add(new DefaultCheckbox(this, ID_DefaultPop, popCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-			gridSizer->Add(new wxStaticText(this, wxID_ANY, _("Pop limit")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
+			wxSpinCtrl* popCtrl = new wxSpinCtrl(resourceSizer->GetStaticBox(), ID_PlayerPop, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, INT_MAX);
+			gridSizer->Add(new DefaultCheckbox(resourceSizer->GetStaticBox(), ID_DefaultPop, popCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			gridSizer->Add(new wxStaticText(resourceSizer->GetStaticBox(), wxID_ANY, _("Pop limit")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT));
 			gridSizer->Add(Tooltipped(popCtrl,
 				_("Population limit for this player")), wxSizerFlags().Expand());
 			m_Controls.pop = popCtrl;
@@ -233,10 +234,10 @@ public:
 			// Diplomacy
 			wxStaticBoxSizer* diplomacySizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Diplomacy"));
 			wxBoxSizer* boxSizer = new wxBoxSizer(wxHORIZONTAL);
-			wxChoice* teamCtrl = new wxChoice(this, wxID_ANY);
-			boxSizer->Add(new DefaultCheckbox(this, ID_DefaultTeam, teamCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			wxChoice* teamCtrl = new wxChoice(diplomacySizer->GetStaticBox(), wxID_ANY);
+			boxSizer->Add(new DefaultCheckbox(diplomacySizer->GetStaticBox(), ID_DefaultTeam, teamCtrl), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
 			boxSizer->AddSpacer(5);
-			boxSizer->Add(new wxStaticText(this, wxID_ANY, _("Team")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+			boxSizer->Add(new wxStaticText(diplomacySizer->GetStaticBox(), wxID_ANY, _("Team")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
 			boxSizer->AddSpacer(5);
 			teamCtrl->Append(_("None"));
 			teamCtrl->Append(_T("1"));
@@ -261,14 +262,14 @@ public:
 			// Camera
 			wxStaticBoxSizer* cameraSizer = new wxStaticBoxSizer(wxVERTICAL, this, _("Starting Camera"));
 			wxGridSizer* gridSizer = new wxGridSizer(3);
-			wxButton* cameraSet = new wxButton(this, ID_CameraSet, _("Set"), wxDefaultPosition, wxSize(48, -1));
+			wxButton* cameraSet = new wxButton(cameraSizer->GetStaticBox(), ID_CameraSet, _("Set"), wxDefaultPosition, wxSize(48, -1));
 			gridSizer->Add(Tooltipped(cameraSet,
-				_("Set player camera to this view")), wxSizerFlags().Expand());
-			wxButton* cameraView = new wxButton(this, ID_CameraView, _("View"), wxDefaultPosition, wxSize(48, -1));
+				_("Set player camera to cameraSizer->GetStaticBox() view")), wxSizerFlags().Expand());
+			wxButton* cameraView = new wxButton(cameraSizer->GetStaticBox(), ID_CameraView, _("View"), wxDefaultPosition, wxSize(48, -1));
 			cameraView->Enable(false);
 			gridSizer->Add(Tooltipped(cameraView,
 				_("View the player camera")), wxSizerFlags().Expand());
-			wxButton* cameraClear = new wxButton(this, ID_CameraClear, _("Clear"), wxDefaultPosition, wxSize(48, -1));
+			wxButton* cameraClear = new wxButton(cameraSizer->GetStaticBox(), ID_CameraClear, _("Clear"), wxDefaultPosition, wxSize(48, -1));
 			cameraClear->Enable(false);
 			gridSizer->Add(Tooltipped(cameraClear,
 				_("Clear player camera")), wxSizerFlags().Expand());
@@ -595,14 +596,14 @@ PlayerSettingsControl::PlayerSettingsControl(wxWindow* parent, ScenarioEditor& s
 	SetSizer(sizer);
 
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxHORIZONTAL);
-	boxSizer->Add(new wxStaticText(this, wxID_ANY, _("Num players")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
-	wxSpinCtrl* numPlayersSpin = new wxSpinCtrl(this, ID_NumPlayers, wxEmptyString, wxDefaultPosition, wxSize(40, -1));
+	boxSizer->Add(new wxStaticText(sizer->GetStaticBox(), wxID_ANY, _("Num players")), wxSizerFlags().Align(wxALIGN_CENTER_VERTICAL));
+	wxSpinCtrl* numPlayersSpin = new wxSpinCtrl(sizer->GetStaticBox(), ID_NumPlayers, wxEmptyString, wxDefaultPosition, wxSize(40, -1));
 	numPlayersSpin->SetValue(MAX_NUM_PLAYERS);
 	numPlayersSpin->SetRange(1, MAX_NUM_PLAYERS);
 	boxSizer->Add(numPlayersSpin);
 	sizer->Add(boxSizer, wxSizerFlags().Expand().Proportion(0));
 	sizer->AddSpacer(5);
-	m_Players = new PlayerNotebook(this);
+	m_Players = new PlayerNotebook(sizer->GetStaticBox());
 	sizer->Add(m_Players, wxSizerFlags().Expand().Proportion(1));
 
 	m_InGUIUpdate = false;
