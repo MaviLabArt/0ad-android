@@ -784,22 +784,34 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 	const playerIDs = [];
 	const playerPosition = [];
 	const teamPositions = [];
-	const teamAngles = [];
-	const strongholdRadius = [];
+	const strongholdRadius = teamsArray.map(team => {
+		// If we have a solo player, place them on the center of the team's location
+		if (team.length == 1)
+			return 0;
+
+		// If we have a team of above average size, make sure they're spread out
+		if (team.length > 4)
+			return Math.max(fractionToTiles(0.08), groupedDistance);
+
+		return groupedDistance * 1.2;
+	});
+
+	const distanceBetweenStrongholds = (distance * 2 * Math.PI -
+		2 * strongholdRadius.reduce((a, b) => a + b)) / strongholdRadius.length;
+
+	const relativeTeamAngles = strongholdRadius.map((r1, i) => {
+		return (distanceBetweenStrongholds + strongholdRadius.at(i - 1) + r1) / distance;
+	});
+
+	const teamAngles = relativeTeamAngles.reduce((acc, angle, i) => {
+		acc.push((i === 0 ? startAngle : acc.at(-1)) + angle);
+		return acc;
+	}, []);
 
 	for (let i = 0; i < teamsArray.length; ++i)
 	{
-		const teamAngle = startAngle + (i + 1) * 2 * Math.PI / teamsArray.length;
-		const teamPosition = Vector2D.add(mapCenter, new Vector2D(distance * 0.8, 0).rotate(-teamAngle));
-		let teamGroupDistance = groupedDistance * 1.2;
-
-		// If we have a team of above average size, make sure they're spread out
-		if (teamsArray[i].length > 4)
-			teamGroupDistance = Math.max(fractionToTiles(0.08), groupedDistance);
-
-		// If we have a solo player, place them on the center of the team's location
-		if (teamsArray[i].length == 1)
-			teamGroupDistance = fractionToTiles(0);
+		const teamPosition = Vector2D.add(mapCenter,
+			new Vector2D(distance * 0.8, 0).rotate(-teamAngles[i]));
 
 		// TODO: Ensure players are not placed outside of the map area, similar to placeLine
 
@@ -808,11 +820,10 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 		{
 			const angle = startAngle + (p + 1) * 2 * Math.PI / teamsArray[i].length;
 			playerIDs.push(teamsArray[i][p]);
-			playerPosition.push(Vector2D.add(teamPosition, new Vector2D(teamGroupDistance, 0).rotate(-angle)).round());
+			playerPosition.push(Vector2D.add(teamPosition,
+				new Vector2D(strongholdRadius[i], 0).rotate(-angle)).round());
 		}
 		teamPositions.push(teamPosition);
-		teamAngles.push(teamAngle);
-		strongholdRadius.push(teamGroupDistance);
 	}
 
 	return {
