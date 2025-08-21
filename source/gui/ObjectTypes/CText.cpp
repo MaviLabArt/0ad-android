@@ -27,6 +27,7 @@
 #include "maths/Rect.h"
 #include "maths/Size2D.h"
 
+#include <limits>
 #include <memory>
 #include <string>
 #include <utility>
@@ -120,7 +121,7 @@ CSize2D CText::GetTextSize()
 
 CSize2D CText::GetPreferredTextSize()
 {
-	return CGUIText{m_pGUI, m_Caption, m_Font, m_pGUI.GetWindowSize().Width, m_BufferZone, m_TextAlign, this}.GetSize();
+	return CGUIText{m_pGUI, m_Caption, m_Font, std::numeric_limits<float>::max(), m_BufferZone, m_TextAlign, this}.GetSize();
 }
 
 const CStrW& CText::GetTooltipText() const
