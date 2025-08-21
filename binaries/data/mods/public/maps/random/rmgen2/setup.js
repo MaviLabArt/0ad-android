@@ -82,7 +82,8 @@ export const playerbaseTypes = {
 		"walls": true
 	},
 	"stronghold": {
-		"getPosition": (distance, groupedDistance, startAngle) => placeStronghold(getTeamsArray(), distance, groupedDistance, startAngle),
+		"getPosition": (distance, groupedDistance, startAngle) =>
+			placeStronghold(getTeamsArray(), distance, groupedDistance * 1.7, startAngle),
 		"distance": fractionToTiles(randFloat(0.2, 0.35)),
 		"groupedDistance": fractionToTiles(randFloat(0.08, 0.1)),
 		"walls": false

@@ -609,7 +609,7 @@ function playerPlacementByPattern(patternName, distance = undefined, groupedDist
 	case "groupedLines":
 		return placeLine(getTeamsArray(), distance, groupedDistance, angle);
 	case "stronghold":
-		return placeStronghold(getTeamsArray(), distance, groupedDistance, angle);
+		return placeStronghold(getTeamsArray(), distance, groupedDistance * 1.4, angle);
 	case "randomGroup":
 		return playerPlacementRandom(getPlayerIDs(), undefined);
 	default:
@@ -789,11 +789,7 @@ function placeStronghold(teamsArray, distance, groupedDistance, startAngle)
 		if (team.length == 1)
 			return 0;
 
-		// If we have a team of above average size, make sure they're spread out
-		if (team.length > 4)
-			return Math.max(fractionToTiles(0.08), groupedDistance);
-
-		return groupedDistance * 1.2;
+		return groupedDistance / 2 / Math.sin(Math.PI / team.length);
 	});
 
 	const distanceBetweenStrongholds = (distance * 2 * Math.PI -
