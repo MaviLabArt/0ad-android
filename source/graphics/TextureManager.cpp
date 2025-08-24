@@ -724,59 +724,48 @@ public:
 			}
 		}
 
-		// We'll only push new conversion requests if it's not already busy
-		bool converterBusy = m_TextureConverter.IsBusy();
+		if (m_TextureCache.empty())
+			return false;
 
-		if (!converterBusy)
+		const auto getPriority = [busy = m_TextureConverter.IsBusy()](const CTexturePtr& tex)
 		{
+			// We'll only push new conversion requests if it's not already busy
+
 			// Look for all high-priority textures needing conversion.
-			// (Iterating over all textures isn't optimally efficient, but it
-			// doesn't seem to be a problem yet and it's simpler than maintaining
-			// multiple queues.)
-			for (TextureCache::iterator it = m_TextureCache.begin(); it != m_TextureCache.end(); ++it)
-			{
-				if ((*it)->m_State == CTexture::HIGH_NEEDS_CONVERTING)
-				{
-					// Start converting this texture
-					(*it)->m_State = CTexture::HIGH_IS_CONVERTING;
-					ConvertTexture(*it);
-					return true;
-				}
-			}
-		}
+			if (!busy && tex->m_State == CTexture::HIGH_NEEDS_CONVERTING)
+				return 3;
+			if (tex->m_State == CTexture::PREFETCH_NEEDS_LOADING)
+				return 2;
+			if (!busy && tex->m_State == CTexture::PREFETCH_NEEDS_CONVERTING)
+				return 1;
+			return 0;
+		};
 
-		// Try loading prefetched textures from their cache
-		for (TextureCache::iterator it = m_TextureCache.begin(); it != m_TextureCache.end(); ++it)
+		CTexturePtr highPrioritytexture = std::ranges::max(m_TextureCache, {}, getPriority);
+
+		switch (highPrioritytexture->m_State)
 		{
-			if ((*it)->m_State == CTexture::PREFETCH_NEEDS_LOADING)
-			{
-				if (TryLoadingCached(*it))
-				{
-					(*it)->m_State = CTexture::LOADED;
-				}
-				else
-				{
-					(*it)->m_State = CTexture::PREFETCH_NEEDS_CONVERTING;
-				}
-				return true;
-			}
-		}
+		case CTexture::HIGH_NEEDS_CONVERTING:
+			// Start converting this texture
+			highPrioritytexture->m_State = CTexture::HIGH_IS_CONVERTING;
+			ConvertTexture(highPrioritytexture);
+			return true;
 
-		// If we've got nothing better to do, then start converting prefetched textures.
-		if (!converterBusy)
-		{
-			for (TextureCache::iterator it = m_TextureCache.begin(); it != m_TextureCache.end(); ++it)
-			{
-				if ((*it)->m_State == CTexture::PREFETCH_NEEDS_CONVERTING)
-				{
-					(*it)->m_State = CTexture::PREFETCH_IS_CONVERTING;
-					ConvertTexture(*it);
-					return true;
-				}
-			}
-		}
+		case CTexture::PREFETCH_NEEDS_LOADING:
+			// Try loading prefetched textures from their cache
+			highPrioritytexture->m_State = TryLoadingCached(highPrioritytexture) ? CTexture::LOADED :
+				CTexture::PREFETCH_NEEDS_CONVERTING;
+			return true;
 
-		return false;
+		case CTexture::PREFETCH_NEEDS_CONVERTING:
+			// If we've got nothing better to do, then start converting prefetched textures.
+			highPrioritytexture->m_State = CTexture::PREFETCH_IS_CONVERTING;
+			ConvertTexture(highPrioritytexture);
+			return true;
+
+		default:
+			return false;
+		}
 	}
 
 	bool MakeUploadProgress(
