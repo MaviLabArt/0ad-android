@@ -1379,7 +1379,7 @@ int CMapReader::StartMapGeneration(const CStrW& scriptFile)
 	m_GeneratorState = std::make_unique<GeneratorState>();
 
 	// The settings are stringified to pass them to the task.
-	m_GeneratorState->task = g_TaskManager.PushTask(
+	m_GeneratorState->task = {g_TaskManager,
 		[&progress = m_GeneratorState->progress, scriptFile,
 			settings = Script::StringifyJSON(rq, &m_ScriptSettings)](const StopToken stopToken)
 		{
@@ -1398,7 +1398,7 @@ int CMapReader::StartMapGeneration(const CStrW& scriptFile)
 				}};
 
 			return RunMapGenerationScript(stopToken, progress, mapgenInterface, scriptPath, settings);
-		});
+		}};
 
 	return 0;
 }

@@ -185,7 +185,7 @@ size_t TaskManager::GetNumberOfWorkers() const
 	return m->m_Workers.size();
 }
 
-void TaskManager::DoPushTask(std::function<void()>&& task, TaskPriority priority)
+void TaskManager::PushTask(std::function<void()> task, TaskPriority priority)
 {
 	m->PushTask(std::move(task), priority);
 }

@@ -25,25 +25,37 @@
 #include <new>
 #include <type_traits>
 #include <utility>
+#include <vector>
 
 class TestFuture : public CxxTest::TestSuite
 {
 public:
+	struct TestTaskManager
+	{
+		std::vector<std::function<void()>> tasks;
+		void PushTask(std::function<void()> task)
+		{
+			tasks.push_back(std::move(task));
+		}
+	};
+
 	void test_future_basic()
 	{
 		bool executed{false};
-		Future<void> noret;
-		auto task = noret.Wrap([&]{ executed = true; });
-		task();
+		TestTaskManager ttm;
+		Future noret{ttm, [&]{ executed = true; }};
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
 		TS_ASSERT(executed);
 	}
 
 	void test_future_return()
 	{
+		TestTaskManager ttm;
 		{
-			Future<int> future;
-			std::function<void()> task = future.Wrap([]() { return 1; });
-			task();
+			Future future{ttm, []{ return 1; }};
+			TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+			std::exchange(ttm.tasks, {})[0]();
 			TS_ASSERT_EQUALS(future.Get(), 1);
 		}
 
@@ -64,9 +76,9 @@ public:
 		};
 		TS_ASSERT_EQUALS(destroyed, 0);
 		{
-			Future<NonDef> future;
-			std::function<void()> task = future.Wrap([]() { return NonDef{1}; });
-			task();
+			Future future{ttm, []{ return NonDef{1}; }};
+			TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+			std::exchange(ttm.tasks, {})[0]();
 			TS_ASSERT_EQUALS(future.Get().value, 1);
 		}
 		TS_ASSERT_EQUALS(destroyed, 1);
@@ -86,6 +98,7 @@ public:
 	{
 		Future<int> future;
 		std::function<int()> function;
+		TestTaskManager ttm;
 
 		// Set things up so all temporaries passed into the futures will be reset to obviously invalid memory.
 		std::aligned_storage_t<sizeof(Future<int>), alignof(Future<int>)> futureStorage;
@@ -96,14 +109,14 @@ public:
 		c = new (&functionStorage) std::function<int()>{};
 
 		*c = []() { return 7; };
-		std::function<void()> task = f->Wrap(std::move(*c));
+		*f = {ttm, std::move(*c)};
 
 		future = std::move(*f);
 		function = std::move(*c);
 
-		// Let's move the packaged task while at it.
-		std::function<void()> task2 = std::move(task);
-		task2();
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
+
 		TS_ASSERT_EQUALS(future.Get(), 7);
 
 		// Destroy and clear the memory
@@ -115,8 +128,6 @@ public:
 
 	void test_move_only_function()
 	{
-		Future<int> future;
-
 		class MoveOnlyType
 		{
 		public:
@@ -128,8 +139,11 @@ public:
 			int fn() const { return 7; }
 		};
 
-		auto task = future.Wrap([t = MoveOnlyType{}]{ return t.fn(); });
-		task();
+		TestTaskManager ttm;
+
+		Future future{ttm, [t = MoveOnlyType{}]{ return t.fn(); }};
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
 
 		TS_ASSERT_EQUALS(future.Get(), 7);
 	}
@@ -141,26 +155,28 @@ public:
 
 	void test_exception()
 	{
-		Future<int> future;
-		auto packedTask = future.Wrap([]() -> int
+		TestTaskManager ttm;
+		Future<int> future{ttm, []() -> int
 		{
 			throw TestException{};
-		});
+		}};
 
-		packedTask();
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
 		TS_ASSERT(future.IsDone());
 		TS_ASSERT_THROWS(future.Get(), const TestException&);
 	}
 
 	void test_voidException()
 	{
-		Future<void> future;
-		auto packedTask = future.Wrap([]
+		TestTaskManager ttm;
+		Future<void> future{ttm, []
 		{
 			throw TestException{};
-		});
+		}};
 
-		packedTask();
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
 		TS_ASSERT(future.IsDone());
 		TS_ASSERT_THROWS(future.Get(), const TestException&);
 	}
@@ -180,19 +196,22 @@ public:
 			}
 		};
 
-		Future<ThrowsOnMove> future;
-		auto packedTask = future.Wrap([]
+		TestTaskManager ttm;
+
+		Future<ThrowsOnMove> future{ttm, []
 		{
 			return ThrowsOnMove{};
-		});
+		}};
 
-		packedTask();
+		TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+		std::exchange(ttm.tasks, {})[0]();
 		TS_ASSERT(future.IsDone());
 		TS_ASSERT_THROWS(future.Get(), const TestException&);
 	}
 
 	void test_stop_token_overload()
 	{
+		TestTaskManager ttm;
 		{
 			class DifferentValues
 			{
@@ -207,8 +226,9 @@ public:
 				}
 			};
 
-			Future<bool> future;
-			future.Wrap(DifferentValues{})();
+			Future<bool> future{ttm, DifferentValues{}};
+			TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+			std::exchange(ttm.tasks, {})[0]();
 			TS_ASSERT_EQUALS(future.Get(), true);
 		}
 		{
@@ -223,8 +243,9 @@ public:
 				}
 			};
 
-			Future<bool> future;
-			future.Wrap(DifferentTypes{})();
+			Future<bool> future{ttm, DifferentTypes{}};
+			TS_ASSERT_EQUALS(ttm.tasks.size(), 1);
+			std::exchange(ttm.tasks, {})[0]();
 		}
 	}
 };

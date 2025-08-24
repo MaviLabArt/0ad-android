@@ -861,13 +861,13 @@ void CCmpPathfinder::StartProcessingMoves(bool useMax)
 		ENSURE(!m_Futures[i].Valid());
 		// Pass the i+1th vertex pathfinder to keep the first for the main thread,
 		// each thread get its own instance to avoid conflicts in cached data.
-		m_Futures[i] = g_TaskManager.PushTask(
+		m_Futures[i] = {g_TaskManager,
 			[&pathfinder=*this, &vertexPfr=m_VertexPathfinders[i + 1]]()
 			{
 				PROFILE2("Async pathfinding");
 				pathfinder.m_ShortPathRequests.Compute(pathfinder, vertexPfr);
 				pathfinder.m_LongPathRequests.Compute(pathfinder, *pathfinder.m_LongPathfinder);
-			});
+			}};
 	}
 }
 

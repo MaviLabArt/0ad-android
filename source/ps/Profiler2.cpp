@@ -41,6 +41,7 @@
 #include <cstdio>
 #include <fmt/format.h>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <map>
 #include <set>
@@ -107,18 +108,11 @@ static void* MgCallback(mg_event event, struct mg_connection *conn, const struct
 		std::string uri = request_info->uri;
 
 		if (uri == "/download")
-		{
-			Threading::TaskManager::GetSingleton().PushTask([&]
-			{
-				profiler->SaveToFile();
-			}).Get();
-		}
+			Future{g_TaskManager, std::bind_front(&CProfiler2::SaveToFile, profiler)}.Get();
 		else if (uri == "/overview")
 		{
-			Threading::TaskManager::GetSingleton().PushTask([&]
-			{
-				profiler->ConstructJSONOverview(stream);
-			}).Get();
+			Future{g_TaskManager,
+				std::bind_front(&CProfiler2::ConstructJSONOverview, profiler, std::ref(stream))}.Get();
 		}
 		else if (uri == "/query")
 		{
@@ -138,10 +132,10 @@ static void* MgCallback(mg_event event, struct mg_connection *conn, const struct
 			}
 			std::string thread(buf);
 
-			const char* err = Threading::TaskManager::GetSingleton().PushTask([&]
-			{
-				return profiler->ConstructJSONResponse(stream, thread);
-			}).Get();
+			const char* err = Future{g_TaskManager,
+				std::bind_front(&CProfiler2::ConstructJSONResponse, profiler, std::ref(stream),
+					std::ref(thread))}.Get();
+
 			if (err)
 			{
 				mg_printf(conn, "%s (%s)", header400, err);

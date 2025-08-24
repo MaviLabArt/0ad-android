@@ -18,7 +18,6 @@
 #ifndef INCLUDED_THREADING_TASKMANAGER
 #define INCLUDED_THREADING_TASKMANAGER
 
-#include "ps/Future.h"
 #include "ps/Singleton.h"
 
 #include <cstddef>
@@ -59,18 +58,10 @@ public:
 	/**
 	 * Push a task to be executed.
 	 */
-	template<typename T>
-	Future<CallbackResult<T>> PushTask(T&& func, TaskPriority priority = TaskPriority::NORMAL)
-	{
-		Future<CallbackResult<T>> ret;
-		DoPushTask(ret.Wrap(std::move(func)), priority);
-		return ret;
-	}
+	void PushTask(std::function<void()> func, TaskPriority priority = TaskPriority::NORMAL);
 
 private:
 	TaskManager(size_t numberOfWorkers);
-
-	void DoPushTask(std::function<void()>&& task, TaskPriority priority);
 
 	class Impl;
 	const std::unique_ptr<Impl> m;

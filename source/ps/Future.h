@@ -145,93 +145,6 @@ struct SharedState
 } // namespace FutureSharedStateDetail
 
 /**
- * Corresponds to std::future.
- * Unlike std::future, Future can request the cancellation of the task that would produce the result.
- * This makes it more similar to Java's CancellableTask or C#'s Task.
- * The name Future was kept over Task so it would be more familiar to C++ users,
- * but this all should be revised once Concurrency TS wraps up.
- *
- * Future is _not_ thread-safe. Call it from a single thread or ensure synchronization externally.
- *
- * The callback never runs after the @p Future is destroyed.
- */
-template<typename ResultType>
-class Future
-{
-	template<typename T>
-	friend class PackagedTask;
-
-public:
-	Future() = default;
-	Future(const Future& o) = delete;
-	Future(Future&&) = default;
-	Future& operator=(Future&& other)
-	{
-		CancelOrWait();
-		m_Receiver = std::move(other.m_Receiver);
-		return *this;
-	}
-	~Future()
-	{
-		CancelOrWait();
-	}
-
-	/**
-	 * Make the future wait for the result of @a callback.
-	 */
-	template<typename Callback>
-	PackagedTask<Callback> Wrap(Callback&& callback);
-
-	/**
-	 * Move the result out of the future, and invalidate the future.
-	 * If the future is not complete, calls Wait().
-	 * If the future is invalid, asserts.
-	 */
-	ResultType Get()
-	{
-		ENSURE(!!m_Receiver);
-
-		Wait();
-		// This mark the state invalid - can't call Get again.
-		return std::exchange(m_Receiver, nullptr)->GetResult();
-	}
-
-	/**
-	 * @return true if the shared state is valid and has a result (i.e. Get can be called).
-	 */
-	bool IsDone() const
-	{
-		return !!m_Receiver && m_Receiver->IsDone();
-	}
-
-	/**
-	 * @return true if the future has a shared state and it's not been invalidated, ie. pending, started or done.
-	 */
-	bool Valid() const
-	{
-		return !!m_Receiver;
-	}
-
-	void Wait()
-	{
-		if (Valid())
-			m_Receiver->Wait();
-	}
-
-	void CancelOrWait()
-	{
-		if (!Valid())
-			return;
-		m_Receiver->RequestStop();
-		m_Receiver->Wait();
-		m_Receiver.reset();
-	}
-
-protected:
-	std::shared_ptr<FutureSharedStateDetail::Receiver<ResultType>> m_Receiver;
-};
-
-/**
  * Corresponds somewhat to std::packaged_task.
  * Like packaged_task, this holds a function acting as a promise.
  * This type is mostly just the shared state and the call operator,
@@ -295,18 +208,107 @@ private:
 	std::shared_ptr<FutureSharedStateDetail::SharedState<Callback>> m_SharedState;
 };
 
+/**
+ * Corresponds to std::future.
+ * Unlike std::future, Future can request the cancellation of the task that would produce the result.
+ * This makes it more similar to Java's CancellableTask or C#'s Task.
+ * The name Future was kept over Task so it would be more familiar to C++ users,
+ * but this all should be revised once Concurrency TS wraps up.
+ *
+ * Future is _not_ thread-safe. Call it from a single thread or ensure synchronization externally.
+ *
+ * The callback never runs after the @p Future is destroyed.
+ */
 template<typename ResultType>
-template<typename Callback>
-PackagedTask<Callback> Future<ResultType>::Wrap(Callback&& callback)
+class Future
 {
-	static_assert(std::is_same_v<CallbackResult<Callback>, ResultType>,
+	template<typename T>
+	friend class PackagedTask;
+
+public:
+	Future() = default;
+	Future(const Future& o) = delete;
+	Future(Future&&) = default;
+	Future& operator=(Future&& other)
+	{
+		CancelOrWait();
+		m_Receiver = std::move(other.m_Receiver);
+		return *this;
+	}
+
+	/**
+	 * Make the future wait for the result of @a callback.
+	 */
+	template<typename Callback, typename... Args>
+	Future(auto& taskManager, Callback&& callback, Args&&... args)
+	{
+		static_assert(std::is_same_v<CallbackResult<Callback>, ResultType>,
 		"The return type of the wrapped function is not the same as the type the Future expects.");
-	static_assert(std::is_invocable_v<Callback, StopToken> || !std::is_invocable_v<Callback, StopToken&>,
-		"Consider taking the `StopToken` by value");
-	CancelOrWait();
-	auto temp = std::make_shared<FutureSharedStateDetail::SharedState<Callback>>(std::move(callback));
-	m_Receiver = {temp, &temp->receiver};
-	return PackagedTask<Callback>(std::move(temp));
-}
+		static_assert(std::is_invocable_v<Callback, StopToken> || !std::is_invocable_v<Callback, StopToken&>,
+			"Consider taking the `StopToken` by value");
+
+		auto temp = std::make_shared<FutureSharedStateDetail::SharedState<Callback>>(
+			std::forward<Callback>(callback));
+		m_Receiver = {temp, &temp->receiver};
+
+		taskManager.PushTask(PackagedTask<Callback>(std::move(temp)), std::forward<Args>(args)...);
+	}
+
+	~Future()
+	{
+		CancelOrWait();
+	}
+
+	/**
+	 * Move the result out of the future, and invalidate the future.
+	 * If the future is not complete, calls Wait().
+	 * If the future is invalid, asserts.
+	 */
+	ResultType Get()
+	{
+		ENSURE(!!m_Receiver);
+
+		Wait();
+		// This mark the state invalid - can't call Get again.
+		return std::exchange(m_Receiver, nullptr)->GetResult();
+	}
+
+	/**
+	 * @return true if the shared state is valid and has a result (i.e. Get can be called).
+	 */
+	bool IsDone() const
+	{
+		return !!m_Receiver && m_Receiver->IsDone();
+	}
+
+	/**
+	 * @return true if the future has a shared state and it's not been invalidated, ie. pending, started or done.
+	 */
+	bool Valid() const
+	{
+		return !!m_Receiver;
+	}
+
+	void Wait()
+	{
+		if (Valid())
+			m_Receiver->Wait();
+	}
+
+	void CancelOrWait()
+	{
+		if (!Valid())
+			return;
+		m_Receiver->RequestStop();
+		m_Receiver->Wait();
+		m_Receiver.reset();
+	}
+
+protected:
+	std::shared_ptr<FutureSharedStateDetail::Receiver<ResultType>> m_Receiver;
+};
+
+template<typename Callback, typename... Args>
+Future(auto& taskManager, Callback&& callback, Args&&... args) -> Future<CallbackResult<Callback>>;
 
 #endif // INCLUDED_FUTURE
