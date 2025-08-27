@@ -237,6 +237,9 @@ function horizontallySpaceObjects(parentName, margin = 0)
 function resizeGUIObjectToCaption(object, align, margin = {})
 {
 	const textSize = object.getPreferredTextSize();
+	// Sizes are now floating point, we should limit the value to next int number.
+	textSize.width = Math.ceil(textSize.width);
+	textSize.height = Math.ceil(textSize.height);
 
 	if (align.horizontal)
 	{
