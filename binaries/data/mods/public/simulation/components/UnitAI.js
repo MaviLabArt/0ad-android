@@ -5495,6 +5495,16 @@ UnitAI.prototype.WalkToTarget = function(target, queued, pushFront)
 };
 
 /**
+ * Adds walk-to-target-range order to queue, this only occurs in response
+ * to a player order, and so is forced.
+ */
+UnitAI.prototype.WalkToTargetRange = function(target, iid, type, queued, pushFront)
+{
+	const range = this.GetRange(iid, type, target);
+	this.AddOrder("WalkToTarget", { "target": target, "min": range.min, "max": range.max, "force": true }, queued, pushFront);
+};
+
+/**
  * Adds walk-and-fight order to queue, this only occurs in response
  * to a player order, and so is forced.
  * If targetClasses is given, only entities matching the targetClasses can be attacked.
@@ -5549,7 +5559,7 @@ UnitAI.prototype.Attack = function(target, allowCapture = this.DEFAULT_CAPTURE, 
 		// We don't want to let healers walk to the target unit so they can be easily killed.
 		// Instead we just let them get into healing range.
 		if (this.IsHealer())
-			this.MoveToTargetRange(target, IID_Heal);
+			this.WalkToTargetRange(target, IID_Heal, null, queued, pushFront);
 		else
 			this.WalkToTarget(target, queued, pushFront);
 		return;
