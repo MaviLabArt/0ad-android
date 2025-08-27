@@ -167,9 +167,7 @@ void CTextRenderer::PutString(float x, float y, const std::wstring* buf, bool ow
 	{
 		float x0, y0, x1, y1;
 		m_Font->GetGlyphBounds(x0, y0, x1, y1);
-		if (y + y1 < m_Clipping.top)
-			return;
-		if (y + y0 > m_Clipping.bottom)
+		if (y + y1 < m_Clipping.top && y + y0 > m_Clipping.bottom)
 			return;
 	}
 
