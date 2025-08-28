@@ -3,6 +3,7 @@ Engine.LoadComponentScript("interfaces/ProductionQueue.js");
 Engine.LoadComponentScript("interfaces/Researcher.js");
 Engine.LoadComponentScript("interfaces/Timer.js");
 Engine.LoadComponentScript("interfaces/Trainer.js");
+Engine.LoadComponentScript("interfaces/UnitAI.js");
 Engine.LoadComponentScript("interfaces/Upgrade.js");
 Engine.LoadComponentScript("Timer.js");
 

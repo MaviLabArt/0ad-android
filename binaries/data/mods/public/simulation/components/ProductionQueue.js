@@ -369,6 +369,11 @@ ProductionQueue.prototype.RemoveItem = function(id)
 
 ProductionQueue.prototype.SetAnimation = function(name)
 {
+	// In case the entity has a UnitAI discard the attempted change of
+	// animation as it would interfere with animation logic in UnitAI.
+	if (Engine.QueryInterface(this.entity, IID_UnitAI))
+		return;
+
 	const cmpVisual = Engine.QueryInterface(this.entity, IID_Visual);
 	if (cmpVisual)
 		cmpVisual.SelectAnimation(name, false, 1);
