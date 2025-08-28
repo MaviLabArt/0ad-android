@@ -29,6 +29,7 @@
 #include "lib/debug.h"
 
 #include <algorithm>
+#include <cmath>
 #include <iterator>
 #include <optional>
 #include <utility>
@@ -329,13 +330,13 @@ float CGUIText::GetLineOffset(
 	switch (align)
 	{
 	case EAlign::LEFT:
-		return widthRangeFrom;
+		return std::ceil(widthRangeFrom);
 
 	case EAlign::CENTER:
 		return (widthRangeTo + widthRangeFrom - lineSize.Width) / 2;
 
 	case EAlign::RIGHT:
-		return widthRangeTo - lineSize.Width;
+		return std::floor(widthRangeTo - lineSize.Width);
 
 	default:
 		debug_warn(L"Broken EAlign in CGUIText()");
