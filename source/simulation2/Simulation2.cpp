@@ -430,6 +430,13 @@ void CSimulation2Impl::Update(int turnLength, const std::vector<SimulationComman
 
 		ScriptRequest rq(scriptInterface);
 
+		// Clone InitAttributes.
+		{
+			const ScriptRequest rq2(m_SecondaryComponentManager->GetScriptInterface());
+			const JS::RootedValue initAttributesCloned(rq2.cx, Script::CloneValueFromOtherCompartment(m_SecondaryComponentManager->GetScriptInterface(), scriptInterface, m_InitAttributes));
+			m_SecondaryComponentManager->GetScriptInterface().SetGlobal("InitAttributes", initAttributesCloned, true, true, true);
+		}
+
 		// Load the trigger scripts after we have loaded the simulation.
 		{
 			ScriptRequest rq2(m_SecondaryComponentManager->GetScriptInterface());
