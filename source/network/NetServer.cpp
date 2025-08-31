@@ -1594,6 +1594,21 @@ void CNetServerWorker::PreStartGame(const CStr& initAttribs)
 
 	for (CNetServerSession* session : m_Sessions)
 	{
+		// InitialiseClient makes the NetServerTurnManager wait for this client.
+		// But we only want to wait for clients who have passed authentication, i.e. who have the correct password.
+		// Therefore we may not call InitialiseClient for unauthenticated clients.
+		if (session->GetCurrState() != NSS_PREGAME)
+		{
+			// We only support clients joining before or after, not during the loading screen.
+			// Therefore we have to disconnect clients who did not complete the authentication yet.
+			LOGMESSAGE("Dropping client (%s / %s / %d) not in NSS_PREGAME when starting the game",
+				session->GetUserName().ToUTF8().c_str(),
+				session->GetGUID().c_str(),
+				session->GetHostID());
+			session->Disconnect(NDR_SERVER_LOADING);
+			continue;
+		}
+
 		// Special case: the controller shouldn't be treated as an observer in any case.
 		bool isObserver = m_PlayerAssignments[session->GetGUID()].m_PlayerID == -1 && m_ControllerGUID != session->GetGUID();
 		m_ServerTurnManager->InitialiseClient(session->GetHostID(), 0, isObserver);
