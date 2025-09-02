@@ -10,28 +10,7 @@
   <Obstruction>
     <Static width="26.0" depth="26.0"/>
   </Obstruction>
-  <Researcher>
-    <Technologies datatype="tokens">
-      -fishing_boat_gather_rate
-      -fishing_boat_gather_capacity
-      -dock_efficiency
-      -arsenal_philon
-      -juggernauts
-      -ship_vision
-      -exploration
-      -ship_health
-      -warship_arrow_attack
-      -warship_ramming_speed
-      -warship_ramming_attack
-      -warship_resistance
-      -warship_health
-      -warship_fireship_attack
-      -warship_siege_attack
-      -warship_ranged_attack
-      -equine_transports
-      -iphicratean_reforms
-    </Technologies>
-  </Researcher>
+  <Researcher disable=""/>
   <Trainer>
     <BatchTimeModifier>0.8</BatchTimeModifier>
     <Entities datatype="tokens">

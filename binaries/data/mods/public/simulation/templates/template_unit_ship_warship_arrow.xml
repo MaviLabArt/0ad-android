@@ -22,7 +22,7 @@
     <Population>1</Population>
     <BuildTime>24</BuildTime>
     <Resources>
-      <wood>120</wood>
+      <wood>100</wood>
       <metal>100</metal>
     </Resources>
   </Cost>
@@ -38,7 +38,7 @@
     <GenericName>Arrow Ship</GenericName>
     <VisibleClasses datatype="tokens">ArrowShip Ranged</VisibleClasses>
     <Classes datatype="tokens">Trireme</Classes>
-    <Tooltip>Counters: 3× vs Ships. Garrison units for transport across water. Strong against Fire Ships.</Tooltip>
+    <Tooltip>Counters: 3× vs Ships. Garrison units for transport across water.</Tooltip>
     <Requirements>
       <Techs datatype="tokens">
         phase_town
@@ -63,7 +63,7 @@
     </Entity>
   </Resistance>
   <UnitMotion>
-    <WalkSpeed op="mul">1.5</WalkSpeed>
-    <Acceleration op="mul">4</Acceleration>
+    <WalkSpeed op="mul">1.4</WalkSpeed>
+    <Acceleration op="mul">5.0</Acceleration>
   </UnitMotion>
 </Entity>

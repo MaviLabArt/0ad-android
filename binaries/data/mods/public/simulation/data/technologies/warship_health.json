@@ -1,5 +1,4 @@
 {
-	"supersedes": "warship_resistance",
 	"genericName": "Undergirding Cables",
 	"specificName": {
 		"athen": "Hypozomata",
@@ -12,7 +11,7 @@
 	},
 	"description": "The hypozomata brace the structure of a ship.",
 	"cost": {
-		"metal": 500
+		"metal": 400
 	},
 	"requirements": {
 		"all": [
@@ -20,19 +19,20 @@
 			{
 				"any": [
 					{ "civ": "athen" },
+					{ "civ": "cart" },
 					{ "civ": "mace" },
-					{ "civ": "pers" },
+					{ "civ": "rome" },
 					{ "civ": "spart" }
 				]
 			}
 		]
 	},
-	"requirementsTooltip": "Unlocked in City Phase. Requires “Ship Cladding.”",
+	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "armor_ship_bronze.png",
 	"researchTime": 40,
-	"tooltip": "Arrow Ships and Ramming Ships +25% health.",
+	"tooltip": "Arrow Ships and Ramming Ships +20% health.",
 	"modifications": [
-		{ "value": "Health/Max", "multiply": 1.25 }
+		{ "value": "Health/Max", "multiply": 1.2 }
 	],
 	"affects": [
 		"ArrowShip",

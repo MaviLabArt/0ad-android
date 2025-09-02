@@ -1,13 +1,25 @@
 {
-	"genericName": "Experienced Crews",
-	"description": "Train your oarsmen and sailors to move more efficiently and speed up your ships.",
+	"supersedes": "dock_efficiency",
+	"genericName": "Phoenician Naval Tradition",
+	"description": "The Phoenician cities had a tradition of seafaring which spanned a thousand years.",
 	"cost": {
-		"food": 500
+		"food": 200,
+		"wood": 200
 	},
-	"requirements": { "tech": "phase_city" },
-	"requirementsTooltip": "Unlocked in City Phase.",
+	"requirements": {
+		"all": [
+			{ "tech": "phase_town" },
+			{
+				"any": [
+					{ "civ": "cart" },
+					{ "civ": "pers" }
+				]
+			}
+		]
+	},
+	"requirementsTooltip": "Unlocked in Town Phase. Requires “Shipwrights.”",
 	"icon": "trihemiolia.png",
-	"researchTime": 60,
+	"researchTime": 40,
 	"tooltip": "Ships +10% movement speed.",
 	"modifications": [
 		{ "value": "UnitMotion/WalkSpeed", "multiply": 1.1 }

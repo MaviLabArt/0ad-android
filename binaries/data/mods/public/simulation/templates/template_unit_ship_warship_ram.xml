@@ -5,9 +5,9 @@
     <Melee>
       <AttackName>Naval Ram</AttackName>
       <Damage>
-        <Hack>350</Hack>
+        <Hack>320</Hack>
         <Pierce>0.0</Pierce>
-        <Crush>70</Crush>
+        <Crush>50</Crush>
       </Damage>
       <MaxRange>12.0</MaxRange>
       <PrepareTime>0</PrepareTime>
@@ -44,7 +44,7 @@
   </Health>
   <Identity>
     <GenericName>Ramming Ship</GenericName>
-    <Tooltip>Garrison units for transport across water. Strong against Arrow Ships.</Tooltip>
+    <Tooltip>Garrison units for transport across water.</Tooltip>
     <VisibleClasses datatype="tokens">NavalRam Melee</VisibleClasses>
     <Classes datatype="tokens">Trireme</Classes>
     <Requirements>

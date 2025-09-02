@@ -21,7 +21,7 @@
 			{ "notciv": "spart" }
 		]
 	},
-	"requirementsTooltip": "Unlocked in City Phase. Requires “Naval Construction.”",
+	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "incendiary_weapons.png",
 	"researchTime": 40,
 	"tooltip": "Fire Ships +25% health and +25% attack damage.",

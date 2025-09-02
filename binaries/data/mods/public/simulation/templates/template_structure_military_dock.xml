@@ -50,21 +50,20 @@
       fishing_boat_gather_rate
       fishing_boat_gather_capacity
       dock_efficiency
+      ship_health
       arsenal_philon
       juggernauts
+      ship_movement_speed
       ship_vision
       exploration
-      ship_health
       warship_arrow_attack
-      warship_ramming_speed
       warship_ramming_attack
-      warship_resistance
-      warship_health
       warship_fireship_attack
       warship_siege_attack
       warship_ranged_attack
-      equine_transports
+      warship_health
       iphicratean_reforms
+      equine_transports
     </Technologies>
   </Researcher>
   <ResourceDropsite>

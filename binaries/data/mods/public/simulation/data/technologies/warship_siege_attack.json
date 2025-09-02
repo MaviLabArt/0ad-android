@@ -2,8 +2,8 @@
 	"genericName": "Naval Ballistae",
 	"description": "Mounting stronger catapults onto ships helped give added firepower.",
 	"cost": {
-		"wood": 400,
-		"metal": 400
+		"wood": 300,
+		"metal": 300
 	},
 	"requirements": {
 		"all": [
@@ -11,6 +11,7 @@
 			{ "notciv": "athen" },
 			{ "notciv": "brit" },
 			{ "notciv": "gaul" },
+			{ "notciv": "germ" },
 			{ "notciv": "iber" },
 			{ "notciv": "kush" },
 			{ "notciv": "mace" },

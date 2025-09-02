@@ -19,7 +19,7 @@
 	"requirementsTooltip": "Unlocked in Town Phase.",
 	"icon": "calipers.png",
 	"researchTime": 40,
-	"tooltip": "Docks work 20% faster (Ships −20% build time; Technologies −20% research time) and are built 20% faster.",
+	"tooltip": "Docks work 20% faster (Ships −20% build time; Technologies −20% research time) and are built 20% faster. Unlocks special naval technologies for some civilizations.",
 	"modifications": [
 		{ "value": "Cost/BuildTime", "multiply": 0.8, "affects": "Ship" },
 		{ "value": "Cost/BuildTime", "multiply": 0.8, "affects": "Dock" },

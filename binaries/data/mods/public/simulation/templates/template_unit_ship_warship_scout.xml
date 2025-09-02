@@ -2,6 +2,7 @@
 <Entity parent="template_unit_ship_warship">
   <Attack>
     <Ranged>
+      <MaxRange op="add">-8.0</MaxRange>
       <PreferredClasses datatype="tokens">-Human</PreferredClasses>
       <PrepareTime op="mul">0.25</PrepareTime>
       <Bonuses>
@@ -17,7 +18,7 @@
     <BuildTime>12</BuildTime>
     <Resources>
       <food>50</food>
-      <wood>80</wood>
+      <wood>50</wood>
     </Resources>
   </Cost>
   <GarrisonHolder>
@@ -33,7 +34,7 @@
     <Tooltip>Counters: 3× vs Ships. Scout for coastlines. Garrison units for transport across water.</Tooltip>
     <Requirements>
       <Techs datatype="tokens">
-        phase_town
+        phase_village
       </Techs>
     </Requirements>
   </Identity>

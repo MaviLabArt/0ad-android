@@ -1,5 +1,4 @@
 {
-	"supersedes": "warship_ramming_speed",
 	"genericName": "Bronze Ram",
 	"specificName": {
 		"athen": "Embolon",
@@ -12,7 +11,6 @@
 	},
 	"description": "A bronze beak at the prow of the ship, used for ramming enemy ships.",
 	"cost": {
-		"wood": 400,
 		"metal": 400
 	},
 	"requirements": {
@@ -20,6 +18,7 @@
 			{ "tech": "phase_city" },
 			{ "notciv": "brit" },
 			{ "notciv": "gaul" },
+			{ "notciv": "germ" },
 			{ "notciv": "han" },
 			{ "notciv": "iber" },
 			{ "notciv": "kush" },
@@ -27,7 +26,7 @@
 			{ "notciv": "germ" }
 		]
 	},
-	"requirementsTooltip": "Unlocked in City Phase. Requires “Flanking Maneuvers.”",
+	"requirementsTooltip": "Unlocked in City Phase.",
 	"icon": "ship_ram.png",
 	"researchTime": 40,
 	"tooltip": "Ramming Ships +30% attack damage.",

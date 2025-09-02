@@ -8,10 +8,11 @@
 	"requirements": {
 		"all": [
 			{ "tech": "phase_city" },
+			{ "tech": "dock_efficiency" },
 			{ "civ": "pers" }
 		]
 	},
-	"requirementsTooltip": "Unlocked in City Phase.",
+	"requirementsTooltip": "Unlocked in City Phase. Requires “Shipwrights.”",
 	"icon": "horse_rider.png",
 	"researchTime": 60,
 	"tooltip": "Phoenician Triremes gain the ability to train Cavalry.",
