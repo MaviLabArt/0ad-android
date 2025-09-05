@@ -39,11 +39,11 @@ class ChatOverlay
 				this.chatLines[i].caption = chatMessage.text;
 				const newSize = this.chatLines[i].getPreferredTextSize();
 
-				Object.assign(this.chatLines[i].size, {
+				this.chatLines[i].size = {
 					"top": i * newSize.height,
 					"bottom": (i + 1) * newSize.height,
-					"right": this.chatLines[i].size.left + newSize.width
-				});
+					"right": newSize.width
+				};
 
 				if (chatMessage.callback)
 					this.chatLines[i].onPress = chatMessage.callback;
