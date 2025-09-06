@@ -16,7 +16,8 @@
 			{ "notciv": "mace" },
 			{ "notciv": "maur" },
 			{ "notciv": "pers" },
-			{ "notciv": "spart" }
+			{ "notciv": "spart" },
+			{ "notciv": "germ" }
 		]
 	},
 	"requirementsTooltip": "Unlocked in City Phase.",

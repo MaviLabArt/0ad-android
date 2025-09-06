@@ -9,6 +9,7 @@
 		"all": [
 			{ "tech": "phase_city" },
 			{ "notciv": "brit" },
+			{ "notciv": "germ" },
 			{ "notciv": "gaul" },
 			{ "notciv": "iber" },
 			{ "notciv": "kush" },

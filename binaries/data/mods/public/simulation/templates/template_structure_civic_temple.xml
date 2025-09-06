@@ -51,6 +51,7 @@
       heal_rate_2
       garrison_heal
       health_regen_units
+      grove_of_fetters
     </Technologies>
   </Researcher>
   <Sound>

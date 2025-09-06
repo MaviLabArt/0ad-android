@@ -22,6 +22,8 @@
     </variant>
   </group>
   <group>
+	<variant file="biped/base_axeman_shield_fast_ready.xml" name="Axeman-Shield-Fast-Ready" frequency="1"/>
+    <variant file="biped/base_axeman_shield_fast_relax.xml" name="Axeman-Shield-Fast-Relax" frequency="1"/>
     <variant file="biped/base_spearman_shield_relax_ptol.xml" name="Spearman-Shield-Relax-Ptol" frequency="1"/>
     <variant file="biped/base_spearman_shield_ready.xml" name="Spearman-Shield-Ready" frequency="1"/>
     <variant file="biped/base_spearman_shield_relax.xml" name="Spearman-Shield-Relax" frequency="1"/>

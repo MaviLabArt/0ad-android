@@ -23,7 +23,8 @@
 			{ "notciv": "han" },
 			{ "notciv": "iber" },
 			{ "notciv": "kush" },
-			{ "notciv": "maur" }
+			{ "notciv": "maur" },
+			{ "notciv": "germ" }
 		]
 	},
 	"requirementsTooltip": "Unlocked in City Phase. Requires “Flanking Maneuvers.”",
