@@ -7,6 +7,7 @@
   <Identity>
     <GenericName>Mausoleum at Halicarnassus</GenericName>
     <SpecificName>Mausōleion</SpecificName>
+    <Icon>structures/wonder_special.png</Icon>
   </Identity>
   <Obstruction>
     <Static width="36" depth="44"/>

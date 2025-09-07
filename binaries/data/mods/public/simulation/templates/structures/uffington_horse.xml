@@ -8,6 +8,7 @@
   <Identity>
     <Civ>brit</Civ>
     <SpecificName>Uffington White Horse</SpecificName>
+    <Icon>structures/wonder_special.png</Icon>
   </Identity>
   <Obstruction>
     <Static width="60.0" depth="30.0"/>
