@@ -5,7 +5,6 @@
  *
  * -autostart="TYPEDIR/MAPNAME"    enables autostart and sets MAPNAME;
  *                                 TYPEDIR is skirmishes, scenarios, or random
- * -autostart-biome=BIOME          sets BIOME for a random map
  * -autostart-seed=SEED            sets randomization seed value (default 0, use -1 for random)
  * -autostart-ai=PLAYER:AI         sets the AI for PLAYER (e.g. 2:petra)
  * -autostart-aidiff=PLAYER:DIFF   sets the DIFFiculty of PLAYER's AI
@@ -48,6 +47,7 @@
  * -autostart-players=NUMBER       sets NUMBER of players on random map
  *                                 (default 2)
  * -autostart-placement=PLACEMENT  sets the placement type for a random map
+ * -autostart-biome=BIOME          sets the biome for a random map
  *
  * Examples:
  * 1) "Bob" will host a 2 player game on the Arcadia map:
@@ -73,9 +73,7 @@ function parseCmdLineArgs(settings, cmdLineArgs)
 	}[mapType]);
 	// eslint-disable-next-line dot-notation
 	settings.map.selectMap("maps/" + cmdLineArgs['autostart']);
-	settings.mapSize.setSize(+(cmdLineArgs['autostart-size'] ?? 192));
-	settings.biome.setBiome(cmdLineArgs['autostart-biome'] || "random");
-	settings.playerPlacement.setValue(cmdLineArgs['autostart-placement']);
+
 	if ('autostart-visibility' in cmdLineArgs)
 	{
 		switch (cmdLineArgs['autostart-visibility'])
@@ -110,7 +108,17 @@ function parseCmdLineArgs(settings, cmdLineArgs)
 		}
 	}
 
-	settings.playerCount.setNb(+(cmdLineArgs['autostart-players'] ?? 2));
+	// Handle options specific to random maps
+	if (mapType === "random")
+	{
+		settings.mapSize.setSize(+(cmdLineArgs['autostart-size'] ?? 192));
+		settings.biome.setBiome(cmdLineArgs['autostart-biome'] || "random");
+		settings.playerPlacement.setValue(cmdLineArgs['autostart-placement']);
+
+		// If not specified, random maps are generated for 2 players
+		if (cmdLineArgs['autostart-players'])
+			settings.playerCount.setNb(+cmdLineArgs['autostart-players']);
+	}
 
 	const getPlayer = (key, i) => {
 		if (!(('autostart-' + key) in cmdLineArgs))

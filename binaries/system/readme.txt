@@ -8,7 +8,6 @@ Basic gameplay:
 
 Autostart:
 -autostart="TYPEDIR/MAPNAME"    enables autostart and sets MAPNAME; TYPEDIR is skirmishes, scenarios, or random
--autostart-biome=BIOME          sets BIOME for a random map
 -autostart-seed=SEED            sets randomization seed value (default 0, use -1 for random)
 -autostart-ai=PLAYER:AI         sets the AI for PLAYER (e.g. 2:petra)
 -autostart-aidiff=PLAYER:DIFF   sets the DIFFiculty of PLAYER's AI (default 3, 0: sandbox, 5: very hard)
@@ -35,6 +34,7 @@ Multiplayer:
 -autostart-size=TILES           sets random map size in TILES (default 192)
 -autostart-players=NUMBER       sets NUMBER of players on random map (default 2)
 -autostart-placement=PLACEMENT  sets the placement type for a random map
+-autostart-biome=BIOME          sets the biome for a random map
 
 Examples:
 1) "Bob" will host a 2 player game on the Arcadia map:
