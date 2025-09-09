@@ -38,6 +38,25 @@ function cancelOr(costumPromise)
 	})]);
 }
 
+async function waitOnEvent(loadSavedGame)
+{
+	while (true)
+	{
+		await cancelOr(new Promise(resolve => {
+			Engine.GetGUIObjectByName("multiplayerPages").onTick = async() => {
+				if (await onTick(loadSavedGame))
+					resolve();
+			};
+			Engine.GetGUIObjectByName("continueButton").onPress = () => {
+				if (confirmSetup(loadSavedGame))
+					resolve();
+			};
+		}));
+		if (cancelSetup())
+			return;
+	}
+}
+
 async function init(attribs)
 {
 	g_UserRating = attribs.rating;
@@ -90,21 +109,7 @@ async function init(attribs)
 		break;
 	}
 
-	while (true)
-	{
-		await cancelOr(new Promise(resolve => {
-			Engine.GetGUIObjectByName("multiplayerPages").onTick = async() => {
-				if (await onTick(attribs.loadSavedGame))
-					resolve();
-			};
-			Engine.GetGUIObjectByName("continueButton").onPress = () => {
-				if (confirmSetup(attribs.loadSavedGame))
-					resolve();
-			};
-		}));
-		if (cancelSetup())
-			return;
-	}
+	await waitOnEvent(attribs.loadSavedGame);
 }
 
 function cancelSetup()
