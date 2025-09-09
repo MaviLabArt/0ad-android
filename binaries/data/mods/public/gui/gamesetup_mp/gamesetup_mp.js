@@ -24,6 +24,20 @@ var g_IsRejoining = false;
 var g_PlayerAssignments; // used when rejoining
 var g_UserRating;
 
+const cancelTag = Symbol("cancelTag");
+
+/**
+ * When the cancel button is pressed the returned promise will resolve to
+ * `cancelTag`. When the passed in promise resolves the returned promise will
+ * resolve to that result.
+ */
+function cancelOr(costumPromise)
+{
+	return Promise.race([costumPromise, new Promise(resolve => {
+		Engine.GetGUIObjectByName("cancelButton").onPress = resolve.bind(undefined, cancelTag);
+	})]);
+}
+
 async function init(attribs)
 {
 	g_UserRating = attribs.rating;
@@ -42,9 +56,17 @@ async function init(attribs)
 			g_ServerName = attribs.name;
 			g_ServerId = attribs.hostJID;
 			switchSetupPage("pagePassword");
+			const passwordResult = await cancelOr(new Promise(resolve => {
+				Engine.GetGUIObjectByName("confirmPasswordButton").onPress = resolve;
+			}));
+			if (passwordResult === cancelTag)
+				return;
 		}
-		else if (startJoinFromLobby(attribs.name, attribs.hostJID, ""))
+		if (startJoinFromLobby(attribs.name, attribs.hostJID,
+			attribs.hasPassword ? Engine.GetGUIObjectByName("clientPassword").caption : ""))
+		{
 			switchSetupPage("pageConnecting");
+		}
 		else if (cancelSetup())
 			return;
 		break;
@@ -70,8 +92,7 @@ async function init(attribs)
 
 	while (true)
 	{
-		await new Promise(resolve => {
-			Engine.GetGUIObjectByName("cancelButton").onPress = resolve;
+		await cancelOr(new Promise(resolve => {
 			Engine.GetGUIObjectByName("multiplayerPages").onTick = async() => {
 				if (await onTick(attribs.loadSavedGame))
 					resolve();
@@ -80,11 +101,7 @@ async function init(attribs)
 				if (confirmSetup(attribs.loadSavedGame))
 					resolve();
 			};
-			Engine.GetGUIObjectByName("confirmPasswordButton").onPress = () => {
-				if (confirmPassword())
-					resolve();
-			};
-		});
+		}));
 		if (cancelSetup())
 			return;
 	}
@@ -112,18 +129,6 @@ function cancelSetup()
 	else
 		error("cancelSetup: Unrecognized multiplayer game type: " + g_GameType);
 	return false;
-}
-
-function confirmPassword()
-{
-	if (Engine.GetGUIObjectByName("pagePassword").hidden)
-		return false;
-	if (startJoinFromLobby(g_ServerName, g_ServerId, Engine.GetGUIObjectByName("clientPassword").caption))
-	{
-		switchSetupPage("pageConnecting");
-		return false;
-	}
-	return true;
 }
 
 function confirmSetup(loadSavedGame)
