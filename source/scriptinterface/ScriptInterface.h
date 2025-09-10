@@ -24,7 +24,6 @@
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <functional>
 #include <js/CallArgs.h>

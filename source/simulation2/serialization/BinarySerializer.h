@@ -25,7 +25,6 @@
 #include "lib/debug.h"
 #include "lib/types.h"
 #include "maths/Fixed.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "simulation2/system/Component.h"
 
 #include <cstddef>

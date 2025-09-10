@@ -23,7 +23,6 @@
 #include "lib/path.h"
 #include "ps/CStr.h"
 #include "scriptinterface/ScriptExceptions.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 
 #include <cstddef>

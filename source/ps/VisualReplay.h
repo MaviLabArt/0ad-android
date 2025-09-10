@@ -19,7 +19,6 @@
 #define INCLUDED_VISUAL_REPLAY
 
 #include "lib/os_path.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/TypeDecls.h>
 

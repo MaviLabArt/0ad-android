@@ -33,7 +33,6 @@
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptStats.h"
 #include "scriptinterface/StructuredClone.h"
 

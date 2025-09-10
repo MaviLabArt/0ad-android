@@ -20,10 +20,16 @@
 
 #include "lib/debug.h"
 #include "ps/Singleton.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/Initialization.h>
 #include <list>
+
+#if MOZJS_MAJOR_VERSION != 128
+#error Your compiler is trying to use an incorrect major version of the \
+SpiderMonkey library. The SpiderMonkey API is subject to changes, and the \
+game will not build with the selected version of the library. Make sure \
+you have got all the right files and include paths.
+#endif
 
 struct JSContext;
 

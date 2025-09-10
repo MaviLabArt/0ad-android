@@ -22,7 +22,6 @@
 #include "lib/posix/posix_types.h"
 #include "lib/types.h"
 #include "ps/CStr.h"
-#include "scriptinterface/ScriptTypes.h"
 
 class ScriptInterface;
 namespace JS { class Value; }

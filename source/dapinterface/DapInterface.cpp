@@ -31,7 +31,6 @@
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
 #include "scriptinterface/ScriptExceptions.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 

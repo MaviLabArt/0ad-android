@@ -23,12 +23,12 @@
 #include "ps/CLogger.h"
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <cwchar>
 #include <js/Array.h>
 #include <js/GCVector.h>
 #include <js/Id.h>
+#include <js/Object.h>
 #include <js/PropertyAndElement.h>
 #include <js/PropertyDescriptor.h>
 #include <js/RootingAPI.h>

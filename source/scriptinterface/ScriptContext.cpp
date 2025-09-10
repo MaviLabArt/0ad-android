@@ -29,7 +29,6 @@
 #include "scriptinterface/ModuleLoader.h"
 #include "scriptinterface/Promises.h"
 #include "scriptinterface/ScriptEngine.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 
 #include <js/Context.h>
 #include <js/GCAPI.h>

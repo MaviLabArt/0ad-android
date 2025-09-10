@@ -27,7 +27,6 @@
 #include "ps/Filesystem.h"
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/InterfaceScripted.h"

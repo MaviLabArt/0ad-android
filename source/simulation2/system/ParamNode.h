@@ -22,7 +22,6 @@
 #include "lib/types.h"
 #include "maths/Fixed.h"
 #include "ps/Errors.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <cstddef>
 #include <iosfwd>

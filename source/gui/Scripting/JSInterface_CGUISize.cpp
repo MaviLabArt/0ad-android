@@ -33,7 +33,6 @@
 #include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <fmt/format.h>
 #include <js/CallArgs.h>

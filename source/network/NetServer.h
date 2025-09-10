@@ -23,7 +23,6 @@
 #include "lib/types.h"
 #include "network/NetHost.h"
 #include "ps/CStr.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <ctime>
 #include <js/RootingAPI.h>

@@ -26,7 +26,6 @@
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptConversions.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 
 #include <js/CallAndConstruct.h>

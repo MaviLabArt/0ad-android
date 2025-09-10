@@ -31,7 +31,6 @@
 #include "ps/CLogger.h"
 #include "ps/Profiler2.h"
 #include "scriptinterface/Object.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "soundmanager/ISoundManager.h"
 

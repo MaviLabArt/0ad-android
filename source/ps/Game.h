@@ -23,7 +23,6 @@
 #include "lib/types.h"
 #include "ps/CStr.h"
 #include "ps/Errors.h"
-#include "scriptinterface/ScriptTypes.h"
 #include "simulation2/helpers/Player.h"
 
 #include <algorithm>

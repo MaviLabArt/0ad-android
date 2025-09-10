@@ -6,6 +6,15 @@ cppcheckError:./source/lib/file/file_system.cpp
 
 *:source/third_party/*
 
+// Ignore SpiderMonkey version compile check
+
+preprocessorErrorDirective:source/scriptinterface/ScriptEngine.h
+
+// Lists of network/simulation messages are included in other files which define macros
+
+unknownMacro:source/network/NetMessages.h
+unknownMacro:source/simulation2/TypeList.h
+
 // Issues reported by cppcheck and not yet fixed
 
 danglingLifetime:source/lib/sysdep/os/unix/ufilesystem.cpp
@@ -34,7 +43,6 @@ preprocessorErrorDirective:source/lib/sysdep/arch.h
 preprocessorErrorDirective:source/lib/sysdep/arch/x86_x64/x86_x64.h
 preprocessorErrorDirective:source/lib/sysdep/os/win/win.h
 preprocessorErrorDirective:source/network/NMTCreator.h
-preprocessorErrorDirective:source/scriptinterface/ScriptTypes.h
 preprocessorErrorDirective:source/tools/atlas/AtlasUI/CustomControls/Windows/AtlasWindow.h
 
 returnDanglingLifetime:source/lib/file/vfs/vfs_tree.cpp
@@ -53,4 +61,3 @@ unknownMacro:source/lib/sysdep/os/win/wdbg_sym.cpp
 unknownMacro:source/lib/sysdep/os/win/wfirmware.cpp
 unknownMacro:source/lib/sysdep/os/win/wposix/wutsname.cpp
 unknownMacro:source/ps/CStr.cpp
-unknownMacro:source/simulation2/TypeList.h

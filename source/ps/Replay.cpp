@@ -42,7 +42,6 @@
 #include "scriptinterface/JSON.h"
 #include "scriptinterface/Object.h"
 #include "scriptinterface/ScriptContext.h"
-#include "scriptinterface/ScriptConversions.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "scriptinterface/ScriptStats.h"
@@ -55,7 +54,6 @@
 
 #include <ctime>
 #include <fstream>
-#include <js/Value.h>
 #include <memory>
 
 /**

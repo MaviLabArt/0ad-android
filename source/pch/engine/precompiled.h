@@ -26,7 +26,6 @@
 #include "ps/Errors.h"
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/file/vfs/vfs_util.h"
-#include "scriptinterface/ScriptTypes.h"
 #endif // CONFIG_ENABLE_PCH
 
 // IWYU pragma: end_keep

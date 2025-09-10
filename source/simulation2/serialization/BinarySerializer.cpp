@@ -23,7 +23,6 @@
 #include "ps/CLogger.h"
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/JSON.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/serialization/SerializedScriptTypes.h"
 

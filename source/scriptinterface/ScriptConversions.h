@@ -23,7 +23,6 @@
 #include "lib/types.h"
 #include "ps/CStr.h"
 #include "scriptinterface/ScriptExceptions.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptRequest.h"
 
 #include <js/Array.h>

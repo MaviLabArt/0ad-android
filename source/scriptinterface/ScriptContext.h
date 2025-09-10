@@ -18,9 +18,6 @@
 #ifndef INCLUDED_SCRIPTCONTEXT
 #define INCLUDED_SCRIPTCONTEXT
 
-#include "scriptinterface/ScriptExtraHeaders.h"
-#include "scriptinterface/ScriptTypes.h"
-
 #include <cstdint>
 #include <list>
 #include <memory>

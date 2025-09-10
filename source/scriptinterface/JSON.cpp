@@ -30,7 +30,6 @@
 #include "scriptinterface/FunctionWrapper.h"
 #include "scriptinterface/ScriptExceptions.h"
 #include "scriptinterface/ScriptRequest.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/Exception.h>
 #include <js/JSON.h>

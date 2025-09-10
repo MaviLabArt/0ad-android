@@ -33,7 +33,6 @@
 #include "lib/input.h"
 #include "maths/Rect.h"
 #include "ps/CStr.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>

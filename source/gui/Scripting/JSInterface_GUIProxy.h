@@ -20,10 +20,10 @@
 
 #include "gui/ObjectBases/IGUIObject.h"
 #include "lib/sysdep/compiler.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 
 #include <js/GCVector.h>
 #include <js/Id.h>
+#include <js/PropertyDescriptor.h>
 #include <js/Proxy.h>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>

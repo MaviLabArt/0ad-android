@@ -21,11 +21,11 @@
 #include "lib/code_annotation.h"
 #include "lib/os_path.h"
 #include "lib/types.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <iosfwd>
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>
+#include <js/Value.h>
 #include <string>
 #include <vector>
 

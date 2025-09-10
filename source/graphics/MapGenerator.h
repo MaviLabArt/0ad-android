@@ -20,7 +20,6 @@
 
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/types.h"
-#include "scriptinterface/ScriptTypes.h"
 #include "scriptinterface/StructuredClone.h"
 
 #include <atomic>

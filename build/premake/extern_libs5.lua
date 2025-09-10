@@ -643,6 +643,17 @@ extern_lib_defs = {
 	},
 	spidermonkey = {
 		compile_settings = function()
+			-- This define is not supposed to be needed anymore, but it leaks into the
+			-- SpiderMonkey headers, and is necessary to build with ESR140 at the time
+			-- of writing (https://bugzilla.mozilla.org/show_bug.cgi?id=1987876).
+			filter "system:windows"
+				defines { "XP_WIN" }
+			filter { }
+
+			filter "Debug"
+				defines { "MOZ_DIAGNOSTIC_ASSERT_ENABLED" }
+			filter {}
+
 			if _OPTIONS["with-system-mozjs"] then
 				if not _OPTIONS["android"] then
 					pkgconfig.add_includes_after("mozjs-128")

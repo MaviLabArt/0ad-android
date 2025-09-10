@@ -28,7 +28,6 @@
 #include "ps/CStr.h"
 #include "ps/Errors.h"
 #include "ps/FileIo.h"
-#include "scriptinterface/ScriptTypes.h"
 #include "simulation2/system/Entity.h"
 
 #include <cstddef>

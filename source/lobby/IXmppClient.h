@@ -19,8 +19,10 @@
 #define IXMPPCLIENT_H
 
 #include "lib/types.h"
-#include "scriptinterface/ScriptTypes.h"
 
+#include <js/Value.h>
+
+class ScriptInterface;
 class ScriptRequest;
 
 class IXmppClient

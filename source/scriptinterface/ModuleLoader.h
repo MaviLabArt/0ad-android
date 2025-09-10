@@ -20,7 +20,6 @@
 
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/path.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <cstddef>
 #include <exception>

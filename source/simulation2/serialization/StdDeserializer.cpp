@@ -25,7 +25,6 @@
 #include "lib/utf8.h"
 #include "ps/CStr.h"
 #include "scriptinterface/FunctionWrapper.h"
-#include "scriptinterface/ScriptExtraHeaders.h"
 #include "scriptinterface/ScriptInterface.h"
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/serialization/ISerializer.h"

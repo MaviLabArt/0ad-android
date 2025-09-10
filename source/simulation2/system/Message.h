@@ -19,7 +19,6 @@
 #define INCLUDED_MESSAGE
 
 #include "lib/code_annotation.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/RootingAPI.h>
 #include <js/TypeDecls.h>

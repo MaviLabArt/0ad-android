@@ -19,7 +19,6 @@
 #define INCLUDED_JSI_VFS
 
 #include "lib/types.h"
-#include "scriptinterface/ScriptTypes.h"
 
 #include <js/PropertyDescriptor.h>
 

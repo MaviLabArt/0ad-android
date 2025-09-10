@@ -19,7 +19,6 @@
 #define INCLUDED_SAVEDGAME
 
 #include "lib/status.h"
-#include "scriptinterface/ScriptTypes.h"
 #include "scriptinterface/StructuredClone.h"
 
 #include <js/Value.h>
