@@ -18,7 +18,6 @@ class GameDetails
 		this.sgMapName = Engine.GetGUIObjectByName("sgMapName");
 		this.sgGame = Engine.GetGUIObjectByName("sgGame");
 		this.sgPlayersAndMods = Engine.GetGUIObjectByName("sgPlayersAndMods");
-		this.sgMapSize = Engine.GetGUIObjectByName("sgMapSize");
 		this.sgMapPreview = Engine.GetGUIObjectByName("sgMapPreview");
 		this.sgMapDescription = Engine.GetGUIObjectByName("sgMapDescription");
 
