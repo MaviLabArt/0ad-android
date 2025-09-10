@@ -38,20 +38,30 @@ function cancelOr(costumPromise)
 	})]);
 }
 
-async function waitOnEvent(loadSavedGame)
+async function waitOnEvent(loadSavedGame, joinFromLobby)
 {
 	while (true)
 	{
-		await cancelOr(new Promise(resolve => {
-			Engine.GetGUIObjectByName("multiplayerPages").onTick = async() => {
-				if (await onTick(loadSavedGame))
-					resolve();
-			};
-			Engine.GetGUIObjectByName("continueButton").onPress = () => {
-				if (confirmSetup(loadSavedGame))
-					resolve();
-			};
-		}));
+		if (!joinFromLobby)
+		{
+			const continueResult = await cancelOr(new Promise(resolve => {
+				Engine.GetGUIObjectByName("continueButton").onPress = resolve;
+			}));
+			if (continueResult === cancelTag || confirmSetup(loadSavedGame))
+			{
+				if (cancelSetup())
+					return;
+				continue;
+			}
+		}
+		while (true)
+		{
+			const tickResult = await cancelOr(new Promise(resolve => {
+				Engine.GetGUIObjectByName("multiplayerPages").onTick = resolve;
+			}));
+			if (tickResult === cancelTag || await onTick(loadSavedGame))
+				break;
+		}
 		if (cancelSetup())
 			return;
 	}
@@ -109,7 +119,8 @@ async function init(attribs)
 		break;
 	}
 
-	await waitOnEvent(attribs.loadSavedGame);
+	await waitOnEvent(attribs.loadSavedGame,
+		attribs.multiplayerGameType === "join" && Engine.HasXmppClient());
 }
 
 function cancelSetup()
