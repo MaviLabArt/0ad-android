@@ -2,6 +2,7 @@
 <Entity parent="template_unit">
   <Decay>
     <SinkingAnim>true</SinkingAnim>
+    <SinkProb>1.0</SinkProb>
     <DelayTime>0.0</DelayTime>
     <SinkRate>0.5</SinkRate>
     <SinkAccel>7.0</SinkAccel>

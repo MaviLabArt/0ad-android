@@ -36,6 +36,8 @@
 
 #include <algorithm>
 #include <cmath>
+#include <optional>
+#include <random>
 #include <string>
 
 /**
@@ -65,6 +67,13 @@ public:
 
 	bool m_Active;
 	bool m_ShipSink;
+	bool m_Stochastic;
+
+	std::optional<std::minstd_rand> m_Generator;
+	std::negative_binomial_distribution<> m_Distribution{ 6, 0.032 };
+	std::geometric_distribution<>::result_type m_NextSink;
+
+	float m_SinkProb;
 	float m_DelayTime;
 	float m_SinkRate;
 	float m_SinkAccel;
@@ -88,6 +97,9 @@ public:
 			"<element name='SinkingAnim' a:help='If true, the entity will decay in a ship-like manner'>"
 				"<data type='boolean'/>"
 			"</element>"
+			"<element name='SinkProb' a:help='The entity decays according to the supplied probability each frame.'>"
+				"<ref name='nonNegativeDecimal'/>"
+			"</element>"
 			"<element name='DelayTime' a:help='Time to wait before starting to sink, in seconds'>"
 				"<ref name='nonNegativeDecimal'/>"
 			"</element>"
@@ -103,12 +115,18 @@ public:
 	{
 		m_Active = paramNode.GetChild("Active").ToBool();
 		m_ShipSink = paramNode.GetChild("SinkingAnim").ToBool();
+		m_SinkProb = paramNode.GetChild("SinkProb").ToFixed().ToFloat();
 		m_DelayTime = paramNode.GetChild("DelayTime").ToFixed().ToFloat();
 		m_SinkRate = paramNode.GetChild("SinkRate").ToFixed().ToFloat();
 		m_SinkAccel = paramNode.GetChild("SinkAccel").ToFixed().ToFloat();
 
 		m_CurrentTime = 0.f;
 		m_TotalSinkDepth = -1.f;
+
+		m_SinkProb < 1.f ? m_Stochastic = true : m_Stochastic = false;
+
+		std::negative_binomial_distribution<int>::param_type new_params(6, m_SinkProb*4);
+		m_Distribution.param(new_params);
 
 		// Detect unsafe misconfiguration
 		if (m_Active && !ENTITY_IS_LOCAL(GetEntityId()))
@@ -175,6 +193,13 @@ public:
 
 				CFixedVector3D pos = cmpPosition->GetPosition();
 
+				//Use the entities position upon decay start to vary the pseudorandom seed.
+				if (!m_Generator.has_value())
+				{
+					m_Generator.emplace(pos.X.ToInt_RoundToNearest() * pos.Z.ToInt_RoundToNearest());
+					m_NextSink = m_Distribution(m_Generator.value());
+				}
+
 				CmpPtr<ICmpTerrain> cmpTerrain(GetSystemEntity());
 				if (cmpTerrain)
 				{
@@ -199,27 +224,32 @@ public:
 
 			if (m_CurrentTime >= m_DelayTime)
 			{
-				float t = m_CurrentTime - m_DelayTime;
-				float depth = (m_SinkRate * t) + (m_SinkAccel * t * t);
-
-				if (m_ShipSink)
+				//If the entity should sink stochastically, use the negative binomial distribution to see if it should sink each frame.
+				if ((m_Stochastic && (m_NextSink-- == 0)) || !m_Stochastic)
 				{
-					// exponential sinking with tilting
-					float tilt_time = t > 5.f ? 5.f : t;
-					float tiltSink = tilt_time * tilt_time / 5.f;
-					entity_pos_t RotX = entity_pos_t::FromFloat(((m_InitialXRotation.ToFloat() * (5.f - tiltSink)) + (m_SinkingAngleX * tiltSink)) / 5.f);
-					entity_pos_t RotZ = entity_pos_t::FromFloat(((m_InitialZRotation.ToFloat() * (3.f - tilt_time)) + (m_SinkingAngleZ * tilt_time)) / 3.f);
-					cmpPosition->SetXZRotation(RotX,RotZ);
+					m_NextSink = m_Distribution(m_Generator.value());
+					float t = m_CurrentTime - m_DelayTime;
+					float depth = (m_SinkRate * t) + (m_SinkAccel * t * t);
 
-					depth = m_SinkRate * (exp(t - 1.f) - 0.54881163609f) + (m_SinkAccel * exp(t - 4.f) - 0.01831563888f);
-					if (depth < 0.f)
-						depth = 0.f;
+					if (m_ShipSink)
+					{
+						// exponential sinking with tilting
+						float tilt_time = t > 5.f ? 5.f : t;
+						float tiltSink = tilt_time * tilt_time / 5.f;
+						entity_pos_t RotX = entity_pos_t::FromFloat(((m_InitialXRotation.ToFloat() * (5.f - tiltSink)) + (m_SinkingAngleX * tiltSink)) / 5.f);
+						entity_pos_t RotZ = entity_pos_t::FromFloat(((m_InitialZRotation.ToFloat() * (3.f - tilt_time)) + (m_SinkingAngleZ * tilt_time)) / 3.f);
+						cmpPosition->SetXZRotation(RotX,RotZ);
+
+						depth = m_SinkRate * (exp(t - 1.f) - 0.54881163609f) + (m_SinkAccel * exp(t - 4.f) - 0.01831563888f);
+						if (depth < 0.f)
+							depth = 0.f;
+					}
+
+					cmpPosition->SetHeightOffset(entity_pos_t::FromFloat(-depth));
+
+					if (depth > m_TotalSinkDepth)
+						GetSimContext().GetComponentManager().DestroyComponentsSoon(GetEntityId());
 				}
-
-				cmpPosition->SetHeightOffset(entity_pos_t::FromFloat(-depth));
-
-				if (depth > m_TotalSinkDepth)
-					GetSimContext().GetComponentManager().DestroyComponentsSoon(GetEntityId());
 			}
 
 			break;

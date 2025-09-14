@@ -3,6 +3,7 @@
   <Decay>
     <Active>true</Active>
     <SinkingAnim>false</SinkingAnim>
+    <SinkProb>1.0</SinkProb>
     <DelayTime>0.5</DelayTime>
     <SinkRate>10000</SinkRate>
     <SinkAccel>0</SinkAccel>
