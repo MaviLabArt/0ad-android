@@ -15,9 +15,9 @@
     <Active>false</Active>
     <SinkingAnim>false</SinkingAnim>
     <SinkProb>0.01</SinkProb>
-    <DelayTime>30.0</DelayTime>
-    <SinkRate>0.01</SinkRate>
-    <SinkAccel>0.0</SinkAccel>
+    <DelayTime>5.0</DelayTime>
+    <SinkRate>0.003</SinkRate>
+    <SinkAccel>0.0002</SinkAccel>
   </Decay>
   <Footprint>
     <Circle radius="1.5"/>
