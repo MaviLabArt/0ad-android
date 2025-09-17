@@ -44,12 +44,14 @@ public:
 	void UploadTexturesAtlasToGPU();
 
 private:
-	static void ftLibraryDeleter(FT_Library library) {
+	static void ftLibraryDeleter(FT_Library library)
+	{
 		FT_Done_FreeType(library);
 	}
+
 	std::unique_ptr<FT_LibraryRec_, decltype(&ftLibraryDeleter)> m_FreeType{nullptr, &ftLibraryDeleter};
 
-	std::shared_ptr<std::array<float,256>> m_GammaCorrectionLUT;
+	std::unique_ptr<std::array<float, 256>> m_GammaCorrectionLUT;
 
 	using FontsMap = std::unordered_map<CStrIntern, std::shared_ptr<CFont>>;
 	FontsMap m_Fonts;

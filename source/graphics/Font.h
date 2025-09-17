@@ -46,7 +46,7 @@ namespace Renderer::Backend::Sampler { struct Desc; }
 class CFont
 {
 public:
-	CFont(FT_Library library, std::shared_ptr<std::array<float, 256>> gammaCorrection) : m_FreeType{library}, m_GammaCorrectionLUT{gammaCorrection} {};
+	CFont(FT_Library library, const std::array<float, 256>& gammaCorrection) : m_FreeType{library}, m_GammaCorrectionLUT{gammaCorrection} {}
 	~CFont() = default;
 	NONCOPYABLE(CFont);
 
@@ -112,11 +112,15 @@ public:
 	CTexturePtr GetTexture() const { return m_Texture; }
 	void UploadTextureAtlasToGPU();
 	const GlyphData* GetGlyph(u16 i);
+
 private:
-	static void ftFaceDeleter(FT_Face face) {
+	static void ftFaceDeleter(FT_Face face)
+	{
 		FT_Done_Face(face);
 	}
-	static void ftStrokerDeleter(FT_Stroker stroker) {
+
+	static void ftStrokerDeleter(FT_Stroker stroker)
+	{
 		FT_Stroker_Done(stroker);
 	}
 
@@ -173,7 +177,7 @@ private:
 
 	float m_FontSize{0.0f};
 	std::string m_FontName;
-	std::shared_ptr<std::array<float, 256>> m_GammaCorrectionLUT{nullptr};
+	const std::array<float, 256>& m_GammaCorrectionLUT;
 
 	FT_Library m_FreeType;
 	std::vector<std::shared_ptr<u8>> m_FontsData;

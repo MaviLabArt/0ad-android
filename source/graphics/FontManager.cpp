@@ -43,8 +43,11 @@
 #include <utility>
 #include <vector>
 
-namespace {
-struct FontSpec {
+namespace
+{
+
+struct FontSpec
+{
 	std::string type;
 	bool bold{false};
 	bool italic{false};
@@ -103,7 +106,7 @@ CFontManager::CFontManager()
 		throw std::runtime_error{"Failed to initialize FreeType " + std::to_string(error)};
 	m_FreeType.reset(lib);
 
-	m_GammaCorrectionLUT = std::make_shared<std::array<float, 256>>();
+	m_GammaCorrectionLUT = std::make_unique<std::array<float, 256>>();
 
 	std::generate(m_GammaCorrectionLUT->begin(), m_GammaCorrectionLUT->end(), [i = 0]() mutable {
 		return std::pow((i++) / 255.0f, 1.0f / GAMMA_CORRECTION);
@@ -189,7 +192,7 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 		}()
 	};
 
-	std::shared_ptr<CFont> font{std::make_shared<CFont>(this->m_FreeType.get(), m_GammaCorrectionLUT)};
+	std::shared_ptr<CFont> font{std::make_shared<CFont>(this->m_FreeType.get(), *m_GammaCorrectionLUT)};
 
 	if (!font->SetFontParams(localeFontName.string(), fontSpec.size, fontSpec.stroke ? 1.0f : 0.0f, guiScale))
 	{

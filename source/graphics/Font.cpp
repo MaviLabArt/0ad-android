@@ -369,7 +369,7 @@ const CFont::GlyphData* CFont::ExtractAndGenerateGlyph(u16 codepoint)
 	}
 
 	m_IsDirty = true;
-	CVector2D offset{0,0};
+	CVector2D offset{0.0f, 0.0f};
 
 	const FT_Render_Mode renderMode{FT_RENDER_MODE_NORMAL};
 
@@ -536,7 +536,7 @@ void CFont::BlendGlyphBitmapToTextureRGBA(const FT_Bitmap& bitmap, int targetX, 
 			u8* tempDstRow{dstRow + x * m_TextureFormatStride};
 			u8 alpha{srcRow[x]};
 
-			const float srcAlpha{m_StrokeWidth > 0 ? (*m_GammaCorrectionLUT)[alpha] : alpha/255.0f};
+			const float srcAlpha{m_StrokeWidth > 0 ? m_GammaCorrectionLUT[alpha] : alpha/255.0f};
 			const float dstAlpha{tempDstRow[3] / 255.0f};
 			const float outAlpha{srcAlpha + dstAlpha * (1.0f - srcAlpha)};
 
