@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2024 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -58,8 +58,6 @@ public:
 	virtual uint32_t GetWidth() const = 0;
 	virtual uint32_t GetHeight() const = 0;
 	virtual uint32_t GetMIPLevelCount() const = 0;
-
-	virtual bool IsPendingQueueSubmit() const = 0;
 };
 
 } // namespace Backend

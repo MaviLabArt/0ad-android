@@ -289,7 +289,7 @@ bool CFont::ConstructTextureAtlas()
 		Renderer::Backend::ITexture::Usage::TRANSFER_DST |
 		Renderer::Backend::ITexture::Usage::SAMPLED,
 		m_TextureFormat,
-		textureSize, textureSize, defaultSamplerDesc, 1, 1, true
+		textureSize, textureSize, defaultSamplerDesc
 	));
 
 	if (!m_Texture)
@@ -297,6 +297,8 @@ bool CFont::ConstructTextureAtlas()
 		LOGERROR("Failed to create font texture %s", m_FontName);
 		return false;
 	}
+
+	m_IsLoadingTextureToGPU = true;
 
 	// Initialise texture with transparency, for the areas we don't
 	// overwrite with uploading later.
@@ -492,7 +494,10 @@ std::optional<CVector2D> CFont::GenerateGlyphBitmap(FT_Glyph& glyph, u16 codepoi
 
 void CFont::UploadTextureAtlasToGPU()
 {
-	if (m_Texture->GetBackendTexture()->IsPendingQueueSubmit() || !m_IsDirty)
+	if (std::exchange(m_IsLoadingTextureToGPU, false))
+		return;
+
+	if (!m_IsDirty)
 		return;
 
 	Renderer::Backend::IDeviceCommandContext* deviceCommandContext = g_Renderer.GetDeviceCommandContext();

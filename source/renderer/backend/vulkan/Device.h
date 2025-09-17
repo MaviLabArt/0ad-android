@@ -96,12 +96,12 @@ public:
 	std::unique_ptr<ITexture> CreateTexture(
 		const char* name, const ITexture::Type type, const uint32_t usage,
 		const Format format, const uint32_t width, const uint32_t height,
-		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware = false) override;
+		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount) override;
 
 	std::unique_ptr<ITexture> CreateTexture2D(
 		const char* name, const uint32_t usage,
 		const Format format, const uint32_t width, const uint32_t height,
-		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount = 1, const uint32_t sampleCount = 1, const bool queueSubmitAware = false) override;
+		const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount = 1, const uint32_t sampleCount = 1) override;
 
 	std::unique_ptr<IFramebuffer> CreateFramebuffer(
 		const char* name, SColorAttachment* colorAttachment,
@@ -165,8 +165,6 @@ public:
 
 	void ScheduleBufferToDestroy(const DeviceObjectUID uid);
 
-	void ScheduleTextureUploadWatch(CTexture* texture);
-
 	void SetObjectName(VkObjectType type, const void* handle, const char* name)
 	{
 		SetObjectName(type, reinterpret_cast<uint64_t>(handle), name);
@@ -190,8 +188,6 @@ public:
 
 	DeviceObjectUID GenerateNextDeviceObjectUID();
 
-	uint32_t GetCurrentSchedulerHandle() const;
-
 private:
 	CDevice();
 
@@ -199,7 +195,6 @@ private:
 	bool IsSwapChainValid();
 	void ProcessObjectToDestroyQueue(const bool ignoreFrameID = false);
 	void ProcessDeviceObjectToDestroyQueue(const bool ignoreFrameID = false);
-	void ProcessTextureUploadWatchQueue(const bool ignoreFrameID = false);
 
 	bool IsFormatSupportedForUsage(const Format format, const uint32_t usage) const;
 
@@ -250,7 +245,6 @@ private:
 	};
 	std::queue<ObjectToDestroy> m_ObjectToDestroyQueue;
 	std::queue<std::pair<uint32_t, DeviceObjectUID>> m_TextureToDestroyQueue;
-	std::queue<std::pair<uint32_t, CTexture*>> m_TextureUploadWatcherQueue;
 	std::queue<std::pair<uint32_t, DeviceObjectUID>> m_BufferToDestroyQueue;
 
 	std::unique_ptr<CRenderPassManager> m_RenderPassManager;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2022 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -50,9 +50,6 @@ public:
 	uint32_t GetWidth() const override { return m_Width; }
 	uint32_t GetHeight() const override { return m_Height; }
 	uint32_t GetMIPLevelCount() const override { return m_MIPLevelCount; }
-
-	// Dummy backend does not support queue submission.
-	bool IsPendingQueueSubmit() const override { return false; }
 
 private:
 	friend class CDevice;

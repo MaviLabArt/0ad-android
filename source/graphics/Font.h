@@ -162,6 +162,7 @@ private:
 
 	int m_AtlasPadding;
 	bool m_IsDirty{false};
+	bool m_IsLoadingTextureToGPU{false};
 	float m_StrokeWidth{0.0f};
 	float m_Scale{1.0f};
 

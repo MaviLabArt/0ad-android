@@ -681,7 +681,6 @@ CDevice::~CDevice()
 	if (m_QueryPool)
 		vkDestroyQueryPool(GetVkDevice(), m_QueryPool, nullptr);
 
-	ProcessTextureUploadWatchQueue(true);
 	ProcessDeviceObjectToDestroyQueue(true);
 
 	m_RenderPassManager.reset();
@@ -754,21 +753,21 @@ std::unique_ptr<IVertexInputLayout> CDevice::CreateVertexInputLayout(
 std::unique_ptr<ITexture> CDevice::CreateTexture(
 	const char* name, const ITexture::Type type, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
-	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware)
+	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount)
 {
 	return CTexture::Create(
 		this, name, type, usage, format, width, height,
-		defaultSamplerDesc, MIPLevelCount, sampleCount, queueSubmitAware);
+		defaultSamplerDesc, MIPLevelCount, sampleCount);
 }
 
 std::unique_ptr<ITexture> CDevice::CreateTexture2D(
 	const char* name, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
-	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware)
+	const Sampler::Desc& defaultSamplerDesc, const uint32_t MIPLevelCount, const uint32_t sampleCount)
 {
 	return CreateTexture(
 		name, ITexture::Type::TEXTURE_2D, usage, format,
-		width, height, defaultSamplerDesc, MIPLevelCount, sampleCount, queueSubmitAware);
+		width, height, defaultSamplerDesc, MIPLevelCount, sampleCount);
 }
 
 std::unique_ptr<IFramebuffer> CDevice::CreateFramebuffer(
@@ -837,7 +836,6 @@ void CDevice::Present()
 
 	m_SubmitScheduler->Present(*m_SwapChain);
 
-	ProcessTextureUploadWatchQueue();
 	ProcessObjectToDestroyQueue();
 	ProcessDeviceObjectToDestroyQueue();
 
@@ -1018,10 +1016,6 @@ void CDevice::ScheduleBufferToDestroy(const DeviceObjectUID uid)
 {
 	m_BufferToDestroyQueue.push({m_FrameID, uid});
 }
-void CDevice::ScheduleTextureUploadWatch(CTexture* texture)
-{
-	m_TextureUploadWatcherQueue.push({ m_FrameID, texture });
-}
 
 void CDevice::SetObjectName(VkObjectType type, const uint64_t handle, const char* name)
 {
@@ -1125,18 +1119,6 @@ void CDevice::ProcessDeviceObjectToDestroyQueue(const bool ignoreFrameID)
 	}
 }
 
-void CDevice::ProcessTextureUploadWatchQueue(const bool ignoreFrameID)
-{
-	while (!m_TextureUploadWatcherQueue.empty() &&
-		(ignoreFrameID || m_TextureUploadWatcherQueue.front().first + NUMBER_OF_FRAMES_IN_FLIGHT < m_FrameID))
-	{
-		CTexture* texture = m_TextureUploadWatcherQueue.front().second;
-		if (texture)
-			texture->SetPendingQueueSubmit(false);
-		m_TextureUploadWatcherQueue.pop();
-	}
-}
-
 CTexture* CDevice::GetCurrentBackbufferTexture()
 {
 	return IsSwapChainValid() ? m_SwapChain->GetCurrentBackbufferTexture() : nullptr;
@@ -1167,11 +1149,6 @@ DeviceObjectUID CDevice::GenerateNextDeviceObjectUID()
 std::unique_ptr<IDevice> CreateDevice(SDL_Window* window)
 {
 	return Vulkan::CDevice::Create(window);
-}
-
-uint32_t CDevice::GetCurrentSchedulerHandle() const
-{
-	return m_SubmitScheduler ? m_SubmitScheduler->GetCurrentHandle() : CSubmitScheduler::INVALID_SUBMIT_HANDLE;
 }
 
 } // namespace Vulkan

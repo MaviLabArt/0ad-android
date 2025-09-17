@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2024 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -28,8 +28,6 @@
 #include "renderer/backend/vulkan/SamplerManager.h"
 #include "renderer/backend/vulkan/Utilities.h"
 
-#include <utility>
-
 namespace Renderer
 {
 
@@ -44,7 +42,7 @@ std::unique_ptr<CTexture> CTexture::Create(
 	CDevice* device, const char* name, const Type type, const uint32_t usage,
 	const Format format, const uint32_t width, const uint32_t height,
 	const Sampler::Desc& defaultSamplerDesc,
-	const uint32_t MIPLevelCount, const uint32_t sampleCount, const bool queueSubmitAware)
+	const uint32_t MIPLevelCount, const uint32_t sampleCount)
 {
 	std::unique_ptr<CTexture> texture(new CTexture(device));
 
@@ -56,7 +54,6 @@ std::unique_ptr<CTexture> CTexture::Create(
 	texture->m_MIPLevelCount = MIPLevelCount;
 	texture->m_SampleCount = sampleCount;
 	texture->m_LayerCount = type == ITexture::Type::TEXTURE_CUBE ? 6 : 1;
-	texture->m_QueueSubmitAware = queueSubmitAware;
 
 	if (type == Type::TEXTURE_2D_MULTISAMPLE)
 		ENSURE(sampleCount > 1);
@@ -381,15 +378,6 @@ CTexture::~CTexture()
 			VK_OBJECT_TYPE_IMAGE, m_Image, m_Allocation);
 
 	m_Device->ScheduleTextureToDestroy(m_UID);
-}
-
-void CTexture::SetPendingQueueSubmit(bool pending)
-{
-	if (!m_QueueSubmitAware)
-		return;
-
-	if (!std::exchange(m_PendingQueueSubmit, pending) && pending)
-		m_Device->ScheduleTextureUploadWatch(this);
 }
 
 IDevice* CTexture::GetDevice()

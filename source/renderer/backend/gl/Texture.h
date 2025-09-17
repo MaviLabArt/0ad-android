@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2022 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -58,8 +58,6 @@ public:
 
 	GLuint GetHandle() const { return m_Handle; }
 
-	// GL doesn's support queue submmit, so we don't need to track pending.
-	bool IsPendingQueueSubmit() const override { return false; }
 private:
 	friend class CDevice;
 
