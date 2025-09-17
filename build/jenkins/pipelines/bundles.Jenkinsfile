@@ -150,13 +150,14 @@ pipeline {
                 }
                 sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do md5sum "${file}" > "${file}".md5sum; done'
                 sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do sha1sum "${file}" > "${file}".sha1sum; done'
+                sh 'for file in *.{dmg,exe,tar.gz,tar.xz}; do sha256sum "${file}" > "${file}".sha256sum; done'
             }
         }
     }
 
     post {
         success {
-            archiveArtifacts '*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum'
+            archiveArtifacts '*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum,*.sha256sum'
         }
         cleanup {
             sh 'svn revert -R .'
