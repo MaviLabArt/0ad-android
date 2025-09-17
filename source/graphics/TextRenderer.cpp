@@ -214,7 +214,7 @@ void CTextRenderer::Render(
 	std::vector<CVector2D> uvs;
 
 	const bool debugFontBox{g_ConfigDB.Get("fonts.debugbox", false)};
-	const std::string debugFontBoxColor{ g_ConfigDB.Get("fonts.debugboxcolor", std::string{"128 0 128"})};
+	const std::string debugFontBoxColor{g_ConfigDB.Get("fonts.debugboxcolor", std::string{"128 0 128"})};
 	CColor debugBoxColor;
 	debugBoxColor.ParseString(debugFontBoxColor.c_str());
 
@@ -248,6 +248,7 @@ void CTextRenderer::Render(
 
 		if (lastTexture != batch.font->GetTexture().get())
 		{
+			batch.font->InitalizeAtlasTextureIfNeeded(deviceCommandContext);
 			lastTexture = batch.font->GetTexture().get();
 			lastTexture->UploadBackendTextureIfNeeded(deviceCommandContext);
 			deviceCommandContext->SetTexture(texBindingSlot, lastTexture->GetBackendTexture());

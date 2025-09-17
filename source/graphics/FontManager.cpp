@@ -28,6 +28,7 @@
 #include "ps/CStrInternStatic.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
+#include "renderer/backend/IDeviceCommandContext.h"
 
 #include <algorithm>
 #include <cmath>
@@ -230,13 +231,16 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 	return font;
 }
 
-void CFontManager::UploadTexturesAtlasToGPU()
+void CFontManager::UploadAtlasTexturesToGPU(Renderer::Backend::IDeviceCommandContext* deviceCommandContext)
 {
+	PROFILE2("Loading font textures");
+	GPU_SCOPED_LABEL(deviceCommandContext, "Loading font textures");
+
 	for (auto& [fontName, fontPtr] : m_Fonts)
 	{
 		if (!fontPtr)
 			continue;
 
-		fontPtr->UploadTextureAtlasToGPU();
+		fontPtr->UploadAtlasTextureToGPU(deviceCommandContext);
 	}
 }

@@ -30,6 +30,8 @@
 class CFont;
 struct FT_LibraryRec_;
 
+namespace Renderer::Backend { class IDeviceCommandContext; }
+
 /**
  * Font manager: loads and caches bitmap fonts.
  */
@@ -41,7 +43,8 @@ public:
 	NONCOPYABLE(CFontManager);
 
 	std::shared_ptr<CFont> LoadFont(CStrIntern fontName, CStrIntern locale);
-	void UploadTexturesAtlasToGPU();
+	void UploadAtlasTexturesToGPU(
+		Renderer::Backend::IDeviceCommandContext* deviceCommandContext);
 
 private:
 	static void ftLibraryDeleter(FT_Library library)

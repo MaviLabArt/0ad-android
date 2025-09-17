@@ -180,7 +180,7 @@ bool CFont::SetFontParams(const std::string& fontName, float size, float strokeW
 		FT_Stroker_Set(m_Stroker.get(), FloatToF26Dot6(m_StrokeWidth), FT_STROKER_LINECAP_ROUND, FT_STROKER_LINEJOIN_ROUND, 0);
 	}
 
-	if (!ConstructTextureAtlas())
+	if (!ConstructAtlasTexture())
 	{
 		LOGERROR("Failed to create font texture atlas %s", fontName);
 		return false;
@@ -262,7 +262,7 @@ Renderer::Backend::Sampler::Desc CFont::ChooseTextureFormatAndSampler()
 	return defaultSamplerDesc;
 }
 
-bool CFont::ConstructTextureAtlas()
+bool CFont::ConstructAtlasTexture()
 {
 	Renderer::Backend::IDevice* backendDevice = g_Renderer.GetDeviceCommandContext()->GetDevice();
 
@@ -287,7 +287,7 @@ bool CFont::ConstructTextureAtlas()
 	m_Texture = g_Renderer.GetTextureManager().WrapBackendTexture(backendDevice->CreateTexture2D(
 		("Font Texture " + m_FontName).c_str(),
 		Renderer::Backend::ITexture::Usage::TRANSFER_DST |
-		Renderer::Backend::ITexture::Usage::SAMPLED,
+			Renderer::Backend::ITexture::Usage::SAMPLED,
 		m_TextureFormat,
 		textureSize, textureSize, defaultSamplerDesc
 	));
@@ -298,18 +298,27 @@ bool CFont::ConstructTextureAtlas()
 		return false;
 	}
 
-	m_IsLoadingTextureToGPU = true;
-
 	// Initialise texture with transparency, for the areas we don't
 	// overwrite with uploading later.
 	m_TexData = std::make_unique<u8[]>(m_AtlasSize);
 	std::fill_n(m_TexData.get(), m_AtlasSize, 0x00);
 
-	g_Renderer.GetDeviceCommandContext()->UploadTexture(
+	m_IsTextureInitialized = false;
+
+	return true;
+}
+
+void CFont::InitalizeAtlasTextureIfNeeded(
+	Renderer::Backend::IDeviceCommandContext* deviceCommandContext)
+{
+	if (m_IsTextureInitialized)
+		return;
+
+	deviceCommandContext->UploadTexture(
 		m_Texture->GetBackendTexture(), m_TextureFormat,
 		m_TexData.get(), m_AtlasSize);
 
-	return true;
+	m_IsTextureInitialized = true;
 }
 
 const CFont::GlyphData* CFont::GetGlyph(u16 codepoint)
@@ -492,24 +501,16 @@ std::optional<CVector2D> CFont::GenerateGlyphBitmap(FT_Glyph& glyph, u16 codepoi
 	return newOffset;
 }
 
-void CFont::UploadTextureAtlasToGPU()
+void CFont::UploadAtlasTextureToGPU(Renderer::Backend::IDeviceCommandContext* deviceCommandContext)
 {
-	if (std::exchange(m_IsLoadingTextureToGPU, false))
-		return;
-
 	if (!m_IsDirty)
 		return;
 
-	Renderer::Backend::IDeviceCommandContext* deviceCommandContext = g_Renderer.GetDeviceCommandContext();
-	PROFILE2("Loading font texture");
-	GPU_SCOPED_LABEL(deviceCommandContext, "Loading font texture");
-
-	deviceCommandContext->UploadTextureRegion(
+	deviceCommandContext->UploadTexture(
 		m_Texture->GetBackendTexture(),
 		m_TextureFormat,
 		m_TexData.get(),
-		m_AtlasSize,
-		0, 0, m_AtlasWidth, m_AtlasHeight
+		m_AtlasSize
 	);
 
 	m_IsDirty = false;

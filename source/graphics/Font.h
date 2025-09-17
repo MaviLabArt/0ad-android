@@ -38,6 +38,7 @@
 #include <vector>
 
 class CVector2D;
+namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend::Sampler { struct Desc; }
 
 /**
@@ -110,7 +111,10 @@ public:
 	}
 
 	CTexturePtr GetTexture() const { return m_Texture; }
-	void UploadTextureAtlasToGPU();
+	void InitalizeAtlasTextureIfNeeded(
+		Renderer::Backend::IDeviceCommandContext* deviceCommandContext);
+	void UploadAtlasTextureToGPU(
+		Renderer::Backend::IDeviceCommandContext* deviceCommandContext);
 	const GlyphData* GetGlyph(u16 i);
 
 private:
@@ -140,7 +144,7 @@ private:
 	std::optional<CVector2D> GenerateGlyphBitmap(FT_Glyph& glyph, u16 codepoint, FT_Render_Mode renderMode, CVector2D offset, const float baselineInAtlas);
 
 	const GlyphData* ExtractAndGenerateGlyph(u16 codepoint);
-	bool ConstructTextureAtlas();
+	bool ConstructAtlasTexture();
 	Renderer::Backend::Sampler::Desc ChooseTextureFormatAndSampler();
 
 	CTexturePtr m_Texture;
@@ -166,7 +170,7 @@ private:
 
 	int m_AtlasPadding;
 	bool m_IsDirty{false};
-	bool m_IsLoadingTextureToGPU{false};
+	bool m_IsTextureInitialized{false};
 	float m_StrokeWidth{0.0f};
 	float m_Scale{1.0f};
 

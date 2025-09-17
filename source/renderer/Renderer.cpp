@@ -662,7 +662,7 @@ void CRenderer::RenderFrame2D(const bool renderGUI, const bool renderLogger)
 		g_ProfileViewer.RenderProfile(canvas);
 	}
 
-	this->GetFontManager().UploadTexturesAtlasToGPU();
+	GetFontManager().UploadAtlasTexturesToGPU(m->deviceCommandContext.get());
 }
 
 void CRenderer::RenderScreenShot(const bool needsPresent)
