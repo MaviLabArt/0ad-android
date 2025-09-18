@@ -28,6 +28,7 @@
 #include "ps/CStrInternStatic.h"
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
+#include "ps/Profiler2.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 
 #include <algorithm>
