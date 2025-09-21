@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Entity parent="units/cart/infantry_javelineer_iber_a">
+<Entity parent="units/cart/infantry_spearman_ital_a">
   <Identity>
     <Rank>Elite</Rank>
   </Identity>
   <Promotion disable=""/>
   <VisualActor>
-    <Actor>units/iberians/infantry_javelinist_e_fire.xml</Actor>
+    <Actor>units/carthaginians/infantry_spearman_e_m.xml</Actor>
   </VisualActor>
 </Entity>
