@@ -3,14 +3,14 @@
   <Attack>
     <Melee>
       <Damage>
-        <Hack op="add">-4.0</Hack>
+        <Hack op="add">-6.0</Hack>
       </Damage>
       <Splash>
         <Damage>
-          <Hack>4.0</Hack>
+          <Hack>6.0</Hack>
         </Damage>
         <Shape>Circular</Shape>
-        <Range>2</Range>
+        <Range>2.5</Range>
         <FriendlyFire>false</FriendlyFire>
       </Splash>
       <MaxRange op="add">2.0</MaxRange>
