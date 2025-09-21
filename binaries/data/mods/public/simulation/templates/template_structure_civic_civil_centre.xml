@@ -45,7 +45,7 @@
   </BuildingAI>
   <Capturable>
     <CapturePoints>2500</CapturePoints>
-    <RegenRate>5.0</RegenRate>
+    <RegenRate>30</RegenRate>
   </Capturable>
   <Cost>
     <BuildTime>500</BuildTime>

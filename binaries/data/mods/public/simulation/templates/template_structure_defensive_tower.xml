@@ -37,6 +37,9 @@
       <MinDistance>60</MinDistance>
     </Distance>
   </BuildRestrictions>
+  <Capturable>
+    <RegenRate>10.0</RegenRate>
+  </Capturable>
   <GarrisonHolder>
     <EjectHealth>0.1</EjectHealth>
     <EjectClassesOnDestroy datatype="tokens">Unit</EjectClassesOnDestroy>

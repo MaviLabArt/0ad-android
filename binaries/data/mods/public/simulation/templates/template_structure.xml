@@ -8,7 +8,7 @@
   </BuildRestrictions>
   <Capturable>
     <CapturePoints>500</CapturePoints>
-    <RegenRate>0.5</RegenRate>
+    <RegenRate>5</RegenRate>
     <GarrisonRegenRate>1.0</GarrisonRegenRate>
   </Capturable>
   <Cost>
