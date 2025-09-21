@@ -10,7 +10,7 @@
       </Damage>
       <Splash>
         <Shape>Circular</Shape>
-        <Range>2</Range>
+        <Range>2.5</Range>
         <FriendlyFire>false</FriendlyFire>
         <Damage>
           <Hack>30</Hack>
