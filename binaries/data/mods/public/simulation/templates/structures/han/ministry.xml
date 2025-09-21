@@ -5,14 +5,13 @@
   </BuildRestrictions>
   <Capturable>
     <CapturePoints>3000</CapturePoints>
-    <RegenRate>5.0</RegenRate>
   </Capturable>
   <Cost>
     <BuildTime>200</BuildTime>
     <Resources>
-      <wood>0</wood>
+      <wood>50</wood>
       <stone>200</stone>
-      <metal>200</metal>
+      <metal>50</metal>
     </Resources>
   </Cost>
   <Footprint>
@@ -36,17 +35,18 @@
     <GenericName>Imperial Ministry</GenericName>
     <SpecificName>Gōngdiàn</SpecificName>
     <Classes datatype="tokens">CivSpecific</Classes>
-    <VisibleClasses datatype="tokens">ImperialMinistry Town</VisibleClasses>
+    <VisibleClasses datatype="tokens">ImperialMinistry Village</VisibleClasses>
     <Tooltip>Train the Nine Ministers. Territory root. Research a powerful suite of Administrative technologies.</Tooltip>
     <Icon>structures/imperial_ministry.png</Icon>
     <Requirements>
-      <Techs datatype="tokens">phase_town</Techs>
+      <Techs datatype="tokens">phase_village</Techs>
     </Requirements>
   </Identity>
   <Loot>
     <xp>200</xp>
+    <wood>10</wood>
     <stone>40</stone>
-    <metal>40</metal>
+    <metal>10</metal>
   </Loot>
   <Obstruction>
     <Static depth="32.0" width="28.0"/>
@@ -63,15 +63,6 @@
       spy_counter
     </Technologies>
   </Researcher>
-  <ResourceTrickle>
-    <Rates>
-      <food>0.0</food>
-      <wood>0.1</wood>
-      <stone>0.1</stone>
-      <metal>0.1</metal>
-    </Rates>
-    <Interval>2000</Interval>
-  </ResourceTrickle>
   <TerritoryInfluence>
     <Root>true</Root>
     <Radius>60</Radius>

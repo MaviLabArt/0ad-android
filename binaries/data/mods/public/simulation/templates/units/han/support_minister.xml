@@ -3,27 +3,15 @@
   <Attack>
     <Capture>
       <AttackName>Capture</AttackName>
-      <Capture>8</Capture>
+      <Capture>4</Capture>
       <MaxRange>4</MaxRange>
       <RepeatTime>1000</RepeatTime>
       <RestrictedClasses datatype="tokens">Field Palisade Wall</RestrictedClasses>
     </Capture>
-    <Melee>
-      <AttackName context="Name of an attack using a double-edged sword.">Sword</AttackName>
-      <Damage>
-        <Hack>10</Hack>
-      </Damage>
-      <MaxRange>3</MaxRange>
-      <PrepareTime>500</PrepareTime>
-      <RepeatTime>1000</RepeatTime>
-      <PreferredClasses datatype="tokens">Unit+!Ship</PreferredClasses>
-    </Melee>
   </Attack>
   <Auras datatype="tokens">
-    units/han_minister_garrison
     units/han_minister_gathering
     units/han_minister_building
-    units/han_minister_garrison_ministry
   </Auras>
   <Cost>
     <Population>1</Population>
@@ -34,18 +22,18 @@
     </Resources>
   </Cost>
   <Health>
-    <Max>200</Max>
+    <Max>50</Max>
   </Health>
   <Identity>
     <Civ>han</Civ>
     <GenericName>Imperial Minister</GenericName>
     <SpecificName>Qīng</SpecificName>
-    <Tooltip>Use to boost the efficiency of nearby units and buildings. Garrison within a building to boost the efficiency of its production queue. Only Han buildings can garrison ministers.</Tooltip>
+    <Tooltip>Use to boost the efficiency of nearby units and buildings.</Tooltip>
     <Classes datatype="tokens">Organic Human</Classes>
     <VisibleClasses datatype="tokens">Minister</VisibleClasses>
     <Icon>units/han/minister.png</Icon>
     <Requirements>
-      <Techs datatype="tokens">phase_town</Techs>
+      <Techs datatype="tokens">phase_village</Techs>
     </Requirements>
   </Identity>
   <Loot>
@@ -63,7 +51,7 @@
     <Entity>
       <Damage>
         <Hack>2</Hack>
-        <Pierce>4</Pierce>
+        <Pierce>2</Pierce>
         <Crush>6</Crush>
       </Damage>
     </Entity>

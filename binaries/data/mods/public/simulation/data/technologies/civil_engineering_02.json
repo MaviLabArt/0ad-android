@@ -5,7 +5,7 @@
 	"description": "",
 	"cost": {
 		"food": 0,
-		"wood": 300,
+		"wood": 100,
 		"stone": 300,
 		"metal": 0
 	},
