@@ -7,6 +7,7 @@ class GameSettingsController
 	{
 		this.setupWindow = setupWindow;
 		this.mapCache = mapCache;
+		this.isSavedGame = isSavedGame;
 		this.persistentMatchSettings = new PersistentMatchSettings(g_IsNetworked);
 
 		this.guiData = new GameSettingsGuiData();
@@ -25,7 +26,7 @@ class GameSettingsController
 		this.loadingChangeHandlers = new Set();
 		this.settingsLoadedHandlers = new Set();
 
-		setupWindow.registerLoadHandler(this.onLoad.bind(this, isSavedGame));
+		setupWindow.registerLoadHandler(this.onLoad.bind(this));
 		setupWindow.registerGetHotloadDataHandler(this.onGetHotloadData.bind(this));
 
 		setupWindow.registerClosePageHandler(this.onClose.bind(this));
@@ -75,9 +76,9 @@ class GameSettingsController
 		this.settingsLoadedHandlers.add(handler);
 	}
 
-	onLoad(isSavedGame, initData, hotloadData)
+	onLoad(initData, hotloadData)
 	{
-		if (!isSavedGame)
+		if (!this.isSavedGame)
 		{
 			// This initial settings parsing in wrapped in a try-catch because it can fail unexpectedly,
 			// and particularly could fail with mods that change persistent settings, so this is
@@ -314,7 +315,7 @@ class GameSettingsController
 
 	savePersistentMatchSettings()
 	{
-		if (g_IsController)
+		if (g_IsController && !this.isSavedGame)
 			// TODO: ought to only save a subset of settings.
 			this.persistentMatchSettings.saveFile(this.getSettings());
 	}
