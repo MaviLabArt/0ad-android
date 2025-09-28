@@ -12,6 +12,7 @@
     <GenericName>First Cohort Legionary</GenericName>
     <SpecificName>Cohors Prima Legiōnārius</SpecificName>
     <SelectionGroupName>units/rome/champion_infantry_swordsman</SelectionGroupName>
+    <VisibleClasses datatype="tokens">Legionary</VisibleClasses>
     <Icon>units/rome/champion_infantry_first.png</Icon>
     <Requirements>
       <Techs datatype="tokens">-phase_city unlock_champion_infantry</Techs>
