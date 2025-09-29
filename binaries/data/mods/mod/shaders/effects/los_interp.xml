@@ -2,14 +2,8 @@
 <effect>
     <technique>
         <require shaders="arb"/>
-        <pass shader="arb/los_interp"/>
-    </technique>
-    <technique>
         <require shaders="glsl"/>
-        <pass shader="glsl/los_interp"/>
-    </technique>
-    <technique>
         <require shaders="spirv"/>
-        <pass shader="spirv/los_interp"/>
+        <pass shader="los_interp"/>
     </technique>
 </effect>

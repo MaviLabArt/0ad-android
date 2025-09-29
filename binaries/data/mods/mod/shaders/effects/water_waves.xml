@@ -2,15 +2,8 @@
 <effect>
 	<technique>
 		<require shaders="glsl"/>
-		<pass shader="glsl/waves">
-			<depth test="TRUE" func="always"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="spirv"/>
-		<pass shader="spirv/waves">
+		<pass shader="waves">
 			<depth test="TRUE" func="always"/>
 			<blend src="src_alpha" dst="one_minus_src_alpha"/>
 		</pass>

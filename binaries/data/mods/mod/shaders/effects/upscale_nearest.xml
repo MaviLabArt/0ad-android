@@ -2,13 +2,8 @@
 <effect>
 	<technique>
 		<require shaders="glsl"/>
-		<pass shader="glsl/upscale_nearest">
-			<depth test="FALSE" mask="false"/>
-		</pass>
-	</technique>
-	<technique>
 		<require shaders="spirv"/>
-		<pass shader="spirv/upscale_nearest">
+		<pass shader="upscale_nearest">
 			<depth test="FALSE" mask="false"/>
 		</pass>
 	</technique>

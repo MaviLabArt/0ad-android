@@ -2,14 +2,8 @@
 <effect>
 	<technique>
 		<require shaders="glsl"/>
-		<pass shader="glsl/bloom">
-			<depth test="FALSE" mask="false"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="spirv"/>
-		<pass shader="spirv/bloom">
+		<pass shader="bloom">
 			<depth test="FALSE" mask="false"/>
 		</pass>
 	</technique>

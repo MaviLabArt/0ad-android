@@ -2,15 +2,8 @@
 <effect>
 	<technique>
 		<require shaders="glsl"/>
-		<pass shader="glsl/water_high">
-			<depth test="TRUE"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="spirv"/>
-		<pass shader="spirv/water_high">
+		<pass shader="water_high">
 			<depth test="TRUE"/>
 			<blend src="src_alpha" dst="one_minus_src_alpha"/>
 		</pass>

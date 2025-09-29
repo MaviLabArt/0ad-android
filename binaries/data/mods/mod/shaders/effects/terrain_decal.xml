@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <effect>
-
 	<technique>
 		<require context="PASS_REFLECTIONS"/>
 		<require shaders="arb"/>
-		<pass shader="arb/terrain_decal">
+		<require shaders="glsl"/>
+		<require shaders="spirv"/>
+		<pass shader="terrain_decal">
 			<depth mask="false"/>
 			<cull mode="FRONT"/>
 			<blend src="src_alpha" dst="one_minus_src_alpha"/>
@@ -12,79 +13,24 @@
 	</technique>
 
 	<technique>
-		<require context="PASS_REFLECTIONS"/>
+		<require shaders="arb"/>
 		<require shaders="glsl"/>
-		<pass shader="glsl/terrain_decal">
-			<depth mask="false"/>
-			<cull mode="FRONT"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
-		<require context="PASS_REFLECTIONS"/>
 		<require shaders="spirv"/>
-		<pass shader="spirv/terrain_decal">
+		<require context="MODE_WIREFRAME"/>
+		<pass shader="terrain_decal">
 			<depth mask="false"/>
-			<cull mode="FRONT"/>
+			<polygon mode="LINE"/>
 			<blend src="src_alpha" dst="one_minus_src_alpha"/>
 		</pass>
 	</technique>
-
 
 	<technique>
 		<require shaders="arb"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="arb/terrain_decal">
-			<depth mask="false"/>
-			<polygon mode="LINE"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="glsl"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="glsl/terrain_decal">
-			<depth mask="false"/>
-			<polygon mode="LINE"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="spirv"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="spirv/terrain_decal">
-			<depth mask="false"/>
-			<polygon mode="LINE"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-
-	<technique>
-		<require shaders="arb"/>
-		<pass shader="arb/terrain_decal">
+		<pass shader="terrain_decal">
 			<depth mask="false"/>
 			<blend src="src_alpha" dst="one_minus_src_alpha"/>
 		</pass>
 	</technique>
-
-	<technique>
-		<require shaders="glsl"/>
-		<pass shader="glsl/terrain_decal">
-			<depth mask="false"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
-	<technique>
-		<require shaders="spirv"/>
-		<pass shader="spirv/terrain_decal">
-			<depth mask="false"/>
-			<blend src="src_alpha" dst="one_minus_src_alpha"/>
-		</pass>
-	</technique>
-
 </effect>

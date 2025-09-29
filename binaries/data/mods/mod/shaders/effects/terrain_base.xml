@@ -1,69 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <effect>
-
 	<technique>
 		<require context="PASS_REFLECTIONS"/>
 		<require shaders="arb"/>
-		<pass shader="arb/terrain_base">
+		<require shaders="glsl"/>
+		<require shaders="spirv"/>
+		<pass shader="terrain_base">
 			<cull mode="FRONT"/>
 		</pass>
 	</technique>
 
 	<technique>
-		<require context="PASS_REFLECTIONS"/>
+		<require shaders="arb"/>
 		<require shaders="glsl"/>
-		<pass shader="glsl/terrain_base">
-			<cull mode="FRONT"/>
-		</pass>
-	</technique>
-
-	<technique>
-		<require context="PASS_REFLECTIONS"/>
 		<require shaders="spirv"/>
-		<pass shader="spirv/terrain_base">
-			<cull mode="FRONT"/>
+		<require context="MODE_WIREFRAME"/>
+		<pass shader="terrain_base">
+			<polygon mode="LINE"/>
 		</pass>
 	</technique>
-
 
 	<technique>
 		<require shaders="arb"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="arb/terrain_base">
-			<polygon mode="LINE"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="glsl"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="glsl/terrain_base">
-			<polygon mode="LINE"/>
-		</pass>
-	</technique>
-
-	<technique>
 		<require shaders="spirv"/>
-		<require context="MODE_WIREFRAME"/>
-		<pass shader="spirv/terrain_base">
-			<polygon mode="LINE"/>
-		</pass>
+		<pass shader="terrain_base"/>
 	</technique>
-
-
-	<technique>
-		<require shaders="arb"/>
-		<pass shader="arb/terrain_base"/>
-	</technique>
-
-	<technique>
-		<require shaders="glsl"/>
-		<pass shader="glsl/terrain_base"/>
-	</technique>
-
-	<technique>
-		<require shaders="spirv"/>
-		<pass shader="spirv/terrain_base"/>
-	</technique>
-
 </effect>
