@@ -27,7 +27,9 @@
 #include "lib/hash.h"
 #include "lib/timer.h"
 #include "lib/utf8.h"
+#include "ps/algorithm.h"
 #include "ps/CLogger.h"
+#include "ps/containers/StaticVector.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Errors.h"
@@ -219,12 +221,21 @@ bool CShaderManager::LoadTechnique(CShaderTechniquePtr& tech)
 
 	XMBElement root = XeroFile.GetRoot();
 
-	// Find all the techniques that we can use, and their preference
+	PS::StaticVector<std::string_view, 3> supportedShaders;
+	if (m_Device->GetBackend() == Renderer::Backend::Backend::GL_ARB && m_Device->GetCapabilities().ARBShaders)
+		supportedShaders.emplace_back("arb");
+	if (m_Device->GetBackend() == Renderer::Backend::Backend::GL)
+		supportedShaders.emplace_back("glsl");
+	if (m_Device->GetBackend() == Renderer::Backend::Backend::VULKAN)
+		supportedShaders.emplace_back("spirv");
 
+	// Find a first suitable technique that we can use.
 	std::optional<XMBElement> usableTech;
+	std::optional<std::string_view> usableShader;
 	XERO_ITER_EL(root, technique)
 	{
-		bool isUsable = true;
+		bool isUsable{true};
+		usableShader.reset();
 		XERO_ITER_EL(technique, child)
 		{
 			XMBAttributeList attrs = child.GetAttributes();
@@ -232,23 +243,11 @@ bool CShaderManager::LoadTechnique(CShaderTechniquePtr& tech)
 			// TODO: require should be an attribute of the tech and not its child.
 			if (child.GetNodeName() == el_require)
 			{
-				if (attrs.GetNamedItem(at_shaders) == "arb")
+				if (!attrs.GetNamedItem(at_shaders).empty())
 				{
-					if (m_Device->GetBackend() != Renderer::Backend::Backend::GL_ARB ||
-						!m_Device->GetCapabilities().ARBShaders)
-					{
-						isUsable = false;
-					}
-				}
-				else if (attrs.GetNamedItem(at_shaders) == "glsl")
-				{
-					if (m_Device->GetBackend() != Renderer::Backend::Backend::GL)
-						isUsable = false;
-				}
-				else if (attrs.GetNamedItem(at_shaders) == "spirv")
-				{
-					if (m_Device->GetBackend() != Renderer::Backend::Backend::VULKAN)
-						isUsable = false;
+					auto it = std::find(supportedShaders.begin(), supportedShaders.end(), std::string_view{attrs.GetNamedItem(at_shaders)});
+					if (it != supportedShaders.end())
+						usableShader.emplace(*it);
 				}
 				else if (!attrs.GetNamedItem(at_context).empty())
 				{
@@ -259,7 +258,7 @@ bool CShaderManager::LoadTechnique(CShaderTechniquePtr& tech)
 			}
 		}
 
-		if (isUsable)
+		if (isUsable && usableShader)
 		{
 			usableTech.emplace(technique);
 			break;
@@ -276,7 +275,7 @@ bool CShaderManager::LoadTechnique(CShaderTechniquePtr& tech)
 
 	const auto loadShaderProgramForTech = [&](const CStr& name, const CShaderDefines& defines)
 	{
-		CShaderProgramPtr shaderProgram = LoadProgram(name.c_str(), defines);
+		CShaderProgramPtr shaderProgram = LoadProgram(CStr{usableShader.value()} + "/" + name.c_str(), defines);
 		if (shaderProgram)
 		{
 			for (const VfsPath& shaderProgramPath : shaderProgram->GetFileDependencies())
