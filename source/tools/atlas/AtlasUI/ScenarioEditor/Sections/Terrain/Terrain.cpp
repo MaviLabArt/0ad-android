@@ -168,7 +168,7 @@ public:
 			m_Sizer->Add(label, wxSizerFlags().Expand());
 
 			// We have to force the sidebar to layout manually
-			GetParent()->Layout();
+			GetParent()->GetParent()->Layout();
 
 			if (preview.loaded && m_Timer.IsRunning())
 			{
