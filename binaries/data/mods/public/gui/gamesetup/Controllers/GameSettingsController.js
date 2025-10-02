@@ -117,7 +117,7 @@ class GameSettingsController
 		}
 
 		for (const handler of this.settingsLoadedHandlers)
-			handler();
+			handler(isSavedGame);
 
 		this.updateLayout();
 		this.setNetworkInitAttributes();

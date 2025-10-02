@@ -13,9 +13,9 @@ GameSettingControls.MapSelection = class MapSelection extends GameSettingControl
 		};
 	}
 
-	onSettingsLoaded()
+	onSettingsLoaded(isSavedGame)
 	{
-		if (this.gameSettingsController.guiData.lockSettings?.map)
+		if (this.gameSettingsController.guiData.lockSettings?.map || isSavedGame)
 		{
 			if (!g_GameSettings.map)
 			{
