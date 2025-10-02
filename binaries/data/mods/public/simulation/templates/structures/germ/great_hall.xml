@@ -30,7 +30,7 @@
         phase_town
       </Techs>
     </Requirements>
-    <Icon>structures/syssition.png</Icon>
+    <Icon>structures/hall.png</Icon>
   </Identity>
   <Loot>
     <stone>40</stone>
