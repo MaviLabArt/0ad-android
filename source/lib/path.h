@@ -49,6 +49,7 @@
 #include <istream>
 #include <string>
 #include <string_view>
+#include <utility>
 
 namespace ERR
 {
@@ -95,6 +96,12 @@ public:
 		DetectSeparator();
 	}
 
+	Path(Path&& p)
+		: path(std::move(p.path))
+	{
+		DetectSeparator();
+	}
+
 	Path(const char* p)
 		: path((const unsigned char*)p, (const unsigned char*)p+strlen(p))
 		// interpret bytes as unsigned; makes no difference for ASCII,
@@ -115,7 +122,13 @@ public:
 		DetectSeparator();
 	}
 
-	Path(const std::wstring& s)
+	Path(std::wstring s)
+		: path(std::move(s))
+	{
+		DetectSeparator();
+	}
+
+	Path(const std::wstring_view& s)
 		: path(s)
 	{
 		DetectSeparator();
@@ -125,6 +138,13 @@ public:
 	{
 		path = rhs.path;
 		DetectSeparator();	// (warns if separators differ)
+		return *this;
+	}
+
+	Path& operator=(Path&& rhs)
+	{
+		path = std::move(rhs.path);
+		DetectSeparator();
 		return *this;
 	}
 
@@ -217,14 +237,13 @@ public:
 		return filename.string().substr(0, idxDot);
 	}
 
-	// (Path return type allows callers to use our operator==)
-	Path Extension() const
+	std::wstring_view Extension() const
 	{
-		const Path filename = Filename();
-		const size_t idxDot = filename.string().find_last_of('.');
+		const std::wstring_view filename{path};
+		const size_t idxDot = filename.find_last_of('.');
 		if(idxDot == String::npos)
-			return Path();
-		return filename.string().substr(idxDot);
+			return {};
+		return filename.substr(idxDot);
 	}
 
 	Path ChangeExtension(Path extension) const
@@ -232,7 +251,7 @@ public:
 		return Parent() / Path(Basename().string() + extension.string());
 	}
 
-	Path operator/(Path rhs) const
+	Path operator/(const Path& rhs) const
 	{
 		Path ret = *this;
 		if(ret.path.empty())	// (empty paths assume '/')

@@ -114,7 +114,8 @@ Status GetDirectoryEntries(const OsPath& path, CFileInfos* files, DirectoryNames
 
 		for(size_t i = 0; osEnt->d_name[i] != '\0'; i++)
 			RETURN_STATUS_IF_ERR(Path::Validate(osEnt->d_name[i]));
-		const OsPath name(osEnt->d_name);
+
+		const std::wstring_view name{osEnt->d_name};
 
 		// get file information (mode, size, mtime)
 		struct stat s;
@@ -124,7 +125,7 @@ Status GetDirectoryEntries(const OsPath& path, CFileInfos* files, DirectoryNames
 #else
 		// .. call regular stat().
 		errno = 0;
-		const OsPath pathname = path / name;
+		const OsPath pathname = path / OsPath(osEnt->d_name);
 		if(wstat(pathname, &s) != 0)
 		{
 			if(errno == ENOENT)
@@ -140,9 +141,9 @@ Status GetDirectoryEntries(const OsPath& path, CFileInfos* files, DirectoryNames
 #endif
 
 		if(files && S_ISREG(s.st_mode))
-			files->push_back(CFileInfo(name, s.st_size, s.st_mtime));
+			files->emplace_back(osEnt->d_name, s.st_size, s.st_mtime);
 		else if(subdirectoryNames && S_ISDIR(s.st_mode) && name != L"." && name != L"..")
-			subdirectoryNames->push_back(name);
+			subdirectoryNames->emplace_back(osEnt->d_name);
 	}
 }
 

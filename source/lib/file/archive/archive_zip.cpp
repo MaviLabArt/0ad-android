@@ -311,7 +311,7 @@ cassert(sizeof(ECDR) == 22);
 // ArchiveFile_Zip
 //-----------------------------------------------------------------------------
 
-class ArchiveFile_Zip : public IArchiveFile
+class ArchiveFile_Zip final : public IArchiveFile
 {
 public:
 	ArchiveFile_Zip(const PFile& file, off_t ofs, off_t csize, u32 checksum, ZipMethod method)
@@ -321,22 +321,22 @@ public:
 	{
 	}
 
-	virtual size_t Precedence() const
+	size_t Precedence() const override
 	{
 		return 2u;
 	}
 
-	virtual wchar_t LocationCode() const
+	wchar_t LocationCode() const override
 	{
 		return 'A';
 	}
 
-	virtual OsPath Path() const
+	const OsPath& Path() const override
 	{
 		return m_file->Pathname();
 	}
 
-	virtual Status Load(const OsPath& /*name*/, const std::shared_ptr<u8>& buf, size_t size) const
+	Status Load(const OsPath& /*name*/, const std::shared_ptr<u8>& buf, size_t size) const override
 	{
 		AdjustOffset();
 

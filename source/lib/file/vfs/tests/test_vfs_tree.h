@@ -36,21 +36,23 @@
 
 class MockLoader : public IFileLoader
 {
-private:
-	size_t m_Precedence;
 public:
 	MockLoader(size_t precedence) :
 		m_Precedence(precedence)
 	{
 	}
 
-	size_t Precedence() const { return m_Precedence; }
-	wchar_t LocationCode() const { return L'\0'; }
-	OsPath Path() const { return L"";}
-	Status Load(const OsPath& /*name*/, const std::shared_ptr<u8>& /*buf*/, size_t /*size*/) const
+	size_t Precedence() const override { return m_Precedence; }
+	wchar_t LocationCode() const override { return L'\0'; }
+	const OsPath& Path() const override { return m_Path; }
+	Status Load(const OsPath& /*name*/, const std::shared_ptr<u8>& /*buf*/, size_t /*size*/) const override
 	{
 		return INFO::OK;
 	}
+
+private:
+	size_t m_Precedence;
+	OsPath m_Path;
 };
 
 class TestVfsTree : public CxxTest::TestSuite

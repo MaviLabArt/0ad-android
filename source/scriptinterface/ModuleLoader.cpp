@@ -126,7 +126,7 @@ VfsPath GetBaseFilename(const VfsPath& filename)
 	if (!VfsFileExists(filePath))
 		throw std::runtime_error{fmt::format("The file \"{}\" does not exist.", filePath.string8())};
 
-	if (filePath.Extension().string8() != ".js")
+	if (filePath.Extension() != L".js")
 	{
 		throw std::runtime_error{fmt::format("The file \"{}\" is not a JavaScript module.",
 			filePath.string8())};

@@ -116,7 +116,7 @@ bool CCacheLoader::CanUseArchiveCache(const VfsPath& sourcePath, const VfsPath& 
 
 VfsPath CCacheLoader::ArchiveCachePath(const VfsPath& sourcePath) const
 {
-	return sourcePath.ChangeExtension(sourcePath.Extension().string() + L".cached" + m_FileExtension);
+	return sourcePath.ChangeExtension(std::wstring{sourcePath.Extension()} + L".cached" + m_FileExtension);
 }
 
 VfsPath CCacheLoader::LooseCachePath(const VfsPath& sourcePath, const MD5& initialHash, u32 version)
@@ -148,7 +148,7 @@ VfsPath CCacheLoader::LooseCachePath(const VfsPath& sourcePath, const MD5& initi
 
 	return VfsPath("cache") /
 		path_name_only(path.BeforeCommon(sourcePath).Parent().string().c_str()) /
-			sourcePath.ChangeExtension(sourcePath.Extension().string() +
+			sourcePath.ChangeExtension(std::wstring{sourcePath.Extension()} +
 			L"." +
 			// Use a short prefix of the full hash (we don't need high collision-resistance)
 			wstring_from_utf8(Hexify(digest, 8)) +

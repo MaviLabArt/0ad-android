@@ -36,7 +36,7 @@ struct IFileLoader
 
 	virtual size_t Precedence() const = 0;
 	virtual wchar_t LocationCode() const = 0;
-	virtual OsPath Path() const = 0;
+	virtual const OsPath& Path() const = 0;
 
 	virtual Status Load(const OsPath& name, const std::shared_ptr<u8>& buf, size_t size) const = 0;
 };
