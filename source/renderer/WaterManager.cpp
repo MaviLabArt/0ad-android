@@ -300,6 +300,7 @@ void WaterManager::RecreateOrLoadTexturesIfNeeded()
 			g_RenderingOptions.SetWaterReflection(false);
 			UpdateQuality();
 		}
+		m_ReflectionFramebufferInitialized = false;
 	}
 
 	// Create refraction textures.
@@ -342,6 +343,7 @@ void WaterManager::RecreateOrLoadTexturesIfNeeded()
 			g_RenderingOptions.SetWaterRefraction(false);
 			UpdateQuality();
 		}
+		m_RefractionFramebufferInitialized = false;
 	}
 
 	const float scale{g_Renderer.GetPostprocManager().IsEnabled()

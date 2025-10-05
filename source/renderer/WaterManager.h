@@ -113,7 +113,9 @@ public:
 
 	// framebuffer objects
 	std::unique_ptr<Renderer::Backend::IFramebuffer> m_RefractionFramebuffer;
+	bool m_RefractionFramebufferInitialized{false};
 	std::unique_ptr<Renderer::Backend::IFramebuffer> m_ReflectionFramebuffer;
+	bool m_ReflectionFramebufferInitialized{false};
 	std::unique_ptr<Renderer::Backend::IFramebuffer> m_FancyEffectsFramebuffer;
 	std::unique_ptr<Renderer::Backend::IFramebuffer> m_FancyEffectsOccludersFramebuffer;
 

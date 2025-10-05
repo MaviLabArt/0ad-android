@@ -564,6 +564,12 @@ void CSceneRenderer::RenderReflections(
 		m->terrainRenderer.ScissorWater(CULL_DEFAULT, m_ViewCamera);
 	if (reflectionScissor.IsEmpty())
 	{
+		if (!wm.m_ReflectionFramebufferInitialized)
+		{
+			wm.m_ReflectionFramebufferInitialized = true;
+			deviceCommandContext->BeginFramebufferPass(wm.m_ReflectionFramebuffer.get());
+			deviceCommandContext->EndFramebufferPass();
+		}
 		m_ViewCamera = normalCamera;
 		return;
 	}
@@ -619,6 +625,8 @@ void CSceneRenderer::RenderReflections(
 	deviceCommandContext->SetScissors(0, nullptr);
 	deviceCommandContext->EndFramebufferPass();
 
+	wm.m_ReflectionFramebufferInitialized = true;
+
 	// Reset old camera
 	m_ViewCamera = normalCamera;
 }
@@ -641,6 +649,12 @@ void CSceneRenderer::RenderRefractions(
 		m->terrainRenderer.ScissorWater(CULL_DEFAULT, m_ViewCamera);
 	if (refractionScissor.IsEmpty())
 	{
+		if (!wm.m_RefractionFramebufferInitialized)
+		{
+			wm.m_RefractionFramebufferInitialized = true;
+			deviceCommandContext->BeginFramebufferPass(wm.m_ReflectionFramebuffer.get());
+			deviceCommandContext->EndFramebufferPass();
+		}
 		m_ViewCamera = normalCamera;
 		return;
 	}
@@ -696,6 +710,8 @@ void CSceneRenderer::RenderRefractions(
 
 	deviceCommandContext->SetScissors(0, nullptr);
 	deviceCommandContext->EndFramebufferPass();
+
+	wm.m_RefractionFramebufferInitialized = true;
 
 	// Reset old camera
 	m_ViewCamera = normalCamera;
