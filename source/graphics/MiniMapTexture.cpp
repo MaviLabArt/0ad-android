@@ -517,11 +517,17 @@ void CMiniMapTexture::RenderFinalTexture(
 	m_LastFinalTextureUpdate = currentTime;
 	m_FinalTextureDirty = false;
 
+	CmpPtr<ICmpRangeManager> cmpRangeManager(m_Simulation, SYSTEM_ENTITY);
+	ENSURE(cmpRangeManager);
+
 	// We might scale entities properly in the vertex shader but it requires
 	// additional space in the vertex buffer. So we assume that we don't need
 	// to change an entity size so often.
+	// Also compensate circular maps for being rendered closer than square maps.
+	const float mapGeometryScale{cmpRangeManager->GetLosCircular() ? std::sqrt(2.0f) : 1.0f};
+	const float entityRadiusScale{g_ConfigDB.Get("gui.session.minimap.entityradiusscale", 1.0f) / mapGeometryScale };
 	// Radius with instancing is lower because an entity has a more round shape.
-	const float entityRadius = static_cast<float>(m_MapSize) / 128.0f * (m_UseInstancing ? 5.0 : 6.0f);
+	const float entityRadius = static_cast<float>(m_MapSize) / 128.0f * (m_UseInstancing ? 5.0 : 6.0f) * entityRadiusScale;
 
 	UpdateAndUploadEntities(deviceCommandContext, entityRadius, currentTime);
 
