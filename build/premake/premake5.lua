@@ -42,7 +42,6 @@ print("")
 newoption { category = "Pyrogenesis", trigger = "android", description = "Use non-working Android cross-compiling mode" }
 newoption { category = "Pyrogenesis", trigger = "coverage", description = "Enable code coverage data collection (GCC only)" }
 newoption { category = "Pyrogenesis", trigger = "gles", description = "Use non-working OpenGL ES 2.0 mode" }
-newoption { category = "Pyrogenesis", trigger = "jenkins-tests", description = "Configure CxxTest to use the XmlPrinter runner which produces Jenkins-compatible output" }
 newoption { category = "Pyrogenesis", trigger = "minimal-flags", description = "Only set compiler/linker flags that are really needed. Has no effect on Windows builds" }
 newoption { category = "Pyrogenesis", trigger = "outpath", description = "Location for generated project files", default="../workspaces/default" }
 newoption { category = "Pyrogenesis", trigger = "sanitize-address", description = "Enable ASAN if available" }
@@ -1521,11 +1520,6 @@ function setup_tests()
 		end
 	end
 
-	local runner = "ErrorPrinter"
-	if _OPTIONS["jenkins-tests"] then
-		runner = "XmlPrinter"
-	end
-
 	local include_files = {
 		-- Precompiled headers - the header is added to all generated .cpp files
 		-- note that the header isn't actually precompiled here, only #included
@@ -1541,7 +1535,7 @@ function setup_tests()
 		table.insert(test_root_include_files, "lib/external_libraries/libsdl.h")
 	end
 
-	cxxtest.init(true, true, runner, include_files, test_root_include_files)
+	cxxtest.init(true, true, nil, include_files, test_root_include_files)
 
 	local target_type = get_main_project_target_type()
 	project_create("test", target_type)

@@ -93,7 +93,7 @@ pipeline {
                                     }
                                     bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.8\\lib libraries\\${ARCH}\\wxwidgets\\lib) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
                                     bat "(robocopy /MIR /NDL /NJH /NJS /NP /NS /NC E:\\wxWidgets-3.2.8\\include libraries\\${ARCH}\\wxwidgets\\include) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
-                                    bat 'cd build\\workspaces && update-workspaces.bat --jenkins-tests'
+                                    bat 'cd build\\workspaces && update-workspaces.bat'
 
                                     script {
                                         if (params.CLEANBUILD) {
@@ -143,7 +143,7 @@ pipeline {
                                     timeout(time: 15) {
                                         script {
                                             def bin = env.BUILD_TYPE == 'Debug' ? 'test_dbg' : 'test'
-                                            bat "cd binaries\\system && ${bin}.exe > cxxtest.xml"
+                                            bat "cd binaries\\system && ${bin}.exe --format junit --output cxxtest.xml"
                                         }
                                     }
                                 }

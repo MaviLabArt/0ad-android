@@ -37,7 +37,7 @@ pipeline {
             steps {
                 ws('/zpool0/docker-coverage') {
                     dir('build/workspaces/') {
-                        sh './update-workspaces.sh -j1 --jenkins-tests --coverage'
+                        sh './update-workspaces.sh -j1 --coverage'
                         dir('gcc/') {
                             // Reset everything in case there were ever leftovers
                             sh 'lcov --directory . --zerocounters'

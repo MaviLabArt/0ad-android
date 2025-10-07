@@ -47,7 +47,7 @@ pipeline {
                 sh 'git lfs pull -I "binaries/data/mods/_test.*"'
 
                 sh "libraries/build-source-libs.sh ${JOBS} 2> freebsd-prebuild-errors.log"
-                sh 'build/workspaces/update-workspaces.sh --jenkins-tests 2>> freebsd-prebuild-errors.log'
+                sh 'build/workspaces/update-workspaces.sh 2>> freebsd-prebuild-errors.log'
 
                 script {
                     if (params.CLEANBUILD) {
@@ -103,7 +103,7 @@ pipeline {
         stage('Release Tests') {
             steps {
                 timeout(time: 15) {
-                    sh './binaries/system/test > cxxtest.xml'
+                    sh './binaries/system/test --format junit --output cxxtest.xml'
                 }
             }
             post {

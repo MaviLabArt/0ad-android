@@ -53,7 +53,7 @@ pipeline {
                                     sh 'git lfs pull -I "binaries/data/mods/_test.*"'
 
                                     sh "libraries/build-macos-libs.sh ${JOBS} 2> macos-prebuild-errors.log"
-                                    sh 'build/workspaces/update-workspaces.sh --jenkins-tests 2>> macos-prebuild-errors.log'
+                                    sh 'build/workspaces/update-workspaces.sh 2>> macos-prebuild-errors.log'
 
                                     script {
                                         if (params.CLEANBUILD) {
@@ -111,7 +111,7 @@ pipeline {
                                     timeout(time: 15) {
                                         script {
                                             def bin = env.BUILD_TYPE == 'debug' ? 'test_dbg' : 'test'
-                                            sh "./binaries/system/${bin} > cxxtest.xml"
+                                            sh "./binaries/system/${bin} --format junit --output cxxtest.xml"
                                         }
                                     }
                                 }

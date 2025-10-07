@@ -2,7 +2,6 @@ local m = {}
 m._VERSION = "1.1.0-dev"
 
 m.exepath = nil
-m.runner = "ErrorPrinter"
 m.options = ""
 m.rootoptions = ""
 
@@ -19,8 +18,6 @@ end
 -- for a reference of available options, that should eventually be implemented in
 -- this module.
 function m.init(have_std, have_eh, runner, includes, root_includes)
-
-	m.runner = runner
 
 	if have_std then
 		m.options = m.options.." --have-std"
@@ -53,7 +50,7 @@ function m.init(have_std, have_eh, runner, includes, root_includes)
 		buildmessage 'Generating test root file'
 		buildcommands {
 			"{MKDIR} %{wks.location}/generated",
-			m.exepath.." --root "..m.rootoptions.." --runner="..m.runner.." -o %{wks.location}/generated/test_root.cpp"
+			m.exepath .. " --root " .. m.rootoptions .. " --template ../../../source/CxxTestRunner.tpl -o %{wks.location}/generated/test_root.cpp"
 		}
 		cleancommands { "{DELETE} %{wks.location}/generated/test_root.cpp" }
 	end
@@ -70,7 +67,7 @@ function m.configure_project(hdrfiles)
 		prebuildmessage 'Generating test root file'
 		prebuildcommands {
 			"{MKDIR} %{wks.location}/generated",
-			m.exepath.." --root "..m.rootoptions.." --runner="..m.runner.." -o %{wks.location}/generated/test_root.cpp"
+			m.exepath .. " --root " .. m.rootoptions .. " --template ../../../source/CxxTestRunner.tpl -o %{wks.location}/generated/test_root.cpp"
 		}
 	end
 
