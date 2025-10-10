@@ -44,3 +44,6 @@ fi
 # Supress warning on newer GCC compilers.
 # https://bugzilla.mozilla.org/show_bug.cgi?id=1953622
 patch -p1 <"${PATCHES}"/SuppressDanglingPointerWarning.patch
+
+# Fix building with python 3.14
+patch -p1 <"${PATCHES}"/FixPython3_14.diff

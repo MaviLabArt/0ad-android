@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 PV=128.13.0
 FOLDER="mozjs-${PV}"
 # If same-version changes are needed, increment this.
-LIB_VERSION="${PV}+wfg2"
+LIB_VERSION="${PV}+wfg3"
 LIB_NAME="mozjs128"
 
 build_archive()
