@@ -23,7 +23,6 @@
 #include "lib/file/vfs/vfs_path.h"
 #include "lib/types.h"
 #include "simulation2/system/Entity.h"
-#include "soundmanager/data/OggData.h"
 
 #include <cstddef>
 #include <string>
@@ -51,6 +50,7 @@ class CSoundGroup
 public:
 	CSoundGroup(const VfsPath& pathnameXML);
 	CSoundGroup();
+	~CSoundGroup();
 
 	// Play next sound in group
 	// @param position world position of the entity generating the sound
@@ -63,6 +63,9 @@ public:
 	bool LoadSoundGroup(const VfsPath& pathnameXML);
 
 	void Reload();
+
+	// Release all remaining loaded handles
+	void ReleaseGroup();
 
 	// Update SoundGroup, remove dead sounds from intensity count
 	void Update(float TimeSinceLastFrame);
@@ -81,7 +84,7 @@ private:
 	void SetDefaultValues();
 #if CONFIG2_AUDIO
 	// We store the handles so we can load now and play later
-	std::vector<COggData*> m_SoundGroups;
+	std::vector<CSoundData*> m_SoundGroups;
 #endif
 	u32 m_Seed;
 	// We need the filenames so we can reload when necessary.

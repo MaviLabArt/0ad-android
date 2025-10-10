@@ -34,11 +34,8 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <map>
-#include <memory>
 #include <mutex>
-#include <optional>
 #include <string>
-#include <unordered_map>
 #include <vector>
 
 class CSoundData;
@@ -103,8 +100,8 @@ public:
 	void StartWorker();
 
 	ISoundItem* LoadItem(const VfsPath& itemPath);
-	ISoundItem* ItemForData(COggData* itemData);
-	ISoundItem* ItemForEntity(entity_id_t source, COggData* sndData);
+	ISoundItem* ItemForData(CSoundData* itemData);
+	ISoundItem* ItemForEntity(entity_id_t source, CSoundData* sndData);
 
 	Status ReloadChangedFiles(const VfsPath& path);
 
@@ -126,6 +123,7 @@ public:
 
 	ALuint GetALSource(ISoundItem* anItem);
 	void ReleaseALSource(ALuint theSource);
+	ISoundItem* ItemFromData(CSoundData* itemData);
 
 	ISoundItem* ItemFromWAV(VfsPath& fname);
 	ISoundItem* ItemFromOgg(VfsPath& fname);
@@ -164,16 +162,12 @@ public:
 	void SetActionGain(float gain);
 	void SetUIGain(float gain);
 
-	COggData* GetSoundDataFromFile(const VfsPath& itemPath);
 protected:
 	void InitListener();
 	Status AlcInit();
 	void SetMusicItem(ISoundItem* anItem);
 
 private:
-	using DataMap = std::unordered_map<std::string, COggData>;
-	DataMap m_OggDataCache{};
-
 	CSoundManager(CSoundManager* /*other*/){};
 };
 

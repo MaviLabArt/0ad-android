@@ -18,6 +18,7 @@
 #include "precompiled.h"
 
 #include "SoundManager.h"
+
 #include "items/CBufferItem.h"
 #include "items/CSoundItem.h"
 #include "items/CStreamItem.h"
@@ -35,7 +36,7 @@
 #include "ps/XMB/XMBStorage.h"
 #include "ps/XML/Xeromyces.h"
 #include "soundmanager/ISoundManager.h"
-#include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
 #include "soundmanager/items/ISoundItem.h"
 #include "soundmanager/scripting/SoundGroup.h"
 
@@ -513,17 +514,21 @@ void CSoundManager::SetUIGain(float gain)
 
 ISoundItem* CSoundManager::LoadItem(const VfsPath& itemPath)
 {
-	if (!m_Enabled || itemPath.empty())
-		return nullptr;
+	AL_CHECK;
 
-	COggData* itemData{this->GetSoundDataFromFile(itemPath)};
-	if (!itemData)
-		return nullptr;
+	if (m_Enabled)
+	{
+		CSoundData* itemData = CSoundData::SoundDataFromFile(itemPath);
 
-	return ItemForData(itemData);
+		AL_CHECK;
+		if (itemData)
+			return CSoundManager::ItemForData(itemData);
+	}
+
+	return NULL;
 }
 
-ISoundItem* CSoundManager::ItemForData(COggData* itemData)
+ISoundItem* CSoundManager::ItemForData(CSoundData* itemData)
 {
 	AL_CHECK;
 	ISoundItem* answer = NULL;
@@ -597,12 +602,14 @@ void CSoundManager::IdleTask()
 	}
 }
 
-ISoundItem*	CSoundManager::ItemForEntity(entity_id_t /*source*/, COggData* sndData)
+ISoundItem*	CSoundManager::ItemForEntity(entity_id_t /*source*/, CSoundData* sndData)
 {
-	if (!m_Enabled)
-		return nullptr;
+	ISoundItem* currentItem = NULL;
 
-	return ItemForData(sndData);
+	if (m_Enabled)
+		currentItem = ItemForData(sndData);
+
+	return currentItem;
 }
 
 
@@ -859,21 +866,6 @@ CStr8 CSoundManager::GetOpenALVersion() const
 CStr8 CSoundManager::GetSoundCardNames() const
 {
 	return m_SoundCardNames;
-}
-
-COggData* CSoundManager::GetSoundDataFromFile(const VfsPath& itemPath)
-{
-	try
-	{
-		const std::string key = itemPath.string8();
-		auto [it, inserted] = m_OggDataCache.try_emplace(key, itemPath);
-		return &it->second;
-	}
-	catch (OggDataError& e)
-	{
-		LOGERROR("Failed to load sound data from '%s': %s", itemPath.string8(), e.what());
-		return nullptr;
-	}
 }
 
 #else // CONFIG2_AUDIO

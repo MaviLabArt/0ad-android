@@ -23,13 +23,13 @@
 
 #include "soundmanager/ISoundManager.h"
 #include "soundmanager/SoundManager.h"
-#include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
 
 #include <AL/al.h>
 #include <cstddef>
 #include <mutex>
 
-CBufferItem::CBufferItem(COggData* sndData)
+CBufferItem::CBufferItem(CSoundData* sndData)
 {
 	ResetVars();
 	if (InitOpenAL())
@@ -106,15 +106,24 @@ bool CBufferItem::IdleTask()
 	return true;
 }
 
-void CBufferItem::Attach(COggData* itemData)
+void CBufferItem::Attach(CSoundData* itemData)
 {
-	if (!m_ALSource || !itemData)
+	if ( m_ALSource == 0 )
 		return;
 
 	AL_CHECK;
-	m_SoundData = itemData;
-	alSourceQueueBuffers(m_ALSource, m_SoundData->GetBufferCount(), m_SoundData->GetBufferPtr());
+	if (m_SoundData != NULL)
+	{
+		CSoundData::ReleaseSoundData(m_SoundData);
+		m_SoundData = 0;
+	}
 	AL_CHECK;
+	if (itemData != NULL)
+	{
+		m_SoundData = itemData->IncrementCount();
+		alSourceQueueBuffers(m_ALSource, m_SoundData->GetBufferCount(),(const ALuint *) m_SoundData->GetBufferPtr());
+		AL_CHECK;
+	}
 }
 
 void CBufferItem::SetLooping(bool loops)

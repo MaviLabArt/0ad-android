@@ -22,7 +22,7 @@
 #if CONFIG2_AUDIO
 
 #include "soundmanager/SoundManager.h"
-#include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
 
 #include <AL/al.h>
 #include <cstddef>
@@ -33,7 +33,7 @@ CSoundItem::CSoundItem()
 	ResetVars();
 }
 
-CSoundItem::CSoundItem(COggData* sndData)
+CSoundItem::CSoundItem(CSoundData* sndData)
 {
 	ResetVars();
 	if (InitOpenAL())
@@ -65,18 +65,24 @@ bool CSoundItem::IdleTask()
 	return true;
 }
 
-void CSoundItem::Attach(COggData* itemData)
+void CSoundItem::Attach(CSoundData* itemData)
 {
-	if (!itemData)
-		return;
+	if (m_SoundData != NULL)
+	{
+		CSoundData::ReleaseSoundData(m_SoundData);
+		m_SoundData = 0;
+	}
 
-	AL_CHECK;
-	alSourcei(m_ALSource, AL_BUFFER, 0);
-	AL_CHECK;
-	m_SoundData = itemData;
-	alSourcei(m_ALSource, AL_BUFFER, m_SoundData->GetBuffer());
+	if (itemData != NULL)
+	{
+		AL_CHECK;
+		alSourcei(m_ALSource, AL_BUFFER, 0);
+		AL_CHECK;
+		m_SoundData = itemData->IncrementCount();
+		alSourcei(m_ALSource, AL_BUFFER, m_SoundData->GetBuffer());
 
-	AL_CHECK;
+		AL_CHECK;
+	}
 }
 
 #endif // CONFIG2_AUDIO

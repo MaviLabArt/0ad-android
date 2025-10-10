@@ -24,7 +24,7 @@
 
 #include "maths/Vector3D.h"
 #include "ps/CStr.h"
-#include "soundmanager/data/OggData.h"
+#include "soundmanager/data/SoundData.h"
 
 class ISoundItem
 {
@@ -44,7 +44,7 @@ public:
 	virtual void Play() = 0;
 	virtual void Stop() = 0;
 
-	virtual void Attach(COggData* itemData) = 0;
+	virtual void Attach(CSoundData* itemData) = 0;
 
 	virtual void EnsurePlay() = 0;
 
