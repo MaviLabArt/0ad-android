@@ -31,46 +31,46 @@ public:
 	void test_allocate()
 	{
 		Allocators::DynamicArena<100> testArena;
-		u8* p = static_cast<u8*>(testArena.allocate(10, nullptr, 1));
+		u8* p = static_cast<u8*>(testArena.allocate(10, 1));
 		TS_ASSERT(p != nullptr);
-		void* p2 = testArena.allocate(10, nullptr, 1);
+		void* p2 = testArena.allocate(10, 1);
 		TS_ASSERT(p + 10 == p2);
 
-		void* p3 = testArena.allocate(80, nullptr, 1);
+		void* p3 = testArena.allocate(80, 1);
 		TS_ASSERT(p + 20 == p3);
 
-		void* p4 = testArena.allocate(100, nullptr, 1);
+		void* p4 = testArena.allocate(100, 1);
 		TS_ASSERT(p4 != nullptr);
 
-		void* p5 = testArena.allocate(1, nullptr, 1);
+		void* p5 = testArena.allocate(1, 1);
 		TS_ASSERT(p5 != nullptr);
 
-		void* p6 = testArena.allocate(100, nullptr, 1);
+		void* p6 = testArena.allocate(100, 1);
 		TS_ASSERT(p6 != nullptr);
 
-		void* p7 = testArena.allocate(0, nullptr, 1);
+		void* p7 = testArena.allocate(0, 1);
 		TS_ASSERT(p7 != nullptr);
 	}
 
 	void test_alignment()
 	{
 		Allocators::DynamicArena<100> testArena;
-		u8* p = static_cast<u8*>(testArena.allocate(4, nullptr, 1));
+		u8* p = static_cast<u8*>(testArena.allocate(4, 1));
 		TS_ASSERT(p != nullptr);
 
-		u8* p2 = static_cast<u8*>(testArena.allocate(1, nullptr, 8));
+		u8* p2 = static_cast<u8*>(testArena.allocate(1, 8));
 		TS_ASSERT_EQUALS(p + 8, p2);
 
-		p2 = static_cast<u8*>(testArena.allocate(1, nullptr, 8));
+		p2 = static_cast<u8*>(testArena.allocate(1, 8));
 		TS_ASSERT_EQUALS(p + 16, p2);
 
-		p2 = static_cast<u8*>(testArena.allocate(1, nullptr, 8));
+		p2 = static_cast<u8*>(testArena.allocate(1, 8));
 		TS_ASSERT_EQUALS(p + 24, p2);
 
-		p2 = static_cast<u8*>(testArena.allocate(1, nullptr, 2));
+		p2 = static_cast<u8*>(testArena.allocate(1, 2));
 		TS_ASSERT_EQUALS(p + 26, p2);
 
-		p2 = static_cast<u8*>(testArena.allocate(1, nullptr, 8));
+		p2 = static_cast<u8*>(testArena.allocate(1, 8));
 		TS_ASSERT_EQUALS(p + 32, p2);
 	}
 };

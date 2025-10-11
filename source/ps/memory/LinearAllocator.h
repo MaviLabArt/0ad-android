@@ -57,7 +57,7 @@ public:
 		Release();
 	}
 
-	void* allocate(std::size_t n, void*, std::size_t alignment)
+	void* allocate(std::size_t n, std::size_t alignment)
 	{
 		m_Size = ROUND_UP(m_Size, alignment);
 		if (m_Size + n > m_Capacity)

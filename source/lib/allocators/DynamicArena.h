@@ -126,7 +126,7 @@ public:
 		m_Blocks.emplace_back();
 	}
 
-	void* allocate(size_t n, const void*, size_t alignment)
+	void* allocate(size_t n, size_t alignment)
 	{
 		// Safely handle zero-sized allocations (happens with GCC STL - see ticket #909).
 		if (n == 0)
