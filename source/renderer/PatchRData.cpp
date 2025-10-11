@@ -35,7 +35,6 @@
 #include "graphics/TextRenderer.h"
 #include "graphics/TextureManager.h"
 #include "lib/alignment.h"
-#include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
 #include "lib/code_generation.h"
 #include "lib/debug.h"
@@ -45,6 +44,7 @@
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
 #include "ps/Game.h"
+#include "ps/memory/LinearAllocator.h"
 #include "ps/Profile.h"
 #include "renderer/AlphaMapCalculator.h"
 #include "renderer/BlendShapes.h"
@@ -841,16 +841,14 @@ void CPatchRData::Update(CSimulation2* simulation)
 // batches uses a arena allocator. (All allocations are short-lived so we can
 // just throw away the whole arena at the end of each frame.)
 
-using Arena = Allocators::DynamicArena<1 * MiB>;
-
 // std::map types with appropriate arena allocators and default comparison operator
 template<class Key, class Value>
-using PooledBatchMap = std::map<Key, Value, std::less<Key>, ProxyAllocator<std::pair<Key const, Value>, Arena>>;
+using PooledBatchMap = std::map<Key, Value, std::less<Key>, ProxyAllocator<std::pair<Key const, Value>, PS::Memory::ScopedLinearAllocator>>;
 
 // Equivalent to "m[k]", when it returns a arena-allocated std::map (since we can't
 // use the default constructor in that case)
 template<typename M>
-typename M::mapped_type& PooledMapGet(M& m, const typename M::key_type& k, Arena& arena)
+typename M::mapped_type& PooledMapGet(M& m, const typename M::key_type& k, PS::Memory::ScopedLinearAllocator& arena)
 {
 	return m.insert(std::make_pair(k,
 		typename M::mapped_type(typename M::mapped_type::key_compare(), typename M::mapped_type::allocator_type(arena))
@@ -859,7 +857,7 @@ typename M::mapped_type& PooledMapGet(M& m, const typename M::key_type& k, Arena
 
 // Equivalent to "m[k]", when it returns a std::pair of arena-allocated std::vectors
 template<typename M>
-typename M::mapped_type& PooledPairGet(M& m, const typename M::key_type& k, Arena& arena)
+typename M::mapped_type& PooledPairGet(M& m, const typename M::key_type& k, PS::Memory::ScopedLinearAllocator& arena)
 {
 	return m.insert(std::make_pair(k, std::make_pair(
 			typename M::mapped_type::first_type(typename M::mapped_type::first_type::allocator_type(arena)),
@@ -868,7 +866,7 @@ typename M::mapped_type& PooledPairGet(M& m, const typename M::key_type& k, Aren
 }
 
 // Each multidraw batch has a list of index counts, and a list of pointers-to-first-indexes
-using BatchElements = std::pair<std::vector<u32, ProxyAllocator<u32, Arena>>, std::vector<u32, ProxyAllocator<u32, Arena>>>;
+using BatchElements = std::pair<std::vector<u32, ProxyAllocator<u32, PS::Memory::ScopedLinearAllocator>>, std::vector<u32, ProxyAllocator<u32, PS::Memory::ScopedLinearAllocator>>>;
 
 // Group batches by index buffer
 using IndexBufferBatches = PooledBatchMap<CVertexBuffer*, BatchElements>;
@@ -890,9 +888,9 @@ void CPatchRData::RenderBases(
 	PROFILE3("render terrain bases");
 	GPU_SCOPED_LABEL(deviceCommandContext, "Render terrain bases");
 
-	Arena arena;
+	PS::Memory::ScopedLinearAllocator scopedLinearAllocator{g_Renderer.GetLinearAllocator()};
 
-	ShaderTechniqueBatches batches(ShaderTechniqueBatches::key_compare(), (ShaderTechniqueBatches::allocator_type(arena)));
+	ShaderTechniqueBatches batches(ShaderTechniqueBatches::key_compare(), (ShaderTechniqueBatches::allocator_type(scopedLinearAllocator)));
 
 	PROFILE_START("compute batches");
 
@@ -913,12 +911,12 @@ void CPatchRData::RenderBases(
 			BatchElements& batch = PooledPairGet(
 				PooledMapGet(
 					PooledMapGet(
-						PooledMapGet(batches, std::make_pair(material.GetShaderEffect(), material.GetShaderDefines()), arena),
-						splat.m_Texture, arena
+						PooledMapGet(batches, std::make_pair(material.GetShaderEffect(), material.GetShaderDefines()), scopedLinearAllocator),
+						splat.m_Texture, scopedLinearAllocator
 					),
-					patch->m_VBBase->m_Owner, arena
+					patch->m_VBBase->m_Owner, scopedLinearAllocator
 				),
-				patch->m_VBBaseIndices->m_Owner, arena
+				patch->m_VBBaseIndices->m_Owner, scopedLinearAllocator
 			);
 
 			batch.first.push_back(splat.m_IndexCount);
@@ -1015,8 +1013,8 @@ void CPatchRData::RenderBases(
  */
 struct SBlendBatch
 {
-	SBlendBatch(Arena& arena) :
-		m_Batches(VertexBufferBatches::key_compare(), VertexBufferBatches::allocator_type(arena))
+	SBlendBatch(PS::Memory::ScopedLinearAllocator& allocator) :
+		m_Batches(VertexBufferBatches::key_compare(), VertexBufferBatches::allocator_type(allocator))
 	{
 	}
 
@@ -1031,12 +1029,12 @@ struct SBlendBatch
 struct SBlendStackItem
 {
 	SBlendStackItem(CVertexBuffer::VBChunk* v, CVertexBuffer::VBChunk* i,
-			const std::vector<CPatchRData::SSplat>& s, Arena& arena) :
-		vertices(v), indices(i), splats(s.begin(), s.end(), SplatStack::allocator_type(arena))
+			const std::vector<CPatchRData::SSplat>& s, PS::Memory::ScopedLinearAllocator& allocator) :
+		vertices(v), indices(i), splats(s.begin(), s.end(), SplatStack::allocator_type(allocator))
 	{
 	}
 
-	using SplatStack = std::vector<CPatchRData::SSplat, ProxyAllocator<CPatchRData::SSplat, Arena>>;
+	using SplatStack = std::vector<CPatchRData::SSplat, ProxyAllocator<CPatchRData::SSplat, PS::Memory::ScopedLinearAllocator>>;
 	CVertexBuffer::VBChunk* vertices;
 	CVertexBuffer::VBChunk* indices;
 	SplatStack splats;
@@ -1050,10 +1048,10 @@ void CPatchRData::RenderBlends(
 	PROFILE3("render terrain blends");
 	GPU_SCOPED_LABEL(deviceCommandContext, "Render terrain blends");
 
-	Arena arena;
+	PS::Memory::ScopedLinearAllocator scopedLinearAllocator{g_Renderer.GetLinearAllocator()};
 
-	using BatchesStack = std::vector<SBlendBatch, ProxyAllocator<SBlendBatch, Arena>>;
-	BatchesStack batches((BatchesStack::allocator_type(arena)));
+	using BatchesStack = std::vector<SBlendBatch, ProxyAllocator<SBlendBatch, PS::Memory::ScopedLinearAllocator>>;
+	BatchesStack batches((BatchesStack::allocator_type(scopedLinearAllocator)));
 
 	CShaderDefines contextBlend = context;
 	contextBlend.Add(str_BLEND, str_1);
@@ -1064,8 +1062,8 @@ void CPatchRData::RenderBlends(
  	// to avoid heavy reallocations
  	batches.reserve(256);
 
-	using BlendStacks = std::vector<SBlendStackItem, ProxyAllocator<SBlendStackItem, Arena>>;
-	BlendStacks blendStacks((BlendStacks::allocator_type(arena)));
+	using BlendStacks = std::vector<SBlendStackItem, ProxyAllocator<SBlendStackItem, PS::Memory::ScopedLinearAllocator>>;
+	BlendStacks blendStacks((BlendStacks::allocator_type(scopedLinearAllocator)));
 	blendStacks.reserve(patches.size());
 
 	// Extract all the blend splats from each patch
@@ -1074,8 +1072,7 @@ void CPatchRData::RenderBlends(
  		CPatchRData* patch = patches[i];
  		if (!patch->m_BlendSplats.empty())
  		{
-
- 			blendStacks.push_back(SBlendStackItem(patch->m_VBBlends.Get(), patch->m_VBBlendIndices.Get(), patch->m_BlendSplats, arena));
+			blendStacks.push_back(SBlendStackItem(patch->m_VBBlends.Get(), patch->m_VBBlendIndices.Get(), patch->m_BlendSplats, scopedLinearAllocator));
  			// Reverse the splats so the first to be rendered is at the back of the list
  			std::reverse(blendStacks.back().splats.begin(), blendStacks.back().splats.end());
  		}
@@ -1100,7 +1097,7 @@ void CPatchRData::RenderBlends(
 					CVertexBuffer::VBChunk* vertices = blendStacks[k].vertices;
 					CVertexBuffer::VBChunk* indices = blendStacks[k].indices;
 
-					BatchElements& batch = PooledPairGet(PooledMapGet(batches.back().m_Batches, vertices->m_Owner, arena), indices->m_Owner, arena);
+					BatchElements& batch = PooledPairGet(PooledMapGet(batches.back().m_Batches, vertices->m_Owner, scopedLinearAllocator), indices->m_Owner, scopedLinearAllocator);
 					batch.first.push_back(splats.back().m_IndexCount);
 
 		 			batch.second.push_back(indices->m_Index + splats.back().m_IndexStart);
@@ -1126,7 +1123,7 @@ void CPatchRData::RenderBlends(
 		if (bestStackSize == 0)
 			break;
 
-		SBlendBatch layer(arena);
+		SBlendBatch layer(scopedLinearAllocator);
 		layer.m_Texture = bestTex;
 		if (!bestTex->GetMaterial().GetSamplers().empty())
 		{

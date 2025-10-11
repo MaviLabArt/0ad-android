@@ -52,6 +52,7 @@ constexpr size_t MAX_CHAR_COUNT_PER_BATCH = 65536 / 4;
 } // anonymous namespace
 
 CTextRenderer::CTextRenderer()
+	: m_ScopedLinearAllocator{g_Renderer.GetLinearAllocator()}, m_Batches(m_ScopedLinearAllocator)
 {
 	ResetTranslate();
 	SetCurrentColor(CColor(1.0f, 1.0f, 1.0f, 1.0f));
@@ -174,7 +175,7 @@ void CTextRenderer::PutString(float x, float y, const std::wstring* buf, bool ow
 	// If any state has changed since the last batch, start a new batch
 	if (m_Dirty)
 	{
-		SBatch batch;
+		SBatch batch{m_ScopedLinearAllocator};
 		batch.chars = 0;
 		batch.translate = m_Translate;
 		batch.color = m_Color;
@@ -210,16 +211,16 @@ void CTextRenderer::Render(
 	const CVector2D& transformScale, const CVector2D& translation,
 	const bool debugFontBox, const CColor& debugBoxColor)
 {
-	std::vector<u16> indices;
-	std::vector<CVector2D> positions;
-	std::vector<CVector2D> uvs;
+	std::vector<u16, ProxyAllocator<u16, PS::Memory::ScopedLinearAllocator>> indices{m_ScopedLinearAllocator};
+	std::vector<CVector2D, ProxyAllocator<CVector2D, PS::Memory::ScopedLinearAllocator>> positions{m_ScopedLinearAllocator};
+	std::vector<CVector2D, ProxyAllocator<CVector2D, PS::Memory::ScopedLinearAllocator>> uvs{m_ScopedLinearAllocator};
 
 	// Try to merge non-consecutive batches that share the same font/color/translate:
 	// sort the batch list by font, then merge the runs of adjacent compatible batches
 	m_Batches.sort(SBatchCompare());
-	for (std::list<SBatch>::iterator it = m_Batches.begin(); it != m_Batches.end(); )
+	for (SBatchList::iterator it = m_Batches.begin(); it != m_Batches.end(); )
 	{
-		std::list<SBatch>::iterator next = std::next(it);
+		SBatchList::iterator next = std::next(it);
 		if (next != m_Batches.end() && it->chars + next->chars <= MAX_CHAR_COUNT_PER_BATCH && it->font == next->font && it->color == next->color && it->translate == next->translate)
 		{
 			it->chars += next->chars;
@@ -238,10 +239,8 @@ void CTextRenderer::Render(
 	bool translationChanged = false;
 
 	CTexture* lastTexture = nullptr;
-	for (std::list<SBatch>::iterator it = m_Batches.begin(); it != m_Batches.end(); ++it)
+	for (SBatch& batch : m_Batches)
 	{
-		SBatch& batch = *it;
-
 		if (lastTexture != batch.font->GetTexture().get())
 		{
 			batch.font->InitalizeAtlasTextureIfNeeded(deviceCommandContext);
@@ -294,9 +293,8 @@ void CTextRenderer::Render(
 			idx = 0;
 		};
 
-		for (std::list<SBatchRun>::iterator runit = batch.runs.begin(); runit != batch.runs.end(); ++runit)
+		for (SBatchRun& run : batch.runs)
 		{
-			SBatchRun& run = *runit;
 			float x{std::ceil(run.x)};
 			float y{std::ceil(run.y)};
 			for (size_t i = 0; i < run.text->size(); ++i)

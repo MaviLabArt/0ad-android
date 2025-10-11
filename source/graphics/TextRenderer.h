@@ -19,9 +19,11 @@
 #define INCLUDED_TEXTRENDERER
 
 #include "graphics/Color.h"
+#include "lib/allocators/STLAllocators.h"
 #include "maths/Rect.h"
 #include "maths/Vector2D.h"
 #include "ps/CStrIntern.h"
+#include "ps/memory/LinearAllocator.h"
 
 #include <cstddef>
 #include <list>
@@ -159,10 +161,15 @@ private:
 		CVector2D translate;
 		CColor color;
 		CFont* font;
-		std::list<SBatchRun> runs;
+		using SBatchRunList = std::list<SBatchRun, ProxyAllocator<SBatchRun, PS::Memory::ScopedLinearAllocator>>;
+		SBatchRunList runs;
+
+		SBatch(PS::Memory::ScopedLinearAllocator& allocator) : runs{allocator} {}
 	};
 
 	void PutString(float x, float y, const std::wstring* buf, bool owned);
+
+	PS::Memory::ScopedLinearAllocator m_ScopedLinearAllocator;
 
 	CVector2D m_Translate;
 	CRect m_Clipping;
@@ -173,7 +180,8 @@ private:
 
 	bool m_Dirty = true;
 
-	std::list<SBatch> m_Batches;
+	using SBatchList = std::list<SBatch, ProxyAllocator<SBatch, PS::Memory::ScopedLinearAllocator>>;
+	SBatchList m_Batches;
 };
 
 #endif // INCLUDED_TEXTRENDERER

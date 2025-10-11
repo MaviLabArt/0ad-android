@@ -31,7 +31,6 @@
 #include "graphics/Texture.h"
 #include "graphics/TextureManager.h"
 #include "lib/alignment.h"
-#include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
 #include "lib/debug.h"
 #include "lib/hash.h"
@@ -41,6 +40,7 @@
 #include "ps/CLogger.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/memory/LinearAllocator.h"
 #include "ps/Profile.h"
 #include "renderer/MikktspaceWrap.h"
 #include "renderer/ModelRenderer.h"
@@ -441,10 +441,9 @@ void ShaderModelRenderer::Render(
 	 * list in each, rebinding the GL state whenever it changes.
 	 */
 
-	using Arena = Allocators::DynamicArena<256 * KiB>;
+	PS::Memory::ScopedLinearAllocator scopedLinearAllocator{g_Renderer.GetLinearAllocator()};
 
-	Arena arena;
-	using ModelListAllocator = ProxyAllocator<CModel*, Arena>;
+	using ModelListAllocator = ProxyAllocator<CModel*, PS::Memory::ScopedLinearAllocator>;
 	using ModelList_t = std::vector<CModel*, ModelListAllocator>;
 	using MaterialBuckets_t = std::unordered_map<
 		SMRMaterialBucketKey,
@@ -453,9 +452,9 @@ void ShaderModelRenderer::Render(
 		std::equal_to<SMRMaterialBucketKey>,
 		ProxyAllocator<
 			std::pair<const SMRMaterialBucketKey, ModelList_t>,
-			Arena> >;
+			PS::Memory::ScopedLinearAllocator>>;
 
-	MaterialBuckets_t materialBuckets((MaterialBuckets_t::allocator_type(arena)));
+	MaterialBuckets_t materialBuckets((MaterialBuckets_t::allocator_type(scopedLinearAllocator)));
 
 	{
 		PROFILE3("bucketing by material");
@@ -470,7 +469,7 @@ void ShaderModelRenderer::Render(
 			if (it == materialBuckets.end())
 			{
 				std::pair<MaterialBuckets_t::iterator, bool> inserted = materialBuckets.insert(
-					std::make_pair(key, ModelList_t(ModelList_t::allocator_type(arena))));
+					std::make_pair(key, ModelList_t(ModelList_t::allocator_type(scopedLinearAllocator))));
 				inserted.first->second.reserve(32);
 				inserted.first->second.push_back(model);
 			}
@@ -481,19 +480,19 @@ void ShaderModelRenderer::Render(
 		}
 	}
 
-	using SortByDistItemsAllocator = ProxyAllocator<SMRSortByDistItem, Arena>;
-	std::vector<SMRSortByDistItem, SortByDistItemsAllocator> sortByDistItems((SortByDistItemsAllocator(arena)));
+	using SortByDistItemsAllocator = ProxyAllocator<SMRSortByDistItem, PS::Memory::ScopedLinearAllocator>;
+	std::vector<SMRSortByDistItem, SortByDistItemsAllocator> sortByDistItems((SortByDistItemsAllocator(scopedLinearAllocator)));
 
-	using SortByTechItemsAllocator = ProxyAllocator<CShaderTechniquePtr, Arena>;
-	std::vector<CShaderTechniquePtr, SortByTechItemsAllocator> sortByDistTechs((SortByTechItemsAllocator(arena)));
+	using SortByTechItemsAllocator = ProxyAllocator<CShaderTechniquePtr, PS::Memory::ScopedLinearAllocator>;
+	std::vector<CShaderTechniquePtr, SortByTechItemsAllocator> sortByDistTechs((SortByTechItemsAllocator(scopedLinearAllocator)));
 		// indexed by sortByDistItems[i].techIdx
 		// (which stores indexes instead of CShaderTechniquePtr directly
 		// to avoid the shared_ptr copy cost when sorting; maybe it'd be better
 		// if we just stored raw CShaderTechnique* and assumed the shader manager
 		// will keep it alive long enough)
 
-	using TechBucketsAllocator =  ProxyAllocator<SMRTechBucket, Arena>;
-	std::vector<SMRTechBucket, TechBucketsAllocator> techBuckets((TechBucketsAllocator(arena)));
+	using TechBucketsAllocator =  ProxyAllocator<SMRTechBucket, PS::Memory::ScopedLinearAllocator>;
+	std::vector<SMRTechBucket, TechBucketsAllocator> techBuckets((TechBucketsAllocator(scopedLinearAllocator)));
 
 	{
 		PROFILE3("processing material buckets");
@@ -555,7 +554,7 @@ void ShaderModelRenderer::Render(
 	// (This exists primarily because techBuckets wants a CModel**;
 	// we could avoid the cost of copying into this list by adding
 	// a stride length into techBuckets and not requiring contiguous CModel*s)
-	std::vector<CModel*, ModelListAllocator> sortByDistModels((ModelListAllocator(arena)));
+	std::vector<CModel*, ModelListAllocator> sortByDistModels((ModelListAllocator(scopedLinearAllocator)));
 
 	if (!sortByDistItems.empty())
 	{
@@ -608,19 +607,19 @@ void ShaderModelRenderer::Render(
 		// This vector keeps track of texture changes during rendering. It is kept outside the
 		// loops to avoid excessive reallocations. The token allocation of 64 elements
 		// should be plenty, though it is reallocated below (at a cost) if necessary.
-		using TextureListAllocator = ProxyAllocator<CTexture*, Arena>;
-		std::vector<CTexture*, TextureListAllocator> currentTexs((TextureListAllocator(arena)));
+		using TextureListAllocator = ProxyAllocator<CTexture*, PS::Memory::ScopedLinearAllocator>;
+		std::vector<CTexture*, TextureListAllocator> currentTexs((TextureListAllocator(scopedLinearAllocator)));
 		currentTexs.reserve(64);
 
 		// texBindings holds the identifier bindings in the shader, which can no longer be defined
 		// statically in the ShaderRenderModifier class. texBindingNames uses interned strings to
 		// keep track of when bindings need to be reevaluated.
-		using BindingListAllocator = ProxyAllocator<int32_t, Arena>;
-		std::vector<int32_t, BindingListAllocator> texBindings((BindingListAllocator(arena)));
+		using BindingListAllocator = ProxyAllocator<int32_t, PS::Memory::ScopedLinearAllocator>;
+		std::vector<int32_t, BindingListAllocator> texBindings((BindingListAllocator(scopedLinearAllocator)));
 		texBindings.reserve(64);
 
-		using BindingNamesListAllocator = ProxyAllocator<CStrIntern, Arena>;
-		std::vector<CStrIntern, BindingNamesListAllocator> texBindingNames((BindingNamesListAllocator(arena)));
+		using BindingNamesListAllocator = ProxyAllocator<CStrIntern, PS::Memory::ScopedLinearAllocator>;
+		std::vector<CStrIntern, BindingNamesListAllocator> texBindingNames((BindingNamesListAllocator(scopedLinearAllocator)));
 		texBindingNames.reserve(64);
 
 		while (idxTechStart < techBuckets.size())

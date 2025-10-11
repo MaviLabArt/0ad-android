@@ -53,6 +53,7 @@
 #include "ps/Game.h"
 #include "ps/GameSetup/Config.h"
 #include "ps/Globals.h"
+#include "ps/memory/LinearAllocator.h"
 #include "ps/Profile.h"
 #include "ps/ProfileViewer.h"
 #include "ps/Profiler2.h"
@@ -99,7 +100,7 @@ class CRendererStatsTable : public AbstractProfileTable
 {
 	NONCOPYABLE(CRendererStatsTable);
 public:
-	CRendererStatsTable(const CRenderer::Stats& st);
+	CRendererStatsTable(const CRenderer::Stats& st, const PS::Memory::LinearAllocator& linearAllocator);
 
 	// Implementation of AbstractProfileTable interface
 	CStr GetName() override;
@@ -112,6 +113,7 @@ public:
 private:
 	/// Reference to the renderer singleton's stats
 	const CRenderer::Stats& Stats;
+	const PS::Memory::LinearAllocator& m_LinearAllocator;
 
 	/// Column descriptions
 	std::vector<ProfileColumn> columnDescriptions;
@@ -129,6 +131,7 @@ private:
 		Row_VBAllocated,
 		Row_TextureMemory,
 		Row_ShadersLoaded,
+		Row_LinearAllocator,
 
 		// Must be last to count number of rows
 		NumberRows
@@ -136,8 +139,8 @@ private:
 };
 
 // Construction
-CRendererStatsTable::CRendererStatsTable(const CRenderer::Stats& st)
-	: Stats(st)
+CRendererStatsTable::CRendererStatsTable(const CRenderer::Stats& st, const PS::Memory::LinearAllocator& linearAllocator)
+	: Stats(st), m_LinearAllocator(linearAllocator)
 {
 	columnDescriptions.push_back(ProfileColumn("Name", 230));
 	columnDescriptions.push_back(ProfileColumn("Value", 100));
@@ -236,6 +239,12 @@ CStr CRendererStatsTable::GetCellText(size_t row, size_t col)
 		sprintf_s(buf, sizeof(buf), "%lu", (unsigned long)g_Renderer.GetShaderManager().GetNumEffectsLoaded());
 		return buf;
 
+	case Row_LinearAllocator:
+		if (col == 0)
+			return "linear allocator";
+		sprintf_s(buf, sizeof(buf), "%lu", static_cast<unsigned long>(m_LinearAllocator.GetCapacity()));
+		return buf;
+
 	default:
 		return "???";
 	}
@@ -292,6 +301,13 @@ public:
 
 	CFontManager fontManager;
 
+	// During rendering we need to collect and sort many objects. To reduce
+	// the allocation cost and increase cache locality we use the
+	// LinearAllocator.
+	// If we need to have more than 16MiB of continious memory then we're doing
+	// a lot of unnecessary work.
+	PS::Memory::LinearAllocator linearAllocator{1 * MiB, 16 * MiB};
+
 	struct VertexAttributesHash
 	{
 		size_t operator()(const std::vector<Renderer::Backend::SVertexAttributeFormat>& attributes) const;
@@ -304,7 +320,7 @@ public:
 	Internals(Renderer::Backend::IDevice* device) :
 		device(device),
 		deviceCommandContext(device->CreateCommandContext()),
-		IsOpen(false), ShadersDirty(true), profileTable(g_Renderer.m_Stats),
+		IsOpen(false), ShadersDirty(true), profileTable(g_Renderer.m_Stats, linearAllocator),
 		shaderManager(device), textureManager(g_VFS, false, device), vertexBufferManager(device),
 		postprocManager(device), sceneRenderer(device)
 	{
@@ -623,6 +639,8 @@ void CRenderer::RenderFrameImpl(const bool renderGUI, const bool renderLogger)
 	PROFILE2_ATTR("particles: %zu", stats.m_Particles);
 
 	g_Profiler2.RecordGPUFrameEnd(m->deviceCommandContext.get());
+
+	m->linearAllocator.Release();
 }
 
 void CRenderer::RenderFrame2D(const bool renderGUI, const bool renderLogger)
@@ -858,6 +876,8 @@ void CRenderer::EndFrame()
 	PROFILE3("end frame");
 
 	m->sceneRenderer.EndFrame();
+
+	m->linearAllocator.Release();
 }
 
 void CRenderer::MakeShadersDirty()
@@ -929,4 +949,9 @@ Renderer::Backend::IVertexInputLayout* CRenderer::GetVertexInputLayout(
 	if (inserted)
 		it->second = m->device->CreateVertexInputLayout(attributes);
 	return it->second.get();
+}
+
+PS::Memory::LinearAllocator& CRenderer::GetLinearAllocator()
+{
+	return m->linearAllocator;
 }

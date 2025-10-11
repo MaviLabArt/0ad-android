@@ -33,6 +33,7 @@ class CShaderManager;
 class CTextureManager;
 class CTimeManager;
 class CVertexBufferManager;
+namespace PS::Memory { class LinearAllocator; }
 namespace Renderer::Backend { class IDevice; }
 namespace Renderer::Backend { class IDeviceCommandContext; }
 namespace Renderer::Backend { class IVertexInputLayout; }
@@ -143,6 +144,12 @@ public:
 	 */
 	Renderer::Backend::IVertexInputLayout* GetVertexInputLayout(
 		const std::span<const Renderer::Backend::SVertexAttributeFormat> attributes);
+
+	/**
+	 * Currently using the linear allocated is allowed in small scopes to avoid
+	 * high memory overhead. To validate that use PS::Memory::ScopedLinearAllocator.
+	 */
+	PS::Memory::LinearAllocator& GetLinearAllocator();
 
 protected:
 	friend class CDecalRData;

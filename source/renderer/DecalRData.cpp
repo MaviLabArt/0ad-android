@@ -29,7 +29,6 @@
 #include "graphics/Terrain.h"
 #include "graphics/TextureManager.h"
 #include "lib/alignment.h"
-#include "lib/allocators/DynamicArena.h"
 #include "lib/allocators/STLAllocators.h"
 #include "lib/debug.h"
 #include "lib/posix/posix_types.h"
@@ -38,6 +37,7 @@
 #include "ps/CLogger.h"
 #include "ps/CStrIntern.h"
 #include "ps/CStrInternStatic.h"
+#include "ps/memory/LinearAllocator.h"
 #include "ps/Profile.h"
 #include "renderer/Renderer.h"
 #include "renderer/TerrainRenderer.h"
@@ -143,12 +143,10 @@ void CDecalRData::RenderDecals(
 	PROFILE3("render terrain decals");
 	GPU_SCOPED_LABEL(deviceCommandContext, "Render terrain decals");
 
-	using Arena = Allocators::DynamicArena<256 * KiB>;
+	PS::Memory::ScopedLinearAllocator scopedLinearAllocator{g_Renderer.GetLinearAllocator()};
 
-	Arena arena;
-
-	using Batches = std::vector<SDecalBatch, ProxyAllocator<SDecalBatch, Arena>>;
-	Batches batches((Batches::allocator_type(arena)));
+	using Batches = std::vector<SDecalBatch, ProxyAllocator<SDecalBatch, PS::Memory::ScopedLinearAllocator>>;
+	Batches batches((Batches::allocator_type(scopedLinearAllocator)));
 	batches.reserve(decals.size());
 
 	CShaderDefines contextDecal = context;
