@@ -305,22 +305,7 @@ void TerrainRenderer::PrepareShader(
 		shader->GetBindingSlot(str_losTransform),
 		los.GetTextureMatrix()[0], los.GetTextureMatrix()[12]);
 
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_ambient),
-		lightEnv.m_AmbientColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_sunColor),
-		lightEnv.m_SunColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_sunDir),
-		lightEnv.GetSunDir().AsFloatArray());
-
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_fogColor),
-		lightEnv.m_FogColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_fogParams),
-		lightEnv.m_FogFactor, lightEnv.m_FogMax);
+	lightEnv.Bind(deviceCommandContext, shader);
 }
 
 void TerrainRenderer::RenderTerrainShader(
@@ -585,12 +570,6 @@ bool TerrainRenderer::RenderFancyWater(
 	}
 
 	deviceCommandContext->SetUniform(
-		fancyWaterShader->GetBindingSlot(str_ambient), lightEnv.m_AmbientColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		fancyWaterShader->GetBindingSlot(str_sunDir), lightEnv.GetSunDir().AsFloatArray());
-	deviceCommandContext->SetUniform(
-		fancyWaterShader->GetBindingSlot(str_sunColor), lightEnv.m_SunColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
 		fancyWaterShader->GetBindingSlot(str_color), waterManager.m_WaterColor.AsFloatArray());
 	deviceCommandContext->SetUniform(
 		fancyWaterShader->GetBindingSlot(str_tint), waterManager.m_WaterTint.AsFloatArray());
@@ -610,12 +589,8 @@ bool TerrainRenderer::RenderFancyWater(
 		fancyWaterShader->GetBindingSlot(str_cameraPos),
 		camera.GetOrientation().GetTranslation().AsFloatArray());
 
-	deviceCommandContext->SetUniform(
-		fancyWaterShader->GetBindingSlot(str_fogColor),
-		lightEnv.m_FogColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		fancyWaterShader->GetBindingSlot(str_fogParams),
-		lightEnv.m_FogFactor, lightEnv.m_FogMax);
+	lightEnv.Bind(deviceCommandContext, fancyWaterShader);
+
 	deviceCommandContext->SetUniform(
 		fancyWaterShader->GetBindingSlot(str_time), static_cast<float>(time));
 	const float scale{g_Renderer.GetPostprocManager().IsEnabled()

@@ -3,7 +3,6 @@
 
 vec3 applyFog(vec3 color, vec3 fogColor, vec2 fogParams)
 {
-#if USE_FOG
 	float density = fogParams.x;
 	float maxFog = fogParams.y;
 
@@ -16,9 +15,6 @@ vec3 applyFog(vec3 color, vec3 fogColor, vec2 fogParams)
 	fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 	return mix(fogColor, color, fogFactor);
-#else
-	return color;
-#endif
 }
 
 #endif // INCLUDED_COMMON_FOG

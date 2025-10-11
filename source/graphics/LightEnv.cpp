@@ -20,6 +20,10 @@
 #include "LightEnv.h"
 
 #include "maths/MathUtil.h"
+#include "ps/CStrInternStatic.h"
+#include "renderer/backend/IDeviceCommandContext.h"
+#include "renderer/backend/IShaderProgram.h"
+#include "renderer/RenderingOptions.h"
 
 #include <cmath>
 
@@ -55,4 +59,23 @@ void CLightEnv::CalculateSunDirection()
 	m_SunDir.X = scale * sinf(m_Rotation);
 	m_SunDir.Z = scale * cosf(m_Rotation);
 	m_SunDir.Normalize();
+}
+
+void CLightEnv::Bind(
+	Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
+	Renderer::Backend::IShaderProgram* shaderProgram) const
+{
+	deviceCommandContext->SetUniform(
+		shaderProgram->GetBindingSlot(str_ambient), m_AmbientColor.AsFloatArray());
+	deviceCommandContext->SetUniform(
+		shaderProgram->GetBindingSlot(str_sunDir), GetSunDir().AsFloatArray());
+	deviceCommandContext->SetUniform(
+		shaderProgram->GetBindingSlot(str_sunColor), m_SunColor.AsFloatArray());
+
+	deviceCommandContext->SetUniform(
+		shaderProgram->GetBindingSlot(str_fogColor),
+		m_FogColor.AsFloatArray());
+	deviceCommandContext->SetUniform(
+		shaderProgram->GetBindingSlot(str_fogParams),
+		m_FogFactor, g_RenderingOptions.GetFog() ? m_FogMax : 1.0f);
 }

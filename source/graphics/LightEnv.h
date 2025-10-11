@@ -25,6 +25,9 @@
 #include "graphics/Color.h"
 #include "maths/Vector3D.h"
 
+namespace Renderer::Backend { class IDeviceCommandContext; }
+namespace Renderer::Backend { class IShaderProgram; }
+
 /**
  * Class CLightEnv: description of a lighting environment - contains all the
  * necessary parameters for representation of the lighting within a scenario
@@ -89,6 +92,10 @@ public:
 	{
 		return !(*this == o);
 	}
+
+	void Bind(
+		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
+		Renderer::Backend::IShaderProgram* shaderProgram) const;
 
 private:
 	friend class CMapWriter;

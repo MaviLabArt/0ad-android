@@ -83,24 +83,7 @@ void ShaderRenderModifier::BeginPass(
 		GetShadowMap()->BindTo(deviceCommandContext, shader);
 
 	if (GetLightEnv())
-	{
-		deviceCommandContext->SetUniform(
-			shader->GetBindingSlot(str_ambient),
-			GetLightEnv()->m_AmbientColor.AsFloatArray());
-		deviceCommandContext->SetUniform(
-			shader->GetBindingSlot(str_sunDir),
-			GetLightEnv()->GetSunDir().AsFloatArray());
-		deviceCommandContext->SetUniform(
-			shader->GetBindingSlot(str_sunColor),
-			GetLightEnv()->m_SunColor.AsFloatArray());
-
-		deviceCommandContext->SetUniform(
-			shader->GetBindingSlot(str_fogColor),
-			GetLightEnv()->m_FogColor.AsFloatArray());
-		deviceCommandContext->SetUniform(
-			shader->GetBindingSlot(str_fogParams),
-			GetLightEnv()->m_FogFactor, GetLightEnv()->m_FogMax);
-	}
+		GetLightEnv()->Bind(deviceCommandContext, shader);
 
 	if (shader->GetBindingSlot(str_losTex) >= 0)
 	{

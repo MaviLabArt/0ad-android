@@ -224,14 +224,7 @@ void CParticleEmitter::Bind(
 		shader->GetBindingSlot(str_losTransform),
 		los.GetTextureMatrix()[0], los.GetTextureMatrix()[12]);
 
-	const CLightEnv& lightEnv = g_Renderer.GetSceneRenderer().GetLightEnv();
-
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_sunColor), lightEnv.m_SunColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_fogColor), lightEnv.m_FogColor.AsFloatArray());
-	deviceCommandContext->SetUniform(
-		shader->GetBindingSlot(str_fogParams), lightEnv.m_FogFactor, lightEnv.m_FogMax);
+	g_Renderer.GetSceneRenderer().GetLightEnv().Bind(deviceCommandContext, shader);
 
 	deviceCommandContext->SetTexture(
 		shader->GetBindingSlot(str_baseTex), m_Type->m_Texture->GetBackendTexture());

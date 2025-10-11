@@ -241,9 +241,6 @@ void CSceneRenderer::ReloadShaders(Renderer::Backend::IDevice* device)
 	m->globalContext.Add(str_RENDER_DEBUG_MODE,
 		RenderDebugModeEnum::ToString(g_RenderingOptions.GetRenderDebugMode()));
 
-	if (device->GetBackend() != Renderer::Backend::Backend::GL_ARB && g_RenderingOptions.GetFog())
-		m->globalContext.Add(str_USE_FOG, str_1);
-
 	m->Model.ModShader = LitRenderModifierPtr(new ShaderRenderModifier());
 
 	ENSURE(g_RenderingOptions.GetRenderPath() != RenderPath::FIXED);
