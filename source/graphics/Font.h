@@ -31,6 +31,7 @@
 #include FT_GLYPH_H
 #include FT_IMAGE_H
 #include FT_STROKER_H
+#include <functional>
 #include <memory>
 #include <optional>
 #include <string>
@@ -49,6 +50,7 @@ class CFont
 public:
 	CFont(FT_Library library, const std::array<float, 256>& gammaCorrection) : m_FreeType{library}, m_GammaCorrectionLUT{gammaCorrection} {}
 	~CFont() = default;
+	MOVABLE(CFont);
 	NONCOPYABLE(CFont);
 
 	struct GlyphData
@@ -73,6 +75,7 @@ public:
 	public:
 		GlyphMap() = default;
 		~GlyphMap() = default;
+		MOVABLE(GlyphMap);
 		NONCOPYABLE(GlyphMap);
 
 		/**
@@ -181,7 +184,7 @@ private:
 
 	float m_FontSize{0.0f};
 	std::string m_FontName;
-	const std::array<float, 256>& m_GammaCorrectionLUT;
+	std::reference_wrapper<const std::array<float, 256>> m_GammaCorrectionLUT;
 
 	FT_Library m_FreeType;
 	std::vector<std::shared_ptr<u8>> m_FontsData;

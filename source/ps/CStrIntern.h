@@ -46,6 +46,7 @@ public:
 	CStrIntern();
 	explicit CStrIntern(const char* str);
 	explicit CStrIntern(const std::string& str);
+	explicit CStrIntern(const std::string_view str);
 
 	/**
 	 * Returns cached FNV1-A hash of the string.

@@ -36,8 +36,14 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <cstddef>
 #include <mutex>
-#include <sstream>
 #include <unordered_set>
+#include <version>
+
+#if defined(__cpp_lib_to_chars)
+#include <charconv>
+#else
+#include <sstream>
+#endif
 
 namespace
 {
@@ -65,8 +71,13 @@ const std::unordered_set<std::string> g_UnloggedEntries = {
 
 template<typename T> void Get(const CStr& value, T& ret)
 {
+#if defined(__cpp_lib_to_chars)
+	std::from_chars(value.data(), value.data() + value.size(), ret);
+#else
+	// TODO: switch to std::from_chars after minimal libcxx supports it.
 	std::stringstream ss(value);
 	ss >> ret;
+#endif
 }
 
 template<> void Get<>(const CStr& value, bool& ret)

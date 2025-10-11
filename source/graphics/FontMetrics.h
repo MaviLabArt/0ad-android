@@ -18,8 +18,6 @@
 #ifndef INCLUDED_FONTMETRICS
 #define INCLUDED_FONTMETRICS
 
-#include <memory>
-
 class CFont;
 class CStrIntern;
 
@@ -40,7 +38,7 @@ public:
 	void CalculateStringSize(const wchar_t* string, float& w, float& h) const;
 
 private:
-	std::shared_ptr<CFont> m_Font;
+	CFont* m_Font;
 };
 
 #endif // INCLUDED_FONTMETRICS

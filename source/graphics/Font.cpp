@@ -25,6 +25,7 @@
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
+#include "ps/strings/StringBuilder.h"
 #include "renderer/Renderer.h"
 #include "renderer/backend/IDevice.h"
 #include "renderer/backend/IDeviceCommandContext.h"
@@ -284,8 +285,12 @@ bool CFont::ConstructAtlasTexture()
 
 	m_AtlasSize = m_AtlasWidth * m_AtlasHeight * m_TextureFormatStride;
 
+	char buffer[128];
+	PS::StringBuilder fontTextureNameBuilder{{std::begin(buffer), std::end(buffer)}};
+	fontTextureNameBuilder.Append("Font Texture ");
+	fontTextureNameBuilder.Append(m_FontName);
 	m_Texture = g_Renderer.GetTextureManager().WrapBackendTexture(backendDevice->CreateTexture2D(
-		("Font Texture " + m_FontName).c_str(),
+		fontTextureNameBuilder.Str().data(),
 		Renderer::Backend::ITexture::Usage::TRANSFER_DST |
 			Renderer::Backend::ITexture::Usage::SAMPLED,
 		m_TextureFormat,
@@ -537,7 +542,7 @@ void CFont::BlendGlyphBitmapToTextureRGBA(const FT_Bitmap& bitmap, int targetX, 
 			u8* tempDstRow{dstRow + x * m_TextureFormatStride};
 			u8 alpha{srcRow[x]};
 
-			const float srcAlpha{m_StrokeWidth > 0 ? m_GammaCorrectionLUT[alpha] : alpha/255.0f};
+			const float srcAlpha{m_StrokeWidth > 0 ? m_GammaCorrectionLUT.get()[alpha] : alpha / 255.0f};
 			const float dstAlpha{tempDstRow[3] / 255.0f};
 			const float outAlpha{srcAlpha + dstAlpha * (1.0f - srcAlpha)};
 

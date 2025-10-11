@@ -108,7 +108,8 @@ public:
 	void Render(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
 		Renderer::Backend::IShaderProgram* shader,
-		const CVector2D& transformScale, const CVector2D& translation);
+		const CVector2D& transformScale, const CVector2D& translation,
+		const bool debugFontBox, const CColor& debugBoxColor);
 
 private:
 	friend struct SBatchCompare;
@@ -157,7 +158,7 @@ private:
 		size_t chars; // sum of runs[i].text->size()
 		CVector2D translate;
 		CColor color;
-		std::shared_ptr<CFont> font;
+		CFont* font;
 		std::list<SBatchRun> runs;
 	};
 
@@ -168,7 +169,7 @@ private:
 
 	CColor m_Color;
 	CStrIntern m_FontName;
-	std::shared_ptr<CFont> m_Font;
+	CFont* m_Font{};
 
 	bool m_Dirty = true;
 

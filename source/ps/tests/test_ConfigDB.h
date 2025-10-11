@@ -70,6 +70,46 @@ public:
 		}
 	}
 
+	void CheckFloat(const std::string& value, const float expectedValue)
+	{
+		configDB->SetValueString(CFG_SYSTEM, "test_setting", value);
+		configDB->WriteFile(CFG_SYSTEM);
+		configDB->Reload(CFG_SYSTEM);
+		{
+			std::string res;
+			configDB->GetValue(CFG_SYSTEM, "test_setting", res);
+			TS_ASSERT_EQUALS(res, value);
+		}
+		{
+			float res;
+			configDB->GetValue(CFG_SYSTEM, "test_setting", res);
+			TS_ASSERT_EQUALS(res, expectedValue);
+		}
+	}
+
+	void test_setting_float()
+	{
+		configDB->SetConfigFile(CFG_SYSTEM, "config/file.cfg");
+		configDB->WriteFile(CFG_SYSTEM);
+		configDB->Reload(CFG_SYSTEM);
+
+		const char* oldLocale{setlocale(LC_NUMERIC, "")};
+		for (const char* locale : {oldLocale, "fr_FR.UTF-8", "de_DE.UTF-8", "ja_JP.UTF-8"})
+		{
+			setlocale(LC_NUMERIC, locale);
+
+			CheckFloat("1", 1.0f);
+			CheckFloat("1.0", 1.0f);
+			CheckFloat("1e-3", 1e-3f);
+			CheckFloat("-1e-3", -1e-3f);
+			CheckFloat("1234.567", 1234.567f);
+			CheckFloat("-1234.567", -1234.567f);
+			CheckFloat("1.0suffix", 1.0f);
+		}
+
+		setlocale(LC_NUMERIC, oldLocale);
+	}
+
 	void test_setting_empty()
 	{
 		configDB->SetConfigFile(CFG_SYSTEM, "config/file.cfg");

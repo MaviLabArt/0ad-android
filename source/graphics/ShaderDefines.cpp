@@ -29,9 +29,15 @@
 
 #include <algorithm>
 #include <iterator>
-#include <sstream>
 #include <string>
 #include <string_view>
+#include <version>
+
+#if defined(__cpp_lib_to_chars)
+#include <charconv>
+#else
+#include <sstream>
+#endif
 
 namespace std
 {
@@ -185,9 +191,13 @@ int CShaderDefines::GetInt(const char* name) const
 	{
 		if (item.first == nameIntern)
 		{
-			int ret;
+			int ret{};
+#if defined(__cpp_lib_to_chars)
+			std::from_chars(item.second.c_str(), item.second.c_str() + item.second.string().size(), ret);
+#else
 			std::stringstream str(item.second.c_str());
 			str >> ret;
+#endif
 			return ret;
 		}
 	}

@@ -179,7 +179,7 @@ void CTextRenderer::PutString(float x, float y, const std::wstring* buf, bool ow
 		batch.translate = m_Translate;
 		batch.color = m_Color;
 		batch.font = m_Font;
-		m_Batches.push_back(batch);
+		m_Batches.emplace_back(batch);
 		m_Dirty = false;
 	}
 
@@ -187,7 +187,7 @@ void CTextRenderer::PutString(float x, float y, const std::wstring* buf, bool ow
 	SBatchRun run;
 	run.x = x;
 	run.y = y;
-	m_Batches.back().runs.push_back(run);
+	m_Batches.back().runs.emplace_back(run);
 	m_Batches.back().runs.back().text = buf;
 	m_Batches.back().runs.back().owned = owned;
 	m_Batches.back().chars += buf->size();
@@ -207,16 +207,12 @@ struct SBatchCompare
 void CTextRenderer::Render(
 	Renderer::Backend::IDeviceCommandContext* deviceCommandContext,
 	Renderer::Backend::IShaderProgram* shader,
-	const CVector2D& transformScale, const CVector2D& translation)
+	const CVector2D& transformScale, const CVector2D& translation,
+	const bool debugFontBox, const CColor& debugBoxColor)
 {
 	std::vector<u16> indices;
 	std::vector<CVector2D> positions;
 	std::vector<CVector2D> uvs;
-
-	const bool debugFontBox{g_ConfigDB.Get("fonts.debugbox", false)};
-	const std::string debugFontBoxColor{g_ConfigDB.Get("fonts.debugboxcolor", std::string{"128 0 128"})};
-	CColor debugBoxColor;
-	debugBoxColor.ParseString(debugFontBoxColor.c_str());
 
 	// Try to merge non-consecutive batches that share the same font/color/translate:
 	// sort the batch list by font, then merge the runs of adjacent compatible batches

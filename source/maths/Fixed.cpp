@@ -20,8 +20,8 @@
 #include "Fixed.h"
 
 #include "ps/CStr.h"
+#include "ps/strings/StringBuilder.h"
 
-#include <sstream>
 #include <string>
 
 template<>
@@ -96,18 +96,19 @@ CFixed_15_16 CFixed_15_16::FromString(const CStrW& s)
 template<>
 CStr8 CFixed_15_16::ToString() const
 {
-	std::stringstream r;
+	char buffer[16];
+	PS::StringBuilder builder({std::begin(buffer), std::end(buffer)});
 
 	u32 posvalue = abs(value);
 	if (value < 0)
-		r << "-";
+		builder.Append('-');
 
-	r << (posvalue >> fract_bits);
+	builder.Append(posvalue >> fract_bits);
 
 	u16 fraction = posvalue & ((1 << fract_bits) - 1);
 	if (fraction)
 	{
-		r << ".";
+		builder.Append('.');
 
 		u32 frac = 0;
 		u32 div = 1;
@@ -125,23 +126,23 @@ CStr8 CFixed_15_16::ToString() const
 			// If this gives the exact target, then add the digit and stop
 			if (((u64)frac << 16) / div == fraction)
 			{
-				r << digit;
+				builder.Append(digit);
 				break;
 			}
 
 			// If the next higher digit gives the exact target, then add that digit and stop
 			if (digit <= 8 && (((u64)frac+1) << 16) / div == fraction)
 			{
-				r << digit+1;
+				builder.Append(digit+1);
 				break;
 			}
 
 			// Otherwise add the digit and continue
-			r << digit;
+			builder.Append(digit);
 		}
 	}
 
-	return r.str();
+	return CStr(builder.Str());
 }
 
 // Based on http://www.dspguru.com/dsp/tricks/fixed-point-atan2-with-self-normalization

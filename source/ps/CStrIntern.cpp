@@ -130,6 +130,11 @@ CStrIntern::CStrIntern(const std::string& str)
 	m = GetString(str.c_str(), str.length());
 }
 
+CStrIntern::CStrIntern(const std::string_view str)
+{
+	m = GetString(str.data(), str.length());
+}
+
 u32 CStrIntern::GetHash() const
 {
 	return m->hash;

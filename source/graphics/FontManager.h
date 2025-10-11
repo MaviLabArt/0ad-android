@@ -27,6 +27,7 @@
 #include <memory>
 #include <unordered_map>
 
+class CConfigDBHook;
 class CFont;
 struct FT_LibraryRec_;
 
@@ -39,10 +40,10 @@ class CFontManager
 {
 public:
 	CFontManager();
-	~CFontManager() = default;
+	~CFontManager();
 	NONCOPYABLE(CFontManager);
 
-	std::shared_ptr<CFont> LoadFont(CStrIntern fontName, CStrIntern locale);
+	CFont* LoadFont(CStrIntern fontName, CStrIntern locale);
 	void UploadAtlasTexturesToGPU(
 		Renderer::Backend::IDeviceCommandContext* deviceCommandContext);
 
@@ -56,8 +57,11 @@ private:
 
 	std::unique_ptr<std::array<float, 256>> m_GammaCorrectionLUT;
 
-	using FontsMap = std::unordered_map<CStrIntern, std::shared_ptr<CFont>>;
+	using FontsMap = std::unordered_map<CStrIntern, CFont>;
 	FontsMap m_Fonts;
+
+	float m_GUIScale{1.0f};
+	std::unique_ptr<CConfigDBHook> m_GUIScaleHook;
 
 	/*
 	* Most monitors today use 2.2 as the standard gamma.

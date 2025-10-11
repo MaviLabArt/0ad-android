@@ -29,6 +29,7 @@
 #include "ps/ConfigDB.h"
 #include "ps/Filesystem.h"
 #include "ps/Profiler2.h"
+#include "ps/strings/StringBuilder.h"
 #include "renderer/backend/IDeviceCommandContext.h"
 
 #include <algorithm>
@@ -101,6 +102,11 @@ FontSpec ParseFontSpec(const std::string& spec)
 } // namespace
 
 CFontManager::CFontManager()
+	: m_GUIScaleHook{std::make_unique<CConfigDBHook>(g_ConfigDB.RegisterHookAndCall(
+		"gui.scale", [this]()
+		{
+			m_GUIScale = g_ConfigDB.Get("gui.scale", 1.0f);
+		}))}
 {
 	FT_Library lib;
 	FT_Error error{FT_Init_FreeType(&lib)};
@@ -115,7 +121,9 @@ CFontManager::CFontManager()
 	});
 }
 
-std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern locale)
+CFontManager::~CFontManager() = default;
+
+CFont* CFontManager::LoadFont(CStrIntern fontName, CStrIntern locale)
 {
 	const std::string localeToUse{[&]
 		{
@@ -129,12 +137,19 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 			return g_L10n.GetCurrentLocaleString();
 		} ()
 	};
-	const float guiScale{g_ConfigDB.Get("gui.scale", 1.0f)};
-	CStrIntern localeFontName{fmt::format("{}{}-{}", localeToUse ,fontName.string(), guiScale)};
+	// fmt::format_to_n is expensive for frequent LoadFont calls, parsing the
+	// format string takes a noticeable amount of time.
+	char buffer[128];
+	PS::StringBuilder fontNameBuilder{{std::begin(buffer), std::end(buffer)}};
+	fontNameBuilder.Append(localeToUse);
+	fontNameBuilder.Append(fontName.string());
+	fontNameBuilder.Append('-');
+	fontNameBuilder.Append(m_GUIScale);
+	CStrIntern localeFontName{fontNameBuilder.Str()};
 
 	FontsMap::iterator it{m_Fonts.find(localeFontName)};
 	if (it != m_Fonts.end())
-		return it->second;
+		return &it->second;
 
 	// TODO: use hooks or something to hotrealoding default font.
 	const std::string defaultFont{g_ConfigDB.Get("fonts.default", std::string{})};
@@ -194,9 +209,9 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 		}()
 	};
 
-	std::shared_ptr<CFont> font{std::make_shared<CFont>(this->m_FreeType.get(), *m_GammaCorrectionLUT)};
+	CFont font{this->m_FreeType.get(), *m_GammaCorrectionLUT};
 
-	if (!font->SetFontParams(localeFontName.string(), fontSpec.size, fontSpec.stroke ? 1.0f : 0.0f, guiScale))
+	if (!font.SetFontParams(localeFontName.string(), fontSpec.size, fontSpec.stroke ? 1.0f : 0.0f, m_GUIScale))
 	{
 		LOGERROR("Failed to set font params for %s", localeFontName.string().c_str());
 		return nullptr;
@@ -214,7 +229,7 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 				return nullptr;
 			}
 
-			if (!font->AddFontFromPath(fntPath))
+			if (!font.AddFontFromPath(fntPath))
 			{
 				LOGERROR("Failed to load font %s", fntPath.string8());
 				return nullptr;
@@ -226,10 +241,9 @@ std::shared_ptr<CFont> CFontManager::LoadFont(CStrIntern fontName, CStrIntern lo
 	// Common characters are: Latin, numbers, punctuation.
 	std::string_view glypshSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?\"'()[]{}<>-+=_@#$%^&*`~\\|/";
 	for (const char c : glypshSet)
-		font->GetGlyph(c);
+		font.GetGlyph(c);
 
-	m_Fonts[localeFontName] = font;
-	return font;
+	return &m_Fonts.insert_or_assign(localeFontName, std::move(font)).first->second;
 }
 
 void CFontManager::UploadAtlasTexturesToGPU(Renderer::Backend::IDeviceCommandContext* deviceCommandContext)
@@ -237,11 +251,6 @@ void CFontManager::UploadAtlasTexturesToGPU(Renderer::Backend::IDeviceCommandCon
 	PROFILE2("Loading font textures");
 	GPU_SCOPED_LABEL(deviceCommandContext, "Loading font textures");
 
-	for (auto& [fontName, fontPtr] : m_Fonts)
-	{
-		if (!fontPtr)
-			continue;
-
-		fontPtr->UploadAtlasTextureToGPU(deviceCommandContext);
-	}
+	for (auto& [fontName, font] : m_Fonts)
+		font.UploadAtlasTextureToGPU(deviceCommandContext);
 }
