@@ -103,7 +103,8 @@ private:
 	int ParseTerrain();
 
 	// Parse script data into entities
-	int ParseEntities();
+	int StartParseEntities();
+	int PollParseEntities();
 
 	// Parse script data into environment
 	int ParseEnvironment();
@@ -131,6 +132,9 @@ private:
 
 	struct GeneratorState;
 	std::unique_ptr<GeneratorState> m_GeneratorState;
+
+	struct ParseEntitiesState;
+	std::unique_ptr<ParseEntitiesState> m_ParseEntitiesState;
 
 	CFileUnpacker unpacker;
 	CTerrain* pTerrain;

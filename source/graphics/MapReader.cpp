@@ -78,7 +78,6 @@
 
 #include <algorithm>
 #include <atomic>
-#include <boost/algorithm/string/predicate.hpp>
 #include <functional>
 #include <js/PropertyAndElement.h>
 #include <string>
@@ -283,8 +282,12 @@ void CMapReader::LoadRandomMap(const CStrW& scriptFile, const ScriptContext& cx,
 	// parse RMS results into entities
 	LDR_Register([this](const double)
 	{
-		return ParseEntities();
-	}, L"CMapReader::ParseEntities", 1000);
+		return StartParseEntities();
+	}, L"CMapReader::StartParseEntities", 10);
+	LDR_Register([this](const double)
+	{
+		return PollParseEntities();
+	}, L"CMapReader::PollParseEntities", 1000);
 
 	// apply misc data to the world
 	LDR_Register([this](const double)
@@ -1204,7 +1207,7 @@ int CXMLReader::ReadEntities(XMBElement parent, double end_time)
 				// TODO: variation/selection strings
 			}
 
-			if (PlayerID == m_MapReader.m_PlayerID && (boost::algorithm::ends_with(TemplateName, L"civil_centre") || m_MapReader.m_StartingCameraTarget == INVALID_ENTITY))
+			if (PlayerID == m_MapReader.m_PlayerID && (TemplateName.ends_with(L"civil_centre") || m_MapReader.m_StartingCameraTarget == INVALID_ENTITY))
 			{
 				// Focus on civil centre or first entity owned by player
 				m_MapReader.m_StartingCameraTarget = ent;
@@ -1517,39 +1520,45 @@ if (!Script::GetProperty(rq, val, #prop, out))\
 	return 0;
 }
 
-int CMapReader::ParseEntities()
+struct CMapReader::ParseEntitiesState
 {
-	PROFILE2("ParseEntities");
-	ScriptRequest rq(pSimulation2->GetScriptInterface());
-
-	// parse entities from map data
+	ScriptRequest rq;
+	CmpPtr<ICmpPlayerManager> cmpPlayerManager;
 	std::vector<Entity> entities;
+	size_t currentEntityIndex{0};
 
-	if (!Script::GetProperty(rq, m_MapData, "entities", entities))
+	ParseEntitiesState(CSimulation2& sim)
+		: rq(sim.GetScriptInterface()), cmpPlayerManager(sim, SYSTEM_ENTITY) {}
+};
+
+int CMapReader::StartParseEntities()
+{
+	PROFILE2("StartParseEntities");
+
+	m_ParseEntitiesState = std::make_unique<ParseEntitiesState>(*pSimulation2);
+	if (!Script::GetProperty(m_ParseEntitiesState->rq, m_MapData, "entities", m_ParseEntitiesState->entities))
 		LOGWARNING("CMapReader::ParseEntities() failed to get 'entities' property");
+	return 0;
+}
 
-	CSimulation2& sim = *pSimulation2;
-	CmpPtr<ICmpPlayerManager> cmpPlayerManager(sim, SYSTEM_ENTITY);
+int CMapReader::PollParseEntities()
+{
+	PROFILE2("PollParseEntities");
 
-	size_t entity_idx = 0;
-	size_t num_entities = entities.size();
-
-	Entity currEnt;
-
-	while (entity_idx < num_entities)
+	ParseEntitiesState& state{*m_ParseEntitiesState};
+	CSimulation2& sim{*pSimulation2};
+	const size_t numberOfEntitesToLoadPerCall{100};
+	for (size_t iteration{0}; iteration < numberOfEntitesToLoadPerCall && state.currentEntityIndex < state.entities.size(); ++iteration, ++state.currentEntityIndex)
 	{
+		const Entity& currEnt{state.entities[state.currentEntityIndex]};
 		// Get current entity struct
-		currEnt = entities[entity_idx];
-		entity_id_t player = cmpPlayerManager->GetPlayerByID(currEnt.playerID);
+		entity_id_t player = state.cmpPlayerManager->GetPlayerByID(currEnt.playerID);
 		CmpPtr<ICmpPlayer> cmpPlayer(sim, player);
 		// Don't add entities for removed players.
 		if (cmpPlayer && cmpPlayer->IsRemoved())
-		{
-			entity_idx++;
 			continue;
-		}
 
-		entity_id_t ent = pSimulation2->AddEntity(currEnt.templateName, currEnt.entityID);
+		entity_id_t ent = sim.AddEntity(currEnt.templateName, currEnt.entityID);
 		if (ent == INVALID_ENTITY || player == INVALID_ENTITY)
 		{	// Don't add entities with invalid player IDs
 			LOGERROR("Failed to load entity template '%s'", utf8_from_wstring(currEnt.templateName));
@@ -1575,15 +1584,18 @@ int CMapReader::ParseEntities()
 			if (cmpObstruction)
 				cmpObstruction->ResolveFoundationCollisions();
 
-			if (currEnt.playerID == m_PlayerID && (boost::algorithm::ends_with(currEnt.templateName, L"civil_centre") || m_StartingCameraTarget == INVALID_ENTITY))
+			if (currEnt.playerID == m_PlayerID && (currEnt.templateName.ends_with(L"civil_centre") || m_StartingCameraTarget == INVALID_ENTITY))
 			{
 				// Focus on civil centre or first entity owned by player
 				m_StartingCameraTarget = currEnt.entityID;
 			}
 		}
-
-		entity_idx++;
 	}
+
+	if (state.currentEntityIndex < state.entities.size())
+		return Clamp<int>(state.currentEntityIndex * 80 / state.entities.size(), 20, 100);
+
+	m_ParseEntitiesState.reset();
 
 	return 0;
 }
