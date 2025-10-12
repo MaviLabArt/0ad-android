@@ -214,8 +214,12 @@ void CGameView::RegisterInit()
 
 	LDR_Register([](const double)
 	{
-		return g_TexMan.LoadTerrainTextures();
-	}, L"LoadTerrainTextures", 60);
+		return g_TexMan.StartTerrainTextures();
+	}, L"StartTerrainTextures", 1);
+	LDR_Register([](const double)
+	{
+		return g_TexMan.PollTerrainTextures();
+	}, L"PollTerrainTextures", 60);
 }
 
 void CGameView::BeginFrame()

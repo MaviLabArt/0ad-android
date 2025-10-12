@@ -30,6 +30,7 @@
 #include "lib/path.h"
 #include "lib/status.h"
 #include "lib/tex/tex.h"
+#include "maths/MathUtil.h"
 #include "ps/CLogger.h"
 #include "ps/Filesystem.h"
 #include "ps/XMB/XMBStorage.h"
@@ -121,10 +122,40 @@ static Status AddTextureCallback(const VfsPath& pathname, const CFileInfo&, cons
 	return INFO::OK;
 }
 
-int CTerrainTextureManager::LoadTerrainTextures()
+struct CTerrainTextureManager::LoadTexturesState
 {
-	AddTextureCallbackData data = {this, CTerrainPropertiesPtr(new CTerrainProperties(CTerrainPropertiesPtr()))};
-	vfs::ForEachFile(g_VFS, L"art/terrains/", AddTextureCallback, (uintptr_t)&data, L"*.xml", vfs::DIR_RECURSIVE, AddTextureDirCallback, (uintptr_t)&data);
+	vfs::ForEachFileContext context;
+	AddTextureCallbackData data;
+
+	LoadTexturesState(const VfsPath& startPath, CTerrainTextureManager* self)
+		: context{startPath}, data{self, std::make_shared<CTerrainProperties>(CTerrainPropertiesPtr())} {}
+};
+
+int CTerrainTextureManager::StartTerrainTextures()
+{
+	m_LoadTexturesState = std::make_unique<LoadTexturesState>(VfsPath{L"art/terrains/"}, this);
+	return 0;
+}
+
+int CTerrainTextureManager::PollTerrainTextures()
+{
+	LoadTexturesState& state{*m_LoadTexturesState};
+	const size_t numberOfDirectoriesToLoadPerCall{10};
+	for (size_t iteration{0}; !state.context.empty() && iteration < numberOfDirectoriesToLoadPerCall; ++iteration)
+	{
+		vfs::ForEachFileNext(state.context, g_VFS, AddTextureCallback, (uintptr_t)&state.data, L"*.xml", vfs::DIR_RECURSIVE, AddTextureDirCallback, (uintptr_t)&state.data);
+	}
+
+	if (!state.context.empty())
+	{
+		// We don't know exact number so just using a rough approximation of the
+		// current number.
+		const size_t totalApproximateAmountOfTextures{1000};
+		return Clamp<int>(m_TextureEntries.size() * 90 / totalApproximateAmountOfTextures, 10, 100);
+	}
+
+	m_LoadTexturesState.reset();
+
 	return 0;
 }
 

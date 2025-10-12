@@ -60,40 +60,41 @@ Status GetPathnames(const PIVFS& fs, const VfsPath& path, const wchar_t* filter,
 
 Status ForEachFile(const PIVFS& fs, const VfsPath& startPath, FileCallback cb, uintptr_t cbData, const wchar_t* pattern, size_t flags, DirCallback dircb, uintptr_t dircbData)
 {
-	// (declare here to avoid reallocations)
-	CFileInfos files;
-	DirectoryNames subdirectoryNames;
-
-	// (a FIFO queue is more efficient than recursion because it uses less
-	// stack space and avoids seeks due to breadth-first traversal.)
-	std::queue<VfsPath> pendingDirectories;
-	pendingDirectories.push(startPath/"");
-	while(!pendingDirectories.empty())
+	ForEachFileContext context{startPath};
+	while(!context.pendingDirectories.empty())
 	{
-		const VfsPath& path = pendingDirectories.front();
-
-		RETURN_STATUS_IF_ERR(fs->GetDirectoryEntries(path, &files, &subdirectoryNames));
-
-		if(dircb)
-			RETURN_STATUS_IF_ERR(dircb(path, dircbData));
-
-		for(size_t i = 0; i < files.size(); i++)
-		{
-			const CFileInfo fileInfo = files[i];
-			if(!match_wildcard(fileInfo.Name().string().c_str(), pattern))
-				continue;
-
-			const VfsPath pathname(path / fileInfo.Name());	// (CFileInfo only stores the name)
-			RETURN_STATUS_IF_ERR(cb(pathname, fileInfo, cbData));
-		}
-
-		if(!(flags & DIR_RECURSIVE))
-			break;
-
-		for(size_t i = 0; i < subdirectoryNames.size(); i++)
-			pendingDirectories.push(path / subdirectoryNames[i]/"");
-		pendingDirectories.pop();
+		RETURN_STATUS_IF_ERR(ForEachFileNext(context, fs, cb, cbData, pattern, flags, dircb, dircbData));
 	}
+	return INFO::OK;
+}
+
+Status ForEachFileNext(
+	ForEachFileContext& context, const PIVFS& fs, FileCallback cb,
+	uintptr_t cbData, const wchar_t* pattern, size_t flags,
+	DirCallback dircb, uintptr_t dircbData)
+{
+	const VfsPath path{std::move(context.pendingDirectories.front())};
+	context.pendingDirectories.pop();
+
+	RETURN_STATUS_IF_ERR(fs->GetDirectoryEntries(path, &context.files, &context.subdirectoryNames));
+
+	if(dircb)
+		RETURN_STATUS_IF_ERR(dircb(path, dircbData));
+
+	for (const CFileInfo& fileInfo : context.files)
+	{
+		if(!match_wildcard(fileInfo.Name().string().c_str(), pattern))
+			continue;
+
+		const VfsPath pathname(path / fileInfo.Name());	// (CFileInfo only stores the name)
+		RETURN_STATUS_IF_ERR(cb(pathname, fileInfo, cbData));
+	}
+
+	if(!(flags & DIR_RECURSIVE))
+		return INFO::OK;
+
+	for(const OsPath& subdirectoryName : context.subdirectoryNames)
+		context.pendingDirectories.push(path / subdirectoryName / "");
 
 	return INFO::OK;
 }
