@@ -90,7 +90,7 @@ class CTerrainTextureManager : public Singleton<CTerrainTextureManager>
 	friend class CTerrainTextureEntry;
 
 public:
-	using TerrainGroupMap = std::map<CStr, CTerrainGroup*>;
+	using TerrainGroupMap = std::map<CStr, std::unique_ptr<CTerrainGroup>>;
 	using TerrainAlphaMap = std::map<VfsPath, TerrainAlpha>;
 
 	// constructor, destructor
@@ -107,10 +107,7 @@ public:
 
 	// Create a texture object for a new terrain texture at path, using the
 	// property sheet props.
-	CTerrainTextureEntry* AddTexture(const CTerrainPropertiesPtr& props, const VfsPath& path);
-
-	// Remove the texture from all our maps and lists and delete it afterwards.
-	void DeleteTexture(CTerrainTextureEntry* entry);
+	void AddTexture(const CTerrainPropertiesPtr& props, const VfsPath& path);
 
 	// Find or create a new texture group. All terrain groups are owned by the
 	// texturemanager (TerrainTypeManager)
@@ -128,7 +125,7 @@ private:
 
 	// All texture entries created by this class, for easy freeing now that
 	// textures may be in several STextureType's
-	std::vector<CTerrainTextureEntry*> m_TextureEntries;
+	std::vector<std::unique_ptr<CTerrainTextureEntry>> m_TextureEntries;
 
 	TerrainGroupMap m_TerrainGroups;
 
@@ -139,6 +136,9 @@ private:
 	// A way to separate file loading and uploading to GPU to not stall uploading.
 	// Once we get a properly threaded loading we might optimize that.
 	std::vector<CTerrainTextureManager::TerrainAlphaMap::iterator> m_AlphaMapsToUpload;
+
+	struct LoadTexturesState;
+	std::unique_ptr<LoadTexturesState> m_LoadTexturesState;
 };
 
 // access to sole CTerrainTextureManager object

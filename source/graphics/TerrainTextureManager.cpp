@@ -67,13 +67,8 @@ CTerrainTextureManager::~CTerrainTextureManager()
 
 void CTerrainTextureManager::UnloadTerrainTextures()
 {
-	for (CTerrainTextureEntry* const& te : m_TextureEntries)
-		delete te;
-	m_TextureEntries.clear();
-
-	for (const std::pair<const CStr, CTerrainGroup*>& tg : m_TerrainGroups)
-		delete tg.second;
 	m_TerrainGroups.clear();
+	m_TextureEntries.clear();
 
 	m_LastGroupIndex = 0;
 }
@@ -82,33 +77,21 @@ CTerrainTextureEntry* CTerrainTextureManager::FindTexture(const CStr& tag_)
 {
 	CStr tag = tag_.BeforeLast("."); // Strip extension
 
-	for (CTerrainTextureEntry* const& te : m_TextureEntries)
-		if (te->GetTag() == tag)
-			return te;
+	for (const auto& textureEntry : m_TextureEntries)
+		if (textureEntry->GetTag() == tag)
+			return textureEntry.get();
 
 	LOGWARNING("CTerrainTextureManager: Couldn't find terrain %s using fallback texture", tag.c_str());
 
 	// If the texture is not found, return a default texture.
 	// This is a fallback texture, so it should not be used in the editor.
-	CTerrainTextureEntry* fallback{new CTerrainTextureEntry{tag}};
-	m_TextureEntries.push_back(fallback);
-	return fallback;
+	std::unique_ptr<CTerrainTextureEntry> fallback{std::make_unique<CTerrainTextureEntry>(tag)};
+	return m_TextureEntries.emplace_back(std::move(fallback)).get();
 }
 
-CTerrainTextureEntry* CTerrainTextureManager::AddTexture(const CTerrainPropertiesPtr& props, const VfsPath& path)
+void CTerrainTextureManager::AddTexture(const CTerrainPropertiesPtr& props, const VfsPath& path)
 {
-	CTerrainTextureEntry* entry = new CTerrainTextureEntry(props, path);
-	m_TextureEntries.push_back(entry);
-	return entry;
-}
-
-void CTerrainTextureManager::DeleteTexture(CTerrainTextureEntry* entry)
-{
-	std::vector<CTerrainTextureEntry*>::iterator it = std::find(m_TextureEntries.begin(), m_TextureEntries.end(), entry);
-	if (it != m_TextureEntries.end())
-		m_TextureEntries.erase(it);
-
-	delete entry;
+	m_TextureEntries.emplace_back(std::make_unique<CTerrainTextureEntry>(props, path));
 }
 
 struct AddTextureCallbackData
@@ -149,9 +132,9 @@ CTerrainGroup* CTerrainTextureManager::FindGroup(const CStr& name)
 {
 	TerrainGroupMap::const_iterator it = m_TerrainGroups.find(name);
 	if (it != m_TerrainGroups.end())
-		return it->second;
+		return it->second.get();
 	else
-		return m_TerrainGroups[name] = new CTerrainGroup(name, ++m_LastGroupIndex);
+		return m_TerrainGroups.insert_or_assign(name, std::make_unique<CTerrainGroup>(name, ++m_LastGroupIndex)).first->second.get();
 }
 
 // LoadAlphaMaps: load the 14 default alpha maps, pack them into one composite texture and
