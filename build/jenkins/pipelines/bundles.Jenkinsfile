@@ -314,7 +314,7 @@ pipeline {
 
     post {
         success {
-            archiveArtifacts artifacts: '*AppImage,*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum,*.sha256sum', excludes: 'win32-rebuild.tar.gz, win64-build.tar.gz'
+            archiveArtifacts artifacts: '*AppImage,*.dmg,*.exe,*.tar.gz,*.tar.xz,*.minisig,*.md5sum,*.sha1sum,*.sha256sum', excludes: 'win32-rebuild.tar.gz,win64-build.tar.gz'
         }
         cleanup {
             sh 'svn revert -R .'
