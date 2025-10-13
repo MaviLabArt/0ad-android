@@ -457,9 +457,10 @@ void RunHardwareDetection(bool writeSystemInfoBeforeDetection, Renderer::Backend
 
 	Script::SetProperty(rq, settings, "hardware_concurrency", std::thread::hardware_concurrency());
 	Script::SetProperty(rq, settings, "random_device_entropy", std::random_device{}.entropy());
+	Script::SetProperty(rq, settings, "neon", static_cast<int>(SDL_HasNEON()));
 
 	// The version should be increased for every meaningful change.
-	const int reportVersion = 22;
+	const int reportVersion = 23;
 
 	// Send the same data to the reporting system
 	g_UserReporter.SubmitReport(
