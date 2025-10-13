@@ -6,13 +6,27 @@ set -e
 cd "$(dirname "$0")"
 
 PV=28209
-LIB_VERSION=${PV}
+LIB_VERSION=${PV}+wfg1
 
 fetch()
 {
+	tar_version=$(tar --version | head --lines 1)
+	case "${tar_version}" in
+		*"GNU tar"*)
+			tar_extra_opts="--owner root --group root"
+			;;
+		*"libarchive"*)
+			tar_extra_opts="--uname root --gname root"
+			;;
+		*)
+			echo "unknown tar implementation ${tar_version}"
+			;;
+	esac
+
 	rm -Rf fcollada-${PV}
 	svn export https://svn.wildfiregames.com/public/source-libs/trunk/fcollada@${PV} fcollada-${PV}
-	"${TAR}" cJf fcollada-${PV}.tar.xz fcollada-${PV}
+	# shellcheck disable=SC2086
+	"${TAR}" -c ${tar_extra_opts} -Jf fcollada-${PV}.tar.xz fcollada-${PV}
 	rm -R fcollada-${PV}
 }
 
