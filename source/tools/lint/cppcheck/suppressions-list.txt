@@ -61,3 +61,5 @@ unknownMacro:source/lib/sysdep/os/win/wdbg_sym.cpp
 unknownMacro:source/lib/sysdep/os/win/wfirmware.cpp
 unknownMacro:source/lib/sysdep/os/win/wposix/wutsname.cpp
 unknownMacro:source/ps/CStr.cpp
+
+uninitvar:source/graphics/MapReader.cpp
