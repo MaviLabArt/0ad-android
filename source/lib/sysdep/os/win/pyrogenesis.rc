@@ -25,7 +25,7 @@ BEGIN
             VALUE "FileDescription", "Pyrogenesis engine"
             VALUE "FileVersion", PYROGENESIS_VERSION
             VALUE "InternalName", "pyrogenesis.rc"
-            VALUE "LegalCopyright", "Copyright (C) 2024 Wildfire Games"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Wildfire Games"
             VALUE "OriginalFilename", "pyrogenesis.rc"
             VALUE "ProductName", "Pyrogenesis"
             VALUE "ProductVersion", PYROGENESIS_VERSION
