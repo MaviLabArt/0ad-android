@@ -30,7 +30,7 @@ export function* generateMap()
 	const ePine = "gaia/tree/aleppo_pine";
 	const ePalmTall = "gaia/tree/cretan_date_palm_tall";
 	const eFanPalm = "gaia/tree/medit_fan_palm";
-	const eApple = "gaia/fruit/apple";
+	const eCypress = "gaia/tree/cypress";
 	const eBush = "gaia/fruit/berry_01";
 	const eFish = "gaia/fish/generic";
 	const ePig = "gaia/fauna_pig";
@@ -68,6 +68,7 @@ export function* generateMap()
 	const clCreek = g_Map.createTileClass();
 	const clWater = g_Map.createTileClass();
 	const clCliffs = g_Map.createTileClass();
+	const clFish = g_Map.createTileClass();
 	const clForest = g_Map.createTileClass();
 	const clShore = g_Map.createTileClass();
 	const clPlayer = g_Map.createTileClass();
@@ -75,19 +76,19 @@ export function* generateMap()
 	const clPassage = g_Map.createTileClass();
 	const clSettlement = g_Map.createTileClass();
 
-	const radiusBeach = fractionToTiles(0.57);
-	const radiusCreeks = fractionToTiles(0.52);
-	const radiusIsland = fractionToTiles(0.4);
-	const radiusLevel1 = fractionToTiles(0.35);
-	const radiusPlayer = fractionToTiles(0.25);
-	const radiusLevel2 = fractionToTiles(0.2);
+	const radiusBeach = fractionToTiles(0.65);
+	const radiusCreeks = fractionToTiles(0.60);
+	const radiusIsland = fractionToTiles(0.46);
+	const radiusLevel1 = fractionToTiles(0.40);
+	const radiusPlayer = fractionToTiles(0.29);
+	const radiusLevel2 = fractionToTiles(0.20);
 
 	const creeksArea = () => randBool() ? randFloat(10, 50) : scaleByMapSize(75, 100) + randFloat(0, 20);
 
-	const nbCreeks = scaleByMapSize(6, 15);
+	const nbCreeks = scaleByMapSize(7, 9);
 	const nbSubIsland = 5;
-	const nbBeaches = scaleByMapSize(2, 5);
-	const nbPassagesLevel1 = scaleByMapSize(4, 8);
+	const nbBeaches = scaleByMapSize(6, 10);
+	const nbPassagesLevel1 = scaleByMapSize(6, 8);
 	const nbPassagesLevel2 = scaleByMapSize(2, 4);
 
 	g_Map.log("Creating Corsica and Sardinia");
@@ -183,9 +184,9 @@ export function* generateMap()
 					new Vector2D(radiusLevel1 + 10, 0).rotate(-angle)),
 				"end": Vector2D.add(islandLocations[island],
 					new Vector2D(radiusLevel1 - 4, 0).rotate(-angle)),
-				"startWidth": 10,
-				"endWidth": 6,
-				"smoothWidth": 3,
+				"startWidth": 20,
+				"endWidth": 20,
+				"smoothWidth": 2,
 				"tileClass": clPassage
 			});
 		}
@@ -212,8 +213,8 @@ export function* generateMap()
 						new Vector2D(radiusLevel2 + 3, 0).rotate(-angle)),
 					"end": Vector2D.add(islandLocations[island],
 						new Vector2D(radiusLevel2 - 6, 0).rotate(-angle)),
-					"startWidth": 4,
-					"endWidth": 6,
+					"startWidth": 20,
+					"endWidth": 20,
 					"smoothWidth": 2,
 					"tileClass": clPassage
 				});
@@ -409,7 +410,7 @@ export function* generateMap()
 				new SimpleObject(ePine, 3, 6, 1, 3),
 				new SimpleObject(ePalmTall, 1, 3, 1, 3),
 				new SimpleObject(eFanPalm, 0, 2, 0, 2),
-				new SimpleObject(eApple, 0, 1, 1, 2)
+				new SimpleObject(eCypress, 0, 1, 1, 2)
 			],
 			true,
 			clForest),
@@ -515,36 +516,34 @@ export function* generateMap()
 		50);
 
 	g_Map.log("Creating fish");
-	createObjectGroupsDeprecated(
-		new SimpleGroup([new SimpleObject(eFish, 1, 2, 0, 3)]),
-		0,
-		[
-			stayClasses(clWater, 3),
-			avoidClasses(clCreek, 3, clShore, 3)
-		],
-		scaleByMapSize(100, 150),
-		300);
 
-
-	g_Map.log("Creating shore fish");
-	createObjectGroupsDeprecated(
-		new SimpleGroup([new SimpleObject(eFish, 1, 2, 0, 3)]),
-		0,
+	createFood(
 		[
-			stayClasses(clCreek, 1),
+			[new SimpleObject(eFish, 2, 3, 0, 2)]
 		],
-		scaleByMapSize(200, 300),
-		500);
+		[
+			50 * numPlayers
+		],
+		[
+			avoidClasses(clCreek, 2, clShore, 3, clFish, 8),
+			stayClasses(clWater, 3)
+		],
+		clFish);
 
 	g_Map.log("Creating shore fish");
-	createObjectGroupsDeprecated(
-		new SimpleGroup([new SimpleObject(eFish, 1, 2, 0, 3)]),
-		0,
+
+	createFood(
 		[
-			stayClasses(clShore, 3)
+			[new SimpleObject(eFish, 2, 3, 0, 2)]
 		],
-		scaleByMapSize(200, 300),
-		500);
+		[
+			70 * numPlayers
+		],
+		[
+			avoidClasses(clFish, 6),
+			stayClasses(clWater, 3, clShore, 0)
+		],
+		clFish);
 
 	yield 95;
 
