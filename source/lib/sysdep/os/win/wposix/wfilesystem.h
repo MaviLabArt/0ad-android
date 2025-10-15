@@ -53,6 +53,6 @@ typedef unsigned int mode_t;	// defined by MinGW but not VC
 #define S_ISREG(m) (m & S_IFREG)
 
 
-#include <corecrt_io.h> // read, write, lseek
+#include <corecrt_io.h> // read, write
 
 #endif	// #ifndef INCLUDED_WFILESYSTEM

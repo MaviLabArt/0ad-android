@@ -56,8 +56,14 @@ Status LoadHeightmapImageOs(const OsPath& filepath, std::vector<u16>& heightmap)
 	File file;
 	RETURN_STATUS_IF_ERR(file.Open(OsString(filepath), O_RDONLY));
 
+#if OS_WIN
+	// sizeof(long) == 4 on Windows so we can't use lseek.
+	size_t fileSize = _lseeki64(file.Descriptor(), 0, SEEK_END);
+	_lseeki64(file.Descriptor(), 0, SEEK_SET);
+#else
 	size_t fileSize = lseek(file.Descriptor(), 0, SEEK_END);
 	lseek(file.Descriptor(), 0, SEEK_SET);
+#endif
 
 	std::shared_ptr<u8> fileData;
 	RETURN_STATUS_IF_ERR(AllocateAligned(fileData, fileSize, maxSectorSize));

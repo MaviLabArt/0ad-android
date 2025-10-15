@@ -51,7 +51,12 @@ Status Issue(aiocb& cb, [[maybe_unused]] size_t queueDepth)
 	else
 #endif
 	{
+#if OS_WIN
+		// sizeof(long) == 4 on Windows so we can't use lseek.
+		ENSURE(_lseeki64(cb.aio_fildes, cb.aio_offset, SEEK_SET) == cb.aio_offset);
+#else
 		ENSURE(lseek(cb.aio_fildes, cb.aio_offset, SEEK_SET) == cb.aio_offset);
+#endif
 
 		void* buf = (void*)cb.aio_buf;	// cast from volatile void*
 		const ssize_t bytesTransferred = (cb.aio_lio_opcode == LIO_WRITE)? write(cb.aio_fildes, buf, cb.aio_nbytes) : read(cb.aio_fildes, buf, cb.aio_nbytes);
