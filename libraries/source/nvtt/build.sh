@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")"
 
 PV=28209
-LIB_VERSION=${PV}+wfg3
+LIB_VERSION=${PV}+wfg4
 
 fetch()
 {
@@ -64,6 +64,9 @@ rm -Rf nvtt-${PV}
 patch -d nvtt-${PV} -p1 <patches/0001-Don-t-overspecify-flags.patch
 patch -d nvtt-${PV} -p1 <patches/0002-Bump-cmake-min-version-to-3.10.patch
 patch -d nvtt-${PV} -p1 <patches/0003-Use-execute_process-insted-of-exec_program.patch
+patch -d nvtt-${PV} -p1 <patches/0004-Properly-detect-ppc64le-systems.patch
+patch -d nvtt-${PV} -p1 <patches/0005-Fix-compiler-flags-on-ppc64le-systems.patch
+patch -d nvtt-${PV} -p1 <patches/0006-Fix-altivec-include-on-ppc64le-systems.patch
 
 # build
 (
