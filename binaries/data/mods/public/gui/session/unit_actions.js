@@ -1550,7 +1550,8 @@ var g_EntityCommands =
 	"stop": {
 		"getInfo": function(entStates)
 		{
-			if (entStates.every(entState => !entState.unitAI))
+			// Don't show generic option to abort if not applicable or in case of guard, which has its own abort action
+			if (entStates.every(entState => !entState.unitAI || entState.unitAI.isIdle || entState.unitAI.isGuarding))
 				return false;
 
 			return {
