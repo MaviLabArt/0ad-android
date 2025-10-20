@@ -48,7 +48,7 @@
 ;Language Selection Dialog Settings
 
   ;Remember the installer language
-  !define MUI_LANGDLL_REGISTRY_ROOT "HKCU"
+  !define MUI_LANGDLL_REGISTRY_ROOT "SHCTX"
   !define MUI_LANGDLL_REGISTRY_KEY "Software\0 A.D."
   !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
 
@@ -62,7 +62,7 @@
   !insertmacro MUI_PAGE_DIRECTORY
 
   ;Start Menu Folder Page Configuration
-  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU"
+  !define MUI_STARTMENUPAGE_REGISTRY_ROOT "SHCTX"
   !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\0 A.D."
   !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
   !define MUI_STARTMENUPAGE_DEFAULTFOLDER "0 A.D. Empires Ascendant"
