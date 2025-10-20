@@ -61,7 +61,7 @@ const u8 minimumReplayDuration = 3;
 
 OsPath VisualReplay::GetDirectoryPath()
 {
-	return Paths(g_CmdLineArgs).UserData() / "replays" / PYROGENESIS_VERSION;
+	return Paths(g_CmdLineArgs).UserData() / "replays" / PS_SERIALIZATION_VERSION;
 }
 
 OsPath VisualReplay::GetCacheFilePath()

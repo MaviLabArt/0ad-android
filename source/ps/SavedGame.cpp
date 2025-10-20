@@ -112,7 +112,8 @@ Status SavedGames::Save(const CStrW& name, const CStrW& description, CSimulation
 	Script::CreateObject(
 		rq,
 		&metadata,
-		"engine_version", PYROGENESIS_VERSION,
+		"engine_version", PS_VERSION,
+		"engine_serialization_version", PS_SERIALIZATION_VERSION,
 		"time", static_cast<double>(now),
 		"playerID", g_Game->GetPlayerID(),
 		"mods", mods,

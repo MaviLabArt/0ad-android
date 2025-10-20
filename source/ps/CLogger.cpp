@@ -77,8 +77,8 @@ CLogger::CLogger(std::ostream& mainLog, std::ostream& interestingLog, const bool
 	m_InterestingLog{interestingLog},
 	m_UseDebugPrintf{useDebugPrintf}
 {
-	m_MainLog << html_header0 << PYROGENESIS_VERSION << ") Main log" << html_header1;
-	m_InterestingLog << html_header0 << PYROGENESIS_VERSION << ") Main log (warnings and errors only)" << html_header1;
+	m_MainLog << html_header0 << PS_VERSION << ") Main log" << html_header1;
+	m_InterestingLog << html_header0 << PS_VERSION << ") Main log (warnings and errors only)" << html_header1;
 }
 
 CLogger::~CLogger()

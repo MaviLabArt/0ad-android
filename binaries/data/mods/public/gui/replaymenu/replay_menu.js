@@ -360,13 +360,13 @@ function getReplayDuration(replay)
  */
 function isReplayCompatible(replay)
 {
-	return replayHasSameEngineVersion(replay) && hasSameMods(replay.attribs.mods, g_EngineInfo.mods);
+	return replayHasCompatibleEngineVersion(replay) && hasSameMods(replay.attribs.mods, g_EngineInfo.mods);
 }
 
 /**
  * True if we can start the given replay with the currently loaded mods.
  */
-function replayHasSameEngineVersion(replay)
+function replayHasCompatibleEngineVersion(replay)
 {
-	return replay.attribs.engine_version && replay.attribs.engine_version == g_EngineInfo.engine_version;
+	return replay.attribs.engine_serialization_version && replay.attribs.engine_serialization_version == g_EngineInfo.engine_serialization_version;
 }

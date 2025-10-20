@@ -174,8 +174,8 @@ class SavegameList
 	isCompatibleSavegame(metadata, engineInfo)
 	{
 		return engineInfo &&
-			metadata.engine_version &&
-			metadata.engine_version == engineInfo.engine_version &&
+			metadata.engine_serialization_version &&
+			metadata.engine_serialization_version == engineInfo.engine_serialization_version &&
 			hasSameMods(metadata.mods, engineInfo.mods);
 	}
 

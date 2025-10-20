@@ -561,7 +561,9 @@ static void RunGameOrAtlas(const std::span<const char* const> argv)
 
 	if (args.Has("version"))
 	{
-		debug_printf("Pyrogenesis %s\n", PYROGENESIS_VERSION);
+		debug_printf("Pyrogenesis %s\n", PS_VERSION);
+		if (std::strcmp(PS_VERSION, PS_SERIALIZATION_VERSION) != 0)
+			debug_printf("Compatible down to patch %s\n", PS_SERIALIZATION_VERSION);
 		return;
 	}
 

@@ -84,7 +84,7 @@ function reallyStartVisualReplay(replayDirectory)
 function displayReplayCompatibilityError(replay)
 {
 	var errMsg;
-	if (replayHasSameEngineVersion(replay))
+	if (replayHasCompatibleEngineVersion(replay))
 	{
 		const gameMods = replay.attribs.mods || [];
 		errMsg = translate("This replay needs a different sequence of mods:") + "\n" +
@@ -93,8 +93,9 @@ function displayReplayCompatibilityError(replay)
 	else
 	{
 		errMsg = translate("This replay is not compatible with your version of the game!") + "\n";
-		errMsg += sprintf(translate("Your version: %(version)s"), { "version": g_EngineInfo.engine_version }) + "\n";
-		errMsg += sprintf(translate("Required version: %(version)s"), { "version": replay.attribs.engine_version });
+		errMsg += sprintf(translate("Your version: %(version)s, compatible down to %(compatibleVersion)s"), { "version": g_EngineInfo.engine_version, "compatibleVersion": g_EngineInfo.engine_serialization_version }) + "\n";
+		if (replay.attribs.engine_serialization_version)
+			errMsg += sprintf(translate("Replay version: %(version)s"), { "version": replay.attribs.engine_serialization_version });
 	}
 
 	messageBox(500, 200, errMsg, translate("Incompatible replay"));

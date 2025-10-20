@@ -24,9 +24,9 @@ class SavegameLoader
 		// Check compatibility before really loading it
 		const engineInfo = Engine.GetEngineInfo();
 		const sameMods = hasSameMods(metadata.mods, engineInfo.mods);
-		const sameEngineVersion = metadata.engine_version && metadata.engine_version == engineInfo.engine_version;
+		const compatibleEngineVersions = metadata.engine_serialization_version && metadata.engine_serialization_version == engineInfo.engine_serialization_version;
 
-		if (sameEngineVersion && sameMods)
+		if (compatibleEngineVersions && sameMods)
 		{
 			this.closePageCallback(gameId);
 			return;
@@ -35,14 +35,17 @@ class SavegameLoader
 		// Version not compatible ... ask for confirmation
 		let message = "";
 
-		if (!sameEngineVersion)
-			if (metadata.engine_version)
-				message += sprintf(translate("This savegame needs 0 A.D. version %(requiredVersion)s, while you are running version %(currentVersion)s."), {
-					"requiredVersion": metadata.engine_version,
-					"currentVersion": engineInfo.engine_version
+		if (!compatibleEngineVersions)
+		{
+			if (metadata.engine_serialization_version)
+				message += sprintf(translate("This savegame needs 0 A.D. version %(requiredCompatibleVersion)s or compatible. You are running version %(currentVersion)s, compatible down to %(compatibleVersion)s."), {
+					"requiredCompatibleVersion": metadata.engine_serialization_version,
+					"currentVersion": engineInfo.engine_version,
+					"compatibleVersion": engineInfo.engine_serialization_version,
 				}) + "\n";
 			else
 				message += translate("This savegame needs an older version of 0 A.D.") + "\n";
+		}
 
 		if (!sameMods)
 		{

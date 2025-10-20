@@ -9,8 +9,8 @@
 #endif
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION     PYROGENESIS_VERSION_WORD
-PRODUCTVERSION  PYROGENESIS_VERSION_WORD
+FILEVERSION     PS_VERSION_WORD
+PRODUCTVERSION  PS_VERSION_WORD
 FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
 FILEFLAGS       VER_DEBUG
 FILEOS          VOS_NT_WINDOWS32
@@ -23,12 +23,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Wildfire Games"
             VALUE "FileDescription", "Pyrogenesis engine"
-            VALUE "FileVersion", PYROGENESIS_VERSION
+            VALUE "FileVersion", PS_VERSION
             VALUE "InternalName", "pyrogenesis.rc"
             VALUE "LegalCopyright", "Copyright (C) 2025 Wildfire Games"
             VALUE "OriginalFilename", "pyrogenesis.rc"
             VALUE "ProductName", "Pyrogenesis"
-            VALUE "ProductVersion", PYROGENESIS_VERSION
+            VALUE "ProductVersion", PS_VERSION
         END
     END
     BLOCK "VarFileInfo"

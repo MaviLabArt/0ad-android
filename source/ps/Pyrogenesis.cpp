@@ -57,7 +57,7 @@ static void AppendAsciiFile(FILE* out, const OsPath& pathname)
 void psBundleLogs(FILE* f)
 {
 	fwprintf(f, L"Build Version: %ls\n\n", build_version);
-	fwprintf(f, L"Engine Version: %hs\n\n", PYROGENESIS_VERSION);
+	fwprintf(f, L"Engine Version: %hs\n\n", PS_VERSION);
 
 	fwprintf(f, L"System info:\n\n");
 	OsPath path1 = psLogDir()/"system_info.txt";
