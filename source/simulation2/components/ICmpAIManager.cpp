@@ -31,7 +31,7 @@
 #include "scriptinterface/ScriptRequest.h"
 #include "simulation2/system/InterfaceScripted.h"
 
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <iterator>
 #include <js/Array.h>
 #include <js/PropertyAndElement.h>
@@ -72,8 +72,8 @@ public:
 		ScriptRequest rq(self->m_ScriptInterface);
 
 		// Extract the 3rd component of the path (i.e. the directory after simulation/ai/)
-		boost::filesystem::path components = pathname.string();
-		boost::filesystem::path::iterator it = components.begin();
+		std::filesystem::path components = pathname.string();
+		std::filesystem::path::iterator it = components.begin();
 		std::advance(it, 2);
 		std::wstring dirname = it->wstring();
 

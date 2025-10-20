@@ -224,21 +224,6 @@ extern_lib_defs = {
 				externalincludedirs { "/usr/local/include" }
 			end
 		end,
-		link_settings = function()
-			if os.istarget("windows") or os.istarget("macosx") then
-				if os.istarget("windows") then
-					defines { 'BOOST_LIB_TOOLSET="vc143"' }
-				end
-				add_default_lib_paths("boost")
-			end
-			add_default_links({
-				-- The following are not strictly link dependencies on all systems, but
-				-- are included for compatibility with different versions of Boost
-				android_names = { "boost_filesystem-gcc-mt" },
-				unix_names = { os.findlib("boost_filesystem-mt") and "boost_filesystem-mt" or "boost_filesystem" },
-				osx_names = { "boost_filesystem" },
-			})
-		end,
 	},
 	comsuppw = {
 		link_settings = function()

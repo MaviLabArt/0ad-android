@@ -43,9 +43,9 @@
 
 #include <algorithm>
 #include <array>
-#include <boost/filesystem.hpp>
 #include <boost/iterator/iterator_facade.hpp>
 #include <chrono>
+#include <filesystem>
 #include <iterator>
 #include <set>
 #include <sstream>
@@ -792,11 +792,11 @@ public:
 	 */
 	CTextureConverter::Settings GetConverterSettings(const CTexturePtr& texture)
 	{
-		boost::filesystem::path srcPath = texture->m_Properties.m_Path.string();
+		std::filesystem::path srcPath = texture->m_Properties.m_Path.string();
 
 		std::vector<CTextureConverter::SettingsFile*> files;
 		VfsPath p;
-		for (boost::filesystem::path::iterator it = srcPath.begin(); it != srcPath.end(); ++it)
+		for (std::filesystem::path::iterator it = srcPath.begin(); it != srcPath.end(); ++it)
 		{
 			VfsPath settingsPath = p / "textures.xml";
 			m_HotloadFiles[settingsPath].insert(texture);

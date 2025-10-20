@@ -24,7 +24,7 @@
 
 #include "tinygettext/unix_file_system.hpp"
 
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <fstream>
 #include <stdlib.h>
 
@@ -38,7 +38,7 @@ std::vector<std::string>
 UnixFileSystem::open_directory(const std::string& pathname)
 {
   std::vector<std::string> files;
-  for(auto const& p : boost::filesystem::directory_iterator(pathname))
+  for(auto const& p : std::filesystem::directory_iterator(pathname))
   {
     files.push_back(p.path().filename().string());
   }

@@ -32,10 +32,10 @@
 #include "lib/sysdep/filesystem.h"
 #include "lib/sysdep/os.h"
 
-#include <boost/filesystem.hpp>
 #include <boost/version.hpp>
 #include <cerrno>
 #include <cstring>
+#include <filesystem>
 #include <memory>
 #include <string>
 
@@ -217,9 +217,9 @@ Status RenameFile(const OsPath& path, const OsPath& newPath)
 
 	try
 	{
-		boost::filesystem::rename(boost::filesystem::path(path.string()), boost::filesystem::path(newPath.string()));
+		std::filesystem::rename(std::filesystem::path(path.string()), std::filesystem::path(newPath.string()));
 	}
-	catch (boost::filesystem::filesystem_error& err)
+	catch (std::filesystem::filesystem_error& err)
 	{
 		debug_printf("RenameFile: failed to rename %s to %s.\n%s\n", path.string8().c_str(), path.string8().c_str(), err.what());
 		return ERR::EXCEPTION;
@@ -237,15 +237,11 @@ Status CopyFile(const OsPath& path, const OsPath& newPath, bool override_if_exis
 	try
 	{
 		if(override_if_exists)
-#if BOOST_VERSION >=107400
-			boost::filesystem::copy_file(boost::filesystem::path(path.string()), boost::filesystem::path(newPath.string()), boost::filesystem::copy_options::overwrite_existing);
-#else
-			boost::filesystem::copy_file(boost::filesystem::path(path.string()), boost::filesystem::path(newPath.string()), boost::filesystem::copy_option::overwrite_if_exists);
-#endif
+			std::filesystem::copy_file(std::filesystem::path(path.string()), std::filesystem::path(newPath.string()), std::filesystem::copy_options::overwrite_existing);
 		else
-			boost::filesystem::copy_file(boost::filesystem::path(path.string()), boost::filesystem::path(newPath.string()));
+			std::filesystem::copy_file(std::filesystem::path(path.string()), std::filesystem::path(newPath.string()));
 	}
-	catch(boost::filesystem::filesystem_error& err)
+	catch(std::filesystem::filesystem_error& err)
 	{
 		debug_printf("CopyFile: failed to copy %s to %s.\n%s\n", path.string8().c_str(), path.string8().c_str(), err.what());
 		return ERR::EXCEPTION;
