@@ -26,8 +26,8 @@
   OutFile "${PREFIX}-${WINARCH}.exe"
 
   ;Default installation folder
-  InstallDir "$LOCALAPPDATA\0 A.D."
-  ; NOTE: we can't use folder names ending in "." because they seemingly get stripped
+  InstallDir "$LOCALAPPDATA\0 A.D. Empires Ascendant"
+  ; NOTE: "0 A.D." doesn't work as a folder/start menu folder name, the final dot gets stripped.
 
   ;Get installation folder from registry if available
   InstallDirRegKey HKCU "Software\0 A.D." ""
@@ -68,7 +68,7 @@
   !define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKCU"
   !define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\0 A.D."
   !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
-  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "0 A.D."
+  !define MUI_STARTMENUPAGE_DEFAULTFOLDER "0 A.D. Empires Ascendant"
 
   !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 
