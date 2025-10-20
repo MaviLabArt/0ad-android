@@ -29,9 +29,6 @@
   InstallDir "$LOCALAPPDATA\0 A.D. Empires Ascendant"
   ; NOTE: "0 A.D." doesn't work as a folder/start menu folder name, the final dot gets stripped.
 
-  ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\0 A.D." ""
-
   RequestExecutionLevel user
 
 ;--------------------------------
@@ -234,6 +231,10 @@ uninst:
 
 done:
 
+  ;In alpha versions, the uninstaller preserved the registry key containing user install preferences
+  DeleteRegKey HKCU "Software\0 A.D."
+  ClearErrors
+
 FunctionEnd
 
 Function CreateDesktopLink
@@ -290,7 +291,7 @@ Section "Uninstall"
   RMDir "$SMPROGRAMS\$StartMenuFolder"
 
   DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\0 A.D."
-  DeleteRegKey /ifempty SHCTX "Software\0 A.D."
+  DeleteRegKey SHCTX "Software\0 A.D."
 
   ;Unregister .pyromod file association
   ${unregisterExtension} ".pyromod" "Pyrogenesis mod"
