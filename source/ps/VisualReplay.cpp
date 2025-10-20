@@ -151,8 +151,8 @@ JS::HandleObject VisualReplay::ReloadReplayCache(const ScriptInterface& scriptIn
 
 			JS::RootedValue file(rq.cx);
 			OsPath fileName;
-			double fileSize;
-			double fileMtime;
+			double fileSize{0};
+			double fileMtime{0};
 			Script::GetProperty(rq, replay, "directory", fileName);
 			Script::GetProperty(rq, replay, "fileSize", fileSize);
 			Script::GetProperty(rq, replay, "fileMTime", fileMtime);
