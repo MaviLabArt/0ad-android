@@ -135,7 +135,7 @@ JS::Value GetEngineInfo(const ScriptInterface& scriptInterface)
 	Script::CreateObject(
 		 rq,
 		 &metainfo,
-		 "engine_version", engine_version,
+		 "engine_version", PYROGENESIS_VERSION,
 		 "mods", mods);
 
 	Script::DeepFreezeObject(rq, metainfo);

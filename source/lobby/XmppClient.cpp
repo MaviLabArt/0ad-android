@@ -130,7 +130,7 @@ XmppClient::XmppClient(const ScriptInterface* scriptInterface, const std::string
 
 	m_client->registerConnectionListener(this);
 	m_client->setPresence(gloox::Presence::Available, -1);
-	m_client->disco()->setVersion("Pyrogenesis", engine_version);
+	m_client->disco()->setVersion("Pyrogenesis", PYROGENESIS_VERSION);
 	m_client->disco()->setIdentity("client", "bot");
 	m_client->setCompression(false);
 

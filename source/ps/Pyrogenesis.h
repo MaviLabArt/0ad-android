@@ -24,12 +24,13 @@ Standard declarations which are included in all projects.
 #ifndef INCLUDED_PYROGENESIS
 #define INCLUDED_PYROGENESIS
 
+#include <lib/build_version.h>
+
 #include <cstdio>
 
 class Path;
 using OsPath = Path;
 
-extern const char* engine_version;
 extern const char* main_window_name;
 
 extern void psBundleLogs(FILE* f); // set during InitVfs

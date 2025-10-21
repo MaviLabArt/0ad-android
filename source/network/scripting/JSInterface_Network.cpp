@@ -128,7 +128,7 @@ void StartNetworkHost(const CStrW& playerName, const u16 serverPort, const CStr&
 		 * TODO: it should be possible to implement SRP or something along those lines to completely protect from this,
 		 * but the cost/benefit ratio is probably not worth it.
 		 */
-		CStr hashedPass = HashCryptographically(password, hostJID + password + engine_version);
+		CStr hashedPass = HashCryptographically(password, hostJID + password + PYROGENESIS_VERSION);
 		g_NetServer->SetPassword(hashedPass);
 		g_NetClient->SetHostJID(hostJID);
 		g_NetClient->SetGamePassword(hashedPass);
@@ -176,7 +176,7 @@ void StartNetworkJoinLobby(const CStrW& playerName, const CStr& hostJID, const C
 	ENSURE(!g_NetServer);
 	ENSURE(!g_Game);
 
-	CStr hashedPass = HashCryptographically(password, hostJID + password + engine_version);
+	CStr hashedPass = HashCryptographically(password, hostJID + password + PYROGENESIS_VERSION);
 	g_Game = new CGame(true);
 	g_NetClient = new CNetClient(g_Game);
 	g_NetClient->SetUserName(playerName);

@@ -561,7 +561,7 @@ static void RunGameOrAtlas(const std::span<const char* const> argv)
 
 	if (args.Has("version"))
 	{
-		debug_printf("Pyrogenesis %s\n", engine_version);
+		debug_printf("Pyrogenesis %s\n", PYROGENESIS_VERSION);
 		return;
 	}
 

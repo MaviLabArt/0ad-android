@@ -80,7 +80,7 @@ void CReplayLogger::StartGame(JS::MutableHandleValue attribs)
 	Script::SetProperty(rq, attribs, "timestamp", (double)std::time(nullptr));
 
 	// Add engine version and currently loaded mods for sanity checks when replaying
-	Script::SetProperty(rq, attribs, "engine_version", engine_version);
+	Script::SetProperty(rq, attribs, "engine_version", PYROGENESIS_VERSION);
 	JS::RootedValue mods(rq.cx);
 	Script::ToJSVal(rq, &mods, g_Mods.GetEnabledModsData());
 	Script::SetProperty(rq, attribs, "mods", mods);

@@ -19,14 +19,12 @@
 
 #include "Pyrogenesis.h"
 
-#include "lib/build_version.h"
 #include "lib/path.h"
 #include "lib/sysdep/sysdep.h"
 
 #include <cstdio>
 #include <cwchar>
 
-const char* engine_version = PYROGENESIS_VERSION;
 const char* main_window_name = "0 A.D.";
 
 // convert contents of file <in_filename> from char to wchar_t and
@@ -59,7 +57,7 @@ static void AppendAsciiFile(FILE* out, const OsPath& pathname)
 void psBundleLogs(FILE* f)
 {
 	fwprintf(f, L"Build Version: %ls\n\n", build_version);
-	fwprintf(f, L"Engine Version: %hs\n\n", engine_version);
+	fwprintf(f, L"Engine Version: %hs\n\n", PYROGENESIS_VERSION);
 
 	fwprintf(f, L"System info:\n\n");
 	OsPath path1 = psLogDir()/"system_info.txt";
