@@ -40,7 +40,10 @@ Trigger.prototype.tutorialGoals = [
 			markForTranslation("At this point, food and wood are the most important resources for developing your economy, so let's start with gathering food. Civilians gather vegetables faster than other units.\n"),
 			markForTranslation("There are primarily three ways to select units:\n"),
 			markForTranslation("1) Hold the left mouse button and drag a selection rectangle that encloses the units you want to select.\n"),
-			markForTranslation("2) Click on one of them and then add additional units to your selection by holding Shift and clicking each additional unit (or also via the above selection rectangle).\n"),
+			{
+				"text": markForTranslation("2) Click on one of them and then add additional units to your selection by holding %(hotkey)s and clicking each additional unit (or also via the above selection rectangle).\n"),
+				"hotkey": "selection.add"
+			},
 			{
 				"text": markForTranslation("3) Double-click on a unit. This will select every unit of the same type as the specified unit in your visible window. %(hotkey)s+double-click will select all units of the same type on the entire map.\n"),
 				"hotkey": "selection.offscreen"
@@ -98,7 +101,10 @@ Trigger.prototype.tutorialGoals = [
 	{
 		"instructions": [
 			markForTranslation("Now that the rally point is set, we can produce additional units and they will do their assigned task automatically.\n"),
-			markForTranslation("Citizen Soldiers gather wood faster than Civilians. Select the Civic Center and, while holding Shift, click on the second unit icon, the Hoplites (holding Shift trains a batch of five units). You can also train units individually by simply clicking, but training 5 units together takes less time than training 5 units individually.")
+			{
+				"text": markForTranslation("Citizen Soldiers gather wood faster than Civilians. Select the Civic Center and, while holding %(hotkey)s, click on the second unit icon, the Hoplites (holding %(hotkey)s trains a batch of five units). You can also train units individually by simply clicking, but training 5 units together takes less time than training 5 units individually."),
+				"hotkey": "session.batchtrain"
+			}
 		],
 		"OnTrainingQueued": function(msg)
 		{
@@ -108,8 +114,8 @@ Trigger.prototype.tutorialGoals = [
 				const cmpProductionQueue = Engine.QueryInterface(entity, IID_ProductionQueue);
 				cmpProductionQueue.ResetQueue();
 				const txt = +msg.count == 1 ?
-					markForTranslation("Do not forget to hold Shift while clicking to train several units.") :
-					markForTranslation("Hold Shift and click on the Hoplite icon.");
+					markForTranslation("Do not forget to hold the hotkey while clicking to train several units.") :
+					markForTranslation("The second icon represents the Hoplites.");
 				this.WarningMessage(txt);
 				return;
 			}
@@ -153,7 +159,10 @@ Trigger.prototype.tutorialGoals = [
 	{
 		"instructions": [
 			markForTranslation("When construction finishes, the builders default to gathering wood automatically.\n"),
-			markForTranslation("Let's train some Civilians to gather more food. Select the Civic Center, hold Shift and click on the Civilian icon to train five Civilians.")
+			{
+				"text": markForTranslation("Let's train some Civilians to gather more food. Select the Civic Center, hold %(hotkey)s and click on the Civilian icon to train five Civilians."),
+				"hotkey": "session.batchtrain"
+			}
 		],
 		"Init": function()
 		{
@@ -167,8 +176,8 @@ Trigger.prototype.tutorialGoals = [
 				const cmpProductionQueue = Engine.QueryInterface(entity, IID_ProductionQueue);
 				cmpProductionQueue.ResetQueue();
 				const txt = +msg.count == 1 ?
-					markForTranslation("Do not forget to hold Shift and click to train several units.") :
-					markForTranslation("Hold shift and click on the Civilian icon.");
+					markForTranslation("Do not forget to hold the hotkey and click to train several units.") :
+					markForTranslation("The first icon represents the Civilians.");
 				this.WarningMessage(txt);
 				return;
 			}
@@ -212,8 +221,14 @@ Trigger.prototype.tutorialGoals = [
 	},
 	{
 		"instructions": [
-			markForTranslation("Select two of your newly-trained Civilians and ask them to build these Houses in the empty space to the east of the Civic Center. To do so, after selecting the Civilians, click on the House icon in the bottom right panel and, while holding Shift, click first on the position in the map where you want to build the first House, and then click on the position where you want to build the second House (when you give a command while holding Shift, you put the command in a queue; units automatically switch to the next command in their queue when they finish their current command). Press Escape to get rid of the House cursor so you don't spam Houses all over the map.\n"),
-			markForTranslation("Reminder: to select only two Civilians, click on the first one and then hold Shift and click on the second one.")
+			{
+				"text": markForTranslation("Select two of your newly-trained Civilians and ask them to build these Houses in the empty space to the east of the Civic Center. To do so, after selecting the Civilians, click on the House icon in the bottom right panel and, while holding %(hotkey)s, click first on the position in the map where you want to build the first House, and then click on the position where you want to build the second House (When you give a command while holding %(hotkey)s, you put the command in a queue; units automatically switch to the next command in their queue when they finish their current command). Press Escape to get rid of the House cursor so you don't spam Houses all over the map.\n"),
+				"hotkey": "selection.queue"
+			},
+			{
+				"text": markForTranslation("Reminder: to select only two Civilians, click on the first one and then hold %(hotkey) and click on the second one."),
+				"hotkey": "selection.add"
+			}
 		],
 		"Init": function()
 		{
@@ -347,7 +362,7 @@ Trigger.prototype.tutorialGoals = [
 				const cmpProductionQueue = Engine.QueryInterface(entity, IID_ProductionQueue);
 				cmpProductionQueue.ResetQueue();
 				const txt = +msg.count != 1 ?
-					markForTranslation("Click without holding Shift to train a single unit.") :
+					markForTranslation("Click without holding a hotkey to train a single unit.") :
 					markForTranslation("Click on the Civilian icon.");
 				this.WarningMessage(txt);
 				return;
@@ -418,7 +433,10 @@ Trigger.prototype.tutorialGoals = [
 	},
 	{
 		"instructions": [
-			markForTranslation("Thus, we should order them to deposit their wood in the Civic Center along the way. To do so, we will hold Shift while clicking to queue orders: select your soldiers, hold Shift and right-click on the Civic Center to deposit their wood and then hold Shift and right-click on the stone quarry to gather it.\n"),
+			{
+				"text": markForTranslation("Thus, we should order them to deposit their wood in the Civic Center along the way. To do so, we will hold %(hotkey)s while clicking to queue orders: select your soldiers, hold %(hotkey)s and right-click on the Civic Center to deposit their wood and then hold %(hotkey)s and right-click on the stone quarry to gather it.\n"),
+				"hotkey": "selection.queue"
+			},
 			markForTranslation("Perform a similar order queue with the remaining soldiers and the metal mine in the west.")
 		],
 		"Init": function()
