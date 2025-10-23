@@ -222,7 +222,7 @@ Trigger.prototype.tutorialGoals = [
 	{
 		"instructions": [
 			{
-				"text": markForTranslation("Select two of your newly-trained Civilians and ask them to build these Houses in the empty space to the east of the Civic Center. To do so, after selecting the Civilians, click on the House icon in the bottom right panel and, while holding %(hotkey)s, click first on the position in the map where you want to build the first House, and then click on the position where you want to build the second House (When you give a command while holding %(hotkey)s, you put the command in a queue; units automatically switch to the next command in their queue when they finish their current command). Press Escape to get rid of the House cursor so you don't spam Houses all over the map.\n"),
+				"text": markForTranslation("Select two of your newly-trained Civilians and order them to build these Houses in the empty space to the east of the Civic Center. Click on the House icon in the bottom right panel. While holding %(hotkey)s click on positions on the map where you want to build Houses. The Civilians will then start to build the houses in order. (When you give a command while holding %(hotkey)s, you put the command in a queue; units automatically switch to the next command in their queue when they finish their current command). Press Escape to get rid of the House cursor so you don't spam Houses all over the map.\n"),
 				"hotkey": "selection.queue"
 			},
 			{
