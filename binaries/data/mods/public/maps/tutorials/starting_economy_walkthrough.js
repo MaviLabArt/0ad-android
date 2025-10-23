@@ -70,7 +70,7 @@ Trigger.prototype.tutorialGoals = [
 	},
 	{
 		"instructions": [
-			markForTranslation("Cavalry Citizen Soldiers are good for hunting. Select your Cavalry and order him to hunt the chickens around your Civic Center in similar fashion.")
+			markForTranslation("Cavalry Citizen Soldiers are good for hunting. Select your Cavalry and order him to slaughter the chickens around your Civic Center in similar fashion.")
 		],
 		"OnPlayerCommand": function(msg)
 		{
