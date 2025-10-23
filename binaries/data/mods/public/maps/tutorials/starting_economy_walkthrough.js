@@ -16,7 +16,7 @@ Trigger.prototype.tutorialGoals = [
 	},
 	{
 		"instructions": [
-			markForTranslation("To start off, select your building, the Civic Center, by clicking on it. A selection ring in the color of your civilization will be displayed after clicking.")
+			markForTranslation("To start off, select your building, the Civic Center, by clicking on it. A selection ring in the color of your player will be displayed after clicking.")
 		]
 	},
 	{
