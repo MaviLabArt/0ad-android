@@ -260,7 +260,10 @@ Trigger.prototype.tutorialGoals = [
 		"instructions": [
 			markForTranslation("Select the three remaining (idle) Civilians and order them to build a Farmstead in the center of the large open area to the west of the Civic Center.\n"),
 			markForTranslation("We will need a decent chunk of space around the Farmstead to build Fields. In addition, we can see goats on the west side to further improve our food gathering efficiency should we ever decide to hunt them.\n"),
-			markForTranslation("If you try to select the three idle Civilians by clicking and dragging a selection rectangle over them, you might accidentally select additional units. To avoid that, hold the I key while selecting so that only idle units are selected. If you accidentally select a cavalry unit, hold Ctrl and click on the cavalry unit icon of the selection panel at the bottom of the screen to remove the cavalry unit from the current selection.")
+			{
+				"text": markForTranslation("If you try to select the three idle Civilians by clicking and dragging a selection rectangle over them, you might accidentally select additional units. To avoid that, hold %(hotkey)s while selecting so that only idle units are selected. If you accidentally select a cavalry unit, hold Ctrl and click on the cavalry unit icon of the selection panel at the bottom of the screen to remove the cavalry unit from the current selection."),
+				"hotkey": "selection.idleonly"
+			}
 		],
 		"OnPlayerCommand": function(msg)
 		{
