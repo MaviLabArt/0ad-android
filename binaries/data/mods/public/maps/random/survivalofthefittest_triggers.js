@@ -149,7 +149,11 @@ Trigger.prototype.InitStartingUnits = function()
 	{
 		this.playerCivicCenter[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "CivilCentre")[0];
 		this.treasureCivilian[playerID] = TriggerHelper.GetPlayerEntitiesByClass(playerID, "Civilian")[0];
-		Engine.QueryInterface(this.treasureCivilian[playerID], IID_Resistance).SetInvulnerability(true);
+		if (this.treasureCivilian[playerID])
+		{
+			Engine.QueryInterface(this.treasureCivilian[playerID], IID_Resistance)
+				.SetInvulnerability(true);
+		}
 	}
 };
 
