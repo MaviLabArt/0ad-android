@@ -159,6 +159,20 @@ Trigger.prototype.tutorialGoals = [
 	{
 		"instructions": [
 			markForTranslation("When construction finishes, the builders default to gathering wood automatically.\n"),
+			markForTranslation("In the meantime, we seem to have enough workers gathering wood. We should remove the current rally point of the Civic Center away from gathering wood. For that purpose, right-click on the Civic Center when it is selected (and the flag icon indicating the rally point is crossed out).")
+		],
+		"OnPlayerCommand": function(msg)
+		{
+			if (msg.cmd.type == "unset-rallypoint")
+				this.NextGoal();
+		},
+		"OnTrainingFinished": function(msg)
+		{
+			this.trainingDone = true;
+		}
+	},
+	{
+		"instructions": [
 			{
 				"text": markForTranslation("Let's train some Civilians to gather more food. Select the Civic Center, hold %(hotkey)s and click on the Civilian icon to train five Civilians."),
 				"hotkey": "session.batchtrain"
@@ -182,21 +196,6 @@ Trigger.prototype.tutorialGoals = [
 				return;
 			}
 			this.NextGoal();
-		}
-	},
-	{
-		"instructions": [
-			markForTranslation("Let's wait for the units to be trained.\n"),
-			markForTranslation("In the meantime, we seem to have enough workers gathering wood. We should remove the current rally point of the Civic Center away from gathering wood. For that purpose, right-click on the Civic Center when it is selected (and the flag icon indicating the rally point is crossed out).")
-		],
-		"OnPlayerCommand": function(msg)
-		{
-			if (msg.cmd.type == "unset-rallypoint")
-				this.NextGoal();
-		},
-		"OnTrainingFinished": function(msg)
-		{
-			this.trainingDone = true;
 		}
 	},
 	{
