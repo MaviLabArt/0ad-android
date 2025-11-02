@@ -15,7 +15,7 @@ export const projectInformation = {
 		"caption": getBuildString()
 	},
 	"productDescription": {
-		"caption": setStringTags(translate("Release XXVIII: B——"), { "font": "sans-bold-16" }) + "\n\n" +
+		"caption": setStringTags(translate("Release XXVIII: Boiorix"), { "font": "sans-bold-16" }) + "\n\n" +
 			translate("Notice: This game is under development and many features have not been added yet.")
 	}
 };
