@@ -320,7 +320,14 @@ ActorViewer::ActorViewer()
 	}
 
 	// Prepare the simulation
-	m.Simulation2.LoadDefaultScripts();
+	try
+	{
+		m.Simulation2.LoadDefaultScripts();
+	}
+	catch (const CSimulation2::LoadScriptError& e)
+	{
+		LOGERROR("%s", e.what());
+	}
 	m.Simulation2.ResetState();
 
 	// Set player data

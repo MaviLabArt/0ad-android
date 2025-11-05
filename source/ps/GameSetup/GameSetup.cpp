@@ -594,11 +594,18 @@ bool Init(const CmdLineArgs& args, int flags)
 	// on anything else.)
 	if (args.Has("dumpSchema"))
 	{
-		CSimulation2 sim{NULL, *g_ScriptContext, NULL};
-		sim.LoadDefaultScripts();
-		std::ofstream f("entity.rng", std::ios_base::out | std::ios_base::trunc);
-		f << sim.GenerateSchema();
-		debug_printf("Generated entity.rng\n");
+		try
+		{
+			CSimulation2 sim{NULL, *g_ScriptContext, NULL};
+			sim.LoadDefaultScripts();
+			std::ofstream f("entity.rng", std::ios_base::out | std::ios_base::trunc);
+			f << sim.GenerateSchema();
+			debug_printf("Generated entity.rng\n");
+		}
+		catch (const CSimulation2::LoadScriptError& e)
+		{
+			LOGERROR("%s", e.what());
+		}
 		return false;
 	}
 

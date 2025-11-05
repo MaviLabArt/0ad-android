@@ -114,8 +114,8 @@ public:
 		componentManager.AddSystemComponents(skipScriptedComponents, skipAI);
 	}
 
-	static bool LoadDefaultScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts);
-	static bool LoadScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts, const VfsPath& path);
+	static void LoadDefaultScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts);
+	static void LoadScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts, const VfsPath& path);
 	static bool LoadTriggerScripts(CComponentManager& componentManager, JS::HandleValue mapSettings, std::set<VfsPath>* loadedScripts);
 	Status ReloadChangedFile(const VfsPath& path);
 
@@ -193,31 +193,27 @@ public:
 	}
 };
 
-bool CSimulation2Impl::LoadDefaultScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts)
+void CSimulation2Impl::LoadDefaultScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts)
 {
-	return (
-		LoadScripts(componentManager, loadedScripts, L"simulation/components/interfaces/") &&
-		LoadScripts(componentManager, loadedScripts, L"simulation/helpers/") &&
-		LoadScripts(componentManager, loadedScripts, L"simulation/components/")
-	);
+	LoadScripts(componentManager, loadedScripts, L"simulation/components/interfaces/");
+	LoadScripts(componentManager, loadedScripts, L"simulation/helpers/");
+	LoadScripts(componentManager, loadedScripts, L"simulation/components/");
 }
 
-bool CSimulation2Impl::LoadScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts, const VfsPath& path)
+void CSimulation2Impl::LoadScripts(CComponentManager& componentManager, std::set<VfsPath>* loadedScripts, const VfsPath& path)
 {
 	VfsPaths pathnames;
 	if (vfs::GetPathnames(g_VFS, path, L"*.js", pathnames) < 0)
-		return false;
+		throw CSimulation2::LoadScriptError{"Error enumerating " + path.string8()};
 
-	bool ok = true;
 	for (const VfsPath& scriptPath : pathnames)
 	{
 		if (loadedScripts)
 			loadedScripts->insert(scriptPath);
 		LOGMESSAGE("Loading simulation script '%s'", scriptPath.string8());
 		if (!componentManager.LoadScript(scriptPath))
-			ok = false;
+			throw CSimulation2::LoadScriptError{"Error loading " + scriptPath.string8()};
 	}
-	return ok;
 }
 
 bool CSimulation2Impl::LoadTriggerScripts(CComponentManager& componentManager, JS::HandleValue mapSettings, std::set<VfsPath>* loadedScripts)
@@ -425,7 +421,7 @@ void CSimulation2Impl::Update(int turnLength, const std::vector<SimulationComman
 		m_SecondaryComponentManager->LoadComponentTypes();
 
 		m_SecondaryLoadedScripts = std::make_unique<std::set<VfsPath>>();
-		ENSURE(LoadDefaultScripts(*m_SecondaryComponentManager, m_SecondaryLoadedScripts.get()));
+		LoadDefaultScripts(*m_SecondaryComponentManager, m_SecondaryLoadedScripts.get());
 		ResetComponentState(*m_SecondaryComponentManager, false, false);
 
 		ScriptRequest rq(scriptInterface);
@@ -782,14 +778,14 @@ float CSimulation2::GetLastFrameOffset() const
 	return m->m_LastFrameOffset;
 }
 
-bool CSimulation2::LoadScripts(const VfsPath& path)
+void CSimulation2::LoadScripts(const VfsPath& path)
 {
-	return m->LoadScripts(m->m_ComponentManager, &m->m_LoadedScripts, path);
+	m->LoadScripts(m->m_ComponentManager, &m->m_LoadedScripts, path);
 }
 
-bool CSimulation2::LoadDefaultScripts()
+void CSimulation2::LoadDefaultScripts()
 {
-	return m->LoadDefaultScripts(m->m_ComponentManager, &m->m_LoadedScripts);
+	m->LoadDefaultScripts(m->m_ComponentManager, &m->m_LoadedScripts);
 }
 
 void CSimulation2::SetStartupScript(const std::string& code)

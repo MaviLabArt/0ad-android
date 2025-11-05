@@ -65,7 +65,7 @@ public:
 	{
 		CXeromycesEngine xeromycesEngine;
 		CSimulation2 sim{nullptr, *g_ScriptContext, &m_Terrain};
-		TS_ASSERT(sim.LoadScripts(L"simulation/components/addentity/"));
+		sim.LoadScripts(L"simulation/components/addentity/");
 
 		sim.ResetState(true, true);
 
@@ -86,7 +86,7 @@ public:
 	{
 		CXeromycesEngine xeromycesEngine;
 		CSimulation2 sim{nullptr, *g_ScriptContext, &m_Terrain};
-		TS_ASSERT(sim.LoadScripts(L"simulation/components/addentity/"));
+		sim.LoadScripts(L"simulation/components/addentity/");
 
 		sim.ResetState(true, true);
 
@@ -149,7 +149,7 @@ public:
 		copyFile(L"simulation/components/test-hotload1.js", L"simulation/components/hotload/hotload.js");
 		TS_ASSERT_OK(g_VFS->RemoveFile(L"simulation/components/hotload/hotload.js"));
 		TS_ASSERT_OK(g_VFS->RepopulateDirectory(L"simulation/components/hotload/"));
-		TS_ASSERT(sim.LoadScripts(L"simulation/components/hotload/"));
+		sim.LoadScripts(L"simulation/components/hotload/");
 
 		sim.ResetState(true, true);
 

@@ -53,6 +53,11 @@ class CSimulation2
 	NONCOPYABLE(CSimulation2);
 
 public:
+	struct LoadScriptError : std::runtime_error
+	{
+		using std::runtime_error::runtime_error;
+	};
+
 	// TODO: CUnitManager should probably be handled automatically by this
 	// module, but for now we'll have it passed in externally instead
 	CSimulation2(CUnitManager* unitManager, ScriptContext& cx, CTerrain* terrain);
@@ -68,13 +73,13 @@ public:
 	 * should be called immediately after constructing the CSimulation2 object.
 	 * @return false on failure
 	 */
-	bool LoadScripts(const VfsPath& path);
+	void LoadScripts(const VfsPath& path);
 
 	/**
 	 * Call LoadScripts for each of the game's standard simulation script paths.
 	 * @return false on failure
 	 */
-	bool LoadDefaultScripts();
+	void LoadDefaultScripts();
 
 	/**
 	 * Loads the player settings script (called before map is loaded)
