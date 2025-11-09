@@ -806,13 +806,6 @@ bool CDevice::AcquireNextBackbuffer()
 {
 	if (!IsSwapChainValid())
 	{
-		vkDeviceWaitIdle(m_Device);
-
-		// Since we know there is no GPU work in progress we can free resources
-		// queued for deletion.
-		ProcessDeviceObjectToDestroyQueue(true);
-		ProcessObjectToDestroyQueue(true);
-
 		RecreateSwapChain();
 		if (!IsSwapChainValid())
 			return false;
@@ -1043,7 +1036,18 @@ std::unique_ptr<CRingCommandContext> CDevice::CreateRingCommandContext(const siz
 
 void CDevice::RecreateSwapChain()
 {
-	m_BackbufferReadbackTexture.reset();
+	if (m_SwapChain)
+	{
+		vkDeviceWaitIdle(m_Device);
+
+		m_BackbufferReadbackTexture.reset();
+
+		// Since we know there is no GPU work in progress we can free resources
+		// queued for deletion.
+		ProcessDeviceObjectToDestroyQueue(true);
+		ProcessObjectToDestroyQueue(true);
+	}
+
 	int surfaceDrawableWidth = 0, surfaceDrawableHeight = 0;
 	SDL_Vulkan_GetDrawableSize(m_Window, &surfaceDrawableWidth, &surfaceDrawableHeight);
 	m_SwapChain = CSwapChain::Create(
