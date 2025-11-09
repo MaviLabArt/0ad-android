@@ -808,6 +808,11 @@ bool CDevice::AcquireNextBackbuffer()
 	{
 		vkDeviceWaitIdle(m_Device);
 
+		// Since we know there is no GPU work in progress we can free resources
+		// queued for deletion.
+		ProcessDeviceObjectToDestroyQueue(true);
+		ProcessObjectToDestroyQueue(true);
+
 		RecreateSwapChain();
 		if (!IsSwapChainValid())
 			return false;
