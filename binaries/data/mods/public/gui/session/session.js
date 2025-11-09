@@ -705,7 +705,7 @@ function updateCinemaPath()
 	{
 		// TODO: Keyboard shortcuts can still try to toggle silhouettes
 		// which would behave incorrectly on reset.
-		Engine.ConfigDB_Reload();
+		Engine.ConfigDB_Reload("user");
 		g_HasHiddenSilhouettes = false;
 	}
 }
