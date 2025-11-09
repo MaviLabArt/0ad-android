@@ -1040,6 +1040,13 @@ void CDevice::RecreateSwapChain()
 	{
 		vkDeviceWaitIdle(m_Device);
 
+		// It seems some drivers might not reuse the same swapchain memory. So
+		// to avoid higher memory peaks destroy the old swapchain before.
+		const bool destroyOldSwapchainBefore{
+			g_ConfigDB.Get("renderer.backend.vulkan.destroyoldswapchainbefore", false)};
+		if (destroyOldSwapchainBefore)
+			m_SwapChain.reset();
+
 		m_BackbufferReadbackTexture.reset();
 
 		// Since we know there is no GPU work in progress we can free resources
