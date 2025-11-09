@@ -20,6 +20,7 @@
 #include "Device.h"
 
 #include "lib/alignment.h"
+#include "lib/build_version.h"
 #include "lib/debug.h"
 #include "lib/sysdep/os.h"
 #include "ps/CLogger.h"
@@ -225,7 +226,7 @@ std::unique_ptr<CDevice> CDevice::Create(SDL_Window* window)
 	VkApplicationInfo applicationInfo{};
 	applicationInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	applicationInfo.pApplicationName = "0 A.D.";
-	applicationInfo.applicationVersion = VK_MAKE_VERSION(0, 0, 27);
+	applicationInfo.applicationVersion = VK_MAKE_VERSION(PS_VERSION_MAJOR, PS_VERSION_MINOR, PS_VERSION_PATCH);
 	applicationInfo.pEngineName = "Pyrogenesis";
 	applicationInfo.engineVersion = applicationInfo.applicationVersion;
 	applicationInfo.apiVersion = VK_API_VERSION_1_1;
