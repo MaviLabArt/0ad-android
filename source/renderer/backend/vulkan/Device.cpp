@@ -407,10 +407,19 @@ std::unique_ptr<CDevice> CDevice::Create(SDL_Window* window)
 	}
 	if (choosedDeviceIt == device->m_AvailablePhysicalDevices.end())
 	{
-		// We need to choose the best available device fits our needs.
-		choosedDeviceIt = min_element(
-			availablePhyscialDevices.begin(), availablePhyscialDevices.end(),
-			ComparePhysicalDevices);
+		const bool chooseBestDevice{g_ConfigDB.Get("renderer.backend.vulkan.choosebestdevice", false)};
+		if (chooseBestDevice)
+		{
+			// We need to choose the best available device fits our needs.
+			choosedDeviceIt = min_element(
+				availablePhyscialDevices.begin(), availablePhyscialDevices.end(),
+				ComparePhysicalDevices);
+		}
+		else
+		{
+			// By default we assume that the Vulkan driver provides a decent default.
+			choosedDeviceIt = availablePhyscialDevices.begin();
+		}
 	}
 	device->m_ChoosenDevice = *choosedDeviceIt;
 	const SAvailablePhysicalDevice& choosenDevice = device->m_ChoosenDevice;
