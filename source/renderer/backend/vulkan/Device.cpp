@@ -393,35 +393,35 @@ std::unique_ptr<CDevice> CDevice::Create(SDL_Window* window)
 	}
 
 	const int deviceIndexOverride{g_ConfigDB.Get("renderer.backend.vulkan.deviceindexoverride", -1)};
-	auto choosedDeviceIt = device->m_AvailablePhysicalDevices.end();
+	auto chosenDeviceIt = device->m_AvailablePhysicalDevices.end();
 	if (deviceIndexOverride >= 0)
 	{
-		choosedDeviceIt = std::find_if(
+		chosenDeviceIt = std::find_if(
 			device->m_AvailablePhysicalDevices.begin(), device->m_AvailablePhysicalDevices.end(),
 			[deviceIndexOverride](const SAvailablePhysicalDevice& availableDevice)
 			{
 				return availableDevice.index == static_cast<uint32_t>(deviceIndexOverride);
 			});
-		if (choosedDeviceIt == device->m_AvailablePhysicalDevices.end())
+		if (chosenDeviceIt == device->m_AvailablePhysicalDevices.end())
 			LOGWARNING("Device with override index %d not found.", deviceIndexOverride);
 	}
-	if (choosedDeviceIt == device->m_AvailablePhysicalDevices.end())
+	if (chosenDeviceIt == device->m_AvailablePhysicalDevices.end())
 	{
 		const bool chooseBestDevice{g_ConfigDB.Get("renderer.backend.vulkan.choosebestdevice", false)};
 		if (chooseBestDevice)
 		{
 			// We need to choose the best available device fits our needs.
-			choosedDeviceIt = min_element(
+			chosenDeviceIt = min_element(
 				availablePhyscialDevices.begin(), availablePhyscialDevices.end(),
 				ComparePhysicalDevices);
 		}
 		else
 		{
 			// By default we assume that the Vulkan driver provides a decent default.
-			choosedDeviceIt = availablePhyscialDevices.begin();
+			chosenDeviceIt = availablePhyscialDevices.begin();
 		}
 	}
-	device->m_ChoosenDevice = *choosedDeviceIt;
+	device->m_ChoosenDevice = *chosenDeviceIt;
 	const SAvailablePhysicalDevice& choosenDevice = device->m_ChoosenDevice;
 	device->m_AvailablePhysicalDevices.erase(std::remove_if(
 		device->m_AvailablePhysicalDevices.begin(), device->m_AvailablePhysicalDevices.end(),
