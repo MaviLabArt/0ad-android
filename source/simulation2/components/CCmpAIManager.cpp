@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2026 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -87,7 +87,7 @@
 #include <utility>
 #include <vector>
 
-extern void QuitEngine();
+extern void QuitEngine(int exitStatus);
 
 /**
  * @file

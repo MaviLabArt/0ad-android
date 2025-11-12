@@ -9,9 +9,9 @@ export function aiWarn(output)
 /**
  * Useful for simulating consecutive AI matches.
  */
-export function exit()
+export function exit(exitStatus)
 {
-	Engine.Exit();
+	Engine.Exit(exitStatus);
 }
 
 export function VectorDistance(a, b)

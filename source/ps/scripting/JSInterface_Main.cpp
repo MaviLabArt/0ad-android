@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2026 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -46,6 +46,8 @@
 #include <string>
 
 class ScriptInterface;
+
+extern void QuitEngine(int exitStatus);
 
 namespace JSI_Main
 {
@@ -134,6 +136,7 @@ std::string CalculateMD5(const std::string& input)
 
 void RegisterScriptFunctions(const ScriptRequest& rq)
 {
+	ScriptFunction::Register<&QuitEngine>(rq, "Exit");
 	ScriptFunction::Register<&AtlasIsAvailable>(rq, "AtlasIsAvailable");
 	ScriptFunction::Register<&IsAtlasRunning>(rq, "IsAtlasRunning");
 	ScriptFunction::Register<&OpenURL>(rq, "OpenURL");
