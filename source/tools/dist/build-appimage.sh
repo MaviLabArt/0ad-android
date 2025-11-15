@@ -76,7 +76,8 @@ for lib in \
 	patchelf --set-rpath "${lib}:${ROOT}/binaries/system" "${APPDIR}/usr/bin/pyrogenesis" || die
 done
 
-# dlopen lib
+# dlopen libs
+doins binaries/system/libAtlasUI.so "${APPDIR}/usr/lib"
 doins binaries/system/libCollada.so "${APPDIR}/usr/lib"
 
 doins binaries/data/config/default.cfg "${APPDIR}/usr/data/config"
