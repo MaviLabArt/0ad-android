@@ -208,10 +208,11 @@ void InitVfs(const CmdLineArgs& args)
 	psSetLogDir(logs);
 	// desired location for crashlog is now known. update AppHooks ASAP
 	// (particularly before the following error-prone operations):
-	AppHooks hooks = {0};
-	hooks.bundle_logs = psBundleLogs;
-	hooks.get_log_dir = psLogDir;
-	hooks.display_error = psDisplayError;
+	AppHooks hooks{
+		.get_log_dir = psLogDir,
+		.bundle_logs = psBundleLogs,
+		.display_error = psDisplayError
+	};
 	app_hooks_update(&hooks);
 
 	g_VFS = CreateVfs();
