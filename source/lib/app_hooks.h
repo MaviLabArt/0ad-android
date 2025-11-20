@@ -153,7 +153,7 @@ struct AppHooks
  * override the previous function pointer value
  * (these default to the stub hooks which are functional but basic).
  **/
-void app_hooks_update(AppHooks* ah);
+void app_hooks_update(const AppHooks& ah);
 
 /**
  * was the app hook changed via app_hooks_update from its default value?

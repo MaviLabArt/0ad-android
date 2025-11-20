@@ -76,11 +76,9 @@ static AppHooks default_ah = ah;
 // register the specified hook function pointers. any of them that
 // are non-zero override the previous function pointer value
 // (these default to the stub hooks which are functional but basic).
-void app_hooks_update(AppHooks* new_ah)
+void app_hooks_update(const AppHooks& new_ah)
 {
-	ENSURE(new_ah);
-
-#define OVERRIDE_IF_NONZERO(HOOKNAME) if(new_ah->HOOKNAME) ah.HOOKNAME = new_ah->HOOKNAME;
+#define OVERRIDE_IF_NONZERO(HOOKNAME) if(new_ah.HOOKNAME) ah.HOOKNAME = new_ah.HOOKNAME;
 	OVERRIDE_IF_NONZERO(get_log_dir)
 	OVERRIDE_IF_NONZERO(bundle_logs)
 	OVERRIDE_IF_NONZERO(display_error)
