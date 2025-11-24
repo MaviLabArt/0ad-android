@@ -47,18 +47,16 @@
   "PlayerData": [
     null,
     {
+	  "Civ": "germ",
       "Color": {
         "b": 0,
         "g": 92,
         "r": 183
       }
-    },
-    {}
+    }
   ],
   "Preview": "sandbox-thegermans.png",
-  "VictoryConditions": [
-    "conquest"
-  ]
+  "VictoryConditions": []
 }
 ]]></ScriptSettings>
 	<Entities>
