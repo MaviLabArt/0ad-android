@@ -17,13 +17,11 @@ PopulationCapManager.prototype.Init = function()
  */
 PopulationCapManager.prototype.SetPopulationCapType = function(type)
 {
-	if ([this.CAPTYPE_PLAYER_POPULATION, this.CAPTYPE_TEAM_POPULATION, this.CAPTYPE_WORLD_POPULATION].includes(type))
-		this.popCapType = type;
-	else
-	{
-		warn(`Attempted to set an unknown population capacity type: '${type}'. Continuing with type 'Player Population'...`);
-		this.popCapType = this.CAPTYPE_PLAYER_POPULATION;
-	}
+	if (![this.CAPTYPE_PLAYER_POPULATION, this.CAPTYPE_TEAM_POPULATION, this.CAPTYPE_WORLD_POPULATION].includes(type))
+		error("Invalid population cap type specified: " + type);
+
+	this.popCapType = type;
+
 	if (this.popCap)
 		this.InitializePopCaps();
 };

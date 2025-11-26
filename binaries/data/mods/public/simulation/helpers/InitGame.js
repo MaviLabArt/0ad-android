@@ -65,8 +65,12 @@ function InitGame(settings)
 	}
 
 	const cmpPopulationCapManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_PopulationCapManager);
-	cmpPopulationCapManager.SetPopulationCapType(settings.PopulationCapType);
-	cmpPopulationCapManager.SetPopulationCap(settings.PopulationCap);
+	if ([cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION, cmpPopulationCapManager.CAPTYPE_TEAM_POPULATION,
+		cmpPopulationCapManager.CAPTYPE_WORLD_POPULATION].includes(settings.PopulationCapType))
+		cmpPopulationCapManager.SetPopulationCapType(settings.PopulationCapType);
+	else
+		cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION);
+	cmpPopulationCapManager.SetPopulationCap(settings.PopulationCap || 300);
 
 	// Update the grid with all entities created for the map init.
 	Engine.QueryInterface(SYSTEM_ENTITY, IID_Pathfinder).UpdateGrid();
