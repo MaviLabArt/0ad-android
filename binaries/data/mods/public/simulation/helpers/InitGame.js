@@ -64,13 +64,22 @@ function InitGame(settings)
 			Engine.QueryInterface(cmpPlayer.entity, IID_TechnologyManager)?.ResearchTechnology(Engine.QueryInterface(cmpPlayer.entity, IID_Diplomacy).template.SharedLosTech);
 	}
 
-	const cmpPopulationCapManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_PopulationCapManager);
-	if ([cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION, cmpPopulationCapManager.CAPTYPE_TEAM_POPULATION,
-		cmpPopulationCapManager.CAPTYPE_WORLD_POPULATION].includes(settings.PopulationCapType))
-		cmpPopulationCapManager.SetPopulationCapType(settings.PopulationCapType);
-	else
-		cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION);
-	cmpPopulationCapManager.SetPopulationCap(settings.PopulationCap || 300);
+	{
+		const popCap = settings.PopulationCap || 300;
+		const cmpPopulationCapManager = Engine.QueryInterface(SYSTEM_ENTITY, IID_PopulationCapManager);
+		const nonGaiaPlayers = settings.PlayerData.slice(1);
+		if (nonGaiaPlayers.some(player => player.PopulationLimit))
+			cmpPopulationCapManager.SetPerPlayerPopulationCaps(nonGaiaPlayers.map(player => player.PopulationLimit || popCap));
+		else
+		{
+			if ([cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION, cmpPopulationCapManager.CAPTYPE_TEAM_POPULATION,
+				cmpPopulationCapManager.CAPTYPE_WORLD_POPULATION].includes(settings.PopulationCapType))
+				cmpPopulationCapManager.SetPopulationCapType(settings.PopulationCapType);
+			else
+				cmpPopulationCapManager.SetPopulationCapType(cmpPopulationCapManager.CAPTYPE_PLAYER_POPULATION);
+			cmpPopulationCapManager.SetPopulationCap(popCap);
+		}
+	}
 
 	// Update the grid with all entities created for the map init.
 	Engine.QueryInterface(SYSTEM_ENTITY, IID_Pathfinder).UpdateGrid();

@@ -46,6 +46,13 @@ PopulationCapManager.prototype.SetPopulationCap = function(cap)
 		this.InitializePopCaps();
 };
 
+PopulationCapManager.prototype.SetPerPlayerPopulationCaps = function(playerCaps)
+{
+	this.perPlayerPopCaps = playerCaps;
+	this.popCapType = this.CAPTYPE_PLAYER_POPULATION;
+	this.InitializePopCaps();
+};
+
 /**
  * Get the current pop cap.
  * @returns {number}
@@ -84,10 +91,10 @@ PopulationCapManager.prototype.InitializePopCaps = function()
  */
 PopulationCapManager.prototype.InitializePlayerPopCaps = function()
 {
-	const players = Engine.QueryInterface(SYSTEM_ENTITY, IID_PlayerManager).GetActivePlayers();
-	for (const player of players)
-		QueryPlayerIDInterface(player, IID_Player)
-			.SetMaxPopulation(this.popCap);
+	const players = Engine.QueryInterface(SYSTEM_ENTITY, IID_PlayerManager).GetNonGaiaPlayers();
+	for (const i in players)
+		QueryPlayerIDInterface(players[i], IID_Player)
+			.SetMaxPopulation(this.perPlayerPopCaps ? this.perPlayerPopCaps[i] : this.popCap);
 };
 
 /**
