@@ -16,7 +16,7 @@ echo "Filtering languages"
 # Included languages
 # Note: Needs to be edited manually at each release.
 # Keep in sync with the installer languages in 0ad.nsi.
-LANGS="ast ca cs de el en_GB es eu fi fr gl hu id it ja ko nl pl pt_BR pt_PT ru sk sv tr uk zh zh_TW"
+LANGS="ast ca cs de el en_GB es eu fi fr gl hu id it ja ko nl pl pt_BR pt_PT ru sk sv tr uk vi zh zh_TW"
 
 # shellcheck disable=SC2086
 REGEX=$(printf "\|%s" ${LANGS} | cut -c 2-)

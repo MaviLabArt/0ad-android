@@ -114,6 +114,7 @@
   !insertmacro MUI_LANGUAGE "TradChinese"
   !insertmacro MUI_LANGUAGE "Turkish"
   !insertmacro MUI_LANGUAGE "Ukrainian"
+  !insertmacro MUI_LANGUAGE "Vietnamese"
 
 ;--------------------------------
 ;Installer Sections
