@@ -203,11 +203,10 @@ pipeline {
                         }
                     }
                     steps {
-                        checkout changelog: false, poll: false, scm: [
-                            $class: 'SubversionSCM',
-                            locations: [[local: '.', remote: "https://svn.wildfiregames.com/nightly-build/trunk@${NIGHTLY_REVISION}"]],
-                            quietOperation: false,
-                            workspaceUpdater: [$class: 'UpdateWithCleanUpdater']]
+                        bat "svn co https://svn.wildfiregames.com/nightly-build/trunk@${NIGHTLY_REVISION} ."
+                        bat 'svn revert -R .'
+                        bat 'svn cleanup --remove-unversioned'
+
                         copyArtifacts projectName: '0ad-patch-release', selector: upstream()
                         bat "svn patch ${params.BUNDLE_VERSION}.patch"
 
@@ -225,8 +224,7 @@ pipeline {
                     }
                     post {
                         cleanup {
-                            bat 'svn revert -R .'
-                            bat 'svn cleanup --remove-unversioned'
+                            bat 'svn cleanup'
                         }
                     }
                 }
@@ -255,11 +253,10 @@ pipeline {
                         HOSTTYPE = 'amd64'
                     }
                     steps {
-                        checkout changelog: false, poll: false, scm: [
-                            $class: 'SubversionSCM',
-                            locations: [[local: '.', remote: "https://svn.wildfiregames.com/nightly-build/trunk@${NIGHTLY_REVISION}"]],
-                            quietOperation: false,
-                            workspaceUpdater: [$class: 'UpdateWithCleanUpdater']]
+                        bat "svn co https://svn.wildfiregames.com/nightly-build/trunk@${NIGHTLY_REVISION} ."
+                        bat 'svn revert -R .'
+                        bat 'svn cleanup --remove-unversioned'
+
                         script {
                             if (params.PATCH_BUILD) {
                                 copyArtifacts projectName: '0ad-patch-release', selector: upstream()
@@ -281,8 +278,7 @@ pipeline {
                     }
                     post {
                         cleanup {
-                            bat 'svn revert -R .'
-                            bat 'svn cleanup --remove-unversioned'
+                            bat 'svn cleanup'
                         }
                     }
                 }
