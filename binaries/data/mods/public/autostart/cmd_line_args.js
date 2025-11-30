@@ -66,11 +66,20 @@ function parseCmdLineArgs(settings, cmdLineArgs)
 {
 	// eslint-disable-next-line dot-notation
 	const mapType = cmdLineArgs['autostart'].substring(0, cmdLineArgs['autostart'].indexOf('/'));
-	settings.map.setType({
-		"scenarios": "scenario",
-		"random": "random",
-		"skirmishes": "skirmish",
-	}[mapType]);
+	switch (mapType)
+	{
+	case "random":
+		settings.map.setType("random");
+		break;
+	case "scenarios":
+		settings.map.setType("scenario");
+		break;
+	case "skirmishes":
+		settings.map.setType("skirmish");
+		break;
+	default:
+		throw new Error(`Unknown map type ${mapType}`);
+	}
 	// eslint-disable-next-line dot-notation
 	settings.map.selectMap("maps/" + cmdLineArgs['autostart']);
 
