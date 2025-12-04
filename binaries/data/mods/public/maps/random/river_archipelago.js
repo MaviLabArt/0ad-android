@@ -136,7 +136,7 @@ export function* generateMap(mapSettings)
 	const playerIDs = randBool() ? sortAllPlayers() : primeSortAllPlayers();
 
 	g_Map.log("Ensuring player territory");
-	const playerRadius = scaleByMapSize(12, 20);
+	const playerRadius = scaleByMapSize(15, 20);
 	for (let i = 0; i < numPlayers; ++i)
 		createArea(
 			new ChainPlacer(1, 6, 40, 1, playerPosition[i], 0, [Math.floor(playerRadius)]),
