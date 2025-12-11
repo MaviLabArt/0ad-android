@@ -855,7 +855,8 @@ bool Autostart(const CmdLineArgs& args)
 		while (!shouldQuit)
 		{
 			g_NetClient->Poll();
-			ScriptFunction::Call(rq, global, "onTick", shouldQuit);
+			if (!ScriptFunction::Call(rq, global, "onTick", shouldQuit))
+				return false;
 			std::this_thread::sleep_for(std::chrono::microseconds(200));
 		}
 	}
