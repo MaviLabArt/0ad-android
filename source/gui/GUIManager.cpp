@@ -256,11 +256,15 @@ void CGUIManager::SGUIPage::LoadPage(ScriptContext& scriptContext)
 	if (hotloadData)
 		Script::ReadStructuredClone(rq, hotloadData, &hotloadDataVal);
 
+	sendingPromise = std::make_shared<JS::PersistentRootedObject>(rq.cx);
+	// Assigning to `sendingPromise` isn't possible after `init` has been called because `init` might
+	// replace this page. So a local copy has to be made.
+	const std::shared_ptr<JS::PersistentRootedObject> localPromise{sendingPromise};
+
 	JS::RootedObject returnObject{rq.cx, gui->CallPageInit(rq, initData, hotloadDataVal,
 		utf8_from_wstring(m_Name))};
 
-	sendingPromise = std::make_shared<JS::PersistentRootedObject>(rq.cx,
-		returnObject ? returnObject : JS::NewPromiseObject(rq.cx, nullptr));
+	*localPromise = returnObject ? returnObject : JS::NewPromiseObject(rq.cx, nullptr);
 }
 
 JS::Value CGUIManager::SGUIPage::ReplacePromise(ScriptInterface& scriptInterface)
