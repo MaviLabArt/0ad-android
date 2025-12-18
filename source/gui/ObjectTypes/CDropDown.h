@@ -74,12 +74,19 @@ public:
 	 */
 	virtual void Draw(CCanvas2D& canvas);
 
+	virtual void CreateJSObject() override;
+
 	// This is one of the few classes we actually need to redefine this function
 	//  this is because the size of the control changes whether it is open
 	//  or closed.
 	virtual bool IsMouseOver() const;
 
 	virtual float GetBufferedZ() const;
+
+	/**
+	 * Calculate the preferred text size of the currently selected item displayed in the header.
+	 */
+	virtual CSize2D GetPreferredHeaderTextSize() const;
 
 protected:
 	/**

@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <limits>
 #include <vector>
 
 CDropDown::CDropDown(CGUI& pGUI)
@@ -500,4 +501,12 @@ float CDropDown::GetBufferedZ() const
 		return std::min(bz + 500.f, 1000.f); // TODO - don't use magic number for max z value
 	else
 		return bz;
+}
+
+CSize2D CDropDown::GetPreferredHeaderTextSize() const
+{
+	if (m_Selected == -1)
+		return CSize2D{0.0f, 0.0f};
+
+	return CGUIText{m_pGUI, m_List->m_Items[m_Selected], m_Font, std::numeric_limits<float>::max(), m_BufferZone, m_TextAlign, this}.GetSize();
 }

@@ -22,6 +22,7 @@
 
 #include "gui/ObjectBases/IGUIObject.h"
 #include "gui/ObjectTypes/CButton.h"
+#include "gui/ObjectTypes/CDropDown.h"
 #include "gui/ObjectTypes/CList.h"
 #include "gui/ObjectTypes/CMiniMap.h"
 #include "gui/ObjectTypes/CScrollPanel.h"
@@ -68,6 +69,13 @@ template<> void JSI_GUIProxy<CList>::CreateFunctions(const ScriptRequest& rq, GU
 	CreateFunction<static_cast<void(CList::*)(const CGUIString&)>(&CList::AddItem)>(rq, cache, "addItem");
 }
 DECLARE_GUIPROXY(CList);
+
+// CDropDown
+template<> void JSI_GUIProxy<CDropDown>::CreateFunctions(const ScriptRequest& rq, GUIProxyProps* cache)
+{
+	CreateFunction<&CDropDown::GetPreferredHeaderTextSize>(rq, cache, "getPreferredHeaderTextSize");
+}
+DECLARE_GUIPROXY(CDropDown);
 
 // CMiniMap
 template<> void JSI_GUIProxy<CMiniMap>::CreateFunctions(const ScriptRequest& rq, GUIProxyProps* cache)

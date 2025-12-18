@@ -265,8 +265,8 @@ function initGUICharts()
 function resizeDropdown(dropdown)
 {
 	dropdown.size.bottom = dropdown.size.top +
-		(Engine.GetTextWidth(dropdown.font, dropdown.list[dropdown.selected]) >
-			dropdown.size.right - dropdown.size.left - 28 &&
+		(dropdown.getPreferredHeaderTextSize().width >
+			dropdown.size.right - dropdown.size.left - dropdown.button_width &&
 		    dropdown.list[dropdown.selected].indexOf(" ") !== -1 ? 42 : 28);
 }
 

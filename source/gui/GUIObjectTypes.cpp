@@ -49,6 +49,7 @@ void CGUI::AddObjectTypes()
 	m_ProxyData.insert(JSI_GUIProxy<IGUIObject>::CreateData(*m_ScriptInterface));
 	m_ProxyData.insert(JSI_GUIProxy<CText>::CreateData(*m_ScriptInterface));
 	m_ProxyData.insert(JSI_GUIProxy<CList>::CreateData(*m_ScriptInterface));
+	m_ProxyData.insert(JSI_GUIProxy<CDropDown>::CreateData(*m_ScriptInterface));
 	m_ProxyData.insert(JSI_GUIProxy<CMiniMap>::CreateData(*m_ScriptInterface));
 	m_ProxyData.insert(JSI_GUIProxy<CButton>::CreateData(*m_ScriptInterface));
 	m_ProxyData.insert(JSI_GUIProxy<CScrollPanel>::CreateData(*m_ScriptInterface));
