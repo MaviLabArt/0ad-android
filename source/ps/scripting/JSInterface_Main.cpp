@@ -98,9 +98,8 @@ int GetFps()
 	return g_frequencyFilter->StableFrequency();
 }
 
-CSize2D GetTextSize(const std::string& fontName, const std::wstring& text)
+CSize2D CalculateTextSize(const std::string& fontName, const std::wstring& text)
 {
-	ONCE(LOGWARNING("Engine.GetTextSize is deprecated and will be removed in a future version.Use guiObject.GetPreferedTextSize for accurate text sizing or guiObject.getTextSize for sizing within GUI objects."));
 	float width = 0;
 	float height = 0;
 	CStrIntern _fontName(fontName);
@@ -109,9 +108,17 @@ CSize2D GetTextSize(const std::string& fontName, const std::wstring& text)
 	return CSize2D(width, height);
 }
 
+
+CSize2D GetTextSize(const std::string& fontName, const std::wstring& text)
+{
+	ONCE(LOGWARNING("Engine.GetTextSize is deprecated and will be removed in a future version. Instead use guiObject.getPreferredTextSize and dropdown.getPreferredHeaderTextSize for more convenient text sizing or guiObject.getTextSize for sizing within an object."));
+	return CalculateTextSize(fontName, text);
+}
+
 int GetTextWidth(const std::string& fontName, const std::wstring& text)
 {
-	return GetTextSize(fontName, text).Width;
+	ONCE(LOGWARNING("Engine.GetTextWidth is deprecated and will be removed in a future version. Instead use guiObject.getPreferredTextSize and dropdown.getPreferredHeaderTextSize for more convenient text sizing or guiObject.getTextSize for sizing within an object."));
+	return CalculateTextSize(fontName, text).Width;
 }
 
 std::string CalculateMD5(const std::string& input)
