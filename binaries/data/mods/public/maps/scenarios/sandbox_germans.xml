@@ -20456,98 +20456,98 @@
 			<Actor seed="23588"/>
 		</Entity>
 		<Entity uid="3473">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="332.12186" z="451.66132"/>
 			<Orientation y="-2.40531"/>
 			<Actor seed="43656"/>
 		</Entity>
 		<Entity uid="3474">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="330.28055" z="448.46393"/>
 			<Orientation y="-2.4396"/>
 			<Actor seed="22449"/>
 		</Entity>
 		<Entity uid="3475">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="327.54374" z="452.57486"/>
 			<Orientation y="2.35621"/>
 			<Actor seed="58505"/>
 		</Entity>
 		<Entity uid="3476">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="326.51185" z="448.19327"/>
 			<Orientation y="-2.08526"/>
 			<Actor seed="21275"/>
 		</Entity>
 		<Entity uid="3477">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="325.30298" z="451.8647"/>
 			<Orientation y="-2.21181"/>
 			<Actor seed="35836"/>
 		</Entity>
 		<Entity uid="3478">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="328.28318" z="446.60975"/>
 			<Orientation y="-2.25087"/>
 			<Actor seed="62149"/>
 		</Entity>
 		<Entity uid="3479">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="323.6949" z="443.73194"/>
 			<Orientation y="-2.2695"/>
 			<Actor seed="52899"/>
 		</Entity>
 		<Entity uid="3480">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="318.79917" z="444.40821"/>
 			<Orientation y="-2.38955"/>
 			<Actor seed="31384"/>
 		</Entity>
 		<Entity uid="3481">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="317.27378" z="439.22846"/>
 			<Orientation y="-2.40764"/>
 			<Actor seed="46504"/>
 		</Entity>
 		<Entity uid="3482">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="338.14426" z="456.2815"/>
 			<Orientation y="-2.43624"/>
 			<Actor seed="46566"/>
 		</Entity>
 		<Entity uid="3483">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="334.72394" z="458.05823"/>
 			<Orientation y="-2.39664"/>
 			<Actor seed="48744"/>
 		</Entity>
 		<Entity uid="3484">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="314.81849" z="440.92362"/>
 			<Orientation y="-2.31492"/>
 			<Actor seed="37975"/>
 		</Entity>
 		<Entity uid="3485">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="322.47095" z="438.82441"/>
 			<Orientation y="-2.41076"/>
 			<Actor seed="15798"/>
 		</Entity>
 		<Entity uid="3486">
-			<Template>units/germ/infantry_clubman</Template>
+			<Template>units/germ/champion_infantry_maceman</Template>
 			<Player>1</Player>
 			<Position x="334.34528" z="448.38428"/>
 			<Orientation y="-2.42885"/>
