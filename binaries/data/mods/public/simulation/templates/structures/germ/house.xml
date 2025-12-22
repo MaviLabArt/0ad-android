@@ -12,7 +12,7 @@
     <SpecificName>Hūsą</SpecificName>
   </Identity>
   <Obstruction>
-    <Static width="18.0" depth="18.0"/>
+    <Static width="16.0" depth="16.0"/>
   </Obstruction>
   <VisualActor>
     <Actor>structures/germans/house.xml</Actor>

@@ -3,7 +3,7 @@
   <Attack disable=""/>
   <BuildingAI disable=""/>
   <BuildRestrictions>
-    <Territory>own neutral enemy</Territory>
+    <Territory>own neutral</Territory>
     <Category>Encampment</Category>
     <Distance>
       <FromClass>CivilCentre</FromClass>

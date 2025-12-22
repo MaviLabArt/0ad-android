@@ -14,18 +14,6 @@
     <Civ>germ</Civ>
     <Icon>units/germ/support_wagon_covered.png</Icon>
   </Identity>
-  <ProductionQueue/>
-  <Researcher>
-    <Technologies datatype="tokens">
-      health_females_01
-      unlock_females_house
-    </Technologies>
-  </Researcher>
-  <Trainer>
-    <Entities datatype="tokens">
-      units/{civ}/support_female_citizen_house
-    </Entities>
-  </Trainer>
   <VisualActor>
     <Actor>structures/germans/wagon_house.xml</Actor>
   </VisualActor>
