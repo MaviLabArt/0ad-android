@@ -243,7 +243,6 @@ void CRenderingOptions::ReadConfigAndSetupHooks()
 	m_ConfigHooks->Setup("silhouettes", m_Silhouettes);
 
 	m_ConfigHooks->Setup("gpuskinning", [this]() {
-		;
 		const Renderer::Backend::IDevice::Capabilities& capabilities{
 			g_VideoMode.GetBackendDevice()->GetCapabilities()};
 		if (!g_ConfigDB.Get("gpuskinning", false))
@@ -252,7 +251,10 @@ void CRenderingOptions::ReadConfigAndSetupHooks()
 		if (capabilities.computeShaders && capabilities.storage)
 			m_GPUSkinning = true;
 		else
+		{
+			m_GPUSkinning = false;
 			LOGMESSAGE("GPU skinning isn't supported on the current hardware.");
+		}
 
 		if (CRenderer::IsInitialised())
 			g_Renderer.MakeShadersDirty();
