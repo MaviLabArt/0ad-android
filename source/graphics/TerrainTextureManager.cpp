@@ -68,8 +68,8 @@ CTerrainTextureManager::~CTerrainTextureManager()
 
 void CTerrainTextureManager::UnloadTerrainTextures()
 {
-	m_TerrainGroups.clear();
 	m_TextureEntries.clear();
+	m_TerrainGroups.clear();
 
 	m_LastGroupIndex = 0;
 }
