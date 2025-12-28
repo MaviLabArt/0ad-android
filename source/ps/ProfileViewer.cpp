@@ -240,15 +240,17 @@ void CProfileViewer::RenderProfile(CCanvas2D& canvas)
 		float rowColX = 0.0f;
 		for (size_t col = 0; col < columns.size(); ++col)
 		{
-			CStrW text = table->GetCellText(row, col).FromUTF8();
-			float w, h;
-			font.CalculateStringSize(text.c_str(), w, h);
+			const CStrW text{table->GetCellText(row, col).FromUTF8()};
+			if (!text.empty())
+			{
+				float w, h;
+				font.CalculateStringSize(text.c_str(), w, h);
 
-			float x = rowColX;
-			if (col > 0) // right-align all but the first column
-				x += columns[col].width - w;
-			textRenderer.Put(x, 0.0f, text.c_str());
-
+				float x = rowColX;
+				if (col > 0) // right-align all but the first column
+					x += columns[col].width - w;
+				textRenderer.Put(x, 0.0f, text.c_str());
+			}
 			rowColX += columns[col].width;
 		}
 
