@@ -18,7 +18,7 @@
 // This pipeline is used to generate the nightly builds.
 
 def visualStudioPath = '"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"'
-def buildOptions = '/p:PlatformToolset=v143 /t:pyrogenesis /t:AtlasUI %JOBS% /nologo -clp:Warningsonly -clp:ErrorsOnly'
+def buildOptions = '/p:PlatformToolset=v143 /t:pyrogenesis /t:AtlasUI /t:ActorEditor %JOBS% /nologo -clp:Warningsonly -clp:ErrorsOnly'
 
 def gitHash = ''
 def buildSPIRV = false
