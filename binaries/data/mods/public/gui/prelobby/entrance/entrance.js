@@ -13,7 +13,8 @@ function loginButton()
 	Engine.OpenChildPage("page_prelobby_login.xml");
 }
 
-function registerButton()
+async function registerButton()
 {
-	Engine.OpenChildPage("page_prelobby_register.xml");
+	if (await Engine.OpenChildPage("page_prelobby_register.xml"))
+		Engine.OpenChildPage("page_prelobby_login.xml");
 }

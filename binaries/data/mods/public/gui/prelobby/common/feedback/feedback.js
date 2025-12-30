@@ -42,4 +42,6 @@ async function cancelButton()
 	await new Promise(resolve => { Engine.GetGUIObjectByName("cancel").onPress = resolve; });
 	if (Engine.HasXmppClient())
 		Engine.StopXmppClient();
+
+	return false;
 }

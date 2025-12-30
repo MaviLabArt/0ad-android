@@ -40,6 +40,5 @@ async function onRegistered()
 	setFeedback(translate("Registered"));
 
 	Engine.StopXmppClient();
-
-	Engine.OpenChildPage("page_prelobby_login.xml");
+	return true;
 }
