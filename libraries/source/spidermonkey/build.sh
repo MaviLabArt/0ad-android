@@ -9,7 +9,7 @@ cd "$(dirname "$0")"
 PV=128.13.0
 FOLDER="mozjs-${PV}"
 # If same-version changes are needed, increment this.
-LIB_VERSION="${PV}+wfg3"
+LIB_VERSION="${PV}+wfg4"
 LIB_NAME="mozjs128"
 
 build_archive()
@@ -69,7 +69,13 @@ fi
 
 # unpack
 rm -Rf "${FOLDER}"
-"${TAR}" xfJ "${FOLDER}.tar.xz"
+"${TAR}" xfJ "${FOLDER}.tar.xz" \
+	--exclude=js/src/tests/non262 \
+	--exclude=js/src/tests/test262 \
+	--exclude=js/src/jit-test \
+	--exclude=python/mozperftest \
+	--exclude=testing/web-platform \
+	--exclude=third_party/rust/mp4parse/link-u-avif-sample-images
 
 # patch
 (
