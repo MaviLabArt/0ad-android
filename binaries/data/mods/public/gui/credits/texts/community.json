@@ -30,12 +30,6 @@
 				{ "nick": "user1", "name": "A. C." },
 				{ "nick": "Yiuel", "name": "Ugo Lachapelle" }
 			]
-		},
-		{
-			"Title": "Packaging",
-			"List": [
-				{ "nick": "oSoMoN", "name": "Olivier Tilloy" }
-			]
 		}
 	]
 }
