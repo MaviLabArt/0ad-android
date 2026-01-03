@@ -40,7 +40,7 @@
   <url type="translate">https://gitea.wildfiregames.com/0ad/0ad/wiki/Localization</url>
   <url type="donation">https://play0ad.com/community/donate/</url>
   <releases>
-    <release version="0.28.0" date="2025-12-03">
+    <release version="0.28.0" date="2026-01-05">
         <url type="details">https://wildfiregames.com/forum/topic/137892-release-28-branch/</url>
         <description>
             <p>Wildfire Games proudly announces the release of 0 A.D. 0.28.0: "Boiorix".</p>
@@ -48,6 +48,7 @@
                 <li>A new faction: the German tribes.</li>
                 <li>Gendered Civilians replace Female Citizens.</li>
                 <li>In some places JavaScript-Modules can be used to write mods.</li>
+                <li>Font Rendering: CJK languages are bundled with the game, not as separate mods.</li>
             </ul>
         </description>
     </release>
