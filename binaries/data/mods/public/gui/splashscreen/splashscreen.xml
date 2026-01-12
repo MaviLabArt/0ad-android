@@ -23,25 +23,19 @@
 				<object>
 					<object name="icon1" type="image" sprite="stretched:pregame/icons/experimental.png"/>
 					<object name="text1" type="text" textcolor="white" font="sans-16">
-						<translatableAttribute id="caption">
-							This game is still in development. You may encounter bugs, and some features are not as fleshed out as we would like.
-						</translatableAttribute>
+						<translatableAttribute id="caption">This game is still in development. You may encounter bugs, and some features are not as fleshed out as we would like.</translatableAttribute>
 					</object>
 				</object>
 				<object>
 					<object name="icon2" type="image" sprite="stretched:pregame/icons/lag.png"/>
 					<object name="text2" type="text" textcolor="white" font="sans-16">
-						<translatableAttribute id="caption">
-							The game can have performance problems, especially with large maps and a great number of units.
-						</translatableAttribute>
+						<translatableAttribute id="caption">The game can have performance problems, especially with large maps and a great number of units.</translatableAttribute>
 					</object>
 				</object>
 				<object>
 					<object name="icon3" type="image" sprite="stretched:pregame/icons/map.png"/>
 					<object name="text3" type="text" textcolor="white" font="sans-16">
-						<translatableAttribute id="caption">
-							0 A.D. is Free Software: you can participate in its development. If you want to help with art, sound, gameplay or programming, make sure to join our official forum.
-						</translatableAttribute>
+						<translatableAttribute id="caption">0 A.D. is Free Software: you can participate in its development. If you want to help with art, sound, gameplay or programming, make sure to join our official forum.</translatableAttribute>
 					</object>
 				</object>
 			</object>

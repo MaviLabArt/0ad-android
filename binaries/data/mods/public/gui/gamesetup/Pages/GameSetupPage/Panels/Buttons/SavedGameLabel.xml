@@ -8,7 +8,5 @@
 
 	<translatableAttribute id="caption">Saved game</translatableAttribute>
 
-	<translatableAttribute id="tooltip">
-		The controller loaded a saved game.
-	</translatableAttribute>
+	<translatableAttribute id="tooltip">The controller loaded a saved game.</translatableAttribute>
 </object>
