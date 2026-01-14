@@ -759,6 +759,32 @@
             {
                 "extractor": "json",
                 "filemasks": [
+                    "simulation/data/settings/player_placements.json"
+                ],
+                "options": {
+                    "keywords": {
+                        "Name": {},
+                        "Description": {}
+                    }
+                }
+            },
+            {
+                "extractor": "json",
+                "filemasks": [
+                    "simulation/data/settings/population_capacities.json"
+                ],
+                "options": {
+                    "keywords": {
+                        "Title": {},
+                        "Tooltip": {},
+                        "CapTitle": {},
+                        "CapTooltip": {}
+                    }
+                }
+            },
+            {
+                "extractor": "json",
+                "filemasks": [
                     "simulation/ai/**.json"
                 ],
                 "options": {
