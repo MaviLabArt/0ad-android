@@ -31,6 +31,7 @@ PetraBot.prototype.CustomInit = function(gameState)
 	if (this.isDeserialized)
 	{
 		// WARNING: the deserializations should not modify the metadatas infos inside their init functions
+		this.canPlay = this.data.canPlay;
 		this.turn = this.data.turn;
 		this.playedTurn = this.data.playedTurn;
 		this.elapsedTime = this.data.elapsedTime;
@@ -151,6 +152,7 @@ PetraBot.prototype.Serialize = function()
 	}
 
 	return {
+		"canPlay": this.canPlay,
 		"uniqueIDs": this.uniqueIDs,
 		"turn": this.turn,
 		"playedTurn": this.playedTurn,
