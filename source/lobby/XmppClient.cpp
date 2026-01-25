@@ -394,11 +394,21 @@ void XmppClient::SendIqGameReport(const ScriptRequest& rq, JS::HandleValue data)
 	// Iterate through all the properties reported and add them to the stanza.
 	std::vector<std::string> properties;
 	Script::EnumeratePropertyNames(rq, data, true, properties);
+
+	// https://gitea.wildfiregames.com/0ad/0ad/issues/8687
+	const std::map<std::string, std::string> mappings{
+		{ "civilianUnitsLost", "femaleCitizenUnitsLost" },
+		{ "civilianUnitsTrained", "femaleCitizenUnitsTrained" },
+		{ "enemyCivilianUnitsKilled", "enemyFemaleCitizenUnitsKilled"}
+	};
 	for (const std::string& p : properties)
 	{
 		std::wstring value;
 		Script::GetProperty(rq, data, p.c_str(), value);
-		report->addAttribute(p, utf8_from_wstring(value));
+		if (mappings.contains(p))
+			report->addAttribute(mappings.at(p), utf8_from_wstring(value));
+		else
+			report->addAttribute(p, utf8_from_wstring(value));
 	}
 
 	// Add stanza to IQ
