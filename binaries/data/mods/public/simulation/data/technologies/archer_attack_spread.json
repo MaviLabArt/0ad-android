@@ -10,6 +10,7 @@
 			{ "tech": "phase_town" },
 			{ "notciv": "brit" },
 			{ "notciv": "gaul" },
+			{ "notciv": "germ" },
 			{ "notciv": "iber" },
 			{ "notciv": "rome" },
 			{ "notciv": "spart" }
