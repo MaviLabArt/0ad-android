@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 Wildfire Games.
+/* Copyright (C) 2026 Wildfire Games.
  * This file is part of 0 A.D.
  *
  * 0 A.D. is free software: you can redistribute it and/or modify
@@ -344,7 +344,6 @@ public:
 	{
 		m_ScrolledPanel = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
 		m_ScrolledPanel->SetScrollRate(0, 10);
-		m_ScrolledPanel->SetBackgroundColour(wxColor(255, 255, 255));
 
 		wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 		sizer->Add(m_ScrolledPanel, wxSizerFlags().Proportion(1).Expand());
