@@ -177,12 +177,20 @@ jobs:
           fi
           tar -xf "${ARCHIVE}" -C "${DOWNLOAD_DIR}"
 
+          SOURCE_DATA=""
           if [ -d "${DOWNLOAD_DIR}/data" ]; then
             SOURCE_DATA="${DOWNLOAD_DIR}/data"
           elif [ -d "${DOWNLOAD_DIR}/binaries/data" ]; then
             SOURCE_DATA="${DOWNLOAD_DIR}/binaries/data"
           else
+            MODS_PUBLIC_DIR="$(find "${DOWNLOAD_DIR}" -type d -path '*/data/mods/public' -print -quit)"
+            if [ -n "${MODS_PUBLIC_DIR}" ]; then
+              SOURCE_DATA="$(dirname "$(dirname "${MODS_PUBLIC_DIR}")")"
+            fi
+          fi
+          if [ -z "${SOURCE_DATA}" ] || [ ! -d "${SOURCE_DATA}" ]; then
             echo "Could not locate data directory in upstream pack." >&2
+            find "${DOWNLOAD_DIR}" -maxdepth 4 -type d | sed -n '1,200p' >&2
             exit 1
           fi
 
