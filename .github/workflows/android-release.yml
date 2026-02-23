@@ -214,11 +214,25 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           keytool_check() {
-            keytool -list \
-              -keystore "${ANDROID_KEYSTORE_PATH}" \
-              -storepass "${ANDROID_KEYSTORE_PASSWORD}" \
-              -alias "${ANDROID_KEY_ALIAS}" \
-              -keypass "$1" >/dev/null 2>&1
+            local keypass="$1"
+            local tmp_keystore
+            tmp_keystore="$(mktemp "${RUNNER_TEMP}/signcheck-XXXXXX.p12")"
+            rm -f "${tmp_keystore}"
+            if keytool -importkeystore \
+              -srckeystore "${ANDROID_KEYSTORE_PATH}" \
+              -srcstorepass "${ANDROID_KEYSTORE_PASSWORD}" \
+              -srcalias "${ANDROID_KEY_ALIAS}" \
+              -srckeypass "${keypass}" \
+              -destkeystore "${tmp_keystore}" \
+              -deststoretype PKCS12 \
+              -deststorepass "signcheck" \
+              -destkeypass "signcheck" \
+              -noprompt >/dev/null 2>&1; then
+              rm -f "${tmp_keystore}"
+              return 0
+            fi
+            rm -f "${tmp_keystore}"
+            return 1
           }
 
           if keytool_check "${ANDROID_KEY_PASSWORD}"; then
