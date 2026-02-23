@@ -61,6 +61,7 @@ newoption { category = "Pyrogenesis", trigger = "without-lobby", description = "
 newoption { category = "Pyrogenesis", trigger = "without-miniupnpc", description = "Disable use of miniupnpc for port forwarding" }
 newoption { category = "Pyrogenesis", trigger = "without-nvtt", description = "Disable use of NVTT" }
 newoption { category = "Pyrogenesis", trigger = "without-pch", description = "Disable generation and usage of precompiled headers" }
+newoption { category = "Pyrogenesis", trigger = "without-runtime-collada", description = "Disable runtime Collada conversion component" }
 newoption { category = "Pyrogenesis", trigger = "without-tests", description = "Disable generation of test projects" }
 
 -- OS X specific options
@@ -1196,7 +1197,9 @@ if not _OPTIONS["without-miniupnpc"] then
 end
 
 -- Runtime mesh loading depends on Collada conversion, even if Atlas UI is disabled.
-local with_runtime_collada = not _OPTIONS["without-atlas"] or _OPTIONS["android"]
+-- Android builds default to enabled, but can be forced off for environments
+-- where FCollada sources are intentionally not present.
+local with_runtime_collada = (not _OPTIONS["without-atlas"] or _OPTIONS["android"]) and not _OPTIONS["without-runtime-collada"]
 
 -- Bundles static libs together with main.cpp and builds game executable.
 function setup_main_exe ()

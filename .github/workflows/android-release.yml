@@ -33,15 +33,22 @@ jobs:
 
       - name: Set version info
         run: |
-          TAG_REF="${GITHUB_REF_NAME}"
+          TAG_REF=""
           if [ -n "${{ inputs.tag }}" ]; then
             TAG_REF="${{ inputs.tag }}"
+          elif [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            TAG_REF="${GITHUB_REF_NAME}"
           fi
-          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ] && [ -z "${TAG_REF}" ]; then
-            echo "Tag input is required for manual runs." >&2
+          if [ -z "${TAG_REF}" ]; then
+            echo "Tag is required. Use workflow input 'tag' for manual runs." >&2
+            exit 1
+          fi
+          if ! git rev-parse -q --verify "refs/tags/${TAG_REF}" >/dev/null; then
+            echo "Requested tag ${TAG_REF} was not found in this repository." >&2
             exit 1
           fi
           TAG_NAME="${TAG_REF#v}"
+          echo "SOURCE_TAG=${TAG_REF}" >> "${GITHUB_ENV}"
           echo "VERSION_NAME=${TAG_NAME}" >> "${GITHUB_ENV}"
           echo "VERSION_CODE=$(date +%s)" >> "${GITHUB_ENV}"
           echo "DATA_MANIFEST_URL_TEMPLATE=https://github.com/${GITHUB_REPOSITORY}/releases/download/v{VERSION}/0ad-data-{VERSION}.json" >> "${GITHUB_ENV}"

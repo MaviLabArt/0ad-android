@@ -15,6 +15,9 @@ else
 	JOBS_DEFAULT="4"
 fi
 JOBS="${JOBS:-${JOBS_DEFAULT}}"
+PREMAKE_ARGS=()
+RUNTIME_COLLADA_ARGS=()
+VCPKG_PKGCONFIG_DIR=""
 
 if [[ -z "${NDK_ROOT}" ]]; then
 	echo "Set ANDROID_NDK_ROOT (or NDK_ROOT) to your Android NDK path."
@@ -112,11 +115,90 @@ fi
 
 cd "${ROOT_DIR}"
 
+if [[ -f "${VCPKG_PKGCONFIG_DIR}/mozjs-128.pc" ]]; then
+	echo "Using SpiderMonkey from VCPKG (${VCPKG_TRIPLET})"
+	PREMAKE_ARGS+=(--with-system-mozjs)
+else
+	SPIDERMONKEY_DIR="${ROOT_DIR}/libraries/source/spidermonkey"
+	SPIDERMONKEY_BUILD_SCRIPT="${SPIDERMONKEY_DIR}/build.sh"
+	SPIDERMONKEY_INCLUDE_RELEASE="${SPIDERMONKEY_DIR}/include-release/js/RootingAPI.h"
+	SPIDERMONKEY_RUST_LIB="${SPIDERMONKEY_DIR}/lib/libmozjs128-rust.a"
+	SPIDERMONKEY_RELEASE_SO="${SPIDERMONKEY_DIR}/lib/libmozjs128-release.so"
+	SPIDERMONKEY_RELEASE_A="${SPIDERMONKEY_DIR}/lib/libmozjs128-release.a"
+
+	if [[ ! -d "${SPIDERMONKEY_DIR}" || ! -x "${SPIDERMONKEY_BUILD_SCRIPT}" ]]; then
+		echo "SpiderMonkey is missing and no VCPKG mozjs-128 package was found."
+		exit 1
+	fi
+
+	if [[ ! -f "${SPIDERMONKEY_INCLUDE_RELEASE}" || ! -f "${SPIDERMONKEY_RUST_LIB}" || ( ! -f "${SPIDERMONKEY_RELEASE_SO}" && ! -f "${SPIDERMONKEY_RELEASE_A}" ) ]]; then
+		echo "SpiderMonkey artifacts not found, bootstrapping from ${SPIDERMONKEY_BUILD_SCRIPT}"
+		(
+			cd "${SPIDERMONKEY_DIR}"
+			JOBS="-j${JOBS}" CHOST="${HOST_TRIPLE}" CTARGET="${HOST_TRIPLE}" ./build.sh
+		)
+	fi
+
+	if [[ ! -f "${SPIDERMONKEY_INCLUDE_RELEASE}" || ! -f "${SPIDERMONKEY_RUST_LIB}" || ( ! -f "${SPIDERMONKEY_RELEASE_SO}" && ! -f "${SPIDERMONKEY_RELEASE_A}" ) ]]; then
+		echo "SpiderMonkey bootstrap failed."
+		exit 1
+	fi
+fi
+
+if [[ -f "${VCPKG_TRIPLET_DIR}/include/httplib.h" ]]; then
+	echo "Using cpp-httplib from VCPKG (${VCPKG_TRIPLET})"
+	PREMAKE_ARGS+=(--with-system-cpp-httplib)
+else
+	CPP_HTTPLIB_BUILD_SCRIPT="${ROOT_DIR}/libraries/source/cpp-httplib/build.sh"
+	CPP_HTTPLIB_HEADER="${ROOT_DIR}/libraries/source/cpp-httplib/include/httplib.h"
+	if [[ ! -f "${CPP_HTTPLIB_HEADER}" ]]; then
+		if [[ ! -x "${CPP_HTTPLIB_BUILD_SCRIPT}" ]]; then
+			echo "cpp-httplib headers are missing and cannot be bootstrapped."
+			exit 1
+		fi
+		echo "cpp-httplib headers not found, bootstrapping from ${CPP_HTTPLIB_BUILD_SCRIPT}"
+		(
+			cd "${ROOT_DIR}/libraries/source/cpp-httplib"
+			JOBS="-j${JOBS}" ./build.sh
+		)
+	fi
+
+	if [[ ! -f "${CPP_HTTPLIB_HEADER}" ]]; then
+		echo "cpp-httplib bootstrap failed."
+		exit 1
+	fi
+fi
+
+PREMAKE_BIN="${ROOT_DIR}/libraries/source/premake-core/bin/premake5"
+if [[ ! -x "${PREMAKE_BIN}" ]]; then
+	PREMAKE_BUILD_SCRIPT="${ROOT_DIR}/libraries/source/premake-core/build.sh"
+	if [[ -x "${PREMAKE_BUILD_SCRIPT}" ]]; then
+		echo "premake5 not found, bootstrapping from ${PREMAKE_BUILD_SCRIPT}"
+		(
+			cd "${ROOT_DIR}/libraries/source/premake-core"
+			JOBS="-j${JOBS}" MAKE="${MAKE_BIN}" ./build.sh
+		)
+	fi
+fi
+
+if [[ ! -x "${PREMAKE_BIN}" ]]; then
+	if command -v premake5 >/dev/null 2>&1; then
+		echo "Using system premake5"
+		PREMAKE_ARGS+=(--with-system-premake5)
+	else
+		echo "Could not find or build premake5."
+		exit 1
+	fi
+fi
+
 if [[ -d "${ROOT_DIR}/libraries/source/fcollada/src" ]]; then
 	(
 		cd "${ROOT_DIR}/libraries/source/fcollada"
 		JOBS="-j${JOBS}" MAKE="${MAKE_BIN}" ./build.sh
 	)
+else
+	echo "FCollada sources not present; disabling runtime Collada conversion."
+	RUNTIME_COLLADA_ARGS+=(--without-runtime-collada)
 fi
 
 # Ensure linker can resolve -lSDL2 during engine link step.
@@ -127,6 +209,7 @@ fi
 
 # Keep Android builds lean to avoid unavailable desktop-only deps.
 ./build/workspaces/update-workspaces.sh \
+	"${PREMAKE_ARGS[@]}" \
 	--android \
 	--gles \
 	--without-atlas \
@@ -135,6 +218,7 @@ fi
 	--without-nvtt \
 	--without-miniupnpc \
 	--without-dap-interface \
+	"${RUNTIME_COLLADA_ARGS[@]}" \
 	"$@"
 "${MAKE_BIN}" -C build/workspaces/gcc -j"${JOBS}" config="${BUILD_CONFIG}"
 

@@ -3,6 +3,12 @@ binaries/system/*
 !binaries/system/*.bat
 !binaries/system/readme.txt
 
+# Local Android build caches and secrets
+.cache-vcpkg/
+.android-boost/
+.tools/
+android-release.keystore
+
 # Workspaces
 build/workspaces/*
 build/android/SDL2/
