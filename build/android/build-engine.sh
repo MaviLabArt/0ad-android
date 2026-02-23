@@ -53,6 +53,7 @@ case "${ANDROID_ABI}" in
 esac
 
 VCPKG_TRIPLET="${VCPKG_TRIPLET:-${VCPKG_DEFAULT_TRIPLET}}"
+export VCPKG_TRIPLET
 
 case "$(uname -s)" in
 	Linux)
@@ -167,19 +168,40 @@ fi
 
 ANDROID_BOOST_LINK_DIR="${ROOT_DIR}/.android-boost"
 ANDROID_BOOST_LINK="${ANDROID_BOOST_LINK_DIR}/boost"
-if [[ ! -e "${ANDROID_BOOST_LINK}" ]]; then
-	BOOST_INCLUDE_CANDIDATE=""
-	if [[ -d "${VCPKG_TRIPLET_DIR}/include/boost" ]]; then
-		BOOST_INCLUDE_CANDIDATE="${VCPKG_TRIPLET_DIR}/include/boost"
-	elif [[ -d "/usr/include/boost" ]]; then
-		BOOST_INCLUDE_CANDIDATE="/usr/include/boost"
-	fi
+BOOST_INCLUDE_CANDIDATE=""
+BOOST_REQUIRED_HEADERS=(
+	"boost/random/linear_congruential.hpp"
+	"boost/lockfree/queue.hpp"
+	"boost/flyweight.hpp"
+	"boost/algorithm/string/replace.hpp"
+)
 
-	if [[ -n "${BOOST_INCLUDE_CANDIDATE}" ]]; then
-		mkdir -p "${ANDROID_BOOST_LINK_DIR}"
-		ln -s "${BOOST_INCLUDE_CANDIDATE}" "${ANDROID_BOOST_LINK}"
-		echo "Configured Android Boost headers from ${BOOST_INCLUDE_CANDIDATE}"
-	fi
+boost_headers_complete()
+{
+	local include_root="$1"
+	local header=""
+	for header in "${BOOST_REQUIRED_HEADERS[@]}"; do
+		if [[ ! -f "${include_root}/${header}" ]]; then
+			return 1
+		fi
+	done
+	return 0
+}
+
+if [[ -d "${VCPKG_TRIPLET_DIR}/include/boost" ]] && boost_headers_complete "${VCPKG_TRIPLET_DIR}/include"; then
+	BOOST_INCLUDE_CANDIDATE="${VCPKG_TRIPLET_DIR}/include/boost"
+elif [[ -d "/usr/include/boost" ]] && boost_headers_complete "/usr/include"; then
+	BOOST_INCLUDE_CANDIDATE="/usr/include/boost"
+fi
+
+if [[ -n "${BOOST_INCLUDE_CANDIDATE}" ]]; then
+	mkdir -p "${ANDROID_BOOST_LINK_DIR}"
+	rm -rf "${ANDROID_BOOST_LINK}"
+	ln -s "${BOOST_INCLUDE_CANDIDATE}" "${ANDROID_BOOST_LINK}"
+	echo "Configured Android Boost headers from ${BOOST_INCLUDE_CANDIDATE}"
+else
+	echo "Required Boost headers are unavailable in both VCPKG and /usr/include."
+	exit 1
 fi
 
 if [[ -f "${VCPKG_PKGCONFIG_DIR}/mozjs-128.pc" ]]; then

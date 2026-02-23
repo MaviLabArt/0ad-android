@@ -275,6 +275,9 @@ extern_lib_defs = {
 		compile_settings = function()
 			if os.istarget("windows") then
 				add_default_include_paths("enet")
+			elseif _OPTIONS["android"] then
+				local vcpkg_triplet = os.getenv("VCPKG_TRIPLET") or "arm64-android"
+				externalincludedirs { rootdir .. "/.cache-vcpkg/installed/" .. vcpkg_triplet .. "/include" }
 			else
 				pkgconfig.add_includes("libenet")
 			end
