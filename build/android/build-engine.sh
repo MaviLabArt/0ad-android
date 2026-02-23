@@ -18,6 +18,7 @@ JOBS="${JOBS:-${JOBS_DEFAULT}}"
 PREMAKE_ARGS=()
 RUNTIME_COLLADA_ARGS=()
 VCPKG_PKGCONFIG_DIR=""
+SOURCE_TAG="${SOURCE_TAG:-}"
 
 if [[ -z "${NDK_ROOT}" ]]; then
 	echo "Set ANDROID_NDK_ROOT (or NDK_ROOT) to your Android NDK path."
@@ -114,6 +115,39 @@ if [[ -d "${VCPKG_TRIPLET_DIR}" ]]; then
 fi
 
 cd "${ROOT_DIR}"
+
+restore_dir_from_source_tag()
+{
+	local relpath="$1"
+
+	if [[ -z "${SOURCE_TAG}" ]]; then
+		return 1
+	fi
+	if ! command -v git >/dev/null 2>&1; then
+		return 1
+	fi
+	if ! git rev-parse -q --verify "refs/tags/${SOURCE_TAG}" >/dev/null 2>&1; then
+		return 1
+	fi
+	if ! git cat-file -e "${SOURCE_TAG}:${relpath}" 2>/dev/null; then
+		return 1
+	fi
+
+	echo "Restoring ${relpath} from ${SOURCE_TAG}"
+	mkdir -p "$(dirname "${relpath}")"
+	git archive --format=tar "${SOURCE_TAG}" "${relpath}" | tar -xf -
+	return 0
+}
+
+if [[ ! -d "${ROOT_DIR}/libraries/source/spidermonkey" ]]; then
+	restore_dir_from_source_tag "libraries/source/spidermonkey" || true
+fi
+if [[ ! -d "${ROOT_DIR}/libraries/source/cpp-httplib" ]]; then
+	restore_dir_from_source_tag "libraries/source/cpp-httplib" || true
+fi
+if [[ ! -d "${ROOT_DIR}/libraries/source/premake-core" ]]; then
+	restore_dir_from_source_tag "libraries/source/premake-core" || true
+fi
 
 if [[ -f "${VCPKG_PKGCONFIG_DIR}/mozjs-128.pc" ]]; then
 	echo "Using SpiderMonkey from VCPKG (${VCPKG_TRIPLET})"
