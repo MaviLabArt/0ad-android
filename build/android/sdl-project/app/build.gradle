@@ -2,11 +2,20 @@ plugins {
     id "com.android.application"
 }
 
+def trimToNull = { value ->
+    if (value == null) {
+        return null
+    }
+    def trimmed = value.trim()
+    return trimmed.isEmpty() ? null : trimmed
+}
+
 def sdl2SourceDir = providers.gradleProperty("SDL2_SOURCE_DIR")
     .orElse(providers.environmentVariable("SDL2_SOURCE_DIR"))
     .orNull
+sdl2SourceDir = trimToNull(sdl2SourceDir)
 
-if (sdl2SourceDir == null || sdl2SourceDir.trim().isEmpty()) {
+if (sdl2SourceDir == null) {
     throw new GradleException("Set SDL2_SOURCE_DIR to an SDL source tree with -PSDL2_SOURCE_DIR=/path/to/SDL.")
 }
 
@@ -45,10 +54,10 @@ android {
         }
     }
 
-    def keystorePathEnv = System.getenv("ANDROID_KEYSTORE_PATH")
-    def keystorePasswordEnv = System.getenv("ANDROID_KEYSTORE_PASSWORD")
-    def keyAliasEnv = System.getenv("ANDROID_KEY_ALIAS")
-    def keyPasswordEnv = System.getenv("ANDROID_KEY_PASSWORD")
+    def keystorePathEnv = trimToNull(System.getenv("ANDROID_KEYSTORE_PATH"))
+    def keystorePasswordEnv = trimToNull(System.getenv("ANDROID_KEYSTORE_PASSWORD"))
+    def keyAliasEnv = trimToNull(System.getenv("ANDROID_KEY_ALIAS"))
+    def keyPasswordEnv = trimToNull(System.getenv("ANDROID_KEY_PASSWORD"))
     def hasReleaseSigning = keystorePathEnv != null && keystorePasswordEnv != null && keyAliasEnv != null && keyPasswordEnv != null
 
     if (hasReleaseSigning) {

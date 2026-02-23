@@ -206,12 +206,37 @@ jobs:
           {"version":"${DATA_VERSION}","files":[{"name":"0ad-data-${DATA_VERSION}.zip","url":"${DATA_URL}","sha256":"${SHA256}","size":${SIZE}}]}
           EOF
 
-      - name: Build release APK
+      - name: Validate signing credentials
         env:
           ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          keytool_check() {
+            keytool -list \
+              -keystore "${ANDROID_KEYSTORE_PATH}" \
+              -storepass "${ANDROID_KEYSTORE_PASSWORD}" \
+              -alias "${ANDROID_KEY_ALIAS}" \
+              -keypass "$1" >/dev/null 2>&1
+          }
+
+          if keytool_check "${ANDROID_KEY_PASSWORD}"; then
+            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEY_PASSWORD}" >> "${GITHUB_ENV}"
+          elif keytool_check "${ANDROID_KEYSTORE_PASSWORD}"; then
+            echo "Provided ANDROID_KEY_PASSWORD did not unlock alias ${ANDROID_KEY_ALIAS}; falling back to store password."
+            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEYSTORE_PASSWORD}" >> "${GITHUB_ENV}"
+          else
+            echo "Signing credentials are invalid for alias ${ANDROID_KEY_ALIAS} in ${ANDROID_KEYSTORE_PATH}." >&2
+            echo "Check ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD repository secrets." >&2
+            exit 1
+          fi
+      - name: Build release APK
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ env.ANDROID_KEY_PASSWORD_EFFECTIVE }}
         run: |
           gradle :app:assembleRelease -PSDL2_SOURCE_DIR="${SDL2_SOURCE_DIR}"
         working-directory: build/android/sdl-project
