@@ -74,7 +74,33 @@ jobs:
       - name: Install native build deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y uuid-dev
+          sudo apt-get install -y uuid-dev pkg-config ninja-build
+
+      - name: Bootstrap vcpkg Android deps
+        run: |
+          export ANDROID_NDK_HOME="${ANDROID_SDK_ROOT}/ndk/${ANDROID_NDK_VERSION}"
+          export ANDROID_NDK_ROOT="${ANDROID_NDK_HOME}"
+          git clone --depth 1 https://github.com/microsoft/vcpkg .cache-vcpkg
+          ./.cache-vcpkg/bootstrap-vcpkg.sh -disableMetrics
+          ./.cache-vcpkg/vcpkg install --triplet arm64-android --clean-after-build \
+            boost-headers \
+            brotli \
+            bzip2 \
+            cpp-httplib \
+            curl \
+            enet \
+            fmt \
+            freetype \
+            icu \
+            libiconv \
+            libogg \
+            libpng \
+            libsodium \
+            libvorbis \
+            libxml2 \
+            openal-soft \
+            openssl \
+            zlib
 
       - name: Install Gradle
         run: |

@@ -148,6 +148,26 @@ fi
 if [[ ! -d "${ROOT_DIR}/libraries/source/premake-core" ]]; then
 	restore_dir_from_source_tag "libraries/source/premake-core" || true
 fi
+if [[ ! -d "${ROOT_DIR}/libraries/source/cxxtest-4.4" ]]; then
+	restore_dir_from_source_tag "libraries/source/cxxtest-4.4" || true
+fi
+
+ANDROID_BOOST_LINK_DIR="${ROOT_DIR}/.android-boost"
+ANDROID_BOOST_LINK="${ANDROID_BOOST_LINK_DIR}/boost"
+if [[ ! -e "${ANDROID_BOOST_LINK}" ]]; then
+	BOOST_INCLUDE_CANDIDATE=""
+	if [[ -d "${VCPKG_TRIPLET_DIR}/include/boost" ]]; then
+		BOOST_INCLUDE_CANDIDATE="${VCPKG_TRIPLET_DIR}/include/boost"
+	elif [[ -d "/usr/include/boost" ]]; then
+		BOOST_INCLUDE_CANDIDATE="/usr/include/boost"
+	fi
+
+	if [[ -n "${BOOST_INCLUDE_CANDIDATE}" ]]; then
+		mkdir -p "${ANDROID_BOOST_LINK_DIR}"
+		ln -s "${BOOST_INCLUDE_CANDIDATE}" "${ANDROID_BOOST_LINK}"
+		echo "Configured Android Boost headers from ${BOOST_INCLUDE_CANDIDATE}"
+	fi
+fi
 
 if [[ -f "${VCPKG_PKGCONFIG_DIR}/mozjs-128.pc" ]]; then
 	echo "Using SpiderMonkey from VCPKG (${VCPKG_TRIPLET})"
@@ -239,6 +259,23 @@ if [[ ! -x "${PREMAKE_BIN}" ]]; then
 		echo "Could not find or build premake5."
 		exit 1
 	fi
+fi
+
+CXXTEST_DIR="${ROOT_DIR}/libraries/source/cxxtest-4.4"
+CXXTEST_HEADER="${CXXTEST_DIR}/cxxtest/Mock.h"
+CXXTEST_BUILD_SCRIPT="${CXXTEST_DIR}/build.sh"
+if [[ ! -f "${CXXTEST_HEADER}" ]]; then
+	if [[ -x "${CXXTEST_BUILD_SCRIPT}" ]]; then
+		echo "CxxTest headers not found, bootstrapping from ${CXXTEST_BUILD_SCRIPT}"
+		(
+			cd "${CXXTEST_DIR}"
+			JOBS="-j${JOBS}" ./build.sh
+		)
+	fi
+fi
+if [[ ! -f "${CXXTEST_HEADER}" ]]; then
+	echo "CxxTest bootstrap failed."
+	exit 1
 fi
 
 if [[ -d "${ROOT_DIR}/libraries/source/fcollada/src" ]]; then
