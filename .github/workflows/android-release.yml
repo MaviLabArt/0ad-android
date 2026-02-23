@@ -80,6 +80,14 @@ jobs:
         run: |
           export ANDROID_NDK_HOME="${ANDROID_SDK_ROOT}/ndk/${ANDROID_NDK_VERSION}"
           export ANDROID_NDK_ROOT="${ANDROID_NDK_HOME}"
+          export VCPKG_CMAKE_CONFIGURE_OPTIONS="-DCMAKE_POLICY_DEFAULT_CMP0057=NEW"
+          NDK_FLAGS_CMAKE="${ANDROID_NDK_HOME}/build/cmake/flags.cmake"
+          if [ -f "${NDK_FLAGS_CMAKE}" ]; then
+            sed -i \
+              -e 's/if("hwaddress" IN_LIST ANDROID_SANITIZE)/if(";${ANDROID_SANITIZE};" MATCHES ";hwaddress;")/' \
+              -e 's/if("memtag" IN_LIST ANDROID_SANITIZE)/if(";${ANDROID_SANITIZE};" MATCHES ";memtag;")/' \
+              "${NDK_FLAGS_CMAKE}"
+          fi
           git clone --depth 1 https://github.com/microsoft/vcpkg .cache-vcpkg
           ./.cache-vcpkg/bootstrap-vcpkg.sh -disableMetrics
           ./.cache-vcpkg/vcpkg install --triplet arm64-android --clean-after-build \
