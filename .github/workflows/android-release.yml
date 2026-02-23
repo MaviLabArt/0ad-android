@@ -256,6 +256,7 @@ jobs:
       - name: Upload release APK
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.SOURCE_TAG }}
           files: |
             build/android/sdl-project/app/build/outputs/apk/release/app-release.apk
             0ad-data-${{ env.VERSION_NAME }}.zip
