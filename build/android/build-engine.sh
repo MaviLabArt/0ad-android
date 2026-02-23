@@ -215,7 +215,18 @@ if [[ ! -x "${PREMAKE_BIN}" ]]; then
 		echo "premake5 not found, bootstrapping from ${PREMAKE_BUILD_SCRIPT}"
 		(
 			cd "${ROOT_DIR}/libraries/source/premake-core"
-			JOBS="-j${JOBS}" MAKE="${MAKE_BIN}" ./build.sh
+			# premake5 is a host build tool and must not be cross-compiled with Android CC/CXX.
+			env \
+				-u CC \
+				-u CXX \
+				-u AR \
+				-u LD \
+				-u NM \
+				-u RANLIB \
+				-u STRIP \
+				JOBS="-j${JOBS}" \
+				MAKE="${MAKE_BIN}" \
+				./build.sh
 		)
 	fi
 fi
