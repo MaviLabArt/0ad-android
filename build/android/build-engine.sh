@@ -238,18 +238,24 @@ if [[ ! -x "${PREMAKE_BIN}" ]]; then
 		(
 			cd "${ROOT_DIR}/libraries/source/premake-core"
 			# premake5 is a host build tool and must not be cross-compiled with Android CC/CXX.
-			env \
-				-u CC \
-				-u CXX \
-				-u AR \
-				-u LD \
-				-u NM \
-				-u RANLIB \
-				-u STRIP \
-				JOBS="-j${JOBS}" \
-				MAKE="${MAKE_BIN}" \
-				./build.sh
-		)
+				env \
+					-u CC \
+					-u CXX \
+					-u AR \
+					-u LD \
+					-u NM \
+					-u RANLIB \
+					-u STRIP \
+					-u CPPFLAGS \
+					-u CFLAGS \
+					-u CXXFLAGS \
+					-u LDFLAGS \
+					-u PKG_CONFIG_PATH \
+					-u PKG_CONFIG_LIBDIR \
+					JOBS="-j${JOBS}" \
+					MAKE="${MAKE_BIN}" \
+					./build.sh
+			)
 	fi
 fi
 
