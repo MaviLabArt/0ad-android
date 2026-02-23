@@ -143,6 +143,46 @@ jobs:
         env:
           ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
 
+      - name: Validate signing credentials
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          keytool_check() {
+            local keypass="$1"
+            local tmp_keystore
+            tmp_keystore="$(mktemp "${RUNNER_TEMP}/signcheck-XXXXXX.p12")"
+            rm -f "${tmp_keystore}"
+            if keytool -importkeystore \
+              -srckeystore "${ANDROID_KEYSTORE_PATH}" \
+              -srcstorepass "${ANDROID_KEYSTORE_PASSWORD}" \
+              -srcalias "${ANDROID_KEY_ALIAS}" \
+              -srckeypass "${keypass}" \
+              -destkeystore "${tmp_keystore}" \
+              -deststoretype PKCS12 \
+              -deststorepass "signcheck" \
+              -destkeypass "signcheck" \
+              -noprompt >/dev/null 2>&1; then
+              rm -f "${tmp_keystore}"
+              return 0
+            fi
+            rm -f "${tmp_keystore}"
+            return 1
+          }
+
+          if keytool_check "${ANDROID_KEY_PASSWORD}"; then
+            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEY_PASSWORD}" >> "${GITHUB_ENV}"
+          elif keytool_check "${ANDROID_KEYSTORE_PASSWORD}"; then
+            echo "Provided ANDROID_KEY_PASSWORD did not unlock alias ${ANDROID_KEY_ALIAS}; falling back to store password."
+            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEYSTORE_PASSWORD}" >> "${GITHUB_ENV}"
+          else
+            echo "Signing credentials are invalid for alias ${ANDROID_KEY_ALIAS} in ${ANDROID_KEYSTORE_PATH}." >&2
+            echo "Check ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD repository secrets." >&2
+            exit 1
+          fi
+
       - name: Build engine
         run: |
           export ANDROID_NDK_ROOT="${ANDROID_SDK_ROOT}/ndk/${ANDROID_NDK_VERSION}"
@@ -206,45 +246,6 @@ jobs:
           {"version":"${DATA_VERSION}","files":[{"name":"0ad-data-${DATA_VERSION}.zip","url":"${DATA_URL}","sha256":"${SHA256}","size":${SIZE}}]}
           EOF
 
-      - name: Validate signing credentials
-        env:
-          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: |
-          keytool_check() {
-            local keypass="$1"
-            local tmp_keystore
-            tmp_keystore="$(mktemp "${RUNNER_TEMP}/signcheck-XXXXXX.p12")"
-            rm -f "${tmp_keystore}"
-            if keytool -importkeystore \
-              -srckeystore "${ANDROID_KEYSTORE_PATH}" \
-              -srcstorepass "${ANDROID_KEYSTORE_PASSWORD}" \
-              -srcalias "${ANDROID_KEY_ALIAS}" \
-              -srckeypass "${keypass}" \
-              -destkeystore "${tmp_keystore}" \
-              -deststoretype PKCS12 \
-              -deststorepass "signcheck" \
-              -destkeypass "signcheck" \
-              -noprompt >/dev/null 2>&1; then
-              rm -f "${tmp_keystore}"
-              return 0
-            fi
-            rm -f "${tmp_keystore}"
-            return 1
-          }
-
-          if keytool_check "${ANDROID_KEY_PASSWORD}"; then
-            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEY_PASSWORD}" >> "${GITHUB_ENV}"
-          elif keytool_check "${ANDROID_KEYSTORE_PASSWORD}"; then
-            echo "Provided ANDROID_KEY_PASSWORD did not unlock alias ${ANDROID_KEY_ALIAS}; falling back to store password."
-            echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEYSTORE_PASSWORD}" >> "${GITHUB_ENV}"
-          else
-            echo "Signing credentials are invalid for alias ${ANDROID_KEY_ALIAS} in ${ANDROID_KEYSTORE_PATH}." >&2
-            echo "Check ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD repository secrets." >&2
-            exit 1
-          fi
       - name: Build release APK
         env:
           ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
