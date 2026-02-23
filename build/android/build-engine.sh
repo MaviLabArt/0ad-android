@@ -101,10 +101,23 @@ if [[ -d "${VCPKG_TRIPLET_DIR}" ]]; then
 	else
 		export CPPFLAGS="-I${VCPKG_TRIPLET_DIR}/include"
 	fi
+	if [ -n "${CFLAGS:-}" ]; then
+		export CFLAGS="${CFLAGS} -I${VCPKG_TRIPLET_DIR}/include"
+	else
+		export CFLAGS="-I${VCPKG_TRIPLET_DIR}/include"
+	fi
+	if [ -n "${CXXFLAGS:-}" ]; then
+		export CXXFLAGS="${CXXFLAGS} -I${VCPKG_TRIPLET_DIR}/include"
+	else
+		export CXXFLAGS="-I${VCPKG_TRIPLET_DIR}/include"
+	fi
 	export LDFLAGS="${LDFLAGS} -L${VCPKG_TRIPLET_DIR}/lib"
 
 	VCPKG_PKGCONFIG_DIR="${VCPKG_TRIPLET_DIR}/lib/pkgconfig"
 	if [[ -d "${VCPKG_PKGCONFIG_DIR}" ]]; then
+		if [[ ! -e "${VCPKG_PKGCONFIG_DIR}/libenet.pc" && -f "${VCPKG_PKGCONFIG_DIR}/enet.pc" ]]; then
+			ln -s "enet.pc" "${VCPKG_PKGCONFIG_DIR}/libenet.pc"
+		fi
 		if [ -n "${PKG_CONFIG_PATH:-}" ]; then
 			export PKG_CONFIG_PATH="${VCPKG_PKGCONFIG_DIR}:${PKG_CONFIG_PATH}"
 		else
@@ -300,6 +313,12 @@ fi
 SDL_PREBUILT_LIB="${ROOT_DIR}/build/android/prebuilt-libs/${ANDROID_ABI}/libSDL2.so"
 if [[ -f "${SDL_PREBUILT_LIB}" ]]; then
 	cp -f "${SDL_PREBUILT_LIB}" "${ROOT_DIR}/binaries/system/libSDL2.so"
+fi
+if [[ -n "${SDL2_SOURCE_DIR:-}" && -d "${SDL2_SOURCE_DIR}/include" ]]; then
+	SDL_ANDROID_INCLUDE_DIR="${ROOT_DIR}/build/android/SDL2/include"
+	mkdir -p "${ROOT_DIR}/build/android/SDL2"
+	rm -rf "${SDL_ANDROID_INCLUDE_DIR}"
+	ln -s "${SDL2_SOURCE_DIR}/include" "${SDL_ANDROID_INCLUDE_DIR}"
 fi
 
 # Keep Android builds lean to avoid unavailable desktop-only deps.

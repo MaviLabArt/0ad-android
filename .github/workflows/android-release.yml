@@ -94,6 +94,8 @@ jobs:
           ./.cache-vcpkg/bootstrap-vcpkg.sh -disableMetrics
           ./.cache-vcpkg/vcpkg install --triplet arm64-android --clean-after-build \
             boost-headers \
+            boost-random \
+            boost-lockfree \
             brotli \
             bzip2 \
             cpp-httplib \
