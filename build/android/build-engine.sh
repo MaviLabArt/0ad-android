@@ -188,10 +188,34 @@ boost_headers_complete()
 	return 0
 }
 
+download_boost_headers()
+{
+	local boost_version="${BOOST_HEADERS_VERSION:-1.90.0}"
+	local boost_version_underscored="${boost_version//./_}"
+	local boost_cache_dir="${ROOT_DIR}/.cache-boost"
+	local boost_archive="${boost_cache_dir}/boost_${boost_version_underscored}.tar.gz"
+	local boost_extract_dir="${boost_cache_dir}/boost_${boost_version_underscored}"
+	local boost_url="https://archives.boost.io/release/${boost_version}/source/boost_${boost_version_underscored}.tar.gz"
+
+	if [[ ! -d "${boost_extract_dir}/boost" ]]; then
+		mkdir -p "${boost_cache_dir}"
+		echo "Downloading Boost headers ${boost_version}..."
+		curl -fL "${boost_url}" -o "${boost_archive}"
+		tar -xzf "${boost_archive}" -C "${boost_cache_dir}"
+	fi
+
+	if [[ -d "${boost_extract_dir}/boost" ]] && boost_headers_complete "${boost_extract_dir}"; then
+		BOOST_INCLUDE_CANDIDATE="${boost_extract_dir}/boost"
+	fi
+}
+
 if [[ -d "${VCPKG_TRIPLET_DIR}/include/boost" ]] && boost_headers_complete "${VCPKG_TRIPLET_DIR}/include"; then
 	BOOST_INCLUDE_CANDIDATE="${VCPKG_TRIPLET_DIR}/include/boost"
 elif [[ -d "/usr/include/boost" ]] && boost_headers_complete "/usr/include"; then
 	BOOST_INCLUDE_CANDIDATE="/usr/include/boost"
+fi
+if [[ -z "${BOOST_INCLUDE_CANDIDATE}" ]]; then
+	download_boost_headers
 fi
 
 if [[ -n "${BOOST_INCLUDE_CANDIDATE}" ]]; then
