@@ -57,7 +57,10 @@ android {
     def keystorePathEnv = trimToNull(System.getenv("ANDROID_KEYSTORE_PATH"))
     def keystorePasswordEnv = trimToNull(System.getenv("ANDROID_KEYSTORE_PASSWORD"))
     def keyAliasEnv = trimToNull(System.getenv("ANDROID_KEY_ALIAS"))
-    def keyPasswordEnv = trimToNull(System.getenv("ANDROID_KEY_PASSWORD"))
+    def keyPasswordEnv = trimToNull(System.getenv("ANDROID_KEY_PASSWORD_EFFECTIVE"))
+    if (keyPasswordEnv == null) {
+        keyPasswordEnv = trimToNull(System.getenv("ANDROID_KEY_PASSWORD"))
+    }
     def hasReleaseSigning = keystorePathEnv != null && keystorePasswordEnv != null && keyAliasEnv != null && keyPasswordEnv != null
 
     if (hasReleaseSigning) {

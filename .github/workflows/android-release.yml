@@ -249,7 +249,6 @@ jobs:
           ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ env.ANDROID_KEY_PASSWORD_EFFECTIVE }}
         run: |
           gradle :app:assembleRelease -PSDL2_SOURCE_DIR="${SDL2_SOURCE_DIR}"
         working-directory: build/android/sdl-project
