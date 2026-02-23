@@ -150,31 +150,29 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          keytool_check() {
+          signing_check() {
             local keypass="$1"
-            local tmp_keystore
-            tmp_keystore="$(mktemp "${RUNNER_TEMP}/signcheck-XXXXXX.p12")"
-            rm -f "${tmp_keystore}"
-            if keytool -importkeystore \
-              -srckeystore "${ANDROID_KEYSTORE_PATH}" \
-              -srcstorepass "${ANDROID_KEYSTORE_PASSWORD}" \
-              -srcalias "${ANDROID_KEY_ALIAS}" \
-              -srckeypass "${keypass}" \
-              -destkeystore "${tmp_keystore}" \
-              -deststoretype PKCS12 \
-              -deststorepass "signcheck" \
-              -destkeypass "signcheck" \
-              -noprompt >/dev/null 2>&1; then
-              rm -f "${tmp_keystore}"
+            local tmp_dir tmp_zip
+            tmp_dir="$(mktemp -d "${RUNNER_TEMP}/signcheck-XXXXXX")"
+            tmp_zip="${tmp_dir}/unsigned.zip"
+            printf "signcheck\n" > "${tmp_dir}/probe.txt"
+            (cd "${tmp_dir}" && zip -q "${tmp_zip}" probe.txt)
+            if jarsigner \
+              -keystore "${ANDROID_KEYSTORE_PATH}" \
+              -storepass "${ANDROID_KEYSTORE_PASSWORD}" \
+              -keypass "${keypass}" \
+              "${tmp_zip}" \
+              "${ANDROID_KEY_ALIAS}" >/dev/null 2>&1; then
+              rm -rf "${tmp_dir}"
               return 0
             fi
-            rm -f "${tmp_keystore}"
+            rm -rf "${tmp_dir}"
             return 1
           }
 
-          if keytool_check "${ANDROID_KEY_PASSWORD}"; then
+          if signing_check "${ANDROID_KEY_PASSWORD}"; then
             echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEY_PASSWORD}" >> "${GITHUB_ENV}"
-          elif keytool_check "${ANDROID_KEYSTORE_PASSWORD}"; then
+          elif signing_check "${ANDROID_KEYSTORE_PASSWORD}"; then
             echo "Provided ANDROID_KEY_PASSWORD did not unlock alias ${ANDROID_KEY_ALIAS}; falling back to store password."
             echo "ANDROID_KEY_PASSWORD_EFFECTIVE=${ANDROID_KEYSTORE_PASSWORD}" >> "${GITHUB_ENV}"
           else
