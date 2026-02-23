@@ -86,6 +86,10 @@ jobs:
         run: |
           rustup target add aarch64-linux-android
 
+      - name: Install cbindgen
+        run: |
+          cargo install --locked cbindgen
+
       - name: Decode signing keystore
         run: |
           if [ -z "${ANDROID_KEYSTORE_B64}" ]; then
