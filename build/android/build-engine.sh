@@ -168,9 +168,6 @@ else
 	if [[ ! -f "${SPIDERMONKEY_INCLUDE_RELEASE}" || ! -f "${SPIDERMONKEY_RUST_LIB}" || ( ! -f "${SPIDERMONKEY_RELEASE_SO}" && ! -f "${SPIDERMONKEY_RELEASE_A}" ) ]]; then
 		echo "SpiderMonkey artifacts not found, bootstrapping from ${SPIDERMONKEY_BUILD_SCRIPT}"
 		SPIDERMONKEY_ANDROID_CONF_OPTS="--with-android-ndk=${NDK_ROOT}"
-		if [[ -n "${ANDROID_SDK_ROOT:-}" ]]; then
-			SPIDERMONKEY_ANDROID_CONF_OPTS="${SPIDERMONKEY_ANDROID_CONF_OPTS} --with-android-sdk=${ANDROID_SDK_ROOT}"
-		fi
 		(
 			cd "${SPIDERMONKEY_DIR}"
 			JOBS="-j${JOBS}" \
