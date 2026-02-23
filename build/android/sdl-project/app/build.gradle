@@ -64,6 +64,7 @@ android {
         signingConfigs {
             release {
                 storeFile file(keystorePathEnv)
+                storeType "jks"
                 storePassword keystorePasswordEnv
                 keyAlias keyAliasEnv
                 keyPassword keyPasswordEnv
