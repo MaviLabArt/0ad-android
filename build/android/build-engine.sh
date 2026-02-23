@@ -167,7 +167,7 @@ else
 
 	if [[ ! -f "${SPIDERMONKEY_INCLUDE_RELEASE}" || ! -f "${SPIDERMONKEY_RUST_LIB}" || ( ! -f "${SPIDERMONKEY_RELEASE_SO}" && ! -f "${SPIDERMONKEY_RELEASE_A}" ) ]]; then
 		echo "SpiderMonkey artifacts not found, bootstrapping from ${SPIDERMONKEY_BUILD_SCRIPT}"
-		SPIDERMONKEY_ANDROID_CONF_OPTS="--with-android-ndk=${NDK_ROOT}"
+		SPIDERMONKEY_ANDROID_CONF_OPTS="--with-android-ndk=${NDK_ROOT} --with-android-toolchain=${NDK_ROOT}/toolchains/llvm/prebuilt/${HOST_TAG}"
 		(
 			cd "${SPIDERMONKEY_DIR}"
 			JOBS="-j${JOBS}" \
