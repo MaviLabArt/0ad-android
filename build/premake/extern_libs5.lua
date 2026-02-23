@@ -667,12 +667,13 @@ extern_lib_defs = {
 				filter { "system:windows", "configurations:Debug" }
 					linkoptions { "/IGNORE:4099" }
 				filter{}
-			elseif _OPTIONS["android"] then
-				-- Ensure engine shared objects carry an explicit DT_NEEDED on SDL2.
-				links { "SDL2" }
-			elseif not _OPTIONS["android"] then
-				pkgconfig.add_links("sdl2")
-			end
+				elseif _OPTIONS["android"] then
+					-- Android wrapper loads SDL2 first; avoid requiring a host-prebuilt libSDL2
+					-- during engine link in CI.
+					return
+				elseif not _OPTIONS["android"] then
+					pkgconfig.add_links("sdl2")
+				end
 		end,
 	},
 	spidermonkey = {
