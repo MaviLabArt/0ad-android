@@ -71,6 +71,11 @@ jobs:
             "platform-tools" \
             "ndk;${ANDROID_NDK_VERSION}"
 
+      - name: Install native build deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y uuid-dev
+
       - name: Install Gradle
         run: |
           curl -sSL https://services.gradle.org/distributions/gradle-8.9-bin.zip -o /tmp/gradle.zip
