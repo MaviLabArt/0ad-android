@@ -179,6 +179,8 @@ else
 	SPIDERMONKEY_RUST_LIB="${SPIDERMONKEY_DIR}/lib/libmozjs128-rust.a"
 	SPIDERMONKEY_RELEASE_SO="${SPIDERMONKEY_DIR}/lib/libmozjs128-release.so"
 	SPIDERMONKEY_RELEASE_A="${SPIDERMONKEY_DIR}/lib/libmozjs128-release.a"
+	SPIDERMONKEY_NDK_ROOT="${SPIDERMONKEY_NDK_ROOT:-${NDK_ROOT}}"
+	SPIDERMONKEY_TOOLCHAIN_ROOT="${SPIDERMONKEY_NDK_ROOT}/toolchains/llvm/prebuilt/${HOST_TAG}"
 
 	if [[ ! -d "${SPIDERMONKEY_DIR}" || ! -x "${SPIDERMONKEY_BUILD_SCRIPT}" ]]; then
 		echo "SpiderMonkey is missing and no VCPKG mozjs-128 package was found."
@@ -187,12 +189,12 @@ else
 
 	if [[ ! -f "${SPIDERMONKEY_INCLUDE_RELEASE}" || ! -f "${SPIDERMONKEY_RUST_LIB}" || ( ! -f "${SPIDERMONKEY_RELEASE_SO}" && ! -f "${SPIDERMONKEY_RELEASE_A}" ) ]]; then
 		echo "SpiderMonkey artifacts not found, bootstrapping from ${SPIDERMONKEY_BUILD_SCRIPT}"
-		SPIDERMONKEY_ANDROID_CONF_OPTS="--with-android-ndk=${NDK_ROOT} --with-android-toolchain=${NDK_ROOT}/toolchains/llvm/prebuilt/${HOST_TAG}"
+		SPIDERMONKEY_ANDROID_CONF_OPTS="--with-android-ndk=${SPIDERMONKEY_NDK_ROOT} --with-android-toolchain=${SPIDERMONKEY_TOOLCHAIN_ROOT}"
 		(
 			cd "${SPIDERMONKEY_DIR}"
 			JOBS="-j${JOBS}" \
 			CTARGET="${HOST_TRIPLE}" \
-			ANDROID_NDK_ROOT="${NDK_ROOT}" \
+			ANDROID_NDK_ROOT="${SPIDERMONKEY_NDK_ROOT}" \
 			CONF_OPTS="${SPIDERMONKEY_ANDROID_CONF_OPTS} ${CONF_OPTS:-}" \
 			./build.sh
 		)
