@@ -1,0 +1,158 @@
+name: Android Release APK
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to build (e.g., v0.28.0). Required for manual runs."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_API: "24"
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_NDK_VERSION: "27.0.12077973"
+      SDL2_VERSION: "release-2.30.9"
+      GIT_LFS_SKIP_SMUDGE: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.tag != '' && inputs.tag || github.ref }}
+          lfs: false
+
+      - name: Set version info
+        run: |
+          TAG_REF="${GITHUB_REF_NAME}"
+          if [ -n "${{ inputs.tag }}" ]; then
+            TAG_REF="${{ inputs.tag }}"
+          fi
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ] && [ -z "${TAG_REF}" ]; then
+            echo "Tag input is required for manual runs." >&2
+            exit 1
+          fi
+          TAG_NAME="${TAG_REF#v}"
+          echo "VERSION_NAME=${TAG_NAME}" >> "${GITHUB_ENV}"
+          echo "VERSION_CODE=$(date +%s)" >> "${GITHUB_ENV}"
+          echo "DATA_MANIFEST_URL_TEMPLATE=https://github.com/${GITHUB_REPOSITORY}/releases/download/v{VERSION}/0ad-data-{VERSION}.json" >> "${GITHUB_ENV}"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager \
+            "platforms;android-${ANDROID_API}" \
+            "build-tools;34.0.0" \
+            "platform-tools" \
+            "ndk;${ANDROID_NDK_VERSION}"
+
+      - name: Install Gradle
+        run: |
+          curl -sSL https://services.gradle.org/distributions/gradle-8.9-bin.zip -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle
+          echo "/tmp/gradle/gradle-8.9/bin" >> "${GITHUB_PATH}"
+
+      - name: Fetch SDL2
+        run: |
+          git clone --depth 1 --branch "${SDL2_VERSION}" https://github.com/libsdl-org/SDL.git "${GITHUB_WORKSPACE}/.deps/SDL2"
+          echo "SDL2_SOURCE_DIR=${GITHUB_WORKSPACE}/.deps/SDL2" >> "${GITHUB_ENV}"
+
+      - name: Decode signing keystore
+        run: |
+          if [ -z "${ANDROID_KEYSTORE_B64}" ]; then
+            echo "ANDROID_KEYSTORE_B64 is required for release signing." >&2
+            exit 1
+          fi
+          echo "${ANDROID_KEYSTORE_B64}" | base64 -d > "${GITHUB_WORKSPACE}/android-release.keystore"
+        env:
+          ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+
+      - name: Build engine
+        run: |
+          export ANDROID_NDK_ROOT="${ANDROID_SDK_ROOT}/ndk/${ANDROID_NDK_VERSION}"
+          ./build/android/build-engine.sh
+
+      - name: Copy native libs
+        run: |
+          ./build/android/sdl-project/copy-native-libs.sh "${GITHUB_WORKSPACE}/binaries/system"
+
+      - name: Prepare data pack
+        run: |
+          DATA_VERSION="${VERSION_NAME}"
+          DOWNLOAD_DIR="$(mktemp -d)"
+          PACK_DIR="$(mktemp -d)"
+          DATA_URLS=(
+            "https://releases.wildfiregames.com/0ad-${DATA_VERSION}-unix-data.tar.xz"
+            "https://releases.wildfiregames.com/releases/0ad-${DATA_VERSION}-unix-data.tar.xz"
+            "https://releases.wildfiregames.com/0ad-${DATA_VERSION}-unix-data.tar.gz"
+            "https://releases.wildfiregames.com/releases/0ad-${DATA_VERSION}-unix-data.tar.gz"
+          )
+          ARCHIVE=""
+          for url in "${DATA_URLS[@]}"; do
+            if curl -fL "${url}" -o "${DOWNLOAD_DIR}/$(basename "${url}")"; then
+              ARCHIVE="${DOWNLOAD_DIR}/$(basename "${url}")"
+              break
+            fi
+          done
+          if [ -z "${ARCHIVE}" ]; then
+            echo "Failed to download upstream data pack for ${DATA_VERSION}" >&2
+            exit 1
+          fi
+          tar -xf "${ARCHIVE}" -C "${DOWNLOAD_DIR}"
+
+          if [ -d "${DOWNLOAD_DIR}/data" ]; then
+            SOURCE_DATA="${DOWNLOAD_DIR}/data"
+          elif [ -d "${DOWNLOAD_DIR}/binaries/data" ]; then
+            SOURCE_DATA="${DOWNLOAD_DIR}/binaries/data"
+          else
+            echo "Could not locate data directory in upstream pack." >&2
+            exit 1
+          fi
+
+          mkdir -p "${PACK_DIR}/data"
+          rsync -a "${SOURCE_DATA}/" "${PACK_DIR}/data/"
+          echo "${DATA_VERSION}" > "${PACK_DIR}/data/.0ad-data-version"
+          (cd "${PACK_DIR}" && zip -r -9 "${GITHUB_WORKSPACE}/0ad-data-${DATA_VERSION}.zip" data)
+          rm -rf "${DOWNLOAD_DIR}" "${PACK_DIR}"
+          SHA256=$(sha256sum "${GITHUB_WORKSPACE}/0ad-data-${DATA_VERSION}.zip" | awk '{print $1}')
+          SIZE=$(stat -c%s "${GITHUB_WORKSPACE}/0ad-data-${DATA_VERSION}.zip")
+          DATA_URL="https://github.com/${GITHUB_REPOSITORY}/releases/download/v${DATA_VERSION}/0ad-data-${DATA_VERSION}.zip"
+          cat > "${GITHUB_WORKSPACE}/0ad-data-${DATA_VERSION}.json" <<EOF
+          {"version":"${DATA_VERSION}","files":[{"name":"0ad-data-${DATA_VERSION}.zip","url":"${DATA_URL}","sha256":"${SHA256}","size":${SIZE}}]}
+          EOF
+
+      - name: Build release APK
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android-release.keystore
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          gradle :app:assembleRelease -PSDL2_SOURCE_DIR="${SDL2_SOURCE_DIR}"
+        working-directory: build/android/sdl-project
+
+      - name: Upload release APK
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/android/sdl-project/app/build/outputs/apk/release/app-release.apk
+            0ad-data-${{ env.VERSION_NAME }}.zip
+            0ad-data-${{ env.VERSION_NAME }}.json

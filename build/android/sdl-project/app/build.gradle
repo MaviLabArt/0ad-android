@@ -1,0 +1,84 @@
+plugins {
+    id "com.android.application"
+}
+
+def sdl2SourceDir = providers.gradleProperty("SDL2_SOURCE_DIR")
+    .orElse(providers.environmentVariable("SDL2_SOURCE_DIR"))
+    .orNull
+
+if (sdl2SourceDir == null || sdl2SourceDir.trim().isEmpty()) {
+    throw new GradleException("Set SDL2_SOURCE_DIR to an SDL source tree with -PSDL2_SOURCE_DIR=/path/to/SDL.")
+}
+
+android {
+    namespace "com.wildfiregames.zeroad"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.wildfiregames.zeroad"
+        minSdk 28
+        targetSdk 34
+        def versionNameEnv = System.getenv("VERSION_NAME")
+        def versionCodeEnv = System.getenv("VERSION_CODE")
+        versionName versionNameEnv != null && !versionNameEnv.trim().isEmpty() ? versionNameEnv : "0.0.1"
+        versionCode versionCodeEnv != null && !versionCodeEnv.trim().isEmpty() ? Integer.parseInt(versionCodeEnv) : 1
+
+        def dataManifestTemplateEnv = System.getenv("DATA_MANIFEST_URL_TEMPLATE")
+        def dataManifestTemplate = dataManifestTemplateEnv != null ? dataManifestTemplateEnv : ""
+        def dataManifestTemplateEscaped = dataManifestTemplate
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+        buildConfigField "String", "DATA_MANIFEST_URL_TEMPLATE", "\"${dataManifestTemplateEscaped}\""
+
+        ndk {
+            abiFilters "arm64-v8a"
+        }
+
+        externalNativeBuild {
+            ndkBuild {
+                arguments "SDL2_SOURCE_DIR=${sdl2SourceDir}"
+            }
+        }
+    }
+
+    def keystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
+    def keystorePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+    def keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+    def keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+    def hasReleaseSigning = keystorePath != null && keystorePassword != null && keyAlias != null && keyPassword != null
+
+    if (hasReleaseSigning) {
+        signingConfigs {
+            release {
+                storeFile file(keystorePath)
+                storePassword keystorePassword
+                keyAlias keyAlias
+                keyPassword keyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            minifyEnabled false
+            if (hasReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    externalNativeBuild {
+        ndkBuild {
+            path file("src/main/jni/Android.mk")
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ["src/main/jniLibs"]
+        }
+    }
+}
